@@ -1,0 +1,94 @@
+<Solution>
+  <PropertyGroup Name="gflower_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Image Name="baobo_an.png" />
+          <Image Name="baobo_art_quxiao.png" />
+          <Image Name="baobo_huichouma.png" />
+          <Image Name="baobo_zdks_icon.png" />
+          <Image Name="baobo_zdks_icon_gou.png" />
+          <Image Name="baobo_zjh_anniu_h.png" />
+          <Image Name="baobo_zjh_anniu_h40.png" />
+          <Image Name="baobo_zjh_anniu_l.png" />
+          <Image Name="baobo_zjh_anniu_l40.png" />
+          <Image Name="baobo_zjh_anniu_q.png" />
+          <Image Name="baobo_zjh_anniu_q40.png" />
+          <Image Name="baobo_zjh_art_bp.png" />
+          <Image Name="baobo_zjh_art_gdd.png" />
+          <Image Name="baobo_zjh_art_gz.png" />
+          <Image Name="baobo_zjh_art_jiazhu.png" />
+          <Image Name="baobo_zjh_art_jz.png" />
+          <Image Name="baobo_zjh_art_kanpai.png" />
+          <Image Name="baobo_zjh_art_kp.png" />
+          <Image Name="baobo_zjh_art_kpx2.png" />
+          <Image Name="baobo_zjh_art_qp.png" />
+          <Image Name="baobo_zjh_art_qy.png" />
+          <Image Name="baobo_zjh_art_zb.png" />
+          <Image Name="baobo_zjh_art_zb40.png" />
+          <Image Name="baobo_zjh_bp.png" />
+          <Image Name="baobo_zjh_choma_4.png" />
+          <Image Name="baobo_zjh_choma_4x.png" />
+          <Image Name="baobo_zjh_chouma_1.png" />
+          <Image Name="baobo_zjh_chouma_1x.png" />
+          <Image Name="baobo_zjh_chouma_2.png" />
+          <Image Name="baobo_zjh_chouma_2x.png" />
+          <Image Name="baobo_zjh_chouma_3.png" />
+          <Image Name="baobo_zjh_chouma_3x.png" />
+          <Image Name="baobo_zjh_choumadi.png" />
+          <Image Name="baobo_zjh_dengdai_1.png" />
+          <Image Name="baobo_zjh_dengdai_2.png" />
+          <Image Name="baobo_zjh_dengdai_3.png" />
+          <Image Name="baobo_zjh_di_2.png" />
+          <Image Name="baobo_zjh_gbc.png" />
+          <Image Name="baobo_zjh_icon_bx.png" />
+          <Image Name="baobo_zjh_icon_gou.png" />
+          <Image Name="baobo_zjh_icon_gz.png" />
+          <Image Name="baobo_zjh_icon_hz.png" />
+          <Image Name="baobo_zjh_icon_shandian.png" />
+          <Image Name="baobo_zjh_icon_tc.png" />
+          <Image Name="baobo_zjh_icon_wojiantou.png" />
+          <Image Name="baobo_zjh_icon_yxk.png" />
+          <Image Name="baobo_zjh_icon_yxk2.png" />
+          <Image Name="baobo_zjh_icon_yyk.png" />
+          <Image Name="baobo_zjh_icon_yyk2.png" />
+          <Image Name="baobo_zjh_qcbp.png" />
+          <Image Name="baobo_zjh_quxiaoanniu_q.png" />
+          <Image Name="baobo_zjh_tanchuanniu.png" />
+          <Image Name="baobo_zjh_tanchujiantou.png" />
+          <Image Name="baobo_zjh_touxiangdi.png" />
+          <Image Name="baobo_zjh_touxiangkuang.png" />
+          <Image Name="baobo_zjh_vsd.png" />
+          <Image Name="baobo_zjh_xd.png" />
+          <Image Name="baobo_zjh_yizhunbei.png" />
+          <Image Name="baobo_zjh_zhishiguang.png" />
+          <Image Name="baobo_zjh_zhuntaik.png" />
+          <Image Name="baobo_zjh_zhuomian.png" />
+          <Image Name="baobo_zjh_zijiguang.png" />
+          <Image Name="laba.png" />
+          <Image Name="poker_back.png" />
+          <Image Name="s1.png" />
+          <Image Name="zjh_gendaodi_bg.png" />
+          <Image Name="zjh_guize_bg.png" />
+          <Image Name="zjh_icon_vs.png" />
+          <Image Name="zjh_icon_vs_bg.png" />
+          <Image Name="zjh_jieshao_paixing.png" />
+          <Image Name="zjh_jiesuan_timedi.png" />
+          <Image Name="zjh_tanchuang_bg.png" />
+          <Image Name="zjh_text_gz.png" />
+          <Image Name="zjh_tongji_bg.png" />
+          <Image Name="zjh_tongji_mywj.png" />
+          <Image Name="zjh_tongji_wanjiabg.png" />
+          <Image Name="zjh_tongji_wanjiabg2.png" />
+          <Image Name="zjh_vspalyer_bg1.png" />
+          <Image Name="zjh_vspalyer_bg2.png" />
+          <Image Name="zjh_wanjia_tt.png" />
+          <Image Name="zjh_wanjiachouma_bg.png" />
+          <Image Name="zjh_xiazhuchouma_bg.png" />
+        </Folder>
+        <Project Name="GameZJH.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

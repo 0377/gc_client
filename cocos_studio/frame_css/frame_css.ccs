@@ -1,0 +1,28 @@
+<Solution>
+  <PropertyGroup Name="frame_css" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="frame_res">
+          <Folder Name="bombbox">
+            <Image Name="baobo_popupview_closed_normal.png" />
+            <Image Name="baobo_popupview_closed_pressed.png" />
+            <Image Name="bb_sz_tck.png" />
+            <Image Name="bb_sz_tck_qd_normal.png" />
+            <Image Name="bb_sz_tck_qd_pressed.png" />
+            <Image Name="bb_sz_tck_qx_normal.png" />
+            <Image Name="bb_sz_tck_qx_pressed.png" />
+          </Folder>
+          <Image Name="BB_jdt_1.png" />
+          <Image Name="bb_loading_jzt.png" />
+          <Image Name="bb_loading_jztd.png" />
+          <Image Name="kog_bg.jpg" />
+          <Image Name="loading.png" />
+        </Folder>
+        <Project Name="IndicationLayerCCS.csd" Type="Layer" />
+        <Project Name="LaunchSceneCCS.csd" Type="Scene" />
+        <Project Name="TipLayerCCS.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

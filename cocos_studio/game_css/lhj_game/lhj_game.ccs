@@ -1,0 +1,93 @@
+<Solution>
+  <PropertyGroup Name="lhj_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="anim">
+          <Folder Name="slots_race_pop_middle_gold_01">
+            <ExportJsonFile Name="slots_race_pop_middle_gold_01.ExportJson" />
+          </Folder>
+          <Image Name="sgj_win_hp.png" />
+        </Folder>
+        <Folder Name="game_res">
+          <Image Name="wz_bar.png" />
+          <Image Name="wz_bj.png" />
+          <Image Name="wz_bt_gb.png" />
+          <Image Name="wz_bt_gb_2.png" />
+          <Image Name="wz_bt_mx.png" />
+          <Image Name="wz_bt_mx_2.png" />
+          <Image Name="wz_bt_qxzd.png" />
+          <Image Name="wz_bt_qxzd_2.png" />
+          <Image Name="wz_bt_sf.png" />
+          <Image Name="wz_bt_sf_2.png" />
+          <Image Name="wz_bt_tz_2.png" />
+          <Image Name="wz_bt_xs.png" />
+          <Image Name="wz_bt_xs_2.png" />
+          <Image Name="wz_bt-dz.png" />
+          <Image Name="wz_bt-dz_2.png" />
+          <Image Name="wz_gt.png" />
+          <Image Name="wz_icon_1.png" />
+          <Image Name="wz_icon_1_2.png" />
+          <Image Name="wz_icon_2.png" />
+          <Image Name="wz_icon_2_2.png" />
+          <Image Name="wz_icon_3.png" />
+          <Image Name="wz_icon_3_2.png" />
+          <Image Name="wz_icon_4.png" />
+          <Image Name="wz_icon_4_2.png" />
+          <Image Name="wz_icon_5.png" />
+          <Image Name="wz_icon_5_2.png" />
+          <Image Name="wz_icon_6.png" />
+          <Image Name="wz_icon_6_2.png" />
+          <Image Name="wz_icon_7.png" />
+          <Image Name="wz_icon_7_2.png" />
+          <Image Name="wz_icon_8.png" />
+          <Image Name="wz_icon_8_2.png" />
+          <Image Name="wz_icon_9.png" />
+          <Image Name="wz_icon_9_2.png" />
+          <Image Name="wz_jiesuan.png" />
+          <Image Name="wz_jiesuan2.png" />
+          <Image Name="wz_lhj_lagan.png" />
+          <Image Name="wz_lm.png" />
+          <Image Name="wz_pg.png" />
+          <Image Name="wz_pt.png" />
+          <Image Name="wz_pt_ks.png" />
+          <Image Name="wz_pt_ks_2.png" />
+          <Image Name="wz_pt_mx.png" />
+          <Image Name="wz_pt_mx_2.png" />
+          <Image Name="wz_pt_tz.png" />
+          <Image Name="wz_qqq.png" />
+          <Image Name="wz_sggd.png" />
+          <Image Name="wz_shuzi.png" />
+          <Image Name="wz_sz.png" />
+          <Image Name="wz_sz_2.png" />
+          <Image Name="wz_sz_bz.png" />
+          <Image Name="wz_sz_sx.png" />
+          <Image Name="wz_sz_sy.png" />
+          <Image Name="wz_sz_sy_2.png" />
+          <Image Name="wz_sz_tc.png" />
+          <Image Name="wz_sz_yy.png" />
+          <Image Name="wz_win.png" />
+          <Image Name="wz_xg.png" />
+          <Image Name="wz_xian_1.png" />
+          <Image Name="wz_xian_2.png" />
+          <Image Name="wz_xian_3.png" />
+          <Image Name="wz_xian_4.png" />
+          <Image Name="wz_xian_5.png" />
+          <Image Name="wz_xian_6.png" />
+          <Image Name="wz_xian_7.png" />
+          <Image Name="wz_xian_8.png" />
+          <Image Name="wz_xian_9.png" />
+          <Image Name="wz_xj.png" />
+          <Image Name="wz_xs_shuzi.png" />
+          <Image Name="wz_xs_shuzi_2.png" />
+          <Image Name="wz_yt.png" />
+          <Image Name="wz_yxgz.png" />
+          <Image Name="wz_yxgz_2.png" />
+        </Folder>
+        <Project Name="LhjGameScene.csd" Type="Layer" />
+        <Project Name="LhjGameTips.csd" Type="Layer" />
+        <Image Name="wz_lhj_lagan.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

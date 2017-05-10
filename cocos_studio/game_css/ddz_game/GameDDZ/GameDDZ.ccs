@@ -1,0 +1,111 @@
+<Solution>
+  <PropertyGroup Name="GameDDZ" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Folder Name="info">
+            <Image Name="ddz_tanchuang_dikuang.png" />
+            <Image Name="ddz_tanchuang_guanbi.png" />
+            <Image Name="ddz_tanchuang_guize1.png" />
+            <Image Name="ddz_tanchuang_guize2.png" />
+            <Image Name="ddz_tanchuang_paixing1.png" />
+            <Image Name="ddz_tanchuang_paixing2.png" />
+          </Folder>
+          <Image Name="beijing.png" />
+          <Image Name="beijing1.png" />
+          <Image Name="bg_bottom.png" />
+          <Image Name="bg_card.png" />
+          <Image Name="bg_card_882.png" />
+          <Image Name="bg_card_num.png" />
+          <Image Name="bg_player.png" />
+          <Image Name="bg_result.png" />
+          <Image Name="bg_self.png" />
+          <Image Name="bg_self_highlight.png" />
+          <Image Name="bg_tip.png" />
+          <Image Name="btn_change_table.png" />
+          <Image Name="btn_close.png" />
+          <Image Name="btn_game_call.png" />
+          <Image Name="btn_game_help.png" />
+          <Image Name="btn_game_pass.png" />
+          <Image Name="btn_game_pass_2.png" />
+          <Image Name="btn_game_start.png" />
+          <Image Name="btn_game_start_empty.png" />
+          <Image Name="btn_goto_bank.png" />
+          <Image Name="btn_land_call.png" />
+          <Image Name="btn_land_call_1.png" />
+          <Image Name="btn_land_call_2.png" />
+          <Image Name="btn_land_call_3.png" />
+          <Image Name="btn_land_nocall.png" />
+          <Image Name="btn_menu.png" />
+          <Image Name="btn_menu_bg.png" />
+          <Image Name="btn_menu_info.png" />
+          <Image Name="btn_menu_quit.png" />
+          <Image Name="btn_menu_robot.png" />
+          <Image Name="btn_menu_robot_pressed.png" />
+          <Image Name="btn_menu_sound_on.png" />
+          <Image Name="btn_menu_sound_on_pressed.png" />
+          <Image Name="btn_message.png" />
+          <Image Name="btn_recharge.png" />
+          <Image Name="btn_record.png" />
+          <Image Name="btn_result_change_table.png" />
+          <Image Name="btn_result_ready.png" />
+          <Image Name="btn_tuoguan.png" />
+          <Image Name="btn_tuoguan_no.png" />
+          <Image Name="btn_xiala.png" />
+          <Image Name="btn_yingyue.png" />
+          <Image Name="btn_yingyueguan.png" />
+          <Image Name="cardDetails.png" />
+          <Image Name="chongdian.png" />
+          <Image Name="d.png" />
+          <Image Name="ddz_dizhu_2.png" />
+          <Image Name="ddz_duihuakuang.png" />
+          <Image Name="ddz_jiabei.png" />
+          <Image Name="ddz_tuoguan_quxiaotuoguan.png" />
+          <Image Name="ddz_tuoguan_tuoguanzhong.png" />
+          <Image Name="ddz_tuoguan_zhezao.png" />
+          <Image Name="ddz_yizhunbei.png" />
+          <Image Name="di.png" />
+          <Image Name="dian_dian.png" />
+          <Image Name="dianchi.png" />
+          <Image Name="dianliangtiao.png" />
+          <Image Name="doubleBtn.png" />
+          <Image Name="empty.png" />
+          <Image Name="icon_background.png" />
+          <Image Name="icon_card_tip.png" />
+          <Image Name="icon_clock.png" />
+          <Image Name="icon_clock_mask.png" />
+          <Image Name="icon_clockwise.png" />
+          <Image Name="icon_desktop.png" />
+          <Image Name="icon_head_top.png" />
+          <Image Name="icon_land_card.png" />
+          <Image Name="icon_tip_no_big_card.png" />
+          <Image Name="icon_win_farmer.png" />
+          <Image Name="icon_win_land.png" />
+          <Image Name="match.png" />
+          <Image Name="nodoubleBtn.png" />
+          <Image Name="settlement.png" />
+          <Image Name="surplusCards.png" />
+          <Image Name="wifi.png" />
+          <Image Name="WiFi1.png" />
+          <Image Name="wifi2.png" />
+          <Image Name="wifi3.png" />
+          <Image Name="xinhao1.png" />
+          <Image Name="xinhao2.png" />
+          <Image Name="y12.png" />
+          <Image Name="yidongshuju.png" />
+        </Folder>
+        <Project Name="ddzGameCardTipCCS.csd" Type="Node" />
+        <Project Name="ddzGameDeviceInfo.csd" Type="Node" />
+        <Project Name="ddzGameInfoLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameLayerCSS_new.csd" Type="Layer" />
+        <Project Name="ddzGameMenuNodeCCS.csd" Type="Node" />
+        <Project Name="ddzGameResultLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameShadowLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameTimeOutWaitCCS.csd" Type="Layer" />
+        <Project Name="ddzGameUIControlLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameUIUpLayerCCS.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

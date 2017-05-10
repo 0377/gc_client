@@ -1,0 +1,13 @@
+<Solution>
+  <PropertyGroup Name="test_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Image Name="test_game_bg.png" />
+        </Folder>
+        <Project Name="TestGameLayerCCS.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

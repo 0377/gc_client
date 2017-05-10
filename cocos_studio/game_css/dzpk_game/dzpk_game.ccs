@@ -1,0 +1,136 @@
+<Solution>
+  <PropertyGroup Name="dzpk_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Folder Name="anim">
+            <Folder Name="dezhou_supervisor">
+              <ExportJsonFile Name="dezhou_supervisor.ExportJson" />
+            </Folder>
+            <Folder Name="dzpk_px_eff">
+              <ExportJsonFile Name="dzpk_px_eff.ExportJson" />
+            </Folder>
+          </Folder>
+          <Folder Name="fnt">
+            <Fnt Name="tt.fnt" />
+          </Folder>
+          <Folder Name="mainui">
+            <Image Name="dz_1_2dc.png" />
+            <Image Name="dz_1xdc.png" />
+            <Image Name="dz_2_3dc.png" />
+            <Image Name="dz_3xdm.png" />
+            <Image Name="dz_4xdm.png" />
+            <Image Name="dz_bj.jpg" />
+            <Image Name="dz_bq_dz.png" />
+            <Image Name="dz_bq_gp.png" />
+            <Image Name="dz_bq_gz.png" />
+            <Image Name="dz_bq_hjths.png" />
+            <Image Name="dz_bq_hl.png" />
+            <Image Name="dz_bq_jz.png" />
+            <Image Name="dz_bq_qp.png" />
+            <Image Name="dz_bq_qx.png" />
+            <Image Name="dz_bq_rp.png" />
+            <Image Name="dz_bq_santiao.png" />
+            <Image Name="dz_bq_skz.png" />
+            <Image Name="dz_bq_st.png" />
+            <Image Name="dz_bq_sz.png" />
+            <Image Name="dz_bq_th.png" />
+            <Image Name="dz_bq_ths.png" />
+            <Image Name="dz_button_cm.png" />
+            <Image Name="dz_button_hong_normal.png" />
+            <Image Name="dz_button_hong_pressed.png" />
+            <Image Name="dz_button_huang_normal.png" />
+            <Image Name="dz_button_huang_pressed.png" />
+            <Image Name="dz_button_huanzhuo_normal.png" />
+            <Image Name="dz_button_huanzhuo_pressed.png" />
+            <Image Name="dz_button_kuang.png" />
+            <Image Name="dz_button_liaotian_normal.png" />
+            <Image Name="dz_button_liaotian_pressed.png" />
+            <Image Name="dz_button_lv_2_normal.png" />
+            <Image Name="dz_button_lv_2_pressed.png" />
+            <Image Name="dz_button_lv_normal.png" />
+            <Image Name="dz_button_lv_pressed.png" />
+            <Image Name="dz_button_paixing_normal.png" />
+            <Image Name="dz_button_paixing_pressed.png" />
+            <Image Name="dz_button_shangla_normal.png" />
+            <Image Name="dz_button_shangla_pressed.png" />
+            <Image Name="dz_button_szt.png" />
+            <Image Name="dz_button_tuichu_normal.png" />
+            <Image Name="dz_button_tuichu_pressed.png" />
+            <Image Name="dz_button_xiala_normal.png" />
+            <Image Name="dz_button_xiala_pressed.png" />
+            <Image Name="dz_button_yinxiao_guan_normal.png" />
+            <Image Name="dz_button_yinxiao_guan_pressed.png" />
+            <Image Name="dz_button_yinxiao_kai_normal.png" />
+            <Image Name="dz_button_yinxiao_kai_pressed.png" />
+            <Image Name="dz_button_yinyue_guan_normal.png" />
+            <Image Name="dz_button_yinyue_guan_pressed.png" />
+            <Image Name="dz_button_yinyue_kai_normal.png" />
+            <Image Name="dz_button_yinyue_kai_pressed.png" />
+            <Image Name="dz_button_zi_normal.png" />
+            <Image Name="dz_button_zi_pressed.png" />
+            <Image Name="dz_cmt_1.png" />
+            <Image Name="dz_cmt_2.png" />
+            <Image Name="dz_cmt_3.png" />
+            <Image Name="dz_D.png" />
+            <Image Name="dz_dashang.png" />
+            <Image Name="dz_dc_di.png" />
+            <Image Name="dz_duipai.png" />
+            <Image Name="dz_gen.png" />
+            <Image Name="dz_grhz.png" />
+            <Image Name="dz_hdt_1.png" />
+            <Image Name="dz_hdt_2.png" />
+            <Image Name="dz_hdt_3.png" />
+            <Image Name="dz_hdt_4.png" />
+            <Image Name="dz_hdt_all in.png" />
+            <Image Name="dz_jia.png" />
+            <Image Name="dz_jsslp.png" />
+            <Image Name="dz_jz.png" />
+            <Image Name="dz_lbt.png" />
+            <Image Name="dz_lp.png" />
+            <Image Name="dz_qp.png" />
+            <Image Name="dz_qpkuang.png" />
+            <Image Name="dz_quxiao.png" />
+            <Image Name="dz_qx.png" />
+            <Image Name="dz_rhq.png" />
+            <Image Name="dz_rp.png" />
+            <Image Name="dz_szt_1.png" />
+            <Image Name="dz_szt_2.png" />
+            <Image Name="dz_touxiangk.png" />
+            <Image Name="dz_txk_wfg_1.png" />
+            <Image Name="dz_txk_wfg_2.png" />
+            <Image Name="dz_txk_wfg_3.png" />
+            <Image Name="dz_zdrp.png" />
+            <Image Name="head.png" />
+            <Image Name="poker_0_11.png" />
+            <Image Name="show1.jpg" />
+            <Image Name="show2.jpg" />
+            <Image Name="show3.jpg" />
+          </Folder>
+          <Folder Name="secondui">
+            <Image Name="dz_button_qd_normal.png" />
+            <Image Name="dz_button_qd_pressed.png" />
+            <Image Name="dz_button_qx_normal.png" />
+            <Image Name="dz_button_qx_pressed.png" />
+            <Image Name="dz_kjfy_kuang.png" />
+            <Image Name="dz_kjfy_kuang_2.png" />
+            <Image Name="dz_kjfy_kuang_3.png" />
+            <Image Name="dz_paixing.png" />
+            <Image Name="dz_tckuang.png" />
+            <Image Name="dz_X_normal.png" />
+            <Image Name="dz_X_pressed.png" />
+            <Image Name="show1.jpg" />
+            <Image Name="show2.jpg" />
+            <Image Name="show3.jpg" />
+          </Folder>
+        </Folder>
+        <Project Name="dzpk_jiazhu.csd" Type="Layer" />
+        <Project Name="dzpk_paixing.csd" Type="Layer" />
+        <Project Name="dzpk_quicktalk.csd" Type="Layer" />
+        <Project Name="dzpkGameLayerCCS.csd" Type="Scene" />
+        <Project Name="marqueeTip.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

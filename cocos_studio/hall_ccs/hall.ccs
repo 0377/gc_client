@@ -1,0 +1,667 @@
+<Solution>
+  <PropertyGroup Name="hall" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="hall_res">
+          <Folder Name="account">
+            <Image Name="bb_btn_alter_password.png" />
+            <Image Name="bb_btn_alter_password_pressed.png" />
+            <Image Name="bb_chang_user.png" />
+            <Image Name="bb_chang_user_2.png" />
+            <Image Name="bb_djfzID_normal.png" />
+            <Image Name="bb_djfzID_pressed.png" />
+            <Image Name="bb_grxx_bangdingzhanghao.png" />
+            <Image Name="bb_grxx_bangdingzhanghao1.png" />
+            <Image Name="bb_grxx_bangdizhifubao.png" />
+            <Image Name="bb_grxx_bangdizhifubao1.png" />
+            <Image Name="bb_grxx_bc_normal.png" />
+            <Image Name="bb_grxx_bc_pressed.png" />
+            <Image Name="bb_grxx_bdzh_ditiao.png" />
+            <Image Name="bb_grxx_bdzh_huoquyanzhengma.png" />
+            <Image Name="bb_grxx_bdzh_huoquyanzhengma1.png" />
+            <Image Name="bb_grxx_bdzh_querenmima.png" />
+            <Image Name="bb_grxx_bdzh_shoujihaoma.png" />
+            <Image Name="bb_grxx_bdzh_shurumima.png" />
+            <Image Name="bb_grxx_bdzh_shurunicheng.png" />
+            <Image Name="bb_grxx_bdzh_yanzhengma.png" />
+            <Image Name="bb_grxx_bt.png" />
+            <Image Name="bb_grxx_fz_normal.png" />
+            <Image Name="bb_grxx_fz_pressed.png" />
+            <Image Name="bb_grxx_gerenxinxi.png" />
+            <Image Name="bb_grxx_gerenxinxi1.png" />
+            <Image Name="bb_grxx_ghtx_normal.png" />
+            <Image Name="bb_grxx_ghtx_pressed.png" />
+            <Image Name="bb_grxx_ID.png" />
+            <Image Name="bb_grxx_jb.png" />
+            <Image Name="bb_grxx_KK.png" />
+            <Image Name="bb_grxx_ljbd.png" />
+            <Image Name="bb_grxx_ljbd_KK.png" />
+            <Image Name="bb_grxx_ljbd_normal.png" />
+            <Image Name="bb_grxx_ljbd_pressed.png" />
+            <Image Name="bb_grxx_ljbd_zhifubao.png" />
+            <Image Name="bb_grxx_ljbd_zhifubaozhanghao.png" />
+            <Image Name="bb_grxx_nc.png" />
+            <Image Name="bb_grxx_queren.png" />
+            <Image Name="bb_grxx_queren1.png" />
+            <Image Name="bb_grxx_txk_1.png" />
+            <Image Name="bb_grxx_xgnc_normal.png" />
+            <Image Name="bb_grxx_zh.png" />
+            <Image Name="bb_grxx_zhanghu.png" />
+            <Image Name="bb_grzx_bdwc.png" />
+            <Image Name="bb_grzx_ljbd.png" />
+            <Image Name="bb_grzx_ljbd_pressed.png" />
+            <Image Name="bb_lookfor_pw_normal.png" />
+            <Image Name="bb_lookfor_pw_pressed.png" />
+            <Image Name="bb_tongyong_beijing.jpg" />
+            <Image Name="bb_tongyong_fanhui.png" />
+            <Image Name="bb_tongyong_fanhui1.png" />
+            <Image Name="bb_tx_txk_xz.png" />
+            <Image Name="bb_xgmm_bt.png" />
+            <Image Name="bb_xgmm_d.png" />
+          </Folder>
+          <Folder Name="account_bind_tip">
+            <Image Name="bb_bdtsk_bdsjh.png" />
+            <Image Name="bb_bdtsk_bdzfb.png" />
+            <Image Name="bb_bdtsk_zs3.png" />
+            <Image Name="bb_btn_gobind .png" />
+            <Image Name="bb_btn_gobind _pressed.png" />
+            <Image Name="bb_btn_gobind.png" />
+            <Image Name="bb_btn_gobind_pressed.png" />
+            <Image Name="bb_btn_letmeplayplay.png" />
+            <Image Name="bb_btn_letmeplayplay_pressed.png" />
+            <Image Name="bb_khyj_bt.png" />
+            <Image Name="bb_tixian_tip.png" />
+            <Image Name="MM_fk_kuang.png" />
+            <Image Name="MM_icon_gou.png" />
+          </Folder>
+          <Folder Name="anim">
+            <Folder Name="d_gamehall_anieffects">
+              <ExportJsonFile Name="d_gamehall_anieffects.ExportJson" />
+            </Folder>
+            <Folder Name="kog_loadingani">
+              <ExportJsonFile Name="kog_loadingani.ExportJson" />
+            </Folder>
+          </Folder>
+          <Folder Name="bank_new">
+            <Folder Name="bank_caozuo">
+              <Image Name="baobo_popupview_button_qrcr.png" />
+              <Image Name="baobo_popupview_button_qrcr1.png" />
+              <Image Name="baobo_popupview_button_qrqc.png" />
+              <Image Name="baobo_popupview_button_qrqc1.png" />
+              <Image Name="baobo_popupview_text_cr.png" />
+              <Image Name="baobo_popupview_text_qc.png" />
+            </Folder>
+            <Folder Name="dl_recharge">
+              <Image Name="baobo_popupview_button_chongzhi.png" />
+              <Image Name="baobo_popupview_button_chongzhi1.png" />
+              <Image Name="baobo_popupview_button_fz.png" />
+              <Image Name="baobo_popupview_button_fz1.png" />
+              <Image Name="baobo_popupview_button_lianxi.png" />
+              <Image Name="baobo_popupview_button_lianxi1.png" />
+              <Image Name="baobo_popupview_button_tj.png" />
+              <Image Name="baobo_popupview_button_tj1.png" />
+              <Image Name="baobo_popupview_button_yhfk.png" />
+              <Image Name="baobo_popupview_button_yhfk1.png" />
+              <Image Name="baobo_popupview_changtiao.png" />
+              <Image Name="baobo_popupview_dikuang.png" />
+              <Image Name="baobo_popupview_dl_qq.png" />
+              <Image Name="baobo_popupview_dl_wechat.png" />
+              <Image Name="baobo_popupview_kuaisutianjia_bg.png" />
+              <Image Name="baobo_popupview_lianxidaili.png" />
+            </Folder>
+            <Image Name="baobo_id.png" />
+            <Image Name="baobo_popupview_bg.jpg" />
+            <Image Name="baobo_popupview_button_cr.png" />
+            <Image Name="baobo_popupview_button_cr1.png" />
+            <Image Name="baobo_popupview_button_dailizchongzhi.png" />
+            <Image Name="baobo_popupview_button_dailizchongzhi1.png" />
+            <Image Name="baobo_popupview_button_dailizhaoshan.png" />
+            <Image Name="baobo_popupview_button_dailizhaoshan1.png" />
+            <Image Name="baobo_popupview_button_qc.png" />
+            <Image Name="baobo_popupview_button_qc1.png" />
+            <Image Name="baobo_popupview_button_qr.png" />
+            <Image Name="baobo_popupview_button_qr1.png" />
+            <Image Name="baobo_popupview_button_qrgm.png" />
+            <Image Name="baobo_popupview_button_qrgm1.png" />
+            <Image Name="baobo_popupview_button_qrzz.png" />
+            <Image Name="baobo_popupview_button_qrzz1.png" />
+            <Image Name="baobo_popupview_button_weixin.png" />
+            <Image Name="baobo_popupview_button_weixin1.png" />
+            <Image Name="baobo_popupview_button_zhifubao.png" />
+            <Image Name="baobo_popupview_button_zhifubao1.png" />
+            <Image Name="baobo_popupview_button_zhuanzhang.png" />
+            <Image Name="baobo_popupview_button_zhuanzhang1.png" />
+            <Image Name="baobo_popupview_button_zz.png" />
+            <Image Name="baobo_popupview_button_zz1.png" />
+            <Image Name="baobo_popupview_changtiao.png" />
+            <Image Name="baobo_popupview_chongzhiwenzi.png" />
+            <Image Name="baobo_popupview_closed_normal.png" />
+            <Image Name="baobo_popupview_closed_normal1.png" />
+            <Image Name="baobo_popupview_cmk.png" />
+            <Image Name="baobo_popupview_id.png" />
+            <Image Name="baobo_popupview_jbk.png" />
+            <Image Name="baobo_popupview_text_skf.png" />
+            <Image Name="baobo_popupview_text_zzje.png" />
+            <Image Name="baobo_qsrndyqm.png" />
+            <Image Name="bb_cmdh_cz_bt.png" />
+            <Image Name="bb_cmdh_yh_bt.png" />
+            <Image Name="bb_cz_lxdl_dh.png" />
+            <Image Name="bb_cz_lxdl_qq.png" />
+            <Image Name="bb_cz_lxdl_wx.png" />
+            <Image Name="bb_cz_lxdl_zfb.png" />
+            <Image Name="BB_tx_button_50_normal.png" />
+            <Image Name="BB_tx_button_50_pressed.png" />
+            <Image Name="BB_tx_button_500_normal.png" />
+            <Image Name="BB_tx_button_500_pressed.png" />
+            <Image Name="BB_tx_button_5000_normal.png" />
+            <Image Name="BB_tx_button_5000_pressed.png" />
+            <Image Name="bb_tx_ql_normal.png" />
+            <Image Name="bb_tx_ql_pressed.png" />
+            <Image Name="BB_yh_button_10_normal.png" />
+            <Image Name="BB_yh_button_10_pressed.png" />
+            <Image Name="BB_yh_button_100_normal.png" />
+            <Image Name="BB_yh_button_100_pressed.png" />
+            <Image Name="BB_yh_button_1000_normal.png" />
+            <Image Name="BB_yh_button_1000_pressed.png" />
+            <Image Name="BB_yh_button_10000_normal.png" />
+            <Image Name="BB_yh_button_10000_pressed.png" />
+            <Image Name="BB_yh_button_cxsr_normal.png" />
+            <Image Name="BB_yh_button_cxsr_pressed.png" />
+          </Folder>
+          <Folder Name="bombbox">
+            <Image Name="baobo_button_qcz.png" />
+            <Image Name="baobo_button_qcz2.png" />
+            <Image Name="baobo_button_qyh.png" />
+            <Image Name="baobo_button_qyh2.png" />
+            <Image Name="baobo_popupview_closed_normal.png" />
+            <Image Name="baobo_popupview_closed_pressed.png" />
+            <Image Name="bb_sz_tck.png" />
+            <Image Name="bb_sz_tck_fh_normal.png" />
+            <Image Name="bb_sz_tck_fh_pressed.png" />
+            <Image Name="bb_sz_tck_qd_normal.png" />
+            <Image Name="bb_sz_tck_qd_pressed.png" />
+            <Image Name="bb_sz_tck_qx_normal.png" />
+            <Image Name="bb_sz_tck_qx_pressed.png" />
+            <Image Name="bb_xiaokuang_cb.png" />
+            <Image Name="bb_xiaokuang_cb_ax.png" />
+            <Image Name="bb_xiaokuang_kf.png" />
+            <Image Name="bb_xiaokuang_kf_ax.png" />
+          </Folder>
+          <Folder Name="feedback">
+            <Image Name="bb_button_fk_1.png" />
+            <Image Name="bb_button_fk_1_pressed.png" />
+            <Image Name="bb_fk_bj.jpg" />
+            <Image Name="bb_fk_dhkuang_1.png" />
+            <Image Name="bb_fk_dhkuang_2.png" />
+            <Image Name="bb_fk_kftx.png" />
+            <Image Name="bb_fk_sjkuang.png" />
+            <Image Name="bb_fk_srkuang.png" />
+            <Image Name="bb_fk_tj.png" />
+            <Image Name="bb_fk_tj_pressed.png" />
+            <Image Name="bb_fk_txkuang.png" />
+            <Image Name="bb_fk_txkuang_1.png" />
+            <Image Name="feedback_system_head.png" />
+            <Image Name="MM_button_ckhf.png" />
+            <Image Name="MM_button_ckhf2.png" />
+            <Image Name="MM_button_tj.png" />
+            <Image Name="MM_button_tj2.png" />
+            <Image Name="MM_button_tjfk.png" />
+            <Image Name="MM_button_tjfk2.png" />
+            <Image Name="MM_fk_bt.png" />
+            <Image Name="MM_fk_hdt_1.png" />
+            <Image Name="MM_fk_hdt_2.png" />
+            <Image Name="MM_fk_kuang.png" />
+            <Image Name="MM_fk_srkuang.png" />
+            <Image Name="MM_fk_srkuang2.png" />
+            <Image Name="MM_fk_xxx.png" />
+            <Image Name="MM_icon_gou.png" />
+            <Image Name="MM_wenzi_bug.png" />
+            <Image Name="MM_wenzi_czwt.png" />
+            <Image Name="MM_wenzi_tjy.png" />
+            <Image Name="MM_wenzi_zxqt.png" />
+          </Folder>
+          <Folder Name="flip_button">
+            <Image Name="baobo_an_left_normal.png" />
+            <Image Name="baobo_an_left_pressed.png" />
+            <Image Name="baobo_an_right_normal.png" />
+            <Image Name="baobo_an_right_pressed.png" />
+          </Folder>
+          <Folder Name="game_select">
+            <Folder Name="np_zh_bairenniuniu_chart">
+              <Image Name="brnn_biaotizi.png" />
+              <Image Name="brnn_gang.png" />
+              <Image Name="brnn_gbc.png" />
+              <Image Name="brnn_shuzi.png" />
+              <Image Name="brnn_xnc.png" />
+              <Image Name="brnn_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_ddz_chart">
+              <Image Name="bb_fc_ddz_biaotizi.png" />
+              <Image Name="BB_icon_ddz_cjc.png" />
+              <Image Name="BB_icon_ddz_fhc.png" />
+              <Image Name="BB_icon_ddz_gjc.png" />
+              <Image Name="BB_icon_ddz_xsc.png" />
+              <Image Name="zjh_shuzi.png" />
+              <Image Name="zjh_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_dntg_chart">
+              <Image Name="bb_fc_dntg_biaotizi.png" />
+              <Image Name="bb_fc_dntg_tb1.png" />
+              <Image Name="bb_fc_dntg_tb2.png" />
+              <Image Name="bb_fc_dntg_tb3.png" />
+              <Image Name="bb_fc_dntg_tb4.png" />
+              <Image Name="bb_fc_lkpy_b.png" />
+              <Image Name="bb_fc_lkpy_bs.png" />
+              <Image Name="bb_fc_lkpy_dz.png" />
+              <Image Name="bb_fc_lkpy_h.png" />
+              <Image Name="bb_fc_lkpy_rc.png" />
+              <Image Name="bb_fc_lkpy_szbq.png" />
+            </Folder>
+            <Folder Name="np_zh_dzpk_chart">
+              <Image Name="bb_fc_dzpk_biaotizi.png" />
+              <Image Name="bb_fc_dzpk_rcdz.png" />
+              <Image Name="bb_fc_dzpk_shuzi.png" />
+              <Image Name="bb_fc_dzpk_tb1.png" />
+              <Image Name="bb_fc_dzpk_tb2.png" />
+              <Image Name="bb_fc_dzpk_tb3.png" />
+              <Image Name="bb_fc_dzpk_tb4.png" />
+            </Folder>
+            <Folder Name="np_zh_fishgame2d_jcby_chart">
+              <Image Name="bb_fc_jcby_biaotizi.png" />
+              <Image Name="bb_fc_jcby_tb1.png" />
+              <Image Name="bb_fc_jcby_tb2.png" />
+              <Image Name="bb_fc_jcby_tb3.png" />
+              <Image Name="bb_fc_jcby_tb4.png" />
+              <Image Name="bb_fc_lkpy_b.png" />
+              <Image Name="bb_fc_lkpy_bs.png" />
+              <Image Name="bb_fc_lkpy_dz.png" />
+              <Image Name="bb_fc_lkpy_h.png" />
+              <Image Name="bb_fc_lkpy_rc.png" />
+              <Image Name="bb_fc_lkpy_szbq.png" />
+            </Folder>
+            <Folder Name="np_zh_fishgame2d_lkpy_chart">
+              <Image Name="bb_fc_lkpy_b.png" />
+              <Image Name="bb_fc_lkpy_biaotizi.png" />
+              <Image Name="bb_fc_lkpy_bs.png" />
+              <Image Name="bb_fc_lkpy_dz.png" />
+              <Image Name="bb_fc_lkpy_h.png" />
+              <Image Name="bb_fc_lkpy_rc.png" />
+              <Image Name="bb_fc_lkpy_szbq.png" />
+              <Image Name="BB_icon_lkpy_cjc.png" />
+              <Image Name="BB_icon_lkpy_fhc.png" />
+              <Image Name="BB_icon_lkpy_gjc.png" />
+              <Image Name="BB_icon_lkpy_xsc.png" />
+            </Folder>
+            <Folder Name="np_zh_laohuji_chart">
+              <Image Name="bb_fc_lhj_biaotizi.png" />
+              <Image Name="bb_fc_lhj_tb1.png" />
+              <Image Name="bb_fc_lhj_tb2.png" />
+              <Image Name="bb_fc_lhj_tb3.png" />
+              <Image Name="bb_fc_lhj_tb4.png" />
+              <Image Name="bb_fc_lkpy_b.png" />
+              <Image Name="bb_fc_lkpy_bs.png" />
+              <Image Name="bb_fc_lkpy_dz.png" />
+              <Image Name="bb_fc_lkpy_h.png" />
+              <Image Name="bb_fc_lkpy_rc.png" />
+              <Image Name="bb_fc_lkpy_szbq.png" />
+            </Folder>
+            <Folder Name="np_zh_niuniu_erren_chart">
+              <Image Name="bb_fc_ernn_biaotizi.png" />
+              <Image Name="bb_fc_ernn_tb1.png" />
+              <Image Name="bb_fc_ernn_tb2.png" />
+              <Image Name="bb_fc_ernn_tb3.png" />
+              <Image Name="bb_fc_ernn_tb4.png" />
+              <Image Name="zjh_shuzi.png" />
+              <Image Name="zjh_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_niuniu_siren_chart">
+              <Image Name="bb_fc_srnn_biaotizi.png" />
+              <Image Name="bb_fc_srnn_tb1.png" />
+              <Image Name="bb_fc_srnn_tb2.png" />
+              <Image Name="bb_fc_srnn_tb3.png" />
+              <Image Name="bb_fc_srnn_tb4.png" />
+              <Image Name="zjh_shuzi.png" />
+              <Image Name="zjh_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_niuniu_tongbi_chart">
+              <Image Name="bb_fc_tbnn_biaotizi.png" />
+              <Image Name="bb_fc_tbnn_tb1.png" />
+              <Image Name="bb_fc_tbnn_tb2.png" />
+              <Image Name="bb_fc_tbnn_tb3.png" />
+              <Image Name="bb_fc_tbnn_tb4.png" />
+              <Image Name="zjh_shuzi.png" />
+              <Image Name="zjh_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_showhand_erren_chart">
+              <Image Name="bb_fc_ersh_biaotizi.png" />
+              <Image Name="bb_fc_ersh_tb1.png" />
+              <Image Name="bb_fc_ersh_tb2.png" />
+              <Image Name="bb_fc_ersh_tb3.png" />
+              <Image Name="showhand2_shuzi.png" />
+              <Image Name="showhand2_zi.png" />
+            </Folder>
+            <Folder Name="np_zh_shuihuzhuan_chart">
+              <Image Name="bb_fc_lkpy_b.png" />
+              <Image Name="bb_fc_lkpy_bs.png" />
+              <Image Name="bb_fc_lkpy_dz.png" />
+              <Image Name="bb_fc_lkpy_h.png" />
+              <Image Name="bb_fc_lkpy_rc.png" />
+              <Image Name="bb_fc_lkpy_szbq.png" />
+              <Image Name="bb_fc_shz_biaotizi.png" />
+              <Image Name="bb_fc_shz_tb1.png" />
+              <Image Name="bb_fc_shz_tb2.png" />
+              <Image Name="bb_fc_shz_tb3.png" />
+              <Image Name="bb_fc_shz_tb4.png" />
+            </Folder>
+            <Folder Name="np_zh_zhajinhua_chart">
+              <Image Name="bb_fc_zjh_biaotizi.png" />
+              <Image Name="bb_fc_zjh_shuzi.png" />
+              <Image Name="bb_fc_zjh_zi.png" />
+              <Image Name="BB_icon_zjh_cjc.png" />
+              <Image Name="BB_icon_zjh_fhc.png" />
+              <Image Name="BB_icon_zjh_gjc.png" />
+              <Image Name="BB_icon_zjh_xsc.png" />
+            </Folder>
+            <Image Name="bb_fc_beijing.jpg" />
+            <Image Name="bb_fc_ddz_normal.png" />
+            <Image Name="bb_fc_ddz_pressed.png" />
+            <Image Name="bb_tongyong_fanhui.png" />
+            <Image Name="bb_tongyong_fanhui1.png" />
+          </Folder>
+          <Folder Name="hall">
+            <Image Name="BB_button_ty.png" />
+            <Image Name="BB_button_ty_pressed.png" />
+            <Image Name="bb_dating_beijing.jpg" />
+            <Image Name="bb_dating_beijing.png" />
+            <Image Name="bb_dating_choumashuru.png" />
+            <Image Name="bb_dating_cmdh_normal.png" />
+            <Image Name="bb_dating_cmdh_pressed.png" />
+            <Image Name="bb_dating_diguang.png" />
+            <Image Name="bb_dating_down_blank.png" />
+            <Image Name="bb_dating_download_gxz.png" />
+            <Image Name="bb_dating_download_jindutiao1.png" />
+            <Image Name="bb_dating_download_jindutiao2.png" />
+            <Image Name="bb_dating_download_normal.png" />
+            <Image Name="bb_dating_download_pressed.png" />
+            <Image Name="bb_dating_fhdt_normal.png" />
+            <Image Name="bb_dating_fhdt_pressed.png" />
+            <Image Name="bb_dating_gonggao_bg.png" />
+            <Image Name="bb_dating_jiahao_normal.png" />
+            <Image Name="bb_dating_jiahao_pressed.png" />
+            <Image Name="bb_dating_jinbishuzi.png" />
+            <Image Name="bb_dating_jindudi.png" />
+            <Image Name="bb_dating_jindutiao.png" />
+            <Image Name="bb_dating_kaifu_normal.png" />
+            <Image Name="bb_dating_moregame_normal.png" />
+            <Image Name="bb_dating_moregame_pressed.png" />
+            <Image Name="bb_dating_shuxian.png" />
+            <Image Name="bb_dating_touxiangkuang.png" />
+            <Image Name="bb_dating_touxiangkuang_2.png" />
+            <Image Name="bb_dating_tubiao_daoying.png" />
+            <Image Name="bb_dating_tubiao_daoying_brnn.png" />
+            <Image Name="bb_dating_yinghangshuru.png" />
+            <Image Name="bb_dating_youxitubiao_1_1.png" />
+            <Image Name="bb_dating_youxitubiao_10_1.png" />
+            <Image Name="bb_dating_youxitubiao_11_1.png" />
+            <Image Name="bb_dating_youxitubiao_12_1.png" />
+            <Image Name="bb_dating_youxitubiao_13_1.png" />
+            <Image Name="bb_dating_youxitubiao_14_1.png" />
+            <Image Name="bb_dating_youxitubiao_15_1.png" />
+            <Image Name="bb_dating_youxitubiao_2_1.png" />
+            <Image Name="bb_dating_youxitubiao_3_1.png" />
+            <Image Name="bb_dating_youxitubiao_4_1.png" />
+            <Image Name="bb_dating_youxitubiao_5_1.png" />
+            <Image Name="bb_dating_youxitubiao_6_1.png" />
+            <Image Name="bb_dating_youxitubiao_7_1.png" />
+            <Image Name="bb_dating_youxitubiao_8_1.png" />
+            <Image Name="bb_dating_youxitubiao_9_1.png" />
+            <Image Name="bb_dating_zzgx.png" />
+            <Image Name="BB_icon_ystk.png" />
+            <Image Name="bb_tubiao_duihuan_normal.png" />
+            <Image Name="bb_tubiao_duihuan_pressed.png" />
+            <Image Name="bb_tubiao_fankui_normal.png" />
+            <Image Name="bb_tubiao_fankui_pressed.png" />
+            <Image Name="bb_tubiao_gd_dk.png" />
+            <Image Name="bb_tubiao_gengduo_normal.png" />
+            <Image Name="bb_tubiao_gengduo_pressed.png" />
+            <Image Name="bb_tubiao_gonggao_normal.png" />
+            <Image Name="bb_tubiao_gonggao_pressed.png" />
+            <Image Name="bb_tubiao_hongdian_pressed.png" />
+            <Image Name="bb_tubiao_kefu_normal.png" />
+            <Image Name="bb_tubiao_kefu_pressed.png" />
+            <Image Name="bb_tubiao_shezhi_normal.png" />
+            <Image Name="bb_tubiao_shezhi_pressed.png" />
+            <Image Name="bb_tubiao_xiaoxi_normal.png" />
+            <Image Name="bb_tubiao_xiaoxi_pressed.png" />
+            <Image Name="bb_tubiao_yinhang_normal.png" />
+            <Image Name="bb_tubiao_yinhang_pressed.png" />
+            <Image Name="bb_tubiao_zhanghu_normal.png" />
+            <Image Name="bb_tubiao_zhanghupressed.png" />
+          </Folder>
+          <Folder Name="inviter">
+            <Image Name="baobo_qsrndyqm.png" />
+            <Image Name="baobo_title_yqrxx.png" />
+          </Folder>
+          <Folder Name="loading">
+            <Image Name="BB_jdt_1.png" />
+            <Image Name="bb_loading_jzt.png" />
+            <Image Name="bb_loading_jztd.png" />
+            <Image Name="kog_bg.jpg" />
+          </Folder>
+          <Folder Name="login_verify">
+            <Image Name="bb_biaoti_shoujiyanzheng.png" />
+            <Image Name="bb_grxx_sjyz_sjh.png" />
+            <Image Name="bb_grxx_sjyz_yzm.png" />
+            <Image Name="bb_huoquyanzhengma_normal.png" />
+            <Image Name="bb_huoquyanzhengma_pressed.png" />
+            <Image Name="bb_queding_normal.png" />
+            <Image Name="bb_queding_pressed.png" />
+            <Image Name="shoujiyanz.jpg" />
+          </Folder>
+          <Folder Name="my_toast">
+            <Image Name="tishikuangBg.png" />
+          </Folder>
+          <Folder Name="notice_service_setting">
+            <Image Name="baobo_gdt_bg.png" />
+            <Image Name="baobo_gdt_hdk.png" />
+            <Image Name="baobo_popupview_bg_gonggao.png" />
+            <Image Name="baobo_popupview_button_fasong.png" />
+            <Image Name="baobo_popupview_button_fasong1.png" />
+            <Image Name="baobo_popupview_button_shousuo.png" />
+            <Image Name="baobo_popupview_button_shousuo1.png" />
+            <Image Name="baobo_popupview_button_xiala.png" />
+            <Image Name="baobo_popupview_button_xiala1.png" />
+            <Image Name="baobo_popupview_gonggao_biaotibeijing2.png" />
+            <Image Name="baobo_popupview_kefu_shurukuang.png" />
+            <Image Name="baobo_popupview_title_gonggao.png" />
+            <Image Name="baobo_popupview_title_kefu.png" />
+            <Image Name="baobo_popupview_title_set.png" />
+            <Image Name="baobo_popupview_zwgg.png" />
+            <Image Name="baobo_tc_gonggao_listbg.png" />
+            <Image Name="baobo_tc_kefu_bg.png" />
+            <Image Name="baobo_tc_title_xiaoxi.png" />
+            <Image Name="baobo_tc_xiaoxi_bg.png" />
+            <Image Name="baobo_tc_xiaoxi_listbg.png" />
+            <Image Name="bb_btn_content.png" />
+            <Image Name="bb_btn_content_pressed.png" />
+            <Image Name="bb_btn_queding.png" />
+            <Image Name="bb_btn_queding_pressed.png" />
+            <Image Name="bb_btn_quxiao.png" />
+            <Image Name="bb_btn_quxiao_pressed.png" />
+            <Image Name="bb_btn_return.png" />
+            <Image Name="bb_btn_return_pressed.png" />
+            <Image Name="bb_fc_ty_guanbi_normal.png" />
+            <Image Name="bb_fc_ty_guanbi_pressed.png" />
+            <Image Name="bb_xiaoxi_view.png" />
+            <Image Name="loading.png" />
+          </Folder>
+          <Folder Name="register_login">
+            <Image Name="bb_biaoti_denglu.png" />
+            <Image Name="bb_dl_beijing.jpg" />
+            <Image Name="BB_dl_bj.png" />
+            <Image Name="bb_shoujiyanzhengdenglu_normal.png" />
+            <Image Name="bb_shoujiyanzhengdenglu_pressed.png" />
+            <Image Name="bb_tongyong_fanhui.png" />
+            <Image Name="bb_tongyong_fanhui1.png" />
+            <Image Name="bb_ykdl.png" />
+            <Image Name="bb_ykdl_1.png" />
+            <Image Name="bb_zc_tykk.png" />
+            <Image Name="bt_dl.png" />
+            <Image Name="bt_dl_2.png" />
+            <Image Name="srmm.png" />
+            <Image Name="srzh.png" />
+          </Folder>
+          <Folder Name="reset_passwd">
+            <Image Name="baobo_popupview_button_qd.png" />
+            <Image Name="baobo_popupview_button_qd1.png" />
+            <Image Name="baobo_popupview_button_qx.png" />
+            <Image Name="baobo_popupview_button_qx1.png" />
+            <Image Name="bb_biaoti_duanxinggaimi.png" />
+          </Folder>
+          <Folder Name="setting">
+            <Image Name="bb_grxx_txk.png" />
+            <Image Name="bb_sz_bt.png" />
+            <Image Name="bb_sz_guan.png" />
+            <Image Name="bb_sz_k1.png" />
+            <Image Name="bb_sz_k2.png" />
+            <Image Name="bb_sz_kai.png" />
+            <Image Name="bb_sz_kgd.kg.png" />
+            <Image Name="bb_sz_kgd.png" />
+            <Image Name="bb_sz_kgd_2.png" />
+            <Image Name="bb_sz_qhzh_d.png" />
+            <Image Name="bb_sz_qhzh_normal.png" />
+            <Image Name="bb_sz_qhzh_pressed.png" />
+            <Image Name="bb_sz_yxa.png" />
+            <Image Name="bb_sz_yxxx.png" />
+            <Image Name="bb_sz_yy.png" />
+          </Folder>
+          <Folder Name="shop">
+            <Image Name="BB_button_sc_12.png" />
+            <Image Name="BB_button_sc_128.png" />
+            <Image Name="BB_button_sc_30.png" />
+            <Image Name="BB_button_sc_328.png" />
+            <Image Name="BB_button_sc_6.png" />
+            <Image Name="BB_button_sc_60.png" />
+            <Image Name="BB_button_sc_618.png" />
+            <Image Name="BB_title_sc.png" />
+          </Folder>
+          <Folder Name="tixian">
+            <Folder Name="bb_confirmation_box">
+              <Image Name="baobo_popupview_button_qr.png" />
+              <Image Name="baobo_popupview_button_qr1.png" />
+              <Image Name="baobo_popupview_button_qx.png" />
+              <Image Name="baobo_popupview_button_qx1.png" />
+              <Image Name="baobo_popupview_qingqiushibai.png" />
+              <Image Name="baobo_popupview_title_zcqr.png" />
+              <Image Name="baobo_popupview_txcg.png" />
+              <Image Name="bb_cmdh_txjd_normal.png" />
+              <Image Name="bb_cmdh_txjd_pressed.png" />
+              <Image Name="bb_cmdh_zdl_normal.png" />
+              <Image Name="bb_cmdh_zdl_pressed.png" />
+              <Image Name="xiaoguo2.png" />
+              <Image Name="xiaoguotu1.png" />
+              <Image Name="xiaoguotu3.png" />
+            </Folder>
+            <Image Name="baobo_bind_apli.png" />
+            <Image Name="baobo_button_txbz_normal.png" />
+            <Image Name="baobo_button_txbz_pressed.png" />
+            <Image Name="baobo_popupview_alipay.png" />
+            <Image Name="baobo_popupview_button_.png" />
+            <Image Name="baobo_popupview_button_tixian.png" />
+            <Image Name="baobo_popupview_button_tixianjindu.png" />
+            <Image Name="baobo_popupview_button_tixianjindu1.png" />
+            <Image Name="baobo_popupview_closed_normal.png" />
+            <Image Name="baobo_popupview_closed_pressed.png" />
+            <Image Name="baobo_popupview_cmk2.png" />
+            <Image Name="baobo_popupview_input_bg.png" />
+            <Image Name="baobo_popupview_jbk2.png" />
+            <Image Name="baobo_popupview_text_tx.png" />
+            <Image Name="baobo_popupview_title_bdzfb.png" />
+            <Image Name="baobo_popupview_title_tixian.png" />
+            <Image Name="baobo_popupview_title_zcqr.png" />
+            <Image Name="baobo_popupview_xztxfs_input_bg.png" />
+            <Image Name="baobo_tixian_text.png" />
+            <Image Name="bb_cmdh_bz_bt.png" />
+            <Image Name="bb_cmdh_qrtx_normal.png" />
+            <Image Name="bb_cmdh_qrtx_pressed.png" />
+            <Image Name="bb_tongyong_beijing.jpg" />
+            <Image Name="bb_tongyong_fanhui.png" />
+            <Image Name="bb_tongyong_fanhui1.png" />
+            <Image Name="BB_tx_button_normal.png" />
+            <Image Name="BB_tx_button_pressed.png" />
+            <Image Name="bb_tx_jb.png" />
+            <Image Name="bb_tx_ql_normal.png" />
+            <Image Name="bb_tx_ql_pressed.png" />
+            <Image Name="BB_tx_szt.png" />
+            <Image Name="bb_tx_yh.png" />
+            <Image Name="bb_txjd_fenleibiaoti.png" />
+            <Image Name="bb_txjd_lxkf_normal.png" />
+            <Image Name="bb_txjd_lxkf_pressed.png" />
+            <Image Name="bb_txjd_tixianbiaoti.png" />
+            <Image Name="bb_txjd_txjd.png" />
+          </Folder>
+          <Folder Name="ui_public">
+            <Image Name="bb_fc_ty_guanbi_normal.png" />
+            <Image Name="bb_fc_ty_guanbi_pressed.png" />
+          </Folder>
+          <Folder Name="word_verification">
+            <Image Name="baobo_title_yzm.png" />
+            <Image Name="baobo_yzm_bg.png" />
+            <Image Name="baobo_yzm_bg2.png" />
+            <Image Name="baobo_yzm_kuang.png" />
+            <Image Name="baobo_yzm_kuang1.png" />
+          </Folder>
+        </Folder>
+        <Project Name="AccountBindLayerCCS.csd" Type="Layer" />
+        <Project Name="AccountBindTipLayer.csd" Type="Layer" />
+        <Project Name="AlipayBindEnsureLayerCCS.csd" Type="Layer" />
+        <Project Name="AlipayBindInfoLayerCCS.csd" Type="Layer" />
+        <Project Name="AlipayBindLayerCCS.csd" Type="Layer" />
+        <Project Name="AvatarModifyLayerCCS.csd" Type="Layer" />
+        <Project Name="BankCenterLayerCCS.csd" Type="Layer" />
+        <Project Name="BankDepositLayerCCS.csd" Type="Layer" />
+        <Project Name="BankTransferAccountsLayerCCS.csd" Type="Layer" />
+        <Project Name="BankWithdrawLayerCCS.csd" Type="Layer" />
+        <Project Name="ContactAgentLayerCCS.csd" Type="Layer" />
+        <Project Name="CustomServiceLayer.csd" Type="Layer" />
+        <Project Name="ExchangeEnsureLayer.csd" Type="Layer" />
+        <Project Name="ExchangeHelpLayer.csd" Type="Layer" />
+        <Project Name="ExchangeLayer.csd" Type="Layer" />
+        <Project Name="ExchangeResultLayer.csd" Type="Layer" />
+        <Project Name="FeedbackLayer.csd" Type="Layer" />
+        <Project Name="FeedbackLayerNew.csd" Type="Layer" />
+        <Project Name="HallSceneCCS.csd" Type="Scene" />
+        <Project Name="InvitationCodeLayer.csd" Type="Layer" />
+        <Project Name="InviterInfoLayer.csd" Type="Layer" />
+        <Project Name="LoadingLayerCCS.csd" Type="Layer" />
+        <Project Name="LoginAccountLayerCCS.csd" Type="Scene" />
+        <Project Name="LoginWordVerifyLayer.csd" Type="Layer" />
+        <Project Name="MessageLayer.csd" Type="Layer" />
+        <Project Name="MessageTipLayerCCS.csd" Type="Layer" />
+        <Project Name="MobilePhoneLoginLayerCCS.csd" Type="Layer" />
+        <Project Name="MobilePhoneModidfyPwdLayerCCS.csd" Type="Layer" />
+        <Project Name="MyToastLayerCCS.csd" Type="Scene" />
+        <Project Name="NoticeLayer.csd" Type="Layer" />
+        <Project Name="NoticeShowLayer.csd" Type="Layer" />
+        <Project Name="PasswordModifyLayerCCS.csd" Type="Layer" />
+        <Project Name="PersonalCenterLayerCCS.csd" Type="Layer" />
+        <Project Name="PersonalInfoLayerCCS.csd" Type="Layer" />
+        <Project Name="PrivacyPolicyLayerCCS.csd" Type="Layer" />
+        <Project Name="RechargeDailiNode.csd" Type="Layer" />
+        <Project Name="RechargeDlczLayerCCS.csd" Type="Layer" />
+        <Project Name="RechargeDlzsLayerCCS.csd" Type="Layer" />
+        <Project Name="RechargeFeedbackLayerCCS.csd" Type="Layer" />
+        <Project Name="RechargeLayerCCS.csd" Type="Layer" />
+        <Project Name="RechargeTypeLayerCCS.csd" Type="Layer" />
+        <Project Name="SecondaryBRNNNodeCCS.csd" Type="Layer" />
+        <Project Name="SecondaryDDZNodeCCS.csd" Type="Layer" />
+        <Project Name="SecondarySelectLayerCCS.csd" Type="Layer" />
+        <Project Name="SecondaryZJHNodeCCS.csd" Type="Layer" />
+        <Project Name="SettingLayerCCS.csd" Type="Layer" />
+        <Project Name="ShopLayerCCS.csd" Type="Layer" />
+        <Project Name="SecondaryDZPKNodeCCS.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

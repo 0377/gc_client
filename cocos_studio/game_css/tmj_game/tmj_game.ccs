@@ -1,0 +1,271 @@
+<Solution>
+  <PropertyGroup Name="tmj_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Folder Name="animation">
+            <Folder Name="ermj_px_eff">
+              <ExportJsonFile Name="ermj_px_eff.ExportJson" />
+            </Folder>
+          </Folder>
+          <Folder Name="cards">
+            <Image Name="mj_1.png" />
+            <Image Name="mj_10.png" />
+            <Image Name="mj_11.png" />
+            <Image Name="mj_12.png" />
+            <Image Name="mj_13.png" />
+            <Image Name="mj_14.png" />
+            <Image Name="mj_15.png" />
+            <Image Name="mj_16.png" />
+            <Image Name="mj_17.png" />
+            <Image Name="mj_18.png" />
+            <Image Name="mj_19.png" />
+            <Image Name="mj_2.png" />
+            <Image Name="mj_20.png" />
+            <Image Name="mj_21.png" />
+            <Image Name="mj_22.png" />
+            <Image Name="mj_23.png" />
+            <Image Name="mj_24.png" />
+            <Image Name="mj_3.png" />
+            <Image Name="mj_4.png" />
+            <Image Name="mj_5.png" />
+            <Image Name="mj_6.png" />
+            <Image Name="mj_7.png" />
+            <Image Name="mj_8.png" />
+            <Image Name="mj_9.png" />
+            <Image Name="mj_back.png" />
+            <Image Name="mj_face.png" />
+          </Folder>
+          <Folder Name="desk">
+            <Image Name="anchi.png" />
+            <Image Name="angang.png" />
+            <Image Name="anguo.png" />
+            <Image Name="anhu1.png" />
+            <Image Name="anhu2.png" />
+            <Image Name="anjiabei1.png" />
+            <Image Name="anjiabei2.png" />
+            <Image Name="anniu.png" />
+            <Image Name="anpeng.png" />
+            <Image Name="anquxiao.png" />
+            <Image Name="anting.png" />
+            <Image Name="chengquechang.png" />
+            <Image Name="chi.png" />
+            <Image Name="chi3.png" />
+            <Image Name="dizhu.png" />
+            <Image Name="dizhushuzi.png" />
+            <Image Name="fanhui.png" />
+            <Image Name="fanxing.png" />
+            <Image Name="gang.png" />
+            <Image Name="gang3.png" />
+            <Image Name="gaoliang1.png" />
+            <Image Name="gaoliang2.png" />
+            <Image Name="heidi.png" />
+            <Image Name="hu.png" />
+            <Image Name="hu3.png" />
+            <Image Name="hua.png" />
+            <Image Name="hupaixinxidi.png" />
+            <Image Name="hupaixinxidi2.png" />
+            <Image Name="jiabei.png" />
+            <Image Name="jiabeishuzi.png" />
+            <Image Name="jiantou1.png" />
+            <Image Name="jiantou2.png" />
+            <Image Name="kaiju.png" />
+            <Image Name="kehufanshu.png" />
+            <Image Name="kehupai.png" />
+            <Image Name="laoquechang.png" />
+            <Image Name="liuju.png" />
+            <Image Name="majiangzhuo.jpg" />
+            <Image Name="peng.png" />
+            <Image Name="peng3.png" />
+            <Image Name="pipeijiemian.jpg" />
+            <Image Name="pipeiwenzi.png" />
+            <Image Name="qiangganghu.png" />
+            <Image Name="queshenchang.png" />
+            <Image Name="renwu.png" />
+            <Image Name="renwudi.png" />
+            <Image Name="renwushuzi.png" />
+            <Image Name="shengyuzhangshu.png" />
+            <Image Name="shoufang1.png" />
+            <Image Name="shoufang2.png" />
+            <Image Name="shoufangdi.png" />
+            <Image Name="tanhao.png" />
+            <Image Name="ting.png" />
+            <Image Name="tingtubiao.png" />
+            <Image Name="tongyongkuang.png" />
+            <Image Name="touxiang.png" />
+            <Image Name="wancheng.png" />
+            <Image Name="xiaoquechang.png" />
+            <Image Name="xiaotubiao.png" />
+            <Image Name="yinxiao1.png" />
+            <Image Name="yinxiao2.png" />
+            <Image Name="yinyue1.png" />
+            <Image Name="yinyue2.png" />
+            <Image Name="zhizhen.png" />
+            <Image Name="zimo.png" />
+          </Folder>
+          <Folder Name="fan">
+            <Image Name="12fan.png" />
+            <Image Name="16fan.png" />
+            <Image Name="1fan.png" />
+            <Image Name="24fan.png" />
+            <Image Name="2fan.png" />
+            <Image Name="32fan.png" />
+            <Image Name="48fan.png" />
+            <Image Name="4fan.png" />
+            <Image Name="64fan.png" />
+            <Image Name="6fan.png" />
+            <Image Name="88fan.png" />
+            <Image Name="8fan.png" />
+            <Image Name="angang.png" />
+            <Image Name="baiwanshi.png" />
+            <Image Name="baoting.png" />
+            <Image Name="buqiuren.png" />
+            <Image Name="dandiaojiang.png" />
+            <Image Name="daqixing.png" />
+            <Image Name="dasanfeng.png" />
+            <Image Name="dasanyuan.png" />
+            <Image Name="dasixi.png" />
+            <Image Name="dayuwu.png" />
+            <Image Name="dihu.png" />
+            <Image Name="dongbeixinganxian.png" />
+            <Image Name="duanyao.png" />
+            <Image Name="gangshangkaihua.png" />
+            <Image Name="haidilaoyue.png" />
+            <Image Name="huapai.png" />
+            <Image Name="hubianzhang.png" />
+            <Image Name="hujuezhang.png" />
+            <Image Name="hunyaojiu.png" />
+            <Image Name="hunyise.png" />
+            <Image Name="jianke.png" />
+            <Image Name="jiulianbaodeng.png" />
+            <Image Name="juanfengke.png" />
+            <Image Name="laoshaofu.png" />
+            <Image Name="lianliu.png" />
+            <Image Name="lianqidui.png" />
+            <Image Name="menfengke.png" />
+            <Image Name="menqianqing.png" />
+            <Image Name="miaoshouhuichun.png" />
+            <Image Name="minggang.png" />
+            <Image Name="pengpenghu.png" />
+            <Image Name="pinghu.png" />
+            <Image Name="qiangganghu.png" />
+            <Image Name="qidui.png" />
+            <Image Name="qinglong.png" />
+            <Image Name="qingyise.png" />
+            <Image Name="quandaiyao.png" />
+            <Image Name="quanhua.png" />
+            <Image Name="quanqiuren.png" />
+            <Image Name="renhu.png" />
+            <Image Name="sananke.png" />
+            <Image Name="sanfengke.png" />
+            <Image Name="sangang.png" />
+            <Image Name="sanyuanqiduizi.png" />
+            <Image Name="shuangangang.png" />
+            <Image Name="shuangjianke.png" />
+            <Image Name="shuangminggang.png" />
+            <Image Name="shuangtongke.png" />
+            <Image Name="sianke.png" />
+            <Image Name="sigangzi.png" />
+            <Image Name="siguiyi.png" />
+            <Image Name="sixiqiduizi.png" />
+            <Image Name="sizike.png" />
+            <Image Name="tianhu.png" />
+            <Image Name="tianting.png" />
+            <Image Name="xiaosanfeng.png" />
+            <Image Name="xiaosanyuan.png" />
+            <Image Name="xiaosixi.png" />
+            <Image Name="xiaoyuwu.png" />
+            <Image Name="yaojiuke.png" />
+            <Image Name="yibangao.png" />
+            <Image Name="yinzhanghu.png" />
+            <Image Name="yisesanbugao.png" />
+            <Image Name="yisesanjiegao.png" />
+            <Image Name="yisesantongshun.png" />
+            <Image Name="yiseshuanglonghui.png" />
+            <Image Name="yisesibugao.png" />
+            <Image Name="yisesijiegao.png" />
+            <Image Name="yisesitongshun.png" />
+            <Image Name="zimo.png" />
+            <Image Name="ziyise.png" />
+          </Folder>
+          <Folder Name="settle">
+            <Image Name="12fan.png" />
+            <Image Name="12fanan.png" />
+            <Image Name="16fan.png" />
+            <Image Name="16fanan.png" />
+            <Image Name="1fan.png" />
+            <Image Name="1fanan.png" />
+            <Image Name="24fan.png" />
+            <Image Name="24fanan.png" />
+            <Image Name="2fan.png" />
+            <Image Name="2fanan.png" />
+            <Image Name="32fan.png" />
+            <Image Name="32fanan.png" />
+            <Image Name="48fan.png" />
+            <Image Name="48fanan.png" />
+            <Image Name="4fan.png" />
+            <Image Name="4fanan.png" />
+            <Image Name="64fan.png" />
+            <Image Name="64fanan.png" />
+            <Image Name="6fan.png" />
+            <Image Name="6fanan.png" />
+            <Image Name="88fan.png" />
+            <Image Name="88fanan.png" />
+            <Image Name="8fan.png" />
+            <Image Name="8fanan.png" />
+            <Image Name="beijing.jpg" />
+            <Image Name="benjuchipai.png" />
+            <Image Name="benjugangpai.png" />
+            <Image Name="benjuhupai.png" />
+            <Image Name="benjupengpai.png" />
+            <Image Name="daojishishuzi.png" />
+            <Image Name="duishoupaixing.png" />
+            <Image Name="duishoupaixing2.png" />
+            <Image Name="fanhui.png" />
+            <Image Name="fanxingdi.png" />
+            <Image Name="fanxingzi.png" />
+            <Image Name="gongji.png" />
+            <Image Name="heidi.png" />
+            <Image Name="huadonganniu.png" />
+            <Image Name="huadongtiao.png" />
+            <Image Name="jiesuandi.png" />
+            <Image Name="liuju.png" />
+            <Image Name="nishule.png" />
+            <Image Name="niyingle.png" />
+            <Image Name="shengli.png" />
+            <Image Name="shibai.png" />
+            <Image Name="shijiandaojishi.png" />
+            <Image Name="shijiandi.png" />
+            <Image Name="shuishou.png" />
+            <Image Name="tuichubenju.png" />
+            <Image Name="wancheng.png" />
+            <Image Name="weiwancheng.png" />
+            <Image Name="xiayiju.png" />
+            <Image Name="yingfen.png" />
+            <Image Name="yingfenshuzi.png" />
+            <Image Name="zijiapaixing.png" />
+            <Image Name="zijiapaixing2.png" />
+          </Folder>
+        </Folder>
+        <Project Name="TmjBundleNodeCCS.csd" Type="Node" />
+        <Project Name="TmjCardNodeCCS.csd" Type="Node" />
+        <Project Name="TmjChiOperationNodeCCS.csd" Type="Node" />
+        <Project Name="TmjDrawnGameLayerCCS.csd" Type="Layer" />
+        <Project Name="TmjFanXInfoLayerCCS.csd" Type="Layer" />
+        <Project Name="TmjGangOperationNodeCCS.csd" Type="Node" />
+        <Project Name="TmjHeadNode_1_CCS.csd" Type="Node" />
+        <Project Name="TmjHeadNode_2_CCS.csd" Type="Node" />
+        <Project Name="TmjMatchingLayerCCS.csd" Type="Layer" />
+        <Project Name="TmjMenuNodeCCS.csd" Type="Node" />
+        <Project Name="TmjPengOperationNodeCCS.csd" Type="Node" />
+        <Project Name="TmjPlayLayerCCS.csd" Type="Layer" />
+        <Project Name="TmjTaskNodeCCS.csd" Type="Node" />
+        <Project Name="TmjTingCancelNodeCCS.csd" Type="Node" />
+        <Project Name="TmjTingHuInfoNodeCCS.csd" Type="Node" />
+        <Project Name="TmjTingOperationNodeCCS.csd" Type="Node" />
+        <Project Name="TmjWinLoseLayerCCS.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

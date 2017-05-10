@@ -1,0 +1,98 @@
+<Solution>
+  <PropertyGroup Name="brnn_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Image Name="1.png" />
+          <Image Name="bankBg.png" />
+          <Image Name="bankerBg1.png" />
+          <Image Name="bankerBg2.png" />
+          <Image Name="bethuise.png" />
+          <Image Name="big.png" />
+          <Image Name="brnnYinDao.png" />
+          <Image Name="closeSound.png" />
+          <Image Name="closeSound1.png" />
+          <Image Name="guanzhan1.png" />
+          <Image Name="guanzhan2.png" />
+          <Image Name="guanzhanzhong.png" />
+          <Image Name="guizebg.png" />
+          <Image Name="guiZheJieMian.png" />
+          <Image Name="niuniuGuiZe.png" />
+          <Image Name="openSound.png" />
+          <Image Name="openSound1.png" />
+          <Image Name="qingdengdai.png" />
+          <Image Name="shuzi1.png" />
+          <Image Name="shuzi2.png" />
+          <Image Name="small.png" />
+          <Image Name="xiandengdai.png" />
+          <Image Name="zh_brnn_1st.png" />
+          <Image Name="zh_brnn_2nd.png" />
+          <Image Name="zh_brnn_3rd.png" />
+          <Image Name="zh_brnn_4th.png" />
+          <Image Name="zh_brnn_5th.png" />
+          <Image Name="zh_brnn_6th.png" />
+          <Image Name="zh_brnn_7th.png" />
+          <Image Name="zh_brnn_8th.png" />
+          <Image Name="zh_brnn_bangzhu.png" />
+          <Image Name="zh_brnn_beijing.jpg" />
+          <Image Name="zh_brnn_chouma1.png" />
+          <Image Name="zh_brnn_chouma2.png" />
+          <Image Name="zh_brnn_chouma3.png" />
+          <Image Name="zh_brnn_chouma4.png" />
+          <Image Name="zh_brnn_chouma5.png" />
+          <Image Name="zh_brnn_choumahui1.png" />
+          <Image Name="zh_brnn_choumahui2.png" />
+          <Image Name="zh_brnn_choumahui3.png" />
+          <Image Name="zh_brnn_choumahui4.png" />
+          <Image Name="zh_brnn_choumahui5.png" />
+          <Image Name="zh_brnn_choumaxuanzhong.png" />
+          <Image Name="zh_brnn_daojishi.png" />
+          <Image Name="zh_brnn_daojishishuzi.png" />
+          <Image Name="zh_brnn_dengdaijieshu.png" />
+          <Image Name="zh_brnn_dibuui.png" />
+          <Image Name="zh_brnn_dingbuui.png" />
+          <Image Name="zh_brnn_fanhui.png" />
+          <Image Name="zh_brnn_guanbi.png" />
+          <Image Name="zh_brnn_icon_clock_mask.png" />
+          <Image Name="zh_brnn_jiesuandi.png" />
+          <Image Name="zh_brnn_jilu1.png" />
+          <Image Name="zh_brnn_jilu3.png" />
+          <Image Name="zh_brnn_jiluanniu.png" />
+          <Image Name="zh_brnn_jiludi.png" />
+          <Image Name="zh_brnn_jilugaoliang.png" />
+          <Image Name="zh_brnn_julu2.png" />
+          <Image Name="zh_brnn_kaipaishijian.png" />
+          <Image Name="zh_brnn_kaishixiazhu.png" />
+          <Image Name="zh_brnn_quyuzongxiazhu.png" />
+          <Image Name="zh_brnn_shangzhuangdi.png" />
+          <Image Name="zh_brnn_shangzhuangdi2.png" />
+          <Image Name="zh_brnn_shenqingshangzhuang.png" />
+          <Image Name="zh_brnn_shenqingxiazhuang.png" />
+          <Image Name="zh_brnn_shenqingxiazhuanghui.png" />
+          <Image Name="zh_brnn_shouqi.png" />
+          <Image Name="zh_brnn_tongsha.png" />
+          <Image Name="zh_brnn_touxiangkuang_a1.png" />
+          <Image Name="zh_brnn_touxiangkuang_b1.png" />
+          <Image Name="zh_brnn_touxiangkuang_c1.png" />
+          <Image Name="zh_brnn_v.png" />
+          <Image Name="zh_brnn_wanjiaxiazhu.png" />
+          <Image Name="zh_brnn_x.png" />
+          <Image Name="zh_brnn_xiazhuxinxi.png" />
+          <Image Name="zh_brnn_xiazu1.png" />
+          <Image Name="zh_brnn_xiazu2.png" />
+          <Image Name="zh_brnn_xitongdangzhuang.png" />
+          <Image Name="zh_brnn_xuya.png" />
+          <Image Name="zh_brnn_xuya_1.png" />
+          <Image Name="zh_brnn_youxiguize.png" />
+          <Image Name="zh_brnn_zuozhuangshengyucishu.png" />
+          <Image Name="zhezao.png" />
+          <Image Name="zongxiazhunum.png" />
+        </Folder>
+        <Project Name="GameBrnn.csd" Type="Layer" />
+        <Project Name="GuiZe.csd" Type="Layer" />
+        <Project Name="JieSuan.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
