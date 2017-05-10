@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!--子弹设定  倍率        速度        捕获半径       最大捕鱼数量  炮管类型-->
+<BulletSet Mulriple="10" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+		<!--<Catch FishID="2" Probability="800"/>-->
+</BulletSet>
+
+<BulletSet Mulriple="20" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="30" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="40" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="50" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="60" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="70" Speed="800" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="80" Speed="900" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>
+
+<BulletSet Mulriple="90" Speed="900" CatchRadio="20" MaxCatch="1" CannonType="0">
+</BulletSet>	
+	
+<BulletSet Mulriple="100" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="200" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="300" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="400" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="500" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="600" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="700" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="800" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>
+
+<BulletSet Mulriple="900" Speed="900" CatchRadio="25" MaxCatch="1" CannonType="1">
+</BulletSet>	
+		
+<BulletSet Mulriple="1000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="2000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="3000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="4000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="5000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="6000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="7000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>
+
+<BulletSet Mulriple="8000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>	
+		
+<BulletSet Mulriple="9000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>	
+
+<BulletSet Mulriple="10000" Speed="1000" CatchRadio="30" MaxCatch="1" CannonType="2">
+</BulletSet>	
+								

@@ -1,0 +1,2311 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "fish_31",
+      "bone_data": [
+        {
+          "name": "Layer120_Copy3",
+          "parent": "",
+          "dI": -1,
+          "x": 14.914546966552734,
+          "y": 33.654151916503906,
+          "z": 3,
+          "cX": 2.0,
+          "cY": 2.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish31_die_1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_3.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_7.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_9.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_10.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_11.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_12.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_13.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_15.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_17.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_18.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_19.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_21.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_23.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_24.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_26.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_27.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer4",
+          "parent": "",
+          "dI": 5,
+          "x": 5.2780036926269531,
+          "y": 36.677864074707031,
+          "z": 2,
+          "cX": 2.0,
+          "cY": 2.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish31_move_1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_3.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_5.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_9.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_11.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_13.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_15.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_17.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_19.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_21.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_23.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_24.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_25.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_26.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_27.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_28.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_29.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_30.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_31.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_32.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_33.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_34.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_35.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_36.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_37.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_38.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_39.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_40.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_move_7.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer120",
+          "parent": "",
+          "dI": -1,
+          "x": -57.857139587402344,
+          "y": 23.819107055664062,
+          "z": 1,
+          "cX": 2.0,
+          "cY": 2.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish31_die_29.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_30.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_31.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_32.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_33.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_34.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_35.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_36.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_37.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_38.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "fish31_die_40.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "fish_31",
+      "mov_data": [
+        {
+          "name": "die",
+          "dr": 131,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.8333333,
+          "mov_bone_data": [
+            {
+              "name": "Layer120_Copy3",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 2,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 3,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 15,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 4,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 5,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 25,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 6,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 7,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 8,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 9,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 45,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 10,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 50,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 11,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 55,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 12,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 13,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 65,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 14,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 70,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 15,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 16,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 80,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 16,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 84,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 16,
+                  "x": 22.0,
+                  "y": 42.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 85,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 16,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 130,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer120",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 84,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 85,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 90,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 2,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 95,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 3,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 100,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 5,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 105,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 6,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 110,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 7,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 115,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 8,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 120,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 9,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 125,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 10,
+                  "x": -55.714286804199219,
+                  "y": 45.714286804199219,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 130,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "move",
+          "dr": 196,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer4",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 2,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 28,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 3,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 4,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 50,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 5,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 6,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 70,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 7,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 80,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 8,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 90,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 9,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 100,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 10,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 110,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 12,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 120,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 13,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 125,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 14,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 130,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 15,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 135,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 16,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 140,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 17,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 145,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 18,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 150,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 19,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 155,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 20,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 160,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 21,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 165,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 22,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 170,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 23,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 175,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 24,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 180,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 25,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 185,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 26,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 190,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 27,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 195,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "fish31_die_1",
+      "width": 280.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_3",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_7",
+      "width": 280.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_9",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_10",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_11",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_12",
+      "width": 280.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_13",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_15",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_17",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_18",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_21",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_23",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_24",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_26",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_27",
+      "width": 280.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_32",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_29",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_30",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_31",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_19",
+      "width": 280.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_33",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_34",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_35",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_36",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_37",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_38",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_die_40",
+      "width": 300.0,
+      "height": 350.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_1",
+      "width": 260.0,
+      "height": 160.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_3",
+      "width": 360.0,
+      "height": 220.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_5",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_7",
+      "width": 260.0,
+      "height": 160.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_9",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_11",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_13",
+      "width": 260.0,
+      "height": 160.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_15",
+      "width": 260.0,
+      "height": 160.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_17",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_19",
+      "width": 360.0,
+      "height": 220.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_21",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_23",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_24",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_25",
+      "width": 360.0,
+      "height": 220.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_26",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_27",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_28",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_29",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_30",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_31",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_32",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_33",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_34",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_35",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_36",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_37",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_38",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_39",
+      "width": 360.0,
+      "height": 220.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish31_move_40",
+      "width": 260.0,
+      "height": 156.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [
+    "fish_310.plist"
+  ],
+  "config_png_path": [
+    "fish_310.png"
+  ]
+}

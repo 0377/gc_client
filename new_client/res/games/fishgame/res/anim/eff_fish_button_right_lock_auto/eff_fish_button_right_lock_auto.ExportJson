@@ -1,0 +1,341 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "eff_fish_button_right_lock_auto",
+      "bone_data": [
+        {
+          "name": "Layer8",
+          "parent": "",
+          "dI": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 7,
+          "cX": 0.99,
+          "cY": 0.99,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "eff_button_glow_blue_02.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer7",
+          "parent": "",
+          "dI": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 6,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.7853982,
+          "kY": -0.7853982,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "eff_button_glow_blue_01.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "lock_01",
+          "parent": "",
+          "dI": -1,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 3,
+          "cX": 0.99,
+          "cY": 0.99,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "eff_button_glow_red_02.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "lock_02",
+          "parent": "",
+          "dI": -1,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "eff_button_glow_red_01.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "eff_fish_button_right_lock_auto",
+      "mov_data": [
+        {
+          "name": "eff_lock",
+          "dr": 61,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "lock_01",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 6.28318548,
+                  "kY": -6.283186,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 1
+                }
+              ]
+            },
+            {
+              "name": "lock_02",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "eff_auto",
+          "dr": 61,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer8",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": -2.38418579E-07,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 6.28318548,
+                  "kY": -6.283186,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                }
+              ]
+            },
+            {
+              "name": "Layer7",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 1.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "eff_button_glow_red_01",
+      "width": 128.0,
+      "height": 128.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "eff_button_glow_red_02",
+      "width": 117.0,
+      "height": 117.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "eff_button_glow_blue_01",
+      "width": 128.0,
+      "height": 128.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "eff_button_glow_blue_02",
+      "width": 117.0,
+      "height": 117.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [
+    "eff_fish_button_right_lock_auto0.plist"
+  ],
+  "config_png_path": [
+    "eff_fish_button_right_lock_auto0.png"
+  ]
+}

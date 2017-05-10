@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4E6A7A0E-DDD8-4BAA-8B22-C964069364ED}</ProjectGuid>
+    <ProjectName>new_client</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath);</SourcePath>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes\3rd\pbc-cloud;$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;$(EngineRoot);%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;_USRLUASTATIC;_USRLIBSIMSTATIC;CC_USE_SQLITEWIN32;CC_USE_SQLITE=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_imp.lib;websockets.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(ProjectDir)../../../simulator/win32/$(TargetName).pdb</ProgramDatabaseFile>
+      <OutputFile>$(ProjectDir)../../../simulator/win32/$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>new_client.h</HeaderFileName>
+      <InterfaceIdentifierFileName>new_client_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>new_client_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/new_client.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <CustomBuildStep>
+      <Command>if not exist "$(LocalDebuggerWorkingDirectory)" mkdir "$(LocalDebuggerWorkingDirectory)"
+
+xcopy /Y /Q "$(OutDir)*.dll" "$(LocalDebuggerWorkingDirectory)"
+</Command>
+      <Outputs>$(TargetName).cab</Outputs>
+      <Inputs>$(TargetFileName)</Inputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes\3rd\pbc-cloud;$(ProjectDir)..\Classes;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot)external\curl\include\win32;$(EngineRoot);$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;_USRLUASTATIC;_USRLIBSIMSTATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ForcedIncludeFiles>algorithm</ForcedIncludeFiles>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_imp.lib;websockets.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>new_client.h</HeaderFileName>
+      <InterfaceIdentifierFileName>new_client_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>new_client_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/new_client.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\3rd\cjson\fpconv.h" />
+    <ClInclude Include="..\Classes\3rd\cjson\lua_cjson.h" />
+    <ClInclude Include="..\Classes\3rd\cjson\lua_extensions.h" />
+    <ClInclude Include="..\Classes\3rd\cjson\strbuf.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\assertions.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\autolink.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\config.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\features.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\forwards.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\json_tool.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\myjson.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\reader.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\value.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\version.h" />
+    <ClInclude Include="..\Classes\3rd\jsoncpp\writer.h" />
+    <ClInclude Include="..\Classes\3rd\lsqlite3\lsqlite3.h" />
+    <ClInclude Include="..\Classes\3rd\lsqlite3\lua_extensions_more.h" />
+    <ClInclude Include="..\Classes\3rd\lsqlite3\sqlite3.h" />
+    <ClInclude Include="..\Classes\3rd\md5\FileMD5.h" />
+    <ClInclude Include="..\Classes\3rd\mongoose\mongoose.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\pbc-lua.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\alloc.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\array.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\bootstrap.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\context.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\descriptor.pbc.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\map.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\pattern.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\pbc.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\proto.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\stringpool.h" />
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\varint.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\global.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\md5.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\nn.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\prime.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\rsa.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\rsaeuro.h" />
+    <ClInclude Include="..\Classes\3rd\rsa-euro\r_random.h" />
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\BezierCurve.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\Buff.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\common.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\Effect.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\fishgame2d.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\FishObjectManager.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\FishUtils.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\lua_fishgame_manual.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\MathAide.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\MoveCompent.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\MovePoint.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\MyObject.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\MyScene.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\PathManager.h" />
+    <ClInclude Include="..\Classes\game\fishgame2d\Point.h" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_game_fishgame2d_auto.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_HLCustomRichText_auto.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_auto.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_MyDownloader_manual.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_NetworkManager_auto.hpp" />
+    <ClInclude Include="..\Classes\lua-bridge\lua_XMLParser_auto.hpp" />
+    <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\model\HLEventCustom.hpp" />
+    <ClInclude Include="..\Classes\model\TCPMsgOb.h" />
+    <ClInclude Include="..\Classes\my-cocos-ext\ExtendAction.h" />
+    <ClInclude Include="..\Classes\my-cocos-ext\lua_my_cocos_ext_manual.h" />
+    <ClInclude Include="..\Classes\my-cocos-ext\my-cocos-ext.h" />
+    <ClInclude Include="..\Classes\net\MyDownloader.h" />
+    <ClInclude Include="..\Classes\net\NetworkManager.h" />
+    <ClInclude Include="..\Classes\net\TCPConnection.h" />
+    <ClInclude Include="..\Classes\net\TCPManager.h" />
+    <ClInclude Include="..\Classes\utils\CustomUtils.h" />
+    <ClInclude Include="..\Classes\utils\HLCustomRichText.h" />
+    <ClInclude Include="..\Classes\utils\LuaBridgeUtils.h" />
+    <ClInclude Include="..\Classes\utils\LuaManager.h" />
+    <ClInclude Include="..\Classes\utils\luaTarg.h" />
+    <ClInclude Include="..\Classes\utils\luaTargPool.h" />
+    <ClInclude Include="..\Classes\utils\XMLParser.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SimulatorWin.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\3rd\cjson\fpconv.c" />
+    <ClCompile Include="..\Classes\3rd\cjson\lua_cjson.c" />
+    <ClCompile Include="..\Classes\3rd\cjson\lua_extensions.cpp" />
+    <ClCompile Include="..\Classes\3rd\cjson\strbuf.c" />
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_reader.cpp" />
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_value.cpp" />
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_writer.cpp" />
+    <ClCompile Include="..\Classes\3rd\lsqlite3\lsqlite3.c" />
+    <ClCompile Include="..\Classes\3rd\lsqlite3\lua_extensions_more.c" />
+    <ClCompile Include="..\Classes\3rd\lsqlite3\sqlite3.c" />
+    <ClCompile Include="..\Classes\3rd\md5\FileMD5.cpp" />
+    <ClCompile Include="..\Classes\3rd\mongoose\mongoose.c" />
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\pbc-lua.cpp" />
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\alloc.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\array.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\bootstrap.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\context.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\decode.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\map.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\pattern.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\proto.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\register.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\rmessage.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\stringpool.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\varint.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\wmessage.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\md5c.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\nn.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\prime.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\rsa.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_keygen.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_random.cpp" />
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_stdlib.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\BezierCurve.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\Buff.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\Effect.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\FishObjectManager.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\FishUtils.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\lua_fishgame_manual.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\MathAide.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\MoveCompent.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\MovePoint.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\MyObject.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\MyScene.cpp" />
+    <ClCompile Include="..\Classes\game\fishgame2d\PathManager.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_game_fishgame2d_auto.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_HLCustomRichText_auto.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_auto.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_MyDownloader_manual.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_NetworkManager_auto.cpp" />
+    <ClCompile Include="..\Classes\lua-bridge\lua_XMLParser_auto.cpp" />
+    <ClCompile Include="..\Classes\model\HLEventCustom.cpp" />
+    <ClCompile Include="..\Classes\model\TCPMsgOb.cpp" />
+    <ClCompile Include="..\Classes\my-cocos-ext\ExtendAction.cpp" />
+    <ClCompile Include="..\Classes\my-cocos-ext\lua_my_cocos_ext_manual.cpp" />
+    <ClCompile Include="..\Classes\net\MyDownloader.cpp" />
+    <ClCompile Include="..\Classes\net\NetworkManager.cpp" />
+    <ClCompile Include="..\Classes\net\TCPConnection.cpp" />
+    <ClCompile Include="..\Classes\net\TCPManager.cpp" />
+    <ClCompile Include="..\Classes\utils\CustomUtils.cpp" />
+    <ClCompile Include="..\Classes\utils\HLCustomRichText.cpp" />
+    <ClCompile Include="..\Classes\utils\LuaBridgeUtils.cpp" />
+    <ClCompile Include="..\Classes\utils\LuaManager.cpp" />
+    <ClCompile Include="..\Classes\utils\luaTargPool.cpp" />
+    <ClCompile Include="..\Classes\utils\XMLParser.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SimulatorWin.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\cocos2d-x\cocos\2d\libcocos2d.vcxproj">
+      <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-x\cocos\scripting\lua-bindings\proj.win32\libluacocos2d.vcxproj">
+      <Project>{9f2d6ce6-c893-4400-b50c-6db70cc2562f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-x\tools\simulator\libsimulator\proj.win32\libsimulator.vcxproj">
+      <Project>{001b324a-bb91-4e83-875c-c92f75c40857}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\3rd\jsoncpp\json_valueiterator.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

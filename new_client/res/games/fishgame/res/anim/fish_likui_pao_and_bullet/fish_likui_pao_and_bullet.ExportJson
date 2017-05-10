@@ -1,0 +1,2176 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "fish_likui_pao_and_bullet",
+      "bone_data": [
+        {
+          "name": "Layer6",
+          "parent": "",
+          "dI": -1,
+          "x": -0.036841630935668945,
+          "y": -25.497350692749023,
+          "z": 13,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "new_likui_lv6_bullet.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer5",
+          "parent": "",
+          "dI": -1,
+          "x": 0.071876049041748047,
+          "y": -19.044490814208984,
+          "z": 12,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "new_likui_lv3_bullet.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer4",
+          "parent": "",
+          "dI": -1,
+          "x": -0.3333437442779541,
+          "y": -21.961524963378906,
+          "z": 11,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "new_likui_lv1_bullet.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv1_bullet",
+          "parent": "",
+          "dI": -1,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 10,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "likui_lv1_bullet.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer2",
+          "parent": "",
+          "dI": 0,
+          "x": 4.0428080558776855,
+          "y": 105.75426483154297,
+          "z": 9,
+          "cX": 0.845197856,
+          "cY": 0.845197856,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fire.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer1",
+          "parent": "",
+          "dI": 0,
+          "x": 0.058857917785644531,
+          "y": 99.3370590209961,
+          "z": 8,
+          "cX": 0.6387717,
+          "cY": 0.6387717,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "eff_nizipao_fire_002.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv3_body",
+          "parent": "",
+          "dI": -1,
+          "x": -0.21096658706665039,
+          "y": 10.623773574829102,
+          "z": 7,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": -1.5974044799804688E-05,
+          "arrow_y": -2.4490873329341412E-06,
+          "effectbyskeleton": true,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish_likui_lv3_body.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 1.96078491,
+                  "y": 6.03186035,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv3_weapon",
+          "parent": "likui_lv3_body",
+          "dI": -1,
+          "x": 1.9999990463256836,
+          "y": 20.666669845581055,
+          "z": 6,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.58412886,
+          "kY": 1.58412886,
+          "arrow_x": 50.004432678222656,
+          "arrow_y": 3.3267544495174661E-05,
+          "effectbyskeleton": true,
+          "bl": 50,
+          "display_data": [
+            {
+              "name": "fish_likui_lv3_weapon.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 24.8243713,
+                  "y": -0.341430664,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.58412886,
+                  "kY": -1.5841291
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv1_body",
+          "parent": "",
+          "dI": 0,
+          "x": -0.5923926830291748,
+          "y": 10.250568389892578,
+          "z": 5,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": -5.7220458984375E-06,
+          "arrow_y": -4.950561560690403E-07,
+          "effectbyskeleton": true,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish_likui_lv1_body.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 2.43275452,
+                  "y": -0.0961914063,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv1_weapon_01",
+          "parent": "likui_lv1_body",
+          "dI": 0,
+          "x": 19.259262084960938,
+          "y": 17.777795791625977,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.60468161,
+          "kY": 1.60468161,
+          "arrow_x": 21.864408493041992,
+          "arrow_y": -2.3501963369199075E-05,
+          "effectbyskeleton": true,
+          "bl": 21,
+          "display_data": [
+            {
+              "name": "fish_likui_lv1_weapon_02.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 10.47821,
+                  "y": 17.0733337,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.60468113,
+                  "kY": -1.60468113
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lv1_weapon_02",
+          "parent": "likui_lv1_body",
+          "dI": 0,
+          "x": 0.0,
+          "y": 31.481494903564453,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.57079637,
+          "kY": 1.57079637,
+          "arrow_x": 26.296266555786133,
+          "arrow_y": 9.55640098254662E-06,
+          "effectbyskeleton": true,
+          "bl": 26,
+          "display_data": [
+            {
+              "name": "fish_likui_lv1_weapon_01.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 11.5746765,
+                  "y": -1.840744,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.57079637,
+                  "kY": -1.57079637
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lizipao_body",
+          "parent": "",
+          "dI": -1,
+          "x": 1.6008222103118897,
+          "y": 10.525331497192383,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": -4.4941902160644531E-05,
+          "arrow_y": -3.8132799090817571E-05,
+          "effectbyskeleton": true,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "fish_likui_lizipao_weapon_01.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": -0.952331543,
+                  "y": 1.25177,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "likui_lizipao_weapon",
+          "parent": "likui_lizipao_body",
+          "dI": -1,
+          "x": 18.75,
+          "y": -7.5000514984130859,
+          "z": 1,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.57555819,
+          "kY": 1.57555819,
+          "arrow_x": 87.5009994506836,
+          "arrow_y": 4.1921361116692424E-05,
+          "effectbyskeleton": true,
+          "bl": 87,
+          "display_data": [
+            {
+              "name": "fish_likui_lizipao_body_01.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 43.9927368,
+                  "y": 19.4750977,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.575559,
+                  "kY": -1.57555711
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "fish_likui_pao_and_bullet",
+      "mov_data": [
+        {
+          "name": "fish_likui_pao_01",
+          "dr": 9,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer2",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": -20.530303955078125,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": -20.530303955078125,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": -20.530303955078125,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": 1.1363601684570313,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": 1.1363601684570313,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.11363792419433594,
+                  "y": 1.1363601684570313,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 0.9,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer1",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": -16.363639831542969,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": -16.363639831542969,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": -16.363639831542969,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": 5.3030242919921875,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": 5.3030242919921875,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 3.030303955078125,
+                  "y": 5.3030242919921875,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv1_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": -14.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 12.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv1_weapon_01",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.2,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv1_weapon_02",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.30000007,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_pao_02",
+          "dr": 9,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer2",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 2.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.799999952,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 3.3793115615844727,
+                  "y": 20.000007629394531,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer1",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 2.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.6999999,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 219,
+                    "g": 219,
+                    "b": 219
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 3.3793115615844727,
+                  "y": 20.000007629394531,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 219,
+                    "g": 219,
+                    "b": 219
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv3_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": -12.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 12.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv3_weapon",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.30000007,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_pao_03",
+          "dr": 9,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer2",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 227,
+                    "g": 173,
+                    "b": 0
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 222,
+                    "g": 170,
+                    "b": 2
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer1",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.5999999,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 194,
+                    "g": 193,
+                    "b": 193
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 1
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.95238077640533447,
+                  "y": 31.904762268066406,
+                  "z": 0,
+                  "cX": 0.299999923,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 0,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lizipao_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": -14.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 12.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": -7.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lizipao_weapon",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 0.9,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 1,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 2,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.2,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 4,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 8,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_bullet_01",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer4",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_bullet_02",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer5",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_bullet_03",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer6",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  },
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_pao_01_stay",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "likui_lv1_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv1_weapon_01",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv1_weapon_02",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_pao_02_stay",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "likui_lv3_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lv3_weapon",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fish_likui_pao_03_stay",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "likui_lizipao_body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "likui_lizipao_weapon",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "fish_likui_lizipao_body_01",
+      "width": 108.0,
+      "height": 88.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lizipao_weapon_01",
+      "width": 128.0,
+      "height": 83.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lv1_weapon_01",
+      "width": 37.0,
+      "height": 26.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lv1_weapon_02",
+      "width": 52.0,
+      "height": 22.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lv1_body",
+      "width": 94.0,
+      "height": 72.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lv3_body",
+      "width": 108.0,
+      "height": 91.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fish_likui_lv3_weapon",
+      "width": 88.0,
+      "height": 52.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "likui_lv1_bullet",
+      "width": 37.0,
+      "height": 68.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "eff_nizipao_fire_002",
+      "width": 151.0,
+      "height": 151.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "fire",
+      "width": 96.0,
+      "height": 121.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "new_likui_lv1_bullet",
+      "width": 37.0,
+      "height": 112.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "new_likui_lv3_bullet",
+      "width": 56.0,
+      "height": 106.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "new_likui_lv6_bullet",
+      "width": 67.0,
+      "height": 119.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [
+    "fish_likui_pao_and_bullet0.plist"
+  ],
+  "config_png_path": [
+    "fish_likui_pao_and_bullet0.png"
+  ]
+}

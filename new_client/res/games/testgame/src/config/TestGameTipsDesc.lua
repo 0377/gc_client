@@ -1,0 +1,4 @@
+local TestGameTipsDesc =  {
+	
+}
+return TestGameTipsDesc;

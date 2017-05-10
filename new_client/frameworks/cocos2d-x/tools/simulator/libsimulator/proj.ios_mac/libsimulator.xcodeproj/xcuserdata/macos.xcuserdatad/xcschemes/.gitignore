@@ -1,0 +1,3 @@
+*.plist
+/libsimulator Mac.xcscheme
+/libsimulator iOS.xcscheme

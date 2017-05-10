@@ -1,0 +1,3 @@
+*.plist
+/new_client-desktop.xcscheme
+/new_client-mobile.xcscheme

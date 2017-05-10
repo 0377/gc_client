@@ -1,0 +1,61 @@
+Yurneroå·‡©óÿ¿½Q ”åpÒÚèÇÁ`˜àÑòÛ÷‡=ÍØóÆ¼§ôüäØïëz‹ıÒó»‚ù™ÊÅîİ†ò3ş—¹µ¯°µfÖÃÕ¬ø†a–Ë¥“£›|‘ÚÎŸ«¾ò;üí²êÆğ–jİ®½‚äí”Z»­¿«×·E+¶¥:Ÿù¬üèÁÜìšg½ÚÃ•”ğvÍ¯†‰ŸÛÍ­™ÔêÁµfÖÃÅÌêİVÍØõû–a­«¬ø†a–Ë¯…‰ŸÛÍ¹™ÁÜìšg­ºÑòÛ÷‡1îµ²ÊÚùºWí·½…àÚã¨k¾•ª£›¶aĞÅ•¯”ñ\´¯¶•¤”ú@«şãÂöÛ¡Aï½¥Š£—¾\±úY_ERR"¾
+SC_FuritState*
+state (2.SC_FuritState.StateRstate
+money (Rmoney
+timer (Rtimer
+furit (Rfurit
+bigsmall (Rbigsmall
+light (Rlight"
+MsgID
+ID»”"z
+State
+FURIT_STATE_BET
+FURIT_STATE_LOTTO
+FURIT_STATE_BS_BET
+FURIT_STATE_BS_LOTTO
+FURIT_STATE_END"%
+CS_FuritBetClean"
+MsgID
+IDÄ”"%
+SC_FuritBetClean"
+MsgID
+IDÅ”"D
+CS_FuritBetBigSmall
+bigsmall (Rbigsmall"
+MsgID
+IDÆ”"C
+CS_FuritBetBigSmallScore
+money (Rmoney"
+MsgID
+IDÇ”"
+SC_FuritBetBigSmallScore1
+err (2.SC_FuritBetBigSmallScore.ErrorRerr"
+MsgID
+IDÈ”"-
+Error
+OK
+	STATE_ERR
+	MONEY_ERR*£
+Furit	
+apple
+
+orange	
+mango
+
+watermelon
+bell
+double_star
+double_seven
+bar	
+lucky	
+small_lucky
+
+small_apple
+small_orange
+small_mango
+small_watermelon
+
+small_bell
+small_double_star
+small_double_seven
+	small_bar

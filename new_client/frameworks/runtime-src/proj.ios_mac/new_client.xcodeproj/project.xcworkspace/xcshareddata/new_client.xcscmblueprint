@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++33C50DC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++CEBF31B" : 9223372036854775807,
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++A707134" : 0,
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++3DA1EB1" : 9223372036854775807,
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++E540F7A" : 9223372036854775807,
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++33C50DC" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "50121532-58B2-46C0-B422-3FCA38ECBB13",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++CEBF31B" : "",
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++A707134" : "NewClient.git\/",
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++3DA1EB1" : "",
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++E540F7A" : "NewClient\/",
+    "5BD523841613E7469C509A7B8549A2DB5376B0D3+++33C50DC" : "client\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "new_client",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "new_client\/frameworks\/runtime-src\/proj.ios_mac\/new_client.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.1txs.com:gamingcity\/client.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++33C50DC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/192.168.1.215:10022\/client\/NewClient.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++3DA1EB1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.l5k4.com:Client\/NewClient.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++A707134"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/192.168.1.215:10022\/client\/NewClient.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++CEBF31B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/192.168.1.215:10022\/client\/NewClient.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5BD523841613E7469C509A7B8549A2DB5376B0D3+++E540F7A"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<Frame>	
+	<FileList System="Fishing/Script/System.xml" 
+		Path="Fishing/Script/Path.xml" 
+		Troop="Fishing/Script/TroopSet.xml" 
+		Visual="Fishing/Script/Visual.xml" 
+		Bullet="Fishing/Script/BulletSet.xml" 
+		CannonSet="Fishing/Script/CannonSet.xml" 
+		BoundingBox="Fishing/Script/BoundingBox.xml" 
+		Fish="Fishing/Script/Fish.xml" 
+		Scene="Fishing/Script/Scene.xml"
+		Sound="Fishing/Script/FishSound.xml"
+		Special="Fishing/Script/Special.xml"/>
+				
+	<Loading>		
+		<BackGround Img="Fishing/images/UI/background.png" PosX="0" PosY="0"/>
+		<ProgressBar PosX="559" PosY="788">
+			<Bg Img="Fishing/images/UI/progress_bar_bg.png" PosX="0" PosY="0"/>
+			<Bar Img="Fishing/images/UI/progress_bar.png" PosX="0" PosY="0"/>
+		</ProgressBar>
+	</Loading>	
+	
+	<Effect	File="Resource/particle/Particles.pyro"/>
+	
+	<UI>
+		<Frame title="Title" bottom="SelfInfo" Left="Left" Right="Right" CurSor="Cursor" ScorNum="userscore_num"/>
+		<CloseButton	Animation="CloseButton" PosX="1380" PosY="1"/>
+		<SetButton	Animation="SetButton" PosX="1328" PosY="1"/>
+	<!--	<MaxButton	Animation="MaxButton" PosX="1276" PosY="1"/>
+		<ResetButton	Animation="ResetButton" PosX="1276" PosY="1"/>-->
+		<MinButton	Animation="MinButton" PosX="1277" PosY="1"/>
+		<UpButton Animation="UpScore" PosX="653" PosY="868"/>
+		<DownButton Animation="DownScore" PosX="600" PosY="868"/>
+		<!--	<Recharge Animation="Recharge" PosX="850" PosY="868" URL="http://pay.game882.com"/>-->
+		<AutoButton Animation="CheckBt" PosX="720" PosY="868"/>
+		<NamePos X="80" Y="865"/>
+		<ScorePos X="518" Y="880"/>
+		<PingPos X="20" Y="1000"/>
+	</UI>
+	
+	<Bingo Animation="bingo" NumAin="bingo_num" Rotation="0"/>
+	
+	<Chain	Animation1="RedLine" Animation2="BlueLine" Animation3="LightChain"/>
+	
+	<Jetton	Sprite="jetton" GoldAni="gold" NumAin="jetton_num" SpriteBG1="jetton_bgc1" SpriteBG2="jetton_bgc2"/>
+	
+	<LockFish	Flag="lock_flag" Line="lock_line" TagFlag="lock_flag_%d"/>
+	
+	<Treasure RotaryTable="rotaryTable" Points="points" AwardTips="awardTips" Unknow="fish23"/>
+
+	<Special>
+		<BlackWater Sprite="BlackWater"/>
+	</Special>
+</Frame>

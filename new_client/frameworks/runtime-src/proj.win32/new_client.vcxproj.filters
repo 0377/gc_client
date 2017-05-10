@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{fc5cb953-2953-4968-83b3-39e3ff951754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{037a9a02-b906-4cc5-ad98-304acd4e25ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{2d1d0979-58cd-4ab6-b91c-13650158f1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\utils">
+      <UniqueIdentifier>{005177b2-fbe5-4cdd-8122-065fe9a2fb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\net">
+      <UniqueIdentifier>{50fe02ad-d18b-4538-bca0-ee78a3a022c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\model">
+      <UniqueIdentifier>{cf29504d-a638-4e58-b28f-b9814fb32be6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game">
+      <UniqueIdentifier>{aec4aa2b-71ef-4d0a-a3ef-570ac4ae0dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game\fishgame2d">
+      <UniqueIdentifier>{800b2ad4-a9c6-4389-be37-b761fd239330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\my-cocos-ext">
+      <UniqueIdentifier>{0ec5c458-9595-48cb-a722-bfb6689db64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\lua-bridge">
+      <UniqueIdentifier>{24cdb9c9-918a-4306-8628-0a1416873435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd">
+      <UniqueIdentifier>{0bee67ba-97c7-4f65-9a4c-ea90a7d18fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\cjson">
+      <UniqueIdentifier>{902bb607-58bc-4c11-9820-09bf9963fa14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\jsoncpp">
+      <UniqueIdentifier>{2aa88c2a-fc17-4caf-bb2d-a36abedf51f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\md5">
+      <UniqueIdentifier>{5b32cfaf-345a-452e-a6bf-180916eb064e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\mongoose">
+      <UniqueIdentifier>{9b55b6d8-105d-4a0c-ab06-ef40ef7b6aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\pbc-cloud">
+      <UniqueIdentifier>{89b3a792-98f6-468d-8ff8-78fe22285d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\rsa-euro">
+      <UniqueIdentifier>{51f31122-2451-41c5-b457-9bfd658426fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\pbc-cloud\src">
+      <UniqueIdentifier>{1766960e-36af-43fa-a2d8-50c04f94f8e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\3rd\lsqlite3">
+      <UniqueIdentifier>{5e69e85a-8087-47a8-8839-8a47cc4b892d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SimulatorWin.h" />
+    <ClInclude Include="stdafx.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\CustomUtils.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\LuaManager.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\luaTargPool.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\luaTarg.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\model\TCPMsgOb.h">
+      <Filter>Classes\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\model\HLEventCustom.hpp">
+      <Filter>Classes\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\LuaBridgeUtils.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\net\NetworkManager.h">
+      <Filter>Classes\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\net\TCPConnection.h">
+      <Filter>Classes\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\net\TCPManager.h">
+      <Filter>Classes\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\net\MyDownloader.h">
+      <Filter>Classes\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\BezierCurve.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\Buff.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\common.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\Effect.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\FishObjectManager.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\FishUtils.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\lua_fishgame_manual.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\MathAide.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\MoveCompent.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\MovePoint.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\MyObject.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\MyScene.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\PathManager.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\Point.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\fishgame2d\fishgame2d.h">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\XMLParser.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\my-cocos-ext\ExtendAction.h">
+      <Filter>Classes\my-cocos-ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\my-cocos-ext\lua_my_cocos_ext_manual.h">
+      <Filter>Classes\my-cocos-ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\my-cocos-ext\my-cocos-ext.h">
+      <Filter>Classes\my-cocos-ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_game_fishgame2d_auto.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_auto.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_MyDownloader_manual.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_NetworkManager_auto.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\cjson\fpconv.h">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\cjson\lua_cjson.h">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\cjson\lua_extensions.h">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\cjson\strbuf.h">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\assertions.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\autolink.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\config.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\features.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\forwards.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\json_tool.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\myjson.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\reader.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\value.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\version.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\jsoncpp\writer.h">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\md5\FileMD5.h">
+      <Filter>Classes\3rd\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\mongoose\mongoose.h">
+      <Filter>Classes\3rd\mongoose</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\global.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\md5.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\nn.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\prime.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\r_random.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\rsa.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\rsa-euro\rsaeuro.h">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\pbc-lua.h">
+      <Filter>Classes\3rd\pbc-cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_XMLParser_auto.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\alloc.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\array.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\bootstrap.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\context.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\descriptor.pbc.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\map.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\pattern.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\pbc.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\proto.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\stringpool.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\pbc-cloud\src\varint.h">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\lsqlite3\lsqlite3.h">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\lsqlite3\lua_extensions_more.h">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\3rd\lsqlite3\sqlite3.h">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\HLCustomRichText.h">
+      <Filter>Classes\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_HLCustomRichText_auto.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="SimulatorWin.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\CustomUtils.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\LuaManager.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\luaTargPool.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\model\TCPMsgOb.cpp">
+      <Filter>Classes\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\model\HLEventCustom.cpp">
+      <Filter>Classes\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\LuaBridgeUtils.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\net\NetworkManager.cpp">
+      <Filter>Classes\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\net\TCPConnection.cpp">
+      <Filter>Classes\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\net\TCPManager.cpp">
+      <Filter>Classes\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\net\MyDownloader.cpp">
+      <Filter>Classes\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\BezierCurve.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\Buff.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\Effect.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\FishObjectManager.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\FishUtils.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\lua_fishgame_manual.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\MathAide.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\MoveCompent.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\MovePoint.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\MyObject.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\MyScene.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\fishgame2d\PathManager.cpp">
+      <Filter>Classes\game\fishgame2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\XMLParser.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\my-cocos-ext\ExtendAction.cpp">
+      <Filter>Classes\my-cocos-ext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\my-cocos-ext\lua_my_cocos_ext_manual.cpp">
+      <Filter>Classes\my-cocos-ext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_game_fishgame2d_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_MyDownloader_manual.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_NetworkManager_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\cjson\fpconv.c">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\cjson\lua_cjson.c">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\cjson\strbuf.c">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_reader.cpp">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_value.cpp">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\jsoncpp\json_writer.cpp">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\md5\FileMD5.cpp">
+      <Filter>Classes\3rd\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\mongoose\mongoose.c">
+      <Filter>Classes\3rd\mongoose</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\md5c.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\nn.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\prime.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_keygen.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_random.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\r_stdlib.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\rsa-euro\rsa.cpp">
+      <Filter>Classes\3rd\rsa-euro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_XMLParser_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\cjson\lua_extensions.cpp">
+      <Filter>Classes\3rd\cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\wmessage.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\pbc-lua.cpp">
+      <Filter>Classes\3rd\pbc-cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\alloc.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\array.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\bootstrap.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\context.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\decode.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\map.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\pattern.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\proto.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\register.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\rmessage.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\stringpool.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\pbc-cloud\src\varint.c">
+      <Filter>Classes\3rd\pbc-cloud\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\lsqlite3\lsqlite3.c">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\lsqlite3\lua_extensions_more.c">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\3rd\lsqlite3\sqlite3.c">
+      <Filter>Classes\3rd\lsqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\HLCustomRichText.cpp">
+      <Filter>Classes\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_HLCustomRichText_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\3rd\jsoncpp\json_valueiterator.inl">
+      <Filter>Classes\3rd\jsoncpp</Filter>
+    </None>
+  </ItemGroup>
+</Project>

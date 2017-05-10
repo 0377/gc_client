@@ -1,0 +1,528 @@
+<?xml version="1.0"?>
+<VisualSet>
+	<Visual Id="1" TypeID="0" ZOrder = "1">
+		<Live Image="fish_1" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_1" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>	
+	<Visual Id="2" TypeID="0" ZOrder = "2">
+		<Live Image="fish_2" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_2" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="3" TypeID="0" ZOrder = "3">
+		<Live Image="fish_3" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_3" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="4" TypeID="0" ZOrder = "4">
+		<Live Image="fish_4" Name="move" AniType="0" Scale="1" OffestX="-10" OffestY="0" Direction="0" />
+		<Die  Image="fish_4" Name="die" AniType="0" Scale="1" OffestX="-10" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="5" TypeID="0" ZOrder = "5">
+		<Live Image="fish_5" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_5" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="6" TypeID="0" ZOrder = "6">
+		<Live Image="fish_6" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_6" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="7" TypeID="0" ZOrder = "7">
+		<Live Image="fish_7" Name="move" AniType="0" Scale="1" OffestX="-10" OffestY="0" Direction="0" />
+		<Die  Image="fish_7" Name="die" AniType="0" Scale="1" OffestX="-10" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="8" TypeID="0" ZOrder = "8">
+		<Live Image="fish_8" Name="move" AniType="0" Scale="1" OffestX="-20" OffestY="-10" Direction="0" />
+		<Die  Image="fish_8" Name="die" AniType="0" Scale="1" OffestX="-20" OffestY="-10" Direction="0" />
+	</Visual>
+	<Visual Id="9" TypeID="0" ZOrder = "9">
+		<Live Image="fish_9" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_9" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="10" TypeID="0" ZOrder = "10">
+		<Live Image="fish_10" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_10" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="11" TypeID="0" ZOrder = "11">
+		<Live Image="fish_11" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_11" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="12" TypeID="0" ZOrder = "12">
+		<Live Image="fish_12" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_12" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="13" TypeID="0" ZOrder = "13">
+		<Live Image="fish_13" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_13" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="14" TypeID="0" ZOrder = "14">
+		<Live Image="fish_14" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_14" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="15" TypeID="0" ZOrder = "15">
+		<Live Image="fish_15" Name="move" AniType="0" Scale="1" OffestX="-15" OffestY="0" Direction="0" />
+		<Die  Image="fish_15" Name="die" AniType="0" Scale="1" OffestX="-15" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="16" TypeID="0" ZOrder = "16">
+		<Live Image="fish_16" Name="move" AniType="0" Scale="1" OffestX="-40" OffestY="0" Direction="0" />
+		<Die  Image="fish_16" Name="die" AniType="0" Scale="1" OffestX="-40" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="17" TypeID="0" ZOrder = "17">
+		<Live Image="fish_17" Name="move" AniType="0" Scale="1" OffestX="-40" OffestY="0" Direction="0" />
+		<Die  Image="fish_17" Name="die" AniType="0" Scale="1" OffestX="-40" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="18" TypeID="0" ZOrder = "18">
+		<Live Image="fish_21" Name="move" AniType="0" Scale="2" OffestX="-20" OffestY="0" Direction="0" />
+		<Die  Image="fish_21" Name="die" AniType="0" Scale="2" OffestX="-20" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="19" TypeID="0" ZOrder = "19">
+		<Live Image="fish_18" Name="move" AniType="0" Scale="1" OffestX="-50" OffestY="0" Direction="0" />
+		<Die  Image="fish_18" Name="die" AniType="0" Scale="1" OffestX="-50" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="20" TypeID="0" ZOrder = "20">
+		<Live Image="fish_28" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_28" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="21" TypeID="0" ZOrder = "1021">
+		<Live Image="fish_24_move" Name="move" AniType="0" Scale="1" OffestX="-60" OffestY="0" Direction="0" />
+		<Die  Image="fish_24_die" Name="die" AniType="0" Scale="1" OffestX="-60" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="22" TypeID="0" ZOrder = "1022">
+		<Live Image="fish_25_move" Name="move" AniType="0" Scale="1" OffestX="-40" OffestY="-20" Direction="0" />
+		<Die  Image="fish_25_die" Name="die" AniType="0" Scale="1" OffestX="-40" OffestY="-20" Direction="0" />
+	</Visual>
+	<Visual Id="23" TypeID="0" ZOrder = "1023">
+		<Live Image="fish_36" Name="move" AniType="0" Scale="1" OffestX="-60" OffestY="0" Direction="0" />
+		<Die  Image="fish_36" Name="die" AniType="0" Scale="1" OffestX="-60" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="24" TypeID="0" ZOrder = "1024">
+		<Live Image="fish_29" Name="move" AniType="0" Scale="1" OffestX="-80" OffestY="0" Direction="0" />
+		<Die  Image="fish_29" Name="die" AniType="0" Scale="1" OffestX="-80" OffestY="0" Direction="0" />
+	</Visual>
+    <Visual Id="25" TypeID="0" ZOrder = "1025">
+		<Live Image="fish_34" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_34" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="26" TypeID="0" ZOrder = "1026">
+		<Live Image="fish_37" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_37" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+    <Visual Id="27" TypeID="0" ZOrder = "1027">
+		<Live Image="fish_32_move" Name="move" AniType="0" Scale="1" OffestX="-10" OffestY="20" Direction="0" />
+		<Die  Image="fish_32_die" Name="move" AniType="0" Scale="1" OffestX="-10" OffestY="20" Direction="0" />
+	</Visual>
+	<Visual Id="28" TypeID="0" ZOrder = "1028">
+		<Live Image="fish_26" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_26" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="29" TypeID="0" ZOrder = "1029">
+		<Live Image="fish_33" Name="move" AniType="0" Scale="1" OffestX="20" OffestY="0" Direction="0" />
+		<Die  Image="fish_33" Name="die" AniType="0" Scale="1" OffestX="20" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="30" TypeID="0" ZOrder = "1030">
+		<Live Image="fish_31" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="90" Direction="0" />
+		<Die  Image="fish_31" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="90" Direction="0" />
+	</Visual>
+
+	<Visual Id="200" TypeID="0" ZOrder = "200">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.4" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_1" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.4" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_1" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="201" TypeID="0" ZOrder = "201">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.35" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_2" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.35" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_2" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="202" TypeID="0" ZOrder = "202">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.5" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_3" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.5" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_3" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="203" TypeID="0" ZOrder = "203">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_4" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_4" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="204" TypeID="0" ZOrder = "204">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_5" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_5" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="205" TypeID="0" ZOrder = "205">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_6" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_6" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="206" TypeID="0" ZOrder = "206">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_7" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_7" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="207" TypeID="0" ZOrder = "207">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.7" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_8" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.7" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_8" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="208" TypeID="0" ZOrder = "208">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_9" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_9" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="209" TypeID="0" ZOrder = "209">
+		<Live Image="fish_39" Name="move" AniType="0" Scale="0.8" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_10" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_39" Name="move" AniType="0" Scale="0.8" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_10" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="210" TypeID="0" ZOrder = "210">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.4" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_1" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.4" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_1" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="211" TypeID="0" ZOrder = "211">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.35" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_2" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.35" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_2" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="212" TypeID="0" ZOrder = "212">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.5" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_3" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.5" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_3" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="213" TypeID="0" ZOrder = "213">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_4" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_4" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="214" TypeID="0" ZOrder = "214">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_5" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_5" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="215" TypeID="0" ZOrder = "215">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_6" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.55" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_6" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="216" TypeID="0" ZOrder = "216">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_7" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.6" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_7" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="217" TypeID="0" ZOrder = "217">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.7" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_8" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.7" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_8" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="218" TypeID="0" ZOrder = "218">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_9" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_9" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	<Visual Id="219" TypeID="0" ZOrder = "219">
+		<Live Image="fish_38" Name="move" AniType="0" Scale="0.8" OffestX="0" OffestY="0" Direction="0" />
+		<Live Image="fish_10" Name="move" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_38" Name="move" AniType="0" Scale="0.8" OffestX="0" OffestY="0" Direction="0" />
+		<Die  Image="fish_10" Name="die" AniType="0" Scale="1" OffestX="0" OffestY="0" Direction="0" />
+	</Visual>
+	
+	
+	<Visual Id="300" TypeID="0" ZOrder = "300">	
+		<Live Image="fish_43" Name="move01" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="60" Direction="0.02" AniType="0" />
+		<Live Image="fish_9" Name="move" Scale="0.6" OffestX="60" OffestY="60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" />
+		<Live Image="fish_1" Name="move" Scale="1" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Live Image="fish_2" Name="move" Scale="1" OffestX="60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Live Image="fish_3" Name="move" Scale="0.7" OffestX="-60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Live Image="fish_10" Name="move" Scale="0.6" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true"/>
+		
+		<Die Image="fish_43" Name="move01" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Die Image="fish_9" Name="die" Scale="0.6" OffestX="60" OffestY="60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" />
+		<Die Image="fish_1" Name="die" Scale="1" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Die Image="fish_2" Name="die" Scale="1" OffestX="60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Die Image="fish_3" Name="die" Scale="0.7" OffestX="-60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Die Image="fish_10" Name="die" Scale="0.6" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true"/>
+	</Visual>	
+	<Visual Id="301" TypeID="0"  ZOrder = "301">
+		<Live Image="fish_43" Name="move01" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="60" Direction="0.02" AniType="0" />
+		<Live Image="fish_5" Name="move"Scale="0.6" OffestX="60" OffestY="60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" />
+		<Live Image="fish_7" Name="move"Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Live Image="fish_2" Name="move"Scale="0.7" OffestX="60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Live Image="fish_3" Name="move"Scale="0.7" OffestX="-60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Live Image="fish_43" Name="move_02" Scale="0.6" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Live Image="fish_6" Name="move"Scale="0.6" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true"/>
+		
+		<Die Image="fish_43" Name="move01" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Die Image="fish_5" Name="move"Scale="0.6" OffestX="60" OffestY="60" Direction="0.00" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" />
+		<Die Image="fish_7" Name="move"Scale="0.6" OffestX="-60" OffestY="60" Direction="0.02" AniType="0" HideShadow="true"/>
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Die Image="fish_2" Name="move"Scale="0.7" OffestX="60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="-60" OffestY="-60" Direction="0.02" AniType="0" />
+		<Die Image="fish_3" Name="move"Scale="0.7" OffestX="-60" OffestY="-60" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die Image="fish_43" Name="move_02" Scale="0.6" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die Image="fish_6" Name="move"Scale="0.6" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true"/>
+	</Visual>	  
+
+	                                        
+	<Visual Id="500" TypeID="0" ZOrder = "1500">
+		<Live Image="fish_62" Name="move"Scale="1" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die Image="fish_62" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>	  
+	<Visual Id="501" TypeID="0" ZOrder = "1501">
+		<Live Image="fish_60" Name="move"Scale="1" OffestX="0" OffestY="10" Direction="0.00" AniType="0" />
+		<Die Image="fish_60" Name="die" Scale="1" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>	
+	<Visual Id="502" TypeID="0" ZOrder = "1502">
+		<Live Image="fish_61" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die Image="fish_61" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>		
+	             
+
+	<Visual Id="601" TypeID="0" ZOrder = "601">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.05" AniType="0" />
+		<Live Image="fish_1" Name="move"Scale="1.2" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.5" OffestX="0" OffestY="0" Direction="0.10" AniType="0" />
+		<Die  Image="fish_1" Name="die" Scale="1.6" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>					 
+	<Visual Id="602" TypeID="0" ZOrder = "602">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.05" AniType="0" />
+		<Live Image="fish_2" Name="move"Scale="1.2" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.5" OffestX="0" OffestY="0" Direction="0.1" AniType="0" />
+		<Die  Image="fish_2" Name="die" Scale="1.6" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="603" TypeID="0" ZOrder = "603">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_3" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_3" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="604" TypeID="0" ZOrder = "604">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_4" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_4" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="605" TypeID="0" ZOrder = "605">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_5" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_5" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="606" TypeID="0" ZOrder = "606">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_6" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_6" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="607" TypeID="0" ZOrder = "607">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_7" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_7" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="608" TypeID="0" ZOrder = "608">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_8" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_8" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+		<Visual Id="609" TypeID="0" ZOrder = "609">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_9" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_9" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+	<Visual Id="610" TypeID="0" ZOrder = "610">
+		<Live Image="fish_59" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_10" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_59" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_10" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+	
+	<Visual Id="701" TypeID="0" ZOrder = "701">
+		<Live Image="fish_44" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_1" Name="move"Scale="1.0" OffestX="0" OffestY="-30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_2" Name="move"Scale="1.0" OffestX="0" OffestY="30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_44" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_1" Name="die" Scale="1.0" OffestX="0" OffestY="-30" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_2" Name="die" Scale="1.0" OffestX="0" OffestY="30" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="702" TypeID="0" ZOrder = "702">
+		<Live Image="fish_44" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_3" Name="move"Scale="1.0" OffestX="0" OffestY="-30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_4" Name="move"Scale="1.0" OffestX="0" OffestY="30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_44" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_3" Name="die" Scale="1.0" OffestX="0" OffestY="-40" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_4" Name="die" Scale="1.0" OffestX="0" OffestY="40" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="703" TypeID="0" ZOrder = "703">
+		<Live Image="fish_44" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_5" Name="move"Scale="1.0" OffestX="0" OffestY="-30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_6" Name="move"Scale="1.0" OffestX="0" OffestY="30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_44" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_5" Name="die" Scale="1.0" OffestX="0" OffestY="-40" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_6" Name="die" Scale="1.0" OffestX="0" OffestY="40" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="704" TypeID="0" ZOrder = "704">
+		<Live Image="fish_44" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_7" Name="move"Scale="1.0" OffestX="0" OffestY="-30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_8" Name="move"Scale="1.0" OffestX="0" OffestY="30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_44" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_7" Name="die" Scale="1.0" OffestX="0" OffestY="-40" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_8" Name="die" Scale="1.0" OffestX="0" OffestY="40" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="705" TypeID="0" ZOrder = "705">
+		<Live Image="fish_44" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_9" Name="move"Scale="1.0" OffestX="0" OffestY="-30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_10" Name="move"Scale="1.0" OffestX="0" OffestY="30" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_44" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_9" Name="die" Scale="1.0" OffestX="0" OffestY="-40" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_10" Name="die" Scale="1.0" OffestX="0" OffestY="40" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+
+	<Visual Id="801" TypeID="0" ZOrder = "801">
+		<Live Image="fish_45" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Live Image="fish_10" Name="move"Scale="0.8" OffestX="33.0" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_8" Name="move"Scale="0.8" OffestX="-33.0" OffestY="-38.0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_9" Name="move"Scale="0.8" OffestX="-33.0" OffestY="38.0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Die  Image="fish_45" Name="move" Scale="1.2" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_10" Name="die" Scale="1.0" OffestX="43.0" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_8" Name="die" Scale="1.0" OffestX="-43.0" OffestY="-48.0" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_9" Name="die" Scale="1.0" OffestX="-43.0" OffestY="48.0" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="802" TypeID="0" ZOrder = "802">
+		<Live Image="fish_45" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_11" Name="move"Scale="0.8" OffestX="33" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_13" Name="move"Scale="0.8" OffestX="-33" OffestY="-38" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_14" Name="move"Scale="0.8" OffestX="-33" OffestY="38" Direction="0.00" AniType="0"HideShadow="true"  />
+		<Die  Image="fish_45" Name="move" Scale="1.2" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_11" Name="die" Scale="1.0" OffestX="43" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_13" Name="die" Scale="1.0" OffestX="-43" OffestY="-48" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_14" Name="die" Scale="1.0" OffestX="-43" OffestY="48" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>
+	<Visual Id="803" TypeID="0" ZOrder = "803">
+		<Live Image="fish_45" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_5" Name="move"Scale="0.8" OffestX="33" OffestY="0" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_6" Name="move"Scale="0.8" OffestX="-33" OffestY="-38" Direction="0.00" AniType="0" HideShadow="true" />
+		<Live Image="fish_7" Name="move"Scale="0.8" OffestX="-33" OffestY="38" Direction="0.00" AniType="0"HideShadow="true"  />
+		<Die  Image="fish_45" Name="move" Scale="1.2" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_5" Name="die" Scale="1.0" OffestX="43" OffestY="0" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_6" Name="die" Scale="1.0" OffestX="-43" OffestY="-48" Direction="0.02" AniType="0" HideShadow="true" />
+		<Die  Image="fish_7" Name="die" Scale="1.0" OffestX="-43" OffestY="48" Direction="0.02" AniType="0" HideShadow="true" />
+	</Visual>	
+
+	
+	<Visual Id="901" TypeID="0" ZOrder = "1901">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>	
+	<Visual Id="902" TypeID="0" ZOrder = "1902">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>	
+	<Visual Id="903" TypeID="0" ZOrder = "1903">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_1" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_1" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="904" TypeID="0" ZOrder = "1904">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_2" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_2" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="905" TypeID="0" ZOrder = "1905">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_3" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_3" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="906" TypeID="0" ZOrder = "1906">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_4" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_4" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="907" TypeID="0" ZOrder = "1907">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_5" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_5" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="908" TypeID="0" ZOrder = "1908">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_6" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_6" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="909" TypeID="0" ZOrder = "1909">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_7" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_7" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="910" TypeID="0" ZOrder = "1910">
+		<Live Image="fish_35" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_8" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_8" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="911" TypeID="0" ZOrder = "1911">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_9" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_9" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="912" TypeID="0" ZOrder = "1912">
+		<Live Image="fish_35" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Live Image="fish_10" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_35" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+		<Die  Image="fish_10" Name="die" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	
+	<Visual Id="1001" TypeID="0" ZOrder = "11001">
+		<Live Image="fish_47" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_48" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="1002" TypeID="0" ZOrder = "11002">
+		<Live Image="fish_47" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_49" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+	<Visual Id="1003" TypeID="0" ZOrder = "11003">
+		<Live Image="fish_47" Name="move"Scale="1.0" OffestX="0" OffestY="0" Direction="0.00" AniType="0" />
+		<Die  Image="fish_50" Name="move" Scale="1.0" OffestX="0" OffestY="0" Direction="0.02" AniType="0" />
+	</Visual>
+                                                                                                                    
+</VisualSet>

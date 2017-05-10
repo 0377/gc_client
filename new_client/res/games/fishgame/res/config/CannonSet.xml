@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CannonPos>
+	<!--    炮台ID  X位置     Y位置      朝向-->
+	<Cannon id="0" PosX="0.16" PosY="0.1" Direction="3.14"/>
+	<Cannon id="1" PosX="0.56" PosY="0.1" Direction="3.14"/>
+	<Cannon id="2" PosX="0.56" PosY="0.8" Direction="0.0"/>
+	<Cannon id="3" PosX="0.16" PosY="0.8" Direction="0.0"/>
+	<CannonEffect name="PaoTaiEffect" PosX="-115" 			PosY="0"/>
+	<Jetton 			PosX="-60" 					PosY="0" 				Max="4"/>
+	<LOCK 				name="lock_flag" 		line="lock_line" 	flag="lock_flag_%d" PosX="160" PosY="-120"/>
+
+</CannonPos>
+
+
+<!-- 普通炮 -->
+<CannonSet id="0" normal="0" ion="1" double="1">
+    <!-- 第一个炮 -->
+	<CannonType type="0">
+		<Cannon ResName="bb_likui_pao_bullet"    Name="bb_likui_pao1_1v_stay" Move="bb_likui_pao1_1v" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v1" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_01_ani" ResType="1" 	PosX="0" PosY="0" Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="1">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao1_2v_1_stay" Move="bb_likui_pao1_2v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v2" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_02_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+	<CannonType type="2">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao1_3v_1_stay" Move="bb_likui_pao1_3v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v3" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_03_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <!-- 第二个炮 -->
+    <CannonType type="3">
+		<Cannon ResName="bb_likui_pao_bullet"    Name="bb_likui_pao2_1v_stay" Move="bb_likui_pao2_1v" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v1" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_01_ani" ResType="1" 	PosX="0" PosY="0" Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="4">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao2_2v_1_stay" Move="bb_likui_pao2_2v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v2" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_02_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+	<CannonType type="5">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao2_3v_1_stay" Move="bb_likui_pao2_3v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v3" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_03_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <!-- 第三个炮 -->
+    <CannonType type="6">
+		<Cannon ResName="bb_likui_pao_bullet"    Name="bb_likui_pao3_1v_stay" Move="bb_likui_pao3_1v" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v1" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_01_ani" ResType="1" 	PosX="0" PosY="0" Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="7">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao3_2v_1_stay" Move="bb_likui_pao3_2v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v2" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_02_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+	<CannonType type="8">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao3_3v_1_stay" Move="bb_likui_pao3_3v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v3" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_03_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <!-- 第四个炮 -->
+    <CannonType type="9">
+		<Cannon ResName="bb_likui_pao_bullet"    Name="bb_likui_pao4_1v_stay" Move="bb_likui_pao4_1v" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v1" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_01_ani" ResType="1" 	PosX="0" PosY="0" Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="10">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao4_2v_1_stay" Move="bb_likui_pao4_2v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v2" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_02_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+	<CannonType type="11">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao4_3v_1_stay" Move="bb_likui_pao4_3v_1" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet"    Name="Bullet_v3" ResType="1" Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="effect_fish_bomb_03_ani" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+</CannonSet>
+<!-- 离子炮 -->
+<CannonSet  id="1" normal="0" ion="1" double="1">
+    <!-- 第一个炮 -->
+	<CannonType type="0">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="1">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <CannonType type="2">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+     <!-- 第二个炮 -->
+	<CannonType type="3">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="4">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <CannonType type="5">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+     <!-- 第三个炮 -->
+	<CannonType type="6">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="7">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <CannonType type="8">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+     <!-- 第四个炮 -->
+	<CannonType type="9">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+
+	<CannonType type="10">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+    
+    <CannonType type="11">
+		<Cannon ResName="bb_likui_pao_bullet"	Name="bb_likui_pao_lz_stay" Move="bb_likui_pao_lz" ResType="0"	PosX="0" PosY="0" FireOffest="0" type="0"/>
+		<Bullet ResName="bb_likui_pao_bullet" Name="Bullet_v4"	ResType="1" 	Scale="1.0"/>
+		<Net ResName="effect_fish_bomb"	Name="move" ResType="1" 	PosX="0" 		PosY="0"	Scale="0.8" />
+	</CannonType>
+</CannonSet>
+
