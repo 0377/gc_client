@@ -73,6 +73,20 @@ local menuPos =
 }
 
 
+local noticeWords = {
+	[1] = "这次少输一点也是为了下把赢得更多",
+	[2] = "就算你是赌神也不能保证下一张牌就是你想要的",
+	[3] = "胆大心细，不要被对方的演技吓倒",
+	[4] = "如果知道自己的牌是最大的，那么只要考虑怎么让人跟下去就好了",
+	[5] = "如果有多个人赢家，他们牌型牌点一样，将平分奖池",
+	[6] = "筹码不足时全下，还可以参与比牌，有机会赢一部分",
+	[7] = "如果连续在自己的回合不操作，可能被提出房间",
+	[8] = "拿到好牌不加注是放弃赢钱的机会",
+	[9] = "在牌局未结束的时候强制离场，等于放弃了已经丢入场中的筹码",
+	[10] = "同花顺>四条>葫芦>同花>顺子>三条>两对>一对>高牌"
+}
+
+
 
 
 ----注册消息
@@ -166,7 +180,9 @@ function DzpkGameScene:receiveServerResponseSuccessEvent(event)
 		self:fanpaiByChair(userInfo["chair"])
 		--显示牌型
 		self:showCardType(userInfo["chair"],0,3)
+		
 	elseif msgName == DzpkGameManager.MsgName.SC_TexasShowCardsPermission then
+		self.LiangPai = false
 		
 	elseif msgName == DzpkGameManager.MsgName.SC_TexasForceLeave then ---强制离开
 	--
@@ -874,8 +890,20 @@ function DzpkGameScene:popJiazhuOperate()
 	if max > myinfo.money then
 		max = myinfo.money
 	end
+	
+	local panel = self.jiazhuNode:getChildByName("Panel_bg")
+	panel:getChildByName("Image_4"):setVisible(false)
+	if jiazhuMinBet >= myinfo.money then
+		jiazhuMinBet = myinfo.money
+		panel:getChildByName("Image_4"):setVisible(true)
+	end
+	
 	local jiazhuMaxBet = max
-	local panel = self.jiazhuNode:getChildByName("Panel_bg") 
+	if jiazhuMaxBet <= jiazhuMinBet then
+		jiazhuMaxBet = jiazhuMinBet
+	end
+	
+	 
 	
 	--快捷加注
 	for k,v in ipairs(jiazhuKuaiJie) do
@@ -904,6 +932,9 @@ function DzpkGameScene:popJiazhuOperate()
 	self.jiazhuNode.addnum = jiazhuMinBet
 	panel:getChildByName("Button_jia"):getChildByName("Text_1"):setString( CustomHelper.moneyShowStyleNone(jiazhuMinBet))
 	panel:getChildByName("Slider_1"):setPercent(0)
+	
+
+	
 	
 	panel:getChildByName("Slider_1"):addEventListener( 
 		function(sender,eventType)
@@ -1980,6 +2011,9 @@ end
 
 --初始化自己按钮
 function DzpkGameScene:initMyBtn( )
+	
+	self.overLiangPai = false --结束时亮牌
+	self.LiangPai = true --亮牌
 
 	local bottom = self.csNode:getChildByName("Panel_bottom")
 	
@@ -1987,6 +2021,23 @@ function DzpkGameScene:initMyBtn( )
 	local leftsmall = bottom:getChildByName("Panel_leftsmall")
 	local rightmyturn = bottom:getChildByName("Panel_rightmyturn")
 	local rightelseturn = bottom:getChildByName("Panel_rightelseturn")
+	
+	local liangpai = bottom:getChildByName("Panel_liangpai")
+	--结束时亮牌
+	liangpai:getChildByName("Button_1"):addTouchEventListener(function (sender, eventType)
+		if eventType == ccui.TouchEventType.ended then
+			self.overLiangPai = not self.overLiangPai
+			
+		end
+    end)
+	--亮牌
+	liangpai:getChildByName("Button_2"):addTouchEventListener(function (sender, eventType)
+		if eventType == ccui.TouchEventType.ended then
+			self.dzpkGameManager:sendShowCards()
+			self.overLiangPai = false --结束时亮牌
+			self.LiangPai = true
+		end
+    end)
 	
 	--[[--动作类型
 DzpkGameManager.TexasAction = 
@@ -2210,7 +2261,7 @@ function DzpkGameScene:updateUserInfo(dt )
 	local users = self.dzpkGameManager:getDataManager():getUserInfoList()
 	local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
 	local myinfo = self.dzpkGameManager:getDataManager():getMyInfo()
-	if tableinfo == nil or users == nil then
+	if tableinfo == nil or users == nil or myinfo == nil then
 		return
 	end
 	
@@ -2249,6 +2300,12 @@ function DzpkGameScene:updateUserInfo(dt )
 			else
 				userActionStateNode:setVisible(true)
 				userActionStateNode:loadTexture(texasActionImage[v.action])
+			end
+			
+			if v.action == DzpkGameManager.TexasAction.ACT_WAITING then
+				uNode:setOpacity(150)
+			else
+				uNode:setOpacity(255)
 			end
 			
 			
@@ -2384,6 +2441,50 @@ function DzpkGameScene:doWillOperate()
 end
 
 
+--更新亮牌信息
+function DzpkGameScene:updateLiangPai()
+	
+	local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+	if tableinfo == nil then
+		return
+	end
+	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
+	if myinfo == nil then
+		return
+	end
+	local userlistCCS = self.csNode:getChildByName("Panel_bottom")
+	local liangpai = userlistCCS:getChildByName("Panel_liangpai")
+	local willliangpai = liangpai:getChildByName("Button_1")
+	local liangpaibtn = liangpai:getChildByName("Button_2")
+	liangpaibtn:setVisible(false)
+	liangpai:getChildByName("Text_4"):setVisible(true)
+	if tableinfo.state == DzpkGameManager.TexasStatus.STATUS_SHOW_DOWN then
+		
+		liangpai:setVisible(true)
+		liangpai:getChildByName("Text_4"):setVisible(false)
+		willliangpai:setVisible(false)
+		if self.LiangPai == false then
+			liangpaibtn:setVisible(true)
+		end
+		
+	elseif myinfo.action == DzpkGameManager.TexasAction.ACT_FOLD then --弃牌
+		liangpai:setVisible(true)
+		
+		willliangpai:setVisible(true)
+		
+	end
+	
+	
+	--self.overLiangPai
+	
+	if self.overLiangPai == true then
+		willliangpai:getChildByName("Image_3"):setVisible(true)
+	else
+		willliangpai:getChildByName("Image_3"):setVisible(false)
+	end
+	
+end
+
 
 --更新玩家操作按钮状态
 function DzpkGameScene:updatePlayerBtn(dt )
@@ -2396,11 +2497,6 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	
 	local userlistCCS = self.csNode:getChildByName("Panel_bottom")
 	
-	if tableinfo.state == DzpkGameManager.TexasStatus.STATUS_WAITING or tableinfo.state == DzpkGameManager.TexasStatus.STATUS_SHOW_DOWN then
-		userlistCCS:setVisible(false)
-	else
-		userlistCCS:setVisible(true)
-	end
 	
 	
 	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
@@ -2408,13 +2504,7 @@ function DzpkGameScene:updatePlayerBtn(dt )
 		return
 	end
 	
-	--等待或结算
-	if tableinfo.state == DzpkGameManager.TexasStatus.STATUS_WAITING or tableinfo.state == DzpkGameManager.TexasStatus.STATUS_SHOW_DOWN then
-		userlistCCS:setVisible(false)
-		
-	else
-		userlistCCS:setVisible(true)
-	end
+	
 	
 	
 	local leftbig = userlistCCS:getChildByName("Panel_leftbig")
@@ -2422,8 +2512,23 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	local rightmyturn = userlistCCS:getChildByName("Panel_rightmyturn")
 	local rightelseturn = userlistCCS:getChildByName("Panel_rightelseturn")
 	
+	local liangpai = userlistCCS:getChildByName("Panel_liangpai")
 	
 	
+	--等待或结算
+	if tableinfo.state == DzpkGameManager.TexasStatus.STATUS_WAITING  then
+		userlistCCS:setVisible(false)
+		
+	elseif tableinfo.state == DzpkGameManager.TexasStatus.STATUS_SHOW_DOWN then
+		leftsmall:setVisible(false)
+		leftbig:setVisible(false)
+		rightmyturn:setVisible(false)
+		rightelseturn:setVisible(false)
+		liangpai:setVisible(true)
+		return
+	else
+		userlistCCS:setVisible(true)
+	end
 	
 	
 	--设置按钮是否可点击
@@ -2475,8 +2580,15 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	end
 	
 	
+	--自己不在思考的时候关闭加注界面
+	if myinfo.action ~= DzpkGameManager.TexasAction.ACT_THINK then --自己思考中
+		self.jiazhuNode:setVisible(false)
+	end
+	
+	
 	
 	if myinfo.action == DzpkGameManager.TexasAction.ACT_THINK then --自己思考中
+		liangpai:setVisible(false)
 		rightmyturn:setVisible(true)
 		rightelseturn:setVisible(false)
 		--第一轮
@@ -2517,20 +2629,26 @@ function DzpkGameScene:updatePlayerBtn(dt )
 		
 		
 		
-	elseif 	myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING 	or 
-			myinfo.action == DzpkGameManager.TexasAction.ACT_FOLD 		or 
+	elseif 	myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING 	or
 			myinfo.action == DzpkGameManager.TexasAction.ACT_ALL_IN 	then
 		leftsmall:setVisible(false)
 		leftbig:setVisible(false)
 		rightmyturn:setVisible(false)
 		rightelseturn:setVisible(false)
-		
+		liangpai:setVisible(false)
+	elseif 	myinfo.action == DzpkGameManager.TexasAction.ACT_FOLD then
+		leftsmall:setVisible(false)
+		leftbig:setVisible(false)
+		rightmyturn:setVisible(false)
+		rightelseturn:setVisible(false)
+		liangpai:setVisible(true)
 	--没有在弃牌和等待和自己思考中状态(欲操作)
-	elseif myinfo.action ~= DzpkGameManager.TexasAction.ACT_FOLD then
+	else
 		leftsmall:setVisible(false)
 		leftbig:setVisible(false)
 		rightmyturn:setVisible(false)
 		rightelseturn:setVisible(true)
+		liangpai:setVisible(false)
 		
 		local geng = rightelseturn:getChildByName("Button_3")
 		local all = rightelseturn:getChildByName("Button_4")
@@ -2558,10 +2676,7 @@ function DzpkGameScene:updatePlayerBtn(dt )
 				all:setVisible(true)
 				geng:setVisible(false)
 			end
-		--else
-		--	rang:setVisible(true)
-		--	all:setVisible(false)
-		--	geng:setVisible(false)
+			
 		end
 		--
 		
@@ -2588,6 +2703,7 @@ function DzpkGameScene:update(dt )
 		self:updateTable(dt)
 		self:updateUserInfo(dt)
 		self:updatePlayerBtn(dt)
+		self:updateLiangPai()
 end
 
 

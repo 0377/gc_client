@@ -24,6 +24,8 @@ function DzpkGameEntry:getStartScene(infoTab)
 	scene:addChild(sceneLayer);
 	return scene;
 end
+
+
 function DzpkGameEntry:getNeedPreloadResArray()
 	-- body
 	return DzpkGameScene.getNeedPreloadResArray()
