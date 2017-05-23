@@ -1,0 +1,155 @@
+
+¡
+common_msg_banker.proto"k
+BankerTable
+state (Rstate
+
+bottom_bet (R	bottomBet
+chair (Rchair"
+MsgID
+IDã§"z
+BankerPlayerInfo
+guid (Rguid
+chair (Rchair
+name (	Rname
+icon (	Ricon
+money (Rmoney"ö
+BankerGameEndPlayerInfo
+chair (Rchair
+money (Rmoney
+tax (Rtax
+victory (Rvictory'
+increment_money (RincrementMoney"
+BankerReconnectPlayerInfo
+guid (Rguid
+chair (Rchair
+name (	Rname
+icon (	Ricon
+money (Rmoney
+ratio (Rratio
+position (Rposition
+	bet_money (RbetMoney
+cards	 (Rcards
+
+cards_type
+ (R	cardsType
+flag (Rflag
+tax (Rtax
+victory (Rvictory'
+increment_money (RincrementMoney"*
+SC_BankerTableMatching"
+MsgID
+IDêN"ï
+SC_BankerSendCards'
+pb_table (2.BankerTableRpbTable.
+	pb_player (2.BankerPlayerInfoRpbPlayer
+cards (Rcards"
+MsgID
+IDëN"h
+SC_BankerBeginToContend
+	countdown (R	countdown
+
+total_time (R	totalTime"
+MsgID
+IDíN"V
+SC_BankerPlayerContend
+chair (Rchair
+ratio (Rratio"
+MsgID
+IDìN"â
+SC_BankerChoosingBanker
+chairs (Rchairs!
+banker_chair (RbankerChair!
+banker_ratio (RbankerRatio"
+MsgID
+IDîN"j
+SC_BankerPlayerBeginToBet
+	countdown (R	countdown
+
+total_time (R	totalTime"
+MsgID
+IDïN"Y
+SC_BankerPlayerBet
+chair (Rchair
+	bet_money (RbetMoney"
+MsgID
+IDñN"õ
+SC_BankerShowOwnCards
+cards (Rcards
+
+cards_type (R	cardsType
+	countdown (R	countdown
+
+total_time (R	totalTime"
+MsgID
+IDóN"Ö
+SC_BankerShowCards
+chair (Rchair
+cards (Rcards
+
+cards_type (R	cardsType
+flag (Rflag"
+MsgID
+IDòN"Ñ
+SC_BankerGameEnd5
+	pb_player (2.BankerGameEndPlayerInfoRpbPlayer'
+pb_table (2.BankerTableRpbTable"
+MsgID
+IDôN"A
+SC_BankerForceToLeave
+reason (	Rreason"
+MsgID
+IDöN"…
+SC_BankerReconnectInfo'
+pb_table (2.BankerTableRpbTable7
+	pb_player (2.BankerReconnectPlayerInfoRpbPlayer
+	countdown (R	countdown
+
+total_time (R	totalTime"
+MsgID
+IDõN"#
+CS_BankerEnter"
+MsgID
+ID°ú"#
+CS_BankerLeave"
+MsgID
+ID¢ú";
+CS_BankerContend
+ratio (Rratio"
+MsgID
+ID£ú"D
+CS_BankerPlayerBet
+	bet_money (RbetMoney"
+MsgID
+ID§ú".
+CS_BankerPlayerGuessCards"
+MsgID
+ID•ú"&
+CS_BankerNextGame"
+MsgID
+ID¶ú*›
+BANKER_CARD_TYPE
+BANKER_CARD_TYPE_NONEd
+BANKER_CARD_TYPE_ONEe
+BANKER_CARD_TYPE_TWOf
+BANKER_CARD_TYPE_THREEg
+BANKER_CARD_TYPE_FOURh
+BANKER_CARD_TYPE_FIVEi
+BANKER_CARD_TYPE_SIXj
+BANKER_CARD_TYPE_SEVENk
+BANKER_CARD_TYPE_EIGHTl
+BANKER_CARD_TYPE_NIGHTm
+BANKER_CARD_TYPE_TENn
+BANKER_CARD_TYPE_FOUR_KING…
+BANKER_CARD_TYPE_FIVE_KING  
+BANKER_CARD_TYPE_FOUR_SAMESÀ 
+BANKER_CARD_TYPE_FIVE_SAMLLÃ
+BANKER_CARD_TYPE_ERROR*í
+Status
+STATUS_SEND_CARDS
+STATUS_CONTEND_BANKER
+STATUS_DICISION_BANKER
+
+STATUS_BET
+STATUS_SHOW_CARD
+STATUS_SHOW_DOWN
