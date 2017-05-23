@@ -1,0 +1,180 @@
+<Solution>
+  <PropertyGroup Name="ShowHand" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Folder Name="animation">
+            <ExportJsonFile Name="sh_pxdh_eff.ExportJson" />
+          </Folder>
+          <Folder Name="mainView">
+            <Image Name="ddz_dl_1.png" />
+            <Image Name="ddz_dl_bz.png" />
+            <Image Name="ddz_dl_sd.png" />
+            <Image Name="ddz_dl_zc.png" />
+            <Image Name="ddz_wifi_1.png" />
+            <Image Name="ddz_wifi_2.png" />
+            <Image Name="ddz_wifi_3.png" />
+            <Image Name="ddz_wifi_4.png" />
+            <Image Name="sh_anpai.png" />
+            <Image Name="sh_bj.jpg" />
+            <Image Name="sh_button_1.png" />
+            <Image Name="sh_button_2.png" />
+            <Image Name="sh_button_3.png" />
+            <Image Name="sh_button_add_1.png" />
+            <Image Name="sh_button_add_2.png" />
+            <Image Name="sh_button_add_3.png" />
+            <Image Name="sh_button_add_4.png" />
+            <Image Name="sh_button_liaotian.png" />
+            <Image Name="sh_button_liaotian_pressed.png" />
+            <Image Name="sh_button_px.png" />
+            <Image Name="sh_button_px_pressed.png" />
+            <Image Name="sh_button_shang.png" />
+            <Image Name="sh_button_shang_pressed.png" />
+            <Image Name="sh_button_szt.png" />
+            <Image Name="sh_button_tc.png" />
+            <Image Name="sh_button_tc_pressed.png" />
+            <Image Name="sh_button_xia.png" />
+            <Image Name="sh_button_xia_pressed.png" />
+            <Image Name="sh_button_yxg.png" />
+            <Image Name="sh_button_yxg_pressed.png" />
+            <Image Name="sh_button_yxk.png" />
+            <Image Name="sh_button_yxk_pressed.png" />
+            <Image Name="sh_button_yyg.png" />
+            <Image Name="sh_button_yyg_pressed.png" />
+            <Image Name="sh_button_yyk.png" />
+            <Image Name="sh_button_yyk_pressed.png" />
+            <Image Name="sh_cm_1.png" />
+            <Image Name="sh_cm_2.png" />
+            <Image Name="sh_cm_3.png" />
+            <Image Name="sh_cm_4.png" />
+            <Image Name="sh_cm_5.png" />
+            <Image Name="sh_cm_6.png" />
+            <Image Name="sh_cmkuang.png" />
+            <Image Name="sh_cmkuang_2.png" />
+            <Image Name="sh_djs_1.png" />
+            <Image Name="sh_djs_1_szt.png" />
+            <Image Name="sh_djs_2.png" />
+            <Image Name="sh_djs_3.png" />
+            <Image Name="sh_genzhu.png" />
+            <Image Name="sh_jiazhu.png" />
+            <Image Name="sh_kuang.png" />
+            <Image Name="sh_kuang_2.png" />
+            <Image Name="sh_lbt.png" />
+            <Image Name="sh_ltqp.png" />
+            <Image Name="sh_ltqp_gp.png" />
+            <Image Name="sh_ltqp_gz.png" />
+            <Image Name="sh_ltqp_jz.png" />
+            <Image Name="sh_ltqp_qp.png" />
+            <Image Name="sh_ltqp_sh.png" />
+            <Image Name="sh_ppz.png" />
+            <Image Name="sh_suoha.png" />
+            <Image Name="sh_szt_1.png" />
+            <Image Name="sh_szt_2.png" />
+            <Image Name="sh_szt_3.png" />
+            <Image Name="sh_szt_4.png" />
+            <Image Name="sh_txkuang.png" />
+            <Image Name="sh_txkuang_2.png" />
+            <Image Name="sh_txkuang_wfg.png" />
+            <Image Name="sh_txkuang_wfg_2.png" />
+            <Image Name="sh_txkuang_wfg_3.png" />
+            <Image Name="sh_wenzi_bjz.png" />
+            <Image Name="sh_wenzi_gen.png" />
+            <Image Name="sh_wenzi_gp.png" />
+            <Image Name="sh_wenzi_jia.png" />
+            <Image Name="sh_wenzi_jz.png" />
+            <Image Name="sh_wenzi_qp.png" />
+            <Image Name="sh_wenzi_sh.png" />
+          </Folder>
+          <Folder Name="poker">
+            <Image Name="sh_0_10.png" />
+            <Image Name="sh_0_11.png" />
+            <Image Name="sh_0_12.png" />
+            <Image Name="sh_0_13.png" />
+            <Image Name="sh_0_14.png" />
+            <Image Name="sh_0_8.png" />
+            <Image Name="sh_0_9.png" />
+            <Image Name="sh_1_10.png" />
+            <Image Name="sh_1_11.png" />
+            <Image Name="sh_1_12.png" />
+            <Image Name="sh_1_13.png" />
+            <Image Name="sh_1_14.png" />
+            <Image Name="sh_1_8.png" />
+            <Image Name="sh_1_9.png" />
+            <Image Name="sh_2_10.png" />
+            <Image Name="sh_2_11.png" />
+            <Image Name="sh_2_12.png" />
+            <Image Name="sh_2_13.png" />
+            <Image Name="sh_2_14.png" />
+            <Image Name="sh_2_8.png" />
+            <Image Name="sh_2_9.png" />
+            <Image Name="sh_3_10.png" />
+            <Image Name="sh_3_11.png" />
+            <Image Name="sh_3_12.png" />
+            <Image Name="sh_3_13.png" />
+            <Image Name="sh_3_14.png" />
+            <Image Name="sh_3_8.png" />
+            <Image Name="sh_3_9.png" />
+            <Image Name="sh_back.png" />
+            <Image Name="sh_back_1.png" />
+            <Image Name="sh_Invalid.png" />
+            <Image Name="sh_Invalid_1.png" />
+            <Image Name="sh_wenzi_apai.png" />
+          </Folder>
+          <Folder Name="secondView">
+            <Image Name="sh_djs_1.png" />
+            <Image Name="sh_djs_2.png" />
+            <Image Name="sh_djs_3.png" />
+            <Image Name="sh_js_gou.png" />
+            <Image Name="sh_js_gou_kuang.png" />
+            <Image Name="sh_js_ld.png" />
+            <Image Name="sh_js_ljks_normal.png" />
+            <Image Name="sh_js_ljks_pressed.png" />
+            <Image Name="sh_js_mth.png" />
+            <Image Name="sh_js_sant.png" />
+            <Image Name="sh_js_sp.png" />
+            <Image Name="sh_js_st.png" />
+            <Image Name="sh_js_sz.png" />
+            <Image Name="sh_js_szt_1.png" />
+            <Image Name="sh_js_szt_2.png" />
+            <Image Name="sh_js_th.png" />
+            <Image Name="sh_js_ths.png" />
+            <Image Name="sh_js_X.png" />
+            <Image Name="sh_js_X_2.png" />
+            <Image Name="sh_js_xk_1.png" />
+            <Image Name="sh_js_xk_2.png" />
+            <Image Name="sh_js_yd.png" />
+            <Image Name="sh_js_ying.png" />
+            <Image Name="sh_js_zdzb_normal.png" />
+            <Image Name="sh_js_zdzb_pressed.png" />
+            <Image Name="sh_jskuang.png" />
+            <Image Name="sh_kjfy_kuang.png" />
+            <Image Name="sh_px.png" />
+            <Image Name="sh_px_kuang.png" />
+            <Image Name="sh_px_kuang_xuanzhong.png" />
+            <Image Name="sh_px_xuanzhong.png" />
+            <Image Name="sh_tittle_js.png" />
+            <Image Name="sh_txkuang_2.png" />
+            <Image Name="sh_zj_kuang.png" />
+            <Image Name="sh_zj_kuang_2.png" />
+          </Folder>
+        </Folder>
+        <Project Name="Chat_TextMsgCCS.csd" Type="Node" />
+        <Project Name="SHButtonGroupNodeCCS.csd" Type="Node" />
+        <Project Name="SHCardTypeLayerCCS.csd" Type="Layer" />
+        <Project Name="SHChatItemNodeCCS.csd" Type="Node" />
+        <Project Name="SHChatLayerCCS.csd" Type="Layer" />
+        <Project Name="SHDeviceInfoNodeCCS.csd" Type="Node" />
+        <Project Name="SHGameCountDownNodeCCS.csd" Type="Node" />
+        <Project Name="SHGameLayerCCS.csd" Type="Layer" />
+        <Project Name="SHHeadNode_1.csd" Type="Node" />
+        <Project Name="SHHeadNode_2.csd" Type="Node" />
+        <Project Name="SHMenuNodeCCS.csd" Type="Node" />
+        <Project Name="SHPokerNodeCCS.csd" Type="Node" />
+        <Project Name="SHRaiseBetButtonsCCS.csd" Type="Node" />
+        <Project Name="SHResultLayerCCS.csd" Type="Layer" />
+        <Project Name="SHTableInfoNodeCCS.csd" Type="Node" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

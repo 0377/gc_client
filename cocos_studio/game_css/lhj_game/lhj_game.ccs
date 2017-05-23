@@ -7,9 +7,14 @@
           <Folder Name="slots_race_pop_middle_gold_01">
             <ExportJsonFile Name="slots_race_pop_middle_gold_01.ExportJson" />
           </Folder>
-          <Image Name="sgj_win_hp.png" />
         </Folder>
         <Folder Name="game_res">
+          <Image Name="jiujiu_lhj_bei.png" />
+          <Image Name="jiujiu_lhj_beishukuang.png" />
+          <Image Name="jiujiu_lhj_bigwin.png" />
+          <Image Name="jiujiu_lhj_caideng_1.png" />
+          <Image Name="jiujiu_lhj_caideng_2.png" />
+          <Image Name="jiujiu_lhj_win.png" />
           <Image Name="wz_bar.png" />
           <Image Name="wz_bj.png" />
           <Image Name="wz_bt_gb.png" />
@@ -84,8 +89,8 @@
           <Image Name="wz_yxgz.png" />
           <Image Name="wz_yxgz_2.png" />
         </Folder>
-        <Project Name="LhjGameScene.csd" Type="Layer" />
-        <Project Name="LhjGameTips.csd" Type="Layer" />
+        <Project Name="LhjGameSceneCCS.csd" Type="Layer" />
+        <Project Name="LhjGameTipsCCS.csd" Type="Layer" />
         <Image Name="wz_lhj_lagan.png" />
       </RootFolder>
     </Group>

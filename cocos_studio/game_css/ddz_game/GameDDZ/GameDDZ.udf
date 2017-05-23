@@ -1,26 +1,5 @@
 <UserData Version="3.10.0.0">
   <Properties>
-    <Item Key="PackageParamsKey">
-      <Value ctype="PackageParams">
-        <LuaIsEncrypt Value="False" />
-        <LuaEncryptKey Value="" />
-        <LuaEncryptSign Value="" />
-        <Android_PackageName Value="org.cocos.GameDDZ" />
-        <AndroidkeyStore Value="" />
-        <AndroidVersion Value="" />
-        <iOS_Target Value="GameDDZ-mobile" />
-        <iOS_BundleID Value="" />
-        <Platform Value="None" />
-        <RunPlatform Value="None" />
-        <FrameworkVersion Value="cocos2d-x-3.10" />
-        <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
-        <EnableSourceMap Value="False" />
-        <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />
@@ -30,18 +9,7 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="ddzGameInfoLayerCCS.csd" />
-          <FilePathData Path="ddzGameCardTipCCS.csd" />
-          <FilePathData Path="ddzGameDeviceInfo.csd" />
-          <FilePathData Path="ddzGameLayerCSS_new.csd" />
-          <FilePathData Path="ddzGameResultLayerCCS.csd" />
-          <FilePathData Path="ddzGameShadowLayerCCS.csd" />
-          <FilePathData Path="ddzGameTimeOutWaitCCS.csd" />
-          <FilePathData Path="ddzGameUIControlLayerCCS.csd" />
-          <FilePathData Path="ddzGameUIUpLayerCCS.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="ddzGameInfoLayerCCS.csd" />
+        <ActiveDocument />
       </Value>
     </Item>
   </Properties>

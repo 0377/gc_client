@@ -1,0 +1,65 @@
+<Solution>
+  <PropertyGroup Name="fish_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Image Name="by_button_gz_normal.png" />
+          <Image Name="by_button_gz_pressed.png" />
+          <Image Name="by_button_shang_normal.png" />
+          <Image Name="by_button_shang_pressed.png" />
+          <Image Name="by_button_tuichu_normal.png" />
+          <Image Name="by_button_tuichu_pressed.png" />
+          <Image Name="by_button_xia_normal.png" />
+          <Image Name="by_button_xia_pressed.png" />
+          <Image Name="by_button_yxg_normal.png" />
+          <Image Name="by_button_yxg_pressed.png" />
+          <Image Name="by_button_yxk_normal.png" />
+          <Image Name="by_button_yxk_pressed.png" />
+          <Image Name="by_button_yyg_normal.png" />
+          <Image Name="by_button_yyg_pressed.png" />
+          <Image Name="by_button_yyk_normal.png" />
+          <Image Name="by_button_yyk_pressed.png" />
+          <Image Name="by_gzsm_boss.png" />
+          <Image Name="by_gzsm_button_1.png" />
+          <Image Name="by_gzsm_button_2.png" />
+          <Image Name="by_gzsm_cgyl.png" />
+          <Image Name="by_gzsm_dy.png" />
+          <Image Name="by_gzsm_kuang.png" />
+          <Image Name="by_gzsm_sm_boss.png" />
+          <Image Name="by_gzsm_sm_cg.png" />
+          <Image Name="by_gzsm_sm_dy.png" />
+          <Image Name="by_gzsm_sm_ts1.png" />
+          <Image Name="by_gzsm_sm_ts2.png" />
+          <Image Name="by_gzsm_ts.png" />
+          <Image Name="by_gzsm_X_normal.png" />
+          <Image Name="by_gzsm_X_pressed.png" />
+          <Image Name="by_icon_1.png" />
+          <Image Name="by_icon_2.png" />
+          <Image Name="by_pmd.png" />
+          <Image Name="by_pw_-.png" />
+          <Image Name="by_pw_-_pressed.png" />
+          <Image Name="by_pw_1.png" />
+          <Image Name="by_pw_2.png" />
+          <Image Name="by_pw_add.png" />
+          <Image Name="by_pw_add_pressed.png" />
+          <Image Name="by_pw_sub.png" />
+          <Image Name="by_pw_sub_pressed.png" />
+          <Image Name="by_pw_sy.png" />
+          <Image Name="by_szt.png" />
+          <Image Name="by_yuan.png" />
+          <Image Name="Map_0.jpg" />
+          <Image Name="Map_1.jpg" />
+          <Image Name="Map_2.jpg" />
+          <Image Name="Map_3.jpg" />
+          <Image Name="Map_4.jpg" />
+          <Image Name="Map_5.jpg" />
+          <Image Name="Map_likui_001.jpg" />
+          <Image Name="Map_likui_002.jpg" />
+          <Image Name="Map_likui_003.jpg" />
+        </Folder>
+        <Project Name="FishGameCCS.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

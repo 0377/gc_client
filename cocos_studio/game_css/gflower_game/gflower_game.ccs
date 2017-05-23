@@ -87,7 +87,7 @@
           <Image Name="zjh_wanjiachouma_bg.png" />
           <Image Name="zjh_xiazhuchouma_bg.png" />
         </Folder>
-        <Project Name="GameZJH.csd" Type="Scene" />
+        <Project Name="GameZJHCCS.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

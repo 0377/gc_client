@@ -96,7 +96,7 @@
           <Image Name="yidongshuju.png" />
         </Folder>
         <Project Name="ddzGameCardTipCCS.csd" Type="Node" />
-        <Project Name="ddzGameDeviceInfo.csd" Type="Node" />
+        <Project Name="ddzGameDeviceInfoCCS.csd" Type="Node" />
         <Project Name="ddzGameInfoLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameLayerCSS_new.csd" Type="Layer" />
         <Project Name="ddzGameMenuNodeCCS.csd" Type="Node" />

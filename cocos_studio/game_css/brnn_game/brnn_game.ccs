@@ -89,9 +89,9 @@
           <Image Name="zhezao.png" />
           <Image Name="zongxiazhunum.png" />
         </Folder>
-        <Project Name="GameBrnn.csd" Type="Layer" />
-        <Project Name="GuiZe.csd" Type="Layer" />
-        <Project Name="JieSuan.csd" Type="Layer" />
+        <Project Name="GameBrnnCCS.csd" Type="Layer" />
+        <Project Name="GuiZeCCS.csd" Type="Layer" />
+        <Project Name="JieSuanCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
