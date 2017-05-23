@@ -8,14 +8,14 @@
 -- 
 -- @function [parent=#FishObjectManager] GetPathManager 
 -- @param self
--- @return fishgame2d::PathManager#fishgame2d::PathManager ret (return value: game.fishgame2d::PathManager)
+-- @return PathManager#PathManager ret (return value: game.fishgame2d.PathManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] FindFish 
 -- @param self
 -- @param #unsigned long 
--- @return fishgame2d::Fish#fishgame2d::Fish ret (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish ret (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
@@ -24,7 +24,7 @@
 -- @param #int 
 -- @param #int 
 -- @param #string 
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -49,14 +49,14 @@
 -- @function [parent=#FishObjectManager] FindBullet 
 -- @param self
 -- @param #unsigned long id
--- @return fishgame2d::Bullet#fishgame2d::Bullet ret (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet ret (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] SetGameLoaded 
 -- @param self
 -- @param #bool b
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -65,7 +65,7 @@
 -- @param #int buffType
 -- @param #float buffParam
 -- @param #float buffTime
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -79,13 +79,13 @@
 -- @function [parent=#FishObjectManager] SetSwitchingScene 
 -- @param self
 -- @param #bool b
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] Clear 
 -- @param self
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -104,7 +104,7 @@
 -- 
 -- @function [parent=#FishObjectManager] AddFish 
 -- @param self
--- @param #game.fishgame2d::Fish pFish
+-- @param #game.fishgame2d.Fish pFish
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
@@ -121,7 +121,7 @@
 -- @param self
 -- @param #float 
 -- @param #float 
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -133,7 +133,7 @@
 -- 
 -- @function [parent=#FishObjectManager] AddBullet 
 -- @param self
--- @param #game.fishgame2d::Bullet pBullet
+-- @param #game.fishgame2d.Bullet pBullet
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
@@ -154,14 +154,14 @@
 -- @function [parent=#FishObjectManager] ConvertDirection 
 -- @param self
 -- @param #float 
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] SetMirrowShow 
 -- @param self
 -- @param #bool 
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
@@ -169,24 +169,24 @@
 -- @param self
 -- @param #float 
 -- @param #float 
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] DestroyInstance 
 -- @param self
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] DestoryInstace 
 -- @param self
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager self (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager self (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
 -- @function [parent=#FishObjectManager] GetInstance 
 -- @param self
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager ret (return value: game.fishgame2d::FishObjectManager)
+-- @return FishObjectManager#FishObjectManager ret (return value: game.fishgame2d.FishObjectManager)
         
 return nil

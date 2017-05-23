@@ -4,9 +4,9 @@ BrnnGameEnd = class("BrnnGameEnd", function()
 end)
 
 function BrnnGameEnd:ctor()
+    local CCSLuaNode =  requireForGameLuaFile("JieSuanCCS")
+    self._uiLayer = CCSLuaNode:create().root; 
 
-    local csNodePath = CustomHelper.getFullPath("JieSuan.csb")
-    self._uiLayer = cc.CSLoader:createNode(csNodePath)
     self:addChild(self._uiLayer)
 
     self._gameEndBG = tolua.cast(CustomHelper.seekNodeByName(self._uiLayer, "jiesuan"), "ccui.ImageView") --self._uiLayer:getChildByName("jiesuan")

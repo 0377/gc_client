@@ -302,6 +302,7 @@ void TCPManager::parseReciveBufferData(struct  mg_connection *nc)
 		}
 		//服务器传送过来的为MsgHeader
 		MsgHeader* header = reinterpret_cast<MsgHeader*>(io->buf + cur);
+		/*
 		int maxBufferLength = kMaxDataLength + sizeof(header);
 		if (header->len > maxBufferLength)
 		{
@@ -309,6 +310,7 @@ void TCPManager::parseReciveBufferData(struct  mg_connection *nc)
 			doCloseMgConnection(nc);
 			return;
 		}
+		*/
 		if (header->len > read_size - cur)
 		{
 			break;

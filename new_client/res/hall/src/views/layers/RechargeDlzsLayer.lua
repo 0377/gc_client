@@ -4,7 +4,9 @@ local zhaoshang = CustomHelper.getOneHallGameConfigValueWithKey("agents_zhaoshan
 
 local RechargeDlzsLayer = class("RechargeDlzsLayer", CustomBaseView)
 function RechargeDlzsLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeDlzsLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeDlzsLayerCCS.csb"));
+	local CCSLuaNode =  requireForGameLuaFile("RechargeDlzsLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
  
     self:initView();
@@ -16,6 +18,7 @@ function RechargeDlzsLayer:initView()
 		for i=1,4 do
 			local text = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "qq_text_"..i), "ccui.Text")
 			local button = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_lx_"..i), "ccui.Button")
+			local img = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "qq_bg_"..i), "ccui.ImageView")
 			if zhaoshang.qq[i] then
 			
 				text:setString(tostring(zhaoshang.qq[i]));
@@ -30,6 +33,7 @@ function RechargeDlzsLayer:initView()
 			else
 				text:setVisible(false);
 				button:setVisible(false);
+				img:setVisible(false)
 			end
 				
 		end
@@ -39,6 +43,7 @@ function RechargeDlzsLayer:initView()
 		for i=1,4 do
 			local text = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "wx_text_"..i), "ccui.Text")
 			local button = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_fz_"..i), "ccui.Button")
+			local img = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "wx_bg_"..i), "ccui.ImageView")
 			if zhaoshang.weixin[i] then
 				text:setString(tostring(zhaoshang.weixin[i]))
 				button:addClickEventListener(function()
@@ -51,6 +56,7 @@ function RechargeDlzsLayer:initView()
 			else
 				text:setVisible(false);
 				button:setVisible(false);
+				img:setVisible(false)
 			end
 				
 		end

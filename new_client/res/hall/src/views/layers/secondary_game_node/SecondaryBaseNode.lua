@@ -13,20 +13,21 @@ function SecondaryBaseNode:ctor()
 	
 	--self:initViewData(secondRoomInfoTab,clickCallback)
 	-- self:initViewData(secondRoomInfoTab,clickCallback)
+
 end
 
-function SecondaryBaseNode:initViewData(secondRoomInfoTab,clickCallback,canSelected)
+function SecondaryBaseNode:initViewData(secondRoomInfoTab)
 	--todo nothing
 	self.secondRoomInfoTab = secondRoomInfoTab
-	self.clickCallback = clickCallback
-	return self.secondRoomInfoTab ~= nil
+	self.selectBtn = tolua.cast(CustomHelper.seekNodeByName(self, "selected_btn"), "ccui.Button");
+	self.selectBtn:setSwallowTouches(false)
 end
 
-function SecondaryBaseNode:selectNode()
-	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-	if self.clickCallback then
-		self.clickCallback()
-	end
-end
+-- function SecondaryBaseNode:selectNode()
+-- 	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+-- 	if self.clickCallback then
+-- 		self.clickCallback()
+-- 	end
+-- end
 
 return SecondaryBaseNode

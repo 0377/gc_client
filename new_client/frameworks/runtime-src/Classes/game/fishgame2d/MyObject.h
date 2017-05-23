@@ -13,6 +13,7 @@
 #include "common.h"
 
 #include "FishObjectManager.h"
+#include "PathManager.h"
 
 NS_FISHGAME2D_BEGIN
 
@@ -29,7 +30,7 @@ enum ObjState
 	EOS_HIT,
 	EOS_DEAD,
 	EOS_DESTORY,
-	EOS_LIGHTING,
+	EOS_DESTORED,
 };
 
 enum SpecialFishType
@@ -54,7 +55,7 @@ class Effect;
 class MyObjectVisualNode;
 struct VisualNode;
 
-class MyObject : public cocos2d::Ref
+class MyObject : public cocos2d::Node
 {
 protected:
 	MyObject();
@@ -64,23 +65,18 @@ public:
 public:
 	int GetType(){ return m_nType; }
 
-	unsigned long GetId()const{ return m_nId; };
-	void SetId(unsigned long newId){ m_nId = newId; };
+	unsigned long getId()const{ return m_nId; };
+	void setId(unsigned long newId){ m_nId = newId; };
 
-	MyObject* GetOwner(){ return m_pOwner; }
-	void SetOwner(MyObject* p){ m_pOwner = p; }
 
-	int GetState(){ return m_nState; }
-	virtual void SetState(int);
+	int getState(){ return m_nState; }
+	virtual void setState(int);
+	
+	void setTypeId(int typeId) { m_nTypeId = typeId; }
+	int getTypeId() { return m_nTypeId; }
 
-	void SetPosition(float x, float y);
-	cocos2d::Point& GetPosition(){ return m_pPosition; }
-
-	float GetDirection(){ return m_fDirection; }
-	void SetDirection(float dir);
-
-	void SetManager(FishObjectManager* manager){ m_pManager = manager; }
-	FishObjectManager* GetManager(){ return m_pManager; }
+	void setManager(FishObjectManager* manager){ m_pManager = manager; }
+	FishObjectManager* getManager(){ return m_pManager; }
 
 	virtual void Clear(bool, bool noCleanNode = false);
 	virtual void OnClear(bool);
@@ -97,8 +93,8 @@ public:
 	void	SetTarget(int i);
 	int		GetTarget();
 
-	MoveCompent* GetMoveCompent(){ return m_pMoveCompent; }
-	void	SetMoveCompent(MoveCompent*);
+	MoveCompent* getMoveCompent(){ return m_pMoveCompent; }
+	void	setMoveCompent(MoveCompent*);
 	void	AddBuff(int buffType, float buffParam, float buffTime);
 	std::vector<Buff*>&	GetBuffs(){ return m_pBuffList; }
 
@@ -106,9 +102,7 @@ public:
 
 	cocos2d::Vector<MyObject*> ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 
-	void SetTypeID(int typeId) { m_nTypeId = typeId; }
-
-	int GetTypeID() { return m_nTypeId; }
+	void  registerStatusChangedHandler(int);
 protected:
 	int m_nType;
 
@@ -141,6 +135,8 @@ protected:
 
 	FishObjectManager* m_pManager;
 	MoveCompent* m_pMoveCompent;
+
+	int m_handler_statusChanged;
 };
 
 class Fish : public MyObject
@@ -151,7 +147,7 @@ public:
 	virtual ~Fish();
 
 
-	static Fish* Create(){
+	static Fish* create(){
 		Fish * ret = new (std::nothrow) Fish();
 		if (ret)
 		{
@@ -164,8 +160,6 @@ public:
 		return ret;
 	}
 
-	void SetVisualId(int id) { m_nVisualId = id; }
-	int GetVisualId(){ return m_nVisualId; }
 	void SetBoundingBox(int);
 	int GetBoundingBox();
 
@@ -174,8 +168,8 @@ public:
 	int GetFishType(){ return m_FishType; }
 	void SetFishType(int i){ m_FishType = i; }
 
-	int GetRefershID(){ return m_nRefershID; }
-	void SetRefershID(int i){ m_nRefershID = i;  }
+	int getRefershId(){ return m_nRefershID; }
+	void setRefershId(int i){ m_nRefershID = i;  }
 
 	void SetGoldMul(int n){ m_nGoldMul = n; }
 
@@ -184,9 +178,27 @@ public:
 	void SetLockLevel(int n){ m_nLockLevel = n; }
 	int getLockLevel(){ return m_nLockLevel; }
 
+	virtual void setPosition(float x, float y);
+	virtual void setRotation(float rotation);
+
+	virtual const cocos2d::Vec2& getPosition() const;
+	virtual float getRotation() const;
+
 	virtual bool OnUpdate(float fdt, bool shouldUpdate);
 	virtual void OnHit();
+
+	void setContentNode(cocos2d::Node*, cocos2d::Node*);
+	void setDebugNode(cocos2d::Node*);
+
+	void addBoundingBox(float radio,float x,float y);
+
+	std::list<BoundingBox>& getBoundingBox() { return boundingBox; }
 private:
+	cocos2d::Node* m_content;
+	cocos2d::Node* m_shadow;
+	cocos2d::Node* m_debug;
+	std::list<BoundingBox> boundingBox;
+
 	int m_nVisualId;
 	int m_nBoundingBoxId;
 
@@ -200,6 +212,10 @@ private:
 
 	int m_nGoldMul;
 	int m_nLockLevel;
+
+	float rotation;
+	cocos2d::Vec2 position;
+
 };
 class Bullet : public MyObject
 {
@@ -208,7 +224,7 @@ protected:
 public:
 	virtual ~Bullet();
 
-	static Bullet* Create(){
+	static Bullet* create(){
 		Bullet * ret = new (std::nothrow) Bullet();
 		if (ret)
 		{
@@ -228,7 +244,7 @@ public:
 	void	SetCatchRadio(int n);
 	int		GetCatchRadio();
 
-	virtual void	SetState(int);
+	virtual void	setState(int);
 	virtual bool	OnUpdate(float fdt, bool shouldUpdate);
 private:
 	int m_nCannonSetType;

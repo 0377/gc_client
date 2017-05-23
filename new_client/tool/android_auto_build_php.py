@@ -74,13 +74,13 @@ if __name__ == '__main__':
 		# channelTo = int(opts.channel_to)
 		# for num in range(channelFrom,channelTo+1): #202
 		num = opts.channel
-		opts.appid = "com.wangzhe_studio.client_"+str(num)
+		opts.appid = "com.my_game_studio.client_"+str(num)
 		packageInfo += str(num)+"\t"+opts.appid + "\t android" + "\n"
 		opts.packageName = opts.appid + "_" + date +".apk"		
 		phputil.setPkgUrl(os.path.join(DOWNLOAD_PATH, opts.packageName))
 		# TODO:php should give version
 		if (opts.name == None):
-			opts.name = "王者游戏"
+			opts.name = "好游戏"
 		opts.name = opts.name.decode('unicode_escape').encode('utf-8')
 		updateAppName(opts.name);
 		# TODO:php should give version

@@ -138,7 +138,7 @@ function HallDataManager:dealWithServerList(infoTab)
 	else
 		self:setAllOpenGamesDeatilTab(nil);
 	end
-	-- dump(self.allOpenGamesDeatilTab, "allGameDetailTab", 100)
+	 dump(self.allOpenGamesDeatilTab, "allGameDetailTab", 100)
 end
 --保存玩家登录账号
 function HallDataManager:savePlayerAccountInfo(account,pwd)

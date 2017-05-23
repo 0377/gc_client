@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local AccountBindLayer = class("AccountBindLayer", CustomBaseView)
 function AccountBindLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("AccountBindLayerCCS.csb"))
+    local CCSLuaNode =  requireForGameLuaFile("AccountBindLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
 	self:addChild(self.csNode);
 	--初始化输入框
 	self:initInputCommponent()

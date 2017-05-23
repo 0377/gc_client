@@ -2,9 +2,11 @@ local RechargeDailiNode = class("RechargeDailiNode",ccui.Layout)
 function RechargeDailiNode:ctor(dataTab)
 	self.infoTab = dataTab
 	dump(dataTab)
-	local nodeFullPath = CustomHelper.getFullPath("RechargeDailiNode.csb")
-	local csNode = cc.CSLoader:createNode(nodeFullPath);
-	local itemNode = tolua.cast(CustomHelper.seekNodeByName(csNode, "game_panel"), "ccui.Layout")
+	-- local nodeFullPath = CustomHelper.getFullPath("RechargeDailiNode.csb")
+	-- local csNode = cc.CSLoader:createNode(nodeFullPath);
+	local CCSLuaNode =  requireForGameLuaFile("RechargeDailiNodeCCS")
+	self.csNode = CCSLuaNode:create().root;
+	local itemNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "game_panel"), "ccui.Layout")
 	itemNode:retain()
 	itemNode:removeFromParent();
 	self:setContentSize(itemNode:getContentSize());

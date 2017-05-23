@@ -116,7 +116,7 @@ function GameManager:callbackWhenHallVersionDownloadFinished()
 		hallSkinName.."/src/views/layers",
 		hallSkinName.."/src/utils/",
 		hallSkinName.."/res/",
-		hallSkinName.."/res/csb/",
+		hallSkinName.."/res/ccs_export/",
 		hallSkinName.."/res/pb_files/"
 	}
 	for i,v in ipairs(hallPaths) do

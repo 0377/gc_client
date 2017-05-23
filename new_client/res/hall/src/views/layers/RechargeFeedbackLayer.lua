@@ -3,7 +3,9 @@ local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local RechargeFeedbackLayer = class("RechargeFeedbackLayer",CustomBaseView);
 local FeedbackHelper = requireForGameLuaFile("FeedbackHelper")
 function RechargeFeedbackLayer:ctor()
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeFeedbackLayerCCS.csb"));
+    -- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeFeedbackLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("RechargeFeedbackLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");                                                                                                
     self:initView()

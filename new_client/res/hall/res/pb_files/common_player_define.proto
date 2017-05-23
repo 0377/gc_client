@@ -1,5 +1,5 @@
 
-©
+ª
 common_player_define.proto"’
 GameClientRoomListCfg
 game_id (RgameId(
@@ -25,15 +25,15 @@ cell_money (R	cellMoney
 header_icon	 (:0R
 headerIcon*
 slotma_addition
- (:0RslotmaAddition"æ
+ (:0RslotmaAddition"ç
 PlayerVisualInfo
 chair_id (RchairId
 guid (Rguid
 account (	Raccount
 nickname (	Rnickname
 level (:1Rlevel
-money (:0Rmoney"
-header_icon (:0R
+money (:0Rmoney#
+header_icon (:-1R
 headerIcon
 ip_area (	RipArea">
 ItemInfo

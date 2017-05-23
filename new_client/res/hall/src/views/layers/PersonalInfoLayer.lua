@@ -1,7 +1,9 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView");
 local PersonalInfoLayer = class("PersonalInfoLayerCCS",CustomBaseView)  
 function PersonalInfoLayer:ctor()
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PersonalInfoLayerCCS.csb"));
+    -- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PersonalInfoLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("PersonalInfoLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self:showView()
 	PersonalInfoLayer.super.ctor(self);

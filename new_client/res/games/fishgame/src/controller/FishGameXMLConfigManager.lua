@@ -4,6 +4,15 @@
 -- 游戏对象管理器
 --
 
+NPT_LINE = 0
+NPT_BEZIER = 1
+NPT_CIRCLE = 2
+
+PMT_LINE = 0
+PMT_BEZIER = 1
+PMT_CIRCLE= 2
+PMT_STAY = 3
+
 FishGameXMLConfigManager = class("FishGameXMLConfigManager")
 
 --获取xml数据表
@@ -49,8 +58,513 @@ function FishGameXMLConfigManager:init()
     self:loadFishConfig(FishGameConfig.XML_CONFIG.FISH)
     self:loadBulletConfig(FishGameConfig.XML_CONFIG.BULLET_SET)
     self:loadCannonConfig(FishGameConfig.XML_CONFIG.CANNON_SET)
-    self:loadBoundBoxConfig(FishGameConfig.XML_CONFIG.BOUNDING_BOX)
+--    self:loadBoundBoxConfig(FishGameConfig.XML_CONFIG.BOUNDING_BOX)
+--    self:loadTroop(FishGameConfig.XML_CONFIG.TROOP_SET)
+--    self:loadPath(FishGameConfig.XML_CONFIG.PATH)
+--    self:loadFish(FishGameConfig.XML_CONFIG.FISH)
+--    self:loadFishVisual(FishGameConfig.XML_CONFIG.VISUAL)
 end
+
+function FishGameXMLConfigManager:loadFishVisual(file)
+    local xmlData = GetXmlTable(file)
+    local FishPath = xmlData.VisualSet
+
+    local visulaData = {}
+    for _,v in ipairs(FishPath.Visual) do
+        local data = {
+            id = tonumber(v.Id),
+            typeId = tonumber(v.TypeID),
+            zorder = tonumber(v.ZOrder),
+            live = {},
+            die = {},
+        }
+
+        if #v.Live ~= 0 then
+            for __,vv in ipairs(v.Live) do
+                table.insert(data.live,{
+                    image = vv.Image,
+                    name = vv.Name,
+                    aniType = tonumber(vv.AniType),
+                    scale = tonumber(vv.Scale),
+                    offset = {tonumber(vv.OffestX),tonumber(vv.OffestY)},
+                    direction = tonumber(vv.Direction),
+                })
+            end
+        else
+            table.insert(data.live,{
+                image = v.Live.Image,
+                name = v.Live.Name,
+                aniType = tonumber(v.Live.AniType),
+                scale = tonumber(v.Live.Scale),
+                offset = {tonumber(v.Live.OffestX),tonumber(v.Live.OffestY)},
+                direction = tonumber(v.Live.Direction),
+            })
+        end
+
+        if #v.Die ~= 0 then
+            for __,vv in ipairs(v.Die) do
+                table.insert(data.die,{
+                    image = vv.Image,
+                    name = vv.Name,
+                    aniType = tonumber(vv.AniType),
+                    scale = tonumber(vv.Scale),
+                    offset = {tonumber(vv.OffestX),tonumber(vv.OffestY)},
+                    direction = tonumber(vv.Direction),
+                })
+            end
+        else
+            table.insert(data.die,{
+                image = v.Die.Image,
+                name = v.Die.Name,
+                aniType = tonumber(v.Die.AniType),
+                scale = tonumber(v.Die.Scale),
+                offset = {tonumber(v.Die.OffestX),tonumber(v.Live.OffestY)},
+                direction = tonumber(v.Die.Direction),
+            })
+        end
+
+
+        visulaData[data.id] = data
+    end
+
+    io.writefile("jaye_test.text", sz_T2S(visulaData), "w+")
+
+end
+
+function FishGameXMLConfigManager:loadFish(file)
+    local xmlData = GetXmlTable(file)
+    local FishPath = xmlData.FishSet
+
+    local aaData = {}
+    for _,v in ipairs(FishPath.Fish) do
+        dump(v)
+        local fish = {
+            boundingBox = tonumber(v.BoundingBox),
+            broadCast = tonumber(v.BroadCast),
+            lockLvl = tonumber(v.LockLevel),
+            name = v.Name,
+            particle = v.Particle,
+            probability = tonumber(v.Probability),
+            shakeScreen = v.ShakeScreen == "true",
+            showBingo = v.ShowBingo == "true",
+            speed = tonumber(v.Speed),
+            typeId = tonumber(v.TypeID),
+            visualId = tonumber(v.VisualID),
+            effect = {},
+            buff = {},
+
+        }
+        -- effect
+        if #v.Effect ~= 0 then
+            for __,vv in ipairs(v.Effect) do
+                local effect = {
+                    typeId = tonumber(vv.TypeID),
+                    data = {}
+                }
+                for i=1,10 do
+                    if vv["Param" .. i] then
+                        table.insert(effect.data,tonumber(vv["Param" .. i]))
+                    end
+                end
+                table.insert(fish.effect,effect)
+            end
+        else
+            local effect = {
+                typeId = tonumber(v.Effect.TypeID),
+                data = {}
+            }
+            for i=1,10 do
+                if v.Effect["Param" .. i] then
+                    table.insert(effect.data,tonumber(v.Effect["Param" .. i]))
+                end
+            end
+
+            table.insert(fish.effect,effect)
+        end
+
+        -- buff
+        if v.Buffer then
+            if #v.Buffer ~= 0 then
+                for __,vv in ipairs(v.Buffer) do
+                    local effect = {
+                        typeId = tonumber(vv.TypeID),
+                        param = tonumber(vv.Param),
+                        life = tonumber(vv.Life),
+                    }
+                    table.insert(fish.buff,effect)
+                end
+            else
+                local effect = {
+                    typeId = tonumber(v.Buffer.TypeID),
+                    param = tonumber(v.Buffer.Param),
+                    life = tonumber(v.Buffer.Life),
+                }
+
+
+                table.insert(fish.buff,effect)
+            end
+        end
+
+        aaData[fish.typeId] = fish
+    end
+
+    io.writefile("jaye_test.text", sz_T2S(aaData), "w+")
+
+end
+
+function sz_T2S(_t)
+    local szRet = "{"
+    function doT2S(_i, _v)
+        if "number" == type(_i) then
+            szRet = szRet .. "[" .. _i .. "] = "
+--            szRet = szRet .. "" .. _i .. " = "
+            if "number" == type(_v) then
+                szRet = szRet .. _v .. ","
+            elseif "string" == type(_v) then
+                szRet = szRet .. '"' .. _v .. '"' .. ","
+            elseif "table" == type(_v) then
+                szRet = szRet .. sz_T2S(_v) .. ","
+            else
+                szRet = szRet .. "nil,"
+            end
+        elseif "string" == type(_i) then
+--            szRet = szRet .. '["' .. _i .. '"] = '
+            szRet = szRet .. '' .. _i .. ' = '
+            if "number" == type(_v) then
+                szRet = szRet .. _v .. ","
+            elseif "string" == type(_v) then
+                szRet = szRet .. '"' .. _v .. '"' .. ","
+            elseif "table" == type(_v) then
+                szRet = szRet .. sz_T2S(_v) .. ","
+            else
+                szRet = szRet .. "nil,"
+            end
+        end
+    end
+    table.foreach(_t, doT2S)
+    szRet = szRet .. "}"
+    return szRet
+end
+
+
+
+function FishGameXMLConfigManager:loadTroop(file)
+    local xmlData = GetXmlTable(file)
+    local FishPath = xmlData.Path
+--dump(FishPath)
+
+
+    local config = {}
+
+    for _,v in ipairs(FishPath) do
+        local data = {
+            id = tonumber(v.id),
+            type = tonumber(v.Type),
+            next = tonumber(v.Next),
+            delay = tonumber(v.Delay),
+            count = 4,
+            position = {}
+        }
+
+        for __,vv in ipairs(v.Position) do
+            local dd = {}
+            dd[1] = tonumber(vv.x)
+            dd[2] = tonumber(vv.y)
+
+            table.insert(data.position,dd)
+        end
+
+        if data.type == NPT_LINE then
+            data.count = 2
+        elseif data.type == NPT_BEZIER then
+            if data.position[4][1] == 0 and data.position[4][2] == 0 then
+                data.count = 3
+            end
+        end
+
+        config[data.id] = data
+
+    end
+
+
+    local pathMap = {}
+
+    for k,v in pairs(config) do
+        local next = k
+
+        local hhh = {}
+        repeat
+            local data = config[k]
+
+            local ttt ={
+                type = v.type,
+                count = v.count,
+                delay = v.delay,
+                position = v.position,
+
+            }
+
+            table.insert(hhh,ConvertPathPoint(ttt))
+
+        until next ~= 0
+
+
+        pathMap[k] = createPathData(hhh)
+    end
+
+
+
+
+    io.writefile("jaye_test.text", sz_T2S(pathMap), "w+")
+end
+
+function FishGameXMLConfigManager:loadPath(file)
+    local xmlData = GetXmlTable(file)
+    local FishPath = xmlData.FishPath
+
+--    dump(FishPath)
+
+    local config = {}
+
+    for _,v in ipairs(FishPath.Path) do
+        local data = {
+            type = tonumber(v.Type),
+            next = tonumber(v.Next),
+            delay = tonumber(v.Delay),
+            count = 4,
+            position = {}
+        }
+
+        if data.type == NPT_LINE then
+            data.count = 2
+        elseif data.type == NPT_BEZIER then
+            data.count = 3
+        end
+
+
+        for __,vv in ipairs(v.Position) do
+            local dd = {}
+            dd[1] = tonumber(vv.x)
+            dd[2] = tonumber(vv.y)
+
+            table.insert(data.position,dd)
+        end
+
+        table.insert(config,data)
+    end
+
+    local realData = {}
+    local id = 0
+    for _,v in ipairs(config) do
+        for x=0,1 do
+            for y=0,1 do
+                for xy=0,1 do
+                    for _not=0,1 do
+
+
+
+--                        realData[id] = ConvertPathPoint(v,x == 1,y == 1,xy == 1,_not == 1)
+                        realData[id] = createPathData({ConvertPathPoint(v,x == 1,y == 1,xy == 1,_not == 1)})
+                        id = id + 1
+                    end
+                end
+            end
+
+        end
+    end
+
+
+    io.writefile("jaye_test.text", sz_T2S(realData), "w+")
+end
+
+function createPathData(path)
+    local duration = 0
+    local data = {
+    }
+
+    for _,v in ipairs(path) do
+        if v.type == NPT_LINE then
+            local distance = game.fishgame2d.MathAide:CalcDistance(v.position[1][1],v.position[1][2],v.position[2][1],v.position[2][2])
+            distance = math.round(distance)
+            local ele = {
+                type = PMT_LINE,
+                position = v.position,
+                count = v.count,
+                duration = distance,
+                start_time = duration,
+                end_time = 0,
+            }
+            duration = duration + distance
+            ele.end_time = duration
+
+            table.insert(data,ele)
+
+            if v.delay > 0 then
+                local tempDir = game.fishgame2d.MathAide:CalcAngle(v.position[1][1],v.position[1][2],v.position[2][1],v.position[2][2]);
+                tempDir = tempDir + math.pi / 2;
+
+                local ele = {
+                    type = PMT_STAY,
+                    position = {{v.position[1][1],v.position[1][2]}},
+                    count = 1,
+                    direction = tempDir,
+                    duration = v.delay,
+                    start_time = duration,
+                    end_time = 0,
+                }
+                duration = duration + v.delay
+                ele.end_time = duration
+
+                table.insert(data,ele)
+            end
+
+        elseif v.type == NPT_BEZIER then
+            local ele = {
+                type = PMT_BEZIER,
+                position = v.position,
+                count = v.count,
+                duration = 2000,
+                start_time = duration,
+                end_time = 0,
+            }
+            duration = duration + 2000
+            ele.end_time = duration
+
+            table.insert(data,ele)
+
+            if v.delay > 0 then
+                local tempDir = game.fishgame2d.MathAide:CalcAngle(v.xPos[0], v.yPos[0], v.xPos[1], v.yPos[1]);
+                tempDir = tempDir + math.pi  / 2;
+
+                local ele = {
+                    type = PMT_STAY,
+                    position = {{v.position[1][1],v.position[1][2]}},
+                    count = 1,
+                    direction = tempDir,
+                    duration = v.delay,
+                    start_time = duration,
+                    end_time = 0,
+                }
+                duration = duration + v.delay
+                ele.end_time = duration
+
+                table.insert(data,ele)
+            end
+        elseif v.type == NPT_CIRCLE then
+            local nCount = v.position[2][1] * math.abs(v.position[3][2]);
+            nCount = math.round(nCount)
+
+            local ele = {
+                type = PMT_CIRCLE,
+                position = v.position,
+                count = v.count,
+                duration = nCount,
+                start_time = duration,
+                end_time = 0,
+            }
+            duration = duration + nCount
+            ele.end_time = duration
+
+            table.insert(data,ele)
+
+            if v.delay > 0 then
+                local tempDir = game.fishgame2d.MathAide:CalcAngle(v.xPos[0], v.yPos[0], v.xPos[1], v.yPos[1]);
+                tempDir = tempDir + math.pi  / 2;
+
+                local ele = {
+                    type = PMT_STAY,
+                    position = {{v.position[1][1],v.position[1][2]}},
+                    count = 1,
+                    direction = tempDir,
+                    duration = v.delay,
+                    start_time = duration,
+                    end_time = 0,
+                }
+                duration = duration + v.delay
+                ele.end_time = duration
+
+                table.insert(data,ele)
+            end
+        end
+    end
+
+    return {
+        duration = duration,
+        data = data,
+    }
+end
+
+function ConvertPathPoint(data,xMirror,yMirror,xyMirror,Not)
+    local v = clone(data)
+
+
+
+    if xMirror then
+        if v.type == NPT_CIRCLE then
+            v.position[1][1] = 1.0 - v.position[1][1]
+            v.position[3][1] = math.pi - v.position[3][1];
+            v.position[3][2] = -v.position[3][2];
+        else
+            for i=1, v.count do
+                v.position[i][1] = 1.0 - v.position[i][1]
+            end
+        end
+    end
+
+    if yMirror then
+        if v.type == NPT_CIRCLE then
+            v.position[1][2] = 1.0 - v.position[1][2]
+            v.position[3][1] = 2 * math.pi - v.position[3][1];
+            v.position[3][2] = -v.position[3][2];
+        else
+            for i=1, v.count do
+                v.position[i][2] = 1.0 - v.position[i][2]
+            end
+        end
+    end
+
+    if yMirror then
+        if v.type == NPT_CIRCLE then
+            local t = v.position[1][1]
+            v.position[1][1] = 1.0 - v.position[1][2]
+            v.position[1][2] = 1.0 - t
+            v.position[3][1] = v.position[3][1] + math.pi / 2
+        else
+            for i=1, v.count do
+                local t = v.position[i][1]
+                v.position[i][1] = v.position[i][2]
+                v.position[i][2] = t
+            end
+        end
+    end
+
+    if yMirror then
+        if v.type == NPT_CIRCLE then
+
+            v.position[3][1] = v.position[3][1] + v.position[3][2]
+            v.position[3][2] = -v.position[3][2]
+        else
+            for i=1, v.count do
+                local t = v.position[i][1]
+                v.position[i][1] = v.position[v.count - i + 1][1]
+                v.position[v.count - i + 1][1] = t
+
+
+                local t = v.position[i][2]
+                v.position[i][2] = v.position[v.count - i + 1][2]
+                v.position[v.count - i + 1][2] = t
+            end
+        end
+    end
+
+    for _,vv in ipairs(v.position) do
+        vv[1] = math.round(vv[1] * display.width)
+        vv[2] = math.round(vv[2] * display.height)
+    end
+
+    return v
+end
+
 
 -- 加载系统配置
 function  FishGameXMLConfigManager:loadSystemConfig(file)
@@ -347,10 +861,12 @@ function FishGameXMLConfigManager:loadBoundBoxConfig(file)
 
         self._boundBoxMap[boubx.nID] = boubx
     end
+
+    io.writefile("jaye_test.text", sz_T2S(self._boundBoxMap), "w+")
+
 end
 
 function FishGameXMLConfigManager:getCannonPosition(chairID)
-    print("FishGameXMLConfigManager:getCannonPosition : ChairID: "..chairID)
     local v = self._cannonPosVector[chairID]
     return v.x * self._screenWidth, self._screenHeight * v.y
 end

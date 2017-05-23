@@ -27,7 +27,13 @@ backstageIdMap = {"frame_res.zip": "1",
                   "brnngame_res.zip": "5",
                   "brnngame_src.zip": "6",
                   "lhjgame_res.zip": "7",
-                  "lhjgame_src.zip": "8"}
+                  "lhjgame_src.zip": "8",
+                  "dzpkgame_res.zip": "9",
+                  "dzpkgame_src.zip": "10",
+                  "shgame_res.zip": "11",
+                  "shgame_src.zip": "12",
+                  "qznngame_res.zip": "13",
+                  "qznngame_src.zip": "14"}
 
 from Helper import Helper
 #删除文件夹

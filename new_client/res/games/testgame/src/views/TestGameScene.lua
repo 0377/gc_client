@@ -1,9 +1,8 @@
 local SubGameBaseScene = requireForGameLuaFile("SubGameBaseScene")
 local TestGameScene = class("TestGameScene",SubGameBaseScene);
 function TestGameScene:ctor()
-	self.rootPath = TestGameManager:getInstance():getPackageRootPath();	
-	self.csbRootPath = self.rootPath.."/res/csb/"
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename(self.csbRootPath.."TestGameLayerCCS.csb");
+	self.rootPath = TestGameManager:getInstance():getPackageRootPath();
+	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("TestGameLayerCCS.csb");
     self.csNode = cc.CSLoader:createNode(csNodePath);
     self:addChild(self.csNode);
     local exitBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "exitBtn"), "ccui.Button");

@@ -12,29 +12,38 @@
         
 --------------------------------
 -- 
--- @function [parent=#Fish] GetVisualId 
+-- @function [parent=#Fish] setContentNode 
 -- @param self
--- @return int#int ret (return value: int)
+-- @param #cc.Node 
+-- @param #cc.Node 
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
 -- @function [parent=#Fish] SetFishType 
 -- @param self
 -- @param #int i
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
 -- @function [parent=#Fish] SetLockLevel 
 -- @param self
 -- @param #int n
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
 -- @function [parent=#Fish] GetMaxRadio 
 -- @param self
 -- @return int#int ret (return value: int)
+        
+--------------------------------
+-- 
+-- @function [parent=#Fish] setDebugNode 
+-- @param self
+-- @param #cc.Node 
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
@@ -50,6 +59,14 @@
         
 --------------------------------
 -- 
+-- @function [parent=#Fish] setPosition 
+-- @param self
+-- @param #float x
+-- @param #float y
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
+        
+--------------------------------
+-- 
 -- @function [parent=#Fish] OnUpdate 
 -- @param self
 -- @param #float fdt
@@ -58,23 +75,38 @@
         
 --------------------------------
 -- 
--- @function [parent=#Fish] SetVisualId 
--- @param self
--- @param #int id
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
-        
---------------------------------
--- 
--- @function [parent=#Fish] GetRefershID 
+-- @function [parent=#Fish] getRefershId 
 -- @param self
 -- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
--- @function [parent=#Fish] SetRefershID 
+-- @function [parent=#Fish] setRefershId 
 -- @param self
 -- @param #int i
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
+        
+--------------------------------
+-- 
+-- @function [parent=#Fish] getRotation 
+-- @param self
+-- @return float#float ret (return value: float)
+        
+--------------------------------
+-- 
+-- @function [parent=#Fish] addBoundingBox 
+-- @param self
+-- @param #float radio
+-- @param #float x
+-- @param #float y
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
+        
+--------------------------------
+-- 
+-- @function [parent=#Fish] setRotation 
+-- @param self
+-- @param #float rotation
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
@@ -87,25 +119,31 @@
 -- @function [parent=#Fish] SetGoldMul 
 -- @param self
 -- @param #int n
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
 -- @function [parent=#Fish] OnHit 
 -- @param self
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
 -- @function [parent=#Fish] SetBoundingBox 
 -- @param self
 -- @param #int 
--- @return fishgame2d::Fish#fishgame2d::Fish self (return value: game.fishgame2d::Fish)
+-- @return Fish#Fish self (return value: game.fishgame2d.Fish)
         
 --------------------------------
 -- 
--- @function [parent=#Fish] Create 
+-- @function [parent=#Fish] getPosition 
 -- @param self
--- @return fishgame2d::Fish#fishgame2d::Fish ret (return value: game.fishgame2d::Fish)
+-- @return vec2_table#vec2_table ret (return value: vec2_table)
+        
+--------------------------------
+-- 
+-- @function [parent=#Fish] create 
+-- @param self
+-- @return Fish#Fish ret (return value: game.fishgame2d.Fish)
         
 return nil

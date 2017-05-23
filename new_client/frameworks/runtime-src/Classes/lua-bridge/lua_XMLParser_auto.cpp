@@ -254,17 +254,16 @@ TOLUA_API int register_all_XMLParser(lua_State* tolua_S)
 {
 	tolua_open(tolua_S);
 	
-	//
+    //
 	//tolua_module(tolua_S,"myLua",0);
 	//tolua_beginmodule(tolua_S,"myLua");
 	//
     tolua_module(tolua_S,"myLua",0);
-	tolua_beginmodule(tolua_S,"myLua");
+    tolua_beginmodule(tolua_S,"myLua");
 
 	lua_register_XMLParser_XMLParser(tolua_S);
 
     tolua_endmodule(tolua_S);
-    
 	return 1;
 }
 

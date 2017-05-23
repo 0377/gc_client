@@ -1,150 +1,190 @@
 {
-	"client_info": {
-		"channel": "new_baobo",
-		"version": "1.0.0",
-		"is_must_update": "false",
-		"server_urls": ["http:\/\/www.bestplay360.com:8080\/api\/index\/index"],
-		"update_url": "http:\/\/www.bestplay360.com\/test\/hall.zip"
-	},
-	"hall_info": {
-		"addr": ["www.bestplay360.com#7788"],
-		"config": {
-			"hall_ui_other_btns_config": {
-				"btn_kaifu": true,
-				"more_game_back_btn": true,
-				"more_game_btn": true
-			},
-			"pay_url": {
-				"web_create_order": "http:\/\/www.bestplay360.com:8080\/api\/pay\/store",
-				"ios_query_order": "http:\/\/www.bestplay360.com:8080\/api\/apple\/apple_pay",
-				"ios_create_order": "http:\/\/www.bestplay360.com:8080\/api\/apple\/store",
-				"web_query_order": "http:\/\/www.bestplay360.com:8080\/api\/pay\/show"
-			},
-			"gold_to_money_ratio": 100,
-			"personal_center_btns": [{
-				"account_bind_view_btn": true
-			}, {
-				"person_info_view_btn": true
-			}, {
-				"alipay_bind_view_btn": true
-			}],
-			"hall_ui_btns_config": [{
-				"btn_account": true
-			}, {
-				"bank_center_btn": true
-			}, {
-				"btn_exchange": true
-			}, {
-				"btn_message": true
-			}, {
-				"btn_feedback": true
-			}, {
-				"btn_custom_service": true
-			}, {
-				"setting_btn": true
-			}, {
-				"btn_notice": true
-			}],
-			"feedback_list_url": "http:\/\/www.bestplay360.com:8080\/api\/feedback\/messageList",
-			"custom_service_url": "http:\/\/www.bestplay360.com",
-			"exchange_multiple": 50,
-			"recharge_types": {
-				"weixin": true,
-				"zfb": true,
-				"iospay": false
-			},
-			"exchange_min_remain_money": 6,
-			"agents_zhaoshang": {
-				"qq": [123456, 123456, 123456, 123456],
-				"weixin": ["weixin_1", "weixin_1", "weixin_1"]
-			},
-			"agents_info": [{
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商1"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商2"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商3"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商4"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商5"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商6"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商7"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商8"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商9"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商10"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商11"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商12"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商13"
-			}, {
-				"qq": "63864124",
-				"zfb": "zfb_1",
-				"phone": "13666666666",
-				"weixin": "agents_1",
-				"name": "代理商14"
-			}],
-			"feedback_login_url": "http:\/\/www.bestplay360.com:8080\/api\/feedback\/loginInit",
-			"feedback_create_url": "http:\/\/www.bestplay360.com:8080\/api\/feedback\/create"
-		}
-	}
+    "client_info": {
+        "channel": "1",
+        "version": "1.0.0",
+        "is_must_update": "false",
+        "server_urls": [
+            "http:\/\/14.29.123.144:8080\/api\/index\/index"
+        ],
+        "update_url": "http:\/\/192.168.7.32\/test\/hall.zip"
+    },
+    "hall_info": {
+        "addr": ["14.29.123.142#7788"],
+        "config": {
+            "hall_ui_other_btns_config": {
+                "btn_kaifu": true,
+                "more_game_back_btn": true,
+                "more_game_btn": true
+            },
+            "pay_url": {
+                "web_create_order": "http:\/\/119.23.142.36:8080\/api\/pay\/store",
+                "ios_query_order": "http:\/\/119.23.142.36:8080\/api\/apple\/apple_pay",
+                "ios_create_order": "http:\/\/119.23.142.36:8080\/api\/apple\/store",
+                "web_query_order": "http:\/\/119.23.142.36:8080\/api\/pay\/show"
+            },
+            "gold_to_money_ratio": 100,
+            "personal_center_btns": [
+                {
+                    "account_bind_view_btn": true
+                },
+                {
+                    "person_info_view_btn": true
+                },
+                {
+                    "alipay_bind_view_btn": true
+                }
+            ],
+            "hall_ui_btns_config": [
+                {
+                    "btn_account": true
+                },
+                {
+                    "bank_center_btn": true
+                },
+                {
+                    "btn_exchange": true
+                },
+                {
+                    "btn_message": true
+                },
+                {
+                    "btn_feedback": true
+                },
+                {
+                    "btn_custom_service": true
+                },
+                {
+                    "setting_btn": true
+                },
+                {
+                    "btn_notice": true
+                }
+            ],
+            "feedback_list_url": "http:\/\/14.29.123.144:8080\/api\/feedback\/messageList",
+            "custom_service_url": "http:\/\/baidu.com",
+            "exchange_multiple": 50,
+            "recharge_types": {
+                "weixin": true,
+                "zfb": true,
+                "iospay": false,
+                "transferpay": true
+            },
+            "exchange_min_remain_money": 6,
+            "agents_zhaoshang": {
+                "qq": [
+                    123456,
+                    123456,
+                    123456,
+                    123456
+                ],
+                "weixin": [
+                    "weixin_1",
+                    "weixin_1",
+                    "weixin_1"
+                ]
+            },
+            "agents_info": [
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商1"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商2"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商3"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商4"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商5"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商6"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商7"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商8"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商9"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商10"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商11"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商12"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商13"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商14"
+                }
+            ],
+            "feedback_login_url": "http:\/\/14.29.123.144:8080\/api\/feedback\/loginInit",
+            "feedback_create_url": "http:\/\/14.29.123.144:8080\/api\/feedback\/create"
+        }
+    }
 }

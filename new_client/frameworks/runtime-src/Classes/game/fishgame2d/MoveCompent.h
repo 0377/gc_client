@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "./common.h"
+#include "PathManager.h"
 
 NS_FISHGAME2D_BEGIN
 
@@ -15,7 +16,6 @@ enum MoveCompentType
 	EMCT_TARGET,
 };
 
-struct PathData;
 class MyObject;
 class MoveCompent : public cocos2d::Ref
 {
@@ -26,15 +26,15 @@ public:
 	virtual ~MoveCompent(){}
 
 
-	void SetSpeed(float sp){ m_fSpeed = sp; }
-	float GetSpeed(){ return m_fSpeed; }
+	void setSpeed(float sp){ m_fSpeed = sp; }
+	float getSpeed(){ return m_fSpeed; }
 
-	void SetPause(bool bPause = true){ m_bPause = bPause; }
-	bool IsPaused(){ return m_bPause; }
+	void setPause(bool bPause = true){ m_bPause = bPause; }
+	bool isPaused(){ return m_bPause; }
 
 
-	void SetPathID(int pid, bool bt = false){ m_nPathID = pid; m_bTroop = bt; }
-	int GetPathID(){ return m_nPathID; }
+	void setPathID(int pid, bool bt = false){ m_nPathID = pid; m_bTroop = bt; }
+	int getPathID(){ return m_nPathID; }
 
 	bool bTroop(){ return m_bTroop; }
 	virtual void InitMove() = 0;
@@ -42,8 +42,8 @@ public:
 	bool IsEndPath(){ return m_bEndPath; }
 	void SetEndPath(bool be){ m_bEndPath = be; }
 
-	const cocos2d::Point& GetOffest(){ return m_Offest; }
-	void SetOffest(cocos2d::Point& pt){ m_Offest = pt; }
+	const cocos2d::Point& getOffest(){ return m_Offest; }
+	void setOffest(cocos2d::Point& pt){ m_Offest = pt; }
 
 
 	void SetDelay(float f){ m_fDelay = f; }
@@ -97,6 +97,12 @@ public:
 	static MoveByPath* create();
 	virtual void OnUpdate(float dt);
 
+	void setDuration(int);
+	void addPathMoveData(int nType, float fDirection, int nDuration, int nStartTime, int nEndTime,
+		int nPointCount, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4);
+
+
+
 	virtual void InitMove();
 	virtual void OnDetach();
 protected:
@@ -104,7 +110,7 @@ protected:
 	int					m_fDuration;
 	int					m_LastElaspe;
 
-	PathData*			m_pPathData;
+	PathData			m_pPathData;
 
 };
 

@@ -27,6 +27,6 @@
 -- @param #float outX
 -- @param #float outY
 -- @param #float outDir
--- @return fishgame2d::FishUtils#fishgame2d::FishUtils self (return value: game.fishgame2d::FishUtils)
+-- @return FishUtils#FishUtils self (return value: game.fishgame2d.FishUtils)
         
 return nil

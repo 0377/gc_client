@@ -36,6 +36,12 @@ void NetworkManager::sendTCPMsg(int connectionID, int msgID, const std::string &
 {
 	tcpManager->sendTCPMsg(connectionID, msgID, msgPbBufferStr);
 }
+void NetworkManager::sendTCPMSgWithLength(int connectionID, int msgID, const char *pbData, size_t length)
+{
+	std::string msgPbBufferStr;
+	msgPbBufferStr.assign((char *)pbData, length);
+	tcpManager->sendTCPMsg(connectionID, msgID, (const std::string)msgPbBufferStr);
+}
 int NetworkManager::getTCPConnectionStatus(int connectionID)
 {
 	int status = tcpManager->getTCPConnectionStatus(connectionID);
@@ -116,7 +122,7 @@ void NetworkManager::registerNotification()
 
 		}
 		else
-		{
+		{	
 			const char* errstr = lua_tostring(luaState, -1);
 			CCLOG("%s:%d(%s)", __FILE__, __LINE__, errstr);
 			lua_pop(luaState, 1);

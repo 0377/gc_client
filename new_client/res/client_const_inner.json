@@ -31,8 +31,6 @@
 			}, {
 				"bank_center_btn": true
 			}, {
-				"btn_exchange": true
-			}, {
 				"btn_message": true
 			}, {
 				"btn_feedback": true
@@ -45,13 +43,11 @@
 			}],
 			"feedback_list_url": "http:\/\/14.29.123.144:8080\/api\/feedback\/messageList",
 			"custom_service_url": "http:\/\/baidu.com",
-			"exchange_multiple": 50,
 			"recharge_types": {
 				"weixin": true,
 				"zfb": true,
 				"iospay": false
 			},
-			"exchange_min_remain_money": 6,
 			"agents_zhaoshang": {
 				"qq": [123456, 123456, 123456, 123456],
 				"weixin": ["weixin_1", "weixin_1", "weixin_1"]

@@ -6,8 +6,12 @@ PersonalCenterLayer.ViewType = {
 	BindAlipayView  = 3
 }
 function PersonalCenterLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PersonalCenterLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PersonalCenterLayerCCS.csb"));
+	local CCSLuaNode =  requireForGameLuaFile("PersonalCenterLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
+
+    ViewManager.initPublicTopInfoLayer(self,"hall_res/account/bb_grxx_bt.png")
     self.subViewParentNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "sub_view_parent"),"ccui.Widget");
 	local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"close_btn"),"ccui.Widget");
 	closeBtn:addClickEventListener(function ()
@@ -25,11 +29,11 @@ function PersonalCenterLayer:ctor()
 		 GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		self:showViewWithType(PersonalCenterLayer.ViewType.PersonInfoView)
 	end)
-	self.alipayBindBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alipay_bind_view_btn"), "ccui.Button");
-	self.alipayBindBtn:addClickEventListener(function()
-		 GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-		self:showViewWithType(PersonalCenterLayer.ViewType.BindAlipayView)
-	end)
+	-- self.alipayBindBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alipay_bind_view_btn"), "ccui.Button");
+	-- self.alipayBindBtn:addClickEventListener(function()
+	-- 	 GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+	-- 	self:showViewWithType(PersonalCenterLayer.ViewType.BindAlipayView)
+	-- end)
 
 	--正式账号不显示绑定账号按钮
 	if GameManager:getInstance():getHallManager():getPlayerInfo():getIsGuest() == false then
@@ -37,7 +41,7 @@ function PersonalCenterLayer:ctor()
 	end
 
 	if CustomHelper.isExaminState() then
-		self.alipayBindBtn:setVisible(false)
+		-- self.alipayBindBtn:setVisible(false)
 	end
 
 	PersonalCenterLayer.super.ctor(self);
@@ -53,6 +57,7 @@ function PersonalCenterLayer:showViewWithType(viewType)
 			viewType = PersonalCenterLayer.ViewType.PersonInfoView
 		end
 		self.accountBindBtn:setVisible(false)
+
 		-- if self.accountBindBtn ~= nil then
 		-- 	--todo
 		-- 	self.accountBindBtn:removeFromParent();
@@ -71,7 +76,7 @@ function PersonalCenterLayer:showViewWithType(viewType)
 	end
 	self.viewType = viewType;
 	self.personInfoBtn:setEnabled(true);
-	self.alipayBindBtn:setEnabled(true);
+	-- self.alipayBindBtn:setEnabled(true);
 	local subViews = self.subViewParentNode:getChildren();
 	for i,subView in ipairs(subViews) do
 		subView:setVisible(false);
@@ -104,7 +109,7 @@ function PersonalCenterLayer:showViewWithType(viewType)
 			self.alipayBindLayer = AlipayBindLayer:create();
 			self.subViewParentNode:addChild(self.alipayBindLayer)
 		end
-		self.alipayBindBtn:setEnabled(false);
+		-- self.alipayBindBtn:setEnabled(false);
 		self.alipayBindLayer:setVisible(true);
 	end
 	--读取按钮是否显示按钮
@@ -139,13 +144,13 @@ function PersonalCenterLayer:showViewWithType(viewType)
 		tempBtn:retain();
 		tempBtn:removeFromParent();
 		btnsParentNode:addChild(tempBtn);
-		tempBtn:setAnchorPoint(cc.p(0.5,0.5));
+		tempBtn:setAnchorPoint(cc.p(0,0.5));
 		local posY = btnsParentNode:getContentSize().height + tempBtn:getContentSize().height/2
 		if i ~= 1 then
 			--todo
 			posY = posY + btnSpace
 		end
-		tempBtn:setPosition(cc.p(btnsParentNode:getContentSize().width/2,posY))
+		tempBtn:setPosition(cc.p(0,posY))
 		btnsParentNode:setContentSize(cc.size(btnsParentNode:getContentSize().width,posY + tempBtn:getContentSize().height/2));			
 		tempBtn:release()
 	end

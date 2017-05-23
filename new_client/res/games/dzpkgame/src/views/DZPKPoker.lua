@@ -28,7 +28,8 @@ end
 
 function DZPKPoker:getCardPath(issmall)
 	if issmall == true then
-		return "public/poker/smallpoker_"..self._num..".png"
+		return "tt.png"
+		--return "public/poker/smallpoker_"..self._num..".png"
 	else
 		local color = math.floor(self._num/16)
         local pointx = math.floor(self._num%16)

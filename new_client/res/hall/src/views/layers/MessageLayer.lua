@@ -39,8 +39,8 @@ end
 
 function MessageLayer:onCreateContent()
     local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("MessageLayer.csb");
-    self._ui = cc.CSLoader:createNode(csNodePath):addTo(self)
-
+    local CCSLuaNode =  requireForGameLuaFile("MessageLayerCCS")
+    self._ui = CCSLuaNode:create().root:addTo(self);
     local background = self._ui:getChildByName("background")
     background:setTouchEnabled(true)
     self._background_Pos = { background:getPosition() }

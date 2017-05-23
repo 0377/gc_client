@@ -61,15 +61,18 @@ function FeedbackLayerNew:_initData()
 end
 
 function FeedbackLayerNew:onCreateContent()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("FeedbackLayerNew.csb")
-    self._ui = cc.CSLoader:createNode(csNodePath):addTo(self)
+    local CCSLuaNode =  requireForGameLuaFile("FeedbackLayerNewCCS")
+    self.csNode = CCSLuaNode:create().root;
+    self:addChild(self.csNode)
 
-    local background = self._ui:getChildByName("background")
+    local background = self.csNode:getChildByName("background")
     background:setTouchEnabled(true)
     self.background = background
 
-    local btn_close = background:getChildByName("btn_close")
-    btn_close:addClickEventListener(handler(self, self._onBtnClicked_close)) 
+    ViewManager.initPublicTopInfoLayer(self, "hall_res/customer_service/bb_kf_bt.png")
+
+    -- local btn_close = background:getChildByName("btn_close")
+    -- btn_close:addClickEventListener(handler(self, self._onBtnClicked_close)) 
 
     -- 提交反馈 --
     local panel_submit = background:getChildByName("panel_submit")
@@ -133,11 +136,13 @@ end
 function FeedbackLayerNew:_onBtnTouched_submitFeedback(sender, eventType)
     if eventType == ccui.TouchEventType.began then
         sender:getChildByName("Image_Submit_Normal"):setVisible(false)
-        sender:getChildByName("Image_Submit_Selected"):setVisible(true)
+        -- sender:getChildByName("Image_Submit_Selected"):setVisible(true)
+        sender:getChildByName("Image_Submit_Selected"):setVisible(false)
 
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
-        sender:getChildByName("Image_Submit_Normal"):setVisible(true)
+        -- sender:getChildByName("Image_Submit_Normal"):setVisible(true)
+        sender:getChildByName("Image_Submit_Normal"):setVisible(false)
         sender:getChildByName("Image_Submit_Selected"):setVisible(false)
 
         local content = self.editboxFeedback:getText()
@@ -168,6 +173,10 @@ function FeedbackLayerNew:_onEventScroll(sender, type)
     local x, y = container:getPosition()
 
     local viewRect = cc.rect(-x, -y, viewSize.width, viewSize.height)
+    if self._cellData == nil or table.nums(self._cellData) == 0 then
+        --todo
+        return;
+    end
     for k, v in ipairs(self._cellData) do
         local cellRect = v.rect
 
@@ -216,11 +225,11 @@ function FeedbackLayerNew:_onCellAtIndex(data)
             cell.imageHeadBg2:align(display.LEFT_TOP, 0, data.rect.height)
             cell.label_content:align(display.LEFT_TOP, 80 + 20, data.rect.height - 10)
         elseif (self:_getContentTypeByFid(temp["f_id"]) == ContentType.PLAYER) then
-            cell.bg_content:align(display.LEFT_TOP, 20, data.rect.height)
-            cell.imageHead:align(display.LEFT_TOP, 470, data.rect.height)
-            cell.imageHeadBg1:align(display.LEFT_TOP, 470, data.rect.height)
-            cell.imageHeadBg2:align(display.LEFT_TOP, 470, data.rect.height)
-            cell.label_content:align(display.LEFT_TOP, 20 + 10, data.rect.height - 10)
+            cell.bg_content:align(display.LEFT_TOP, 0, data.rect.height)
+            cell.imageHead:align(display.LEFT_TOP, 450, data.rect.height)
+            cell.imageHeadBg1:align(display.LEFT_TOP, 450, data.rect.height)
+            cell.imageHeadBg2:align(display.LEFT_TOP, 450, data.rect.height)
+            cell.label_content:align(display.LEFT_TOP, 0 + 10, data.rect.height - 10)
         end
 
         if (self:_getContentTypeByFid(temp["f_id"]) == ContentType.PLAYER) then
@@ -288,10 +297,10 @@ function FeedbackLayerNew:updateReplay()
 
         local rects = {}
         for k, v in ipairs(data) do
-            local tmpX = 0
+            local tmpX = 0 + 20
             local _height = 0
             if (self:_getContentTypeByFid(v.f_id) == ContentType.PLAYER) then 
-                tmpX = 640
+                tmpX = 640 - 20
                 self.labelTemp:setString(v.content)
                 _height = self.labelTemp:getContentSize().height + 20
             elseif (self:_getContentTypeByFid(v.f_id) == ContentType.SYSTEM) then 

@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local BankDepositLayer = class("BankDepositLayer", CustomBaseView)
 function BankDepositLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("BankDepositLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("BankDepositLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
 	self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.TextAtlas");
@@ -25,7 +26,7 @@ function BankDepositLayer:ctor()
     self.depositNumTF:setInputMode(cc.EDITBOX_INPUT_MODE_NUMERIC)
     self.depositNumTF:setReturnType(cc.KEYBOARD_RETURNTYPE_DONE)
     depositNumEditBoxBogNode:getParent():addChild(self.depositNumTF)
-    	
+
     self.depositNumTF:registerScriptEditBoxHandler(function(eventType)
 
 		if eventType == "changed" then
@@ -48,20 +49,10 @@ function BankDepositLayer:ctor()
 				--MyToastLayer.new(cc.Director:getInstance():getRunningScene(),"金币余额不足，无法添加")
 			end
 			self:showMoneyInfoView();
-
-
 			self:checkBankGold()
 		end
 	end)
-
 	self:resetTempMondAndBank();
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney - self.willDepositValue)
-	moneyStr = string.gsub(moneyStr, "%.", "/")
-	self.moneyText:setString(moneyStr)
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
-	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
-	self.bankText:setString(bankMoneyStr)
-
     self:initView();
 	BankDepositLayer.super.ctor(self);
 end
@@ -83,7 +74,6 @@ function BankDepositLayer:initView()
 		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		self:resetTempMondAndBank();
 		self:showMoneyInfoView();
-
 		self:checkBankGold()
 	end);
 	self.depositBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "deposit_btn"), "ccui.Button");
@@ -97,8 +87,7 @@ end
 
 function BankDepositLayer:checkBankGold()
 	-- body
-
-	local addNumArray = {10,100,1000,10000}
+	local addNumArray = {10,100,500,1000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
 
@@ -110,37 +99,33 @@ function BankDepositLayer:checkBankGold()
 		local m1 = (self.myPlayerInfo:getMoney()/CustomHelper.goldToMoneyRate()-money) - addNumArray[i]
 		--print("m1:"..m1.."money:"..money.."array:",addNumArray[i].."rate:"..CustomHelper.goldToMoneyRate())
 		if m1 >= 0 then
-				tempAddBtn:setEnabled(true)
+			tempAddBtn:setEnabled(true)
 		else
-				tempAddBtn:setEnabled(false)
+			tempAddBtn:setEnabled(false)
 		end
 	end
 
 end
+function BankDepositLayer:showMoneyInfoView()
+	-- local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney());--CustomHelper.moneyShowStyleNone(self.tempMoney - self.willDepositValue)
+	-- moneyStr = string.gsub(moneyStr, "%.", "/")
+	-- self.moneyText:setString(moneyStr)
 
 
+	-- local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
+	-- bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
+	-- self.bankText:setString(bankMoneyStr)
 
+	self.depositNumTF:setText(self.willDepositValue/CustomHelper.goldToMoneyRate())
+	--self.willDepositValueText:setString(CustomHelper.moneyShowStyleNone(self.willDepositValue))
 
+end
 
 
 function BankDepositLayer:resetTempMondAndBank()
 	self.tempMoney = self.myPlayerInfo:getMoney();
 	self.tempBank = self.myPlayerInfo:getBank()
 	self.willDepositValue = 0;
-end
-function BankDepositLayer:showMoneyInfoView()
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney());--CustomHelper.moneyShowStyleNone(self.tempMoney - self.willDepositValue)
-	moneyStr = string.gsub(moneyStr, "%.", "/")
-	self.moneyText:setString(moneyStr)
-
-
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
-	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
-	self.bankText:setString(bankMoneyStr)
-
-	self.depositNumTF:setText(self.willDepositValue/CustomHelper.goldToMoneyRate())
-	--self.willDepositValueText:setString(CustomHelper.moneyShowStyleNone(self.willDepositValue))
-
 end
 function BankDepositLayer:clickOneAddbtn(btn)
 	local addValue = btn.addValue;
@@ -224,11 +209,7 @@ function BankDepositLayer:receiveServerResponseSuccessEvent(event)
 		self:showMoneyInfoView();
 		local resultStr = CustomHelper.moneyShowStyleNone(userInfo.money)
 		MyToastLayer.new(cc.Director:getInstance():getRunningScene(), string.format("成功存入"..resultStr))
-
-
 		self:checkBankGold()
-
-
     elseif msgName == HallMsgManager.MsgName.SC_Gamefinish then --关闭提示框
         --todo
         -- print("12312312311111111111111111111111")

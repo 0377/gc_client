@@ -146,15 +146,15 @@ long EffectKill::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyO
 	// if (!bPretreating)
 	// 	RaiseEvent("AddChain", this, pSelf);
 
-	auto* pMgr = pSelf->GetManager();
+	auto* pMgr = pSelf->getManager();
 	if (pMgr != NULL)
 	{
 		auto ifs = pMgr->BeginFish();
 		while (ifs != pMgr->EndFish())
 		{
 			MyObject* pObj = ifs->second;
-			MoveCompent* pMove = pObj->GetMoveCompent();
-			if (pObj->GetId() != pSelf->GetId() && pMove)
+			MoveCompent* pMove = pObj->getMoveCompent();
+			if (pObj->getId() != pSelf->getId() && pMove)
 			{
 				if (GetParam(0) == 0 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为０时表示杀死全部的鱼
 				{
@@ -164,21 +164,21 @@ long EffectKill::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyO
 				}
 				else if (GetParam(0) == 1 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为１时表示杀死指定范围内的鱼，参数２表示半径
 				{
-					if (MathAide::CalcDistance(pSelf->GetPosition().x, pSelf->GetPosition().y, pObj->GetPosition().x, pObj->GetPosition().y) <= GetParam(1)){
+					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= GetParam(1)){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
 						pObj->ExecuteEffects(pTarget, list, bPretreating);
 					}
 				}
-				else if (GetParam(0) == 2 && pObj->InSideScreen() && pObj->GetMoveCompent()->HasBeginMove())//参数１为２时表示杀死指定类型的鱼，参数２表示指定类型
+				else if (GetParam(0) == 2 && pObj->InSideScreen() && pObj->getMoveCompent()->HasBeginMove())//参数１为２时表示杀死指定类型的鱼，参数２表示指定类型
 				{
-					if (pObj->GetTypeID() == GetParam(1) && ((Fish*)pObj)->GetFishType() == ESFT_NORMAL){
+					if (pObj->getTypeId() == GetParam(1) && ((Fish*)pObj)->GetFishType() == ESFT_NORMAL){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
 						pObj->ExecuteEffects(pTarget, list, bPretreating);
 					}
 				}
 				else if (GetParam(0) == 3)//参数１为３时表示杀死同一批次刷出来的鱼。
 				{
-					if (((Fish*)pObj)->GetRefershID() == ((Fish*)pSelf)->GetRefershID()){
+					if (((Fish*)pObj)->getRefershId() == ((Fish*)pSelf)->getRefershId()){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
 						pObj->ExecuteEffects(pTarget, list, bPretreating);
 					}
@@ -207,7 +207,7 @@ long EffectAddBuffer::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vecto
 
 	// RaiseEvent("AddBuffer", this, pSelf);
 
-	auto* pMgr = pSelf->GetManager();
+	auto* pMgr = pSelf->getManager();
 	if (pMgr != NULL)
 	{
 		auto ifs = pMgr->BeginFish();
@@ -215,7 +215,7 @@ long EffectAddBuffer::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vecto
 		{
 			MyObject* pObj = (MyObject*)ifs->second;
 
-			if (pObj != pSelf && pObj->GetId() != pSelf->GetId() /* && pObj->InSideScreen()*/)
+			if (pObj != pSelf && pObj->getId() != pSelf->getId() /* && pObj->InSideScreen()*/)
 			{
 				if (GetParam(0) == 0)//参数１为０时表示全部的鱼
 				{
@@ -223,12 +223,12 @@ long EffectAddBuffer::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vecto
 				}
 				else if (GetParam(0) == 1)//参数１为１时表示指定范围内的鱼，参数２表示半径
 				{
-					if (MathAide::CalcDistance(pSelf->GetPosition().x, pSelf->GetPosition().y, pObj->GetPosition().x, pObj->GetPosition().y) <= GetParam(1))
+					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= GetParam(1))
 						pObj->AddBuff(GetParam(2), GetParam(3), GetParam(4));
 				}
 				else if (GetParam(0) == 2)//参数１为２时表示指定类型的鱼，参数２表示指定类型
 				{
-					if (pObj->GetTypeID() == GetParam(1))
+					if (pObj->getTypeId() == GetParam(1))
 						pObj->AddBuff(GetParam(2), GetParam(3), GetParam(4));
 				}
 			}

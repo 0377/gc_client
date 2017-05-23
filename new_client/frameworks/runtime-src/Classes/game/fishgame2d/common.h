@@ -52,6 +52,8 @@ struct VisualNode
 	}
 };
 
+
+
 NS_FISHGAME2D_END
 
 #endif

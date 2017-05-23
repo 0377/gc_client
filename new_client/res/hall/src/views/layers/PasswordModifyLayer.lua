@@ -4,7 +4,9 @@ function PasswordModifyLayer:ctor()
     
     print("PasswordModifyLayer------")
 
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PasswordModifyLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("PasswordModifyLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("PasswordModifyLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");
     CustomHelper.addAlertAppearAnim(alertPanel);

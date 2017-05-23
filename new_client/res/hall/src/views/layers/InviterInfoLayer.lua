@@ -5,7 +5,9 @@ local InviterInfoLayer = class("InviterInfoLayer",CustomBaseView)
 function InviterInfoLayer:ctor(inviterInfo,finishedCallback)
 	self.inviterInfo = inviterInfo
 	self.finishedCallback = finishedCallback;
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("InviterInfoLayer.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("InviterInfoLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Widget");
   

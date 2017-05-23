@@ -1,5 +1,5 @@
 
-à
+ÿ
 common_msg_texas.proto"ñ
 UserInfo
 guid (Rguid
@@ -82,11 +82,13 @@ think_time (R	thinkTime!
 chair (Rchair
 money (Rmoney"
 MsgID
-ID˜N"Z
+ID˜N"y
 SC_TexasShowCards
 chair (Rchair
 
-user_cards (R	userCards"
+user_cards (R	userCards
+
+cards_type (R	cardsType"
 MsgID
 ID™N"E
 SC_TexasShowCardsPermission

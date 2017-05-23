@@ -61,7 +61,7 @@ if __name__ == '__main__':
 	channelTo = int(opts.channel_to)
 	for num in range(channelFrom,channelTo+1): #202
 		print("start package channel:" + str(num))
-		opts.appid = "com.wangzhe_studio.client_"+str(num)
+		opts.appid = "com.my_new_game_studio.client_"+str(num)
 		packageInfo += str(num)+"\t"+opts.appid + "\t android" + "\n"
 		opts.packageName = opts.appid + "_" + date +".apk"
 		updateAppName(opts.name);

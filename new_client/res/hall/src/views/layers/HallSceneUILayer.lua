@@ -37,8 +37,9 @@ end
 function HallSceneUILayer:ctor(hallScene)
 	self.hallScene = hallScene;
 	self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("HallSceneCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("HallSceneCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self:addChild(self.csNode);
     --快速开始按钮
 	-- self.exitBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"exitBtn"), "ccui.Button");
@@ -78,6 +79,11 @@ function HallSceneUILayer:onEnter()
 
 	local FeedbackHelper = requireForGameLuaFile("FeedbackHelper")
 	FeedbackHelper.queryFeedbackStatus()
+
+
+	self:_onEvent_refreshMessageReaded()
+
+
 
 end
 
@@ -140,19 +146,18 @@ function HallSceneUILayer:showButtomView()
 	--金币
 	if self.moneyText == nil then
 		--todo
-		self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.Text");
+		self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.TextAtlas");
 	end
 	local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney());
-	-- moneyStr = string.gsub(moneyStr, "%.", "/")
+	moneyStr = string.gsub(moneyStr, "%.", "/")
 	self.moneyText:setString(moneyStr)
 	--银行存款
 	if self.bankMoneyText == nil then
 		--todo
-		self.bankMoneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_money_text"), "ccui.Text");
+		self.bankMoneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_money_text"), "ccui.TextAtlas");
 	end
-	self.bankMoneyText:setFontName("黑体")
 	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
-	-- bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
+	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
 	self.bankMoneyText:setString(bankMoneyStr)
 	--
 end
@@ -171,13 +176,6 @@ function HallSceneUILayer:initBtns()
 		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		ViewManager.enterBankDepositLayer()
 	end);
-
-	--返回大厅游戏按钮
-	local backHallGameBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "more_game_back_btn"), "ccui.Button");
-	backHallGameBtn:setVisible(false);
-	--更多游戏按钮
-	local moreGameBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "more_game_btn"), "ccui.Button");
-	moreGameBtn:setVisible(false);
 	--返回大厅游戏按钮
 	self.rightBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "Button_right"), "ccui.Button");
 	self.rightBtn:addClickEventListener(handler(self,self._handlePageButton))
@@ -243,22 +241,6 @@ function HallSceneUILayer:initBtns()
         ViewManager.enterOneLayerWithClassName("MessageLayer")
     end);
     self.btn_message = btn_message
-
-
-    -- 兑换按钮
-    local btn_exchange = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_exchange"), "ccui.Button");
-    btn_exchange:addClickEventListener(function(sender)
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        --判断是否绑定支付宝
-        local alipayAccount = self.myPlayerInfo:getAlipayAccount();
-    	if alipayAccount ~= nil then
-        	ViewManager.enterExchangeLayer()
-        else
-        	---
-        	ViewManager.alertAccountBindTipLayer()
-        	-- 
-        end
-    end); 
 	  -- 商城按钮
     local btn_store = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_store"), "ccui.Button");
     btn_store:addClickEventListener(function(sender)
@@ -266,16 +248,21 @@ function HallSceneUILayer:initBtns()
         ViewManager.enterStoreLayer();
     end);
 
-    local amartureNode = btn_store:getChildByName("ArmatureNode")
-    amartureNode:init("d_gamehall_anieffects")
-    amartureNode:getAnimation():play("ani_02")
+    local amartureNode = btn_store:getChildByName("eff_99yl_ui_loading")
+    -- amartureNode:init("d_gamehall_anieffects")
+    amartureNode:getAnimation():play("ani_03")
+    -- amartureNode:getAnimation():setMovementEventCallFunc(function(sender, type)
+    --     if type == ccs.MovementEventType.complete then
+    --         print("[HallSceneUILayer] ccs.MovementEventType.complete")
+    --     end
+    -- end)
 	
     --绑定有奖
     self.bindRewardTipBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_kaifu"), "ccui.Button");
 
-    amartureNode = self.bindRewardTipBtn:getChildByName("ArmatureNode")
-    amartureNode:init("d_gamehall_anieffects")
-    amartureNode:getAnimation():play("ani_01")
+    amartureKaiFuNode = self.bindRewardTipBtn:getChildByName("eff_99yl_ui_loading")
+    -- amartureNode:init("d_gamehall_anieffects")
+    amartureKaiFuNode:getAnimation():play("ani_02")
 	
     self.bindRewardTipBtn:addClickEventListener(function()
     	ViewManager.alertAccountBindTipLayer()
@@ -306,7 +293,6 @@ function HallSceneUILayer:initBtns()
 	--苹果审核状态 账户按钮/开户按钮 /兑换按钮不显示
 	if CustomHelper.isExaminState() then
 		accountBtn:setVisible(false)
-		btn_exchange:setVisible(false)
 		self.bindRewardTipBtn:setVisible(false)
 		btn_custom_service:setVisible(false)
 		--隐私条款
@@ -337,15 +323,18 @@ function HallSceneUILayer:showBtnsIsVisibleByConfig()
 				visible = false
 			end
 			local tempBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, btnName), "ccui.Button");
-			if visible then
-				--todo
-				if tempBtn:isVisible() then
+				if tempBtn then
 					--todo
-					table.insert(needShowBtnArray,tempBtn);
-					mainBtnsNum = mainBtnsNum + 1;
+					if visible then
+					--todo
+					if tempBtn:isVisible() then
+						--todo
+						table.insert(needShowBtnArray,tempBtn);
+						mainBtnsNum = mainBtnsNum + 1;
+					end
+				else
+					tempBtn:setVisible(false);
 				end
-			else
-				tempBtn:setVisible(false);
 			end
 		end
 	end
@@ -414,14 +403,14 @@ function HallSceneUILayer:showBtnsIsVisibleByConfig()
 			self.buttomBtnPanel:addChild(tempBtn);
 			tempBtn:setAnchorPoint(cc.p(0.5,0.5));
 
-			local lightSp = display.newSprite("hall_res/hall/bb_dating_diguang.png")
-			lightSp:addTo(tempBtn)
-			lightSp:setPosition(cc.p(tempBtn:getContentSize().width/2,23))
-			local lineSp = display.newSprite("hall_res/hall/bb_dating_shuxian.png")
-			lineSp:addTo(self.buttomBtnPanel)
-			local lineSize = lineSp:getContentSize()
-			local lightSize = lightSp:getContentSize()
-			lineSp:setPosition(cc.p(btnSpace*(i-1),lineSize.height/2))
+			-- local lightSp = display.newSprite("hall_res/hall/bb_dating_diguang.png")
+			-- lightSp:addTo(tempBtn)
+			-- lightSp:setPosition(cc.p(tempBtn:getContentSize().width/2,23))
+			-- local lineSp = display.newSprite("hall_res/hall/bb_dating_shuxian.png")
+			-- lineSp:addTo(self.buttomBtnPanel)
+			-- local lineSize = lineSp:getContentSize()
+			-- local lightSize = lightSp:getContentSize()
+			-- lineSp:setPosition(cc.p(btnSpace*(i-1),lineSize.height/2))
 			
 			local posX = self.buttomBtnPanel:getContentSize().width + tempBtn:getContentSize().width/2
 
@@ -436,7 +425,7 @@ function HallSceneUILayer:showBtnsIsVisibleByConfig()
 	local otherBtnVisibleConfig = CustomHelper.getOneHallGameConfigValueWithKey("hall_ui_other_btns_config") 
 	for btnName,visible in pairs(otherBtnVisibleConfig) do
 		local tempBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, btnName), "ccui.Button");
-		if tempBtn:isVisible() then
+		if tempBtn and tempBtn:isVisible() then
 			--todo
 			tempBtn:setVisible(visible)
 		end
@@ -614,12 +603,12 @@ function HallSceneUILayer:scrollViewDidZoom(view)
 
 end
 function HallSceneUILayer:tableCellTouched(view,cell)
-	print("tableCellTouched...",cell:getIdx())
-	local gamenode = cell:getChildByName("HallGameNode")
-	if gamenode and gamenode.touchGameNode then
+	-- print("tableCellTouched...",cell:getIdx())
+	-- local gamenode = cell:getChildByName("HallGameNode")
+	-- if gamenode and gamenode.touchGameNode then
 
-		gamenode:touchGameNode()
-	end
+	-- 	gamenode:touchGameNode()
+	-- end
 end
 function HallSceneUILayer:cellSizeForTable(view,idx)
 	return self.defaultGameItemNode:getContentSize().width,self.defaultGameItemNode:getContentSize().height
@@ -648,7 +637,19 @@ function HallSceneUILayer:tableCellAtIndex(view,idx)
     end
 	local gamedata = self.gameDatas[idx+1]
 	if gamedata then
-		ritem:showInfoWithOneGameItemNode(gamedata,not view:isTouchEnabled())
+		ritem:showInfoWithOneGameItemNode(gamedata)
+		ritem.selectBtn:addTouchEventListener(
+			function(sender,event)
+				if event == ccui.TouchEventType.ended then
+					--todo
+					if self.tableView:isTouchMoved() then
+						--todo
+						return;
+					end
+					ritem:touchGameNode()
+				end
+			end
+		)
 	end
 	ritem:setVisible(true)
     return cell

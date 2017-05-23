@@ -1,7 +1,7 @@
 #include "MyObject.h"
 #include "common.h"
 #include "MoveCompent.h"
-#include "MyScene.h"
+//#include "MyScene.h"
 #include "PathManager.h"
 #include "Buff.h"
 #include "Effect.h"
@@ -9,7 +9,7 @@
 NS_FISHGAME2D_BEGIN
 
 MyObject::MyObject() 
-	: cocos2d::Ref()
+	: cocos2d::Node()
 	, m_nType(EOT_NONE)
 	, m_nId(0)
 	, m_fDirection(0.0f)
@@ -121,10 +121,6 @@ bool MyObject::OnUpdate(float dt, bool shouldUpdate){
 		}
 		m_pVisualNodeList.clear();
 
-		MyScene* scene = (MyScene*)cocos2d::Director::getInstance()->getRunningScene();
-		if (scene != nullptr){
-			scene->AddMyObject(this, &m_pVisualNodeList);
-		}
 
 			
 		m_bDirtyPos = true;
@@ -134,86 +130,16 @@ bool MyObject::OnUpdate(float dt, bool shouldUpdate){
 	else{
 		ret = false;
 	}
-
-	// 更新位置;
-	if (m_bDirtyPos || m_bDirtyDir || m_bDirtyInScreen){
-		float x, y, dir, sinDir, cosDir;
-		dir = m_fDirection;
-
-		if (m_bDirtyDir){
-			FishObjectManager::GetInstance()->ConvertDirection(&dir);
-		}
-
-		if (m_bDirtyPos){
-			x = m_pPosition.x;
-			y = m_pPosition.y;
-			FishObjectManager::GetInstance()->ConvertCoord(&x, &y);
-
-			sinDir = sinf(dir);
-			cosDir = cosf(dir);
-		}
-
-		for (auto& i : m_pVisualNodeList)
-		{
-			if (m_bDirtyPos){
-				float __x = i.offsetX * cosDir - i.offsetY * sinDir + x;
-				float __y = i.offsetX * sinDir + i.offsetY * cosDir + y;
-
-				if (i.targetShadow) i.targetShadow->setPosition(__x, __y - 30);
-				if (i.target) i.target->setPosition(__x, __y);
-			}
-			if (m_bDirtyDir){
-				float __dir = CC_RADIANS_TO_DEGREES(-dir + i.direction);
-
-				if (i.targetShadow) i.targetShadow->setRotation(__dir);
-				if (i.target) i.target->setRotation(__dir);
-			}
-			if (m_bDirtyInScreen){
-				if (i.targetShadow) i.targetShadow->setVisible(m_bInScreen);
-				if (i.target) i.target->setVisible(m_bInScreen);
-			}
-		}
-		m_bDirtyPos = false;
-		m_bDirtyDir = false;
-		m_bDirtyInScreen = false;
-	}
+	
 
 	return ret;
 }
 
 void MyObject::OnMoveEnd(){
-	SetState(EOS_DESTORY);
+	setState(EOS_DESTORY);
 }
 
-void MyObject::SetPosition(float x, float y){
-	if (m_pPosition.x == x && m_pPosition.y == y) {
-		return;
-	}
-	m_pPosition.x = x;
-	m_pPosition.y = y;
-	m_bDirtyPos = true;
-
-	// 检测是否在屏幕内;
-	if (x < -100 || y < -100 || x > 1540 || y > 1000) {
-		if (m_bInScreen){
-			OnMoveEnd();
-		}
-		m_bInScreen = false;
-	}
-	else{
-		m_bInScreen = true;
-	}
-}
-
-void  MyObject::SetDirection(float dir){
-	if (m_fDirection == dir){
-		return;
-	}
-	m_fDirection = dir;
-	m_bDirtyDir = true;
-}
-
-void MyObject::SetState(int st){
+void MyObject::setState(int st){
 	if (st == m_nState) {
 		return;
 	}
@@ -225,6 +151,20 @@ void MyObject::SetState(int st){
 
 	m_nState = st;
 	m_bDirtyState = true;
+
+
+	if (st == EOS_DESTORED)
+	{
+		int a = 1;
+		int b = 2;
+	}
+#if CC_ENABLE_SCRIPT_BINDING
+	cocos2d::LuaStack *_stack = cocos2d::LuaEngine::getInstance()->getLuaStack();
+	_stack->pushInt(m_nState);
+
+	int ret = _stack->executeFunctionByHandler(m_handler_statusChanged, 1);
+	_stack->clean();
+#endif
 
 }
 
@@ -244,7 +184,7 @@ void MyObject::AddEffect(Effect* effect){
 	}
 }
 
-void MyObject::SetMoveCompent(MoveCompent* p){
+void MyObject::setMoveCompent(MoveCompent* p){
 	if (!p){ return; }
 	if (m_pMoveCompent != nullptr){
 		m_pMoveCompent->OnDetach();
@@ -265,12 +205,12 @@ int MyObject::GetTarget(){
 
 cocos2d::Vector<MyObject*> MyObject::ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating){
 	for (auto v : list){
-		if (v->GetId() == GetId()){
+		if (v->getId() == getId()){
 			return list;
 		}
 	}
 		
-	if (GetState() < EOS_DEAD){
+	if (getState() < EOS_DEAD){
 		list.pushBack(this);
 
 		for (auto v : m_pEffectList){
@@ -284,16 +224,67 @@ cocos2d::Vector<MyObject*> MyObject::ExecuteEffects(MyObject* pTarget, cocos2d::
 	return list;
 }
 
+void  MyObject::registerStatusChangedHandler(int handler) {
+#if CC_ENABLE_SCRIPT_BINDING
+	m_handler_statusChanged = handler;
+#endif
+}
+
 Fish::Fish() 
 	: MyObject()
 	, m_nRedTime(0)
 	, m_fMaxRadio(0.0f)
 	, m_nGoldMul(0)
+	, m_content(nullptr)
+	, m_shadow(nullptr)
+	, m_debug(nullptr)
+	, rotation(0)
+	, position(0,0)
 {
 	m_nType = EOT_FISH;
 }
 
 Fish::~Fish(){}
+
+void Fish::setPosition(float x, float y) {
+	if (m_debug) m_debug->setPosition(x, y);
+	if (m_content) m_content->setPosition(x, y);
+	if (m_shadow) m_shadow->setPosition(x, y - 35);
+
+	this->position.x = x;
+	this->position.y = y;
+}
+
+void Fish::setRotation(float rotation) {
+	if (m_debug) m_debug->setRotation(rotation);
+	if (m_content) m_content->setRotation(rotation);
+	if (m_shadow) m_shadow->setRotation(rotation);
+
+	this->rotation = rotation;
+}
+
+const cocos2d::Vec2& Fish::getPosition() const {
+	return this->position;
+}
+
+float Fish::getRotation() const {
+	return rotation;
+}
+
+void Fish::setContentNode(cocos2d::Node* content, cocos2d::Node* shadow) {
+	m_content = content;
+	m_shadow = shadow;
+}
+void Fish::setDebugNode(cocos2d::Node* debugNode) {
+	m_debug = debugNode;
+}
+
+void Fish::addBoundingBox(float radio, float x, float y) {
+	boundingBox.push_back(BoundingBox(radio,x,y));
+
+	m_fMaxRadio = fmax(m_fMaxRadio, fabs(x) + radio);
+	m_fMaxRadio = fmax(m_fMaxRadio, fabs(y) + radio);
+}
 
 void Fish::SetBoundingBox(int id){
 	m_nBoundingBoxId = id;
@@ -324,7 +315,7 @@ bool Fish::OnUpdate(float fdt, bool shouldUpdate){
 	}
 			
 	if (!shouldUpdate && m_nState == EOS_DEAD){
-		SetState(EOS_DESTORY);
+		setState(EOS_DESTORY);
 	}
 	return MyObject::OnUpdate(fdt, shouldUpdate);
 }
@@ -363,8 +354,8 @@ void Bullet::SetCatchRadio(int n){ m_nCatchRadio = n; }
 
 int	Bullet::GetCatchRadio(){ return m_nCatchRadio; }
 
-void Bullet::SetState(int st){
-	MyObject::SetState(st);
+void Bullet::setState(int st){
+	MyObject::setState(st);
 
 	if (st == EOS_HIT){
 		m_hitTime = 0.5f;
@@ -376,11 +367,11 @@ bool Bullet::OnUpdate(float fdt, bool shouldUpdate){
 	if (m_hitTime > 0){
 		m_hitTime -= fdt;
 		if (m_hitTime <= 0){
-			SetState(EOS_DEAD);
+			setState(EOS_DEAD);
 		}
 	}
 	if (!shouldUpdate && m_nState == EOS_DEAD){
-		SetState(EOS_DESTORY);
+		setState(EOS_DESTORY);
 	}
 	return MyObject::OnUpdate(fdt, shouldUpdate);
 }

@@ -5,7 +5,8 @@ local InvitationCodeLayer = class("InvitationCodeLayer",CustomBaseView)
 
 function InvitationCodeLayer:ctor(finishedCallback)
     self.finishedCallback = finishedCallback;
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("InvitationCodeLayer.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("InvitationCodeLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Widget");
 

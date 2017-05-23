@@ -23,6 +23,7 @@ function LhjGameDataManager:ctor()
 	self._cellTimes = 1;--当前底注倍数
 	self._enterRoomAndSitDownInfo = nil;---进入游戏保存游戏信息
 	self._systemTax = 0 --系统台费
+	self._winBets = 0; --本局的中奖总倍数
 	self._accumulative = 0
 	self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
 	self.moneyInfo = {
@@ -49,6 +50,7 @@ function LhjGameDataManager:OnMsg_Slotma_Start( msgData)
 	self._winMoney = msgData.money or 0
 	self._winLines = msgData.pb_winline
 	self._systemTax = msgData.tax or 0
+
 	
 	--按照中奖倍数排序
 	if self._winLines then
@@ -59,6 +61,11 @@ function LhjGameDataManager:OnMsg_Slotma_Start( msgData)
 				return false 
 			end
 		end)
+
+
+		for i,v in ipairs(self._winLines) do
+			self._winBets = self._winBets + v.times
+		end
 	end
 end
 
@@ -104,6 +111,12 @@ function LhjGameDataManager:getWinLines(  )
 	return self._winLines;
 end
 
+--获取本轮游戏中奖beishu
+function LhjGameDataManager:getWinBets(  )
+	return self._winBets;
+end
+
+
 --获取房间信息
 function LhjGameDataManager:getRoomInfo()
 	return 	self._enterRoomAndSitDownInfo
@@ -124,6 +137,7 @@ function LhjGameDataManager:clearRoundData(  )
 	self._winMoney = 0
 	self._winLines = nil
 	self._systemTax = 0
+	self._winBets = 0
 end
 ---保存进入游戏
 function LhjGameDataManager:OnMsg_EnterRoomAndSitDownInfo(msgTab)

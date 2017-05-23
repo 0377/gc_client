@@ -6,6 +6,7 @@
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 #include "lua_module_register.h"
 #include "lua-bridge/lua_NetworkManager_auto.hpp"
+#include "lua-bridge/lua_NetworkManager_manual.hpp"
 #include "lua-bridge/lua_LuaBridgeUtils_auto.hpp"
 #include "lua-bridge/lua_LuaBridgeUtils_manual.hpp"
 #include "lua-bridge/lua_MyDownloader_manual.hpp"
@@ -52,6 +53,8 @@ void LuaManager::initGameLua()
 	lua_module_register(_luaState);
 	//networkNetManager register to lua
 	register_all_NetworkManager(_luaState);
+	register_all_NetworkManager_manual(_luaState);
+
 	//LuaBridgeUtils
 	register_all_LuaBridgeUtils(_luaState);
 	register_all_LuaBridgeUtils_manual(_luaState);

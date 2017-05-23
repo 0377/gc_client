@@ -57,13 +57,38 @@ MoveByPath* MoveByPath::create(){
 void MoveByPath::InitMove(){
 	m_Elaspe = 0;
 	m_LastElaspe = -1;
-	m_fDuration = 0;
+	//m_fDuration = 0;
 
-	m_pPathData = FishObjectManager::GetInstance()->GetPathManager()->GetPathData(m_nPathID, m_bTroop);
-	m_fDuration = m_pPathData->nDuration;
+	//m_pPathData = FishObjectManager::GetInstance()->GetPathManager()->GetPathData(m_nPathID, m_bTroop);
+	//m_fDuration = m_pPathData.nDuration;
 	m_Elaspe = 0;
 	m_LastElaspe = -1;
 	m_bEndPath = false;
+}
+
+void MoveByPath::setDuration(int duration) {
+	m_fDuration = duration;
+}
+void MoveByPath::addPathMoveData(int nType, float fDirection, int nDuration, int nStartTime, int nEndTime,
+	int nPointCount, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
+
+	PathMoveData ele;
+	ele.nType = nType;
+	ele.xPos[0] = x1;
+	ele.xPos[1] = x2;
+	ele.xPos[2] = x3;
+	ele.xPos[3] = x4;
+	ele.yPos[0] = y1;
+	ele.yPos[1] = y2;
+	ele.yPos[2] = y3;
+	ele.yPos[3] = y4;
+	ele.nPointCount = 1;
+	ele.fDirction = fDirection;
+	ele.nDuration = nDuration;
+	ele.nStartTime = nStartTime;
+	ele.nEndTime = nEndTime;
+
+	m_pPathData.path.push_back(ele);
 }
 
 
@@ -87,7 +112,7 @@ void MoveByPath::OnUpdate(float fdt){
 	if (m_fDelay > 0){
 		m_fDelay = m_fDelay - fdt;
 		if (m_fDelay >= 0){
-			m_pOwner->SetPosition(-500.0f, -500.0f);
+			m_pOwner->setPosition(-500.0f, -500.0f);
 
 			return;
 		}
@@ -99,9 +124,9 @@ void MoveByPath::OnUpdate(float fdt){
 	if (m_bBeginMove == false && m_Elaspe > 0){
 		m_bBeginMove = true;
 	}
-	m_Elaspe += fdt * GetSpeed();
+	m_Elaspe += fdt * getSpeed();
 	if (m_Elaspe < 0){
-		m_pOwner->SetPosition(-500, -500);
+		m_pOwner->setPosition(-500, -500);
 		return;
 	}
 
@@ -127,7 +152,7 @@ void MoveByPath::OnUpdate(float fdt){
 
 	//计算路径并缓存 ;
 	int index = -1;
-	for (auto v : m_pPathData->path){
+	for (auto v : m_pPathData.path){
 		index++;
 		if (tempElaspe >= v.nStartTime && tempElaspe < v.nEndTime){
 			break;
@@ -135,13 +160,13 @@ void MoveByPath::OnUpdate(float fdt){
 	}
 	//更新是否路径完成;
 	if (tempElaspe > m_fDuration){
-		index = m_pPathData->path.size() - 1;
+		index = m_pPathData.path.size() - 1;
 	}
 
 	if (index == -1) return;
 
 	// 更新位置;
-	PathMoveData path = m_pPathData->path[index];
+	PathMoveData path = m_pPathData.path[index];
 	float percent = MIN(1.0f, (float)(tempElaspe - path.nStartTime) / (float)path.nDuration);
 	float x(0.0f), y(0.0f), dir(0.0f);
 
@@ -171,8 +196,9 @@ void MoveByPath::OnUpdate(float fdt){
 	// ele.dir = dir;
 	// m_pPathData->pathData[tempElaspe] = ele;
 		
-	m_pOwner->SetPosition(x + m_Offest.x, y + m_Offest.y);
-	m_pOwner->SetDirection(dir);
+	m_pOwner->setPosition(x + m_Offest.x, y + m_Offest.y);
+	//m_pOwner->setRotation(dir);
+	m_pOwner->setRotation(CC_RADIANS_TO_DEGREES(-dir));
 }
 
 void MoveByPath::OnDetach(){}
@@ -220,18 +246,18 @@ void MoveByDirection::OnUpdate(float fdt){
 	if (m_pOwner->GetTarget() != 0 && !FishObjectManager::GetInstance()->IsSwitchingScene())
 	{
 		MyObject* pObj = FishObjectManager::GetInstance()->FindFish(m_pOwner->GetTarget());
-		if (pObj != nullptr && pObj->GetState() < EOS_DEAD && pObj->InSideScreen())
+		if (pObj != nullptr && pObj->getState() < EOS_DEAD && pObj->InSideScreen())
 		{
 			if (inited_){
-				if (MathAide::CalcDistance(pObj->GetPosition().x, pObj->GetPosition().y, m_pOwner->GetPosition().x, m_pOwner->GetPosition().y) > 10)
+				if (MathAide::CalcDistance(pObj->getPosition().x, pObj->getPosition().y, m_pOwner->getPosition().x, m_pOwner->getPosition().y) > 10)
 				{
-					SetDirection(MathAide::CalcAngle(pObj->GetPosition().x, pObj->GetPosition().y, m_pOwner->GetPosition().x, m_pOwner->GetPosition().y));
+					SetDirection(MathAide::CalcAngle(pObj->getPosition().x, pObj->getPosition().y, m_pOwner->getPosition().x, m_pOwner->getPosition().y));
 					InitMove();
 				}
 				else
 				{
-					SetPosition(m_pOwner->GetPosition().x, m_pOwner->GetPosition().y);
-					SetDirection(m_pOwner->GetDirection());
+					SetPosition(m_pOwner->getPosition().x, m_pOwner->getPosition().y);
+					//SetDirection(m_pOwner->);
 					return;
 				}
 			}
@@ -293,7 +319,7 @@ void MoveByDirection::OnUpdate(float fdt){
 	}
 
 
-	m_pOwner->SetDirection(m_pOwner->GetType() == EOT_FISH ? angle_ - M_PI_2 : angle_ + M_PI);
-	m_pOwner->SetPosition(m_pPosition.x, m_pPosition.y);
+	m_pOwner->setRotation(CC_RADIANS_TO_DEGREES(m_pOwner->GetType() == EOT_FISH ? angle_ - M_PI_2 : - angle_ + M_PI));
+	m_pOwner->setPosition(m_pPosition.x, m_pPosition.y);
 }
 NS_FISHGAME2D_END

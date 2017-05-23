@@ -53,10 +53,6 @@ HallMsgManager.MsgName 		=	 {
 	SC_NotifyBank					=				"SC_NotifyBank",--银行账号刷新
 	CS_LoginValidatebox				=				"CS_LoginValidatebox"	,--文字验证
 	SC_LoginValidatebox				=				"SC_LoginValidatebox",-- 验证结果
-	CS_CashMoney					=				"CS_CashMoney",--发送提现请求
-	SC_CashMoneyResult				=				"SC_CashMoneyResult",--发送提现消息的返回
-	CS_CashMoneyType				=				"CS_CashMoneyType",--获取提现列表
-	SC_CashMoneyType      			=				"SC_CashMoneyType",--提现列表
  	CS_BandAlipay					=				"CS_BandAlipay",--绑定支付宝
  	SC_BandAlipay					=				"SC_BandAlipay",--绑定支付宝返回值		
 	--- 消息功能
@@ -282,9 +278,9 @@ function HallMsgManager:sendMsg(msgName,msgTab,isNeedLogin,isAutoResend)
 	--
 	if msgName ~= HallMsgManager.MsgName.CS_HEARTBEAT then
 		--todo
-		print("msgName:",msgName)
+--		print("msgName:",msgName)
 		--CustomHelper.printStack();
-		dump(msgTab, "msgTab", nesting)
+--		dump(msgTab, "msgTab", nesting)
 	end
 	--检测是否需要处理超时
 	--[[
@@ -331,7 +327,7 @@ function HallMsgManager:callbackWhenReceiveOneFullMsg(msgID,dataStr)
     msgTab["msgName"] = msgName;
 	if msgName ~= HallMsgManager.MsgName.SC_HEARTBEAT then
 		--todo
-	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
+--	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
 	end
 	--self.needResendMsgMap移除对应数据
 	for needResendMsgName,v in pairs(self.needResendMsgMap) do
@@ -849,7 +845,7 @@ function HallMsgManager:sendEnterOneGameMsg(gameType,roomID)
 	local infoTab = {};
 	infoTab["first_game_type"] = gameType;
 	infoTab["second_game_type"] = roomID;
-	self.tempGameType = gameType;
+	print("sendEnterOneGameMsg")
 	self:sendMsg(HallMsgManager.MsgName.CS_ChangeGame,infoTab,true);
 end
 --增加切换游戏返回消息
@@ -857,7 +853,7 @@ function HallMsgManager:on_SC_EnterRoomAndSitDown(msgTab)
 	-- print("get enter one game result :")
 	-- dump(msgTab, "msgTab", nesting);	
 	---服务器切换成功，准备进入具体某个游戏
-	msgTab[HallGameConfig.GameIDKey] = self.tempGameType;
+	print("on_SC_EnterRoomAndSitDown")
 	GameManager:getInstance():getHallManager():enterOneGameWithGameInfoTab(msgTab);
 end
 --处理错误异常
@@ -1023,36 +1019,6 @@ function HallMsgManager:on_SC_NewMsgData(data)
 	-- local event2 = cc.EventCustom:new("kNotifyName_ReceiveNewMsg")
 	-- cc.Director:getInstance():getEventDispatcher():dispatchEvent(event2)
 end
---发送提现消息后的返回消息
---[[
-// 提现结果
-message SC_CashMoneyResult{
-	enum MsgID { ID = 11071; }
-	optional int32 result = 1;           //1失败 0成功
-	optional int64 bank = 2;             //银行余额
-	optional int64 money = 3;            //当前余额
-}
-
-// 提现状态
-message SC_CashMoneyType{
-	enum MsgID { ID = 11071; }
-	repeated CashMoneyType pb_cash_info = 1;
-}
-]]
-function HallMsgManager:on_SC_CashMoneyResult(msgTab)
-	local bank = msgTab.bank or 0
-	local money = msgTab.money or 0;
-	if self.playerInfo then
-		self.playerInfo:setMoney(money);
-		self.playerInfo:setBank(bank);
-		self:postRefreshPlayerInfoNotify();
-	end
-end
---收到 提现列表消息
-function HallMsgManager:on_SC_CashMoneyType(msgTab)
-	self.hallDataManager:setExchangeListData(msgTab.pb_cash_info);
-end
-
 --- 处理反馈信息更新消息
 function HallMsgManager:on_SC_FeedBackUpDate(msgTab)
 	-- 拉取反馈信息状态

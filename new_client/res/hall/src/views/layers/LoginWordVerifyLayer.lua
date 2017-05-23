@@ -1,8 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local LoginWordVerifyLayer = class("SettingLayer", CustomBaseView)
 function LoginWordVerifyLayer:ctor(wordVerifyData,finishedCallback)
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("LoginWordVerifyLayer.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("LoginWordVerifyLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Widget");
     local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.alertView, "close_btn"), "ccui.Button");

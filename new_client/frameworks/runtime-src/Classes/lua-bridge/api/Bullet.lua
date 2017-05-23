@@ -9,7 +9,7 @@
 -- @function [parent=#Bullet] SetCatchRadio 
 -- @param self
 -- @param #int n
--- @return fishgame2d::Bullet#fishgame2d::Bullet self (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
@@ -36,7 +36,7 @@
 -- @function [parent=#Bullet] SetCannonSetType 
 -- @param self
 -- @param #int 
--- @return fishgame2d::Bullet#fishgame2d::Bullet self (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
@@ -49,19 +49,19 @@
 -- @function [parent=#Bullet] SetCannonType 
 -- @param self
 -- @param #int 
--- @return fishgame2d::Bullet#fishgame2d::Bullet self (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] SetState 
+-- @function [parent=#Bullet] setState 
 -- @param self
 -- @param #int 
--- @return fishgame2d::Bullet#fishgame2d::Bullet self (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] Create 
+-- @function [parent=#Bullet] create 
 -- @param self
--- @return fishgame2d::Bullet#fishgame2d::Bullet ret (return value: game.fishgame2d::Bullet)
+-- @return Bullet#Bullet ret (return value: game.fishgame2d.Bullet)
         
 return nil

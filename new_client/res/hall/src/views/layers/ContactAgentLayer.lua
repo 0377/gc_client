@@ -5,7 +5,8 @@ local PayHelper = requireForGameLuaFile("PayHelper")
 
 function ContactAgentLayer:ctor(agentInfo)
 	self.agentInfo = agentInfo
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("ContactAgentLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("ContactAgentLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Widget");
   

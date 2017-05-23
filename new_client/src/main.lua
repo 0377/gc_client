@@ -6,8 +6,6 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 require "config"
 require "cocos.init"
 
-
-
 local function main()
     require("app.MyApp"):create()
 end
@@ -19,6 +17,10 @@ end
 
 if DEBUG >=2 then
     print=release_print
+else
+	print = function()
+	
+	end
 end
 
 

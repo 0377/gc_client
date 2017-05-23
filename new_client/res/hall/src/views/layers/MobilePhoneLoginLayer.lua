@@ -2,7 +2,9 @@ local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local MobilePhoneLoginLayer = class("MobilePhoneLoginLayer",CustomBaseView);
 function MobilePhoneLoginLayer:ctor()
 	-- body
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("MobilePhoneLoginLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("MobilePhoneLoginLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self:addChild(self.csNode);
     self:initView();
     local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");

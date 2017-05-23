@@ -17,20 +17,35 @@ FishGameConfig.RULE_SELECT ={
 
 
 -- 玩家对应的编号
-FishGameConfig.PLAYER_IDX ={
+FishGameConfig.PLAYER ={
         LEFTBOTTOM      = 0,
         RIGHTBOTTOM     = 1,
         RIGHTTOP        = 2,
         LEFTTOP         = 3,
 }
 
+FishGameConfig.LBPLAYER_OFFSETX   = 190
+FishGameConfig.RBPLAYER_OFFSETX   = 165
+FishGameConfig.LTPLAYER_OFFSETX   = 165
+FishGameConfig.RTPLAYER_OFFSETX   = 165
+
+FishGameConfig.PLAYER_COUNT       = 4
+FishGameConfig.CANNONTYPE_COUNT   = 4
+
+
 ----------------------------------资源配置----------------------------------------------------------
 -- 捕鱼场景图片资源路径
 FishGameConfig.IMAGE_SCENE = {
-    SCENE_01 = "games/fishgame/res/scene/Map_01.png",
-    SCENE_02 = "games/fishgame/res/scene/Map_02.png",
-    SCENE_03 = "games/fishgame/res/scene/Map_03.png",
-    SCENE_04 = "games/fishgame/res/scene/Map_04.png",
+--    "scene/Map_likui_001.jpg",
+--    "scene/Map_likui_002.jpg",
+--    "scene/Map_likui_003.jpg",
+    "scene/Map_0.jpg",
+    "scene/Map_1.jpg",
+    "scene/Map_2.jpg",
+    "scene/Map_3.jpg",
+    "scene/Map_4.jpg",
+    "scene/Map_5.jpg",
+
 }
 
 -- 捕鱼按钮背景（因为点击需要切换图片的按钮才添加）
@@ -65,6 +80,13 @@ FishGameConfig.XML_CONFIG = {
     SYSTEM          = "games/fishgame/res/config/System.xml",
     TROOP_SET       = "games/fishgame/res/config/TroopSet.xml",
     VISUAL          = "games/fishgame/res/config/Visual.xml",
+}
+
+FishGameConfig.PARTICAL_CONFIG = {
+    ["salute1"] = { AniImage = "fish_effect_bomb_big_01", AniName = "Animation1" },
+    ["bubble"] = { AniImage = "fish_effect_bomb_big_02", AniName = "Animation1" },
+    ["switch"] = { AniImage = "fish_effect_bomb_big_03", AniName = "Animation1" },
+    ["bomb"] = { AniImage = "fish_effect_bomb_big_04", AniName = "Animation1" },
 }
 
 return FishGameConfig

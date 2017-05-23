@@ -3,19 +3,17 @@ LhjGameTips = class("LhjGameTips", function()
 end)
 
 function LhjGameTips:ctor()
-
-    local csNodePath = CustomHelper.getFullPath("LhjGameTips.csb")
-    self._uiLayer = cc.CSLoader:createNode(csNodePath)
-    self:addChild(self._uiLayer)
-
-
-    self.pageView= tolua.cast(CustomHelper.seekNodeByName(self._uiLayer,"pageView"), "ccui.ListView")
+    local CCSLuaNode =  requireForGameLuaFile("LhjGameTipsCCS")
+    self.csNode = CCSLuaNode:create().root;
+    self:addChild(self.csNode);
+    
+    self.pageView= tolua.cast(CustomHelper.seekNodeByName(self.csNode,"pageView"), "ccui.ListView")
     local page = ccui.ImageView:create("game_res/wz_yxgz_2.png")
      self.pageView:addChild(page)
-    local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self._uiLayer, "btn_close"), "ccui.Button")
+    local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_close"), "ccui.Button")
     closeBtn:addClickEventListener(function (  )
-        -- body
-         self:removeFromParent()
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+        self:removeFromParent()
     end)
 end
 return LhjGameTips

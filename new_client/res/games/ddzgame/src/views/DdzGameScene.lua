@@ -443,9 +443,9 @@ function DdzGameScene:ctor()
     self._sound = gameDdz.DdzSound.new()
     self._logic = DdzGameManager:getInstance():getDataManager()
     self.rootPath = DdzGameManager:getInstance():getPackageRootPath();
-    self.csbRootPath = "res/"..self.rootPath.."res/csb/"
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameLayerCSS_new.csb");
-    self.m_widget = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameLayerCSS_new")
+    self.m_widget = CCSLuaNode:create().root;
+
     self.csNode = self.m_widget
     self:addChild(self.csNode);
 
@@ -636,10 +636,9 @@ end
 
 ---初始化旁边的按钮
 function DdzGameScene:initMenu()
-    
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameMenuNodeCCS.csb");
-  
-    local menuNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameMenuNodeCCS")
+    local menuNode = CCSLuaNode:create().root;
+
     self:addChild(menuNode)
     menuNode:setPosition(cc.p(display.width,display.height))
     local menu = menuNode:getChildByName("menu")
@@ -719,8 +718,9 @@ end
 
 ---初始化桌面
 function DdzGameScene:initUI()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameTimeOutWaitCCS.csb")
-    local timeOutNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameTimeOutWaitCCS")
+    local timeOutNode = CCSLuaNode:create().root;
+
     self:addChild(timeOutNode)
     timeOutNode:setPosition(cc.p(0,0))
     self.panel_TimeoutWait = timeOutNode:getChildByName("panel_TimeoutWait")
@@ -823,7 +823,7 @@ function DdzGameScene:initUI()
     self._panel_tip_label = {}
     self._icon_status = {}
     for i = 1, gameDdz.GAME_PLAYER do
-        local Image_land = ccui.ImageView:create(self.rootPath.."res/csb/game_res/ddz_nongmin.png")
+        local Image_land = ccui.ImageView:create(CustomHelper.getFullPath("game_res/ddz_nongmin.png"))
         Image_land:setTag(10086)
         self._icon_player_identity[i] = ui:getChildByName("icon_player_identity_" .. i)
         self._icon_player_identity[i]:setVisible(true)
@@ -840,8 +840,9 @@ end
 
 ---初始化控制按钮
 function DdzGameScene:initUIControl()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameUIControlLayerCCS.csb")
-    local uiControlNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameUIControlLayerCCS")
+    local uiControlNode = CCSLuaNode:create().root;
+
     self:addChild(uiControlNode)
     uiControlNode:setPosition(cc.p(0,0))
     
@@ -997,7 +998,7 @@ function DdzGameScene:initUIControl()
     local icon_clock_mask = icon_clock:getChildByName("icon_clock_mask")
     local icon_clockwise = icon_clock:getChildByName("icon_clockwise")
     icon_clock_mask:setVisible(false)
-    local spriteProgress = cc.Sprite:create(self.rootPath.."res/csb/game_res/icon_clock_mask.png")
+    local spriteProgress = cc.Sprite:create(CustomHelper.getFullPath("game_res/icon_clock_mask.png"))
     local progressTimer = cc.ProgressTimer:create(spriteProgress)
     progressTimer:setAnchorPoint(0.5, 0.5)
     progressTimer:setPosition(cc.p(icon_clock_mask:getPosition()))
@@ -1024,8 +1025,8 @@ end
 
 ---初始化托管
 function DdzGameScene:initUIUp()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameUIUpLayerCCS.csb")
-    local uiupNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameUIUpLayerCCS")
+    local uiupNode = CCSLuaNode:create().root;    
     self:addChild(uiupNode)
     uiupNode:setPosition(cc.p(0,0))
     
@@ -1066,8 +1067,8 @@ end
 
 ---初始化结束界面
 function DdzGameScene:initResult()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameResultLayerCCS.csb")
-    local gameresultNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameResultLayerCCS")
+    local gameresultNode = CCSLuaNode:create().root;     
     self:addChild(gameresultNode)
     gameresultNode:setPosition(cc.p(0,0))
     
@@ -1138,9 +1139,8 @@ end
 
 ---初始化牌记录器
 function DdzGameScene:initCardTip()
-
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameCardTipCCS.csb")
-    local cardTipNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameCardTipCCS")
+    local cardTipNode = CCSLuaNode:create().root;       
     self:addChild(cardTipNode)
     local btnRecord = CustomHelper.seekNodeByName(self.m_widget,"btn_record")
     local pos = self.m_widget:convertToWorldSpace(cc.p(btnRecord:getPositionX() - btnRecord:getContentSize().width,btnRecord:getPositionY()))
@@ -1187,8 +1187,8 @@ end
 
 ---初始化规则
 function DdzGameScene:initPanelInfo()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameInfoLayerCCS.csb")
-    local infoNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameInfoLayerCCS")
+    local infoNode = CCSLuaNode:create().root;      
     self:addChild(infoNode,100)
     infoNode:setPosition(cc.p(0,0))
     
@@ -1262,8 +1262,9 @@ function DdzGameScene:initPanelInfo()
 end
 
 function DdzGameScene:initPanelshadow()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameShadowLayerCCS.csb")
-    local shadowNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameShadowLayerCCS")
+    local shadowNode = CCSLuaNode:create().root;
+
     self:addChild(shadowNode)
     shadowNode:setPosition(cc.p(0,0))
     self.panel_shadow = shadowNode:getChildByName("panel_shadow")
@@ -1845,7 +1846,7 @@ function DdzGameScene:_doAni_PlayerOutCardEff(cards)
         aniFile = "dkj_ddz_paixing_eff"
         aniName = "ani_03"
 
-        imageFile = self.rootPath.."res/csb/ddz_paixing_huojian.png"
+        -- imageFile = self.rootPath.."ddz_paixing_huojian.png"
 
         self._sound:PlayEffect_cardEff(2)
 
@@ -1855,7 +1856,7 @@ function DdzGameScene:_doAni_PlayerOutCardEff(cards)
         aniFile = "dkj_ddz_paixing_eff"
         aniName = "ani_01"
 
-        imageFile = self.rootPath.."res/csb/ddz_paixing_zhadan.png"
+        -- imageFile = self.rootPath.."ddz_paixing_zhadan.png"
 
         self._sound:PlayEffect_cardEff(5)
 
@@ -1866,15 +1867,15 @@ function DdzGameScene:_doAni_PlayerOutCardEff(cards)
             aniFile = "dkj_ddz_paixing_eff"
             aniName = "ani_02"
 
-            imageFile = self.rootPath.."res/csb/ddz_paixing_longshun.png"
+            -- imageFile = "ddz_paixing_longshun.png"
         else
             aniFile = "dkj_ddz_paixing_eff"
             if outCards.cardType == gameDdz.DdzRules.CT_SINGLE_LINE then
                 aniName = "ani_02"
-                imageFile = self.rootPath.."res/csb/ddz_paixing_shunzi.png"
+                -- imageFile = "ddz_paixing_shunzi.png"
             else
                 aniName = "ani_05"
-                imageFile = self.rootPath.."res/csb/ddz_paixing_liandui.png"
+                -- imageFile = "ddz_paixing_liandui.png"
             end
         end
         ---连队
@@ -1893,7 +1894,7 @@ function DdzGameScene:_doAni_PlayerOutCardEff(cards)
             aniFile = "dkj_ddz_paixing_eff"
             aniName = "ani_04"
 
-            imageFile = self.rootPath.."res/csb/ddz_paixing_feiji.png"
+            -- imageFile = "ddz_paixing_feiji.png"
 
             self._sound:PlayEffect_cardEff(1)
         end
@@ -2182,9 +2183,9 @@ function DdzGameScene:OnGameSetLand(index)
     for k, v in ipairs(self._icon_player_identity) do
         v:setVisible(true)
         local land_icon = v:getChildByTag(10086)
-        land_icon:loadTexture(self.rootPath.."res/csb/game_res/ddz_nongmin.png")
+        land_icon:loadTexture("game_res/ddz_nongmin.png")
         if k == index then
-            land_icon:loadTexture(self.rootPath.."res/csb/game_res/ddz_dizhu.png")
+            land_icon:loadTexture("game_res/ddz_dizhu.png")
         end
     end
 end
@@ -2920,7 +2921,7 @@ function DdzGameScene:UpdateResult(data)
 
         if data.isSelf[k] then
             --self._result.icon_slef_highlight:setPositionY(self._result["label_self_" .. k]:getPositionY())
-            self._result["icon_slef_highlight_"..k]:loadTexture(self.rootPath.."res/csb/game_res/bg_self_highlight.png")
+            self._result["icon_slef_highlight_"..k]:loadTexture("game_res/bg_self_highlight.png")
         end
 
         if v.value > 0 then
@@ -3170,8 +3171,9 @@ end
 
 ---电量信号UI
 function DdzGameScene:initDeviceUtilInfo( )
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("ddzGameDeviceInfo.csb")
-    local deviceInfoNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("ddzGameDeviceInfoCCS")
+    deviceInfoNode = CCSLuaNode:create().root;
+
     self:addChild(deviceInfoNode)
     deviceInfoNode:setPosition(cc.p(0,display.height))
     

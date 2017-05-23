@@ -135,16 +135,20 @@ function SubGameBaseScene:jumpToHallScene()
 
 end
 --检测是否需要弹出游戏维护提示框
-function SubGameBaseScene:checkIsNeedAlertGameMainTipView()
-    local gameSwitchStatus = GameManager:getInstance():getHallManager():getSubGameManager():getGameSwitchStatus()
-    if gameSwitchStatus == GameMaintainStatus.On then
+function SubGameBaseScene:checkIsNeedAlertGameMaintainTipView()
+    local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
+    if subGameManager then
         --todo
-        return true;
+        local gameSwitchStatus = subGameManager:getGameSwitchStatus()
+        if gameSwitchStatus == GameMaintainStatus.On then
+            --todo
+            return true;
+        end
     end
     return false;
 end
 function SubGameBaseScene:isContinueGameConditions()
-    if self:checkIsNeedAlertGameMainTipView() == true then
+    if self:checkIsNeedAlertGameMaintainTipView() == true then
         --todo
         self:alertAlertViewWhenServerMaintain();
         return false;

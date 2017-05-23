@@ -816,30 +816,6 @@ message SC_DeletMsg{
 	optional int32 msg_id = 1;						//删除消息 id
 	optional int32 msg_type = 2;					//删除消息 类型
 }
-// 发起提现
-message CS_CashMoney{	
-	enum MsgID { ID = 11070; }
-	optional int32 money = 1;						//提现金额
-}
-// 提现结果
-message SC_CashMoneyResult{
-	enum MsgID { ID = 11071; }
-	optional int32 result = 1;           //1失败 0成功
-	optional int64 bank = 2;             //银行余额
-	optional int64 money = 3;            //当前余额
-}
-
-// 提现状态
-message CS_CashMoneyType{
-	enum MsgID { ID = 11072; }
-}
-
-// 提现状态
-message SC_CashMoneyType{
-	enum MsgID { ID = 11073; }
-	repeated CashMoneyType pb_cash_info = 1;
-}
-
 
 // 通知客户端银行钱的改变
 message SC_NotifyBank {

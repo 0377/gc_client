@@ -13,7 +13,9 @@ function HallGameNode:ctor(csNode,infoTab)
 	csNode:setPosition(cc.p(0,0))
 	local amartureNode = CustomHelper.seekNodeByName(csNode, "download_finish_anim");
 	self:showInfoWithOneGameItemNode(infoTab);
-	
+	self.selectBtn = tolua.cast(CustomHelper.seekNodeByName(self, "selectBtn"), "ccui.Button");
+	--添加游戏选择框
+	self.selectBtn:setSwallowTouches(false)
 	--print("HallGameNode:ctor")
 	self:setEnabled(true);
 	self:enableNodeEvents();
@@ -37,7 +39,7 @@ function HallGameNode:stopDownloadScheduler()
 end
 --现在游戏节点信息
 --@param canSelected 是否能够设置选择框的触摸
-function HallGameNode:showInfoWithOneGameItemNode(infoTab,canSelected)
+function HallGameNode:showInfoWithOneGameItemNode(infoTab)
 	self.infoTab = infoTab
 	self:stopDownloadScheduler() --每次进来时应该停止计时器
 	local limitMoneyText = tolua.cast(CustomHelper.seekNodeByName(self, "limit_money_text"), "ccui.Text");
@@ -57,12 +59,6 @@ function HallGameNode:showInfoWithOneGameItemNode(infoTab,canSelected)
 	end
 	local minMoneyLimitString = CustomHelper.moneyShowStyleNone(minMoneyLimit);
 	limitMoneyText:setString(minMoneyLimitString);
-	local selectedBtn = tolua.cast(CustomHelper.seekNodeByName(self, "selectBtn"), "ccui.Button");
-	--添加游戏选择框
-	selectedBtn:setSwallowTouches(false)
-	if canSelected then
-		selectedBtn:addClickEventListener(handler(self,self.touchGameNode))
-	end
 	--显示对应信息
 	local iconParentNode = tolua.cast(CustomHelper.seekNodeByName(self,"iconParentNode"), "ccui.ImageView");
 	local gameID = infoTab[HallGameConfig.GameIDKey];
@@ -86,18 +82,6 @@ function HallGameNode:showInfoWithOneGameItemNode(infoTab,canSelected)
 	-- 		)
 	-- 	)
 	-- )
-
-	--显示倒影图片
-	local shadowView = tolua.cast(CustomHelper.seekNodeByName(self, "shadow_view"), "ccui.ImageView");
-	local shadowImageName = infoTab[HallGameConfig.GameShadowIconKey];
-	shadowView:setVisible(false);
-	if shadowImageName then
-		--todo
-		shadowView:setVisible(true);
-		shadowView:ignoreContentAdaptWithSize(true);
-		shadowView:loadTexture(CustomHelper.getFullPath(shadowImageName));
-	end
-
 	-- CustomHelper.changeNodeToGray(iconNode);
 	self.downloadProgressPanel = tolua.cast(CustomHelper.seekNodeByName(self, "download_progress_panel"), "ccui.Button");
 	self.downloadProgressPanel:setVisible(false);
@@ -127,18 +111,18 @@ function HallGameNode:showInfoWithOneGameItemNode(infoTab,canSelected)
 		if groupKey == self.downloaderGroupKey then
 			--todo
 			--骨骼动画播放
-			if self.armature == nil then
-			--todo
-				animInfoStr = "hall_res/anim/hall_xzcg_eff/hall_xzcg_eff.ExportJson#ani_01"
-				local animInfoArray = string.split(animInfoStr,"#");
-				ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(animInfoArray[1])
-				local armature = ccs.Armature:create("hall_xzcg_eff")
-				-- armature:setLocalZOrder(1000000)
-			    iconParentNode:addChild(armature);
-			    armature:align(display.CENTER, armature:getParent():getContentSize().width/2,armature:getParent():getContentSize().height / 2 + 105)
-			    self.armature = armature;
-			end
-		    self.armature:getAnimation():play("ani_01")
+			-- if self.armature == nil then
+			-- --todo
+			-- 	animInfoStr = "hall_res/anim/hall_xzcg_eff/hall_xzcg_eff.ExportJson#ani_01"
+			-- 	local animInfoArray = string.split(animInfoStr,"#");
+			-- 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(animInfoArray[1])
+			-- 	local armature = ccs.Armature:create("hall_xzcg_eff")
+			-- 	-- armature:setLocalZOrder(1000000)
+			--     iconParentNode:addChild(armature);
+			--     armature:align(display.CENTER, armature:getParent():getContentSize().width/2,armature:getParent():getContentSize().height / 2 + 105)
+			--     self.armature = armature;
+			-- end
+		    -- self.armature:getAnimation():play("ani_01")
 	        local seq = cc.Sequence:create(cc.DelayTime:create(0.3),cc.CallFunc:create(function()
 				--保存本地常量
 				self.status = HallGameNode.Status.Normal;
@@ -212,10 +196,6 @@ function HallGameNode:startPercentSchedule()
 end
 function HallGameNode:updateItemNodeStatus()
 	local status = self.status;
-	if self.downloadingTipView == nil then
-		--todo
-		self.downloadingTipView = tolua.cast(CustomHelper.seekNodeByName(self, "download_tipview"), "ccui.Widget");
-	end
 	--正常面板
 	local normalPanel = tolua.cast(CustomHelper.seekNodeByName(self, "normal_panel"), "ccui.Widget");
 	--有更新面板

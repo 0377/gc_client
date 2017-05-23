@@ -2,9 +2,9 @@ local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local MessageTipLayer = class("MessageTipLayer",CustomBaseView)
 
 function MessageTipLayer:ctor()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("MessageTipLayerCCS.csb");
-    local csNode = cc.CSLoader:createNode(csNodePath):addTo(self)
-    local background = csNode:getChildByName("background")
+    local CCSLuaNode =  requireForGameLuaFile("MessageTipLayerCCS")
+    self.csNode = CCSLuaNode:create().root:addTo(self)
+    local background = self.csNode:getChildByName("background")
     CustomHelper.addAlertAppearAnim(background)
 
 
@@ -39,7 +39,6 @@ function MessageTipLayer:updateWithMessage(message)
     if not tolua.isnull(self._label_tip) then
         self._label_tip:removeSelf()
     end
-
     local playInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
     local messageInfo = playInfo:getMessageInfo()
 
@@ -50,6 +49,13 @@ function MessageTipLayer:updateWithMessage(message)
     lableTip:setVisible(true)
     lableTip:addTo(self.background)
     self._label_tip = lableTip
+
+    -- if  not message.Readed then 
+    --     local msgMng = GameManager:getInstance():getHallManager():getHallMsgManager()
+    --     message.Readed = true
+    --     msgMng:sendSetMsgReadFlag(message)
+    -- end
+
 end
 
 function MessageTipLayer:createWithMessage(...)

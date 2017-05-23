@@ -2,8 +2,8 @@
 local LaunchScene = class("LaunchScene", cc.Scene)
 local scheduler = cc.Director:getInstance():getScheduler()
 function LaunchScene:ctor()
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("LaunchSceneCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+	local CCSLuaNode =  requireForGameLuaFile("LaunchSceneCCS")
+    self.csNode = CCSLuaNode:create().root;
     -- dump(self.csNode, "self.csNode", nesting)
     self:addChild(self.csNode);
     self.progressTipText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_text"), "ccui.Text");
@@ -81,7 +81,7 @@ function LaunchScene:checkIsNeedUpdateClient()
 			false,
 			true,
 			function()
-				self._newClientTipLayer:removeSelf()
+				--self._newClientTipLayer:removeSelf()
 			end,
 			function()
 				
@@ -91,7 +91,7 @@ function LaunchScene:checkIsNeedUpdateClient()
 					cc.Application:getInstance():openURL(url)
 				end
 
-				self._newClientTipLayer:removeSelf()
+				--self._newClientTipLayer:removeSelf()
 			end
 		);
 	    self._newClientTipLayer:getCloseBtn():setVisible(false)

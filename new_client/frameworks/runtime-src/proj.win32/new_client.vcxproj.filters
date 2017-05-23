@@ -140,9 +140,6 @@
     <ClInclude Include="..\Classes\game\fishgame2d\MyObject.h">
       <Filter>Classes\game\fishgame2d</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\game\fishgame2d\MyScene.h">
-      <Filter>Classes\game\fishgame2d</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\game\fishgame2d\PathManager.h">
       <Filter>Classes\game\fishgame2d</Filter>
     </ClInclude>
@@ -306,6 +303,9 @@
     <ClInclude Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.hpp">
       <Filter>Classes\lua-bridge</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\lua-bridge\lua_NetworkManager_manual.hpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -378,9 +378,6 @@
     <ClCompile Include="..\Classes\game\fishgame2d\MyObject.cpp">
       <Filter>Classes\game\fishgame2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\game\fishgame2d\MyScene.cpp">
-      <Filter>Classes\game\fishgame2d</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\game\fishgame2d\PathManager.cpp">
       <Filter>Classes\game\fishgame2d</Filter>
     </ClCompile>
@@ -400,9 +397,6 @@
       <Filter>Classes\lua-bridge</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\lua-bridge\lua_MyDownloader_manual.cpp">
-      <Filter>Classes\lua-bridge</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\lua-bridge\lua_NetworkManager_auto.cpp">
       <Filter>Classes\lua-bridge</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\3rd\cjson\fpconv.c">
@@ -514,6 +508,12 @@
       <Filter>Classes\lua-bridge</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\lua-bridge\lua_LuaBridgeUtils_manual.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_NetworkManager_auto.cpp">
+      <Filter>Classes\lua-bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bridge\lua_NetworkManager_manual.cpp">
       <Filter>Classes\lua-bridge</Filter>
     </ClCompile>
   </ItemGroup>

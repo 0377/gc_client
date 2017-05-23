@@ -119,4 +119,8 @@ function VersionModel:getGameSrcVersion(gameId)
 	return version
 end
 
+function VersionModel:getVerionStr()
+	return "v2"
+end
+
 return VersionModel

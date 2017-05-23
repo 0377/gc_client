@@ -1,5 +1,5 @@
 
-Ìi
+¬g
 common_msg_define.protocommon_player_define.proto"&
 C_RequestPublicKey"
 MsgID
@@ -654,25 +654,7 @@ updateTime"
 msg_id (RmsgId
 msg_type (RmsgType"
 MsgID
-IDºV"6
-CS_CashMoney
-money (Rmoney"
-MsgID
-ID¾V"h
-SC_CashMoneyResult
-result (Rresult
-bank (Rbank
-money (Rmoney"
-MsgID
-ID¿V"$
-CS_CashMoneyType"
-MsgID
-IDÀV"V
-SC_CashMoneyType0
-pb_cash_info (2.CashMoneyTypeR
-pbCashInfo"
-MsgID
-IDÁV"q
+IDºV"q
 SC_NotifyBank
 opt_type (RoptType
 bank (Rbank

@@ -16,14 +16,14 @@
 -- @param self
 -- @param #int pos
 -- @param #int p
--- @return fishgame2d::Effect#fishgame2d::Effect self (return value: game.fishgame2d::Effect)
+-- @return Effect#Effect self (return value: game.fishgame2d.Effect)
         
 --------------------------------
 -- 
 -- @function [parent=#Effect] SetEffectType 
 -- @param self
 -- @param #int etp
--- @return fishgame2d::Effect#fishgame2d::Effect self (return value: game.fishgame2d::Effect)
+-- @return Effect#Effect self (return value: game.fishgame2d.Effect)
         
 --------------------------------
 -- 
@@ -35,7 +35,7 @@
 -- 
 -- @function [parent=#Effect] ClearParam 
 -- @param self
--- @return fishgame2d::Effect#fishgame2d::Effect self (return value: game.fishgame2d::Effect)
+-- @return Effect#Effect self (return value: game.fishgame2d.Effect)
         
 --------------------------------
 -- 

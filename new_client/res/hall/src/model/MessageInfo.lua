@@ -66,6 +66,7 @@ function MessageInfo:addData(data, bInit)
         local msg = self:addDataSingle(v)
         if msg then
             if msg.Type == self.MSG_TYPE.MESSAGE then
+                print("addNewMessage")
                 newTipMsg = msg
             elseif msg.Type == self.MSG_TYPE.NOTICE then
                 print("addNewNotice")
@@ -74,7 +75,7 @@ function MessageInfo:addData(data, bInit)
         end
     end
 
-    if newTipMsg then
+    if newTipMsg and newTipMsg.Readed == false then
         -- local runningScene = cc.Director:getInstance():getRunningScene()
         -- if runningScene.__cname == "HallScene" then
 
@@ -118,7 +119,7 @@ function MessageInfo:formatData(data)
         Type = data.msg_type,
         StartTime = data.start_time,
         EndTime = data.end_time,
-        Readed = data.is_read ~= 1,      -- 1 未读 2 已读
+        Readed = data.is_read == 2,      -- 1 未读 2 已读
         Content = data.content,
         _Content = json.decode(data.content),
     }
@@ -187,6 +188,7 @@ function MessageInfo:getUnReadedMessageByType(...)
 
     local timeNow = socket.gettime()
     local data,loaded = self:getData()
+    dump(data)
     for _, v in ipairs(data) do
         if timeNow > v.StartTime and timeNow < v.EndTime then
             for __, vv in ipairs(types) do

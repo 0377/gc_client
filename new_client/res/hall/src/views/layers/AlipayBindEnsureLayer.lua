@@ -4,7 +4,9 @@ function AlipayBindEnsureLayer:ctor(args)
 	dump(args, "args", nesting)
     self.alipayName = args.alipayName;
     self.alipayAccount = args.alipayAccount;
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("AlipayBindEnsureLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("AlipayBindEnsureLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self:addChild(self.csNode);
     local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");
     CustomHelper.addAlertAppearAnim(alertPanel);

@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local AvatarModifyLayer = class("AvatarModifyLayer",CustomBaseView)
 function AvatarModifyLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("AvatarModifyLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("AvatarModifyLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
     self:initView();

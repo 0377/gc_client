@@ -10,15 +10,12 @@ RechargeLayer.ViewType = {
 }
 
 function RechargeLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeLayerCCS.csb"));
+	local CCSLuaNode =  requireForGameLuaFile("RechargeLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.subViewParentNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "sub_view_parent"),"ccui.Widget");
-	local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"close_btn"),"ccui.Widget");
-	closeBtn:addClickEventListener(function ()
-		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-		self:removeSelf();
-	end);
-	
+	ViewManager.initPublicTopInfoLayer(self,"hall_res/bank_new/bb_cmdh_cz_bt.png")
 	self.showRechargeType = {1,2,3,4,5}
 	
 	local rechargeType =  CustomHelper.getOneHallGameConfigValueWithKey("recharge_types")
@@ -91,6 +88,8 @@ function RechargeLayer:showViewWithType(viewType)
 	self.viewType = viewType;
 	for _,item in ipairs(self.viewBtnListView:getItems()) do
 		item:setEnabled(true)
+		-- local normalSize = item:getRendererNormal():getOriginalSize();
+		-- item:setContentSize(cc.size(normalSize.width,normalSize.height))
 	end
 	
 	
@@ -98,6 +97,7 @@ function RechargeLayer:showViewWithType(viewType)
 	for i,subView in ipairs(subViews) do
 		subView:setVisible(false);
 	end
+	local selectBtn = nil;
 	if viewType == RechargeLayer.ViewType.Zfb then
 		--todo
 		if self.rechargeZfbLayer ~= nil then
@@ -107,6 +107,7 @@ function RechargeLayer:showViewWithType(viewType)
 		end
 		local RechargeZfbLayer = requireForGameLuaFile("RechargeTypeLayer")
 		self.zfbBtn:setEnabled(false)
+		selectBtn = self.zfbBtn;
 		self.rechargeZfbLayer = RechargeZfbLayer:create(viewType);
 		self.subViewParentNode:addChild(self.rechargeZfbLayer)
 	elseif viewType == RechargeLayer.ViewType.Wx then
@@ -118,6 +119,7 @@ function RechargeLayer:showViewWithType(viewType)
 		end
 		local RechargeWxLayer = requireForGameLuaFile("RechargeTypeLayer");
 		self.wxBtn:setEnabled(false)
+		selectBtn = self.wxBtn
 		self.rechargeWxLayerr = RechargeWxLayer:create(viewType);
 		self.subViewParentNode:addChild(self.rechargeWxLayerr)
 	elseif viewType == RechargeLayer.ViewType.Dlcz then
@@ -128,6 +130,7 @@ function RechargeLayer:showViewWithType(viewType)
 			self.rechargeDlczLayer = nil;
 		end
 		self.dlczBtn:setEnabled(false)
+		selectBtn = self.dlczBtn
 		local RechargeDlczLayer = requireForGameLuaFile("RechargeDlczLayer");
 		self.rechargeDlczLayer = RechargeDlczLayer:create();
 		self.subViewParentNode:addChild(self.rechargeDlczLayer)
@@ -139,6 +142,7 @@ function RechargeLayer:showViewWithType(viewType)
 			self.rechargeDlzsLayer = nil;
 		end
 		self.dlzsBtn:setEnabled(false)
+		selectBtn = self.dlzsBtn
 		local RechargeDlzsLayer = requireForGameLuaFile("RechargeDlzsLayer");
 		self.rechargeDlzsLayer = RechargeDlzsLayer:create();
 		self.subViewParentNode:addChild(self.rechargeDlzsLayer)
@@ -151,8 +155,14 @@ function RechargeLayer:showViewWithType(viewType)
 		end
 		local rechargeTransferPayLayer = requireForGameLuaFile("RechargeTypeLayer")
 		self.transferBtn:setEnabled(false)
+		selectBtn = self.transferBtn
 		self.rechargeTransferPayLayer = rechargeTransferPayLayer:create(viewType);
 		self.subViewParentNode:addChild(self.rechargeTransferPayLayer)
 	end
+	-- if selectBtn then
+	-- 	--todo
+	-- 	local disabledSize = selectBtn:getRendererDisabled():getOriginalSize();
+	-- 	selectBtn:setContentSize(cc.size(disabledSize.width,disabledSize.height))
+	-- end
 end
 return RechargeLayer;

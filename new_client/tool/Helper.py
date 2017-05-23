@@ -18,7 +18,7 @@ class Helper():
 				continue
 
 			tempPath = tempPath + path + "/"
-			print('path: ' + tempPath)
+			#print('path: ' + tempPath)
 			if not os.path.exists(tempPath):
 				os.mkdir(tempPath)
 

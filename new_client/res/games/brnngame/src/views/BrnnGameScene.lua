@@ -72,6 +72,9 @@ function BrnnGameScene:receiveServerResponseSuccessEvent(event)
 
     elseif msgName == BrnnGameManager.MsgName.SC_OxTableInfo then ---桌面消息
 
+		print("----------------gamestate:"..self.brnnGameManager:getDataManager():getGameStates())
+
+
         ---刷新筹码
         self:setInitChioseAllPoints(self.brnnGameManager:getDataManager():getGameChipInfo())
 
@@ -166,12 +169,18 @@ function BrnnGameScene:receiveServerResponseSuccessEvent(event)
 
         ---更新桌面状态
         self:gameStatesUpdataUI()
-
+		
+		--print("----gamestate:"..self.brnnGameManager:getDataManager():getGameStates())
+		--
 
         if self.brnnGameManager:getDataManager():getGameStates() == 1 then
             ---更新筹码是否可以点击
             self:updateChipBtnTouch()
         end
+		
+		if self.brnnGameManager:getDataManager():getGameStates() == 2 then
+			MusicAndSoundManager:getInstance():playerSoundWithFile("brnnSound/startbet.mp3")
+		end
 
 
     elseif msgName == BrnnGameManager.MsgName.SC_OxAddScore then ---下注返回
@@ -190,6 +199,8 @@ function BrnnGameScene:receiveServerResponseSuccessEvent(event)
 
     elseif msgName == BrnnGameManager.MsgName.SC_OxDealCard then ---发牌
         --todo
+		MusicAndSoundManager:getInstance():playerSoundWithFile("brnnSound/endbet.mp3")
+		
         self:dealMessage();
     
     elseif msgName == BrnnGameManager.MsgName.SC_OxBankerList then ---上庄列表
@@ -301,10 +312,9 @@ function BrnnGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     --    end)
 
     --- 尝试直接发送进入游戏消息
-    local tableinfo = self.brnnGameManager:getDataManager():getRoomInfo()
-    local gameTypeID = tableinfo.id
-    --local roomID = tableinfo.room_id
-	local roomID = self.brnnGameManager.gameDetailInfoTab["second_game_type"]
+    local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+    local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
+    local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
 
     CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
     GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
@@ -471,13 +481,13 @@ function BrnnGameScene:ctor()
     BrnnGameScene.super.ctor(self);
 
     ---初始化界面
-    local csNodePath = CustomHelper.getFullPath("GameBrnn.csb")
-    self.csNode = cc.CSLoader:createNode(csNodePath)
+    local CCSLuaNode =  requireForGameLuaFile("GameBrnnCCS")
+    self.csNode = CCSLuaNode:create().root;     
     self:addChild(self.csNode)
 	
 	local bg = {
-		[1] = CustomHelper.getFullPath("csb/game_res/bg1.jpg"),
-		[2] = CustomHelper.getFullPath("csb/game_res/bg2.jpg"),
+		[1] = CustomHelper.getFullPath("game_res/bg1.jpg"),
+		[2] = CustomHelper.getFullPath("game_res/bg2.jpg"),
 	}
 	self.csNode:getChildByName("tableImgBg"):loadTexture(bg[self.brnnGameManager.gameDetailInfoTab["second_game_type"]])
 	
@@ -534,7 +544,7 @@ function BrnnGameScene:gameStatesUpdataUI()
         self:isContinueGameConditions()
 
         ---休息时间
-        self.timeImg:loadTexture(CustomHelper.getFullPath("csb/game_res/zh_brnn_xiuxipianke.png"))
+        self.timeImg:loadTexture(CustomHelper.getFullPath("game_res/zh_brnn_xiuxipianke.png"))
 
         ---清空桌子数据
         self:updateTabelState()
@@ -591,7 +601,7 @@ function BrnnGameScene:gameStatesUpdataUI()
         self._table:removeAllChildren(true)
 
         ---下注时间
-        self.timeImg:loadTexture(CustomHelper.getFullPath("csb/game_res/zh_brnn_xiazhushijian.png"))
+        self.timeImg:loadTexture(CustomHelper.getFullPath("game_res/zh_brnn_xiazhushijian.png"))
 
         ---改变闹钟坐标
         self.clock:setPosition(cc.p(335.46,651.66))
@@ -604,7 +614,7 @@ function BrnnGameScene:gameStatesUpdataUI()
 
         self.brnnGameManager:getDataManager():getMyAreaBetRecord()
         ---开牌时间
-        self.timeImg:loadTexture(CustomHelper.getFullPath("csb/game_res/zh_brnn_kaipaishijian.png"))
+        self.timeImg:loadTexture(CustomHelper.getFullPath("game_res/zh_brnn_kaipaishijian.png"))
 
         ---改变闹钟坐标
         self.clock:setPosition(cc.p(335.46,651.66))
@@ -2106,7 +2116,7 @@ function BrnnGameScene:gameEnd()
         -- self:addChild(self.gameEnd, 100)
 
         ---
-        self.timeImg:loadTexture(CustomHelper.getFullPath("csb/game_res/stockDater.png"))
+        self.timeImg:loadTexture(CustomHelper.getFullPath("game_res/stockDater.png"))
 
         ---更新庄家信息
         self:initBankerInfo(true)

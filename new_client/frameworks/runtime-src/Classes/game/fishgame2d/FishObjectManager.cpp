@@ -50,14 +50,14 @@ bool FishObjectManager::AddBullet(Bullet* pBullet){
 		return false;
 	}
 
-	auto itr = m_MapBullet.find(pBullet->GetId());
+	auto itr = m_MapBullet.find(pBullet->getId());
 	if (itr != m_MapBullet.end()){
 		return false;
 	}
 
-	pBullet->SetManager(this);
+	pBullet->setManager(this);
 
-	m_MapBullet.insert(pBullet->GetId(), pBullet);
+	m_MapBullet.insert(pBullet->getId(), pBullet);
 
 	return true;
 }
@@ -83,14 +83,14 @@ bool FishObjectManager::AddFish(Fish* pFish){
 	{
 		return false;
 	}
-	auto itr = m_MapFish.find(pFish->GetId());
+	auto itr = m_MapFish.find(pFish->getId());
 	if (itr != m_MapFish.end()){
 		return false;
 	}
 
-	pFish->SetManager(this);
+	pFish->setManager(this);
 
-	m_MapFish.insert(pFish->GetId(),pFish);
+	m_MapFish.insert(pFish->getId(),pFish);
 	return true;
 }
 
@@ -114,6 +114,7 @@ bool FishObjectManager::RemoveAllFishes(bool noCleanNode){
 	for (auto v : m_MapFish)
 		{
 			v.second->Clear(true, noCleanNode);
+			v.second->setState(EOS_DESTORED);
 		}
 	m_MapFish.clear();
 	return true;
@@ -136,12 +137,12 @@ bool FishObjectManager::OnUpdate(float dt){
 		if (i->second->OnUpdate(dt, fishCount <= 10)){
 			fishCount++;
 		}
-		state = i->second->GetState();
+		state = i->second->getState();
 
 		// 剔除活的;
 		if (state < EOS_DEAD){
 			// 根据位置，插入指定范围内;
-			cocos2d::Point& pos = i->second->GetPosition();
+			cocos2d::Vec2 pos = i->second->getPosition();
 				
 			float maxRadio = i->second->GetMaxRadio();
 			for (int __x = (pos.x - maxRadio) / X_INTERVAL; __x <= (pos.x + maxRadio) / X_INTERVAL; __x++){
@@ -159,7 +160,9 @@ bool FishObjectManager::OnUpdate(float dt){
 		}
 		else if (state > EOS_DEAD){
 			i->second->Clear(true);
+			i->second->setState(EOS_DESTORED);
 			i = m_MapFish.erase(i);
+
 		}
 		else{
 			i++;
@@ -174,13 +177,13 @@ bool FishObjectManager::OnUpdate(float dt){
 			bulletCount++;
 		}
 
-		state = itrBullet->second->GetState();
+		state = itrBullet->second->getState();
 
 		// 进行鱼和子弹的碰撞检测;
 
 		if (!m_bSwitchingScene && state < EOS_DEAD){
 			if (itrBullet->second->GetTarget() == 0){
-				auto pos = itrBullet->second->GetPosition();
+				auto pos = itrBullet->second->getPosition();
 				//int yInterval = pos.y / Y_INTERVAL;
 				//int xInterval = pos.x / X_INTERVAL;
 
@@ -240,7 +243,9 @@ bool FishObjectManager::OnUpdate(float dt){
 		}
 		else if (state > EOS_DEAD){
 			itrBullet->second->Clear(true);
+			itrBullet->second->setState(EOS_DESTORED);
 			itrBullet = m_MapBullet.erase(itrBullet);
+
 		}
 		else{
 			itrBullet++;
@@ -294,42 +299,38 @@ void FishObjectManager::ConvertDirection(float* dir){
 bool FishObjectManager::BBulletHitFish(Bullet* pBullet, Fish* pFish){
 	int bulletRad = pBullet->GetCatchRadio();
 	int maxFishRadio = pFish->GetMaxRadio();
-	cocos2d::Point& posBullet = pBullet->GetPosition();
-	cocos2d::Point& posFish = pFish->GetPosition();
+	cocos2d::Point posBullet = pBullet->getPosition();
+	cocos2d::Point posFish = pFish->getPosition();
 
 	if ((posBullet.x + bulletRad < posFish.x - maxFishRadio && posBullet.y + bulletRad < posFish.y - maxFishRadio)
 		|| (posBullet.x - bulletRad > posFish.x + maxFishRadio && posBullet.y - bulletRad > posFish.y + maxFishRadio)){
 		return false;
 	}
-	float dirFish = pFish->GetDirection();
+	float dirFish = pFish->getRotation();
 	float sinDir = sinf(dirFish);
 	float cosDir = cosf(dirFish);
 
-	int boxId = pFish->GetBoundingBox();
-	auto* pathData = m_pPathManager->GetBoundingBoxData(boxId);
-	if (pathData != nullptr){
-		for (auto& v : pathData->value){
-			// 转锟斤拷锟斤拷锟斤拷;
-			float x = v.offsetX * cosDir - v.offsetY * sinDir + posFish.x;
-			float y = v.offsetX * sinDir + v.offsetY * cosDir + posFish.y;
+	auto&  pathData = pFish->getBoundingBox();
+	for (auto& v : pathData){
+		float x = v.offsetX * cosDir - v.offsetY * sinDir + posFish.x;
+		float y = v.offsetX * sinDir + v.offsetY * cosDir + posFish.y;
 
-			float rad = v.rad;
+		float rad = v.rad;
 
-			float _x = x - posBullet.x;
-			float _y = y - posBullet.y;
-			float _dis = (rad + bulletRad);
-			if (_x * _x + _y * _y <= _dis * _dis){
-				return true;
-			}				
-		}
+		float _x = x - posBullet.x;
+		float _y = y - posBullet.y;
+		float _dis = (rad + bulletRad);
+		if (_x * _x + _y * _y <= _dis * _dis){
+			return true;
+		}				
 	}
+
 
 	return false;
 }
 
 void FishObjectManager::onActionBulletHitFish(Bullet* pBullet, Fish* pFish){
-	pBullet->SetState(EOS_DEAD);
-	pFish->OnHit();
+
 
 	//TODO  发送消息到Lua层;
 #if CC_ENABLE_SCRIPT_BINDING
@@ -410,9 +411,9 @@ int	FishObjectManager::TestHitFish(float _x_, float _y_){
 		}
 
 		int maxFishRadio = pFish->GetMaxRadio();
-		cocos2d::Point& posFish = pFish->GetPosition();
+		cocos2d::Point posFish = pFish->getPosition();
 
-		float dirFish = pFish->GetDirection();
+		float dirFish = pFish->getRotation();
 		float sinDir = sinf(dirFish);
 		float cosDir = cosf(dirFish);
 
@@ -466,7 +467,7 @@ int	FishObjectManager::TestHitFish(float _x_, float _y_){
 
 	}
 	if (index != -1){
-		return tempFish[index]->GetId();
+		return tempFish[index]->getId();
 	}
 
 	//quickSort(tempDis, tempFish, 0, length - 1);

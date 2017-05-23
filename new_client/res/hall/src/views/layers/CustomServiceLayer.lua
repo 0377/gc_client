@@ -8,10 +8,12 @@ function CustomServiceLayer:ctor()
 end
 
 function CustomServiceLayer:onCreateContent()
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("CustomServiceLayer.csb");
-    self._ui = cc.CSLoader:createNode(csNodePath):addTo(self)
+    local CCSLuaNode =  requireForGameLuaFile("CustomServiceLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+    self:addChild(self.csNode)
 
-    local background = self._ui:getChildByName("background")
+
+    local background = self.csNode:getChildByName("background")
     background:setTouchEnabled(true)
     self.background = background
     local btn_close = background:getChildByName("btn_close")

@@ -3,7 +3,8 @@ MyToastLayer = class("MyToastLayer",cc.Node)
 function MyToastLayer:ctor(parentLayer,text,num)
     self._uiLayer = cc.Layer:create()
     self:addChild(self._uiLayer)
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("MyToastLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("MyToastLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self._uiLayer:addChild(self.csNode)
     
     self.tipPanel= CustomHelper.seekNodeByName(self.csNode, "tip_panel");

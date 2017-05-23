@@ -5,12 +5,14 @@ local RechargeDlczLayer = class("RechargeDlczLayer", CustomBaseView)
 --临时数据
 local agents = CustomHelper.getOneHallGameConfigValueWithKey("agents_info")
 function RechargeDlczLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeDlczLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeDlczLayerCCS.csb"));
+	local CCSLuaNode =  requireForGameLuaFile("RechargeDlczLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
-	self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.Text");
-	self.bankText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_text"), "ccui.Text");
-	self.idText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "id_text"), "ccui.Text");
+	-- self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.Text");
+	-- self.bankText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_text"), "ccui.Text");
+	-- self.idText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "id_text"), "ccui.Text");
 	self:resetTempMondAndBank();
 	self:showMoneyInfoView();
     self:initView();
@@ -88,14 +90,14 @@ function RechargeDlczLayer:resetTempMondAndBank()
 	self.willRechargeValue = 0
 end
 function RechargeDlczLayer:showMoneyInfoView()
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney - self.willRechargeValue)
-	self.moneyText:setString(moneyStr)
+	-- local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney - self.willRechargeValue)
+	-- self.moneyText:setString(moneyStr)
 
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
-	self.bankText:setString(bankMoneyStr)
+	-- local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
+	-- self.bankText:setString(bankMoneyStr)
 
-	local  idStr = tostring(self.myPlayerInfo:getGuid())
-	self.idText:setString(idStr);
+	-- local  idStr = tostring(self.myPlayerInfo:getGuid())
+	-- self.idText:setString(idStr);
 end
 
 --发送存钱消息

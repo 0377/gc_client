@@ -3,11 +3,13 @@ local RechargeTypeLayer = class("RechargeTypeLayer", CustomBaseView)
 local StoreConfig = requireForGameLuaFile("StoreConfig")
 local RechargeLayer = requireForGameLuaFile("RechargeLayer")
 function RechargeTypeLayer:ctor(type)
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeTypeLayerCCS.csb"));
+	-- self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("RechargeTypeLayerCCS.csb"));
+	local CCSLuaNode =  requireForGameLuaFile("RechargeTypeLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
 	self:addChild(self.csNode);
 	self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
-	self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.Text");
-	self.bankText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_text"), "ccui.Text");
+	-- self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.Text");
+	-- self.bankText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_text"), "ccui.Text");
 	self:initInputCommponent()
 	self:showMoneyInfoView();
 	
@@ -114,11 +116,11 @@ function RechargeTypeLayer:recharge()
 end
 
 function RechargeTypeLayer:showMoneyInfoView()
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney())
-	self.moneyText:setString(moneyStr)
+	-- local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney())
+	-- self.moneyText:setString(moneyStr)
 
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
-	self.bankText:setString(bankMoneyStr)
+	-- local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
+	-- self.bankText:setString(bankMoneyStr)
 
 	
 	

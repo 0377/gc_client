@@ -4,10 +4,12 @@
 ]]
 local SecondaryBRNNNode = class("SecondaryBRNNNode",requireForGameLuaFile("secondary_game_node.SecondaryBaseNode"))
 function SecondaryBRNNNode:ctor()
-	local nodeFullPath = CustomHelper.getFullPath("SecondaryBRNNNodeCCS.csb")
-	-- print("nodeFullPath:",nodeFullPath)
-	local csNode = cc.CSLoader:createNode(nodeFullPath);
-	self.itemNode = tolua.cast(CustomHelper.seekNodeByName(csNode, "game_panel"), "ccui.Layout")
+	-- local nodeFullPath = CustomHelper.getFullPath("SecondaryBRNNNodeCCS.csb")
+	-- -- print("nodeFullPath:",nodeFullPath)
+	-- local csNode = cc.CSLoader:createNode(nodeFullPath);
+	local CCSLuaNode =  requireForGameLuaFile("SecondaryBRNNNodeCCS")
+	self.csNode = CCSLuaNode:create().root;
+	self.itemNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "game_panel"), "ccui.Layout")
 	self.itemNode:retain()
 	self.itemNode:removeFromParent();
 	self:setContentSize(self.itemNode:getContentSize());
@@ -16,42 +18,26 @@ function SecondaryBRNNNode:ctor()
 	SecondaryBRNNNode.super.ctor()
 end
 
-function SecondaryBRNNNode:initViewData(secondRoomInfoTab,clickCallback,canSelected)
-	if not SecondaryBRNNNode.super.initViewData(self,secondRoomInfoTab,clickCallback,canSelected) then
-		return false
-	end
-	
-	
+function SecondaryBRNNNode:initViewData(secondRoomInfoTab)
+	SecondaryBRNNNode.super.initViewData(self,secondRoomInfoTab)
 	local iconView = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "icon_view"), "ccui.ImageView");
 	iconView:ignoreContentAdaptWithSize(true);
 	iconView:loadTexture(CustomHelper.getFullPath(self.secondRoomInfoTab[HallGameConfig.SecondRoomIconKey]))
-	local selectBtn = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "selected_btn"), "ccui.Button");
-	selectBtn:setSwallowTouches(false)
-	if canSelected then
-		selectBtn:addClickEventListener(handler(self,self.selectNode))
-	end
-	local roomEffectInfoStr = self.secondRoomInfoTab[HallGameConfig.SecondRoomIconEffectKey]
-	local roomEffectArray = string.split(roomEffectInfoStr, "#");
-	if #roomEffectArray >= 2 then
-		--todo
-		--添加骨骼动画
-    	local armature = ccs.Armature:create(roomEffectArray[1])
-    	armature:getAnimation():play(roomEffectArray[2])
-    	self.itemNode:addChild(armature)
-   		armature:align(display.CENTER, armature:getParent():getContentSize().width/2 - 3, armature:getParent():getContentSize().height/2 + 15)
-	end
 	--显示底注 和 入场
-	local  minMoneyLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_money_limit"), "ccui.TextAtlas");
+	local  minMoneyLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_money_limit"), "ccui.Text");
 	-- 20.34 string 为 20/34	
 	local minMoneyLimitString = self.secondRoomInfoTab[HallGameConfig.SecondRoomBeiShu]
-	minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
-	minMoneyLimitText:setString(minMoneyLimitString)
+	-- minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
+	minMoneyLimitText:setString("倍数:"..minMoneyLimitString)
 	--底注
 	local minJettonLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_jetton_limit"), "ccui.TextAtlas");
 	local minJettonLimitString = CustomHelper.moneyShowStyleNone(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
 	minJettonLimitString = string.gsub(minJettonLimitString, "%.", "/")
 	-- print("minJettonLimitString---",minJettonLimitString)
 	minJettonLimitText:setString(minJettonLimitString)
+
+	local onlineNumText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "online_num_text"), "ccui.Text");
+	onlineNumText:setString(string.format("在线:%d",math.random(300,1000)))
 end
 
 return SecondaryBRNNNode;

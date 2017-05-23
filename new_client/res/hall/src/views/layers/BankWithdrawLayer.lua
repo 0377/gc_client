@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local BankWithdrawLayer = class("BankWithdrawLayer", CustomBaseView)
 function BankWithdrawLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("BankWithdrawLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("BankWithdrawLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
 	self.moneyText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_text"), "ccui.TextAtlas");
@@ -43,38 +44,25 @@ function BankWithdrawLayer:ctor()
 				self.changeValue = self.tempBank
 				--MyToastLayer.new(cc.Director:getInstance():getRunningScene(),"银行存款不足")
 			end
-			self:showMoneyInfoView();
-
-
+			self:showMoneyInfoView()
 			self:checkBankGold()
 		end
 	end)
 	self:resetTempMondAndBank();
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney)
-	moneyStr = string.gsub(moneyStr, "%.", "/")
-	self.moneyText:setString(moneyStr)
-
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
-	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
-	self.bankText:setString(bankMoneyStr)
     self:initView();
 	BankWithdrawLayer.super.ctor(self);
 
 end
 
-
-
-
 function BankWithdrawLayer:initView()
 	--
-	local addNumArray = {10,100,1000,10000}
+	local addNumArray = {10,100,500,1000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
 		tempAddBtn.addValue = addNumArray[i]
 		tempAddBtn:addClickEventListener(function()
 			GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 			self:clickOneAddbtn(tempAddBtn)
-
 			self:checkBankGold()
 		end);
 	end
@@ -82,8 +70,7 @@ function BankWithdrawLayer:initView()
 	resetBtn:addClickEventListener(function()
 		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		self:resetTempMondAndBank();
-		self:showMoneyInfoView();
-
+		self:showMoneyInfoView()
 		self:checkBankGold()
 	end);
 	self.withDrawBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "withdraw_btn"), "ccui.Button");
@@ -112,42 +99,30 @@ function BankWithdrawLayer:checkBankGold()
 		local m1 = (self.myPlayerInfo:getBank()/CustomHelper.goldToMoneyRate()-money) - addNumArray[i]
 		--print("m1:"..m1.."money:"..money.."array:",addNumArray[i].."rate:"..CustomHelper.goldToMoneyRate())
 		if m1 >= 0 then
-				tempAddBtn:setEnabled(true)
+			tempAddBtn:setEnabled(true)
 		else
-				tempAddBtn:setEnabled(false)
+			tempAddBtn:setEnabled(false)
 		end
 	end
 
 end
+function BankWithdrawLayer:showMoneyInfoView()
+	-- local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney)
+	-- moneyStr = string.gsub(moneyStr, "%.", "/")
+	-- self.moneyText:setString(moneyStr)
 
+	-- local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
+	-- bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
+	-- self.bankText:setString(bankMoneyStr)
 
-
-
-
-
-
-
-
-
-
-
+	--self.changeValueText:setString(CustomHelper.moneyShowStyleNone(self.changeValue))
+	self.withdrawNumTF:setText(self.changeValue/CustomHelper.goldToMoneyRate())
+end
 
 function BankWithdrawLayer:resetTempMondAndBank()
 	self.tempMoney = self.myPlayerInfo:getMoney();
 	self.tempBank = self.myPlayerInfo:getBank()
 	self.changeValue = 0;
-end
-function BankWithdrawLayer:showMoneyInfoView()
-	local moneyStr = CustomHelper.moneyShowStyleNone(self.tempMoney)
-	moneyStr = string.gsub(moneyStr, "%.", "/")
-	self.moneyText:setString(moneyStr)
-
-	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.tempBank);
-	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
-	self.bankText:setString(bankMoneyStr)
-
-	--self.changeValueText:setString(CustomHelper.moneyShowStyleNone(self.changeValue))
-	self.withdrawNumTF:setText(self.changeValue/CustomHelper.goldToMoneyRate())
 end
 function BankWithdrawLayer:clickOneAddbtn(btn)
 	local addValue = btn.addValue;
@@ -160,7 +135,7 @@ function BankWithdrawLayer:clickOneAddbtn(btn)
 		self.changeValue = self.tempBank
 		MyToastLayer.new(cc.Director:getInstance():getRunningScene(), "银行存款不足")
 	end
-	self:showMoneyInfoView();
+	self:showMoneyInfoView()
 end
 --发送存钱消息
 function BankWithdrawLayer:sendWithdrawMoneyMsg()
@@ -209,11 +184,10 @@ function BankWithdrawLayer:receiveServerResponseSuccessEvent(event)
     	--todo
 		self.withDrawBtn:setEnabled(true)
 		self:resetTempMondAndBank();
-		self:showMoneyInfoView();
 		local resultStr = CustomHelper.moneyShowStyleNone(userInfo.money)
 		MyToastLayer.new(cc.Director:getInstance():getRunningScene(), string.format("成功取出"..resultStr))
-
 		self:checkBankGold()
+		self:showMoneyInfoView()
     end
     BankWithdrawLayer.super.receiveServerResponseSuccessEvent(self,event)
 end

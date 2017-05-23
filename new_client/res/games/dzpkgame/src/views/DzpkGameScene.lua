@@ -247,9 +247,9 @@ function DzpkGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     DzpkGameScene.super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
    
     --- 尝试直接发送进入游戏消息
-    local tableinfo = self.dzpkGameManager:getDataManager():getRoomInfo()
-    local gameTypeID = tableinfo.id
-    local roomID = tableinfo.room_id
+    local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+    local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
+    local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
 
     CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
     GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);

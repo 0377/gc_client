@@ -112,6 +112,14 @@ struct BoundingBox
 	float offsetX;
 	float offsetY;
 	float rad;
+
+	BoundingBox(){}
+
+	BoundingBox(float radio, float x, float y) {
+		this->rad = radio;
+		this->offsetX = x;
+		this->offsetY = y;
+	}
 };
 
 struct BoundingBoxData

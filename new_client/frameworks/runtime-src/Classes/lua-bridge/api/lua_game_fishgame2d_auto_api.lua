@@ -2,11 +2,6 @@
 -- @module game.fishgame2d
 
 --------------------------------------------------------
--- the game.fishgame2d MyScene
--- @field [parent=#game.fishgame2d] MyScene#MyScene MyScene preloaded module
-
-
---------------------------------------------------------
 -- the game.fishgame2d FishObjectManager
 -- @field [parent=#game.fishgame2d] FishObjectManager#FishObjectManager FishObjectManager preloaded module
 
@@ -14,6 +9,16 @@
 --------------------------------------------------------
 -- the game.fishgame2d FishUtils
 -- @field [parent=#game.fishgame2d] FishUtils#FishUtils FishUtils preloaded module
+
+
+--------------------------------------------------------
+-- the game.fishgame2d MathAide
+-- @field [parent=#game.fishgame2d] MathAide#MathAide MathAide preloaded module
+
+
+--------------------------------------------------------
+-- the game.fishgame2d PathManager
+-- @field [parent=#game.fishgame2d] PathManager#PathManager PathManager preloaded module
 
 
 --------------------------------------------------------
@@ -44,11 +49,6 @@
 --------------------------------------------------------
 -- the game.fishgame2d MoveByDirection
 -- @field [parent=#game.fishgame2d] MoveByDirection#MoveByDirection MoveByDirection preloaded module
-
-
---------------------------------------------------------
--- the game.fishgame2d MathAide
--- @field [parent=#game.fishgame2d] MathAide#MathAide MathAide preloaded module
 
 
 --------------------------------------------------------
@@ -89,11 +89,6 @@
 --------------------------------------------------------
 -- the game.fishgame2d EffectAward
 -- @field [parent=#game.fishgame2d] EffectAward#EffectAward EffectAward preloaded module
-
-
---------------------------------------------------------
--- the game.fishgame2d PathManager
--- @field [parent=#game.fishgame2d] PathManager#PathManager PathManager preloaded module
 
 
 return nil

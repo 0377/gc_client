@@ -1,65 +1,52 @@
 
 --------------------------------
 -- @module MyObject
--- @extend Ref
+-- @extend Node
 -- @parent_module game.fishgame2d
 
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetMoveCompent 
+-- @function [parent=#MyObject] setMoveCompent 
 -- @param self
--- @param #game.fishgame2d::MoveCompent 
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @param #game.fishgame2d.MoveCompent 
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] GetOwner 
+-- @function [parent=#MyObject] getId 
 -- @param self
--- @return fishgame2d::MyObject#fishgame2d::MyObject ret (return value: game.fishgame2d::MyObject)
+-- @return unsigned long#unsigned long ret (return value: unsigned long)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetOwner 
+-- @function [parent=#MyObject] setTypeId 
 -- @param self
--- @param #game.fishgame2d::MyObject p
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @param #int typeId
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
 -- @function [parent=#MyObject] OnMoveEnd 
 -- @param self
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
-        
---------------------------------
--- 
--- @function [parent=#MyObject] GetMoveCompent 
--- @param self
--- @return fishgame2d::MoveCompent#fishgame2d::MoveCompent ret (return value: game.fishgame2d::MoveCompent)
-        
---------------------------------
--- 
--- @function [parent=#MyObject] SetId 
--- @param self
--- @param #unsigned long newId
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
 -- @function [parent=#MyObject] OnClear 
 -- @param self
 -- @param #bool 
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetManager 
+-- @function [parent=#MyObject] setState 
 -- @param self
--- @param #game.fishgame2d::FishObjectManager manager
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @param #int 
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] GetTypeID 
+-- @function [parent=#MyObject] getTypeId 
 -- @param self
 -- @return int#int ret (return value: int)
         
@@ -67,8 +54,8 @@
 -- 
 -- @function [parent=#MyObject] AddEffect 
 -- @param self
--- @param #game.fishgame2d::Effect 
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @param #game.fishgame2d.Effect 
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
@@ -78,30 +65,21 @@
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetTypeID 
+-- @function [parent=#MyObject] getMoveCompent 
 -- @param self
--- @param #int typeId
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return MoveCompent#MoveCompent ret (return value: game.fishgame2d.MoveCompent)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] GetDirection 
+-- @function [parent=#MyObject] getManager 
 -- @param self
--- @return float#float ret (return value: float)
+-- @return FishObjectManager#FishObjectManager ret (return value: game.fishgame2d.FishObjectManager)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetState 
+-- @function [parent=#MyObject] getState 
 -- @param self
--- @param #int 
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
-        
---------------------------------
--- 
--- @function [parent=#MyObject] SetDirection 
--- @param self
--- @param #float dir
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
@@ -109,19 +87,7 @@
 -- @param self
 -- @param #bool 
 -- @param #bool noCleanNode
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
-        
---------------------------------
--- 
--- @function [parent=#MyObject] GetId 
--- @param self
--- @return unsigned long#unsigned long ret (return value: unsigned long)
-        
---------------------------------
--- 
--- @function [parent=#MyObject] GetManager 
--- @param self
--- @return fishgame2d::FishObjectManager#fishgame2d::FishObjectManager ret (return value: game.fishgame2d::FishObjectManager)
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
@@ -130,19 +96,20 @@
 -- @param #int buffType
 -- @param #float buffParam
 -- @param #float buffTime
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] GetState 
+-- @function [parent=#MyObject] registerStatusChangedHandler 
 -- @param self
--- @return int#int ret (return value: int)
+-- @param #int 
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
 -- @function [parent=#MyObject] ExecuteEffects 
 -- @param self
--- @param #game.fishgame2d::MyObject pTarget
+-- @param #game.fishgame2d.MyObject pTarget
 -- @param #array_table list
 -- @param #bool bPretreating
 -- @return array_table#array_table ret (return value: array_table)
@@ -152,7 +119,7 @@
 -- @function [parent=#MyObject] SetTarget 
 -- @param self
 -- @param #int i
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
@@ -170,11 +137,10 @@
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] SetPosition 
+-- @function [parent=#MyObject] setId 
 -- @param self
--- @param #float x
--- @param #float y
--- @return fishgame2d::MyObject#fishgame2d::MyObject self (return value: game.fishgame2d::MyObject)
+-- @param #unsigned long newId
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 --------------------------------
 -- 
@@ -184,8 +150,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#MyObject] GetPosition 
+-- @function [parent=#MyObject] setManager 
 -- @param self
--- @return vec2_table#vec2_table ret (return value: vec2_table)
+-- @param #game.fishgame2d.FishObjectManager manager
+-- @return MyObject#MyObject self (return value: game.fishgame2d.MyObject)
         
 return nil

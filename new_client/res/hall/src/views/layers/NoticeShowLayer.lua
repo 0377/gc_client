@@ -1,8 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local NoticeShowLayer = class("NoticeShowLayer",CustomBaseView)
 function NoticeShowLayer:ctor(notice)
-	
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("NoticeShowLayer.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("NoticeShowLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Widget");
   
@@ -12,11 +12,11 @@ function NoticeShowLayer:ctor(notice)
     	self:closeView();
     end)
 	
-	local confirmBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"btn_confirm"),"ccui.Button");
-	confirmBtn:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-    	self:closeView();
-    end)
+	-- local confirmBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"btn_confirm"),"ccui.Button");
+	-- confirmBtn:addClickEventListener(function()
+ --        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+ --    	self:closeView();
+ --    end)
 	self:initView(notice)
 	NoticeShowLayer.super.ctor(self)
     CustomHelper.addAlertAppearAnim(self.alertView)
@@ -35,6 +35,8 @@ function NoticeShowLayer:initView(notice)
 	title:setString(CustomHelper.decodeURI(notice._Content.title))
 	local content = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"content_txt"),"ccui.Text");
 	content:setString(CustomHelper.decodeURI(notice._Content.content))
+	content:ignoreContentAdaptWithSize(true); 
+	content:setTextAreaSize(cc.size(930, 0)); 
 end
 
 function NoticeShowLayer:closeView()

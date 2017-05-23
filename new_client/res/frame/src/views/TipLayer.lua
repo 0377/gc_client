@@ -1,8 +1,8 @@
 local TipLayer = class("TipLayer", cc.Node);
 FrameSound_Btn = "sound/frame_btn.mp3"
 function TipLayer:ctor()
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("TipLayerCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+	local CCSLuaNode =  requireForGameLuaFile("TipLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.alertView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_view"), "ccui.Layout");
     self.contentTextNode = tolua.cast(CustomHelper.seekNodeByName(self.alertView, "contentTextNode"), "ccui.Text");
@@ -67,13 +67,15 @@ function TipLayer:showLackMoneyAlertView(content,cancelBtnStr,confirmBtnStr,canc
 			-- btn:loadTextures("","","")
 		elseif btnTag == "bank" then
 			
-			btn:loadTextures("hall_res/gobank_alertview/bt_qyh.png","hall_res/gobank_alertview/bt_qyh_2.png","hall_res/gobank_alertview/bt_qyh_2.png")
+			btn:loadTextures("hall_res/tishi/bb_xszd_qyh.png","hall_res/tishi/bb_xszd_qyh1.png","hall_res/tishi/bb_xszd_qyh1.png")
 			btn:ignoreContentAdaptWithSize(true)
-			btn:setContentSize(cc.size(228,105))
+			local normalSize = btn:getRendererNormal():getOriginalSize();
+			btn:setContentSize(cc.size(normalSize.width,normalSize.height))
 		elseif  btnTag == "story" then
 			btn:ignoreContentAdaptWithSize(true)
-			btn:loadTextures("hall_res/gobank_alertview/bt_qcz.png","hall_res/gobank_alertview/bt_qcz_2.png","hall_res/gobank_alertview/bt_qcz_2.png")
-			btn:setContentSize(cc.size(228,105))
+			btn:loadTextures("hall_res/tishi/bb_xszd_qcz.png","hall_res/tishi/bb_xszd_qcz1.png","hall_res/tishi/bb_xszd_qcz1.png")
+			local normalSize = btn:getRendererNormal():getOriginalSize();
+			btn:setContentSize(cc.size(normalSize.width,normalSize.height))
 		elseif btnTag == "canfirm" then
 
 

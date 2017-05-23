@@ -3,8 +3,8 @@ local NoticeLayer = class("NoticeLayer", CustomBaseView);
 function NoticeLayer:ctor()
     NoticeLayer.super.ctor(self)
     self:setCascadeOpacityEnabled(true)
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("NoticeLayer.csb");
-    self._ui = cc.CSLoader:createNode(csNodePath):addTo(self)
+    local CCSLuaNode =  requireForGameLuaFile("NoticeLayerCCS")
+    self._ui = CCSLuaNode:create().root:addTo(self)
 
 
     local background = tolua.cast(CustomHelper.seekNodeByName(self._ui, "background"), "ccui.Widget")
@@ -258,7 +258,8 @@ function NoticeLayer:UpdateContent()
 
     local message, loaded = messageInfo:getDataByType(messageInfo.MSG_TYPE.NOTICE)
     if not loaded then
-        self:onLoading()
+        -- self:onLoading()
+        self:onLoadingEnd()
     else
         self:onLoadingEnd()
     end

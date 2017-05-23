@@ -12,8 +12,8 @@ LoadingScene._TipsTab = {
 }
 
 function LoadingScene:ctor(needLoadResArray,finishCallback, infoTab)
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("LoadingLayerCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("LoadingLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     --增加提示动画
     local helpTipText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "tips_text"), "ccui.Text");

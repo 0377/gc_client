@@ -133,10 +133,10 @@ function HallManager:initSubGameSearchPath()
 		"src",
 		"src/config/",
 		"src/controller/",
-		"src/views",
-		"src/model",
+		"src/views/",
+		"src/model/",
 		"res",
-		"res/csb"
+		"res/ccs_export/"
 		-- "res/pb_files"
 	}
 	local writablePath = cc.FileUtils:getInstance():getWritablePath();

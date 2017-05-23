@@ -37,7 +37,7 @@ message PlayerVisualInfo {
 	optional string nickname = 4;					// 昵称
 	optional int32 level = 5[default = 1];			// 玩家等级
 	optional int64 money = 6[default = 0]; 			// 有多少钱
-	optional int32 header_icon = 7[default = 0]; 	// 头像	
+	optional int32 header_icon = 7[default = -1]; 	// 头像	
 	optional string ip_area = 8;					// 客户端ip地区
 }
 

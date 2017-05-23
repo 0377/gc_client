@@ -2,14 +2,11 @@ local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local SecondarySelectLayer = class("SecondarySelectLayer",CustomBaseView);
 function SecondarySelectLayer:ctor()
 	print("SecondarySelectLayer:----")
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("SecondarySelectLayerCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+	-- local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("SecondarySelectLayerCCS.csb");
+ --    self.csNode = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("SecondarySelectLayerCCS")
+	self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
-    local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "closeBtn"), "ccui.Button");
-    closeBtn:addClickEventListener(function(sender)
-    	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-    	self:removeSelf();
-    end);
     self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
     --快速开始按钮
     self.quickStartBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_quickStart"), "ccui.Button");
@@ -61,10 +58,13 @@ function SecondarySelectLayer:showView(gameID)
 		-- print("fullPath:",fullPath)
 	end
 	--显示标题
-	local titleView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "title_icon_view"), "ccui.ImageView");
-	local titleResPath = CustomHelper.getFullPath(gameBaseInfoTab[HallGameConfig.GameSecondTitleResKey])
-	titleView:ignoreContentAdaptWithSize(true);
-	titleView:loadTexture(titleResPath);
+	-- local titleView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "title_icon_view"), "ccui.ImageView");
+
+	-- titleView:ignoreContentAdaptWithSize(true);
+	-- titleView:loadTexture(titleResPath);
+
+	ViewManager.initPublicTopInfoLayer(self,gameBaseInfoTab[HallGameConfig.GameSecondTitleResKey])
+
 	self.gameName = gameBaseInfoTab[HallGameConfig.GameNameKey] or "";
 
 	local openGameTab = GameManager:getInstance():getHallManager():getHallDataManager():getAllOpenGamesDeatilTab()
@@ -145,13 +145,16 @@ function SecondarySelectLayer:refreshRoomListTableView()
 		self.tableView:setPositionX((viewSize.width - x*roomCount )/2)
 		self.tableView:setTouchEnabled(false)
 	else
+		self.tableView:setViewSize(cc.size(viewSize.width,viewSize.height))
 		self.tableView:setTouchEnabled(true)
 	end
 	
 	self.tableView:reloadData()
 end
 function SecondarySelectLayer:numberOfCellsInTableView(view)
-	return table.nums(self.roomListData) or 0
+	local roomsNum = table.nums(self.roomListData);
+	local num = math.ceil(roomsNum/4) or 0
+	return num
 end
 
 function SecondarySelectLayer:scrollViewDidScroll(view)
@@ -163,49 +166,93 @@ function SecondarySelectLayer:scrollViewDidZoom(view)
 end
 
 function SecondarySelectLayer:tableCellTouched(view,cell)
-	print("tableCellTouched...",cell:getIdx())
-	local gamenode = cell:getChildByName("Node")
-	if gamenode and gamenode.selectNode then
-		gamenode:selectNode()
-	end
+	-- print("tableCellTouched...",cell:getIdx())
+	-- local gamenode = cell:getChildByName("Node")
+	-- if gamenode and gamenode.selectNode then
+	-- 	gamenode:selectNode()
+	-- end
 end
 function SecondarySelectLayer:cellSizeForTable(view,idx)
-	return 320,450
+	return 1280,450
 end
-function SecondarySelectLayer:createItemIdx(view,idx)
-	local SecondaryGameNodeClass = requireForGameLuaFile(self.selectedGameInfoTab[HallGameConfig.SecondRoomNodeClassNameKey])
-	local itemNode = SecondaryGameNodeClass:create()
-	local x,y = self:cellSizeForTable(view,idx)
-	itemNode:setSwallowTouches(false)
-	itemNode:setName("Node")
-	itemNode:setAnchorPoint(cc.p(0.0,0.0))
-	--itemNode:setPosition(cc.p(x/2,y/2))
-	return itemNode
+function SecondarySelectLayer:createItemIdx(view,idx)	
+	if self.defaultItemNode == nil then
+		--todo
+		self.defaultItemNode = CustomHelper.seekNodeByName(self.csNode, "defaultItemNode");
+	end
+	local itemNode = self.defaultItemNode:clone();
+	itemNode:setSwallowTouches(false);
+	local SecondaryGameNodeClass = nil
+	local SecondClassName = self.selectedGameInfoTab[HallGameConfig.SecondRoomNodeClassNameKey]
+	if SecondClassName and SecondClassName ~= "" then
+		SecondaryGameNodeClass = requireForGameLuaFile(SecondClassName)
+	end
+	local posArray = {
+		cc.p(135,239),
+		cc.p(690,239),
+		cc.p(135,9),
+		cc.p(690,9)
+	}
+	itemNode:removeAllChildren();
+	for i=1,4 do
+		local roomItemNode = nil;
+		if SecondaryGameNodeClass then --如果存在自定义界面
+				--todo	
+			roomItemNode = SecondaryGameNodeClass:create();
+		else
+			local SecondaryNormalNode = require("secondary_game_node.SecondaryNormalNode")
+			roomItemNode = SecondaryNormalNode:create();
+		end
+		roomItemNode:setPosition(posArray[i]);
+		roomItemNode:setName(string.format("secondary_room_%d",i))
+		roomItemNode:setSwallowTouches(false);
+		itemNode:addChild(roomItemNode)
+	end
+	return itemNode;
 end
 function SecondarySelectLayer:tableCellAtIndex(view,idx)
-	
     local cell = view:dequeueCell()
-	local ritem = nil
     if nil == cell then
         cell = cc.TableViewCell:new()
-		ritem = self:createItemIdx(view,idx)		
+		local ritem = self:createItemIdx(view,idx)		
 		cell:addChild(ritem)	
-    else
-        ritem = cell:getChildByName("Node")
-		
     end
-	local roomData = self.roomListData[idx+1]
-	if roomData and ritem and ritem.initViewData then
-		ritem:initViewData(roomData,function()
-			self:readyEnterOneGame(roomData)
-		end,not view:isTouchEnabled())
-	end
-	ritem:setTag(idx)
-	
+    for i=1,4 do
+    	local roomItemNode = CustomHelper.seekNodeByName(cell, string.format("secondary_room_%d",i))
+    	local roomData = self.roomListData[idx * 4+i]
+    	if roomData then
+    		--todo
+    		roomItemNode:setVisible(true);
+			roomItemNode:initViewData(
+				roomData
+			)
+			--添加点击事件
+			local selectBtn = roomItemNode.selectBtn
+			selectBtn:addTouchEventListener(function(sender,event)
+			if event == ccui.TouchEventType.ended then
+				--todo
+				if self.tableView:isTouchMoved() then
+					--todo
+					return;
+				end
+				self:readyEnterOneGame(roomData)
+			end
+
+		end)
+    	else
+    		roomItemNode:setVisible(false)
+    	end
+    	print(i)
+    end
+	-- local roomData = self.roomListData[idx+1]
+	-- if roomData and ritem and ritem.initViewData then
+	-- 	ritem:initViewData(roomData,function()
+	-- 		self:readyEnterOneGame(roomData)
+	-- 	end,not view:isTouchEnabled())
+	-- end
     return cell
 end
 function SecondarySelectLayer:readyEnterOneGame(gameInfoTab)
-
 	if GameManager:getInstance():getHallManager():getPlayerInfo():getFreezeAccount() == 1 then
 		MyToastLayer.new(self, "账号已经被冻结,请联系客服")
 		return

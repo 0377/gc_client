@@ -11,7 +11,7 @@ local framePaths = {
 	"frame/src/views/",
 	"frame/src/utils/",
 	"frame/res/",
-	"frame/res/csb/"
+	"frame/res/ccs_export/"
 }
 for i,v in ipairs(framePaths) do
 	local tempPath = writablePath..v

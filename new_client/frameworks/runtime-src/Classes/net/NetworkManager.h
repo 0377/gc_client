@@ -14,6 +14,7 @@ public:
 	bool disconnect(int connectionID);
 	//发送tcp消息
 	void sendTCPMsg(int connectionID, int msgID, const std::string &msgPbBufferStr);
+	void sendTCPMSgWithLength(int connectionID, int msgID, const char *pb, size_t length);
 	//得到tcp连接状态
 	int getTCPConnectionStatus(int connectionID);
 private:

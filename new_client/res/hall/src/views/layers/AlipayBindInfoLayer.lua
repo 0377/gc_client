@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local AlipayBindInfoLayer = class("AlipayBindInfoLayer", CustomBaseView)
 function AlipayBindInfoLayer:ctor()
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("AlipayBindInfoLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("AlipayBindInfoLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");
     CustomHelper.addAlertAppearAnim(alertPanel);

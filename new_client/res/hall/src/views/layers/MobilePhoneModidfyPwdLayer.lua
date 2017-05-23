@@ -1,7 +1,9 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local MobilePhoneModidfyPwdLayer = class("MobilePhoneModidfyPwdLayer", CustomBaseView);
 function MobilePhoneModidfyPwdLayer:ctor()
-	self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("MobilePhoneModidfyPwdLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("MobilePhoneModidfyPwdLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self:addChild(self.csNode);
     local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alert_panel"), "ccui.Widget");
     CustomHelper.addAlertAppearAnim(alertPanel);

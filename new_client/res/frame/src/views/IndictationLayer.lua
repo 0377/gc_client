@@ -9,8 +9,9 @@ function IndictationLayer:getInstance()
 	return IndictationLayer.instance;
 end
 function IndictationLayer:ctor()
-	local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("IndicationLayerCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("IndicationLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
+
     self.bgView = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"bg_view"),"ccui.Widget")
     self:addChild(self.csNode);
     --旋转图标

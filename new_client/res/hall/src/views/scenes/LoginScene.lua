@@ -4,8 +4,9 @@ local TextStringForSavePwd = "******" -- 有保存账号时,密码信息
 LoginScene.isChangedAccount     = false
 function LoginScene:ctor()
     print("login scene ctor")
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("LoginAccountLayerCCS.csb");
-    self.csNode = cc.CSLoader:createNode(csNodePath);
+    -- local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("LoginAccountLayerCCS.csb");
+    local CCSLuaNode =  requireForGameLuaFile("LoginAccountLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     local winSize = CustomHelper.getWinSize();
     self:addChild(self.csNode);
     -- 添加背景动画baoboblue
@@ -47,11 +48,11 @@ function LoginScene:addSomeNodes()
     self.usernameField = ccui.EditBox:create(editBoxSize,editboxBgFileName)
     self.usernameField:setPosition(cc.p(usernameBgNode:getPositionX(),usernameBgNode:getPositionY()))
     -- self.usernameField:setFontName("Helvetica-Bold")
-    self.usernameField:setFontSize(36)
-    self.usernameField:setFontColor(cc.c3b(255,255,255))
+    self.usernameField:setFontSize(32)
+    self.usernameField:setFontColor(cc.c3b(223,232,82))
     self.usernameField:setPlaceHolder("请输入帐号")
     self.usernameField:setPlaceholderFontColor(cc.c3b(103,95,96))
-    self.usernameField:setPlaceholderFontSize(36)
+    self.usernameField:setPlaceholderFontSize(32)
     self.usernameField:setMaxLength(18)
     self.usernameField:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD);
     self.usernameField:setInputMode(cc.EDITBOX_INPUT_MODE_PHONENUMBER);
@@ -65,11 +66,11 @@ function LoginScene:addSomeNodes()
     self.passwordField = ccui.EditBox:create(editBoxSize,editboxBgFileName)
     self.passwordField:setPosition(cc.p(passwordBgNode:getPositionX(),passwordBgNode:getPositionY()))
     -- self.passwordField:setFontName("Helvetica-Bold")
-    self.passwordField:setFontSize(36)
-    self.passwordField:setFontColor(cc.c3b(255,255,255))
+    self.passwordField:setFontSize(32)
+    self.passwordField:setFontColor(cc.c3b(223,232,82))
     self.passwordField:setPlaceHolder("请输入密码")
     self.passwordField:setPlaceholderFontColor(cc.c3b(103,95,96))
-    self.passwordField:setPlaceholderFontSize(36)
+    self.passwordField:setPlaceholderFontSize(32)
     self.passwordField:setMaxLength(18)
     self.passwordField:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE);
     self.passwordField:setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD)

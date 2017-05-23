@@ -7,7 +7,7 @@
 
 
 #include "./common.h"
-#include "./MyScene.h"
+//#include "./MyScene.h"
 #include "./FishObjectManager.h"
 #include "./FishUtils.h"
 #include "./MyObject.h"

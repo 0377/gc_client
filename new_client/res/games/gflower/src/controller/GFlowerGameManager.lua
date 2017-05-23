@@ -47,7 +47,6 @@ GFlowerGameManager.instance = nil;
 function GFlowerGameManager:getInstance()
     if GFlowerGameManager.instance == nil then
         --todo
-        print("GFlowerGameManager:getInstance! !!!!!!!!!!!!!!!!!!!!!!!!")
         GFlowerGameManager.instance = GFlowerGameManager:create();
     end
     return GFlowerGameManager.instance;
@@ -100,7 +99,6 @@ end
 
 -- 玩家坐下
 function GFlowerGameManager:on_SC_EnterRoomAndSitDown(msgTab)
-    print("----------------------进入房间坐下")
     --dump(msgTab, "----------------------进入 房间坐下")
 end
 
@@ -108,7 +106,6 @@ end
 function GFlowerGameManager:send_CS_ZhaJinHuaGetPlayerStatus()
     -- 3秒不返回退出场景
     self:getDataManager().StandUp = true
-    self:getDataManager():my_NotifyStandUp()
 
     local msgTab = {};
     local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaGetPlayerStatus

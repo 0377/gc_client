@@ -59,7 +59,6 @@ function GFlowerGameScene:returnToHallScene(...)
         self:removeScheduler()
 
         self._logic:InitData()
-        self._logic._gameScene = nil
 
         self._menuOpen = true
         self:MenuControl(not self._menuOpen)
@@ -139,7 +138,6 @@ end
 --重连后游戏结束 就退出房间
 function GFlowerGameScene:exitRoom()
     --GFlowerGameScene.instance = nil
-    print("GFlowerGameScene:exitRoom ............................")
     GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
     self:returnToHallScene()
 end
@@ -154,18 +152,13 @@ function GFlowerGameScene:ctor()
 
     -- 调用父类
     GFlowerGameScene.super.ctor(self);
-
-    self.rootPath = GFlowerGameManager:getInstance():getPackageRootPath();
-    self.csbRootPath = "res/"..self.rootPath.."res/csb/"
-    local csNodePath = cc.FileUtils:getInstance():fullPathForFilename("GameZJH.csb");
-    self.m_widget = cc.CSLoader:createNode(csNodePath);
+    local CCSLuaNode =  requireForGameLuaFile("GameZJHCCS")
+    self.m_widget = CCSLuaNode:create().root;
     self.csNode = self.m_widget
     self:addChild(self.csNode);
 
     -- 初始化逻辑类
     self._logic = GFlowerGameManager:getInstance():getDataManager()
-    self._logic:setGFlowerSceneObj(self);
-
 
     -- 每个玩家只有一个操作倒计时动画 在进入场景时创建
     self._daojishius = {}
@@ -286,7 +279,6 @@ function GFlowerGameScene:onEnter()
     local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
     if gameingInfoTable == nil then
         -- 获取房间内玩家状态 再坐下
-        print("GFlowerGameScene:onEnter ...............................................................")
         GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
          --print("玩家正常进入--------------------------")
     else
@@ -436,7 +428,7 @@ function GFlowerGameScene:InitPlayerUi()
         -- 重连或者换桌 时不再创建
         if self._daojishius[i] == nil then
             -- 加载资源图片
-            local spriteProgress = cc.Sprite:create(self.rootPath.."res/csb/game_res/baobo_zjh_dengdai_1.png")
+            local spriteProgress = cc.Sprite:create("game_res/baobo_zjh_dengdai_1.png")
 
             self._daojishius[i] = cc.ProgressTimer:create(spriteProgress)
             local size = self.gf_player[i]:getContentSize()
@@ -641,7 +633,7 @@ function GFlowerGameScene:InitOtherUi()
 
     -- 倒计时转圈动画
     if self.jiesuan_djs_ani == nil then
-        local spriteProgress = cc.Sprite:create(self.rootPath.."res/csb/game_res/zjh_jiesuan_time.png")
+        local spriteProgress = cc.Sprite:create("game_res/zjh_jiesuan_time.png")
         self.jiesuan_djs_ani = cc.ProgressTimer:create(spriteProgress)
         local size = self.ready_time_di:getContentSize()
         self.jiesuan_djs_ani:setPosition(cc.p(size.width/2, size.height/2))
@@ -781,8 +773,8 @@ function GFlowerGameScene:dealJieSuanReady()
 
     -- 如果房间 不处于战斗状态 玩家进入后强制准备
     if self.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
-
         self:removeAllCoin()
+		print("11111111111111111111111111111111111111111111111111111")
         GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady()
     else
         self:recoverMainTableUI()
@@ -1057,7 +1049,6 @@ function GFlowerGameScene:_onBtnTouched_result_close(sender, eventType)
             if state == GFlowerConfig.PLAYER_STATUS.LOOK
             or state == GFlowerConfig.PLAYER_STATUS.CONTROL then
 
-                print("GFlowerGameScene:_onBtnTouched_result_close")
                 GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGiveUp()
             end
 
@@ -1333,7 +1324,6 @@ function GFlowerGameScene:gfFapaiAnimiCallBack()
         else
             self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 1)
         end
-        print("gfFapaiAnimiCallBack 加注 =======================================： ",GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
         GFlowerGameManager:getInstance():send_CS_ZhaJinHuaAddScore(GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
     end
 end
@@ -1640,7 +1630,6 @@ function GFlowerGameScene:setPlayerInfo(gfplayer)
     local chair = gfplayer:getClientChairId()
     self.playername[chair]:setString(gfplayer:getNickName())
     local p_money  = CustomHelper.moneyShowStyleNone(gfplayer:getMoney())
-    print("GFlowerGameScene:setPlayerInfo ... NickName: "..gfplayer:getNickName().." Money: "..p_money.." Chair: "..gfplayer:getClientChairId())
     self.playergold[chair]:setString(p_money)
     self.playerhead[chair]:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(gfplayer:getHeadIconNum())..".png"))
     local  downMoney = gfplayer:getDownMoney()
@@ -1679,7 +1668,6 @@ function GFlowerGameScene:On_PlayerEnter(gfplayer)
                 or v:getGameState() == GFlowerConfig.PLAYER_STATUS.CONTROL 
                 or v:getGameState() == GFlowerConfig.PLAYER_STATUS.DROP 
                 or v:getGameState() == GFlowerConfig.PLAYER_STATUS.LOSE then
-                    print("玩家id：",v:getClientChairId())
                     self:setPlayerCardVisible(v:getClientChairId())
                 end
             end
@@ -2373,9 +2361,9 @@ function GFlowerGameScene:setJieSuanPanelInfo()
 
                 Image_caozuo:setVisible(true)
                 --默认为弃牌 否则为淘汰
-                local caozuo_file = "games/gflower/res/csb/game_res/zjh_wanjia_qp.png"
+                local caozuo_file = "game_res/zjh_wanjia_qp.png"
                 if playerState == GFlowerConfig.PLAYER_STATUS.LOSE then
-                    caozuo_file = "games/gflower/res/csb/game_res/zjh_wanjia_tt.png"
+                    caozuo_file = "game_res/zjh_wanjia_tt.png"
                 end
 
                 -- 如果是自己 就翻开 
@@ -3225,6 +3213,7 @@ function GFlowerGameScene:registerNotification()
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_NotifySitDown)
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_NotifyStandUp)
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_Ready)
+	
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaStart)
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaAddScore)
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaGiveUp)
@@ -3238,6 +3227,7 @@ function GFlowerGameScene:registerNotification()
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaLostCards)
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaReadyTime)
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaClientReadyTime)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ChangeTable)
 
     GFlowerGameScene.super.registerNotification(self)
 end
@@ -3277,6 +3267,10 @@ function GFlowerGameScene:receiveServerResponseSuccessEvent(event)
         self:on_msg_ZhaJinHuaCompareCard(msgTab)
     elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaReadyTime then
         self:on_msg_ZhaJinHuaReadyTime(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ChangeTable then
+		self:on_msg_ZhaJinHuaChangeTable(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaGetSitDown then
+		self:on_msg_ZhaJinHuaGetSitDown(msgTab)
     elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaClientReadyTime then
         self:on_msg_ZhaJinHuaClientReadyTime(msgTab)
             ---游戏停服通知
@@ -3293,10 +3287,21 @@ end
 function GFlowerGameScene:on_msg_ZhaJinHuaReConnect(msgTab)
 --  这么诡异的写法是因为不熟悉这个消息的具体情况
    if msgTab.isseecard then
+		GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
+		self:check_StandUp()
    else
-        -- 如果不在房间退出到主场景
         self:exitRoom()
     end
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaChangeTable(msgTab)
+	GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
+	self:check_StandUp()
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaGetSitDown(msgTab)
+	GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
+	self:check_StandUp()
 end
 
 function GFlowerGameScene:on_msg_Ready(msgTab)
@@ -3447,7 +3452,7 @@ function GFlowerGameScene:on_msg_ZhaJinHuaWatch(msgTab)
     if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
         -- 清空桌面筹码 其他情况不清除
         self:removeAllCoin()
-
+        print("11111111111111111111111111111111111111111111111111111")
         GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady();
     else
         self:recoverMainTableUI()

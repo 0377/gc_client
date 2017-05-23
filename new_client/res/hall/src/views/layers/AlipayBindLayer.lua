@@ -1,7 +1,8 @@
 local CustomBaseView = requireForGameLuaFile("CustomBaseView")
 local AlipayBindLayer = class("AlipayBindLayer",CustomBaseView);
 function AlipayBindLayer:ctor()
-    self.csNode = cc.CSLoader:createNode(CustomHelper.getFullPath("AlipayBindLayerCCS.csb"));
+    local CCSLuaNode =  requireForGameLuaFile("AlipayBindLayerCCS")
+    self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
     self.goEnsureBindBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "alipay_bind_btn"), "ccui.Button");
     self.goEnsureBindBtn:addClickEventListener(function()

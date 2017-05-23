@@ -91,81 +91,81 @@ GFlowerConfig.PLAYER_STATUS = {
 
 -- 筹码资源路径 --sx
 GFlowerConfig.COIN_SPRITE_STR = {
-    "games/gflower/res/csb/game_res/baobo_zjh_choma_0x.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_choma_4x.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_chouma_3x.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_chouma_2x.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_chouma_1x.png"
+    "game_res/baobo_zjh_choma_0x.png",
+    "game_res/baobo_zjh_choma_4x.png",
+    "game_res/baobo_zjh_chouma_3x.png",
+    "game_res/baobo_zjh_chouma_2x.png",
+    "game_res/baobo_zjh_chouma_1x.png"
 }
 
 -- 状态图片 --sx
 GFlowerConfig.IMAGE_PLAYER_STATUS = {
-    READY = "games/gflower/res/csb/game_res/baobo_zjh_yizhunbei.png",  --已准备
-    DROP = "games/gflower/res/csb/game_res/baobo_zjh_qipai.png",       --弃牌
-    LOSE = "games/gflower/res/csb/game_res/baobo_zjh_taotai.png",      --淘汰
-    STAND = "games/gflower/res/csb/game_res/baobo_dengdairuzhuo.png"   --等待入桌
+    READY = "game_res/baobo_zjh_yizhunbei.png",  --已准备
+    DROP = "game_res/baobo_zjh_qipai.png",       --弃牌
+    LOSE = "game_res/baobo_zjh_taotai.png",      --淘汰
+    STAND = "game_res/baobo_dengdairuzhuo.png"   --等待入桌
 }
 
 -- 气泡贴图 -- sx
 GFlowerConfig.IMAGE_PLAYER_CALL = {
-    ALL_IN = "games/gflower/res/csb/game_res/baobo_zjh_art_quanya.png",
-    BI_PAI = "games/gflower/res/csb/game_res/baobo_zjh_art_bipai.png",
-    GIVE_UP = "games/gflower/res/csb/game_res/baobo_zjh_art_qipai.png",
-    FOLLOW = "games/gflower/res/csb/game_res/baobo_zjh_art_genzhu.png",
-    ADD_SCORE = "games/gflower/res/csb/game_res/baobo_zjh_art_jiazhu.png",
+    ALL_IN = "game_res/baobo_zjh_art_quanya.png",
+    BI_PAI = "game_res/baobo_zjh_art_bipai.png",
+    GIVE_UP = "game_res/baobo_zjh_art_qipai.png",
+    FOLLOW = "game_res/baobo_zjh_art_genzhu.png",
+    ADD_SCORE = "game_res/baobo_zjh_art_jiazhu.png",
 }
 
 -- 倒计时图片 -- sx
 GFlowerConfig.IMAGE_COUNT_DOWN = {
-    "games/gflower/res/csb/game_res/baobo_zjh_dengdai_1.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_dengdai_2.png",
-    "games/gflower/res/csb/game_res/baobo_zjh_dengdai_3.png",
+    "game_res/baobo_zjh_dengdai_1.png",
+    "game_res/baobo_zjh_dengdai_2.png",
+    "game_res/baobo_zjh_dengdai_3.png",
 }
 
 -- 计算界面图片 --
 GFlowerConfig.IMAGE_JIESUAN = {
-    READY_ENABLE   = "games/gflower/res/csb/game_res/baobo_zjh_art_zb.png",
-    READY_DISABLE  = "games/gflower/res/csb/game_res/baobo_zjh_art_zb40.png",
-    AUTO_READY_GOU = "games/gflower/res/csb/game_res/baobo_zdks_icon_gou.png" 
+    READY_ENABLE   = "game_res/baobo_zjh_art_zb.png",
+    READY_DISABLE  = "game_res/baobo_zjh_art_zb40.png",
+    AUTO_READY_GOU = "game_res/baobo_zdks_icon_gou.png" 
 }
 
 -- 金花音效音乐按钮图片 --
 GFlowerConfig.BTN_IMG = {
-    MUSIC_ON_N      = "games/gflower/res/csb/game_res/baobo_zjh_icon_yyk.png",
-    MUSIC_ON_P      = "games/gflower/res/csb/game_res/baobo_zjh_icon_yyk2.png",
-    MUSIC_OFF_N     = "games/gflower/res/csb/game_res/baobo_zjh_icon_yyg.png",
-    MUSIC_OFF_P     = "games/gflower/res/csb/game_res/baobo_zjh_icon_yyg2.png",
-    SOUND_ON_N      = "games/gflower/res/csb/game_res/baobo_zjh_icon_yxk.png",
-    SOUND_ON_P      = "games/gflower/res/csb/game_res/baobo_zjh_icon_yxk2.png",
-    SOUND_OFF_N     = "games/gflower/res/csb/game_res/baobo_zjh_icon_yxg.png",
-    SOUND_OFF_P     = "games/gflower/res/csb/game_res/baobo_zjh_icon_yxg2.png",
+    MUSIC_ON_N      = "game_res/baobo_zjh_icon_yyk.png",
+    MUSIC_ON_P      = "game_res/baobo_zjh_icon_yyk2.png",
+    MUSIC_OFF_N     = "game_res/baobo_zjh_icon_yyg.png",
+    MUSIC_OFF_P     = "game_res/baobo_zjh_icon_yyg2.png",
+    SOUND_ON_N      = "game_res/baobo_zjh_icon_yxk.png",
+    SOUND_ON_P      = "game_res/baobo_zjh_icon_yxk2.png",
+    SOUND_OFF_N     = "game_res/baobo_zjh_icon_yxg.png",
+    SOUND_OFF_P     = "game_res/baobo_zjh_icon_yxg2.png",
 }
 
 -- 按钮文字 --sx
 GFlowerConfig.IMAGE_CONTROL_BTN = {
     ALL_IN = {
-       "games/gflower/res/csb/game_res/baobo_zjh_art_qy.png",
-       "games/gflower/res/csb/game_res/baobo_zjh_art_qy40.png",
+       "game_res/baobo_zjh_art_qy.png",
+       "game_res/baobo_zjh_art_qy40.png",
     },
     BI_PAI = {
-        "games/gflower/res/csb/game_res/baobo_zjh_art_bp.png",
-        "games/gflower/res/csb/game_res/baobo_zjh_art_bp40.png",
+        "game_res/baobo_zjh_art_bp.png",
+        "game_res/baobo_zjh_art_bp40.png",
     },
     GIVE_UP = {
-        "games/gflower/res/csb/game_res/baobo_zjh_art_qp.png",
-        "games/gflower/res/csb/game_res/baobo_zjh_art_qp40.png"
+        "game_res/baobo_zjh_art_qp.png",
+        "game_res/baobo_zjh_art_qp40.png"
     },
     FOLLOW = {
-        "games/gflower/res/csb/game_res/baobo_zjh_art_gz.png",
-        "games/gflower/res/csb/game_res/baobo_zjh_art_gz40.png",
+        "game_res/baobo_zjh_art_gz.png",
+        "game_res/baobo_zjh_art_gz40.png",
     },
     ADD_SCORE = {
-        "games/gflower/res/csb/game_res/baobo_zjh_art_jz.png",
-        "games/gflower/res/csb/game_res/baobo_zjh_art_jz40.png"
+        "game_res/baobo_zjh_art_jz.png",
+        "game_res/baobo_zjh_art_jz40.png"
     },
     LOOK_CARD = {
-        "games/gflower/res/csb/game_res/baobo_zjh_art_kp.png",
-        "games/gflower/res/csb/game_res/baobo_zjh_art_kp40.png"
+        "game_res/baobo_zjh_art_kp.png",
+        "game_res/baobo_zjh_art_kp40.png"
     },
 }
 
@@ -176,7 +176,7 @@ GFlowerConfig.POKER = {
 }
 
 -- 比牌遮罩 --
-GFlowerConfig.SHADE_STR = "games/gflower/res/csb/game_res/baobo_yuanxingqie.png"
+GFlowerConfig.SHADE_STR = "game_res/baobo_yuanxingqie.png"
 
 -- 玩家坐标 -- sx
 GFlowerConfig.PLAYER_LOCATION = {

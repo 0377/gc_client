@@ -26,7 +26,8 @@ LhjGameScene.GAME_STATUS = {
     LOOP_STATUS =3,--滚动循环阶段
     STOP_STATUS = 4,--停止减速阶段
     FLASH_STATUS =5,--中奖线闪烁阶段
-    SHOUFEN_STATUS = 6,--收分动画阶段
+    SHOW_RESULT = 6,--显示结果阶段
+    SHOUFEN_ANIM_STATUS = 7,--收分动画阶段
 }
 
 
@@ -62,10 +63,14 @@ LhjGameScene.IMG_MOHU2[8] = "game_res/wz_qqq_hu_2.png"--2 --忠义堂=777      5
 
 
 LhjGameScene.SOUND = {
-   bg = "lhjSound/music-tiger-bg.mp3",
-   line = "lhjSound/sound-tiger-line-button.mp3",
-   start = "lhjSound/sound-tiger-rool-start.mp3",
-   win = "lhjSound/sound-tiger-win-line.mp3",
+    bg = "lhjSound/lhj_bg_music.mp3",
+    line = "lhjSound/sound-tiger-line-button.mp3", --选线/按钮
+    winline = "lhjSound/lhj_line_sound.mp3", --中奖连线
+    start = "lhjSound/sound-tiger-rool-start.mp3",
+    shoufen = "lhjSound/lhj_shoufen_sound.mp3",
+    getscore =  "lhjSound/lhj_getscore_sound.mp3",
+    stop =  "lhjSound/lhj_getscore_sound.mp3",
+    bigwincoin =  "lhjSound/lhj_bigwincoin_sound.mp3",
 
 
 }
@@ -111,12 +116,16 @@ function LhjGameScene:ctor()
     self.lhjGameManager = LhjGameManager:getInstance();
     self._clickStartTime = nil
     self._scheduler = nil
+
+    self._isPlayBigWinAnimTime = false
    
 
     self.fruitTab = self.fruitTab or {} --游戏中水果节点
     self.numAndLine = self.numAndLine or {} --连线
     ---初始化UI
     self:initUI();
+
+
 
     ---初始化自己的信息
     self:showMyInfo()
@@ -132,10 +141,10 @@ end
 ----初始化界面
 function LhjGameScene:initUI()
      ---初始化界面
-    local csNodePath = CustomHelper.getFullPath("LhjGameScene.csb")
-    self.csNode = cc.CSLoader:createNode(csNodePath)
-    self:addChild(self.csNode)
-
+    local CCSLuaNode =  requireForGameLuaFile("LhjGameSceneCCS")
+    self.csNode = CCSLuaNode:create().root;
+    self:addChild(self.csNode);
+   
     self.cumulativeScoreTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "cumulative_score_txt"), "ccui.TextAtlas");
     self.bankMoneyTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_money_txt"), "ccui.TextAtlas");
     self.moneyTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_txt"), "ccui.TextAtlas");
@@ -174,7 +183,7 @@ function LhjGameScene:initUI()
        
      self.btnXs:addTouchEventListener(function(sender,eventType)
         if eventType == ccui.TouchEventType.began then
-            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
+           GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
             local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
             local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
             --显示下注倍数
@@ -213,14 +222,14 @@ function LhjGameScene:initUI()
 
 
     self.btnMaxLine:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         if self._gameStatus ~= LhjGameScene.GAME_STATUS.READAY_STATUS then return  end
         self:setLineNum(9);
     end) 
 
     self.btnBet:addTouchEventListener(function(sender,eventType)
         if eventType == ccui.TouchEventType.began then
-             GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
+            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
             local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
             local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
             --显示下注倍数
@@ -254,27 +263,34 @@ function LhjGameScene:initUI()
         end
     end); 
     self.btnShoufen:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
-        if self._winLayout:isVisible() then
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+        if self._gameStatus == LhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS then return end
+        if self._winLayout:isVisible() and self._isPlayBigWinAnimTime == false then
             self:showShouFenAnim()
         end
-        
     end) 
 
     self.btnMaxBet:addClickEventListener(function()
-         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
+         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         if self._gameStatus ~= LhjGameScene.GAME_STATUS.READAY_STATUS then return  end
         self:setBet(10);
     end)
 
     local function btnClick(sender,eventType)
         if eventType == ccui.TouchEventType.began then
-            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.line)
+            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
             self._clickStartTime = os.time()
+            self._scheduler = CustomHelper.performWithDelayGlobal(function (  )
+                self._isAuto = true
+                self:startNextRound()
+            end, 2)
         elseif eventType == ccui.TouchEventType.moved then
             
         elseif eventType == ccui.TouchEventType.ended then
             if not self._clickStartTime then return end
+            if self._gameStatus ~= LhjGameScene.GAME_STATUS.READAY_STATUS then return end 
+            CustomHelper.unscheduleGlobal(self._scheduler)
+            self._scheduler = nil
             if os.time() - self._clickStartTime > 1 then --长按
                 self._isAuto = true
             end
@@ -292,10 +308,18 @@ function LhjGameScene:initUI()
         self:btnVisibleControl()
     end) 
     self.btnStop:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-        CustomHelper.unscheduleGlobal(self._scheduler)
-        self._scheduler = nil
-        self:stopLoop(0.5)
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+       
+       --只在加速或loop时执行逻辑
+        if self._gameStatus == LhjGameScene.GAME_STATUS.ACCLERA_STATUS or self._gameStatus == LhjGameScene.GAME_STATUS.LOOP_STATUS then
+             if  self._gameStatus == LhjGameScene.GAME_STATUS.STOP_STATUS then
+            --已经减速 和中奖项目闪烁时 return
+                return 
+            end
+             CustomHelper.unscheduleGlobal(self._scheduler)
+            self._scheduler = nil
+            self:stopLoop(0.5)
+        end 
     end)    
 
     self:setLineNum(self._currentLine)
@@ -311,7 +335,7 @@ function LhjGameScene:initUI()
     self.btnsList = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btns_list"), "ccui.Widget");
     self.btnOpenList = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_open_list"), "ccui.Button");
     self.btnOpenList:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         self.btnOpenList:setTouchEnabled(false)
         if not self._isBtnListOpen then
             local action = {}
@@ -339,7 +363,7 @@ function LhjGameScene:initUI()
 
     local btn_exit = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_exit"), "ccui.Button");
     btn_exit:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         self:exitGame()
     end)  
     local btn_sound = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_sound"), "ccui.Button");
@@ -355,13 +379,13 @@ function LhjGameScene:initUI()
     end
     setSoundBtnIcon()
     btn_sound:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         local isOpenForSound = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
         GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(isOpenForSound);
         
         if isOpenForSound == true then
             --todo
-            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         else
             GameManager:getInstance():getMusicAndSoundManager():stopAllSound();
         end
@@ -369,7 +393,7 @@ function LhjGameScene:initUI()
     end)  
     local btn_help = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_help"), "ccui.Button");
     btn_help:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         local tips = requireForGameLuaFile("LhjGameTips")
         local tipsLayer = tips:create()
         self:addChild(tipsLayer,100)
@@ -398,9 +422,29 @@ function LhjGameScene:initUI()
     setMusicBtnIcon()
     self._winLayout = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "win_layout"), "ccui.Layout");
     self._winLayout:setVisible(false)
+    for i,v in ipairs(self.csNode:getChildren()) do
+        print(v:getName())
+    end
 
 
-    self._startAnim = self.csNode:getChildByName("start_anim")
+     local function winLayoutClick(sender,eventType)
+        if eventType == ccui.TouchEventType.began then
+           
+        elseif eventType == ccui.TouchEventType.moved then
+            
+        elseif eventType == ccui.TouchEventType.ended then
+            if self._gameStatus == LhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS then return end
+            if self._winLayout:isVisible()  and self._isPlayBigWinAnimTime == false then
+                self:showShouFenAnim()
+            end
+        elseif eventType == ccui.TouchEventType.canceled then
+        end
+    end 
+
+    self._winLayout:addTouchEventListener(winLayoutClick)  
+
+
+    self._startAnim = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "slots_race_pop_middle_gold_01"),"ccs.Armature")
     self._startAnim:setVisible(false)
 
     self._btnLagan = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_lagan"), "ccui.Button");
@@ -419,6 +463,17 @@ function LhjGameScene:initUI()
 
 
     self:setBet(self._currentBetMultiple)
+    self._winBetNode = tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "win_bet_node"), "cc.Node");
+    local winLight = tolua.cast(CustomHelper.seekNodeByName(self._winBetNode, "win_light"), "cc.Sprite");
+    local animation =cc.Animation:create()                                                                           
+    for i=1,2 do  
+        local frameName = string.format("game_res/jiujiu_lhj_caideng_%d.png",i)                                                     
+        local spriteFrame = cc.SpriteFrame:create(frameName,cc.rect(0,0,251,125))         
+        animation:addSpriteFrame(spriteFrame)                                                           
+    end  
+    animation:setDelayPerUnit(0.1)
+    winLight:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+
 
 end
 
@@ -582,7 +637,7 @@ function LhjGameScene:startNextRound( )
         elseif _type == 2 then
         end
     end)
-    self._startAnim:getAnimation():play("large_04")
+    self._startAnim:getAnimation():play("ani_01")
     GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.start)
 end
 
@@ -680,7 +735,6 @@ end
 function LhjGameScene:stopLoop( time)
     self._isStopLoop = true
     if not self.lhjGameManager:getDataManager():getGameItemResults() then return end
-    self.btnStop:setTouchEnabled(false)
     if  self._gameStatus == LhjGameScene.GAME_STATUS.STOP_STATUS then
         --加速时不停止 加速完成后停止
         return 
@@ -692,7 +746,7 @@ function LhjGameScene:stopLoop( time)
         self._scheduler = nil
     end
     self:btnVisibleControl()
-
+    GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.stop)
     if time == nil then time = 1 end
     
     self._tableResult = {}
@@ -774,7 +828,6 @@ function LhjGameScene:showResult( )
         --没有中奖 转下一流程
         self._gameStatus = LhjGameScene.GAME_STATUS.READAY_STATUS
         self:btnVisibleControl()
-        self.btnStop:setTouchEnabled(true)
         if self._isAuto then
             self:startNextRound()
         end
@@ -782,6 +835,7 @@ function LhjGameScene:showResult( )
     end
     GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.win)
     local function flashLight( index )
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.winline)
         if index > #line then
            index = 1
         end 
@@ -848,7 +902,6 @@ function LhjGameScene:showResult( )
     end
     self._scheduler = CustomHelper.performWithDelayGlobal(function (  )
             self:showResultSettlement()
-            self.btnStop:setTouchEnabled(true)
         end, 1)
 
 
@@ -877,16 +930,18 @@ function LhjGameScene:viewNormal(  )
     end
 end
 
-    -- viewNormal()
 
 function LhjGameScene:showShouFenAnim(  )
-    self.btnShoufen:setTouchEnabled(false)
-    local node = self._winLayout:getChildByName("anim")
+    GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.shoufen)
+    self._gameStatus = LhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS
+    self:btnVisibleControl()
+
+    local node =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "slots_race_pop_middle_gold_01"), "ccs.Armature"); 
+    local node =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "slots_race_pop_middle_gold_01"), "ccs.Armature")
     node:getAnimation():setMovementEventCallFunc(function(sender, _type, id)
         if _type == ccs.MovementEventType.start then
         elseif _type == ccs.MovementEventType.complete then
             self._winLayout:setVisible(false)
-            self.btnShoufen:setTouchEnabled(true)
             self:viewNormal()
             self._gameStatus = LhjGameScene.GAME_STATUS.READAY_STATUS
             self:btnVisibleControl()
@@ -896,7 +951,12 @@ function LhjGameScene:showShouFenAnim(  )
         elseif _type == 2 then
         end
     end)
-    node:getAnimation():play("large_03")
+    local winBets = self.lhjGameManager:getDataManager():getWinBets()
+    if winBets >= 30 then 
+        node:getAnimation():play("large_03_1")
+    else
+        node:getAnimation():play("large_03")
+    end
     self:moneyAnim()
     local smallWinNumTxt =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "small_win_num_txt"), "ccui.TextAtlas")
     local shuishouTxt =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "shuishou_txt"), "ccui.Text")
@@ -922,9 +982,8 @@ end
 --显示结算界面
 function LhjGameScene:showResultSettlement()
     
-    self._gameStatus = LhjGameScene.GAME_STATUS.SHOUFEN_STATUS
+    self._gameStatus = LhjGameScene.GAME_STATUS.SHOW_RESULT
     self:btnVisibleControl()
-
     self._winLayout:setVisible(true)
     local winNumTxt =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "win_num_txt"), "ccui.TextAtlas");
     winNumTxt:setString(CustomHelper.moneyShowStyleNone(self.lhjGameManager:getDataManager():getWinMoney()))
@@ -935,24 +994,52 @@ function LhjGameScene:showResultSettlement()
     smallWinNumTxt:setVisible(false)
     shuishouTxt:setVisible(false)
     --anim
-    local node = self._winLayout:getChildByName("anim")
+
+    local winWordImg = tolua.cast(CustomHelper.seekNodeByName(self._winBetNode, "win_word_img"), "ccui.ImageView");
+    local winBetTxt = tolua.cast(CustomHelper.seekNodeByName(self._winBetNode, "win_bet_txt"), "ccui.TextAtlas");
+
+    local winBets = self.lhjGameManager:getDataManager():getWinBets()
+    local node =  tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "slots_race_pop_middle_gold_01"), "ccs.Armature"); 
     node:getAnimation():setMovementEventCallFunc(function(sender, _type, id)
         if _type == ccs.MovementEventType.start then
         elseif _type == ccs.MovementEventType.complete then
-            node:getAnimation():play("large_02")
-            if self._isAuto then
-                if  self._scheduler then 
-                    CustomHelper.unscheduleGlobal(self._scheduler)
-                    self._scheduler = nil
-                end
-                self._scheduler = CustomHelper.performWithDelayGlobal(function (  )
-                    self:showShouFenAnim()
-                end, 1)
+            if id == "large_04" then
+                self._isPlayBigWinAnimTime = false
+                node:getAnimation():play("large_01_1")
+            elseif id == "large_01_1" then
+                 GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.getscore)
+                node:getAnimation():play("large_02_1",-1,0)
+            elseif id == "large_02_1" then
+                self:showShouFenAnim()
+            elseif id ==  "large_01" then
+                node:getAnimation():play("large_02",-1,0)
+            elseif id == "large_02" then
+                self:showShouFenAnim()
             end
         elseif _type == 2 then
         end
     end)
-    node:getAnimation():play("large_01")
+
+
+
+    if winBets >= 30 then 
+        winWordImg:loadTexture("game_res/jiujiu_lhj_bigwin.png")
+       
+        self._isPlayBigWinAnimTime = true
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.bigwincoin)
+        node:getAnimation():play("large_04")
+    else
+        winWordImg:loadTexture("game_res/jiujiu_lhj_win.png")
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(LhjGameScene.SOUND.getscore)
+        node:getAnimation():play("large_01")
+    end
+    winBetTxt:setString(winBets)
+
+
+
+
+   -- self._winLayout:getChildByName("slots_race_pop_middle_gold_01")
+    
 end
 
 
@@ -992,7 +1079,7 @@ function LhjGameScene:btnVisibleControl( )
         self.btnCancalAuto:setVisible(false)
         self.btnStart:setVisible(self._gameStatus == LhjGameScene.GAME_STATUS.READAY_STATUS)
         self.btnStop:setVisible(self._gameStatus == LhjGameScene.GAME_STATUS.FLASH_STATUS or self._gameStatus == LhjGameScene.GAME_STATUS.ACCLERA_STATUS or self._gameStatus == LhjGameScene.GAME_STATUS.LOOP_STATUS or self._gameStatus == LhjGameScene.GAME_STATUS.STOP_STATUS)
-        self.btnShoufen:setVisible(self._gameStatus == LhjGameScene.GAME_STATUS.SHOUFEN_STATUS)  
+        self.btnShoufen:setVisible(self._gameStatus == LhjGameScene.GAME_STATUS.SHOW_RESULT or self._gameStatus == LhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS)  
         self._btnLagan:setTouchEnabled(self._gameStatus == LhjGameScene.GAME_STATUS.READAY_STATUS)
     end
 end
@@ -1121,14 +1208,10 @@ function LhjGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)   
         self._scheduler = nil
     end
-
-
-
-    self.lhjGameManager:clearLoadedOneGameFiles()
-    -- --- 尝试直接发送进入游戏消息
-    local tableinfo = self.lhjGameManager:getDataManager():getRoomInfo()
-    local gameTypeID = tableinfo.id
-    local roomID = tableinfo.room_id
+      self.lhjGameManager:clearLoadedOneGameFiles()
+    local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+    local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
+    local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
 
     CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
     GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);

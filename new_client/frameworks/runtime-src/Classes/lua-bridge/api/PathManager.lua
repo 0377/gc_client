@@ -8,6 +8,6 @@
 -- 
 -- @function [parent=#PathManager] Clear 
 -- @param self
--- @return fishgame2d::PathManager#fishgame2d::PathManager self (return value: game.fishgame2d::PathManager)
+-- @return PathManager#PathManager self (return value: game.fishgame2d.PathManager)
         
 return nil

@@ -4,9 +4,9 @@ BrnnGameTips = class("BrnnGameTips", function()
 end)
 
 function BrnnGameTips:ctor()
+    local CCSLuaNode =  requireForGameLuaFile("GuiZeCCS")
+    self._uiLayer = CCSLuaNode:create().root; 
 
-    local csNodePath = CustomHelper.getFullPath("GuiZe.csb")
-    self._uiLayer = cc.CSLoader:createNode(csNodePath)
     self:addChild(self._uiLayer)
 
 

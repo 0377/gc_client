@@ -88,22 +88,6 @@ function GFlowerGameDataManager:resetMainTableData()
     self.StandUp = false                    -- 进入没准备 被t
 end
 
--- 初始化UI类
-function GFlowerGameDataManager:setGFlowerSceneObj(gscene)
-    -- body
-    self._gameScene = gscene
-end
-
---  服务器是否关闭
-function GFlowerGameDataManager:S2C_GameServerStop(msgTab)
-    --dump(msgTab, "服务器开关")
-    local id = msgTab.game_id
-
-    if self.game_id == id then
-        self._gameScene:On_serverStop()
-    end
-end
-
 -- 进入房间时保存房间数据 点击进入 和 换桌时调用 
 function GFlowerGameDataManager:_onMsg_EnterRoomAndSitDownInfo( infoTab )
     print("GFlowerGameDataManager:_onMsg_EnterRoomAndSitDownInfo ===========================")
@@ -167,7 +151,6 @@ end
 
 -- 重连获取房间信息
 function GFlowerGameDataManager:_onMsg_ReConnectInfo( infoTab )
-    print("GFlowerGameDataManager:_onMsg_ReConnectInfo ===========================")
     --dump(infoTab,"infoTab")
     -- 首先就初始化自己id
     self.myServerChairId = infoTab.chair_id
@@ -184,20 +167,15 @@ function GFlowerGameDataManager:_onMsg_ReConnectInfo( infoTab )
                 othergfPlayer:setHeadIconNum(1)            -- 默认头像为1
             end
 
-            print("GFlowerGameDataManager:_onMsg_ReConnectInfo.  新增玩家: ",othergfPlayer:getChairId()," GUID: ",othergfPlayer:getGuid())
             self.gfPlayers[othergfPlayer:getChairId()] = othergfPlayer
         end
     end
-
-    -- 请求房间信息
-    GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
 end
 
 -- 自己进入时得到已经存在的玩家的状态
 function GFlowerGameDataManager:S2C_ZhaJinHuaWatch(msgTab)
     -- 获取房间其他玩家状态
     self.roomAndPlayerState = msgTab
-    --dump(msgTab, "sx--新玩家进入---------------");
 
     -- 重置为首次进入
     self.is_newIn = true
@@ -339,7 +317,7 @@ end
 
 function GFlowerGameDataManager:dealZhaJinHuaWatch()
     -- 如果是新进入该桌的玩家
-    print("GFlowerGameDataManager:dealZhaJinHuaWatch    WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+    --print("GFlowerGameDataManager:dealZhaJinHuaWatch    WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
     if self.is_newIn == true then
         
         --清除所有数据
@@ -354,39 +332,13 @@ function GFlowerGameDataManager:dealZhaJinHuaWatch()
     end
 end
 
--- 重连
-function GFlowerGameDataManager:S2C_ZhaJinHuaReConnect(msgTab)
-    -- 如果还在房间继续游戏
-    if msgTab.isseecard then
-        -- 请求房间信息
-        print("GFlowerGameDataManager:S2C_ZhaJinHuaReConnect  ...................  ")
-        GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
-    end
-end
-
 -- 换桌返回
 function GFlowerGameDataManager:S2C_ChangeTable( msgTab )
     --print("--------------------------------------------换桌返回")
     self.huanzhuo = true
 
-    -- 先隐藏所有玩家
-    --self._gameScene:InitPlayerUi()
-
-    -- 隐藏所有手牌
-    --self._gameScene:hideAllCard()
-
-    -- 隐藏所有玩家状态等
-    --self._gameScene:hideAllPlayerStateUI()
-
-    -- 其他ui的隐藏或者重置
-    --self._gameScene:resetMainTableUI()
-
     -- 根据得到的桌子数据刷新界面
     self:_onMsg_EnterRoomAndSitDownInfo(msgTab)
-
-    -- 请求房间信息
-    print("GFlowerGameDataManager:S2C_ChangeTable ................................  ")
-    GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
 end
 
 function GFlowerGameDataManager:getGFPlayerByClientId(clientId)
@@ -475,7 +427,6 @@ function GFlowerGameDataManager:S2C_NotifySitDown( msgTab )
 
     if is_intable == false then
 
-        print("S2C_NotifySitDown  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
         local client_id = self:getLocalChairId(server_chairid) 
 
         local new_gfPlayer = GFlowerPlayerInfo:create()
@@ -486,11 +437,10 @@ function GFlowerGameDataManager:S2C_NotifySitDown( msgTab )
             new_gfPlayer:setHeadIconNum(1)            -- 默认头像为1
         end
     
-        dump(msgTab.pb_visual_info,"msgTab.pb_visual_info")
+        --dump(msgTab.pb_visual_info,"msgTab.pb_visual_info")
         self.gfPlayers[server_chairid] = new_gfPlayer
     else
         -- 首先从已退出玩家表中删除 ??????(有 BUG )
-        print("S2C_NotifySitDown  HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
         local client_id = self:getLocalChairId(server_chairid) 
 
         local old_gfPlayer = self:getGfPlayers()[server_chairid]
@@ -500,7 +450,6 @@ function GFlowerGameDataManager:S2C_NotifySitDown( msgTab )
             old_gfPlayer:setHeadIconNum(1)            -- 默认头像为1
         end
 
-        print("GFlowerGameDataManager:S2C_NotifySitDown.2  新增玩家: "..server_chairid)
         self.gfPlayers[server_chairid] = old_gfPlayer
     end
 end
@@ -528,7 +477,7 @@ function GFlowerGameDataManager:S2C_NotifyStandUp(msgTab)
                    self.outJieSuanPlayers[self.outJiesuanPlayersCount]["state"]      = state
                end
 
-            dump(self.outJieSuanPlayers," S2C_NotifyStandUp ~~~~~~~~~~~~ outPlayer")
+            --dump(self.outJieSuanPlayers," S2C_NotifyStandUp ~~~~~~~~~~~~ outPlayer")
             self:clearGFPlayerByClientId(client_chair)
         end
     end
@@ -552,11 +501,6 @@ function GFlowerGameDataManager:getOutJieSuanPlayerByGuid(guid)
     end
 
     return nil
-end
-
--- 处理开拍时自己被服务器踢出
-function GFlowerGameDataManager:my_NotifyStandUp()
-    self._gameScene:check_StandUp();
 end
 
 -- 把本地椅子号 转化为服务器椅子号 便于发送比牌消息
@@ -607,7 +551,6 @@ end
 -----------------------------游戏操作--------------------------------
 -- 发牌
 function GFlowerGameDataManager:S2C_ZhaJinHuaStart(msgTab)
-    print(" GFlowerGameDataManager:S2C_ZhaJinHuaStart ......................")
     local banker_chair_id = msgTab.banker_chair_id
     local begin_chair = self:getLocalChairId(banker_chair_id)
 
@@ -888,7 +831,7 @@ end
 
 -- 游戏结束
 function GFlowerGameDataManager:S2C_ZhaJinHuaEnd(msgTab)
-    print("S2C_ZhaJinHuaEnd  。。。。。。。。。。。。。。。。")
+    --print("S2C_ZhaJinHuaEnd  。。。。。。。。。。。。。。。。")
     --dump(msgTab, "游戏结束-------------------------------------------------")
 
     -- 保存数据 
