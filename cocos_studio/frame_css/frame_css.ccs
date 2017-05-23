@@ -3,20 +3,24 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="anim">
+          <Folder Name="eff_99yl_ui_loading">
+            <ExportJsonFile Name="eff_99yl_ui_loading.ExportJson" />
+          </Folder>
+        </Folder>
         <Folder Name="frame_res">
           <Folder Name="bombbox">
-            <Image Name="baobo_popupview_closed_normal.png" />
-            <Image Name="baobo_popupview_closed_pressed.png" />
-            <Image Name="bb_sz_tck.png" />
-            <Image Name="bb_sz_tck_qd_normal.png" />
-            <Image Name="bb_sz_tck_qd_pressed.png" />
-            <Image Name="bb_sz_tck_qx_normal.png" />
-            <Image Name="bb_sz_tck_qx_pressed.png" />
+            <Image Name="bb_grxx_queren.png" />
+            <Image Name="bb_grxx_queren1.png" />
+            <Image Name="bb_grxx_quxiao.png" />
+            <Image Name="bb_grxx_quxiao1.png" />
+            <Image Name="bb_ty_gb.png" />
+            <Image Name="bb_ty_gb1.png" />
+            <Image Name="bb_ty_tc1.png" />
           </Folder>
-          <Image Name="BB_jdt_1.png" />
+          <Image Name="bb_loading_bj.jpg" />
           <Image Name="bb_loading_jzt.png" />
           <Image Name="bb_loading_jztd.png" />
-          <Image Name="kog_bg.jpg" />
           <Image Name="loading.png" />
         </Folder>
         <Project Name="IndicationLayerCCS.csd" Type="Layer" />

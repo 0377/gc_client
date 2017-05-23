@@ -19,62 +19,73 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="alert_view" ActionTag="1153591563" Tag="17" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="267.0000" RightMargin="267.0000" TopMargin="163.0040" BottomMargin="215.9960" TouchEnable="True" ClipAble="False" ColorAngle="90.0000" Scale9Enable="True" LeftEage="183" RightEage="183" TopEage="70" BottomEage="70" Scale9OriginX="183" Scale9OriginY="70" Scale9Width="537" Scale9Height="395" ctype="PanelObjectData">
-            <Size X="746.0000" Y="341.0000" />
+          <AbstractNodeData Name="alert_view" ActionTag="1153591563" Tag="17" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="267.0000" RightMargin="267.0000" TopMargin="133.5040" BottomMargin="186.4960" TouchEnable="True" ClipAble="False" ColorAngle="90.0000" Scale9Enable="True" LeftEage="183" RightEage="183" TopEage="70" BottomEage="70" Scale9OriginX="183" Scale9OriginY="70" Scale9Width="434" Scale9Height="321" ctype="PanelObjectData">
+            <Size X="746.0000" Y="400.0000" />
             <Children>
-              <AbstractNodeData Name="contentTextNode" ActionTag="-634767122" Tag="18" IconVisible="False" PositionPercentXEnabled="True" PercentWidthEnable="True" PercentWidthEnabled="True" LeftMargin="71.7794" RightMargin="77.4207" TopMargin="52.0432" BottomMargin="124.9568" IsCustomSize="True" FontSize="30" LabelText="提示框的文字 提示框的文字 提示框的文字 提示框的文字 提示框的文字" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="596.8000" Y="164.0000" />
+              <AbstractNodeData Name="Text_1" ActionTag="-1846503181" Tag="34" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="293.0000" RightMargin="293.0000" TopMargin="19.7400" BottomMargin="340.2600" FontSize="40" LabelText="温馨提示" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="160.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="370.1794" Y="206.9568" />
+                <Position X="373.0000" Y="360.2600" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4962" Y="0.6069" />
-                <PreSize X="0.8000" Y="0.4809" />
+                <PrePosition X="0.5000" Y="0.9007" />
+                <PreSize X="0.2145" Y="0.1000" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="confirmBtn" ActionTag="1485205881" Tag="19" IconVisible="False" LeftMargin="389.5000" RightMargin="21.5000" TopMargin="202.5000" BottomMargin="-12.5000" TouchEnable="True" FontSize="30" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
+              <AbstractNodeData Name="contentTextNode" ActionTag="-634767122" Tag="18" IconVisible="False" PositionPercentXEnabled="True" PercentWidthEnable="True" PercentWidthEnabled="True" LeftMargin="71.7652" RightMargin="77.4348" TopMargin="89.0431" BottomMargin="130.9569" IsCustomSize="True" FontSize="30" LabelText="提示框的文字 提示框的文字 提示框的文字 提示框的文字 提示框的文字" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="596.8000" Y="180.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="370.1652" Y="220.9569" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4962" Y="0.5524" />
+                <PreSize X="0.8000" Y="0.4500" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="confirmBtn" ActionTag="1485205881" Tag="19" IconVisible="False" LeftMargin="413.5000" RightMargin="45.5000" TopMargin="287.0000" BottomMargin="13.0000" TouchEnable="True" FontSize="30" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="287.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="557.0000" Y="63.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7466" Y="0.1848" />
-                <PreSize X="0.4491" Y="0.4428" />
+                <PrePosition X="0.7466" Y="0.1575" />
+                <PreSize X="0.3847" Y="0.2500" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qd_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qd_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qd_normal.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_queren1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_queren1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_queren.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="cancelBtn" ActionTag="-2049580795" Tag="21" IconVisible="False" LeftMargin="22.5000" RightMargin="388.5000" TopMargin="202.5000" BottomMargin="-12.5000" TouchEnable="True" FontSize="30" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="190.0000" Y="63.0000" />
+              <AbstractNodeData Name="cancelBtn" ActionTag="-2049580795" Tag="21" IconVisible="False" LeftMargin="45.6163" RightMargin="413.3837" TopMargin="284.0382" BottomMargin="15.9618" TouchEnable="True" FontSize="30" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="287.0000" Y="100.0000" />
+                <AnchorPoint ScaleX="0.4816" ScaleY="0.5581" />
+                <Position X="183.8323" Y="71.7692" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2547" Y="0.1848" />
-                <PreSize X="0.4491" Y="0.4428" />
+                <PrePosition X="0.2464" Y="0.1794" />
+                <PreSize X="0.3847" Y="0.2500" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qx_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qx_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck_qx_normal.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_quxiao1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_quxiao1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="frame_res/bombbox/bb_grxx_quxiao.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="close_btn" ActionTag="91568594" Tag="19" IconVisible="False" LeftMargin="651.3464" RightMargin="3.6536" TopMargin="-7.1044" BottomMargin="253.1044" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="61" Scale9Height="73" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="91.0000" Y="95.0000" />
+              <AbstractNodeData Name="close_btn" ActionTag="91568594" Tag="19" IconVisible="False" LeftMargin="685.2769" RightMargin="-6.2769" TopMargin="-7.8356" BottomMargin="339.8356" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="37" Scale9Height="46" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="67.0000" Y="68.0000" />
                 <AnchorPoint ScaleX="0.5347" ScaleY="0.4410" />
-                <Position X="700.0000" Y="295.0040" />
+                <Position X="721.1018" Y="369.8236" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.9383" Y="0.8651" />
-                <PreSize X="0.1220" Y="0.2786" />
+                <PrePosition X="0.9666" Y="0.9246" />
+                <PreSize X="0.0898" Y="0.1700" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="frame_res/bombbox/baobo_popupview_closed_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="frame_res/bombbox/baobo_popupview_closed_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="frame_res/bombbox/baobo_popupview_closed_normal.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="frame_res/bombbox/bb_ty_gb1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="frame_res/bombbox/bb_ty_gb1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="frame_res/bombbox/bb_ty_gb.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -84,8 +95,8 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5368" />
-            <PreSize X="0.5828" Y="0.4736" />
-            <FileData Type="Normal" Path="frame_res/bombbox/bb_sz_tck.png" Plist="" />
+            <PreSize X="0.5828" Y="0.5556" />
+            <FileData Type="Normal" Path="frame_res/bombbox/bb_ty_tc1.png" Plist="" />
             <SingleColor A="255" R="139" G="105" B="20" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
