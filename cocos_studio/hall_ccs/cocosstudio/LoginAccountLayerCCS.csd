@@ -1,106 +1,126 @@
 <GameFile>
-  <PropertyGroup Name="LoginAccountLayerCCS" Type="Scene" ID="a2ee0952-26b5-49ae-8bf9-4f1d6279b798" Version="3.10.0.0" />
+  <PropertyGroup Name="LoginAccountLayerCCS" Type="Layer" ID="fc9f64a6-d2fa-49dc-9e50-d1c83149e715" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
-      <ObjectData Name="Scene" ctype="GameNodeObjectData">
+      <ObjectData Name="Layer" Tag="45" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" CanEdit="False" ActionTag="-76195862" Tag="8" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="210" RightEage="210" TopEage="170" BottomEage="170" Scale9OriginX="210" Scale9OriginY="170" Scale9Width="860" Scale9Height="380" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_1" ActionTag="-168273779" Tag="46" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="210" RightEage="210" TopEage="170" BottomEage="170" Scale9OriginX="210" Scale9OriginY="170" Scale9Width="860" Scale9Height="380" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
-              <AbstractNodeData Name="Image_6" ActionTag="314482287" Tag="14" IconVisible="False" LeftMargin="165.1118" RightMargin="165.8882" TopMargin="3.2339" BottomMargin="630.7661" LeftEage="191" RightEage="191" TopEage="25" BottomEage="25" Scale9OriginX="191" Scale9OriginY="25" Scale9Width="567" Scale9Height="36" ctype="ImageViewObjectData">
-                <Size X="949.0000" Y="86.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-                <Position X="639.6118" Y="716.7661" />
+              <AbstractNodeData Name="ArmatureNode_1" ActionTag="-1803322649" Tag="717" IconVisible="True" PositionPercentYEnabled="True" LeftMargin="400.0000" RightMargin="880.0000" TopMargin="360.0000" BottomMargin="360.0000" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_01" ctype="ArmatureNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <AnchorPoint />
+                <Position X="400.0000" Y="360.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4997" Y="0.9955" />
-                <PreSize X="0.7414" Y="0.1194" />
-                <FileData Type="Normal" Path="hall_res/register_login/bb_biaoti_denglu.png" Plist="" />
+                <PrePosition X="0.3125" Y="0.5000" />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="anim/jjdwc_women/jjdwc_women.ExportJson" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_1" ActionTag="1021638038" Tag="70" IconVisible="False" LeftMargin="292.3083" RightMargin="898.6917" TopMargin="166.2341" BottomMargin="503.7659" LeftEage="19" RightEage="19" TopEage="9" BottomEage="9" Scale9OriginX="19" Scale9OriginY="9" Scale9Width="51" Scale9Height="32" ctype="ImageViewObjectData">
-                <Size X="89.0000" Y="50.0000" />
+              <AbstractNodeData Name="Image_7" ActionTag="77699869" Tag="48" IconVisible="False" LeftMargin="747.0000" RightMargin="107.0000" TopMargin="152.0000" BottomMargin="32.0000" LeftEage="140" RightEage="140" TopEage="176" BottomEage="176" Scale9OriginX="140" Scale9OriginY="176" Scale9Width="146" Scale9Height="184" ctype="ImageViewObjectData">
+                <Size X="426.0000" Y="536.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="336.8083" Y="528.7659" />
+                <Position X="960.0000" Y="300.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2631" Y="0.7344" />
-                <PreSize X="0.0695" Y="0.0694" />
-                <FileData Type="Normal" Path="hall_res/register_login/srzh.png" Plist="" />
+                <PrePosition X="0.7500" Y="0.4167" />
+                <PreSize X="0.3328" Y="0.7444" />
+                <FileData Type="Normal" Path="hall_res/register_login/bb_dl_kuang.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_3" ActionTag="-1157721403" Tag="72" IconVisible="False" LeftMargin="381.6588" RightMargin="291.3412" TopMargin="153.7356" BottomMargin="491.2644" TouchEnable="True" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="369" Scale9Height="43" ctype="ImageViewObjectData">
-                <Size X="607.0000" Y="75.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="685.1588" Y="528.7644" />
+              <AbstractNodeData Name="ArmatureNode_2" ActionTag="-420515691" Tag="718" IconVisible="True" LeftMargin="960.0000" RightMargin="320.0000" TopMargin="100.0000" BottomMargin="620.0000" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_02" ctype="ArmatureNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <AnchorPoint />
+                <Position X="960.0000" Y="620.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5353" Y="0.7344" />
-                <PreSize X="0.4742" Y="0.1042" />
-                <FileData Type="Normal" Path="hall_res/register_login/bb_zc_tykk.png" Plist="" />
+                <PrePosition X="0.7500" Y="0.8611" />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="anim/jjdwc_women/jjdwc_women.ExportJson" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_2" ActionTag="-200736645" Tag="71" IconVisible="False" LeftMargin="292.8155" RightMargin="897.1845" TopMargin="299.7400" BottomMargin="369.2600" LeftEage="19" RightEage="19" TopEage="9" BottomEage="9" Scale9OriginX="19" Scale9OriginY="9" Scale9Width="52" Scale9Height="33" ctype="ImageViewObjectData">
-                <Size X="90.0000" Y="51.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="337.8155" Y="394.7600" />
+              <AbstractNodeData Name="Image_1" ActionTag="440763112" Tag="50" IconVisible="False" LeftMargin="785.0000" RightMargin="428.0000" TopMargin="212.0000" BottomMargin="472.0000" LeftEage="19" RightEage="19" TopEage="9" BottomEage="9" Scale9OriginX="19" Scale9OriginY="9" Scale9Width="29" Scale9Height="18" ctype="ImageViewObjectData">
+                <Size X="67.0000" Y="36.0000" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="852.0000" Y="490.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2639" Y="0.5483" />
-                <PreSize X="0.0703" Y="0.0708" />
-                <FileData Type="Normal" Path="hall_res/register_login/srmm.png" Plist="" />
+                <PrePosition X="0.6656" Y="0.6806" />
+                <PreSize X="0.0523" Y="0.0500" />
+                <FileData Type="Normal" Path="hall_res/register_login/bb_dl_zh.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_4" ActionTag="1050587366" Tag="73" IconVisible="False" LeftMargin="381.6588" RightMargin="291.3412" TopMargin="287.7456" BottomMargin="357.2544" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="369" Scale9Height="43" ctype="ImageViewObjectData">
-                <Size X="607.0000" Y="75.0000" />
+              <AbstractNodeData Name="Image_3" ActionTag="-84002509" Tag="51" IconVisible="False" LeftMargin="862.5000" RightMargin="142.5000" TopMargin="204.0000" BottomMargin="464.0000" TouchEnable="True" Scale9Enable="True" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="37" Scale9Height="20" ctype="ImageViewObjectData">
+                <Size X="275.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="685.1588" Y="394.7544" />
+                <Position X="1000.0000" Y="490.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5353" Y="0.5483" />
-                <PreSize X="0.4742" Y="0.1042" />
-                <FileData Type="Normal" Path="hall_res/register_login/bb_zc_tykk.png" Plist="" />
+                <PrePosition X="0.7813" Y="0.6806" />
+                <PreSize X="0.2148" Y="0.0722" />
+                <FileData Type="Normal" Path="hall_res/register_login/bb_dl_dt.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="phone_login_view_btn" ActionTag="-248366239" Tag="75" IconVisible="False" LeftMargin="792.1379" RightMargin="296.8621" TopMargin="370.9344" BottomMargin="310.0656" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="161" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="191.0000" Y="39.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="887.6379" Y="329.5656" />
+              <AbstractNodeData Name="Image_2" ActionTag="1934071917" Tag="52" IconVisible="False" LeftMargin="785.0000" RightMargin="428.0000" TopMargin="282.0000" BottomMargin="402.0000" LeftEage="19" RightEage="19" TopEage="9" BottomEage="9" Scale9OriginX="19" Scale9OriginY="9" Scale9Width="29" Scale9Height="18" ctype="ImageViewObjectData">
+                <Size X="67.0000" Y="36.0000" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="852.0000" Y="420.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6935" Y="0.4577" />
-                <PreSize X="0.1492" Y="0.0542" />
+                <PrePosition X="0.6656" Y="0.5833" />
+                <PreSize X="0.0523" Y="0.0500" />
+                <FileData Type="Normal" Path="hall_res/register_login/bb_dl_mm.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Image_4" ActionTag="-1301231998" Tag="53" IconVisible="False" LeftMargin="862.5000" RightMargin="142.5000" TopMargin="274.0000" BottomMargin="394.0000" Scale9Enable="True" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="37" Scale9Height="20" ctype="ImageViewObjectData">
+                <Size X="275.0000" Y="52.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="1000.0000" Y="420.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.7813" Y="0.5833" />
+                <PreSize X="0.2148" Y="0.0722" />
+                <FileData Type="Normal" Path="hall_res/register_login/bb_dl_dt.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="phone_login_view_btn" ActionTag="1622036959" Tag="54" IconVisible="False" LeftMargin="978.3011" RightMargin="136.6989" TopMargin="363.7244" BottomMargin="322.2756" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="135" Scale9Height="12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="165.0000" Y="34.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="1060.8011" Y="339.2756" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.8288" Y="0.4712" />
+                <PreSize X="0.1289" Y="0.0472" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/register_login/bb_shoujiyanzhengdenglu_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/register_login/bb_shoujiyanzhengdenglu_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/register_login/bb_shoujiyanzhengdenglu_normal.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="hall_res/register_login/bb_dl_sjyz1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/register_login/bb_dl_sjyz1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/register_login/bb_dl_sjyz.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="loginBtn" ActionTag="2085910607" Tag="7" IconVisible="False" HorizontalEdge="BothEdge" LeftMargin="752.9480" RightMargin="192.0520" TopMargin="490.1431" BottomMargin="78.8569" TouchEnable="True" FontSize="25" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
+              <AbstractNodeData Name="loginBtn" ActionTag="-1597493650" Tag="55" IconVisible="False" HorizontalEdge="BothEdge" LeftMargin="796.0000" RightMargin="156.0000" TopMargin="551.7469" BottomMargin="69.2531" TouchEnable="True" FontSize="25" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="298" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="328.0000" Y="99.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="920.4480" Y="154.3569" />
+                <Position X="960.0000" Y="118.7531" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7191" Y="0.2144" />
-                <PreSize X="0.2617" Y="0.2097" />
+                <PrePosition X="0.7500" Y="0.1649" />
+                <PreSize X="0.2562" Y="0.1375" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/register_login/bt_dl_2.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/register_login/bt_dl_2.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/register_login/bt_dl.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_dl1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_dl1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_dl.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="quickStartBtn" ActionTag="-1753591613" Tag="3" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="192.9561" RightMargin="752.0439" TopMargin="490.1431" BottomMargin="78.8569" TouchEnable="True" FontSize="25" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
+              <AbstractNodeData Name="quickStartBtn" ActionTag="201685028" Tag="56" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="796.0000" RightMargin="156.0000" TopMargin="440.5000" BottomMargin="180.5000" TouchEnable="True" FontSize="25" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="298" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="328.0000" Y="99.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="360.4561" Y="154.3569" />
+                <Position X="960.0000" Y="230.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2816" Y="0.2144" />
-                <PreSize X="0.2617" Y="0.2097" />
+                <PrePosition X="0.7500" Y="0.3194" />
+                <PreSize X="0.2562" Y="0.1375" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/register_login/bb_ykdl_1.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/register_login/bb_ykdl_1.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/register_login/bb_ykdl.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_ykdl1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_ykdl1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/register_login/bb_dl_an_ykdl.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -111,7 +131,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="hall_res/register_login/bb_dl_beijing.jpg" Plist="" />
+            <FileData Type="Normal" Path="hall_res/register_login/bb_dl_bj.jpg" Plist="" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />

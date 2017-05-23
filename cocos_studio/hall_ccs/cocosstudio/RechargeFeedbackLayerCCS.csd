@@ -21,9 +21,9 @@
                     <PrePosition X="0.9250" Y="0.8751" />
                     <PreSize X="0.0508" Y="0.0903" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="hall_res/bombbox/baobo_popupview_closed_pressed.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="hall_res/bombbox/baobo_popupview_closed_pressed.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="hall_res/bombbox/baobo_popupview_closed_normal.png" Plist="" />
+                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -46,7 +46,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4844" Y="0.5333" />
                     <PreSize X="0.8008" Y="0.3917" />
-                    <FileData Type="Normal" Path="hall_res/bank_new/dl_recharge/baobo_popupview_kuaisutianjia_bg.png" Plist="" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="text_2" ActionTag="-2110908686" Tag="193" IconVisible="False" LeftMargin="490.0000" RightMargin="490.0000" TopMargin="484.0000" BottomMargin="206.0000" FontSize="30" LabelText="请注明你要反馈的内容" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="300.0000" Y="30.0000" />
@@ -79,9 +79,9 @@
                     <PrePosition X="0.5000" Y="0.1444" />
                     <PreSize X="0.2617" Y="0.2097" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="hall_res/bank_new/dl_recharge/baobo_popupview_button_tj1.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="hall_res/bank_new/dl_recharge/baobo_popupview_button_tj1.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="hall_res/bank_new/dl_recharge/baobo_popupview_button_tj.png" Plist="" />
+                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

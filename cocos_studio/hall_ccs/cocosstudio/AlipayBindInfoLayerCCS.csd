@@ -30,7 +30,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.2359" Y="0.5351" />
                     <PreSize X="0.2988" Y="0.9474" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_ljbd.png" Plist="" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="alipay_name_bg" ActionTag="-153656932" Tag="224" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="180.0000" RightMargin="84.0000" TopMargin="-9.0000" BottomMargin="-9.0000" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="261" Scale9Height="43" ctype="ImageViewObjectData">
                     <Size X="499.0000" Y="75.0000" />
@@ -76,9 +76,9 @@
                     <Position X="0.0001" Y="30.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0000" Y="0.5351" />
+                    <PrePosition Y="0.5351" />
                     <PreSize X="0.3945" Y="0.9474" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_ljbd_zhifubaozhanghao.png" Plist="" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="alipay_account_bg" ActionTag="1680201303" Tag="228" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" RightMargin="84.0000" TopMargin="-9.0000" BottomMargin="-9.0000" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="261" Scale9Height="43" ctype="ImageViewObjectData">
                     <Size X="499.0000" Y="75.0000" />

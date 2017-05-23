@@ -6,27 +6,27 @@
       <ObjectData Name="Layer" Tag="191" ctype="GameLayerObjectData">
         <Size X="950.0000" Y="620.0000" />
         <Children>
-          <AbstractNodeData Name="person_info_view" ActionTag="-1259758434" Tag="192" IconVisible="False" PositionPercentYEnabled="True" TopMargin="2.7280" BottomMargin="-2.7280" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="person_info_view" ActionTag="-1259758434" Tag="192" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-1.0842" RightMargin="1.0842" TopMargin="2.7280" BottomMargin="-2.7280" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="950.0000" Y="620.0000" />
             <Children>
-              <AbstractNodeData Name="head_icon_parent" ActionTag="874828004" Tag="193" IconVisible="False" LeftMargin="39.0144" RightMargin="801.9856" TopMargin="78.0883" BottomMargin="432.9117" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="31" Scale9Height="31" ctype="ImageViewObjectData">
-                <Size X="109.0000" Y="109.0000" />
+              <AbstractNodeData Name="head_icon_parent" ActionTag="874828004" Tag="193" IconVisible="False" LeftMargin="26.5144" RightMargin="789.4856" TopMargin="65.5883" BottomMargin="420.4117" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="56" Scale9Height="56" ctype="ImageViewObjectData">
+                <Size X="134.0000" Y="134.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="93.5144" Y="487.4117" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0984" Y="0.7861" />
-                <PreSize X="0.1147" Y="0.1758" />
+                <PreSize X="0.1411" Y="0.2161" />
                 <FileData Type="Normal" Path="hall_res/setting/bb_grxx_txk.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="change_head_btn" ActionTag="-543810832" Tag="194" IconVisible="False" LeftMargin="24.0144" RightMargin="786.9856" TopMargin="199.3347" BottomMargin="361.6653" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="109" Scale9Height="37" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="139.0000" Y="59.0000" />
+              <AbstractNodeData Name="change_head_btn" ActionTag="-543810832" Tag="194" IconVisible="False" LeftMargin="24.0144" RightMargin="786.9856" TopMargin="205.0803" BottomMargin="364.9197" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="109" Scale9Height="28" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="139.0000" Y="50.0000" />
                 <AnchorPoint ScaleX="0.4762" ScaleY="0.3616" />
                 <Position X="90.2062" Y="382.9997" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0950" Y="0.6177" />
-                <PreSize X="0.1463" Y="0.0952" />
+                <PreSize X="0.1463" Y="0.0806" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="hall_res/account/bb_grxx_ghtx_pressed.png" Plist="" />
                 <PressedFileData Type="Normal" Path="hall_res/account/bb_grxx_ghtx_pressed.png" Plist="" />
@@ -34,38 +34,28 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="nickname_editbox_panel" ActionTag="69097064" Tag="317" IconVisible="False" LeftMargin="292.2391" RightMargin="158.7609" TopMargin="41.6040" BottomMargin="503.3960" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="192" RightEage="192" TopEage="18" BottomEage="18" Scale9OriginX="192" Scale9OriginY="18" Scale9Width="115" Scale9Height="39" ctype="PanelObjectData">
-                <Size X="499.0000" Y="75.0000" />
+              <AbstractNodeData Name="nickname_editbox_panel" ActionTag="69097064" Tag="317" IconVisible="False" LeftMargin="335.4806" RightMargin="246.5194" TopMargin="48.0397" BottomMargin="518.9603" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="192" RightEage="192" TopEage="18" BottomEage="18" Scale9OriginX="176" Scale9OriginY="18" Scale9Width="16" Scale9Height="17" ctype="PanelObjectData">
+                <Size X="368.0000" Y="53.0000" />
                 <Children>
-                  <AbstractNodeData Name="Image_22" ActionTag="437193376" Tag="196" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-110.8811" RightMargin="511.8811" TopMargin="10.5000" BottomMargin="10.5000" LeftEage="24" RightEage="24" TopEage="12" BottomEage="12" Scale9OriginX="24" Scale9OriginY="12" Scale9Width="50" Scale9Height="30" ctype="ImageViewObjectData">
-                    <Size X="98.0000" Y="54.0000" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="-12.8811" Y="37.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0258" Y="0.5000" />
-                    <PreSize X="0.1964" Y="0.7200" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_nc.png" Plist="" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="nick_name_text" ActionTag="887138259" Tag="22" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="11.3816" RightMargin="9.6184" TopMargin="17.5000" BottomMargin="17.5000" IsCustomSize="True" FontSize="40" LabelText="&#xA;" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="478.0000" Y="40.0000" />
+                  <AbstractNodeData Name="nick_name_text" ActionTag="887138259" Tag="22" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="11.3816" RightMargin="17.6184" TopMargin="10.0000" BottomMargin="10.0000" IsCustomSize="True" FontSize="32" LabelText="昵称好牛" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
+                    <Size X="339.0000" Y="33.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="11.3816" Y="37.5000" />
+                    <Position X="11.3816" Y="26.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0228" Y="0.5000" />
-                    <PreSize X="0.9579" Y="0.5333" />
+                    <PrePosition X="0.0309" Y="0.5000" />
+                    <PreSize X="0.9212" Y="0.6226" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="edit_nickname_btn" ActionTag="1473331883" Tag="197" IconVisible="False" LeftMargin="524.2571" RightMargin="-102.2571" TopMargin="-7.4548" BottomMargin="5.4548" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="47" Scale9Height="55" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="edit_nickname_btn" ActionTag="1473331883" Tag="197" IconVisible="False" LeftMargin="400.3898" RightMargin="-109.3898" TopMargin="-16.4175" BottomMargin="-7.5825" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="28" Scale9Height="37" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="77.0000" Y="77.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="562.7571" Y="43.9548" />
+                    <AnchorPoint ScaleX="0.4422" ScaleY="0.4832" />
+                    <Position X="434.4392" Y="29.6239" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.1278" Y="0.5861" />
-                    <PreSize X="0.1543" Y="1.0267" />
+                    <PrePosition X="1.1805" Y="0.5589" />
+                    <PreSize X="0.2092" Y="1.4528" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="hall_res/account/bb_grxx_xgnc_normal.png" Plist="" />
                     <PressedFileData Type="Normal" Path="hall_res/account/bb_grxx_xgnc_normal.png" Plist="" />
@@ -73,66 +63,67 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="save_btn" ActionTag="-73199042" VisibleForFrame="False" Tag="198" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="507.5945" RightMargin="-147.5945" TopMargin="4.4075" BottomMargin="11.5925" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="109" Scale9Height="37" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="139.0000" Y="59.0000" />
+                  <AbstractNodeData Name="save_btn" ActionTag="-73199042" VisibleForFrame="False" Tag="198" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="376.2447" RightMargin="-131.2447" TopMargin="-1.7351" BottomMargin="-5.2649" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="93" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="123.0000" Y="60.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="577.0945" Y="41.0925" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <Position X="437.7447" Y="24.7351" />
+                    <Scale ScaleX="0.5000" ScaleY="0.5000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.1565" Y="0.5479" />
-                    <PreSize X="0.2786" Y="0.7867" />
+                    <PrePosition X="1.1895" Y="0.4667" />
+                    <PreSize X="0.3342" Y="1.1321" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="hall_res/account/bb_grxx_bc_normal.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="hall_res/account/bb_grxx_bc_pressed.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="hall_res/account/bb_grxx_bc_normal.png" Plist="" />
+                    <DisabledFileData Type="Normal" Path="hall_res/account/bb_grxx_bc1.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="hall_res/account/bb_grxx_bc1.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="hall_res/account/bb_grxx_bc.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="nick_name_text_0" ActionTag="-1334914584" Tag="70" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-128.5618" RightMargin="376.5618" TopMargin="12.5897" BottomMargin="0.4103" IsCustomSize="True" FontSize="33" LabelText="昵称：" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="120.0000" Y="40.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="-128.5618" Y="20.4103" />
+                    <Scale ScaleX="1.0000" ScaleY="0.9348" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-0.3494" Y="0.3851" />
+                    <PreSize X="0.3261" Y="0.7547" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="255" G="255" B="255" />
+                  </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="292.2391" Y="540.8960" />
+                <Position X="335.4806" Y="545.4603" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3076" Y="0.8724" />
-                <PreSize X="0.5253" Y="0.1210" />
+                <PrePosition X="0.3531" Y="0.8798" />
+                <PreSize X="0.3874" Y="0.0855" />
                 <FileData Type="Normal" Path="hall_res/account/bb_grxx_KK.png" Plist="" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="id_input_bg" ActionTag="-926392232" Tag="199" IconVisible="False" LeftMargin="292.2391" RightMargin="158.7609" TopMargin="136.7851" BottomMargin="408.2149" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="261" Scale9Height="43" ctype="ImageViewObjectData">
-                <Size X="499.0000" Y="75.0000" />
+              <AbstractNodeData Name="id_input_bg" ActionTag="-926392232" Tag="199" IconVisible="False" LeftMargin="335.2606" RightMargin="246.7394" TopMargin="123.5848" BottomMargin="443.4152" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="130" Scale9Height="21" ctype="ImageViewObjectData">
+                <Size X="368.0000" Y="53.0000" />
                 <Children>
-                  <AbstractNodeData Name="id_text" ActionTag="-1060795210" Tag="200" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="15.0000" RightMargin="344.0000" TopMargin="17.5000" BottomMargin="17.5000" FontSize="40" LabelText="9527945" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="140.0000" Y="40.0000" />
+                  <AbstractNodeData Name="id_text" ActionTag="-1060795210" Tag="200" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="15.0000" RightMargin="241.0000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="32" LabelText="9527945" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
+                    <Size X="112.0000" Y="33.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="15.0000" Y="37.5000" />
+                    <Position X="15.0000" Y="26.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0301" Y="0.5000" />
-                    <PreSize X="0.2806" Y="0.5333" />
+                    <PrePosition X="0.0408" Y="0.5000" />
+                    <PreSize X="0.3043" Y="0.6226" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_22" ActionTag="646877767" Tag="201" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-64.8811" RightMargin="511.8811" TopMargin="13.6625" BottomMargin="17.3375" LeftEage="13" RightEage="13" TopEage="12" BottomEage="12" Scale9OriginX="13" Scale9OriginY="12" Scale9Width="26" Scale9Height="20" ctype="ImageViewObjectData">
-                    <Size X="52.0000" Y="44.0000" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="-12.8811" Y="39.3375" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0258" Y="0.5245" />
-                    <PreSize X="0.1042" Y="0.5867" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_ID.png" Plist="" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="btn_copy_id" ActionTag="365442086" Tag="21" IconVisible="False" LeftMargin="335.0524" RightMargin="13.9476" TopMargin="21.5000" BottomMargin="22.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="150.0000" Y="31.0000" />
+                  <AbstractNodeData Name="btn_copy_id" ActionTag="365442086" Tag="21" IconVisible="False" LeftMargin="221.9205" RightMargin="-5.9205" TopMargin="65.8942" BottomMargin="-48.8942" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="152.0000" Y="36.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="410.0524" Y="38.0000" />
+                    <Position X="297.9205" Y="-30.8942" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8217" Y="0.5067" />
-                    <PreSize X="0.3006" Y="0.4133" />
+                    <PrePosition X="0.8096" Y="-0.5829" />
+                    <PreSize X="0.4130" Y="0.6792" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="hall_res/account/bb_djfzID_normal.png" Plist="" />
                     <PressedFileData Type="Normal" Path="hall_res/account/bb_djfzID_pressed.png" Plist="" />
@@ -140,89 +131,102 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="id_text_0" ActionTag="442614355" Tag="67" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-75.3420" RightMargin="376.3420" TopMargin="11.4787" BottomMargin="8.5213" FontSize="33" LabelText="ID：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="67.0000" Y="33.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="-75.3420" Y="25.0213" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-0.2047" Y="0.4721" />
+                    <PreSize X="0.1821" Y="0.6226" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="255" G="255" B="255" />
+                  </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="292.2391" Y="408.2149" />
+                <Position X="335.2606" Y="443.4152" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3076" Y="0.6584" />
-                <PreSize X="0.5253" Y="0.1210" />
+                <PrePosition X="0.3529" Y="0.7152" />
+                <PreSize X="0.3874" Y="0.0855" />
                 <FileData Type="Normal" Path="hall_res/account/bb_grxx_KK.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="phonenum_input_bg" ActionTag="1855662518" Tag="202" IconVisible="False" LeftMargin="292.2391" RightMargin="158.7609" TopMargin="231.9663" BottomMargin="313.0337" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="261" Scale9Height="43" ctype="ImageViewObjectData">
-                <Size X="499.0000" Y="75.0000" />
+              <AbstractNodeData Name="phonenum_input_bg" ActionTag="1855662518" Tag="202" IconVisible="False" LeftMargin="336.5626" RightMargin="245.4374" TopMargin="256.1459" BottomMargin="310.8541" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="130" Scale9Height="21" ctype="ImageViewObjectData">
+                <Size X="368.0000" Y="53.0000" />
                 <Children>
-                  <AbstractNodeData Name="account_text" ActionTag="-1072172489" Tag="203" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="15.0000" RightMargin="204.0000" TopMargin="17.5000" BottomMargin="17.5000" FontSize="40" LabelText="+9618587463458" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="280.0000" Y="40.0000" />
+                  <AbstractNodeData Name="account_text" ActionTag="-1072172489" Tag="203" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="16.0000" RightMargin="128.0000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="32" LabelText="+9618587463458" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
+                    <Size X="224.0000" Y="33.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="15.0000" Y="37.5000" />
+                    <Position X="16.0000" Y="26.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0301" Y="0.5000" />
-                    <PreSize X="0.5611" Y="0.5333" />
+                    <PrePosition X="0.0435" Y="0.5000" />
+                    <PreSize X="0.6087" Y="0.6226" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_24" ActionTag="-1302180134" Tag="204" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-108.8810" RightMargin="511.8810" TopMargin="6.8350" BottomMargin="13.1650" LeftEage="23" RightEage="23" TopEage="12" BottomEage="12" Scale9OriginX="23" Scale9OriginY="12" Scale9Width="50" Scale9Height="31" ctype="ImageViewObjectData">
-                    <Size X="96.0000" Y="55.0000" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="-12.8810" Y="40.6650" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0258" Y="0.5422" />
-                    <PreSize X="0.1924" Y="0.7333" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_zhanghu.png" Plist="" />
-                  </AbstractNodeData>
-                </Children>
-                <AnchorPoint ScaleY="0.5000" />
-                <Position X="292.2391" Y="350.5337" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3076" Y="0.5654" />
-                <PreSize X="0.5253" Y="0.1210" />
-                <FileData Type="Normal" Path="hall_res/account/bb_grxx_KK.png" Plist="" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="gold_input_bg" ActionTag="-581353442" Tag="205" IconVisible="False" LeftMargin="292.2390" RightMargin="158.7610" TopMargin="327.1474" BottomMargin="217.8526" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="261" Scale9Height="43" ctype="ImageViewObjectData">
-                <Size X="499.0000" Y="75.0000" />
-                <Children>
-                  <AbstractNodeData Name="gold_text" ActionTag="-1969108984" Tag="206" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="15.0000" RightMargin="404.0000" TopMargin="17.5000" BottomMargin="17.5000" FontSize="40" LabelText="8888" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="80.0000" Y="40.0000" />
+                  <AbstractNodeData Name="account_text_0" ActionTag="722220024" Tag="68" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-108.6458" RightMargin="377.6458" TopMargin="12.6288" BottomMargin="7.3712" FontSize="33" LabelText="账户：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="99.0000" Y="33.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="15.0000" Y="37.5000" />
+                    <Position X="-108.6458" Y="23.8712" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0301" Y="0.5000" />
-                    <PreSize X="0.1603" Y="0.5333" />
+                    <PrePosition X="-0.2952" Y="0.4504" />
+                    <PreSize X="0.2690" Y="0.6226" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_25" ActionTag="-1782452620" Tag="207" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" PercentHeightEnable="True" PercentHeightEnabled="True" LeftMargin="-108.8742" RightMargin="511.8742" TopMargin="10.9987" BottomMargin="10.9987" LeftEage="36" RightEage="36" TopEage="12" BottomEage="12" Scale9OriginX="36" Scale9OriginY="12" Scale9Width="24" Scale9Height="29" ctype="ImageViewObjectData">
-                    <Size X="96.0000" Y="53.0025" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="-12.8742" Y="37.5000" />
+                </Children>
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="336.5626" Y="337.3541" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3543" Y="0.5441" />
+                <PreSize X="0.3874" Y="0.0855" />
+                <FileData Type="Normal" Path="hall_res/account/bb_grxx_KK.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="gold_input_bg" ActionTag="-581353442" Tag="205" IconVisible="False" LeftMargin="334.3940" RightMargin="247.6060" TopMargin="352.4098" BottomMargin="214.5902" LeftEage="119" RightEage="119" TopEage="16" BottomEage="16" Scale9OriginX="119" Scale9OriginY="16" Scale9Width="130" Scale9Height="21" ctype="ImageViewObjectData">
+                <Size X="368.0000" Y="53.0000" />
+                <Children>
+                  <AbstractNodeData Name="gold_text" ActionTag="-1969108984" Tag="206" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="15.0000" RightMargin="289.0000" TopMargin="11.3038" BottomMargin="8.6962" FontSize="32" LabelText="8888" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
+                    <Size X="64.0000" Y="33.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="15.0000" Y="25.1962" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0258" Y="0.5000" />
-                    <PreSize X="0.1924" Y="0.7067" />
-                    <FileData Type="Normal" Path="hall_res/account/bb_grxx_jb.png" Plist="" />
+                    <PrePosition X="0.0408" Y="0.4754" />
+                    <PreSize X="0.1739" Y="0.6226" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="255" G="255" B="255" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="gold_text_0" ActionTag="1422444037" Tag="69" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="-106.4772" RightMargin="375.4772" TopMargin="10.4611" BottomMargin="9.5389" FontSize="33" LabelText="金币：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="99.0000" Y="33.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="-106.4772" Y="26.0389" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-0.2893" Y="0.4913" />
+                    <PreSize X="0.2690" Y="0.6226" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="292.2390" Y="255.3526" />
+                <Position X="334.3940" Y="241.0902" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3076" Y="0.4119" />
-                <PreSize X="0.5253" Y="0.1210" />
+                <PrePosition X="0.3520" Y="0.3889" />
+                <PreSize X="0.3874" Y="0.0855" />
                 <FileData Type="Normal" Path="hall_res/account/bb_grxx_KK.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="change_pwd_btn" ActionTag="-76193123" Tag="208" IconVisible="False" LeftMargin="121.3812" RightMargin="493.6188" TopMargin="457.7147" BottomMargin="11.2853" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
+              <AbstractNodeData Name="change_pwd_btn" ActionTag="-76193123" Tag="208" IconVisible="False" LeftMargin="145.3812" RightMargin="517.6188" TopMargin="483.2147" BottomMargin="36.7853" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="287.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="288.8812" Y="86.7853" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3041" Y="0.1400" />
-                <PreSize X="0.3526" Y="0.2435" />
+                <PreSize X="0.3021" Y="0.1613" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="hall_res/account/bb_btn_alter_password_pressed.png" Plist="" />
                 <PressedFileData Type="Normal" Path="hall_res/account/bb_btn_alter_password_pressed.png" Plist="" />
@@ -230,14 +234,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="exit_btn" ActionTag="-435563202" Tag="209" IconVisible="False" LeftMargin="582.6426" RightMargin="32.3574" TopMargin="457.7147" BottomMargin="11.2853" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="305" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="335.0000" Y="151.0000" />
+              <AbstractNodeData Name="exit_btn" ActionTag="-435563202" Tag="209" IconVisible="False" LeftMargin="606.6426" RightMargin="56.3574" TopMargin="483.2147" BottomMargin="36.7853" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="287.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="750.1426" Y="86.7853" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7896" Y="0.1400" />
-                <PreSize X="0.3526" Y="0.2435" />
+                <PreSize X="0.3021" Y="0.1613" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="hall_res/account/bb_chang_user_2.png" Plist="" />
                 <PressedFileData Type="Normal" Path="hall_res/account/bb_chang_user_2.png" Plist="" />
@@ -247,10 +251,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="1.0000" />
-            <Position Y="617.2720" />
+            <Position X="-1.0842" Y="617.2720" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition Y="0.9956" />
+            <PrePosition X="-0.0011" Y="0.9956" />
             <PreSize X="1.0000" Y="1.0000" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
