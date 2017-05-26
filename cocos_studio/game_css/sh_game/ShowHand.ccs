@@ -131,6 +131,7 @@
             <Image Name="sh_js_ljks_normal.png" />
             <Image Name="sh_js_ljks_pressed.png" />
             <Image Name="sh_js_mth.png" />
+            <Image Name="sh_js_qp.png" />
             <Image Name="sh_js_sant.png" />
             <Image Name="sh_js_sp.png" />
             <Image Name="sh_js_st.png" />

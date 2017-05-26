@@ -47,6 +47,8 @@
             <Image Name="bb_lookfor_pw_pressed.png" />
             <Image Name="bb_xgmm_bt.png" />
             <Image Name="bb_xgmm_d.png" />
+            <Image Name="bb_xztx_txk.png" />
+            <Image Name="bb_xztx_txkdj.png" />
           </Folder>
           <Folder Name="account_bind_tip">
             <Image Name="bb_khyj_bt.png" />
@@ -152,13 +154,33 @@
               <Image Name="BB_icon_brnn_gbc.png" />
               <Image Name="BB_icon_brnn_xbc.png" />
             </Folder>
-            <Folder Name="np_zh_zjh_chart">
-              <Image Name="bb_fc_zjh_biaotizi.png" />
-              <Image Name="BB_icon_zjh_fhc.png" />
-              <Image Name="BB_icon_zjh_gbc.png" />
-              <Image Name="BB_icon_zjh_pmc.png" />
-              <Image Name="BB_icon_zjh_qgc.png" />
-              <Image Name="BB_icon_zjh_zdc.png" />
+            <Folder Name="ddz_chart">
+              <Image Name="bb_fc_ddz_biaotizi.png" />
+              <Image Name="BB_icon_ddz_cjc.png" />
+              <Image Name="BB_icon_ddz_fhc.png" />
+              <Image Name="BB_icon_ddz_gjc.png" />
+              <Image Name="BB_icon_ddz_xsc.png" />
+            </Folder>
+            <Folder Name="dzpk_chart">
+              <Image Name="bb_fc_dzpk_biaotizi.png" />
+              <Image Name="BB_icon_dzpk_dsc.png" />
+              <Image Name="BB_icon_dzpk_gsc.png" />
+              <Image Name="BB_icon_dzpk_xsc.png" />
+              <Image Name="BB_icon_dzpk_zjc.png" />
+            </Folder>
+            <Folder Name="ermj_chart">
+              <Image Name="bb_fc_ermj_biaotizi.png" />
+              <Image Name="BB_icon_ermj_cqc.png" />
+              <Image Name="BB_icon_ermj_lqc.png" />
+              <Image Name="BB_icon_ermj_qsc.png" />
+              <Image Name="BB_icon_ermj_xqc.png" />
+            </Folder>
+            <Folder Name="lkpy_chart">
+              <Image Name="bb_fc_lkpy_biaotizi.png" />
+              <Image Name="BB_icon_lkpy_hg.png" />
+              <Image Name="BB_icon_lkpy_qt.png" />
+              <Image Name="BB_icon_lkpy_sh.png" />
+              <Image Name="BB_icon_lkpy_xw.png" />
             </Folder>
             <Folder Name="qznn_chart">
               <Image Name="bb_fc_qznn_biaotizi.png" />
@@ -182,8 +204,19 @@
               <Image Name="BB_icon_lhj_fcc.png" />
               <Image Name="BB_icon_lhj_xsc.png" />
             </Folder>
+            <Folder Name="zjh_chart">
+              <Image Name="bb_fc_zjh_biaotizi.png" />
+              <Image Name="BB_icon_zjh_fhc.png" />
+              <Image Name="BB_icon_zjh_gbc.png" />
+              <Image Name="BB_icon_zjh_pmc.png" />
+              <Image Name="BB_icon_zjh_qgc.png" />
+              <Image Name="BB_icon_zjh_zdc.png" />
+            </Folder>
             <Image Name="bb_fc_ddz_normal.png" />
             <Image Name="bb_fc_ddz_pressed.png" />
+            <Image Name="bs.png" />
+            <Image Name="dmz.png" />
+            <Image Name="szt.png" />
             <Image Name="zjh_rw.png" />
             <Image Name="zjh_zi.png" />
           </Folder>
@@ -198,8 +231,8 @@
             <Image Name="bb_dating_gonggao_bg.png" />
             <Image Name="bb_dating_jiahao_normal.png" />
             <Image Name="bb_dating_jiahao_pressed.png" />
-            <Image Name="bb_dating_kaifu_normal.png" />
-            <Image Name="bb_dating_kaifu_pressed.png" />
+            <Image Name="bb_dating_kaifu_normal0.png" />
+            <Image Name="bb_dating_kaifu_pressed0.png" />
             <Image Name="bb_dating_srf.png" />
             <Image Name="bb_dating_srf1.png" />
             <Image Name="bb_dating_taitou_di.png" />
@@ -216,6 +249,7 @@
             <Image Name="bb_dating_youxitubiao_6_1.png" />
             <Image Name="bb_dating_ys.png" />
             <Image Name="bb_dating_ys1.png" />
+            <Image Name="bb_srfj_kfgz_bt.png" />
             <Image Name="bb_tubiao_duihuan_normal.png" />
             <Image Name="bb_tubiao_duihuan_pressed.png" />
             <Image Name="bb_tubiao_fankui_normal.png" />
@@ -245,6 +279,11 @@
           <Folder Name="loading">
             <Image Name="bb_loading_bj.jpg" />
             <Image Name="bb_loading_jzt.png" />
+            <Image Name="bb_loading_jzt2.png" />
+            <Image Name="bb_loading_jzt2_001.png" />
+            <Image Name="bb_loading_jzt2_01.png" />
+            <Image Name="bb_loading_jzt2_02.png" />
+            <Image Name="bb_loading_jzt2_03.png" />
             <Image Name="bb_loading_jztd.png" />
             <Image Name="bb_loading_ld.png" />
           </Folder>
@@ -264,13 +303,52 @@
             <Image Name="baobo_tc_xiaoxi_listbg_1.png" />
           </Folder>
           <Folder Name="private_game_room">
+            <Image Name="bb_srfj_bt.png" />
+            <Image Name="bb_srfj_btdi.png" />
+            <Image Name="bb_srfj_bz.png" />
+            <Image Name="bb_srfj_bz1.png" />
+            <Image Name="bb_srfj_dj.png" />
+            <Image Name="bb_srfj_dj1.png" />
+            <Image Name="bb_srfj_jr_dt.png" />
+            <Image Name="bb_srfj_jr_sz_0.png" />
+            <Image Name="bb_srfj_jr_sz_0_1.png" />
+            <Image Name="bb_srfj_jr_sz_1.png" />
+            <Image Name="bb_srfj_jr_sz_1_1.png" />
+            <Image Name="bb_srfj_jr_sz_10.png" />
+            <Image Name="bb_srfj_jr_sz_10_1.png" />
+            <Image Name="bb_srfj_jr_sz_11.png" />
+            <Image Name="bb_srfj_jr_sz_11_1.png" />
+            <Image Name="bb_srfj_jr_sz_2.png" />
+            <Image Name="bb_srfj_jr_sz_2_1.png" />
+            <Image Name="bb_srfj_jr_sz_3.png" />
+            <Image Name="bb_srfj_jr_sz_3_1.png" />
+            <Image Name="bb_srfj_jr_sz_4.png" />
+            <Image Name="bb_srfj_jr_sz_4_1.png" />
+            <Image Name="bb_srfj_jr_sz_5.png" />
+            <Image Name="bb_srfj_jr_sz_5_1.png" />
+            <Image Name="bb_srfj_jr_sz_6.png" />
+            <Image Name="bb_srfj_jr_sz_6_1.png" />
+            <Image Name="bb_srfj_jr_sz_7.png" />
+            <Image Name="bb_srfj_jr_sz_7_1.png" />
+            <Image Name="bb_srfj_jr_sz_8.png" />
+            <Image Name="bb_srfj_jr_sz_8_1.png" />
+            <Image Name="bb_srfj_jr_sz_9.png" />
+            <Image Name="bb_srfj_jr_sz_9_1.png" />
             <Image Name="bb_srfj_jrfj.png" />
             <Image Name="bb_srfj_jrfj1.png" />
+            <Image Name="bb_srfj_ks_dt.png" />
+            <Image Name="bb_srfj_ks_fgx.png" />
+            <Image Name="bb_srfj_ks_qhyx.png" />
+            <Image Name="bb_srfj_ks_qhyx1.png" />
+            <Image Name="bb_srfj_ks_xld.png" />
+            <Image Name="bb_srfj_ks_xldt.png" />
             <Image Name="bb_srfj_ksfj.png" />
             <Image Name="bb_srfj_ksfj1.png" />
+            <Image Name="bb_srfj_xtc_di.png" />
             <Image Name="bb_srfj_xzyx_an.png" />
             <Image Name="bb_srfj_xzyx_an1.png" />
             <Image Name="bb_srfj_xzyx_brnn.png" />
+            <Image Name="bb_srfj_xzyx_bt.png" />
             <Image Name="bb_srfj_xzyx_ddz.png" />
             <Image Name="bb_srfj_xzyx_dzpk.png" />
             <Image Name="bb_srfj_xzyx_ermj.png" />
@@ -362,6 +440,8 @@
             <Image Name="bb_grxx_queren1.png" />
             <Image Name="bb_grxx_quxiao.png" />
             <Image Name="bb_grxx_quxiao1.png" />
+            <Image Name="bb_srfj_fj.png" />
+            <Image Name="bb_srfj_fj1.png" />
             <Image Name="bb_ts_qcz.png" />
             <Image Name="bb_ts_qcz1.png" />
             <Image Name="bb_ts_qyh.png" />
@@ -421,6 +501,12 @@
         <Project Name="PasswordModifyLayerCCS.csd" Type="Layer" />
         <Project Name="PersonalCenterLayerCCS.csd" Type="Layer" />
         <Project Name="PersonalInfoLayerCCS.csd" Type="Layer" />
+        <Project Name="PrivateRoomHelpCCS.csd" Type="Layer" />
+        <Project Name="PrivateRoomLayerCCS.csd" Type="Layer" />
+        <Project Name="PrivateRoomPromptCCS.csd" Type="Layer" />
+        <Project Name="PrivateRoomSwitchCCS.csd" Type="Layer" />
+        <Project Name="PrivateRoomUpdateCCS.csd" Type="Layer" />
+        <Project Name="PublicGameNode.csd" Type="Node" />
         <Project Name="PublicTopInfoNodeCCS.csd" Type="Node" />
         <Project Name="RechargeDailiNodeCCS.csd" Type="Layer" />
         <Project Name="RechargeDlczLayerCCS.csd" Type="Layer" />
@@ -433,6 +519,7 @@
         <Project Name="SecondarySelectLayerCCS.csd" Type="Layer" />
         <Project Name="SettingLayerCCS.csd" Type="Layer" />
         <Project Name="ShopLayerCCS.csd" Type="Layer" />
+        <Project Name="SecondaryDZPKNodeCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

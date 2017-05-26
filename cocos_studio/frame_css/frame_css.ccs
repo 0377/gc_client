@@ -20,6 +20,7 @@
           </Folder>
           <Image Name="bb_loading_bj.jpg" />
           <Image Name="bb_loading_jzt.png" />
+          <Image Name="bb_loading_jzt2_03.png" />
           <Image Name="bb_loading_jztd.png" />
           <Image Name="loading.png" />
         </Folder>

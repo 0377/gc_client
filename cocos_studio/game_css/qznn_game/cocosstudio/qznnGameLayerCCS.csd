@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="Image_show" CanEdit="False" ActionTag="838333328" Tag="9" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_show" CanEdit="False" Visible="False" ActionTag="838333328" Tag="9" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <AnchorPoint />
             <Position />
@@ -16,7 +16,7 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="game_res/zhujiemian/show3.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_bg" Visible="False" ActionTag="1186376817" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_bg" ActionTag="1186376817" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
               <AbstractNodeData Name="Image_1" ActionTag="1363408547" Tag="7" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
@@ -68,6 +68,17 @@
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_version" ActionTag="-509785229" Tag="134" IconVisible="False" LeftMargin="-93.9543" RightMargin="1343.9542" TopMargin="685.9338" BottomMargin="14.0661" FontSize="20" LabelText="1.2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="30.0000" Y="20.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-78.9543" Y="24.0661" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="-0.0617" Y="0.0334" />
+                <PreSize X="0.0234" Y="0.0278" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -1375,13 +1386,13 @@
           <AbstractNodeData Name="Panel_menu" ActionTag="-1706774669" Tag="45" IconVisible="False" LeftMargin="1168.5905" RightMargin="11.4095" TopMargin="12.9296" BottomMargin="207.0704" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="100.0000" Y="500.0000" />
             <Children>
-              <AbstractNodeData Name="Button_back" ActionTag="2006926598" Tag="47" IconVisible="False" LeftMargin="10.5703" RightMargin="-7.5703" TopMargin="100.5834" BottomMargin="296.4166" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_back" ActionTag="2006926598" Tag="47" IconVisible="False" LeftMargin="129.8297" RightMargin="-126.8297" TopMargin="95.1624" BottomMargin="301.8376" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="97.0000" Y="103.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.0703" Y="347.9166" />
+                <Position X="178.3297" Y="353.3376" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5907" Y="0.6958" />
+                <PrePosition X="1.7833" Y="0.7067" />
                 <PreSize X="0.9700" Y="0.2060" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="game_res/zhujiemian/qznn_button_tc_pressed.png" Plist="" />
@@ -1390,13 +1401,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_sound" ActionTag="1185949742" Tag="49" IconVisible="False" LeftMargin="10.5701" RightMargin="-7.5701" TopMargin="210.7086" BottomMargin="186.2914" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_sound" ActionTag="1185949742" Tag="49" IconVisible="False" LeftMargin="129.8297" RightMargin="-126.8297" TopMargin="205.2876" BottomMargin="191.7124" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="97.0000" Y="103.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.0701" Y="237.7914" />
+                <Position X="178.3297" Y="243.2124" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5907" Y="0.4756" />
+                <PrePosition X="1.7833" Y="0.4864" />
                 <PreSize X="0.9700" Y="0.2060" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="game_res/zhujiemian/qznn_button_yxg_pressed.png" Plist="" />
@@ -1405,13 +1416,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_music" ActionTag="2007598117" Tag="50" IconVisible="False" LeftMargin="10.5701" RightMargin="-7.5701" TopMargin="320.4816" BottomMargin="76.5184" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_music" ActionTag="2007598117" Tag="50" IconVisible="False" LeftMargin="129.8297" RightMargin="-126.8297" TopMargin="315.0606" BottomMargin="81.9394" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="97.0000" Y="103.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.0701" Y="128.0184" />
+                <Position X="178.3297" Y="133.4394" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5907" Y="0.2560" />
+                <PrePosition X="1.7833" Y="0.2669" />
                 <PreSize X="0.9700" Y="0.2060" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="game_res/zhujiemian/qznn_button_yyg_pressed.png" Plist="" />
@@ -1420,13 +1431,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_help" ActionTag="391852365" Tag="51" IconVisible="False" LeftMargin="10.5703" RightMargin="-7.5703" TopMargin="427.0894" BottomMargin="-30.0894" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_help" ActionTag="391852365" Tag="51" IconVisible="False" LeftMargin="129.8297" RightMargin="-126.8297" TopMargin="421.6687" BottomMargin="-24.6687" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="81" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="97.0000" Y="103.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.0703" Y="21.4106" />
+                <Position X="178.3297" Y="26.8313" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5907" Y="0.0428" />
+                <PrePosition X="1.7833" Y="0.0537" />
                 <PreSize X="0.9700" Y="0.2060" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="game_res/zhujiemian/qznn_button_bz_pressed.png" Plist="" />
@@ -1480,14 +1491,14 @@
           <AbstractNodeData Name="Image_winnum" ActionTag="-252388078" Tag="125" IconVisible="False" LeftMargin="-209.3654" RightMargin="1324.3654" TopMargin="737.4867" BottomMargin="-67.4867" LeftEage="54" RightEage="54" TopEage="16" BottomEage="16" Scale9OriginX="54" Scale9OriginY="16" Scale9Width="57" Scale9Height="18" ctype="ImageViewObjectData">
             <Size X="165.0000" Y="50.0000" />
             <Children>
-              <AbstractNodeData Name="num" ActionTag="-1352613141" Tag="126" IconVisible="False" LeftMargin="41.4164" RightMargin="23.5836" TopMargin="1.4233" BottomMargin="7.5767" CharWidth="25" CharHeight="41" LabelText="8543" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="100.0000" Y="41.0000" />
+              <AbstractNodeData Name="num" ActionTag="-1352613141" Tag="126" IconVisible="False" LeftMargin="16.4165" RightMargin="-1.4165" TopMargin="1.4233" BottomMargin="7.5767" CharWidth="25" CharHeight="41" LabelText="100.00" StartChar="." ctype="TextAtlasObjectData">
+                <Size X="150.0000" Y="41.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="91.4164" Y="28.0767" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <Position X="91.4165" Y="28.0767" />
+                <Scale ScaleX="0.9000" ScaleY="0.9000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5540" Y="0.5615" />
-                <PreSize X="0.6061" Y="0.8200" />
+                <PreSize X="0.9091" Y="0.8200" />
                 <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/zhujiemian/qznn_js_szt_1.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_fuhao" ActionTag="-717407214" Tag="253" IconVisible="False" LeftMargin="12.0572" RightMargin="134.9428" TopMargin="14.5454" BottomMargin="16.4546" LeftEage="5" RightEage="5" TopEage="6" BottomEage="6" Scale9OriginX="5" Scale9OriginY="6" Scale9Width="8" Scale9Height="7" ctype="ImageViewObjectData">
@@ -1512,14 +1523,14 @@
           <AbstractNodeData Name="Image_losenum" ActionTag="-607359243" Tag="128" IconVisible="False" LeftMargin="-209.3654" RightMargin="1324.3654" TopMargin="857.7120" BottomMargin="-187.7120" LeftEage="54" RightEage="54" TopEage="16" BottomEage="16" Scale9OriginX="54" Scale9OriginY="16" Scale9Width="57" Scale9Height="18" ctype="ImageViewObjectData">
             <Size X="165.0000" Y="50.0000" />
             <Children>
-              <AbstractNodeData Name="num" ActionTag="-401185919" Tag="129" IconVisible="False" LeftMargin="39.4165" RightMargin="25.5835" TopMargin="2.4233" BottomMargin="6.5767" CharWidth="25" CharHeight="41" LabelText="8543" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="100.0000" Y="41.0000" />
+              <AbstractNodeData Name="num" ActionTag="-401185919" Tag="129" IconVisible="False" LeftMargin="16.4165" RightMargin="-1.4165" TopMargin="0.4233" BottomMargin="8.5767" CharWidth="25" CharHeight="41" LabelText="100.00" StartChar="." ctype="TextAtlasObjectData">
+                <Size X="150.0000" Y="41.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="89.4165" Y="27.0767" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <Position X="91.4165" Y="29.0767" />
+                <Scale ScaleX="0.9000" ScaleY="0.9000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5419" Y="0.5415" />
-                <PreSize X="0.6061" Y="0.8200" />
+                <PrePosition X="0.5540" Y="0.5815" />
+                <PreSize X="0.9091" Y="0.8200" />
                 <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/zhujiemian/qznn_js_szt_2.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_fuhao" ActionTag="-479011814" Tag="254" IconVisible="False" LeftMargin="12.0573" RightMargin="134.9427" TopMargin="14.6421" BottomMargin="16.3579" LeftEage="5" RightEage="5" TopEage="6" BottomEage="6" Scale9OriginX="5" Scale9OriginY="6" Scale9Width="8" Scale9Height="7" ctype="ImageViewObjectData">

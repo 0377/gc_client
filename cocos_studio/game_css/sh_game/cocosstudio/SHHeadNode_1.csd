@@ -63,7 +63,7 @@
                 <PreSize X="1.0160" Y="0.1737" />
                 <FileData Type="Normal" Path="game_res/mainView/sh_cmkuang.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_roundbet" ActionTag="61368955" Tag="80" IconVisible="False" LeftMargin="286.5000" RightMargin="-288.5000" TopMargin="-32.5000" BottomMargin="170.5000" LeftEage="41" RightEage="41" TopEage="9" BottomEage="9" Scale9OriginX="41" Scale9OriginY="9" Scale9Width="45" Scale9Height="11" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_roundbet" ActionTag="61368955" Tag="80" IconVisible="False" LeftMargin="286.5000" RightMargin="-288.5000" TopMargin="-32.5000" BottomMargin="170.5000" Scale9Enable="True" LeftEage="41" RightEage="41" TopEage="9" BottomEage="9" Scale9OriginX="41" Scale9OriginY="9" Scale9Width="45" Scale9Height="11" ctype="ImageViewObjectData">
                 <Size X="127.0000" Y="29.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_roundtag" ActionTag="1102459133" Tag="81" IconVisible="False" LeftMargin="8.6342" RightMargin="74.3658" TopMargin="5.2317" BottomMargin="4.7683" LeftEage="14" RightEage="14" TopEage="6" BottomEage="6" Scale9OriginX="14" Scale9OriginY="6" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
@@ -87,11 +87,11 @@
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/mainView/sh_szt_1.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="350.0000" Y="185.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="286.5000" Y="185.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="2.8000" Y="1.1078" />
+                <PrePosition X="2.2920" Y="1.1078" />
                 <PreSize X="1.0160" Y="0.1737" />
                 <FileData Type="Normal" Path="game_res/mainView/sh_cmkuang_2.png" Plist="" />
               </AbstractNodeData>

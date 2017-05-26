@@ -74,26 +74,26 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sub_view_parent" ActionTag="473942417" Tag="264" IconVisible="False" LeftMargin="355.5337" RightMargin="6.4663" TopMargin="91.2316" BottomMargin="8.7684" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="918.0000" Y="620.0000" />
+              <AbstractNodeData Name="sub_view_parent" ActionTag="473942417" Tag="264" IconVisible="False" LeftMargin="326.8442" RightMargin="3.1558" TopMargin="92.5353" BottomMargin="7.4647" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="950.0000" Y="620.0000" />
                 <Children>
-                  <AbstractNodeData Name="FileNode_1" ActionTag="-2052142248" Tag="265" IconVisible="True" TopMargin="0.1395" BottomMargin="-0.1395" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="True" ctype="ProjectNodeObjectData">
-                    <Size X="918.0000" Y="620.0000" />
+                  <AbstractNodeData Name="FileNode_1" ActionTag="-2052142248" Tag="265" IconVisible="True" TopMargin="1.4439" BottomMargin="-1.4439" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                    <Size X="950.0000" Y="620.0000" />
                     <AnchorPoint />
-                    <Position Y="-0.1395" />
+                    <Position Y="-1.4439" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition Y="-0.0002" />
+                    <PrePosition Y="-0.0023" />
                     <PreSize X="1.0000" Y="1.0000" />
                     <FileData Type="Normal" Path="AlipayBindInfoLayerCCS.csd" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleY="1.0000" />
-                <Position X="355.5337" Y="628.7684" />
+                <Position X="326.8442" Y="627.4647" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2778" Y="0.8733" />
-                <PreSize X="0.7172" Y="0.8611" />
+                <PrePosition X="0.2553" Y="0.8715" />
+                <PreSize X="0.7422" Y="0.8611" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />

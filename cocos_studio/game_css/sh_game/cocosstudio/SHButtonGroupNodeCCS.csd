@@ -59,14 +59,14 @@
           <AbstractNodeData Name="Button_call" ActionTag="-1235546684" Tag="619" IconVisible="False" LeftMargin="768.1324" RightMargin="-1012.1324" TopMargin="-86.7810" BottomMargin="2.7810" TouchEnable="True" FontSize="38" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="214" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="244.0000" Y="84.0000" />
             <Children>
-              <AbstractNodeData Name="AtlasLabel_call" ActionTag="-804986720" Tag="620" IconVisible="False" LeftMargin="123.5155" RightMargin="64.4845" TopMargin="23.6628" BottomMargin="22.3372" CharWidth="28" CharHeight="38" LabelText="32" StartChar="/" ctype="TextAtlasObjectData">
-                <Size X="56.0000" Y="38.0000" />
+              <AbstractNodeData Name="AtlasLabel_call" ActionTag="-804986720" Tag="620" IconVisible="False" LeftMargin="123.5155" RightMargin="92.4845" TopMargin="23.6628" BottomMargin="22.3372" CharWidth="28" CharHeight="38" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
+                <Size X="28.0000" Y="38.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="123.5155" Y="41.3372" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5062" Y="0.4921" />
-                <PreSize X="0.2295" Y="0.4524" />
+                <PreSize X="0.1148" Y="0.4524" />
                 <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/mainView/sh_button_szt.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_call" ActionTag="1911001199" Tag="621" IconVisible="False" LeftMargin="78.1585" RightMargin="117.8415" TopMargin="18.0000" BottomMargin="18.0000" LeftEage="15" RightEage="15" TopEage="16" BottomEage="16" Scale9OriginX="15" Scale9OriginY="16" Scale9Width="18" Scale9Height="16" ctype="ImageViewObjectData">

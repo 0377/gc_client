@@ -31,15 +31,15 @@
                       <AbstractNodeData Name="head_panel_1" ActionTag="1007899500" Tag="412" IconVisible="False" PositionPercentYEnabled="True" RightMargin="816.8700" TopMargin="8.2681" BottomMargin="8.2681" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="130.0000" Y="130.0000" />
                         <Children>
-                          <AbstractNodeData Name="head_parent_node" ActionTag="257195428" Tag="413" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="5.5000" RightMargin="5.5000" TopMargin="5.5000" BottomMargin="5.5000" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="56" Scale9Height="56" ctype="ImageViewObjectData">
-                            <Size X="119.0000" Y="119.0000" />
+                          <AbstractNodeData Name="head_parent_node" ActionTag="257195428" Tag="413" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="6.5000" RightMargin="6.5000" TopMargin="6.0000" BottomMargin="6.0000" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="39" Scale9Height="40" ctype="ImageViewObjectData">
+                            <Size X="117.0000" Y="118.0000" />
                             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                             <Position X="65.0000" Y="65.0000" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
                             <PrePosition X="0.5000" Y="0.5000" />
-                            <PreSize X="0.9154" Y="0.9154" />
-                            <FileData Type="Normal" Path="hall_res/account/bb_grxx_txk_1.png" Plist="" />
+                            <PreSize X="0.9000" Y="0.9077" />
+                            <FileData Type="Normal" Path="hall_res/account/bb_xztx_txk.png" Plist="" />
                           </AbstractNodeData>
                           <AbstractNodeData Name="head_icon_node" ActionTag="1076538767" Tag="10" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="10.5000" RightMargin="10.5000" TopMargin="10.5000" BottomMargin="10.5000" LeftEage="35" RightEage="35" TopEage="35" BottomEage="35" Scale9OriginX="35" Scale9OriginY="35" Scale9Width="64" Scale9Height="64" ctype="ImageViewObjectData">
                             <Size X="109.0000" Y="109.0000" />
@@ -51,16 +51,16 @@
                             <PreSize X="0.8385" Y="0.8385" />
                             <FileData Type="Normal" Path="hall_res/account/bb_grxx_txk_1.png" Plist="" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="selected_btn" ActionTag="-449978601" Tag="414" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="10.5000" RightMargin="10.5000" TopMargin="10.5000" BottomMargin="10.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="104" Scale9Height="112" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                            <Size X="109.0000" Y="109.0000" />
+                          <AbstractNodeData Name="selected_btn" ActionTag="-449978601" Tag="414" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="-2.0000" BottomMargin="-2.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="104" Scale9Height="112" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                            <Size X="134.0000" Y="134.0000" />
                             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                             <Position X="65.0000" Y="65.0000" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
                             <PrePosition X="0.5000" Y="0.5000" />
-                            <PreSize X="0.8385" Y="0.8385" />
+                            <PreSize X="1.0308" Y="1.0308" />
                             <TextColor A="255" R="65" G="65" B="70" />
-                            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                            <DisabledFileData Type="Normal" Path="hall_res/account/bb_xztx_txkdj.png" Plist="" />
                             <PressedFileData Type="Normal" Path="hall_res/account/bb_grxx_txk_1.png" Plist="" />
                             <NormalFileData Type="Normal" Path="hall_res/account/bb_grxx_txk_1.png" Plist="" />
                             <OutlineColor A="255" R="255" G="0" B="0" />

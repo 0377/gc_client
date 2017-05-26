@@ -29,6 +29,17 @@
                 <PreSize X="1.0000" Y="1.0000" />
                 <FileData Type="Normal" Path="game_res/mainui/dz_bj.jpg" Plist="" />
               </AbstractNodeData>
+              <AbstractNodeData Name="Text_version" ActionTag="-1867355845" Tag="204" IconVisible="False" LeftMargin="-53.1432" RightMargin="1303.1432" TopMargin="730.2594" BottomMargin="-30.2594" FontSize="20" LabelText="1.2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="30.0000" Y="20.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-38.1432" Y="-20.2594" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="-0.0298" Y="-0.0281" />
+                <PreSize X="0.0234" Y="0.0278" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="360.0000" />

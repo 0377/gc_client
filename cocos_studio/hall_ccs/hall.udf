@@ -11,8 +11,10 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="HallSceneCCS.csd" />
+          <FilePathData Path="SecondaryNormalNodeCCS.csd" />
+          <FilePathData Path="SecondaryBRNNNodeCCS.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="HallSceneCCS.csd" />
+        <ActiveDocument Path="SecondaryNormalNodeCCS.csd" />
       </Value>
     </Item>
   </Properties>

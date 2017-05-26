@@ -76,14 +76,14 @@
                     <PreSize X="0.1297" Y="0.8772" />
                     <FileData Type="Normal" Path="game_res/secondView/sh_txkuang_2.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="AtlasLabel_moeny" ActionTag="-636626382" Tag="78" IconVisible="False" LeftMargin="662.4700" RightMargin="86.5300" TopMargin="42.2600" BottomMargin="41.7400" CharWidth="22" CharHeight="30" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
-                    <Size X="22.0000" Y="30.0000" />
+                  <AbstractNodeData Name="AtlasLabel_moeny" ActionTag="-636626382" Tag="78" IconVisible="False" LeftMargin="660.9700" RightMargin="85.0300" TopMargin="36.7600" BottomMargin="36.2400" CharWidth="25" CharHeight="41" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
+                    <Size X="25.0000" Y="41.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="673.4700" Y="56.7400" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8735" Y="0.4977" />
-                    <PreSize X="0.0285" Y="0.2632" />
+                    <PreSize X="0.0324" Y="0.3596" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/secondView/sh_js_szt_2.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Text_tax" ActionTag="-1776989254" Tag="143" IconVisible="False" LeftMargin="643.0000" RightMargin="74.0000" TopMargin="78.0000" BottomMargin="18.0000" FontSize="18" LabelText="税收-1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -201,14 +201,14 @@
                     <PreSize X="0.1297" Y="0.8772" />
                     <FileData Type="Normal" Path="game_res/secondView/sh_txkuang_2.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="AtlasLabel_moeny" ActionTag="-1891867646" Tag="76" IconVisible="False" LeftMargin="662.4700" RightMargin="86.5300" TopMargin="42.2645" BottomMargin="41.7355" CharWidth="22" CharHeight="30" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
-                    <Size X="22.0000" Y="30.0000" />
+                  <AbstractNodeData Name="AtlasLabel_moeny" ActionTag="-1891867646" Tag="76" IconVisible="False" LeftMargin="660.9700" RightMargin="85.0300" TopMargin="36.7645" BottomMargin="36.2355" CharWidth="25" CharHeight="41" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
+                    <Size X="25.0000" Y="41.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="673.4700" Y="56.7355" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8735" Y="0.4977" />
-                    <PreSize X="0.0285" Y="0.2632" />
+                    <PreSize X="0.0324" Y="0.3596" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/secondView/sh_js_szt_1.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Text_tax" ActionTag="1148583633" Tag="170" IconVisible="False" LeftMargin="643.0000" RightMargin="74.0000" TopMargin="78.0000" BottomMargin="18.0000" FontSize="18" LabelText="税收-1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

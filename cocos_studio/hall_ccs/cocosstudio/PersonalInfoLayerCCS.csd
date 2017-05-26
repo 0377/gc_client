@@ -37,14 +37,14 @@
               <AbstractNodeData Name="nickname_editbox_panel" ActionTag="69097064" Tag="317" IconVisible="False" LeftMargin="335.4806" RightMargin="246.5194" TopMargin="48.0397" BottomMargin="518.9603" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="192" RightEage="192" TopEage="18" BottomEage="18" Scale9OriginX="176" Scale9OriginY="18" Scale9Width="16" Scale9Height="17" ctype="PanelObjectData">
                 <Size X="368.0000" Y="53.0000" />
                 <Children>
-                  <AbstractNodeData Name="nick_name_text" ActionTag="887138259" Tag="22" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="11.3816" RightMargin="17.6184" TopMargin="10.0000" BottomMargin="10.0000" IsCustomSize="True" FontSize="32" LabelText="昵称好牛" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
-                    <Size X="339.0000" Y="33.0000" />
+                  <AbstractNodeData Name="nick_name_text" ActionTag="887138259" Tag="22" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="11.3816" RightMargin="17.6184" TopMargin="1.5000" BottomMargin="1.5000" IsCustomSize="True" FontSize="32" LabelText="昵称好牛" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="TextObjectData">
+                    <Size X="339.0000" Y="50.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="11.3816" Y="26.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0309" Y="0.5000" />
-                    <PreSize X="0.9212" Y="0.6226" />
+                    <PreSize X="0.9212" Y="0.9434" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>
@@ -63,13 +63,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="save_btn" ActionTag="-73199042" VisibleForFrame="False" Tag="198" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="376.2447" RightMargin="-131.2447" TopMargin="-1.7351" BottomMargin="-5.2649" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="93" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="save_btn" ActionTag="-73199042" VisibleForFrame="False" Tag="198" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="387.2446" RightMargin="-142.2446" TopMargin="-2.7368" BottomMargin="-4.2632" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="93" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="123.0000" Y="60.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="437.7447" Y="24.7351" />
-                    <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="448.7446" Y="25.7368" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.1895" Y="0.4667" />
+                    <PrePosition X="1.2194" Y="0.4856" />
                     <PreSize X="0.3342" Y="1.1321" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="hall_res/account/bb_grxx_bc1.png" Plist="" />

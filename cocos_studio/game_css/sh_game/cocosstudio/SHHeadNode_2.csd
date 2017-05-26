@@ -63,7 +63,7 @@
                 <PreSize X="1.0160" Y="0.1737" />
                 <FileData Type="Normal" Path="game_res/mainView/sh_cmkuang.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_roundbet" ActionTag="61368955" Tag="80" IconVisible="False" LeftMargin="285.5651" RightMargin="-287.5651" TopMargin="135.9879" BottomMargin="2.0121" LeftEage="41" RightEage="41" TopEage="9" BottomEage="9" Scale9OriginX="41" Scale9OriginY="9" Scale9Width="45" Scale9Height="11" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_roundbet" ActionTag="61368955" Tag="80" IconVisible="False" LeftMargin="285.5651" RightMargin="-287.5651" TopMargin="135.9879" BottomMargin="2.0121" Scale9Enable="True" LeftEage="41" RightEage="41" TopEage="9" BottomEage="9" Scale9OriginX="41" Scale9OriginY="9" Scale9Width="45" Scale9Height="11" ctype="ImageViewObjectData">
                 <Size X="127.0000" Y="29.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_roundtag" ActionTag="1102459133" Tag="81" IconVisible="False" LeftMargin="8.6342" RightMargin="74.3658" TopMargin="5.2317" BottomMargin="4.7683" LeftEage="14" RightEage="14" TopEage="6" BottomEage="6" Scale9OriginX="14" Scale9OriginY="6" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
@@ -76,22 +76,22 @@
                     <PreSize X="0.3465" Y="0.6552" />
                     <FileData Type="Normal" Path="game_res/mainView/sh_jiazhu.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="AtlasLabel_roundbet" ActionTag="1380381635" Tag="82" IconVisible="False" LeftMargin="58.2859" RightMargin="42.7141" TopMargin="6.5999" BottomMargin="5.4001" CharWidth="13" CharHeight="17" LabelText="10" StartChar="/" ctype="TextAtlasObjectData">
-                    <Size X="26.0000" Y="17.0000" />
+                  <AbstractNodeData Name="AtlasLabel_roundbet" ActionTag="1380381635" Tag="82" IconVisible="False" LeftMargin="58.2859" RightMargin="55.7141" TopMargin="6.5999" BottomMargin="5.4001" CharWidth="13" CharHeight="17" LabelText="0" StartChar="/" ctype="TextAtlasObjectData">
+                    <Size X="13.0000" Y="17.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="58.2859" Y="13.9001" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4589" Y="0.4793" />
-                    <PreSize X="0.2047" Y="0.5862" />
+                    <PreSize X="0.1024" Y="0.5862" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/mainView/sh_szt_1.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="349.0651" Y="16.5121" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="285.5651" Y="16.5121" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="2.7925" Y="0.0989" />
+                <PrePosition X="2.2845" Y="0.0989" />
                 <PreSize X="1.0160" Y="0.1737" />
                 <FileData Type="Normal" Path="game_res/mainView/sh_cmkuang_2.png" Plist="" />
               </AbstractNodeData>
