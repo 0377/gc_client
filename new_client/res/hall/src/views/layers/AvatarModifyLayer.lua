@@ -8,6 +8,7 @@ function AvatarModifyLayer:ctor()
     self:initView();
     local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "close_btn"), "ccui.Button");
     closeBtn:addClickEventListener(function()
+    	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     	self:removeSelf();
     end);
 	local alertPanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"alert_panel"),"ccui.Widget");
@@ -15,6 +16,7 @@ function AvatarModifyLayer:ctor()
 
 	local closeBtnok = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "close_btn_ok"), "ccui.Button");
     closeBtnok:addClickEventListener(function()
+    	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     	self:removeSelf();
     end);
 end
@@ -58,6 +60,7 @@ function AvatarModifyLayer:initView()
 		headIconNode:loadTexture(headPath)
 		local selectedBtn = tolua.cast(CustomHelper.seekNodeByName(headPanel, "selected_btn"), "ccui.Button");
 		selectedBtn:addClickEventListener(function()
+			GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 			self:clickSelectedBtn(headPanel)
 		end)
 		print("headPanel.newHeadImageNameNum:",headPanel.newHeadImageNameNum,",my head icon Bun：",self.myPlayerInfo:getHeadIconNum())

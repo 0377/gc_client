@@ -1208,7 +1208,7 @@ function LhjGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)   
         self._scheduler = nil
     end
-      self.lhjGameManager:clearLoadedOneGameFiles()
+    self.lhjGameManager:clearLoadedOneGameFiles()
     local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
     local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
     local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]

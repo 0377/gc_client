@@ -256,6 +256,17 @@ function HallGameNode:updateDownLoadProgressForGamesDownload(dt)
 		local percent = totalDownloadSize/totalSize * 100;
 		self.downloadProgressBar:setPercentage(percent);
 		self.progressPercentText:setString(string.format("%d%%", percent));
+
+		if (percent >= 100) then
+			if self._downloadCompleteCb then
+				self._downloadCompleteCb()
+			end
+		end
 	end
 end
+
+function HallGameNode:setDownloadCompleteCallback(cb)
+	self._downloadCompleteCb = cb
+end
+
 return HallGameNode;

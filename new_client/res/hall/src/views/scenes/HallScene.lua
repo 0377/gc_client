@@ -134,7 +134,9 @@ function HallScene:alertGamingTipView()
     false,
     true,
     function(tipLayer)
-        self.reEnterGameTipLayer:removeSelf()
+		if CustomHelper.isLuaNodeValid(self.reEnterGameTipLayer) then
+			self.reEnterGameTipLayer:removeSelf()
+		end
         self.reEnterGameTipLayer = nil;
     end,
     function(tipLayer)
@@ -148,7 +150,9 @@ function HallScene:alertGamingTipView()
             curGamingInfoTab["id"] = firstGameType
             GameManager:getInstance():getHallManager():enterOneGameWithGameInfoTab(curGamingInfoTab)
         end
-        self.reEnterGameTipLayer:removeSelf()
+		if CustomHelper.isLuaNodeValid(self.reEnterGameTipLayer) then
+			self.reEnterGameTipLayer:removeSelf()
+		end
         self.reEnterGameTipLayer = nil;
     end)
 end

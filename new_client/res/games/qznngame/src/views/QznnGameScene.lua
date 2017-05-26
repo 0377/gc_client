@@ -233,7 +233,10 @@ function QznnGameScene:receiveServerResponseSuccessEvent(event)
 	elseif msgName == QznnGameManager.MsgName.SC_BankerForceToLeave then ---强制离开
 	--
 		local function  verificationGold(  )
-			local betNum = 0.1
+			local betNum = userInfo["num"]
+			if betNum == nil then
+				betNum = 200
+			end
 			local cancalCallbackFunc = function (  )
 				self:exitGame(false)
 			end
@@ -295,14 +298,26 @@ function QznnGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     -- body
     print("重新连接成功")
     QznnGameScene.super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
-   
-    --- 尝试直接发送进入游戏消息
-    local tableinfo = self.qznnGameManager:getDataManager():getRoomInfo()
-    local gameTypeID = tableinfo.id
-    local roomID = tableinfo.room_id
+	
+	
+	
+	local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
+	if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN)then
+		self:exitGame()
+	else
+		--- 尝试直接发送进入游戏消息
+		local tableinfo = self.qznnGameManager:getDataManager():getRoomInfo()
+		local gameTypeID = tableinfo.first_game_type
+		local roomID = tableinfo.second_game_type
 
-    CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
-    GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
+		CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
+		GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
+	end
+	
+	
+	
+   
+    
 end
 
 --请求失败通知，网络连接状态变化
@@ -348,6 +363,11 @@ function QznnGameScene:onEnterTransitionFinish()
 end
 
 
+function QznnGameScene:initVersion()
+	local bgnode = self.csNode:getChildByName("Panel_bg")
+	bgnode:getChildByName("Text_version"):setString("1.3")
+end
+
 function QznnGameScene:ctor()
 
    
@@ -366,6 +386,8 @@ function QznnGameScene:ctor()
 	--初始化操作按钮
 	self:initMyBtn()
 	
+	--初始化版本
+	self:initVersion()
 	
 	--初始化按钮
 	self:initMenu()
@@ -590,6 +612,7 @@ function QznnGameScene:initMenu()
 			MusicAndSoundManager:getInstance():playerSoundWithFile("qznnsound/button.mp3")
 			
 			if self.qznnGameManager:getDataManager().isMatch == true then
+				--[[
 				CustomHelper.showAlertView(
 				   "你确定要退出游戏吗？",
 				   true,
@@ -604,8 +627,17 @@ function QznnGameScene:initMenu()
 					tipLayer:removeFromParent()
 			   end)
 				--CustomHelper.addIndicationTip("",cc.Director:getInstance():getRunningScene(),0);
+				--]]
+				self:exitGame()
 			else
-				MyToastLayer.new(self, "请在本局游戏结束时再退出游戏")
+				local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
+				if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN or
+										tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_CARD	)then
+					self:exitGame()
+				else
+					MyToastLayer.new(self, "请在本局游戏结束时再退出游戏")
+				end
+				
 				
 			end
 			
@@ -934,7 +966,10 @@ function QznnGameScene:showCard(msg)
 	for k,v in ipairs(msg.cards) do
 		if node.allCard[k] ~= nil then
 			node.allCard[k]:setNum( v)
-			node.allCard[k]:openBackAction()
+			
+			if tableinfo.chair ~= msg.chair then
+				node.allCard[k]:openBackAction()
+			end
 			
 			
 			
@@ -944,6 +979,8 @@ function QznnGameScene:showCard(msg)
 			else
 				node.allCard[k]:setPosition( card5EndPos[showPos][k])
 			end
+			
+			node.allCard[k]:stopAllAction()
 			
 			
 			
@@ -1071,6 +1108,17 @@ function QznnGameScene:dingZhuangStart(msg)
 	userlistCCS:addChild(self.dingzhuangAnim,10000)
 	self.dingzhuangAnim:setPosition(cc.p(632,449))
 	
+	
+	--
+	local users = self.qznnGameManager:getDataManager():getUserInfoList()
+	local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
+	local myinfo = self.qznnGameManager:getDataManager():getMyInfo()
+	if tableinfo == nil or users == nil or myinfo == nil then
+		return
+	end
+	local zhuangjianode = self:getUserInfoNodeFromChairid( tableinfo.banker_chair)
+	zhuangjianode:getChildByName("Image_zhuangjia"):setScale(0)
+	
 end
 
 ----定庄
@@ -1085,6 +1133,10 @@ function QznnGameScene:dingZhuang(msg)
 		return
 	end
 	
+	if self.qznnGameManager:getDataManager():getMaxRatio() == -1 then
+		MyToastLayer.new(self, "无人抢庄，随机庄家，1倍押注")
+	end
+	
 	
 	
 	local userlistCCS = self.csNode:getChildByName("Panel_middle")
@@ -1092,8 +1144,7 @@ function QznnGameScene:dingZhuang(msg)
 	--Panel_dingzhuang:setScale(1)
 	Panel_dingzhuang:setVisible(true)
 	
-	local zhuangjianode = self:getUserInfoNodeFromChairid( tableinfo.banker_chair)
-	zhuangjianode:getChildByName("Image_zhuangjia"):setScale(0)
+	
 	
 	
 	for i=1, QZNN_MAX_USER do
@@ -1121,7 +1172,7 @@ function QznnGameScene:dingZhuang(msg)
     end
 	self.dingzhuangPosNum = 0
 
-	local speed = 0.2 --1次跳动用时
+	local speed = 0.12 --1次跳动用时
 	local zhuangquanCount = 6	--总圈数
 	local zhuangquanTime = speed*(#tableinfo.ManyChoosingPlayerChairs)*zhuangquanCount	--总用时
 	local curTime = 0

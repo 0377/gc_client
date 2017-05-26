@@ -5,7 +5,6 @@ function CustomRichTextNode.createHLCustomRichTextWithXML(desc,parameterTextNode
 	return customRichNode;
 end
 function CustomRichTextNode:initRichNodeWithXML(desc)
-	print("1111111111111111111")
 	self:setContentSize(cc.size(500,400));
 	local default = {
 

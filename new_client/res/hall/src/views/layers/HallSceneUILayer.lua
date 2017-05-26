@@ -196,6 +196,7 @@ function HallSceneUILayer:initBtns()
 		closeMorePanelBtn:setVisible(self.moreFunctionPanel:isVisible())
 	end);	
 	closeMorePanelBtn:addClickEventListener(function()
+		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		self.moreFunctionPanel:setVisible(false);
 		closeMorePanelBtn:setVisible(false)
 	end);
@@ -265,6 +266,7 @@ function HallSceneUILayer:initBtns()
     amartureKaiFuNode:getAnimation():play("ani_02")
 	
     self.bindRewardTipBtn:addClickEventListener(function()
+    	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     	ViewManager.alertAccountBindTipLayer()
     end)
     --绑定了话，就不用显示了
@@ -288,7 +290,12 @@ function HallSceneUILayer:initBtns()
 		ViewManager.enterStoreLayer();
 	end)
 	
-
+	-- private room
+	local privateRoomBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "Button_Private_Room"), "ccui.Button")
+    privateRoomBtn:addClickEventListener(function(sender)
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+        ViewManager.enterOneLayerWithClassName("privateroom/PrivateRoomView")
+    end)
 
 	--苹果审核状态 账户按钮/开户按钮 /兑换按钮不显示
 	if CustomHelper.isExaminState() then

@@ -89,14 +89,16 @@ function CustomBaseView:receiveMsgRequestErrorEvent(event)
 
 end
 --收到服务器返回的失败的通知，如果登录失败，密码错误
-function CustomBaseView:receiveServerResponseErrorEvent(event)
-    --print("CustomBaseView:receiveServerResponseErrorEvent(event)")
-    local userInfo = event.userInfo;
-    local msgName = userInfo["msgName"];
-    local ret = userInfo["ret"] or userInfo["result"]; 
-    local description = HallUtils:getDescWithMsgNameAndRetNum(msgName,ret);
-    CustomHelper.showAlertView(description);
-    CustomHelper.removeIndicationTip();
+function CustomBaseView:receiveServerResponseErrorEvent(event, status)
+    -- print("CustomBaseView:receiveServerResponseErrorEvent(event)")
+    if self:getIsShowErr() or (status ~= nil and status == true) then
+        local userInfo = event.userInfo;
+        local msgName = userInfo["msgName"];
+        local ret = userInfo["ret"] or userInfo["result"]; 
+        local description = HallUtils:getDescWithMsgNameAndRetNum(msgName,ret);
+        CustomHelper.showAlertView(description);
+        CustomHelper.removeIndicationTip();
+    end
 end
 --收到服务器处理成功通知函数
 function CustomBaseView:receiveServerResponseSuccessEvent(event)
@@ -106,4 +108,16 @@ end
 function CustomBaseView:receiveRefreshPlayerInfoNotify()
 
 end
+
+function CustomBaseView:getIsShowErr()
+    if self._isShowErr ~= nil and self._isShowErr then
+        return true
+    end
+    return false
+end
+
+function CustomBaseView:setIsShowErr(status)
+    self._isShowErr = status
+end
+
 return CustomBaseView;

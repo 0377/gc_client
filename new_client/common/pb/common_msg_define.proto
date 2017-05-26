@@ -251,6 +251,38 @@ message CS_ChangeGame {
 	enum MsgID { ID = 1150; }
 	optional int32 first_game_type = 1;				// 一级菜单
 	optional int32 second_game_type = 2;			// 二级菜单
+	optional int32 private_room_opt = 3;			// 私有房间操作 1 创建 2 加入
+	optional int32 owner_guid = 4;					// 房间拥有者guid
+	optional int32 private_room_chair_count = 5;	// 可选椅子数
+	optional int32 private_room_score_type = 6;		// 选的底注
+}
+
+// 加入私人房间
+message CS_JoinPrivateRoom {
+	enum MsgID { ID = 1151; }
+	optional int32 owner_guid = 1;					// 房间拥有者guid
+}
+
+message SC_JoinPrivateRoomFailed {
+	enum MsgID { ID = 1152; }
+	optional int32 owner_guid = 1;					// 房间拥有者guid
+	optional int32 result = 2;
+}
+
+// 私人房间信息
+message CS_PrivateRoomInfo {
+	enum MsgID { ID = 1153; }
+}
+
+message PrivateRoomInfo {
+	optional int32 first_game_type = 1;				// 一级菜单
+	repeated int32 table_count = 2;					// 桌子数目
+	repeated int32 cell_money = 3;					// 底注
+}
+
+message SC_PrivateRoomInfo {
+	enum MsgID { ID = 1154; }
+	repeated PrivateRoomInfo pb_info = 1;
 }
 
 // 返回游戏配置
@@ -691,6 +723,9 @@ message SC_EnterRoomAndSitDown {
 	optional int32 first_game_type = 7;				// 一级菜单
 	optional int32 second_game_type = 8;			// 二级菜单
 	optional string ip_area = 9;					// 客户端ip地区
+	optional bool private_room = 10;				// true 私人房间
+	optional int32 balance_money = 11;				// 差多少钱
+	optional int32 private_room_score_type = 12;	// 选的底注
 }
 
 // 站起并离开房间
@@ -777,6 +812,11 @@ message CS_HEARTBEAT{
 message CS_ReconnectionPlay{	
 	enum MsgID { ID = 11059; }
 }
+message SC_ReconnectionPlay{	
+	enum MsgID { ID = 11067; }
+	optional bool find_table = 1; //是否找到房间
+}
+
 message SC_SimpleRespons{
 	enum MsgID { ID = 11060; }
 	optional int32 status = 1;

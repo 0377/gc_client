@@ -15,6 +15,7 @@ function PersonalInfoLayer:showView()
 	self:showPersonInfo();
 	local modifyHeadBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "change_head_btn"), "ccui.Button");
 	modifyHeadBtn:addClickEventListener(function()
+		GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 		local AvatarModifyLayer = requireForGameLuaFile("AvatarModifyLayer")
 		local layer = AvatarModifyLayer:create();
 		cc.Director:getInstance():getRunningScene():addChild(layer)

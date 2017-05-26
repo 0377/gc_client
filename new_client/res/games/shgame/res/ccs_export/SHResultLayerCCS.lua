@@ -211,8 +211,8 @@ Image_other:addChild(Image_head_frame)
 --Create AtlasLabel_moeny
 local AtlasLabel_moeny = ccui.TextAtlas:create([[0]],
 													"game_res/secondView/sh_js_szt_2.png",
-													22,
-													30,
+													25,
+													41,
 													"/")
 AtlasLabel_moeny:setLayoutComponentEnabled(true)
 AtlasLabel_moeny:setName("AtlasLabel_moeny")
@@ -223,13 +223,13 @@ AtlasLabel_moeny:setPosition(673.4700, 56.7400)
 layout = ccui.LayoutComponent:bindLayoutComponent(AtlasLabel_moeny)
 layout:setPositionPercentX(0.8735)
 layout:setPositionPercentY(0.4977)
-layout:setPercentWidth(0.0285)
-layout:setPercentHeight(0.2632)
-layout:setSize({width = 22.0000, height = 30.0000})
-layout:setLeftMargin(662.4700)
-layout:setRightMargin(86.5300)
-layout:setTopMargin(42.2600)
-layout:setBottomMargin(41.7400)
+layout:setPercentWidth(0.0324)
+layout:setPercentHeight(0.3596)
+layout:setSize({width = 25.0000, height = 41.0000})
+layout:setLeftMargin(660.9700)
+layout:setRightMargin(85.0300)
+layout:setTopMargin(36.7600)
+layout:setBottomMargin(36.2400)
 Image_other:addChild(AtlasLabel_moeny)
 
 --Create Text_tax
@@ -485,8 +485,8 @@ Image_me:addChild(Image_head_frame)
 --Create AtlasLabel_moeny
 local AtlasLabel_moeny = ccui.TextAtlas:create([[0]],
 													"game_res/secondView/sh_js_szt_1.png",
-													22,
-													30,
+													25,
+													41,
 													"/")
 AtlasLabel_moeny:setLayoutComponentEnabled(true)
 AtlasLabel_moeny:setName("AtlasLabel_moeny")
@@ -497,13 +497,13 @@ AtlasLabel_moeny:setPosition(673.4700, 56.7355)
 layout = ccui.LayoutComponent:bindLayoutComponent(AtlasLabel_moeny)
 layout:setPositionPercentX(0.8735)
 layout:setPositionPercentY(0.4977)
-layout:setPercentWidth(0.0285)
-layout:setPercentHeight(0.2632)
-layout:setSize({width = 22.0000, height = 30.0000})
-layout:setLeftMargin(662.4700)
-layout:setRightMargin(86.5300)
-layout:setTopMargin(42.2645)
-layout:setBottomMargin(41.7355)
+layout:setPercentWidth(0.0324)
+layout:setPercentHeight(0.3596)
+layout:setSize({width = 25.0000, height = 41.0000})
+layout:setLeftMargin(660.9700)
+layout:setRightMargin(85.0300)
+layout:setTopMargin(36.7645)
+layout:setBottomMargin(36.2355)
 Image_me:addChild(AtlasLabel_moeny)
 
 --Create Text_tax

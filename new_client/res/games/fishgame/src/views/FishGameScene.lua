@@ -362,22 +362,22 @@ function FishGameScene:onTouchTTTTT(eventType, x, y)
     local dt = time - self._lastFireTime	
 	local dataMgr = FishGameManager:getInstance():getDataManager()
 	local fireInterval = dataMgr:getFireInterval()
-	dump(eventType,"eventType")
 	if dt*1000 >= fireInterval then
 		self._lastFireTime = time
 		self._targetPos = cc.p(x, y)
 		local mychair = dataMgr:getMyChairId()
 		local idx = mychair - 1
+		local opchair = dataMgr:getOperateChair(idx)
 		local angle = self:updateCannonRotationToPosition(mychair, self._targetPos)
-		if idx == FishGameConfig.PLAYER.LEFTTOP or idx == FishGameConfig.PLAYER.RIGHTTOP then
-			angle = angle + math.pi / 2
+		if opchair == FishGameConfig.PLAYER.LEFTTOP or opchair == FishGameConfig.PLAYER.RIGHTTOP then
+			angle = angle + math.pi/2
+		else
+			angle = math.pi/2 - angle
 		end
 
-		angle = angle + math.pi / 2
+		self._playersUI[opchair].pnlCannon:setRotation(math.deg(angle))
 
-		self._playersUI[idx].pnlCannon:setRotation(math.deg(math.pi - angle))
-
-		self:fireTo(angle)
+		self:fireTo(mychair, angle)
 	end
 
 --
@@ -892,30 +892,36 @@ function FishGameScene:showCannonUI(chairid)
     local dataMgr = FishGameManager:getInstance():getDataManager()
     local player = dataMgr:getPlayerByChairId(chairid)
     local idx = chairid - 1
+	local operateChair = dataMgr:getOperateChair(idx)
     if player ~= nil then
         local cannonSetV = player:getCannonSet()
         local cannonType = player:getCannonType()
+		local cannonMul  = player:getCannonMul()
         if cannonSetV == nil then cannonSetV = 0 end
         if cannonType == nil then cannonType = 0 end
+		if cannonMul  == nil then cannonMul  = 0 end
 
         local cannonSet = self._xmlConfigManager._cannonSetVector[cannonSetV]
         local cannon = cannonSet.Sets[cannonType]
-        self._playersUI[idx].pnlCannon:removeAllChildren()
+	    local bullet = self._xmlConfigManager._bulletVector[cannonMul]
+        self._playersUI[operateChair].pnlCannon:removeAllChildren()
 
         local rootPath = FishGameManager:getInstance():getPackageRootPath();
         local armature = ccs.Armature:create(cannon.Cannon.szResourceName)
         armature:getAnimation():play(cannon.Cannon.Name)
-        self._playersUI[idx].pnlCannon:addChild(armature)
+        self._playersUI[operateChair].pnlCannon:addChild(armature)
 
         local effectWeaponReplace = ccs.Armature:create("effect_weapons_replace")
         effectWeaponReplace:getAnimation():play("effect_weapons_replace_animation")
-        self._playersUI[idx].pnlCannon:addChild(effectWeaponReplace)
+        self._playersUI[operateChair].pnlCannon:addChild(effectWeaponReplace)
         effectWeaponReplace:runAction(transition.sequence({
             cc.DelayTime:create(0.5),
             cc.CallFunc:create(function(sender)
                 sender:removeSelf()
             end)
         }))
+		
+		self._playersUI[operateChair].txtScore:setString(""..bullet.nMulriple.."元")
     end
 end
 
@@ -968,18 +974,27 @@ end
 
 function FishGameScene:on_msg_GameConfig(msgTab)
     local dataMgr = FishGameManager:getInstance():getDataManager()
-    local mychair = dataMgr:getMyChairId() - 1
+    local opchair = dataMgr:getMyChairId() - 1
     if dataMgr:getMirrorShow() == true then
-        if mychair == FishGameConfig.PLAYER.LEFTTOP then
+        if opchair == FishGameConfig.PLAYER.LEFTTOP then
             self:showPlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
             self:hidePlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
+			opchair = FishGameConfig.PLAYER.LEFTBOTTOM
         else
-            self:showPlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
-            self:hidePlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
+            self:showPlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
+            self:hidePlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
+			opchair = FishGameConfig.PLAYER.RIGHTBOTTOM
         end
-		
+	    
+		local playerInfo  =  dataMgr:getPlayerByChairId(dataMgr:getMyChairId())
+		if playerInfo ~= nil then
+			local name = playerInfo:getNickName()
+			self._playersUI[opchair].txtName:setString(playerInfo:getNickName())
+			local bullet = self._xmlConfigManager._bulletVector[1]
+			self._playersUI[opchair].txtScore:setString(""..bullet.nMulriple.."元")
+		end
     else
-        if mychair == FishGameConfig.PLAYER.LEFTBOTTOM then
+        if opchair == FishGameConfig.PLAYER.LEFTBOTTOM then
             self:showPlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
             self:hidePlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
         else
@@ -990,16 +1005,16 @@ function FishGameScene:on_msg_GameConfig(msgTab)
 		local playerInfo  =  dataMgr:getPlayerByChairId(dataMgr:getMyChairId())
 		if playerInfo ~= nil then
 			local name = playerInfo:getNickName()
-			self._playersUI[mychair].txtName:setString(playerInfo:getNickName())
+			self._playersUI[opchair].txtName:setString(playerInfo:getNickName())
 			local bullet = self._xmlConfigManager._bulletVector[1]
-			self._playersUI[mychair].txtScore:setString(""..bullet.nMulriple.."元")
+			self._playersUI[opchair].txtScore:setString(""..bullet.nMulriple.."元")
 		end
     end
 
     for _, v in ipairs(dataMgr._players) do
         if v ~= nil then
             self:showCannonUI(v:getChairId())
-        end
+       end
     end
 end
 
@@ -1007,10 +1022,7 @@ function FishGameScene:on_msg_BulletSet(msgTab)
 end
 
 function FishGameScene:on_msg_UserInfo(msgTab)
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local mychair = msgTab.chair_id - 1
-    mychair = dataMgr:getOperateChair(mychair)
-	self._playersUI[mychair].txtMoney:setString(""..msgTab.score)
+    self:showCannonUI(msgTab.chair_id)
 end
 
 function FishGameScene:on_msg_ChangeScore(msgTab)
@@ -1136,18 +1148,16 @@ function FishGameScene:on_msg_CannonSet(msgTab)
     local idx = msgTab.chair_id - 1
     idx = dataMgr:getOperateChair(idx)
     local cannonSetV = msgTab.cannon_set
+	local cannonType = msgTab.cannon_type
+	local cannonMul = msgTab.cannon_mul
+		
     if cannonSetV == nil then cannonSetV = 0 end
-
-    local cannonMul = msgTab.cannon_mul
-    if cannonMul == nil then cannonMul = 0 end
-
-    local cannonType = msgTab.cannon_type
+    if cannonMul  == nil then cannonMul = 0 end
     if cannonType == nil then cannonType = 0 end
 
     local cannonSet = self._xmlConfigManager._cannonSetVector[cannonSetV]
     local cannon = cannonSet.Sets[cannonType]
 	local bullet = self._xmlConfigManager._bulletVector[cannonMul]
-	dump(bullet,"bullet")
 
     local dataMgr = FishGameManager:getInstance():getDataManager()
 
@@ -1317,25 +1327,25 @@ function FishGameScene:addPartical(_info)
         name = _info.name,
     })
 end
-
-function FishGameScene:fireTo(dir)
+function FishGameScene:fireTo(chairid, dir)
     self._bulletId = self._bulletId or 0
     self._bulletId = self._bulletId + 1
-	local chairid = 0
+	local idx = chairid - 1
 
-	local po  = self._playersUI[chairid].pnlCannon:getWorldPosition()
+	local po  = self._playersUI[idx].pnlCannon:getWorldPosition()
 	local x = po.x
 	local y = po.y
+	local dataMgr  = FishGameManager:getInstance():getDataManager()
     local serverTime = GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getServerTime()
-
+    local playerInfo = dataMgr:getPlayerByChairId(chairid)
     local data = {
         id = self._bulletId, -- 子弹ID
-        chair_id = 0, -- 椅子ID
+        chair_id = chairid, -- 椅子ID
         create_tick = serverTime, -- 创建时间
         x_pos = x, -- X坐标
         y_pos = y, -- Y坐标
-        cannon_type = 1, -- 炮类型
-        multiply = 1, -- 子弹类型
+        cannon_type = playerInfo:getCannonType(), -- 炮类型
+        multiply = playerInfo:getCannonMul(), -- 子弹类型
         score = 0, -- 玩家金钱？
         direction = dir, -- 方向
         is_new = 0, -- 是否新子弹

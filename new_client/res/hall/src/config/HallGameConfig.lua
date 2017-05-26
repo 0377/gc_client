@@ -28,7 +28,7 @@ HallGameConfig.gameOrderList =
 	-- HallGameConfig.game.ID_TMJGame,
 	HallGameConfig.game.ID_LHJGame,
 	HallGameConfig.game.ID_SHGame,
-	-- HallGameConfig.game.ID_DZPKGame,
+	HallGameConfig.game.ID_DZPKGame,
 	HallGameConfig.game.ID_QZNNGame,
 }
 dump(HallGameConfig.gameOrderList, "HallGameConfig.gameOrderList", nesting)
@@ -69,7 +69,7 @@ HallGameConfig.game.IconConfig = {
     [HallGameConfig.game.ID_TMJGame] = "hall_res/hall/bb_dating_youxitubiao_3_1.png",
 
     [HallGameConfig.game.ID_LHJGame] = "hall_res/hall/bb_dating_youxitubiao_4_2.png",
-    [HallGameConfig.game.ID_DZPKGame] = "hall_res/hall/bb_dating_youxitubiao_9_1.png",
+    [HallGameConfig.game.ID_DZPKGame] = "hall_res/hall/bb_dating_youxitubiao_10_1.png",
 
     [HallGameConfig.game.ID_SHGame] = "hall_res/hall/bb_dating_youxitubiao_5_2.png",
 
@@ -328,38 +328,38 @@ HallGameConfig.allGames = {
 		[HallGameConfig.GameIconKey]	 			  =	HallGameConfig.game.IconConfig[HallGameConfig.game.ID_DZPKGame],
 		[HallGameConfig.GameShadowIconKey]			  = "hall_res/hall/bb_dating_tubiao_daoying_dzpk.png",
 		-- [HallGameConfig.GameIconAnimKey]			  = HallGameConfig.game.IconAnimConfig[HallGameConfig.game.ID_DDZGame],
-		-- [HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SecondaryDZPKNode",
+		[HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SecondaryDZPKNode",
 		-- [HallGameConfig.GameSecondEffectResKey]	      = "anim/game_select/bb_ddz_room_eff/bb_ddz_room_eff.ExportJson",--前面为资源名，后面为动画名
-		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/np_zh_dzpk_chart/bb_fc_dzpk_biaotizi.png",
+		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/dzpk_chart/bb_fc_dzpk_biaotizi.png",
 		[HallGameConfig.SecondRoomKey]		          = {
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "乞丐场",
+				[HallGameConfig.SecondRoomNameKey]			  = "新手场",
 				[HallGameConfig.SecondRoomIDKey] 			  = 1,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/np_zh_dzpk_chart/bb_fc_dzpk_tb1.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/dzpk_chart/BB_icon_dzpk_xsc.png",
 				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "bb_ddz_room_eff#ani_01",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	
 			},
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "平民场",
+				[HallGameConfig.SecondRoomNameKey]			  = "高手场",
 				[HallGameConfig.SecondRoomIDKey] 			  = 2,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/np_zh_dzpk_chart/bb_fc_dzpk_tb2.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/dzpk_chart/BB_icon_dzpk_gsc.png",
 				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "bb_ddz_room_eff#ani_02",	
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 600,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	100			
 			},
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "小资场",
+				[HallGameConfig.SecondRoomNameKey]			  = "大师场",
 				[HallGameConfig.SecondRoomIDKey] 			  = 3,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/np_zh_dzpk_chart/bb_fc_dzpk_tb3.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/dzpk_chart/BB_icon_dzpk_dsc.png",
 				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "bb_ddz_room_eff#ani_03",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 1000,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	300				
 			},
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "老板场",
+				[HallGameConfig.SecondRoomNameKey]			  = "专家场",
 				[HallGameConfig.SecondRoomIDKey] 			  = 4,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/np_zh_dzpk_chart/bb_fc_dzpk_tb4.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/dzpk_chart/BB_icon_dzpk_zjc.png",
 				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "bb_ddz_room_eff#ani_04",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 2000,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	500						

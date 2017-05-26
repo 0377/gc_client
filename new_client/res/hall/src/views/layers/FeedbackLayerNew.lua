@@ -146,6 +146,22 @@ function FeedbackLayerNew:_onBtnTouched_submitFeedback(sender, eventType)
         sender:getChildByName("Image_Submit_Selected"):setVisible(false)
 
         local content = self.editboxFeedback:getText()
+        --验证提交内容
+        -- 全空格不能提交
+        local _, count = string.gsub(content, " ", " ")  --计算空格个数 
+        if count == string.len(content) then
+            MyToastLayer.new(cc.Director:getInstance():getRunningScene(), "请输入有效内容")
+            return
+        end
+
+
+
+
+
+
+
+
+
         FeedbackHelper.submitFeedback(FeedbackHelper.CONFIG_FEEDBACK_CAT["提建议"],content,function(xhr,isSuccess)
             local responseStr = xhr.response
             if isSuccess then
@@ -153,14 +169,14 @@ function FeedbackLayerNew:_onBtnTouched_submitFeedback(sender, eventType)
                 if data and data.status == 1 then
                     self.textfield:setString("")
                     self.editboxFeedback:setText("")
-                    MyToastLayer.new(self, data.message)
+                    MyToastLayer.new(cc.Director:getInstance():getRunningScene(), data.message)
 
                     self:requestPageData()
                 else
-                    MyToastLayer.new(self, data.message)
+                    MyToastLayer.new(cc.Director:getInstance():getRunningScene(), data.message)
                 end
             else
-               MyToastLayer.new(self,"提交失败,请重试")
+               MyToastLayer.new(cc.Director:getInstance():getRunningScene(), "提交失败,请重试")
             end
         end)
     end

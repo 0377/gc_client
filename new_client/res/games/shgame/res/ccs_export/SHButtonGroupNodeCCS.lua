@@ -145,7 +145,7 @@ layout:setBottomMargin(2.7810)
 Node:addChild(Button_call)
 
 --Create AtlasLabel_call
-local AtlasLabel_call = ccui.TextAtlas:create([[32]],
+local AtlasLabel_call = ccui.TextAtlas:create([[0]],
 													"game_res/mainView/sh_button_szt.png",
 													28,
 													38,
@@ -160,11 +160,11 @@ AtlasLabel_call:setPosition(123.5155, 41.3372)
 layout = ccui.LayoutComponent:bindLayoutComponent(AtlasLabel_call)
 layout:setPositionPercentX(0.5062)
 layout:setPositionPercentY(0.4921)
-layout:setPercentWidth(0.2295)
+layout:setPercentWidth(0.1148)
 layout:setPercentHeight(0.4524)
-layout:setSize({width = 56.0000, height = 38.0000})
+layout:setSize({width = 28.0000, height = 38.0000})
 layout:setLeftMargin(123.5155)
-layout:setRightMargin(64.4845)
+layout:setRightMargin(92.4845)
 layout:setTopMargin(23.6628)
 layout:setBottomMargin(22.3372)
 Button_call:addChild(AtlasLabel_call)

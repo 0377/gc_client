@@ -767,3 +767,7 @@ function CustomHelper.isExaminState()
         return false
     end 
 end
+--判断节点是否是适合指针
+function CustomHelper.isLuaNodeValid(node)
+	return(node and not tolua.isnull(node))
+end

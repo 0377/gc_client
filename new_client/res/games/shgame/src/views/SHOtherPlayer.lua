@@ -2,6 +2,7 @@ local SHOtherPlayer = class("SHOtherPlayer",requireForGameLuaFile("SHPlayer"))
 local SHHelper = import("..cfg.SHHelper")
 local SHConfig = import("..cfg.SHConfig")
 local HeadNodeCCS = requireForGameLuaFile("SHHeadNode_2")
+local ChatAnimatorFactory = requireForGameLuaFile("ChatAnimatorFactory")
 function SHOtherPlayer:ctor(pinfo)
 	SHOtherPlayer.super.ctor(self,pinfo)
 	self.pType = SHConfig.PlayerType.Type_Opposite --玩家类型
@@ -24,9 +25,9 @@ function SHOtherPlayer:showChatAnim(data)
 	local pSize = pNode:getContentSize()
 	local playerData = {
 		parentNode = pNode, 
-		position = cc.p(pSize.width/2,pSize.height),
-		zorder = 1,
-		
+		position = cc.p(pSize.width/2,pSize.height - 25),
+		zorder = 100,
+		isMan = self:isMan(),
 		}
 	self.chatAnimator = ChatAnimatorFactory.createAnimator(SHConfig.animatorType.Character,animData,playerData)
 end
@@ -39,6 +40,7 @@ function SHOtherPlayer:showCardType(showDatas)
 	local SHCardInfo = self.cards[1] --第一张牌
 	local SHCard = SHCardInfo.node --第一张牌
 	if SHCard then
+		SHCard.mState = SHConfig.CardState.State_Normal
 		SHCard:init( { state =SHConfig.CardState.State_Normal,val = cardInfo.val,col = cardInfo.col } )
 	end
 	SHOtherPlayer.super.showCardType(self,showDatas)
@@ -75,13 +77,13 @@ function SHOtherPlayer:getOneCard(cardInfo)
 end
 --弃牌
 function SHOtherPlayer:fallCard(cardInfo)
-	self:playOperationAnim(SHConfig.CardOperation.Fall,-20)
+	self:playOperationAnim(SHConfig.CardOperation.Fall,cc.p(-40,-20))
 	SHOtherPlayer.super.fallCard(self,cardInfo)
 end
 --跟注
 function SHOtherPlayer:callCard(cardInfo)
 	local oldBet = self.gamebet
-	self:playOperationAnim(SHConfig.CardOperation.Call,-20)
+	self:playOperationAnim(SHConfig.CardOperation.Call,cc.p(-40,-20))
 	SHOtherPlayer.super.callCard(self,cardInfo)
 	local diff = self.gamebet - oldBet
 	self.gold = self.gold - diff*100
@@ -91,7 +93,7 @@ end
 function SHOtherPlayer:raiseCard(cardInfo)
 	--todo
 	local oldBet = self.gamebet
-	self:playOperationAnim(SHConfig.CardOperation.Raise,-20)
+	self:playOperationAnim(SHConfig.CardOperation.Raise,cc.p(-40,-20))
 	SHOtherPlayer.super.raiseCard(self,cardInfo)
 	local diff = self.gamebet - oldBet
 	self.gold = self.gold - diff*100
@@ -101,7 +103,7 @@ end
 function SHOtherPlayer:showHandCard(cardInfo)
 	--todo
 	local oldBet = self.gamebet
-	self:playOperationAnim(SHConfig.CardOperation.ShowHand,-20)
+	self:playOperationAnim(SHConfig.CardOperation.ShowHand,cc.p(-40,-20))
 	SHOtherPlayer.super.showHandCard(self,cardInfo)
 	local diff = self.gamebet - oldBet
 	self.gold = self.gold - diff*100
@@ -110,7 +112,7 @@ end
 --过牌
 function SHOtherPlayer:passCard(cardInfo)
 	--todo
-	self:playOperationAnim(SHConfig.CardOperation.Pass,-20)
+	self:playOperationAnim(SHConfig.CardOperation.Pass,cc.p(-40,-20))
 	SHOtherPlayer.super.passCard(self,cardInfo)
 end
 

@@ -1,5 +1,5 @@
 
-Ì
+ª
 common_msg_showhand.proto"@
 CS_ShowHandAddScore
 target (Rtarget"
@@ -10,7 +10,10 @@
 IDé„"$
 CS_ShowHandPass"
 MsgID
-IDê„"Ž
+IDê„"*
+CS_ShowHandGiveUpEixt"
+MsgID
+IDë„"À
 ShowHand_Player_Info
 tiles (Rtiles
 chair_id (RchairId
@@ -18,11 +21,14 @@
 cur_round_add (RcurRoundAdd
 nick (	Rnick
 icon (Ricon
-gold (Rgold
-is_win (RisWin
-	win_money	 (RwinMoney
-taxes
- (Rtaxes"=
+gold (Rgold
+guid (Rguid
+is_win	 (RisWin
+	win_money
+ (RwinMoney
+taxes (Rtaxes
+
+is_give_up (RisGiveUp"=
 ShowHand_Reconnect_Data"
 act_left_time (RactLeftTime"ð
 SC_ShowHand_Desk_Enter4

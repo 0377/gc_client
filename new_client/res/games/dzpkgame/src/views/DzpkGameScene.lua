@@ -303,6 +303,11 @@ function DzpkGameScene:onEnterTransitionFinish()
 	self.dzpkGameManager:sendPlayerReconnection()
 end
 
+function DzpkGameScene:initVersion()
+	local bgnode = self.csNode:getChildByName("Panel_bg")
+	bgnode:getChildByName("Text_version"):setString("1.3")
+end
+
 
 function DzpkGameScene:ctor()
 
@@ -341,6 +346,9 @@ function DzpkGameScene:ctor()
 	
 	--初始化操作按钮
 	self:initMyBtn()
+	
+	--初始化版本
+	self:initVersion()
 	
 	--重置欲操作
 	self:clearWillOperate()
@@ -659,19 +667,33 @@ function DzpkGameScene:initMenu()
 			
 			MusicAndSoundManager:getInstance():playerSoundWithFile("dzpksound/button.mp3")
 			
-			CustomHelper.showAlertView(
-			   "你确定要退出游戏吗？",
-			   true,
-			   true,
-			   function(tipLayer)
-				   tipLayer:removeFromParent()
-			   end,
-			   function(tipLayer)
-				   
-				MusicAndSoundManager:getInstance():playerSoundWithFile("dzpksound/tuichu.mp3")
+			
+			local users = self.dzpkGameManager:getDataManager():getUserInfoList()
+			local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+			local myinfo = self.dzpkGameManager:getDataManager():getMyInfo()
+			if tableinfo == nil or users == nil or myinfo == nil then
+				return
+			end
+			if myinfo.action ~= nil and myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING then
+				
 				self:exitGame()
-					tipLayer:removeFromParent()
-		   end)
+			else
+				CustomHelper.showAlertView(
+				   "你确定要放弃本局游戏吗？",
+				   true,
+				   true,
+				   function(tipLayer)
+					   tipLayer:removeFromParent()
+				   end,
+				   function(tipLayer)
+					   
+					MusicAndSoundManager:getInstance():playerSoundWithFile("dzpksound/tuichu.mp3")
+					self:exitGame()
+						tipLayer:removeFromParent()
+			   end)
+			end
+			
+			
 		
 		
 		end

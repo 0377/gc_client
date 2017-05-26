@@ -235,6 +235,7 @@ function SecondarySelectLayer:tableCellAtIndex(view,idx)
 					--todo
 					return;
 				end
+				GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 				self:readyEnterOneGame(roomData)
 			end
 

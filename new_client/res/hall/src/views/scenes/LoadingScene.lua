@@ -20,7 +20,7 @@ function LoadingScene:ctor(needLoadResArray,finishCallback, infoTab)
     helpTipText:setString("小贴士：" .. LoadingScene._TipsTab[math.random(1, #LoadingScene._TipsTab)])
     self.progressBarNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_bar"), "ccui.LoadingBar");
     --进度条箭头端动画
-    self.progressArrowView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_arrow"), "ccui.Widget");
+    self.progressArrow = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_arrow"), "ccui.ImageView");
     --预加载资源的序列号
     self.preLoadResIndex = 0;
     self.needLoadResArray = needLoadResArray;
@@ -102,8 +102,14 @@ end
 function LoadingScene:showProgressPercent(percent)
 	-- print("LoadingScene:showProgressPercent:",percent)
 	self.progressBarNode:setPercent(percent);
-	self.progressArrowView:setPosition(cc.p(self.progressBarNode:getContentSize().width * (self.progressBarNode:getPercent() / 100),
-                self.progressArrowView:getParent():getContentSize().height / 2))
+	
+	self.progressArrow:setScaleX(math.min(1,self.progressBarNode:getContentSize().width * percent / 100 /self.progressArrow:getContentSize().width ))
+	self.progressArrow:setPositionX(math.min(self.progressBarNode:getContentSize().width * percent / 100 + 22 ,self.progressBarNode:getContentSize().width))
+	self.progressArrow:setVisible(self.progressArrow:getPositionX() > 55)
+
+
+
+
 	if percent >= 100 and self.isFinish == nil then
 		--todo
 		self.isFinish = true

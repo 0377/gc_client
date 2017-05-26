@@ -19,7 +19,7 @@ function BankWithdrawLayer:ctor()
     self.withdrawNumTF:setFontSize(30)
     self.withdrawNumTF:setFontColor(cc.c3b(255,255,255))
     self.withdrawNumTF:setPlaceHolder("请输入取出金额")
-    self.withdrawNumTF:setPlaceholderFontColor(cc.c3b(103,95,96))
+    self.withdrawNumTF:setPlaceholderFontColor(cc.c3b(133,125,126))
     self.withdrawNumTF:setPlaceholderFontSize(30)
     self.withdrawNumTF:setMaxLength(16)
     self.withdrawNumTF:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD);
@@ -87,7 +87,7 @@ end
 function BankWithdrawLayer:checkBankGold()
 	-- body
 
-	local addNumArray = {10,100,1000,10000}
+	local addNumArray = {10,100,500,1000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
 

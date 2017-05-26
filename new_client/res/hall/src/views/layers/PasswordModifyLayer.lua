@@ -92,6 +92,11 @@ function PasswordModifyLayer:clickPwdModfyBtn()
         --todo
         errorStr = "请输入旧密码"
     end
+    if errorStr == nil and oldPwdStr ~= GameManager:getInstance():getHallManager():getHallDataManager():getSavePlayerPwd() then
+        errorStr = "旧密码不正确"
+    end 
+
+
     if errorStr == nil and newPwdStr == "" then
         --todo
         errorStr = "请输入新密码"
@@ -108,6 +113,10 @@ function PasswordModifyLayer:clickPwdModfyBtn()
         --todo
         errorStr = "新密码与输入的旧密码一致"
     end
+
+
+
+
     if errorStr ~= nil then
         --todo
         MyToastLayer.new(cc.Director:getInstance():getRunningScene(), errorStr)

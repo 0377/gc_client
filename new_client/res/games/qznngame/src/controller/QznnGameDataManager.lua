@@ -363,6 +363,21 @@ function QznnGameDataManager:getZhuangJiaInfo()
 	
 end
 
+--获取庄家信息
+function QznnGameDataManager:getMaxRatio()
+	local maxRatio = -1
+	for k, v in pairs(self._userList) do
+		
+		if v.ratio ~= nil and v.ratio > maxRatio then
+			maxRatio = v.ratio
+		end
+		
+	end
+	
+	return maxRatio
+	
+end
+
 
 
 return QznnGameDataManager

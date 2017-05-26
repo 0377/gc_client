@@ -19,7 +19,7 @@ function BankDepositLayer:ctor()
     self.depositNumTF:setFontSize(30)
     self.depositNumTF:setFontColor(cc.c3b(255,255,255))
     self.depositNumTF:setPlaceHolder("请输入存入金额")
-    self.depositNumTF:setPlaceholderFontColor(cc.c3b(103,95,96))
+    self.depositNumTF:setPlaceholderFontColor(cc.c3b(133,125,126))
     self.depositNumTF:setPlaceholderFontSize(30)
     self.depositNumTF:setMaxLength(16)
     self.depositNumTF:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD);
@@ -58,7 +58,7 @@ function BankDepositLayer:ctor()
 end
 function BankDepositLayer:initView()
 	--
-	local addNumArray = {10,100,1000,10000}
+	local addNumArray = {10,100,500,1000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
 		tempAddBtn.addValue = addNumArray[i]

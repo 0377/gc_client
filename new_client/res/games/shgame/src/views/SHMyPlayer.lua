@@ -83,7 +83,7 @@ end
 --创建加注按钮组
 function SHMyPlayer:createRaiseButtons()
 	
-	if not self.baseBet then
+	if not self.baseBet or not self.betLimit then
 		
 		sslog(self.logTag,"当前下注底注"..tostring(self.baseBet))
 		return --还没有下注的 或者底注未设置
@@ -101,9 +101,13 @@ function SHMyPlayer:createRaiseButtons()
 	local size = raiseBtn:getContentSize()
 	self.raiseButtons:move(x,y+size.height/2 + 10)
 	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	local maxAdd = SHGameDataManager.maxAdd /100
+	local maxAdd = self.baseBet*self.betLimit
 	local roundBet = SHGameDataManager.roundBet /100
-	maxAdd = maxAdd or self.gold
+	sslog(self.logTag,"maxAdd:"..tostring(maxAdd).."self.gold:"..tostring(self.gold))
+	if self.gold then
+		maxAdd = self.gold/100 < maxAdd and self.gold/100 or maxAdd
+	end
+	
 	--需要显示几个加注的  
 	--self.roundBet 当前这轮最高的倍数
 	--self.betLimit 限注
@@ -126,6 +130,7 @@ function SHMyPlayer:createRaiseButtons()
 		local label = CustomHelper.seekNodeByName(self.raiseButtons,string.format("AtlasLabel_%d",i))
 		local showBet = startTimes * self.baseBet*math.pow(2,i-1)
 		btn:addTouchEventListener(handler(self,self.raiseButtonListener))
+		sslog(self.logTag,"显示的加倍数:"..tostring(showBet)..",最大的加倍额度:"..tostring(maxAdd))
 		if showBet <= maxAdd then -- 未超过最大允许的
 			btn:setVisible(true)
 			local s = string.gsub(tostring(showBet), '%.', '/' )
@@ -243,7 +248,8 @@ function SHMyPlayer:showChatAnim(data)
 		parentNode = pNode, 
 		position = cc.p(pSize.width,pSize.height),
 		zorder = 1,
-		flippedX = true
+		flippedX = true,
+		isMan = self:isMan(),
 		}
 	self.chatAnimator = ChatAnimatorFactory.createAnimator(SHConfig.animatorType.Character,animData,playerData)
 end
@@ -255,9 +261,21 @@ function SHMyPlayer:showCardType(showDatas)
 	local SHCardInfo = self.cards[1] --第一张牌
 	local SHCard = SHCardInfo.node --第一张牌
 	if SHCard then
-		SHCard:changeState(SHConfig.CardState.State_Normal)
+		SHCard.mState = SHConfig.CardState.State_Normal
+		SHCard:showFront(false)
+		--SHCard:changeState(SHConfig.CardState.State_Normal)
 	end
 	SHMyPlayer.super.showCardType(self,showDatas)
+end
+--播放赢动画 我自己的有音效
+function SHMyPlayer:showWinAnim()
+	SHConfig.playSound(SHConfig.SoundType.ResultWin)
+	SHMyPlayer.super.showWinAnim(self)
+end
+--播放失败动画 我自己的有音效
+function SHMyPlayer:showLoseAnim()
+	SHConfig.playSound(SHConfig.SoundType.ResultLose)
+	SHMyPlayer.super.showLoseAnim(self)
 end
 
 --显示操作按钮 弃牌 跟注/过牌 加注 梭哈
@@ -271,8 +289,10 @@ function SHMyPlayer:showDealView(cardinfo)
 	self.operationTypes = operationTypes
 	local max_add = cardinfo.max_add
 	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	local roundbet = SHGameDataManager.roundBet --这一轮的最大下注额度
-	sslog(self.logTag,"跟注多少"..tostring(roundBet))
+	local roundbet = SHGameDataManager.roundBet and SHGameDataManager.roundBet/100 or 0 --这一轮的最大下注额度
+	local diffBet = roundbet - self.roundBet
+	
+	sslog(self.logTag,"跟注多少"..tostring(diffBet))
 	SHMyPlayer.super.showDealView(self)
 	table.walk(self.operationNodes,function (v,k)
 		--如果操作里边有这个，那么就可以显示
@@ -284,8 +304,16 @@ function SHMyPlayer:showDealView(cardinfo)
 		
 		if k==SHConfig.CardOperation.Call then
 			local callAtlas = CustomHelper.seekNodeByName(v,"AtlasLabel_call")
-			local s = string.gsub(tostring(roundbet/100), '%.', '/' )
+			local callImg = CustomHelper.seekNodeByName(v,"Image_call")
+			local s = string.gsub(tostring(diffBet), '%.', '/' )
 			callAtlas:setString(s)
+			local btnWidth = v:getContentSize().width
+			local textWidth = callAtlas:getContentSize().width + callImg:getContentSize().width
+			if btnWidth>textWidth then
+				local center = (btnWidth - textWidth)/2
+				callImg:setPositionX(center+callImg:getContentSize().width/2)
+				callAtlas:setPositionX(center+callImg:getContentSize().width)
+			end
 		elseif k == SHConfig.CardOperation.ShowHand or 
 			k == SHConfig.CardOperation.Raise then --梭哈不会隐藏，只是不能点
 			v:setVisible(true)
@@ -372,34 +400,34 @@ function SHMyPlayer:getOneCard(cardInfo)
 end
 --弃牌
 function SHMyPlayer:fallCard(cardInfo)
-	self:playOperationAnim(SHConfig.CardOperation.Fall,0)
+	self:playOperationAnim(SHConfig.CardOperation.Fall)
 	SHMyPlayer.super.fallCard(self,cardInfo)
 	self:hideOperationNodes()
 end
 --跟注
 function SHMyPlayer:callCard(cardInfo)
-	self:playOperationAnim(SHConfig.CardOperation.Call,0)
+	self:playOperationAnim(SHConfig.CardOperation.Call)
 	SHMyPlayer.super.callCard(self,cardInfo)
 	self:hideOperationNodes()
 end
 --加注
 function SHMyPlayer:raiseCard(cardInfo)
 	--todo
-	self:playOperationAnim(SHConfig.CardOperation.Raise,0)
+	self:playOperationAnim(SHConfig.CardOperation.Raise)
 	SHMyPlayer.super.raiseCard(self,cardInfo)
 	self:hideOperationNodes()
 end
 --梭哈
 function SHMyPlayer:showHandCard(cardInfo)
 	--todo
-	self:playOperationAnim(SHConfig.CardOperation.ShowHand,0)
+	self:playOperationAnim(SHConfig.CardOperation.ShowHand)
 	SHMyPlayer.super.showHandCard(self,cardInfo)
 	self:hideOperationNodes()
 end
 --过牌
 function SHMyPlayer:passCard(cardInfo)
 	--todo
-	self:playOperationAnim(SHConfig.CardOperation.Pass,0)
+	self:playOperationAnim(SHConfig.CardOperation.Pass)
 	SHMyPlayer.super.passCard(self,cardInfo)
 	self:hideOperationNodes()
 end

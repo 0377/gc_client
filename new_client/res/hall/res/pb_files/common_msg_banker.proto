@@ -1,5 +1,5 @@
 
-¡
+Ø
 common_msg_banker.proto"k
 BankerTable
 state (Rstate
@@ -36,8 +36,10 @@ cards_type
 flag (Rflag
 tax (Rtax
 victory (Rvictory'
-increment_money (RincrementMoney"*
-SC_BankerTableMatching"
+increment_money (RincrementMoney"X
+SC_BankerTableMatching
+chair (Rchair
+chair1 (Rchair1"
 MsgID
 IDêN"ï
 SC_BankerSendCards'
@@ -95,9 +97,10 @@ cards_type (R	cardsType
 	pb_player (2.BankerGameEndPlayerInfoRpbPlayer'
 pb_table (2.BankerTableRpbTable"
 MsgID
-IDôN"A
+IDôN"S
 SC_BankerForceToLeave
-reason (	Rreason"
+reason (	Rreason
+num (Rnum"
 MsgID
 IDöN"…
 SC_BankerReconnectInfo'
@@ -107,8 +110,10 @@ cards_type (R	cardsType
 
 total_time (R	totalTime"
 MsgID
-IDõN"#
-CS_BankerEnter"
+IDõN"Q
+CS_BankerEnter
+chair (Rchair
+chair1 (Rchair1"
 MsgID
 ID°ú"#
 CS_BankerLeave"

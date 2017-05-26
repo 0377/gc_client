@@ -87,7 +87,7 @@ end
 function HallManager:enterOneGameWithGameInfoTab(infoTab)
 	dump(infoTab,"infoTab")
 	--游戏二级id
-	local gameType = infoTab[HallGameConfig.GameIDKey];
+	local gameType = infoTab[HallGameConfig.GameIDKey] or infoTab["first_game_type"];
 	local gameSecondId = infoTab[HallGameConfig.SecondRoomIDKey];
 	local serverID = infoTab["game_id"];
 	--从服务器常量中获取数据

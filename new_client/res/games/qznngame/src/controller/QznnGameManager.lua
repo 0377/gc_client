@@ -80,6 +80,13 @@ function QznnGameManager:clearLoadedOneGameFiles()
     QznnGameManager.instance = nil;
 end
 
+function QznnGameManager:onExit()
+	
+	SubGameBaseManager:onExit()
+	QznnGameManager.instance = nil;
+	
+end
+
 ----1准备状态
 ----2可以下注
 QznnGameManager.instance = nil;

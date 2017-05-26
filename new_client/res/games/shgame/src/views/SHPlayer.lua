@@ -43,12 +43,19 @@ function SHPlayer:ctor(pinfo)
 	
 end
 --获取玩家的名字
-function SHPlayer:getUserName()
+function SHPlayer:getUserID()
 	if self.pinfo then
 		
 	end
-	return self.pinfo and self.pinfo.nickname or nil
+	return self.pinfo and self.pinfo.guid or nil
 	
+end
+--获取玩家手上牌的张数
+function SHPlayer:getHandCardCount()
+	if self.cards then
+		return table.nums(self.cards)
+	end
+	return 0
 end
 
 --设置金币父容器
@@ -68,11 +75,13 @@ function SHPlayer:initHead(HeadNode)
 	local userNameText = CustomHelper.seekNodeByName(self.headNode,"Text_userName")
 	local goldText = CustomHelper.seekNodeByName(self.headNode,"Text_gold")
 	local gameBetLabel = CustomHelper.seekNodeByName(self.headNode,"AtlasLabel_gamebet")
+	
+	local roundBg = CustomHelper.seekNodeByName(self.headNode,"Image_roundbet")
 	local roundImg = CustomHelper.seekNodeByName(self.headNode,"Image_roundtag")
 	local roundLabel = CustomHelper.seekNodeByName(self.headNode,"AtlasLabel_roundbet")
 	
 	
-	
+	self.roundBgOriginSize = roundBg:getContentSize()
 	headBg:removeAllChildren()
 	userNameText:setString("")
 	goldText:setString("")
@@ -153,6 +162,7 @@ function SHPlayer:setHeadInfo(headInfo)
 	local userNameText = CustomHelper.seekNodeByName(self.headNode,"Text_userName")
 	local goldText = CustomHelper.seekNodeByName(self.headNode,"Text_gold")
 	local gameBetLabel = CustomHelper.seekNodeByName(self.headNode,"AtlasLabel_gamebet")
+	local roundBg = CustomHelper.seekNodeByName(self.headNode,"Image_roundbet")
 	local roundImg = CustomHelper.seekNodeByName(self.headNode,"Image_roundtag")
 	local roundLabel = CustomHelper.seekNodeByName(self.headNode,"AtlasLabel_roundbet")
 	if headInfo.headId then
@@ -169,7 +179,9 @@ function SHPlayer:setHeadInfo(headInfo)
 	end	
 	if headInfo.gold then
 		self.gold = headInfo.gold --当前的金币数
-		local goldStr = tostring(headInfo.gold/100)
+		local goldStr = string.format("%0.2f", headInfo.gold/100)
+		goldStr = string.gsub(goldStr, '%-', '' )
+		goldStr = string.gsub(goldStr, '%+', '' )
 		goldText:setString(goldStr)
 	end
 	if headInfo.username then
@@ -181,7 +193,9 @@ function SHPlayer:setHeadInfo(headInfo)
 		gameBetLabel:setString(s)
 	end
 	
-	if headInfo.roundType then
+	if headInfo.roundType and headInfo.roundType ~= SHConfig.CardOperation.GetCard then
+		roundImg:setVisible(true)
+		roundLabel:setVisible(true)
 		local function getRoundImg(roundType)
 			if roundType == SHConfig.CardOperation.Call then
 				return "game_res/mainView/sh_genzhu.png","game_res/mainView/sh_szt_3.png"
@@ -207,20 +221,33 @@ function SHPlayer:setHeadInfo(headInfo)
 				roundLabel:setVisible(true)
 				local s = string.gsub(tostring(headInfo.roundbet), '%.', '/' )
 				roundLabel:setProperty(s,roundLabelPath,13,17,"/")
+				local diff = roundLabel:getPositionX() - (roundImg:getPositionX() + roundImg:getContentSize().width/2)
+				local totalWidth = roundImg:getContentSize().width + diff + roundLabel:getContentSize().width
+				
+				if self.roundBgOriginSize and totalWidth > self.roundBgOriginSize.width then
+					local newSize = cc.size(totalWidth + 20 ,self.roundBgOriginSize.height)
+					roundBg:setContentSize(newSize)
+				else
+					roundBg:setContentSize(self.roundBgOriginSize)
+				end
+				
 			end
 			
 		end
-		
+	elseif headInfo.roundType == SHConfig.CardOperation.GetCard then
+		roundImg:setVisible(false)
+		roundLabel:setVisible(false)
 	end
 	
 end
 --播放操作的动画 在头像上显示一个角标
-function SHPlayer:playOperationAnim(operation,diffY)
+function SHPlayer:playOperationAnim(operation,diff)
 	local bg = CustomHelper.seekNodeByName(self.headNode,"Image_bg")
 	if SHHelper.isLuaNodeValid(self.opAnimNode) then
 		self.opAnimNode:removeFromParent()
 		self.opAnimNode = nil
 	end
+	diff = diff or cc.p(0,0)
 	local spPath = nil
 	if operation ==SHConfig.CardOperation.Fall then
 		spPath = "game_res/mainView/sh_ltqp_qp.png"
@@ -239,7 +266,7 @@ function SHPlayer:playOperationAnim(operation,diffY)
 		local bgSize = bg:getContentSize()
 		local bgPos = cc.p(bgSize.width/2,bgSize.height)
 		local animNodeSize = self.opAnimNode:getContentSize()
-		self.opAnimNode:setPosition(cc.pAdd(bgPos,cc.p(0,animNodeSize.height/2 + (diffY or 0))))
+		self.opAnimNode:setPosition(cc.pAdd(bgPos,cc.p(diff.x,animNodeSize.height/2 + diff.y)))
 		
 		--这里需要删除吗？？
 	end
@@ -288,6 +315,11 @@ function SHPlayer:showWinAnim()
 		imgBg,
 		cc.p(bgSize.width/2,bgSize.height/2 + 6),false,false)
 end
+--播放失败动画
+function SHPlayer:showLoseAnim()
+	
+end
+
 --播放翻转牌的动画 视情况而定
 function SHPlayer:runOpenCardAnim(createTag)
 
@@ -305,6 +337,14 @@ end
 function SHPlayer:getBetAmount()
 	return self.gamebet
 end
+--关闭上轮操作的显示
+function SHPlayer:closeLastRoundShow()
+	self:setHeadInfo({ roundType = SHConfig.CardOperation.GetCard })
+	if SHHelper.isLuaNodeValid(self.opAnimNode) then
+		self.opAnimNode:removeFromParent()
+		self.opAnimNode = nil
+	end
+end
 
 --拿到一张牌
 --@param cardInfo 牌信息
@@ -312,12 +352,14 @@ end
 --@key col 花色
 --@key val 点数
 function SHPlayer:getOneCard(cardInfo)
-	
-	
+	self:closeLastRoundShow()
+	self:setHeadInfo({gamebet = self.gamebet})
 	if cardInfo and not cardInfo.createTag then
 		local SHGameDataManager = SHGameManager:getInstance():getDataManager()
 		SHGameDataManager.roundBet = 0 
 		self:setRoundBet(0) --发牌后，重置当前这轮的下注额度
+		SHConfig.playSound(SHConfig.SoundType.DealCard)
+		
 	end
 	local curIndex = table.nums(self.cards) + 1
 	local function getCardFun(createTag)
@@ -373,6 +415,7 @@ end
 --@key operationTypes 可以操作的类型集合
 --@key max_add 最大的加注数额，也就是allin
 function SHPlayer:showDealView(cardinfo)
+	SHConfig.playSound(SHConfig.SoundType.RoundStart)
 	--self.leftTime
 	if SHHelper.isLuaNodeValid(self.opAnimNode) then
 		self.opAnimNode:removeFromParent()
@@ -386,12 +429,13 @@ function SHPlayer:showDealView(cardinfo)
 	}
 	--根据剩余的时间，返回倒计时边框的资源
 	local function getLeftTimeSp(time)
-		local maxSp = leftTimeSp[self.maxLeftTime*0.2]
+		local maxSp = leftTimeSp[self.maxLeftTime*0.8]
 		for i,v in pairs(leftTimeSp) do
-			if time>=i then
+			if time<=i then
 				maxSp = v
 			end
 		end
+		
 		return maxSp
 	end
 	
@@ -422,6 +466,10 @@ function SHPlayer:showDealView(cardinfo)
 					progressTimer:removeFromParent()
 				else
 					spriteProgress:setTexture(getLeftTimeSp(self.curCountTime))
+					if self.curCountTime<=5 and math.abs(math.ceil(self.curCountTime) - self.curCountTime)<0.01 then
+						SHConfig.playSound(SHConfig.SoundType.RoundSecound)
+					end
+					
 				end
 			end)
 		})
@@ -438,6 +486,8 @@ function SHPlayer:fallCard(cardInfo)
 	if self.operationFun then
 		self.operationFun(self.pType,SHConfig.CardOperation.Fall)--弃牌结束
 	end
+	SHConfig.playSound(SHConfig.CardOperation.Fall,self:isMan())
+	
 	self:setRoundBet(0)
 --@key roundType  当轮操作类型 加注 跟注 梭哈  SHConfig.CardOperation  Fall,Call,Raise,ShowHand,Pass
 --@key roundbet  当轮下注金额
@@ -460,8 +510,9 @@ function SHPlayer:callCard(cardInfo)
 --@key roundType  当轮操作类型 加注 跟注 梭哈  SHConfig.CardOperation  Fall,Call,Raise,ShowHand,Pass
 --@key roundbet  当轮下注金额
 	self.gamebet = self.gamebet + diff
-	self:setHeadInfo({ gamebet= self.gamebet,roundType=SHConfig.CardOperation.Call,roundbet = roundBet })
+	self:setHeadInfo({ roundType=SHConfig.CardOperation.Call,roundbet = diff })
 	self:addGameBetToTable(diff)
+	SHConfig.playSound(SHConfig.CardOperation.Call,self:isMan())
 	if self.operationFun then
 		self.operationFun(self.pType,SHConfig.CardOperation.Call)--跟注结束
 	end
@@ -485,8 +536,10 @@ function SHPlayer:raiseCard(cardInfo)
 --@key roundType  当轮操作类型 加注 跟注 梭哈  SHConfig.CardOperation  Fall,Call,Raise,ShowHand,Pass
 --@key roundbet  当轮下注金额
 	self.gamebet = self.gamebet + diff
-	self:setHeadInfo({ gamebet= self.gamebet,roundType=SHConfig.CardOperation.Raise,roundbet = cardInfo/100 })
+	self:setHeadInfo({ roundType=SHConfig.CardOperation.Raise,roundbet = cardInfo/100 })
 	self:addGameBetToTable(diff)
+	
+	SHConfig.playSound(SHConfig.CardOperation.Raise,self:isMan())
 	if self.operationFun then
 		self.operationFun(self.pType,SHConfig.CardOperation.Raise)--加注结束
 	end
@@ -511,8 +564,10 @@ function SHPlayer:showHandCard(cardInfo)
 --@key roundType  当轮操作类型 加注 跟注 梭哈  SHConfig.CardOperation  Fall,Call,Raise,ShowHand,Pass
 --@key roundbet  当轮下注金额
 	self.gamebet = self.gamebet + diff
-	self:setHeadInfo({ gamebet= self.gamebet,roundType=SHConfig.CardOperation.ShowHand,roundbet = maxAdd/100 })
+	self:setHeadInfo({ roundType=SHConfig.CardOperation.ShowHand,roundbet = maxAdd/100 })
 	self:addGameBetToTable(diff)
+
+	SHConfig.playSound(SHConfig.CardOperation.ShowHand,self:isMan())
 	if self.operationFun then
 		self.operationFun(self.pType,SHConfig.CardOperation.ShowHand)--梭哈结束
 	end
@@ -521,7 +576,7 @@ end
 function SHPlayer:passCard(cardInfo)
 	--todo
 	sslog(self.logTag,"玩家过牌")
-
+	SHConfig.playSound(SHConfig.CardOperation.Pass,self:isMan())
 --@key roundType  当轮操作类型 加注 跟注 梭哈  SHConfig.CardOperation  Fall,Call,Raise,ShowHand,Pass
 --@key roundbet  当轮下注金额
 	self:setHeadInfo({ roundType=SHConfig.CardOperation.Pass,roundbet = 0 })
@@ -581,9 +636,10 @@ function SHPlayer:rollGold( resPath,srcPos,destPos,count,createTag,callBack )
 		if v then
 			local r = 75.0
 			local angle = math.pi * 2 * math.random()
+			local angle2 = math.pi * 2 * math.random()
 			local lr = r * 0.5 + r * 0.5 * math.random()
 			local dx = math.sin(angle) * lr
-			local dy = math.cos(angle) * lr
+			local dy = math.cos(angle2) * lr
 			local toPos = cc.p(destPos.x + dx, destPos.y + dy)
 			if createTag then --直接创建，没有动画
 				v:move(toPos)
@@ -601,6 +657,7 @@ function SHPlayer:rollGold( resPath,srcPos,destPos,count,createTag,callBack )
 					cc.DelayTime:create(0.5),
 					cc.CallFunc:create(function (node)
 						-- body
+						SHConfig.playSound(SHConfig.SoundType.BetGold)
 						if callBack and k == #goldNodeTable then
 							callBack()
 						end
@@ -636,4 +693,11 @@ function SHPlayer:onExit()
 	self.cardDatas = nil
 	self.cardInfos = nil
 end
+--判断是否是男的
+function SHPlayer:isMan()
+	local icon = self.pinfo and self.pinfo.headId or nil
+
+    return icon == nil and true or icon > 5
+end
+
 return SHPlayer

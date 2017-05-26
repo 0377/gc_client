@@ -116,7 +116,12 @@ function SHChatLayer:tableCellAtIndex(view,idx)
 	ritem:setTag(idx)
 	local textContent = CustomHelper.seekNodeByName(ritem,"Text_content")
 	local data = self.charData[tostring(idx+1)]
-	textContent:setString(data or "")
+	local datas = string.split(data or "","|")
+	if datas and table.nums(datas)>=2 then
+		textContent:setString(tostring(datas[2]))
+	else
+		textContent:setString("")
+	end
 
     return cell
 end

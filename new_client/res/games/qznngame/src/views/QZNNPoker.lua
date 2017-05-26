@@ -197,7 +197,21 @@ function QZNNPoker:isSelect()
 	
 	
 end
-
+--
+function QZNNPoker:stopAllAction()
+	
+	--[[
+	self:stopAllActions()
+	
+	self:setRotation(0)
+	if self.isStart == true then
+		self._font = true
+        self:loadTexture(self:getCardShowPath())
+        self:setFlippedX(false)
+	end
+	--]]
+	
+end
 
 --翻牌动画
 function QZNNPoker:openBackAction()
@@ -213,15 +227,26 @@ function QZNNPoker:openBackAction()
         self:loadTexture(self:getCardShowPath())
         self:setFlippedX(true)
     end
+	
+	local function over1()
+		self:setRotation(0)
+		
+	end
+	
     
     if self._font == false then
 		MusicAndSoundManager:getInstance():playerSoundWithFile("qznnsound/fanpai.mp3")
-		
+		self.isStart = true
         local callfunc = cc.CallFunc:create(unReversal)
+		local ov1 = cc.CallFunc:create(over1)
         self:runAction(cc.Sequence:create(
+			cc.CallFunc:create(function(sender)
+				--
+			end),
             cc.RotateBy:create(time/2, 0, 90), 
             callfunc, 
-            cc.RotateBy:create(time/2, 0, 90)
+            cc.RotateBy:create(time/2, 0, 90),
+			ov1
         ))
 		
     end

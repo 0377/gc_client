@@ -51,6 +51,7 @@ function SHResultLayer:ctor(resultData,exitCallBack,nexCallBack)
 end
 
 function SHResultLayer:onEnter()
+	SHResultLayer.super.onEnter(self)
 	local node = SHResultLayerCCS:create()
 	self:addChild(node.root)
 	CustomHelper.seekNodeByName(node.root,"Button_close"):addTouchEventListener(handler(self,self.onTouchListener))
@@ -85,10 +86,24 @@ function SHResultLayer:onEnter()
 	local meImg = CustomHelper.seekNodeByName(node.root,"Image_me")
 --	resulData.selfCHairId = selfCharId
 --  resulData.otherCharId = otherCharId
+	local hasGiveUp = false
+
+	local playerInfo = self.resultData[self.resultData.selfCHairId]
+	if playerInfo then
+		if playerInfo.is_give_up then
+			hasGiveUp = true
+		end
+	end
+	playerInfo = self.resultData[self.resultData.otherCharId]
+	if playerInfo then
+		if playerInfo.is_give_up then
+			hasGiveUp = true
+		end
+	end
 	--自己的
-	self:setPlayerResult(meImg,self.resultData[self.resultData.selfCHairId])
+	self:setPlayerResult(meImg,self.resultData[self.resultData.selfCHairId],hasGiveUp)
 	--对面的
-	self:setPlayerResult(otherImg,self.resultData[self.resultData.otherCharId])
+	self:setPlayerResult(otherImg,self.resultData[self.resultData.otherCharId],hasGiveUp)
 	
 	local Image_bg = CustomHelper.seekNodeByName(node.root,"Image_bg")
 	self:popIn(Image_bg,SHConfig.Pop_Dir.Right)
@@ -97,7 +112,8 @@ end
 --设置玩家结算信息
 --@param rootImg 玩家父节点
 --@param resultData 玩家数据
-function SHResultLayer:setPlayerResult(rootImg,resultData)
+--@param hasGiveUp 是否是有人弃牌了的
+function SHResultLayer:setPlayerResult(rootImg,resultData,hasGiveUp)
 	if not SHHelper.isLuaNodeValid(rootImg) or not resultData then
 		sslog(self.logTag,"玩家信息或者节点错误")
 		return
@@ -120,9 +136,16 @@ function SHResultLayer:setPlayerResult(rootImg,resultData)
 	local textMoney = CustomHelper.seekNodeByName(rootImg,"AtlasLabel_moeny")
 	
 	if resultData.win_money then
+
 		local s = string.gsub(tostring(resultData.win_money/100), '%.', '/' )
-		local s = string.gsub(s, '%-', ';' )
-		textMoney:setString(s)
+		local s = string.gsub(s, '%-', ':' )
+		--textMoney:setString(s)
+		textMoney:setProperty(s,
+			resultData.win_money >0 and "game_res/secondView/sh_js_szt_1.png" or "game_res/secondView/sh_js_szt_2.png",
+			25,
+			41,
+			"/")
+	
 	end
 	--税收 赢了的才才有
 	local textTax = CustomHelper.seekNodeByName(rootImg,"Text_tax")
@@ -136,14 +159,23 @@ function SHResultLayer:setPlayerResult(rootImg,resultData)
 	end
 	resultData.handCards = resultData.handCards or {}
 	--手上的牌
+	local firstNodePosition = cc.p(0,0)
+	local diffNodeWidth = 0
 	for i=1,5 do
 		local fnode = CustomHelper.seekNodeByName(rootImg,string.format("FileNode_card%d",i))
 		if resultData.handCards[i] then
 			local card = SHCard:create(resultData.handCards[i])
+			card:setName(string.format("FileNode_card%d",i))
 			card:addTo(fnode:getParent())
 			card:setScale(fnode:getScale())
 			card:setCardPosition(cc.p(fnode:getPositionX(),fnode:getPositionY()),true)
 		end
+		if i==1 then
+			firstNodePosition = cc.p(fnode:getPositionX(),fnode:getPositionY())
+		elseif i==2 then
+			diffNodeWidth = fnode:getPositionX() - firstNodePosition.x
+		end
+		
 		if SHHelper.isLuaNodeValid(fnode) then
 			fnode:removeFromParent()
 		end
@@ -156,27 +188,51 @@ function SHResultLayer:setPlayerResult(rootImg,resultData)
 	local resultPath = (resultData.is_win==true and "game_res/secondView/sh_js_xk_1.png" or "game_res/secondView/sh_js_xk_2.png")
 	resultImg:loadTexture(resultPath ,ccui.TextureResType.localType)
 	resultImg:setLocalZOrder(2)
-	--Image_type
 	local typeImg = CustomHelper.seekNodeByName(rootImg,"Image_type")
 	typeImg:ignoreContentAdaptWithSize(true)
 	local winImg = CustomHelper.seekNodeByName(rootImg,"Image_win")
-	local cardType = SHHelper.getCardType(resultData.handCards)
-	local ctimg = CardTypeImg[cardType]
-	if not ctimg or not cc.FileUtils:getInstance():isFileExist(ctimg) then
-		resultImg:setVisible(false)
-	else
-		resultImg:setVisible(true)
-		typeImg:loadTexture(ctimg,ccui.TextureResType.localType)
-		winImg:setVisible(resultData.is_win==true)
-		local contentWidth = typeImg:getContentSize().width + (resultData.is_win==true and winImg:getContentSize().width or 0)
-		
-		local resultImgSize = resultImg:getContentSize()
-		local startPos = (resultImgSize.width - contentWidth) / 2
-		typeImg:setPosition(cc.p(startPos+typeImg:getContentSize().width/2,resultImgSize.height/2))
-		if resultData.is_win==true then
-			winImg:setPosition(cc.p(startPos+typeImg:getContentSize().width+winImg:getContentSize().width/2,resultImgSize.height/2))
+	--Image_type
+	if not hasGiveUp then
+
+		local cardType = SHHelper.getCardType(resultData.handCards)
+		local ctimg = CardTypeImg[cardType]
+		if not ctimg or not cc.FileUtils:getInstance():isFileExist(ctimg) then
+			resultImg:setVisible(false)
+		else
+			resultImg:setVisible(true)
+			typeImg:loadTexture(ctimg,ccui.TextureResType.localType)
+			winImg:setVisible(resultData.is_win==true)
+			local contentWidth = typeImg:getContentSize().width + (resultData.is_win==true and winImg:getContentSize().width or 0)
+			
+			local resultImgSize = resultImg:getContentSize()
+			local startPos = (resultImgSize.width - contentWidth) / 2
+			typeImg:setPosition(cc.p(startPos+typeImg:getContentSize().width/2,resultImgSize.height/2))
+			if resultData.is_win==true then
+				winImg:setPosition(cc.p(startPos+typeImg:getContentSize().width+winImg:getContentSize().width/2,resultImgSize.height/2))
+			end
 		end
+	else
+		if resultData.is_give_up then
+			typeImg:setVisible(false)
+			winImg:setVisible(false)
+			resultImg:ignoreContentAdaptWithSize(true)
+			resultImg:loadTexture("game_res/secondView/sh_js_qp.png",ccui.TextureResType.localType)
+		else
+			resultImg:setVisible(false)
+		end
+		--resultData.handCards
+		local cardNum = table.nums(resultData.handCards)
+		local max = 5
+		local diffX = diffNodeWidth*(max - cardNum)/2
+		for i=1,5 do
+			local fnode = CustomHelper.seekNodeByName(rootImg,string.format("FileNode_card%d",i))
+			if fnode then
+				fnode:setPositionX(fnode:getPositionX()+ diffX)
+			end
+		end
+		
 	end
+
 	
 end
 
@@ -190,9 +246,7 @@ function SHResultLayer:_onInterval(dt)
 		--是否勾选了自动准备
 		if self.readyCheckBox:isSelected() then
 			if self:checkTokickOut() then
-				if self.exitCallBack then
-					self.exitCallBack()
-				end
+				self:showLackMoney()
 			else
 				if self.nexCallBack then
 					self.nexCallBack()
@@ -239,7 +293,9 @@ function SHResultLayer:onTouchListener(ref,eventType)
 		if ref:getName()=="Button_close" then
 			--退出到大厅
 			self:stopScheduler()
+			sslog(self.logTag,"退出去")
 			if self.exitCallBack then
+				sslog(self.logTag,"退出去回调")
 				self.exitCallBack()
 			end
 		elseif ref:getName()=="Button_autoReady" then
@@ -249,13 +305,13 @@ function SHResultLayer:onTouchListener(ref,eventType)
 		elseif ref:getName()=="Button_start" then
 			--继续匹配下一局
 			self:stopScheduler()
-			--HallGameConfig.SecondRoomMinJettonLimitKey
+			sslog(self.logTag,"继续下一局")
+			--HallGameConfig.SecondRoomMinMoneyLimitKey
 			if self:checkTokickOut() then
-				if self.exitCallBack then
-					self.exitCallBack()
-				end
+				self:showLackMoney()
 			else
 				if self.nexCallBack then
+					sslog(self.logTag,"继续下一局回调")
 					self.nexCallBack()
 				end
 			end
@@ -270,12 +326,29 @@ end
 function SHResultLayer:checkTokickOut()
 	local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
 	local myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
-	if roomInfo and myPlayerInfo and roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey] then
-		if myPlayerInfo:getMoney() < roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey] then
+	if roomInfo and myPlayerInfo and roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+		sslog(self.logTag,"玩家当前金币数量："..tostring(myPlayerInfo:getMoney()))
+		sslog(self.logTag,"当前房间的最低进入限制："..tostring(roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]))
+		if myPlayerInfo:getMoney() < roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
 			return true
 		end
 	end
 	return false
+end
+
+function SHResultLayer:showLackMoney()
+	--lackgold
+	self:stopScheduler()
+	if SHHelper.isLuaNodeValid(self.proTimer) then
+		self.proTimer:stopAllActions()
+	end
+	CustomHelper.showAlertView(
+			SHi18nUtils:getInstance():get('str_gameover','lackgold'),
+			false,
+			true,
+			self.exitCallBack,
+			self.exitCallBack
+	)
 end
 
 return SHResultLayer

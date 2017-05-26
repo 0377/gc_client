@@ -23,18 +23,24 @@ function SecondaryBRNNNode:initViewData(secondRoomInfoTab)
 	local iconView = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "icon_view"), "ccui.ImageView");
 	iconView:ignoreContentAdaptWithSize(true);
 	iconView:loadTexture(CustomHelper.getFullPath(self.secondRoomInfoTab[HallGameConfig.SecondRoomIconKey]))
+	
+	--底注
+	local minJettonLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_jetton_limit"), "ccui.TextAtlas");
+	local minMoneyLimitString = self.secondRoomInfoTab[HallGameConfig.SecondRoomBeiShu]
+	--minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
+	--local str1 = string.gsub(minMoneyLimitString, "%.", "/")
+	-- print("minJettonLimitString---",minJettonLimitString)
+	minJettonLimitText:setString("1/"..minMoneyLimitString)
+	
+	
 	--显示底注 和 入场
 	local  minMoneyLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_money_limit"), "ccui.Text");
 	-- 20.34 string 为 20/34	
-	local minMoneyLimitString = self.secondRoomInfoTab[HallGameConfig.SecondRoomBeiShu]
-	-- minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
-	minMoneyLimitText:setString("倍数:"..minMoneyLimitString)
-	--底注
-	local minJettonLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_jetton_limit"), "ccui.TextAtlas");
+	
 	local minJettonLimitString = CustomHelper.moneyShowStyleNone(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
-	minJettonLimitString = string.gsub(minJettonLimitString, "%.", "/")
-	-- print("minJettonLimitString---",minJettonLimitString)
-	minJettonLimitText:setString(minJettonLimitString)
+	--minJettonLimitString = string.gsub(minJettonLimitString, "%.", "/")
+	-- minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
+	minMoneyLimitText:setString("入局:"..minJettonLimitString)
 
 	local onlineNumText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "online_num_text"), "ccui.Text");
 	onlineNumText:setString(string.format("在线:%d",math.random(300,1000)))

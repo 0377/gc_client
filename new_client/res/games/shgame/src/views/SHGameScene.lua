@@ -99,7 +99,7 @@ end
 --开启设备显示信息计时器
 function SHGameScene:startDeviceSchedule()
 	--进来就要显示时间的
-	self._timescheduler = scheduler:scheduleScriptFunc(handler(self,self._intervalTime), 60, false)
+	self._timescheduler = scheduler:scheduleScriptFunc(handler(self,self._intervalTime), 20, false)
 	self:_intervalTime() --先调用一次
 	--定时器获取wifi信号，电池电量
 	self._wifischeduler = scheduler:scheduleScriptFunc(handler(self,self._intervalWIFI), 5, false)
@@ -133,17 +133,22 @@ function SHGameScene:_intervalWIFI(dt)
         local wifiSignalLevel = DeviceUtils.getWifiSignalLevel()		
 		wifiLevel = wifiSignalLevel
     end
+	if self.setDeviceInfo then
+		self:setDeviceInfo({ signal=wifiLevel,electric = batteryLevel })
+	end
 	
-	self:setDeviceInfo({ signal=wifiLevel,electric = batteryLevel })
 end
 
 --停止时间计时器
 function SHGameScene:stopDeviceSchedule()
+	sslog(self.logTag,"停止设备计时器")
 	if self._timescheduler then
+		sslog(self.logTag,"停止时间计时器")
         scheduler:unscheduleScriptEntry(self._timescheduler)
         self._timescheduler = nil
     end
 	if self._wifischeduler then
+		sslog(self.logTag,"停止wifi计时器")
 		scheduler:unscheduleScriptEntry(self._wifischeduler)
 		self._wifischeduler = nil
 	end
@@ -204,7 +209,16 @@ function SHGameScene:loopMsgOperation()
 	local chairId = cardOperations[1].chairId
 	--ssdump(cardOperations,"所有需要的操作",10)
 	--ssdump(cardOperations[1],"当前操作",10)
-	
+	local function closeSelfOperationNodes()
+		if self.seats and self.seats[selfCharId] then
+			local SHMyPlayer = self.seats[selfCharId]
+			SHMyPlayer:hideOperationNodes()
+			
+		end
+	end
+	if cType and cType ~= SHConfig.CardOperation.ShowDecision then
+		closeSelfOperationNodes()
+	end
 	sslog(self.logTag,"当前操作的座位号"..tostring(chairId))
 	local cType = cardOperations[1].type
 	local card = cardOperations[1].card --CustomHelper.copyTab(cardOperations[1].card)
@@ -222,12 +236,23 @@ function SHGameScene:loopMsgOperation()
 		end
 		
 	end
+
+
+	
 	if card and cType and cType == SHConfig.CardOperation.Raise
 	or cType == SHConfig.CardOperation.ShowHand then
 		--self:setTableInfo({ totalbet = tonumber(card),isAdd = true } )
 	end
 	if cType and cType== SHConfig.CardOperation.ShowDecision then
 		self:setCountDown(decisionTime)
+	elseif cType == SHConfig.CardOperation.GetCard then
+		--这里清除所有玩家的上轮加注显示
+		if self.seats then
+			table.walk(self.seats,function (SHPlayer,seatId)
+				SHPlayer:closeLastRoundShow()
+			end)
+		end
+		self:closeCountDown()
 	else
 		self:closeCountDown()
 	end
@@ -249,17 +274,7 @@ function SHGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
 	
     local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
     if gameingInfoTable == nil or self.SHGameDataManager.isGameOver == true then
-       CustomHelper.showAlertView(
-                SHi18nUtils:getInstance():get('str_gameing','gameover'),
-                false,
-                true,
-                function(tipLayer)
-                    self:exitGame()
-                end,
-                function(tipLayer)
-                    self:exitGame()
-                end
-        )
+       self:showGameOverTips()
        
 	else
 		--删除牌型提示
@@ -353,7 +368,10 @@ end
 --定时刷新时间
 function SHGameScene:_intervalTime(dt)
 	local date=os.date("%H:%M")
-	self:setDeviceInfo({time = date})
+	if self.setDeviceInfo then
+		self:setDeviceInfo({time = date})
+	end
+	
 end
 --设置桌子信息
 --@param tinfo 桌子信息
@@ -379,8 +397,8 @@ function SHGameScene:setTableInfo(tinfo)
 	if tinfo.basebet then
 		baseText:setString(tostring(tinfo.basebet/100))
 	end
-	if tinfo.maxbet then
-		limitText:setString(tostring(tinfo.maxbet/100))
+	if tinfo.maxbet and tinfo.basebet then
+		limitText:setString(tostring(tinfo.maxbet*tinfo.basebet/100))
 	end
 	if tinfo.totalbet then
 		local oldTotal = totalText:getString()
@@ -528,8 +546,9 @@ function SHGameScene:menuListener(ref,eventType)
 			--isInGame
 			local SHGameDataManager = SHGameManager:getInstance():getDataManager()
 			if SHGameDataManager.isInGame then --在游戏中才弹出提示
+		
 				CustomHelper.showAlertView(
-					SHi18nUtils:getInstance():get('str_gameing','exitAlert'),
+					SHi18nUtils:getInstance():get('str_gameing','exitAlert2'),
 					true,
 					true,
 				function(tipLayer)
@@ -555,7 +574,7 @@ function SHGameScene:menuListener(ref,eventType)
 			GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(musicSwitch)
 			if musicSwitch == true then
 				--todo
-				GameManager:getInstance():getMusicAndSoundManager():playMusicWithFile(HallSoundConfig.BgMusic.Hall)
+				SHConfig.playBgMusic()
 			else
 				GameManager:getInstance():getMusicAndSoundManager():stopMusic()
 			end
@@ -641,17 +660,19 @@ end
 
 --进入游戏开局消息
 function SHGameScene:onMsgSC_ShowHand_Desk_Enter()
-	--开局后 播放音乐
-	local musicSwitch = GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
-	if musicSwitch then
-		GameManager:getInstance():getMusicAndSoundManager():playMusicWithFile(HallSoundConfig.BgMusic.Hall)
+	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
+	if not SHGameDataManager.valideStart then --判断是否非法开局
+		--非法开局，直接发送准备消息
+		self:showGameOverTips()
+		return
 	end
-	
+	--开局后 播放音乐
+	SHConfig.playBgMusic()
 	--把该隐藏的都隐藏掉
 	local readyImg = CustomHelper.seekNodeByName(self.tableNode,"Image_ready")
 	readyImg:setVisible(false) --匹配隐藏
 	self:removeAllPlayer()
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
+
 	
 	local playerdatas = SHGameDataManager.playerdatas
 
@@ -661,7 +682,7 @@ function SHGameScene:onMsgSC_ShowHand_Desk_Enter()
 	local chooseTime = SHGameDataManager.chooseTime --选择时间
 	local reconnData = SHGameDataManager.reconnData --重连数据
 	local baseScore = SHGameDataManager.baseScore --底注
-	local maxCall = SHGameDataManager.maxCall --限注
+	local maxCall = SHGameDataManager.maxCall --限注 倍数
 	local totalbet = 0
 	--@headInfo 头像信息
 	--@key gold  用户金币
@@ -699,7 +720,7 @@ function SHGameScene:onMsgSC_ShowHand_Desk_Enter()
 			local playerInfo = playerdatas[selfCharId]
 			SHMyPlayer:initOperationNode(CustomHelper.seekNodeByName(self.tableNode,"FileNode_button"))
 			SHMyPlayer:setBaseBet(baseScore/100)
-			SHMyPlayer:setBetLimit(maxCall/100)
+			SHMyPlayer:setBetLimit(maxCall)
 			local roundbet = playerInfo.cur_round_add or 0
 			roundbet = roundbet /100
 			SHMyPlayer:setRoundBet(roundbet)
@@ -773,12 +794,20 @@ function SHGameScene:onMsgSC_ChatTable(msgTab)
 	--SHPlayer:showChatAnim(data)
 	if self.seats then
 		table.walk(self.seats,function (SHPlayer,seatId)
-			if msgTab.chat_name == SHPlayer:getUserName() then
+			if msgTab.chat_guid == SHPlayer:getUserID() then
 				SHPlayer:showChatAnim(msgTab.chat_content)
 			end
 		end)
 	end
 
+end
+function SHGameScene:onMsgSC_ReconnectionPlay(msgTab)
+	ssdump(msgTab,"断线重连返回消息")
+	if msgTab.find_table==nil or msgTab.find_table==false then --没找到房间
+		--游戏已经结束 退出到游戏大厅
+       self:showGameOverTips()
+	end
+	
 end
 --删除玩家的倒计时动画
 function SHGameScene:removePlayerProgress()
@@ -812,6 +841,7 @@ function SHGameScene:gameOver()
 		if playerData.is_win then
 			SHMyPlayer:showWinAnim()
 		else
+			SHMyPlayer:showLoseAnim()
 			local betAmount = SHMyPlayer:getBetAmount() or 0
 			betAmount = -betAmount
 			playerData.win_money = betAmount*100 --单位 分
@@ -824,6 +854,7 @@ function SHGameScene:gameOver()
 		if playerData.is_win then
 			SHOtherPlayer:showWinAnim()
 		else
+			SHOtherPlayer:showLoseAnim()
 			local betAmount = SHOtherPlayer:getBetAmount() or 0
 			betAmount = -betAmount
 			playerData.win_money = betAmount*100 --单位 分
@@ -874,10 +905,30 @@ function SHGameScene:removeAllPlayer()
 	self.seats = nil
 end
 
+function SHGameScene:showGameOverTips()
+   CustomHelper.showAlertView(
+			SHi18nUtils:getInstance():get('str_gameing','gameover'),
+			false,
+			true,
+			function(tipLayer)
+				self:exitGame()
+			end,
+			function(tipLayer)
+				self:exitGame()
+			end
+	)
+end
+
 ---退出游戏界面
 function SHGameScene:exitGame()
+	self:stopDeviceSchedule()
+	--退出游戏发送弃牌操作
+	--退出游戏的时候 清空游戏数据
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
+	SHGameManager:getInstance():sendFallExitMsg()
 	SHGameManager:getInstance():sendStandUpAndExitRoomMsg()
     SceneController.goHallScene()
+	
     local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
 	if subGameManager then
 		subGameManager:onExit()
@@ -887,6 +938,8 @@ function SHGameScene:exitGame()
 end
 --下一局
 function SHGameScene:nextGame()
+	--退出游戏的时候 清空游戏数据
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	--重置标识
 	
 	self.operationComlete = true

@@ -239,7 +239,49 @@ function SHHelper.isPairCount(count,arr)
 	end
 	return pairCount == count
 end
-
+--	V_8 = 8,
+--	V_9 = 9,
+--	V_10 = 10,
+--	V_J = 11,
+--	V_Q = 12,
+--	V_K = 13,
+--	V_A = 14,
+--是否是第二大的顺子
+function SHHelper.isSecondStraight(arr)
+	local secStraiArr = {8,9,10,11,14 }
+	local isEqual = true
+	for i,card in pairs(arr) do
+		if i>5 or card.val~=secStraiArr[i] then
+			isEqual = false
+			break
+		end
+	end
+	return isEqual
+end
+--	V_8 = 8,
+--	V_9 = 9,
+--	V_10 = 10,
+--	V_J = 11,
+--	V_Q = 12,
+--	V_K = 13,
+--	V_A = 14,
+--是否第二大的同花顺
+function SHHelper.isSecondStraightFlush(arr)
+	local secStraiArr = {8,9,10,11,14 }
+	local isEqual = true
+	local firstCol = nil
+	for i,card in pairs(arr) do
+		if i>5 or card.val~=secStraiArr[i] then
+			isEqual = false
+			break
+		elseif firstCol and firstCol~=card.col then
+			isEqual = false
+			break
+		end
+		firstCol = card.col
+	end
+	return isEqual
+end
 --获取牌的类型
 -- 可能是 同花顺>四条>满堂红（fullhouse 3+2）>同花>顺子>三条>两对>一对>散牌
 --@param arr 牌数据数组 每个单牌数据包括col 牌花色 val 牌数值
@@ -254,6 +296,10 @@ function SHHelper.getCardType(arr)
 	end
 	--先判断是否为同花顺
 	local flag = SHHelper.isStraightFlush(arr)
+	if flag then
+		return SHHelper.CardType.STRAIGHT_FLUSH
+	end
+	flag = SHHelper.isSecondStraightFlush(arr)
 	if flag then
 		return SHHelper.CardType.STRAIGHT_FLUSH
 	end
@@ -274,6 +320,10 @@ function SHHelper.getCardType(arr)
 	end
 	--判断是否是顺子
 	flag = SHHelper.isStraight(arr)
+	if flag then
+		return SHHelper.CardType.STRAIGHT
+	end
+	flag = SHHelper.isSecondStraight(arr)
 	if flag then
 		return SHHelper.CardType.STRAIGHT
 	end

@@ -18,6 +18,10 @@ message CS_ShowHandGiveUp {
 message CS_ShowHandPass {
 	enum MsgID { ID = 17002; }
 }
+//弃牌 并 退出
+message CS_ShowHandGiveUpEixt {
+	enum MsgID { ID = 17003; }
+}
 
 
 message ShowHand_Player_Info {
@@ -28,10 +32,12 @@ message ShowHand_Player_Info {
 	optional string nick 					= 5;
 	optional int32 icon 					= 6;
 	optional int32 gold 					= 7;
+	optional int32 guid		            	= 8; 	// guid
 	// game end
-	optional bool is_win 		= 8;			//是否赢了
-	optional int32 win_money 	= 9; 			//赢钱
-	optional int32 taxes 		= 10; 			//税收
+	optional bool is_win 		= 9;			//是否赢了
+	optional int32 win_money 	= 10; 			//赢钱
+	optional int32 taxes 		= 11; 			//税收
+	optional bool is_give_up	= 12; 			//弃牌
 	//reconnect
 };
 message ShowHand_Reconnect_Data {

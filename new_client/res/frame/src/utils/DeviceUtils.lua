@@ -65,7 +65,7 @@ function DeviceUtils.getBatteryStatus()
     if value == nil then
         value =  0
     end
-    return value
+    return (value == 2)
 end
 
 -- 获取网络类型

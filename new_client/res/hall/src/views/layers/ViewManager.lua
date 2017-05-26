@@ -198,42 +198,6 @@ end
 
 --- 进入充值界面
 function ViewManager.enterStoreLayer()
-    GameManager:getInstance():getHallManager():getHallDataManager():setCurSelectedGameDetailInfoTab({
-        [HallGameConfig.GamePackageRootPathKey]       = "games/fishgame/",
-    })
-
-    local needSearchPath = {
-        "src",
-        "src/config/",
-        "src/controller/",
-        "src/views/",
-        "src/model/",
-        "res",
-        "res/ccs_export/"
-        -- "res/pb_files"
-    }
-    local writablePath = cc.FileUtils:getInstance():getWritablePath();
-    local resRootPath = "res/";
-    for i,v in ipairs(needSearchPath) do
-        local tempPath = "games/fishgame/"..v
-        cc.FileUtils:getInstance():addSearchPath(writablePath..tempPath,true);
-        cc.FileUtils:getInstance():addSearchPath(resRootPath..tempPath);
-    end
-
-    local gameEntry = "FishgameEntry"
-    local sceneClass = requireForGameLuaFile(gameEntry);
-    sceneClass:create();
-    dump(sceneClass, "sceneClass", nesting)
-    --切换场景
-    local needPreloadResArray = sceneClass:getNeedPreloadResArray();
-    SceneController.goOneSceneWithPreloadArray(needPreloadResArray,function()
-        local scene = sceneClass:getStartScene(infoTab);
-        SceneController.goOneScene(scene)
-    end, infoTab)
-
-
-    if true then return end
-
     if CustomHelper.isExaminState() then
         if not ViewManager.checkIsInGaming() then
             ViewManager.enterOneLayerWithClassName("ShopLayer");

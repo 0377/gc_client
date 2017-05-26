@@ -76,7 +76,7 @@ function SHGameManager:sendPassMsg()
 end
 --发送加注请求
 function SHGameManager:sendRaiseMsg(gold)
-	sslog(self.logTag,"发送加注请求")
+	sslog(self.logTag,"发送加注请求 "..tostring(gold))
 	local infoTab = {}
 	infoTab.target = gold
 	HallMsgManager:sendMsg(SHConfig.MsgName.CS_ShowHandAddScore,infoTab)	
@@ -95,7 +95,12 @@ function SHGameManager:sendChatMsg(data)
 	infoTab.chat_content = data or ""
 	HallMsgManager:sendMsg(SHConfig.MsgName.CS_ChatTable,infoTab)	
 end
-
+--发送弃牌退出消息
+function SHGameManager:sendFallExitMsg(data)
+	sslog(self.logTag,"发送弃牌退出")
+	local infoTab = {}
+	HallMsgManager:sendMsg(SHConfig.MsgName.CS_ShowHandGiveUpEixt,infoTab)	
+end
 --开局信息
 --message SC_ShowHand_Desk_Enter {
 --	enum MsgID { ID = 17100; }
@@ -116,11 +121,14 @@ end
 --	optional int32 chair_id		            = 2; 	// id
 --  optional int32 add_total	            = 3; 	// 累计下注
 --  optional int32 cur_round_add            = 4;    // 当前轮下注
---	
+--	optional string nick 					= 5;
+--	optional int32 icon 					= 6;
+--	optional int32 gold 					= 7;
+--	optional int32 guid		            	= 8; 	// guid
 --	// game end
---	optional bool is_win 		= 5;			//是否赢了
---	optional int32 win_money 	= 6; 			//赢钱
---	optional int32 taxes 		= 7; 			//税收
+--	optional bool is_win 		= 9;			//是否赢了
+--	optional int32 win_money 	= 10; 			//赢钱
+--	optional int32 taxes 		= 11; 			//税收
 --	//reconnect
 --};
 function SHGameManager:on_SC_ShowHand_Desk_Enter(msgTab)

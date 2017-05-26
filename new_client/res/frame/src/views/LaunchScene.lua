@@ -10,11 +10,11 @@ function LaunchScene:ctor()
     self.progressTipText:setVisible(true)
     self.tipText = tolua.cast(CustomHelper.seekNodeByName(self.csNode,"tip_text"),"ccui.Text");
     --进度条
-    self.progresssBarNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "download_progress_bar"), "ccui.LoadingBar");
+    self.progressBarNode = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "download_progress_bar"), "ccui.LoadingBar");
     
-    self.progressArrowView = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_arrow"), "ccui.Widget");
+    self.progressArrow = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "progress_arrow"), "ccui.ImageView");
     -- self.progressArrowView:setVisible(false)
-
+	
 
  --    	--增加骨骼动画
 	-- local fullPath = CustomHelper.getFullPath("anim/kog_loadingani/kog_loadingani.ExportJson")
@@ -28,7 +28,7 @@ function LaunchScene:ctor()
  --    --进度条箭头端动画
  --    self._progresscoin = ccs.Armature:create("kog_loadingani")
  --    self._progresscoin:getAnimation():play("ani_02")
- --    self.progresssBarNode:addChild(self._progresscoin)
+ --    self.progressBarNode:addChild(self._progresscoin)
     self:showProgressBarPercent(0)
 	--获取服务器配置信息
 	-- self:getServerConfig();
@@ -175,7 +175,7 @@ function LaunchScene:checkIsNeedUpdateBeforeEnterHall()
 	else
 		self.progressTipText:setString("")
 		self:showProgressBarPercent(100)
-		self.progresssBarNode:runAction(
+		self.progressBarNode:runAction(
 			cc.Sequence:create(
 				cc.DelayTime:create(0.1),
 				cc.CallFunc:create(function()
@@ -205,10 +205,19 @@ function LaunchScene:updateDownLoadProgress(dt)
 end
 function LaunchScene:showProgressBarPercent(percent)
 	self.tipText:setString("正在更新资源...")
-	self.progresssBarNode:setPercent(percent);
-	self.progressArrowView:setPosition(cc.p(self.progresssBarNode:getContentSize().width * (self.progresssBarNode:getPercent() / 100),
-            self.progressArrowView:getParent():getContentSize().height / 2))
-	-- self._progresscoin:setPosition(cc.p(self.progresssBarNode:getContentSize().width * (self.progresssBarNode:getPercent() / 100) - 43 ,self.progresssBarNode:getContentSize().height / 2))
+	self.progressBarNode:setPercent(percent)
+
+
+	self.progressArrow:setScaleX(math.min(1,self.progressBarNode:getContentSize().width * percent / 100 /self.progressArrow:getContentSize().width ))
+	self.progressArrow:setPositionX(math.min(self.progressBarNode:getContentSize().width * percent / 100 + 22 ,self.progressBarNode:getContentSize().width))
+	self.progressArrow:setVisible(self.progressArrow:getPositionX() > 55)
+
+
+	-- print("posX:",posX)
+	-- dump(self.progressArrow)
+	-- self.progressArrowView:setPosition(cc.p(self.progressBarNode:getContentSize().width * (self.progressBarNode:getPercent() / 100),
+ --            self.progressArrowView:getParent():getContentSize().height / 2))
+	-- self._progresscoin:setPosition(cc.p(self.progressBarNode:getContentSize().width * (self.progressBarNode:getPercent() / 100) - 43 ,self.progressBarNode:getContentSize().height / 2))
 
 
 end

@@ -14,6 +14,7 @@ local SHHelper = import("..cfg.SHHelper")
 function SHGameDataManager:ctor()
 	self.logTag = self.__cname..".lua"
 	self.isInGame = false
+	self.valideStart = false -- 是否正常开局
 	self.cardOperations = {} --玩家操作队列
 	self.playerInfos = {} -- 玩家基本信息 根据座位号来
 	self.roundBet = 0 --这一轮的下注额度
@@ -57,7 +58,17 @@ function SHGameDataManager:OnMsg_EnterRoomAndSitDownInfo(msgTab)
 	end
 	
 end
-
+----
+function SHGameDataManager:setGameRoomInfo()
+    -- body
+    local pb_gmMessage = {}
+    pb_gmMessage["chair_id"] = self._enterRoomAndSitDownInfo["chair_id"]
+    pb_gmMessage["room_id"] = self._enterRoomAndSitDownInfo["room_id"]
+    pb_gmMessage["table_id"] = self._enterRoomAndSitDownInfo["table_id"]
+    pb_gmMessage["first_game_type"] = self._enterRoomAndSitDownInfo["first_game_type"]
+    pb_gmMessage["second_game_type"] = self._enterRoomAndSitDownInfo["second_game_type"]
+    GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(pb_gmMessage)
+end
 --开局信息
 --message SC_ShowHand_Desk_Enter {
 --	enum MsgID { ID = 17100; }
@@ -82,15 +93,25 @@ end
 --	optional string nick 					= 5;
 --	optional int32 icon 					= 6;
 --	optional int32 gold 					= 7;
+--	optional int32 guid		            	= 8; 	// guid
 --	// game end
---	optional bool is_win 		= 8;			//是否赢了
---	optional int32 win_money 	= 9; 			//赢钱
---	optional int32 taxes 		= 10; 			//税收
+--	optional bool is_win 		= 9;			//是否赢了
+--	optional int32 win_money 	= 10; 			//赢钱
+--	optional int32 taxes 		= 11; 			//税收
 --	//reconnect
 --};
 function SHGameDataManager:on_SC_ShowHand_Desk_Enter(msgTab)
 	ssdump(msgTab," 玩家进入",10)
+
+	local playerNumInValid = (not msgTab.pb_players or table.nums(msgTab.pb_players)<2)
+	if playerNumInValid  then --这个时候其实没有开局，忽略消息
+		sslog(self.logTag,"进入消息只是表示进来的，没有开局，发送开局消息")
+		self.valideStart = false
+		return
+	end
+	self.valideStart = true
 	self.isInGame = true
+	self:setGameRoomInfo()
 	--庄家ID
 	self.zhuangId = msgTab.zhuang
 	--自己的ID
@@ -158,6 +179,7 @@ function SHGameDataManager:on_SC_ShowHand_Desk_Enter(msgTab)
 		playerData.money = playerinfo.gold --金币
 		playerData.headId = playerinfo.icon or 1 --头像id
 		playerData.nickname = playerinfo.nick --昵称
+		playerData.guid = playerinfo.guid --昵称
 		
 		self.playerdatas[playerinfo.chair_id] = playerData
 		
@@ -189,6 +211,8 @@ function SHGameDataManager:on_SC_ShowHand_Game_Finish(msgTab)
 	ssdump(msgTab," 游戏结算",10)
 	SHHelper.removeAll(self.gameOverDatas)
 	self.isInGame = false
+	self.valideStart = false
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	self.gameOverDatas = {}
 	for _,playerinfo in pairs(msgTab.pb_players) do
 		
@@ -203,6 +227,7 @@ function SHGameDataManager:on_SC_ShowHand_Game_Finish(msgTab)
 		--	optional bool is_win 		= 5;			//是否赢了
 		--	optional int32 win_money 	= 6; 			//赢钱
 		--	optional int32 taxes 		= 7; 			//税收
+		--  optional bool is_give_up	= 12; 			//弃牌
 		local playerData = {}
 		playerData.handCards = {}
 		for _,tile in pairs(playerinfo.tiles) do
@@ -219,7 +244,7 @@ function SHGameDataManager:on_SC_ShowHand_Game_Finish(msgTab)
 		playerData.money = playerinfo.gold --金币
 		playerData.headId = playerinfo.icon or 1 --头像id
 		playerData.nickname = playerinfo.nick --昵称
-		
+		playerData.is_give_up = playerinfo.is_give_up --是否弃牌
 		self.gameOverDatas[playerinfo.chair_id] = playerData
 	end
 	--GameOver
@@ -401,12 +426,7 @@ end
 --	optional string chat_name = 3; 					// 说话人名字
 function SHGameDataManager:on_SC_ChatTable(msgTab)
 	ssdump(msgTab,"玩家聊天内容")
-	if self.playerdatas then
-		table.walk(self.playerdatas,function ()
-		
-		end)
-		
-	end
+
 	
 end
 

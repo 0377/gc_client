@@ -36,6 +36,7 @@ SHConfig.MsgName = {
 	CS_ShowHandAddScore = 'CS_ShowHandAddScore', --加注=倍数*底注，allin = -1，跟注 = 0
 	CS_ShowHandGiveUp = 'CS_ShowHandGiveUp', --弃牌
 	CS_ShowHandPass = 'CS_ShowHandPass', --让牌
+	CS_ShowHandGiveUpEixt = 'CS_ShowHandGiveUpEixt', --弃牌并且退出
 
 	
 	SC_ShowHand_Desk_Enter = 'SC_ShowHand_Desk_Enter', --玩家进入
@@ -50,6 +51,7 @@ SHConfig.MsgName = {
 	
 	SC_ChatTable = 'SC_ChatTable', --聊天返回
 	SC_NotifyMoney = 'SC_NotifyMoney', --玩家金币变动
+	SC_ReconnectionPlay = 'SC_ReconnectionPlay', --重连返回
 
 	
 }
@@ -132,6 +134,101 @@ SHConfig.animatorState = {
 	Playing = 2, --播放状态
 	Stoped = 3, --停止状态
 }
+SHConfig.Music = {
+	['bg'] = "shsound/bgm/sh_bgm.mp3",
+}
+--音效类型
+SHConfig.SoundType = {
+	DealCard = 100,--发牌音效
+	BetGold = 101,--下注金币音效
+	ResultWin = 102, --比牌胜利
+	ResultLose = 103,-- 比牌失败
+	RoundStart = 104, --轮到谁发言
+	RoundSecound = 105, -- 轮到谁最后5s每秒播一次
+	
+	Chat_1 = 201, --常用语聊天1
+	Chat_2 = 202, --常用语聊天2
+	Chat_3 = 203, --常用语聊天3
+	Chat_4 = 204, --常用语聊天4
+	Chat_5 = 205, --常用语聊天5
+	Chat_6 = 206, --常用语聊天6
+	Chat_7 = 207, --常用语聊天7
+}
+SHConfig.Sound = {
+	--弃牌
+	[SHConfig.CardOperation.Fall] = {
+		['m'] = "shsound/sh_ren/m_giveup2.mp3",
+		['f'] = "shsound/sh_ren/f_giveup2.mp3",
+	},
+	--跟注
+	[SHConfig.CardOperation.Call] = {
+		['m'] = "shsound/sh_ren/m_follow1.mp3",
+		['f'] = "shsound/sh_ren/f_follow1.mp3",
+	},
+	--加注
+	[SHConfig.CardOperation.Raise] = {
+		['m'] = "shsound/sh_ren/m_add.mp3",
+		['f'] = "shsound/sh_ren/f_add.mp3",
+	},
+	--梭哈
+	[SHConfig.CardOperation.ShowHand] = {
+		['m'] = "shsound/sh_ren/m_allin.mp3",
+		['f'] = "shsound/sh_ren/f_allin.mp3",
+	},
+	--过
+	[SHConfig.CardOperation.Pass] = {
+		['m'] = "shsound/sh_ren/m_check.mp3",
+		['f'] = "shsound/sh_ren/f_checkl.mp3",
+	},
+	--常用语1
+	[SHConfig.SoundType.Chat_1] = {
+		['m'] = "shsound/chat/m_1.mp3",
+		['f'] = "shsound/chat/f_1.mp3",
+	},
+	--常用语2
+	[SHConfig.SoundType.Chat_2] = {
+		['m'] = "shsound/chat/m_2.mp3",
+		['f'] = "shsound/chat/f_2.mp3",
+	},
+	--常用语3
+	[SHConfig.SoundType.Chat_3] = {
+		['m'] = "shsound/chat/m_3.mp3",
+		['f'] = "shsound/chat/f_3.mp3",
+	},
+	--常用语4
+	[SHConfig.SoundType.Chat_4] = {
+		['m'] = "shsound/chat/m_4.mp3",
+		['f'] = "shsound/chat/f_4.mp3",
+	},
+	--常用语5
+	[SHConfig.SoundType.Chat_5] = {
+		['m'] = "shsound/chat/m_5.mp3",
+		['f'] = "shsound/chat/f_5.mp3",
+	},
+	--常用语6
+	[SHConfig.SoundType.Chat_6] = {
+		['m'] = "shsound/chat/m_6.mp3",
+		['f'] = "shsound/chat/f_6.mp3",
+	},
+	--常用语7
+	[SHConfig.SoundType.Chat_7] = {
+		['m'] = "shsound/chat/m_7.mp3",
+		['f'] = "shsound/chat/f_7.mp3",
+	},
+	--发牌
+	[SHConfig.SoundType.DealCard] = "shsound/flop_sound.mp3",
+	--下注
+	[SHConfig.SoundType.BetGold] = "shsound/sound_chips.mp3",
+	--比牌胜利
+	[SHConfig.SoundType.ResultWin] = "shsound/win.mp3",
+	--比牌失败
+	[SHConfig.SoundType.ResultLose] = "shsound/lose.mp3",
+	--轮到谁发言开始
+	[SHConfig.SoundType.RoundStart] = "shsound/sound_lundaoziji.mp3",
+	--轮到谁最后5s每秒播一次
+	[SHConfig.SoundType.RoundSecound] = "shsound/beep.mp3",
+	
+}
 
 --把服务器的牌值转换成本地的牌值
 --服务器牌值规则
@@ -209,9 +306,35 @@ function SHConfig.playAmature(aniFile,aniName,parentNode,animPos,isLoop,autoRemo
 	parentNode = parentNode or display.getRunningScene()
 	parentNode:addChild(anim,SHConfig.LayerOrder.GAME_EFFECT_LAYER)
 end
---按钮
+--按钮音效
 function SHConfig.playButtonSound()
 	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+end
+--播放背景音乐
+function SHConfig.playBgMusic()
+	local MusicAndSoundManager = GameManager:getInstance():getMusicAndSoundManager()
+	MusicAndSoundManager:playMusicWithFile(SHConfig.Music['bg'])
+end
+--播放游戏音效
+--@param stype 音效类型
+--@param isMan 是否是男的 
+function SHConfig.playSound(stype,isMan)
+	if not stype or not SHConfig.Sound[stype] then
+		return
+	end
+	local MusicAndSoundManager = GameManager:getInstance():getMusicAndSoundManager()
+	local soundRes = SHConfig.Sound[stype]
+	local soundPath = nil
+	if type(soundRes)=="table" then
+		soundPath = isMan == true and soundRes['m'] or soundRes['f']
+	else
+		soundPath = soundRes
+		
+	end
+	if soundPath and cc.FileUtils:getInstance():isFileExist(soundPath) then
+		MusicAndSoundManager:playerSoundWithFile(soundPath)
+	end
+	
 end
 
 return SHConfig

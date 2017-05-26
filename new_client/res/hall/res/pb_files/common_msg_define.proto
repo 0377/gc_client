@@ -1,5 +1,5 @@
 
-¨g
+œm
 common_msg_define.protocommon_player_define.proto"&
 C_RequestPublicKey"
 MsgID
@@ -197,12 +197,41 @@ pbMailList"
 result (Rresult8
 pb_validatebox (2.LoginValidateboxRpbValidatebox"
 MsgID
-ID–"s
+ID–"¨
 CS_ChangeGame&
 first_game_type (RfirstGameType(
-second_game_type (RsecondGameType"
+second_game_type (RsecondGameType(
+private_room_opt (RprivateRoomOpt
+
+owner_guid (R	ownerGuid7
+private_room_chair_count (RprivateRoomChairCount5
+private_room_score_type (RprivateRoomScoreType"
 MsgID
-ID˛"S
+ID˛"E
+CS_JoinPrivateRoom
+
+owner_guid (R	ownerGuid"
+MsgID
+IDˇ"c
+SC_JoinPrivateRoomFailed
+
+owner_guid (R	ownerGuid
+result (Rresult"
+MsgID
+IDÄ	"&
+CS_PrivateRoomInfo"
+MsgID
+IDÅ	"y
+PrivateRoomInfo&
+first_game_type (RfirstGameType
+table_count (R
+tableCount
+
+cell_money (R	cellMoney"Q
+SC_PrivateRoomInfo)
+pb_info (2.PrivateRoomInfoRpbInfo"
+MsgID
+IDÇ	"S
 GC_GameServerCfg-
 pb_cfg (2.GameClientRoomListCfgRpbCfg"
 MsgID
@@ -535,7 +564,7 @@ is_offline (R	isOffline"
 IDéV"*
 CS_EnterRoomAndSitDown"
 MsgID
-IDñV"Œ
+IDñV"Õ
 SC_EnterRoomAndSitDown
 room_id (RroomId
 table_id (RtableId
@@ -545,7 +574,11 @@ is_offline (R	isOffline"
 game_id (RgameId&
 first_game_type (RfirstGameType(
 second_game_type (RsecondGameType
-ip_area	 (	RipArea"
+ip_area	 (	RipArea!
+private_room
+ (RprivateRoom#
+balance_money (RbalanceMoney5
+private_room_score_type (RprivateRoomScoreType"
 MsgID
 IDóV")
 CS_StandUpAndExitRoom"
@@ -619,7 +652,12 @@ is_offline (R	isOffline"
 ID≤V"'
 CS_ReconnectionPlay"
 MsgID
-ID≥V"<
+ID≥V"F
+SC_ReconnectionPlay
+
+find_table (R	findTable"
+MsgID
+IDªV"<
 SC_SimpleRespons
 status (Rstatus"
 MsgID

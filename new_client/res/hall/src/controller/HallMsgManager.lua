@@ -70,6 +70,10 @@ HallMsgManager.MsgName 		=	 {
 	SC_FreezeAccount				= 				"SC_FreezeAccount", ----封号消息
 	SC_GameMaintain					=				"SC_GameMaintain",---服務器維護開關，用户玩家一轮游戏结束后，弹出维护提示框
 	SC_CashMaintain					=				"SC_CashMaintain",--提現維護開關
+	CS_PrivateRoomInfo              =               "CS_PrivateRoomInfo",  -- 请求私人房间信息
+	SC_PrivateRoomInfo              =               "SC_PrivateRoomInfo",  -- 返回私人房间信息
+	CS_JoinPrivateRoom              =               "CS_JoinPrivateRoom",  -- 请求进入私人房间
+	SC_JoinPrivateRoomFailed        =               "SC_JoinPrivateRoomFailed",  -- 请求进入私人房间失败
 };
 -- HallMsgManager.EnumName = {
 -- 	REG_ACCOUNT_RESULT = "REG_ACCOUNT_RESULT",
@@ -280,7 +284,7 @@ function HallMsgManager:sendMsg(msgName,msgTab,isNeedLogin,isAutoResend)
 		--todo
 --		print("msgName:",msgName)
 		--CustomHelper.printStack();
---		dump(msgTab, "msgTab", nesting)
+		dump(msgTab, "msgTab", nesting)
 	end
 	--检测是否需要处理超时
 	--[[
@@ -1142,3 +1146,33 @@ function HallMsgManager:on_SC_FreezeAccount(msg)
 
 	end
 end
+
+-- 请求进入私人房间
+function HallMsgManager:sendEnterPrivateRoomMsg(roomId)
+	local tab = {
+		["owner_guid"] = roomId
+	}
+	self:sendMsg(HallMsgManager.MsgName.CS_JoinPrivateRoom, tab)
+end
+
+-- 请求私人房间信息
+function HallMsgManager:sendPrivateRoomInfoMsg()
+	self:sendMsg(HallMsgManager.MsgName.CS_PrivateRoomInfo, {})
+end
+
+-- 请求创建私人房间
+function HallMsgManager:sendCreatePrivateRoomMsg(gameType, roomId, guid, playerNum)
+	local tab = {
+		["first_game_type"] = gameType,
+		["second_game_type"] = 99,
+		["private_room_opt"] = 1,
+		["owner_guid"] = guid,
+		["private_room_chair_count"] = playerNum,
+		["private_room_score_type"] = roomId
+	}
+	dump(tab)
+	self.tempGameType = gameType
+	self:sendMsg(HallMsgManager.MsgName.CS_ChangeGame, tab)
+end
+
+
