@@ -515,11 +515,11 @@
         <Project Name="RechargeLayerCCS.csd" Type="Layer" />
         <Project Name="RechargeTypeLayerCCS.csd" Type="Layer" />
         <Project Name="SecondaryBRNNNodeCCS.csd" Type="Layer" />
+        <Project Name="SecondaryDZPKNodeCCS.csd" Type="Layer" />
         <Project Name="SecondaryNormalNodeCCS.csd" Type="Layer" />
         <Project Name="SecondarySelectLayerCCS.csd" Type="Layer" />
         <Project Name="SettingLayerCCS.csd" Type="Layer" />
         <Project Name="ShopLayerCCS.csd" Type="Layer" />
-        <Project Name="SecondaryDZPKNodeCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

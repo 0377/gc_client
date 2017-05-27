@@ -24,4 +24,9 @@ function LhjGameEntry:getNeedPreloadResArray()
 	-- body
 	return LhjGameScene.getNeedPreloadResArray()
 end
+
+function LhjGameEntry:getVerionStr()
+    return "老虎机.v2"
+end
+
 return LhjGameEntry;

@@ -11,7 +11,7 @@ LoadingScene._TipsTab = {
     [8] = "敢拼才会赢，敢下才会赢更多。"
 }
 
-function LoadingScene:ctor(needLoadResArray,finishCallback, infoTab)
+function LoadingScene:ctor(needLoadResArray,finishCallback, versionStr)
     local CCSLuaNode =  requireForGameLuaFile("LoadingLayerCCS")
     self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
@@ -31,9 +31,9 @@ function LoadingScene:ctor(needLoadResArray,finishCallback, infoTab)
     self:showProgressPercent(0)
 
     -- verion
-    if (infoTab and infoTab["id"] and infoTab["id"] > 0) then
+    if (versionStr and versionStr ~= "") then
     	self._versionStr = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "Text_Version"), "ccui.Text")
-    	self._versionStr:setString(string.format("version:%s/%s", VersionModel:getInstance():getGameResVersion(infoTab["id"]), VersionModel:getInstance():getGameSrcVersion(infoTab["id"])))
+    	self._versionStr:setString(string.format("version:%s", versionStr))
     end
 end
 function LoadingScene:onEnter()

@@ -53,7 +53,7 @@ TmjConfig.MsgName = {
 	SC_Maajan_Act_Trustee = 'SC_Maajan_Act_Trustee', --托管返回	
 	
 	SC_Maajan_Game_Finish = 'SC_Maajan_Game_Finish', --结算消息
-	
+	SC_ReconnectionPlay = 'SC_ReconnectionPlay', --重连返回
 }
 --1 - 9万 - 东 - 西 - 南 - 北 - 中 - 发 - 白 - 春 - 夏 - 秋 - 冬 - 梅 - 兰 - 竹 - 菊
 TmjConfig.Card = {
@@ -151,6 +151,14 @@ TmjConfig.GameState = {
 
 	GAME_IDLE_HEAD = 0x1000,--用于客户端播放动画延迟
 }
+--UI动画方向 定义方向
+TmjConfig.Pop_Dir = {
+    Up = 0,
+    Down = 1,
+    Left = 2,
+    Right = 3,
+}
+
 --桌子类型配置
 TmjConfig.tableType = {
 	[1] = "game_res/desk/laoquechang.png", --小雀场

@@ -24,4 +24,9 @@ function BrnnGameEntry:getNeedPreloadResArray()
 	-- body
 	return BrnnGameScene.getNeedPreloadResArray()
 end
+
+function BrnnGameEntry:getVerionStr()
+	return "百人牛牛.v2"
+end
+
 return BrnnGameEntry;

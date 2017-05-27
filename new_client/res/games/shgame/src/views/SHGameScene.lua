@@ -94,7 +94,6 @@ function SHGameScene:onEnter()
 	self:initTable()
 	self:initMenu() --显示菜单
 	self:startDeviceSchedule()
-
 end
 --开启设备显示信息计时器
 function SHGameScene:startDeviceSchedule()

@@ -7,7 +7,7 @@
 --    1.结算界面 包括胜利，失败
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
-local TmjSettleWinLoseLayer = class("TmjSettleWinLoseLayer",cc.Layer)
+local TmjSettleWinLoseLayer = class("TmjSettleWinLoseLayer",requireForGameLuaFile("TmjPopBaseLayer"))
 local TmjWinLoseLayerCCS = requireForGameLuaFile("TmjWinLoseLayerCCS")
 local TmjConfig = import("..cfg.TmjConfig")
 local TmjHelper = import("..cfg.TmjHelper")
@@ -18,16 +18,17 @@ local countDownTime = 25 --倒计时的长度
 --@param exitCallBack 退出回调
 --@param nexCallBack 下一局回调
 function TmjSettleWinLoseLayer:ctor(resultData,exitCallBack,nexCallBack)
-	self.logTag = self.__cname..".lua"
+	TmjSettleWinLoseLayer.super.ctor(self)
 	self.resultData = resultData
 	self.exitCallBack = exitCallBack --退出按钮回调
 	self.nexCallBack = nexCallBack --下一局回调
 	self.countTime = countDownTime --当前倒计时
-	self:enableNodeEvents()
+	
 	
 end
 
 function TmjSettleWinLoseLayer:onEnter()
+	TmjSettleWinLoseLayer.super.onEnter(self)
 	local node = TmjWinLoseLayerCCS:create()
 	self:addChild(node.root)
 	CustomHelper.seekNodeByName(node.root,"Button_back"):addTouchEventListener(handler(self,self.onTouchListener))
@@ -40,6 +41,8 @@ function TmjSettleWinLoseLayer:onEnter()
 	self:initPanelInfo(CustomHelper.seekNodeByName(node.root,"Panel_info"))
 	self:initHuDesc(CustomHelper.seekNodeByName(node.root,"ScrollView_desc"),CustomHelper.seekNodeByName(node.root,"Image_bar"))
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_showcard"),self.resultData.extraCards,self.resultData.handCards)
+	
+	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
 end
 --初始化结算标签页面
 function TmjSettleWinLoseLayer:initSettleTag(tagNode)
@@ -153,10 +156,10 @@ function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 	local descs = string.split(self.resultData.describe,",")
 	self.scrollView = scrollView
 	local xindex = 0
-	local yindex = 1
+	local yindex = 0
 	local posIndex = { {10,195},{370,560} }
 	local ydiff = 60
-	local height = ydiff*table.nums(descs)/2 + 20
+	local height = ydiff*math.ceil(table.nums(descs)/2) + 20
 	local viewSize = scrollView:getContentSize()
 	scrollView:setInnerContainerSize(cc.size(viewSize.width,height))
 	scrollView:setScrollBarEnabled(false)
@@ -190,7 +193,7 @@ function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 				imgFanInfo:setAnchorPoint(cc.p(0,1.0))
 				
 				imgFanInfo:addTo(scrollView)
-				local y = height - ydiff*(table.nums(descs)/2 - yindex) - 10
+				local y = height - ydiff*(yindex) 
 				imgFanInfo:setPosition(cc.p(posIndex[xindex][1],y))
 				
 				local imgFan = ccui.ImageView:create(string.format("game_res/fan/%dfan.png",huInfo.fan),0)
@@ -371,10 +374,7 @@ function TmjSettleWinLoseLayer:_onInterval(dt)
 		self.textTime:setString(tostring(self.countTime).."s")
 		
 	else
-		if self._scheduler then
-			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
-			self._scheduler = nil
-		end
+		self:stopScheduler()
 		if self.exitCallBack then
 			self.exitCallBack()
 		end
@@ -385,13 +385,11 @@ end
 
 
 function TmjSettleWinLoseLayer:onExit()
+	TmjSettleWinLoseLayer.super.onExit(self)
 	self.exitCallBack = nil
 	self.nexCallBack = nil
 	self.resultData = nil
-    if self._scheduler then
-        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
-        self._scheduler = nil
-    end
+	self:stopScheduler()
 
 end
 function TmjSettleWinLoseLayer:onTouchListener(ref,eventType)
@@ -442,14 +440,53 @@ function TmjSettleWinLoseLayer:onTouchListener(ref,eventType)
 			end
 		elseif ref:getName()=="Button_next" then
 			--继续匹配下一局
-			if self.nexCallBack then
-				self.nexCallBack()
+			if self:checkTokickOut() then
+				self:showLackMoney()
+			else
+				if self.nexCallBack then
+					self.nexCallBack()
+				end
 			end
+
 			--self:removeFromParent()
 		end
 		
 		
 	end
+end
+function TmjSettleWinLoseLayer:stopScheduler()
+    if self._scheduler then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
+        self._scheduler = nil
+    end
+end
+--检查是否要被踢出去
+function TmjSettleWinLoseLayer:checkTokickOut()
+	local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+	local myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
+	if roomInfo and myPlayerInfo and roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+		sslog(self.logTag,"玩家当前金币数量："..tostring(myPlayerInfo:getMoney()))
+		sslog(self.logTag,"当前房间的最低进入限制："..tostring(roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]))
+		if myPlayerInfo:getMoney() < roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+			return true
+		end
+	end
+	return false
+end
+
+function TmjSettleWinLoseLayer:showLackMoney()
+	--lackgold
+	self:stopScheduler()
+	if TmjHelper.isLuaNodeValid(self.proTimer) then
+		self.proTimer:stopAllActions()
+	end
+	CustomHelper.showAlertView(
+			Tmji18nUtils:getInstance():get('str_mjplay','lackgold'),
+			false,
+			true,
+			self.exitCallBack,
+			self.exitCallBack
+	)
 end
 
 return TmjSettleWinLoseLayer

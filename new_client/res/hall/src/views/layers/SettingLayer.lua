@@ -54,8 +54,9 @@ function SettingLayer:ctor(exitCallback)
 
     -- 显示大厅版本号
     local versionStr = tolua.cast(CustomHelper.seekNodeByName(self.alertView, "Text_Version"), "ccui.Text");
-    versionStr:setString(string.format("version:%s/%s/%s/%s(%s)",VersionModel:getInstance():getFrameResVersion(), VersionModel:getInstance():getFrameSrcVersion(),
-        VersionModel:getInstance():getHallResVersion(), VersionModel:getInstance():getHallSrcVersion(),VersionModel:getInstance():getVerionStr()))
+    -- versionStr:setString(string.format("version:%s/%s/%s/%s(%s)",VersionModel:getInstance():getFrameResVersion(), VersionModel:getInstance():getFrameSrcVersion(),
+    --     VersionModel:getInstance():getHallResVersion(), VersionModel:getInstance():getHallSrcVersion(),VersionModel:getInstance():getVerionStr()))
+    versionStr:setString(string.format("version:%s", VersionModel:getInstance():getVerionStr()))
 end
 
 function SettingLayer:onEnter()

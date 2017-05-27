@@ -77,6 +77,9 @@ DzpkGameManager.MsgName =
 	SC_TexasShowCardsPermission = "SC_TexasShowCardsPermission", --允许自己亮牌
 	CS_TexasShowCards = "CS_TexasShowCards", --亮牌请求
 	
+	CS_ChatTable = "CS_ChatTable", ---同桌聊天
+	SC_ChatTable = "SC_ChatTable", --聊天返回
+	
 
 }
 
@@ -199,9 +202,21 @@ function DzpkGameManager:sendPlayerOperate(ac,money)
 	local msgTab = {action = ac,bet_money = money}
 	local msgName = DzpkGameManager.MsgName.CS_TexasUserAction;
 	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
+	dump(msgTab)
+end
+
+--发送聊天
+function DzpkGameManager:sendChatMsg(data)
+	sslog(self.logTag,"发送聊天请求")
+	local infoTab = {}
+	infoTab.chat_content = data or ""
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(DzpkGameManager.MsgName.CS_ChatTable,infoTab)	
 end
 
 
+function DzpkGameManager:on_SC_ChatTable(msgTab)
+	print( "收到聊天请求")
+end
 
 
 

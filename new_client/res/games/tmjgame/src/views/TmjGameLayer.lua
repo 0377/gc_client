@@ -111,15 +111,21 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 		TmjConfig.playButtonSound()
 	elseif eventType==ccui.TouchEventType.ended then
 		if ref:getName()=="Button_back" then
-			
+			local TmjGameDataManager = TmjGameManager:getInstance():getDataManager()
+			if not TmjGameDataManager.isGameOver then --在游戏中才弹出提示
 				CustomHelper.showAlertView(
-					"您正在游戏中，退出游戏后将由电脑托管您继续完成游戏，您可以重进游戏继续该局游戏。",
+					Tmji18nUtils:getInstance():get('str_mjplay','exitAlert'),
 					true,
 					true,
 				function(tipLayer)
 					tipLayer:removeSelf()
 				end,
 				self.exitFun)
+			else
+				if self.exitFun then
+					self.exitFun()
+				end
+			end
 		elseif ref:getName()=="Button_sound" then
 			local isOpenForSound = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
 			GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(isOpenForSound)
@@ -205,11 +211,11 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 					{type =  TmjConfig.cardOperation.Gang,value = {createTag = true, val = 1 }}
 				},
 				},
-				is_hu = true,
+				is_hu = false,
 				hu_fan = 10,
 				win_money = 20,
 				jiabei = 2,
-				describe = "TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE",
+				describe = "TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE,TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE,TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE",
 				taxes = 10,
 				finish_task = true,
 				taskInfo = {

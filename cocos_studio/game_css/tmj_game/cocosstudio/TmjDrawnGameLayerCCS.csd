@@ -6,10 +6,10 @@
       <ObjectData Name="Layer" Tag="993" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="Image_bg" CanEdit="False" ActionTag="-1518681854" Tag="994" IconVisible="False" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_bg" ActionTag="-1518681854" Tag="994" IconVisible="False" TouchEnable="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
-              <AbstractNodeData Name="Image_other" ActionTag="1510899655" Tag="299" IconVisible="False" LeftMargin="125.3885" RightMargin="990.6116" TopMargin="143.8740" BottomMargin="544.1260" LeftEage="54" RightEage="54" TopEage="10" BottomEage="10" Scale9OriginX="54" Scale9OriginY="10" Scale9Width="56" Scale9Height="12" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_other" ActionTag="1510899655" Tag="299" IconVisible="False" LeftMargin="125.3885" RightMargin="990.6115" TopMargin="143.8740" BottomMargin="544.1260" LeftEage="54" RightEage="54" TopEage="10" BottomEage="10" Scale9OriginX="54" Scale9OriginY="10" Scale9Width="56" Scale9Height="12" ctype="ImageViewObjectData">
                 <Size X="164.0000" Y="32.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="207.3885" Y="560.1260" />

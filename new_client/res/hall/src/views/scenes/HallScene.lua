@@ -203,6 +203,13 @@ function HallScene:receiveServerResponseErrorEvent(event)
 
     -- return;
     end
+
+    -- TODO:这里写法很怪异，因为这个错误其他界面有自定义处理，但是hallscene又在监听，所以屏蔽掉
+    if msgName == HallMsgManager.MsgName.SC_EnterRoomAndSitDown and 
+        (ret >= 16 and ret <= 21) then
+        return
+    end
+    
     HallScene.super.receiveServerResponseErrorEvent(self,event);
 end
 --收到服务器处理成功通知函数

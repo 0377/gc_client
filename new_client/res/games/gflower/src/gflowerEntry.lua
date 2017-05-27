@@ -26,6 +26,10 @@ function gflowerEntry:getNeedPreloadResArray()
     return GFlowerGameSceneLayer.getNeedPreloadResArray()
 end
 
+function gflowerEntry:getVerionStr()
+    return "炸金花.v2"
+end
+
 return gflowerEntry
 
 -----------------------------------------------------------------------------------------------------------

@@ -1,0 +1,355 @@
+{
+    "hall_info": {
+        "addr": [
+            "14.29.123.142#7788",
+            "14.29.123.142#7789"
+        ],
+        "config": {
+            "gold_to_money_ratio": "100",
+            "exchange_min_remain_money": "6.0",
+            "exchange_multiple": "50",
+            "agents_info": [
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商1"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商2"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商3"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商4"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商5"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商6"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商7"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商8"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商9"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商10"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商11"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商12"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商13"
+                },
+                {
+                    "qq": "63864124",
+                    "zfb": "zfb_1",
+                    "phone": "13666666666",
+                    "weixin": "agents_1",
+                    "name": "代理商14"
+                }
+            ],
+            "recharge_types": {
+                "zfb": true,
+                "weixin": true,
+                "iospay": false,
+                "transferpay": true
+            },
+            "agents_zhaoshang": {
+                "qq": [
+                    123456,
+                    123456,
+                    123456,
+                    123456
+                ],
+                "weixin": [
+                    "weixin_1",
+                    "weixin_1",
+                    "weixin_1"
+                ]
+            },
+            "personal_center_btns": [
+                {
+                    "account_bind_view_btn": true
+                },
+                {
+                    "person_info_view_btn": true
+                },
+                {
+                    "alipay_bind_view_btn": true
+                }
+            ],
+            "hall_ui_other_btns_config": {
+                "btn_kaifu": true,
+                "more_game_back_btn": true,
+                "more_game_btn": true
+            },
+            "hall_ui_btns_config": [
+                {
+                    "btn_account": true
+                },
+                {
+                    "bank_center_btn": true
+                },
+                {
+                    "btn_exchange": true
+                },
+                {
+                    "btn_message": true
+                },
+                {
+                    "btn_feedback": true
+                },
+                {
+                    "btn_custom_service": true
+                },
+                {
+                    "setting_btn": true
+                },
+                {
+                    "btn_notice": true
+                }
+            ],
+            "custom_service_url": "http://baidu.com",
+            "feedback_create_url": "http://14.29.123.185/api/feedback/create",
+            "feedback_login_url": "http://14.29.123.185/api/feedback/loginInit",
+            "feedback_list_url": "http://14.29.123.185/api/feedback/messageList",
+            "pay_url": {
+                "ios_create_order": "http://14.29.123.144/api/apple/store",
+                "ios_query_order": "http://14.29.123.144/api/apple/apple_pay",
+                "web_create_order": "http://14.29.123.144/api/pay/store",
+                "web_query_order": "http://14.29.123.144/api/pay/show",
+                "transfer_alipay_create_order": "http://192.168.7.162/api/index/transferStore"
+            },
+            "inviter_code": "false",
+            "cvgycvgycgycftgycfgy": "cfycfgycgfycfgycfgy",
+            "template": "default"
+        }
+    },
+    "client_info": {
+        "server_urls": [
+            "http://119.23.142.36:8080/api/index/index",
+            "http://139.23.142.36:8080/api/index/index",
+            "http://129.23.142.36:8080/api/index/index"
+        ],
+        "channel": "new_baobo",
+        "version": "1.0.0",
+        "is_must_update": "false",
+        "update_url": "http://14.29.123.144:8080/uploads/com.wangzhe_studio.client_1_2017-04-20.apk"
+    },
+    "hall_download_info": {
+        "hall_res.zip": {
+            "id": 1,
+            "version": "1.0.11",
+            "channel": ",1,",
+            "update_url": "http://14.29.123.185:8080/uploads/20170424/hall_res.zip",
+            "describe": "大厅",
+            "filename": "hall_res.zip",
+            "md5": "a8316ecbdccaa97aa67b9583d4019b6d",
+            "size": "8167512",
+            "created_at": "2017-05-19 16:38:17",
+            "updated_at": "2017-05-27 09:01:05",
+            "deleted_at": null
+        },
+        "hall_src.zip": {
+            "id": 2,
+            "version": "1.0.11",
+            "channel": ",1,",
+            "update_url": "http://14.29.123.185:8080/uploads/20170424/hall_src.zip",
+            "describe": "大厅",
+            "filename": "hall_src.zip",
+            "md5": "c9c793073208cc9e94f56800c563d457",
+            "size": "533151",
+            "created_at": "2017-05-19 16:38:17",
+            "updated_at": "2017-05-27 09:01:05",
+            "deleted_at": null
+        }
+    },
+    "games_download_info": {
+        "5": {
+            "ddzgame_res.zip": {
+                "md5": "55dd9d94e9b01208e349a15a0a7ccdea",
+                "size": "7512534",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/ddzgame_res.zip",
+                "version": "1.0.6"
+            },
+            "ddzgame_src.zip": {
+                "md5": "fb00a98a3e8df37c136fbbcaf52ba85c",
+                "size": "284952",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/ddzgame_src.zip",
+                "version": "1.0.6"
+            }
+        },
+        "6": {
+            "gflower_res.zip": {
+                "md5": "0e1a4932e7fefe384e5569d8f07eaf8b",
+                "size": "5566392",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/gflower_res.zip",
+                "version": "1.0.6"
+            },
+            "gflower_src.zip": {
+                "md5": "0c96df24a46bf807691d95bdadca853f",
+                "size": "211708",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/gflower_src.zip",
+                "version": "1.0.6"
+            }
+        },
+        "7": {
+            "shgame_res.zip": {
+                "md5": "dfbdd41fc8677e1a8f969dc74fb12392",
+                "size": "2122259",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/shgame_res.zip",
+                "version": "1.0.8"
+            },
+            "shgame_src.zip": {
+                "md5": "5dfb85a37a6fa239bccfc2c19079325d",
+                "size": "163047",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/shgame_src.zip",
+                "version": "1.0.8"
+            }
+        },
+        "8": {
+            "brnngame_res.zip": {
+                "md5": "3b68340a1f1f92aef595cf6096a80bc6",
+                "size": "2651659",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/brnngame_res.zip",
+                "version": "1.0.7"
+            },
+            "brnngame_src.zip": {
+                "md5": "42a2b23c9025f90abdaba2592bc4ed10",
+                "size": "127994",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/brnngame_src.zip",
+                "version": "1.0.7"
+            }
+        },
+        "11": {
+            "dzpkgame_res.zip": {
+                "md5": "35602845fd5134095d1aed24ef7cf94d",
+                "size": "3443328",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/dzpkgame_res.zip",
+                "version": "1.0.7"
+            },
+            "dzpkgame_src.zip": {
+                "md5": "0d2290c42da6bd71a74f424a1c5c7ee1",
+                "size": "124975",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/dzpkgame_src.zip",
+                "version": "1.0.7"
+            }
+        },
+        "12": {
+            "lhjgame_res.zip": {
+                "md5": "b73a9f6e2f86a6e6a69c4cd12d0ec05e",
+                "size": "4698631",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/lhjgame_res.zip",
+                "version": "1.0.5"
+            },
+            "lhjgame_src.zip": {
+                "md5": "a8aa309bafdfa72062a6757feecfb410",
+                "size": "68119",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/lhjgame_src.zip",
+                "version": "1.0.5"
+            }
+        },
+        "14": {
+            "qznngame_res.zip": {
+                "md5": "28460d9f5cca957a10c202dd1e26d686",
+                "size": "3735224",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/qznngame_res.zip",
+                "version": "1.0.8"
+            },
+            "qznngame_src.zip": {
+                "md5": "8ff4b3f245aef3b1771da4e0c3ffe8be",
+                "size": "120234",
+                "update_url": "http://14.29.123.185:8080/uploads/20170424/qznngame_src.zip",
+                "version": "1.0.8"
+            }
+        }
+    },
+    "frame_download_info": {
+        "frame_res.zip": {
+            "id": 1,
+            "version": "1.0.8",
+            "channel": ",1,",
+            "update_url": "http://14.29.123.185:8080/uploads/20170424/frame_res.zip",
+            "describe": "框架",
+            "filename": "frame_res.zip",
+            "md5": "c78d369d86c20deb3a468dbd52adb3d9",
+            "size": "748238",
+            "created_at": "2017-05-19 16:38:17",
+            "updated_at": "2017-05-26 10:03:05",
+            "deleted_at": null
+        },
+        "frame_src.zip": {
+            "id": 2,
+            "version": "1.0.8",
+            "channel": ",1,",
+            "update_url": "http://14.29.123.185:8080/uploads/20170424/frame_src.zip",
+            "describe": "框架",
+            "filename": "frame_src.zip",
+            "md5": "0519bfafad859152ba118bc46e830da3",
+            "size": "128381",
+            "created_at": "2017-05-19 16:38:17",
+            "updated_at": "2017-05-26 10:03:05",
+            "deleted_at": null
+        }
+    }
+}

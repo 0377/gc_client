@@ -28,9 +28,9 @@ function SceneController.goLaunchScene()
     SceneController.goOneScene(launchScene);
 	-- launchScene:showWithScene();
 end
-function SceneController.goOneSceneWithPreloadArray(needArray,finishedCallback,infoTab)
+function SceneController.goOneSceneWithPreloadArray(needArray,finishedCallback,versionStr)
     CustomHelper.cleanMemeryCache()
-	local loadingLayer = LoadingScene:create(needArray,finishedCallback, infoTab)
+	local loadingLayer = LoadingScene:create(needArray,finishedCallback, versionStr)
     --进入加载场景
     local scene = cc.Scene:create()
     scene:addChild(loadingLayer)

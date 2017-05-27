@@ -14,7 +14,7 @@ local TmjHelper = import("..cfg.TmjHelper")
 local TmjCardTip = import("..cfg.TmjCardTip")
 function TmjGameDataManager:ctor()
 	self.logTag = self.__cname..".lua"
-	self.isGameOver = false 
+	self.isGameOver = true 
 end
 function TmjGameDataManager:setGameScene(TmjGameScene)
 	self.TmjGameScene = TmjGameScene
@@ -49,6 +49,7 @@ function TmjGameDataManager:on_SC_Maajan_Desk_Enter(msgTab)
 	if not TmjHelper.isLuaNodeValid(TmjGameScene) then
 		
 	end
+	self:setGameRoomInfo()
 	self.isGameOver = false 
 	--self.seatsInfos = msgTab
 	--庄家ID
@@ -353,6 +354,7 @@ end
 --};
 function TmjGameDataManager:on_SC_Maajan_Game_Finish(msgTab)
 	ssdump(msgTab,"结算消息",10)
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	TmjHelper.removeAll(self.consultData)
 	self.isGameOver = true --结束了
 	self.consultData = {}
@@ -455,5 +457,17 @@ end
 function TmjGameDataManager:OnMsg_EnterRoomAndSitDownInfo(msgTab)
 	self._enterRoomAndSitDownInfo = msgTab
 	ssdump(self._enterRoomAndSitDownInfo,"进入游戏位置信息")
+	--self:setGameRoomInfo()
+end
+----
+function TmjGameDataManager:setGameRoomInfo()
+    -- body
+    local pb_gmMessage = {}
+    pb_gmMessage["chair_id"] = self._enterRoomAndSitDownInfo["chair_id"]
+    pb_gmMessage["room_id"] = self._enterRoomAndSitDownInfo["room_id"]
+    pb_gmMessage["table_id"] = self._enterRoomAndSitDownInfo["table_id"]
+    pb_gmMessage["first_game_type"] = self._enterRoomAndSitDownInfo["first_game_type"]
+    pb_gmMessage["second_game_type"] = self._enterRoomAndSitDownInfo["second_game_type"]
+    GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(pb_gmMessage)
 end
 return TmjGameDataManager

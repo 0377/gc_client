@@ -7,7 +7,7 @@
 --    1.结算界面 包括胜利，失败
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
-local TmjSettleDrawnLayer = class("TmjSettleDrawnLayer",cc.Layer)
+local TmjSettleDrawnLayer = class("TmjSettleDrawnLayer",requireForGameLuaFile("TmjPopBaseLayer"))
 local TmjDrawnGameLayerCCS = requireForGameLuaFile("TmjDrawnGameLayerCCS")
 local TmjConfig = import("..cfg.TmjConfig")
 local TmjHelper = import("..cfg.TmjHelper")
@@ -18,16 +18,17 @@ local countDownTime = 15 --倒计时的长度
 --@param exitCallBack 退出回调
 --@param nexCallBack 下一局回调
 function TmjSettleDrawnLayer:ctor(resultData,exitCallBack,nexCallBack)
-	self.logTag = self.__cname..".lua"
+	TmjSettleDrawnLayer.super.ctor(self)
 	self.resultData = resultData
 	self.exitCallBack = exitCallBack --退出按钮回调
 	self.nexCallBack = nexCallBack --下一局回调
 	self.countTime = countDownTime --当前倒计时
-	self:enableNodeEvents()
+	
 	
 end
 
 function TmjSettleDrawnLayer:onEnter()
+	TmjSettleDrawnLayer.super.onEnter(self)
 	local node = TmjDrawnGameLayerCCS:create()
 	self:addChild(node.root)
 	CustomHelper.seekNodeByName(node.root,"Button_back"):addTouchEventListener(handler(self,self.onTouchListener))
@@ -38,6 +39,7 @@ function TmjSettleDrawnLayer:onEnter()
 	self:initSettleTag(CustomHelper.seekNodeByName(node.root,"Image_settleTag"))
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_other"),self.resultData.other.extraCards,self.resultData.other.handCards)
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_me"),self.resultData.me.extraCards,self.resultData.me.handCards)
+	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
 end
 --初始化结算标签页面
 function TmjSettleDrawnLayer:initSettleTag(tagNode)
@@ -192,10 +194,7 @@ function TmjSettleDrawnLayer:_onInterval(dt)
 		self.textTime:setString(tostring(self.countTime).."s")
 		
 	else
-		if self._scheduler then
-			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
-			self._scheduler = nil
-		end
+		self:stopScheduler()
 		if self.exitCallBack then
 			self.exitCallBack()
 		end
@@ -205,14 +204,11 @@ end
 
 
 function TmjSettleDrawnLayer:onExit()
+	TmjSettleDrawnLayer.super.onExit(self)
 	self.exitCallBack = nil
 	self.nexCallBack = nil
 	self.resultData = nil
-    if self._scheduler then
-        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
-        self._scheduler = nil
-    end
-
+	self:stopScheduler()
 end
 function TmjSettleDrawnLayer:onTouchListener(ref,eventType)
 	if eventType == ccui.TouchEventType.began then
@@ -230,14 +226,53 @@ function TmjSettleDrawnLayer:onTouchListener(ref,eventType)
 			end
 		elseif ref:getName()=="Button_next" then
 			--继续匹配下一局
-			if self.nexCallBack then
-				self.nexCallBack()
+			if not self:checkTokickOut() then
+				self:showLackMoney()
+			else
+				if self.nexCallBack then
+					self.nexCallBack()
+				end
 			end
+
 			--self:removeFromParent()
 		end
 		
 		
 	end
+end
+function TmjSettleDrawnLayer:stopScheduler()
+    if self._scheduler then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
+        self._scheduler = nil
+    end
+end
+--检查是否要被踢出去
+function TmjSettleDrawnLayer:checkTokickOut()
+	local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+	local myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
+	if roomInfo and myPlayerInfo and roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+		sslog(self.logTag,"玩家当前金币数量："..tostring(myPlayerInfo:getMoney()))
+		sslog(self.logTag,"当前房间的最低进入限制："..tostring(roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]))
+		if myPlayerInfo:getMoney() < roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+			return true
+		end
+	end
+	return false
+end
+
+function TmjSettleDrawnLayer:showLackMoney()
+	--lackgold
+	self:stopScheduler()
+	if TmjHelper.isLuaNodeValid(self.proTimer) then
+		self.proTimer:stopAllActions()
+	end
+	CustomHelper.showAlertView(
+			Tmji18nUtils:getInstance():get('str_mjplay','lackgold'),
+			false,
+			true,
+			self.exitCallBack,
+			self.exitCallBack
+	)
 end
 
 return TmjSettleDrawnLayer

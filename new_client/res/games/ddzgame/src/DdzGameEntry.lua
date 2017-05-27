@@ -25,4 +25,8 @@ function DdzGameEntry:getNeedPreloadResArray()
 	return DdzGameScene.getNeedPreloadResArray()
 end
 
+function DdzGameEntry:getVerionStr()
+	return "斗地主.v2"
+end
+
 return DdzGameEntry;

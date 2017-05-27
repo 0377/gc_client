@@ -1,5 +1,5 @@
 
-ÿ
+‘
 common_msg_texas.proto"ñ
 UserInfo
 guid (Rguid
@@ -68,9 +68,10 @@ think_time (R	thinkTime!
 SC_TexasUserLeave"
 pb_user (2	.UserInfoRpbUser"
 MsgID
-ID•N">
+ID•N"P
 SC_TexasForceLeave
-reason (	Rreason"
+reason (	Rreason
+num (Rnum"
 MsgID
 ID—N"p
 SC_TexasTableEnd"

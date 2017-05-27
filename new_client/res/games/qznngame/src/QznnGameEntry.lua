@@ -31,4 +31,9 @@ function QznnGameEntry:getNeedPreloadResArray()
 	return QznnGameScene.getNeedPreloadResArray()
 	--return {}
 end
+
+function QznnGameEntry:getVerionStr()
+    return "抢庄牛牛.v2"
+end
+
 return QznnGameEntry;

@@ -27,7 +27,7 @@ function PrivateRoomView:ctor()
     PrivateRoomView.super.ctor(self)
     CustomHelper.addWholeScrennAnim(self)
 
-    PrivateRoomView.super:setIsShowErr(false)
+    -- PrivateRoomView.super:setIsShowErr(false)
 
     GameManager:getInstance():getHallManager():getHallMsgManager():sendPrivateRoomInfoMsg()
 end
@@ -53,12 +53,14 @@ function PrivateRoomView:registerNotification()
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_JoinPrivateRoomFailed)
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_BankDeposit)
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_BankDraw)
+    print("[PrivateRoomView] registerNotification")
+    dump(self)
     PrivateRoomView.super.registerNotification(self)
 end
 
 function PrivateRoomView:receiveServerResponseSuccessEvent(event)
-    print("[PrivateRoomView] receiveServerResponseSuccessEvent")
-    dump(event)
+    -- print("[PrivateRoomView] receiveServerResponseSuccessEvent")
+    -- dump(event)
     local userInfo = event.userInfo
     local msgName = userInfo["msgName"]
     if msgName == HallMsgManager.MsgName.SC_PrivateRoomInfo then
@@ -90,8 +92,7 @@ function PrivateRoomView:receiveServerResponseSuccessEvent(event)
 end
 
 function PrivateRoomView:receiveServerResponseErrorEvent(event)
-    print("[PrivateRoomView] receiveServerResponseErrorEvent")
-    dump(event.userInfo, "receiveServerResponseErrorEvent", 100)
+    -- print("[PrivateRoomView] receiveServerResponseErrorEvent")
     local userInfo = event.userInfo;
 
     -- -- TODO
@@ -122,7 +123,7 @@ function PrivateRoomView:receiveServerResponseErrorEvent(event)
             end
         end
     else
-        PrivateRoomPrompt.super.receiveServerResponseErrorEvent(self,event, true)
+        PrivateRoomPrompt.super.receiveServerResponseErrorEvent(self,event)
     end
 end
 

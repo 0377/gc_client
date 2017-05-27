@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------
--- Desc:    ¶şÈËÂé½«·¬ĞÍĞÅÏ¢½çÃæ
+-- Desc:    äºŒäººéº»å°†ç•ªå‹ä¿¡æ¯ç•Œé¢
 -- Author:  zengzx
 -- Date:    2017.4.21
 -- Last: 
@@ -7,16 +7,19 @@
 --    
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
-local TmjFanXinInfoLayer = class("TmjFanXinInfoLayer",cc.Layer)
+local TmjFanXinInfoLayer = class("TmjFanXinInfoLayer",requireForGameLuaFile("TmjPopBaseLayer"))
 local TmjHelper = import("..cfg.TmjHelper")
 local TmjConfig = import("..cfg.TmjConfig")
 
 local TmjFanXinInfoLayerNode = requireForGameLuaFile("TmjFanXInfoLayerCCS")
+local scheduler = cc.Director:getInstance():getScheduler()
+
 function TmjFanXinInfoLayer:ctor()
-	self.logTag = self.__cname..".lua"
-	self:enableNodeEvents()
+	TmjFanXinInfoLayer.super.ctor(self)
 	self:initView()
 	self:initCheckGroup()
+	local imgBg = CustomHelper.seekNodeByName(self.node,"Image_bg")
+	self:popIn(imgBg,TmjConfig.Pop_Dir.Up)
 end
 
 function TmjFanXinInfoLayer:initView()
@@ -64,6 +67,7 @@ end
 -- ccui.CheckBoxEventType     selected = 0,   unselected = 1,
 function TmjFanXinInfoLayer:checkListener(ref,eventType)
 	--checkbox:setEnabled(not ref:getSelected())
+	TmjConfig.playButtonSound()
 	self:setCheckIndex(ref:getTag())
 	-- self.scrollView
 	self.scrollView:jumpToPercentVertical(self.groupPercents[ref:getTag()])
@@ -74,7 +78,7 @@ function TmjFanXinInfoLayer:backListener(ref,eventType)
 		TmjConfig.playButtonSound()
 	elseif eventType==ccui.TouchEventType.ended then
 		if ref:getName()=="Button_back" then
-			self:removeFromParent()
+			self:close()
 		end
 	end
 end
@@ -85,12 +89,41 @@ function TmjFanXinInfoLayer:setCheckIndex(index)
 		checkbox:setEnabled(i~=index)
 	end
 end
+function TmjFanXinInfoLayer:_interval(dt)
+	local pos = self.scrollView:getInnerContainerPosition()
+	local innerSize = self.scrollView:getInnerContainerSize()
+	local contentSize = self.scrollView:getContentSize()
+	--
+	if pos.y>=0 then
+		pos.y = 0
+		contentSize.height = 0
+	end
+	local percent = 100*(innerSize.height + pos.y - contentSize.height) / innerSize.height
 
+	self:setCheckIndex(self:getGroupIndex(percent))
+	self.imgBar:setPositionY(self:getSliderPostionYByPercent(percent))
+end
+function TmjFanXinInfoLayer:stopScheduler()
+	if self.timeInterval then
+        scheduler:unscheduleScriptEntry(self.timeInterval)
+        self.timeInterval = nil
+    end
+end
+function TmjFanXinInfoLayer:onEnter()
+	TmjFanXinInfoLayer.super.onEnter(self)
+	self:stopScheduler()
+	--self.timeInterval
+	local aniInterval = cc.Director:getInstance():getAnimationInterval()
+	self.timeInterval = scheduler:scheduleScriptFunc(handler(self,self._interval), aniInterval, false)
+	
+end
 
 function TmjFanXinInfoLayer:onExit()
+	self:stopScheduler()
 	TmjHelper.removeAll(self.groupPercents)
 	TmjHelper.removeAll(self.checkGroups)
 	TmjHelper.removeAll(self.barPosYLimit)
+	TmjFanXinInfoLayer.super.onExit(self)
 end
 
 function TmjFanXinInfoLayer:barListener(ref,eventType)
@@ -115,7 +148,7 @@ function TmjFanXinInfoLayer:barListener(ref,eventType)
 		--
 	end
 end
---Í¨¹ı°Ù·Ö±È£¬»ñÈ¡µ±Ç°ÊÇÔÚÄÇ¸ö·¬ĞÍÉÏ
+--é€šè¿‡ç™¾åˆ†æ¯”ï¼Œè·å–å½“å‰æ˜¯åœ¨é‚£ä¸ªç•ªå‹ä¸Š
 function TmjFanXinInfoLayer:getGroupIndex(percent)
 	local index = #self.groupPercents
 	for i=#self.groupPercents,1,-1 do
@@ -127,7 +160,7 @@ function TmjFanXinInfoLayer:getGroupIndex(percent)
 	end
 	return index
 end
---Í¨¹ıÎ»ÖÃ ×ª»»scrollviewµÄÏÔÊ¾°Ù·Ö±È
+--é€šè¿‡ä½ç½® è½¬æ¢scrollviewçš„æ˜¾ç¤ºç™¾åˆ†æ¯”
 function TmjFanXinInfoLayer:convertScrollPercent(posy)
 	return 100 - 100*(posy - self.barPosYLimit[1])/(self.barPosYLimit[2] - self.barPosYLimit[1])
 end
@@ -141,6 +174,11 @@ function TmjFanXinInfoLayer:convertSliderPosition(pos)
 		newpos.y = self.barPosYLimit[2]
 	end
 	return newpos	
+end
+function TmjFanXinInfoLayer:getSliderPostionYByPercent(percent)
+	local percent = math.min(percent,100)
+	local percent = math.max(percent,0)
+	return (self.barPosYLimit[2] - self.barPosYLimit[1])*(1 - percent/100) + self.barPosYLimit[1]
 end
 
 return TmjFanXinInfoLayer

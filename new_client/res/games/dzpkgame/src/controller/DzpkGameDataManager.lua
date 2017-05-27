@@ -254,6 +254,20 @@ function DzpkGameDataManager:getUserInfoByChair(chair)
 end
 
 
+function DzpkGameDataManager:getUserInfoByGuid(guid)
+
+	for k, v in pairs(self._userList) do
+		if v.guid == guid then
+			return v
+		end
+		
+	end
+	
+	return nil
+	
+end
+
+
 --获取剩余有效思考时间
 function DzpkGameDataManager:getThinkTime()
 	local max = 0

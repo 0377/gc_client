@@ -111,13 +111,20 @@ function HallManager:enterOneGameWithGameInfoTab(infoTab)
 	local gameEntry = gameDetailTab[HallGameConfig.GameEntranceKey];	
     local sceneClass = requireForGameLuaFile(gameEntry);
     sceneClass:create();
+
+    -- 为了显示小游戏版本号
+    local versionStr = ""
+    if sceneClass.getVerionStr ~= nil then
+		versionStr = sceneClass:getVerionStr()
+	end
+
     dump(sceneClass, "sceneClass", nesting)
     --切换场景
     local needPreloadResArray = sceneClass:getNeedPreloadResArray();
     SceneController.goOneSceneWithPreloadArray(needPreloadResArray,function()
     	local scene = sceneClass:getStartScene(infoTab);
     	SceneController.goOneScene(scene)
-    end, infoTab)
+    end, versionStr)
 end
 function HallManager:initSubGameSearchPath()
 	local gameDetailTab = self.hallDataManager:getCurSelectedGameDetailInfoTab()

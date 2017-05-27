@@ -31,4 +31,9 @@ function DzpkGameEntry:getNeedPreloadResArray()
 	return DzpkGameScene.getNeedPreloadResArray()
 	--return {}
 end
+
+function DzpkGameEntry:getVerionStr()
+	return "德州扑克.v2"
+end
+
 return DzpkGameEntry;

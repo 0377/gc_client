@@ -34,4 +34,9 @@ function TmjGameEntry:getNeedPreloadResArray()
 	-- body
 	return TmjGameScene.getNeedPreloadResArray()
 end
+
+function TmjGameEntry:getVerionStr()
+    return "二人麻将.v2"
+end
+
 return TmjGameEntry

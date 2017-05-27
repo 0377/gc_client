@@ -42,4 +42,8 @@ function FishgameEntry:getStartScene(infoTab)
     return scene
 end
 
+function FishgameEntry:getVerionStr()
+    return "李逵劈鱼.v2"
+end
+
 return FishgameEntry

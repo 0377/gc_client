@@ -34,4 +34,9 @@ function SHGameEntry:getNeedPreloadResArray()
 	-- body
 	return SHGameScene.getNeedPreloadResArray()
 end
+
+function SHGameEntry:getVerionStr()
+    return "二人梭哈.v2"
+end
+
 return SHGameEntry

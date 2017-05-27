@@ -109,7 +109,7 @@ function DzpkGameScene:registerNotification()
 	
 	self:addOneTCPMsgListener(DzpkGameManager.MsgName.SC_TexasShowCards)
 	self:addOneTCPMsgListener(DzpkGameManager.MsgName.SC_TexasShowCardsPermission)
-
+	self:addOneTCPMsgListener(DzpkGameManager.MsgName.SC_ChatTable)
 	--self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_StandUpAndExitRoom)
 	
     DzpkGameScene.super.registerNotification(self);
@@ -183,11 +183,13 @@ function DzpkGameScene:receiveServerResponseSuccessEvent(event)
 		
 	elseif msgName == DzpkGameManager.MsgName.SC_TexasShowCardsPermission then
 		self.LiangPai = false
+	elseif msgName == DzpkGameManager.MsgName.SC_ChatTable then
+		self:talk(userInfo)
 		
 	elseif msgName == DzpkGameManager.MsgName.SC_TexasForceLeave then ---强制离开
 	--
 		local function  verificationGold(  )
-			local betNum = 0.1
+			local betNum = userInfo["num"]
 			local cancalCallbackFunc = function (  )
 				self:exitGame(false)
 			end
@@ -593,7 +595,7 @@ function DzpkGameScene:zhankaiMenuAnim(speed)
 		if node1 ~= nil then
 			node1:setScale(1)
 			--node1:setPosition(v.startpos)
-			
+			node1:stopAllActions()
 			local time1 = cc.pGetDistance(v.startpos,v.endpos)/speed
 			
 			node1:runAction( cc.MoveTo:create(time1,v.endpos ))
@@ -622,7 +624,7 @@ function DzpkGameScene:zhedieMenuAnim(speed)
 		if node1 ~= nil then
 			
 			--node1:setPosition(v.endpos)
-			
+			node1:stopAllActions()			
 			local time1 = cc.pGetDistance(v.startpos,v.endpos)/speed
 			local seq = cc.Sequence:create( cc.MoveTo:create(time1,v.startpos ),cc.CallFunc:create(function(sender)
 					node1:setScale(0)
@@ -679,7 +681,7 @@ function DzpkGameScene:initMenu()
 				self:exitGame()
 			else
 				CustomHelper.showAlertView(
-				   "你确定要放弃本局游戏吗？",
+				   "此时离开本局已经下注的筹码不能收回,确定要离开吗？",
 				   true,
 				   true,
 				   function(tipLayer)
@@ -703,17 +705,34 @@ function DzpkGameScene:initMenu()
 	menunode:getChildByName("Button_huanzhuo"):addTouchEventListener(function (sender, eventType)
 		if eventType == ccui.TouchEventType.ended then
 			MusicAndSoundManager:getInstance():playerSoundWithFile("dzpksound/button.mp3")
-			CustomHelper.showAlertView(
-			   "你确定要换桌吗？",
-			   true,
-			   true,
-			   function(tipLayer)
-				   tipLayer:removeFromParent()
-			   end,
-			   function(tipLayer)
-				   self.dzpkGameManager:sendChangeTable()
-					tipLayer:removeFromParent()
-			   end)
+			
+			
+			local users = self.dzpkGameManager:getDataManager():getUserInfoList()
+			local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+			local myinfo = self.dzpkGameManager:getDataManager():getMyInfo()
+			if tableinfo == nil or users == nil or myinfo == nil then
+				return
+			end
+			if myinfo.action ~= nil and myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING then
+				
+				self.dzpkGameManager:sendChangeTable()
+			else
+				CustomHelper.showAlertView(
+				   "此时换桌已经下注的筹码不能收回,确定要换桌吗？",
+				   true,
+				   true,
+				   function(tipLayer)
+					   tipLayer:removeFromParent()
+				   end,
+				   function(tipLayer)
+					   self.dzpkGameManager:sendChangeTable()
+						tipLayer:removeFromParent()
+				   end)
+			end
+			
+			
+			
+			
 			
 			--self.dzpkGameManager:sendPlayerLeave()
 			
@@ -820,6 +839,7 @@ end
 			local _gameTalk = requireForGameLuaFile("DzpkGameTalk");
 			local function sendmessage(key,str)
 				local a = 0
+				self.dzpkGameManager:sendChatMsg(str)
 			end
 			
 			self.gameTalk = _gameTalk:create(sendmessage)
@@ -962,7 +982,8 @@ function DzpkGameScene:popJiazhuOperate()
 		function(sender,eventType)
 			if eventType == ccui.SliderEventType.percentChanged then
 				local curPercent = sender:getPercent()
-				local bet = (jiazhuMaxBet-jiazhuMinBet)/100*curPercent+jiazhuMinBet
+				local bet = math.ceil((jiazhuMaxBet-jiazhuMinBet)/100*curPercent+jiazhuMinBet)
+				
 				panel:getChildByName("Button_jia"):getChildByName("Text_1"):setString(CustomHelper.moneyShowStyleNone( bet ))
 				
 				
@@ -1224,6 +1245,8 @@ function DzpkGameScene:sendPublicCard(cards)
 		print("牌发多了")
 		return
 	end
+	
+	self:setPublicCardEndPos()
 
 	local middleCCS = self.csNode:getChildByName("Panel_middle")
 	local isfapai = false
@@ -1503,6 +1526,40 @@ function DzpkGameScene:showCardType(chair,delay,time)
 		
 	end
 
+end
+
+--
+function DzpkGameScene:talk(msgTab)
+	
+	local user = self.dzpkGameManager:getDataManager():getUserInfoByGuid(msgTab["chat_guid"])
+	if user ~= nil then
+		local userNode = self:getUserInfoNodeFromChairid(user.chair)
+		if userNode == nil then
+			return
+		end
+		
+		local talkui = self.csNode:getChildByName("Panel_Talk"):clone()
+		self.csNode:addChild(talkui)
+		
+		local pos1 = userNode:getChildByName("Panel_talk"):convertToWorldSpace(cc.p(0,0))
+		talkui:setPosition(pos1)
+		talkui:getChildByName("Text_6"):setString(msgTab.chat_content)
+		
+		talkui:runAction(cc.Sequence:create(
+            cc.DelayTime:create(5),
+			cc.FadeOut:create(0.2),
+			cc.CallFunc:create(
+					function()
+						---发送开始消息
+						talkui:removeFromParent()
+					end
+				)
+			
+			
+            ))
+	end
+	
+	
 end
 
 

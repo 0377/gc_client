@@ -18,6 +18,7 @@ local TmjSettleDrawnLayer = requireForGameLuaFile("TmjSettleDrawnLayer")
 --GameManager:getInstance():getHallManager():getSubGameManager()
 function TmjGameScene.getNeedPreloadResArray()
 	local resNeed = {
+	"game_res/animation/ermj_px_eff/ermj_px_eff.ExportJson"
 	}
 	return resNeed
 end
@@ -46,7 +47,6 @@ function TmjGameScene:registerNotification()
 			sslog(self.logTag,"注册消息 "..msgName)
 			self:addOneTCPMsgListener(msgName)
 		end
-		
 	end
 end
 
@@ -101,9 +101,9 @@ function TmjGameScene:onEnter()
     end
 	self:initPlayLayer()
 	self:showWaiting()
-	--self:initPlayer({path = "TmjMyPlayer",seatid = 1})
-	--self:initPlayer({path = "TmjOtherPlayer",seatid = 2})
-
+	self:initPlayer({path = "TmjMyPlayer",seatid = 1})
+	self:initPlayer({path = "TmjOtherPlayer",seatid = 2})
+	self:closeWaiting()
 end
 
 function TmjGameScene:onExit()
@@ -424,7 +424,14 @@ function TmjGameScene:onMsgSC_Maajan_Game_Finish()
 		TmjSettleWinLoseLayer:create(resultData,handler(self,self.exitGame),handler(self,self.nextGame)):addTo(self,TmjConfig.LayerOrder.GAME_RESULT_LAYER)
 	end
 end
-
+function TmjGameScene:onMsgSC_ReconnectionPlay(msgTab)
+	ssdump(msgTab,"断线重连返回消息")
+	if msgTab.find_table==nil or msgTab.find_table==false then --没找到房间
+		--游戏已经结束 退出到游戏大厅
+       self:showGameOverTips()
+	end
+	
+end
 --玩家操作完成后的回调
 --@param pType 玩家类型
 --@param operationType 操作类型
@@ -519,7 +526,7 @@ function TmjGameScene:initPlayer(playerInfo)
 	
 	player:setOperationCallBack(handler(self,self.playerOperationHandler))
 	
-	player:setHeadInfo({headId =1,gold = 1000,nickname="TEST",huaCount =table.nums(playerInfo.huaCard or {}),doubleCount = 0  })
+	player:setHeadInfo({headId =playerInfo.icon or 1,gold = playerInfo.money or 1000,nickname= playerInfo.nickname or "TEST",huaCount =table.nums(playerInfo.huaCard or {}),doubleCount = 0  })
 	player:setTingState(playerInfo.isTing or false)
 	self.seats = self.seats or {}
 	self.seats[seatId] = player
@@ -558,18 +565,7 @@ function TmjGameScene:callbackWhenReloginAndGetPlayerInfoFinished()
 	
     local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
     if gameingInfoTable == nil or self.TmjGameDataManager.isGameOver == true then
-       CustomHelper.showAlertView(
-                "本局已经结束,退回到大厅!!!",
-                false,
-                true,
-                function(tipLayer)
-                    self:exitGame()
-                end,
-                function(tipLayer)
-                    self:exitGame();
-                end
-        )
-       
+		self:showGameOverTips()
 	else
 		
 		self:removeAllPlayer()
@@ -581,9 +577,23 @@ function TmjGameScene:callbackWhenReloginAndGetPlayerInfoFinished()
     end
 
 end
-
+function TmjGameScene:showGameOverTips()
+   CustomHelper.showAlertView(
+			"本局已经结束,退回到大厅!!!",
+			false,
+			true,
+			function(tipLayer)
+				self:exitGame()
+			end,
+			function(tipLayer)
+				self:exitGame();
+			end
+	)
+end
 ---退出游戏界面
 function TmjGameScene:exitGame()
+	--退出游戏的时候 清空游戏数据
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	TmjGameManager:getInstance():sendStandUpAndExitRoomMsg()
     SceneController.goHallScene()
     local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
@@ -595,6 +605,8 @@ function TmjGameScene:exitGame()
 end
 --下一局
 function TmjGameScene:nextGame()
+	--开下一局的游戏的时候 清空游戏数据
+	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	--重置标识
 	self:removeAllPlayer()
 	self.isTrustee = false --是否托管状态

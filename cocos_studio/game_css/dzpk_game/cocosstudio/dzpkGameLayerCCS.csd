@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="Image_show" Visible="False" ActionTag="838333328" VisibleForFrame="False" Tag="9" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_show" ActionTag="838333328" Tag="9" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <AnchorPoint />
             <Position />
@@ -16,7 +16,7 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="game_res/mainui/show2.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_bg" ActionTag="1186376817" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_bg" Visible="False" ActionTag="1186376817" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
               <AbstractNodeData Name="Image_1" ActionTag="1363408547" Tag="7" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="ImageViewObjectData">
@@ -829,13 +829,13 @@
                     <PreSize X="0.2700" Y="0.2700" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_duipai.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Panel_talk" ActionTag="573109785" Tag="91" IconVisible="False" LeftMargin="106.8156" RightMargin="83.1844" TopMargin="0.5477" BottomMargin="189.4523" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Panel_talk" ActionTag="573109785" Tag="91" IconVisible="False" LeftMargin="99.4206" RightMargin="90.5794" TopMargin="61.8214" BottomMargin="128.1786" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="10.0000" Y="10.0000" />
                     <AnchorPoint />
-                    <Position X="106.8156" Y="189.4523" />
+                    <Position X="99.4206" Y="128.1786" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5341" Y="0.9473" />
+                    <PrePosition X="0.4971" Y="0.6409" />
                     <PreSize X="0.0500" Y="0.0500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -985,13 +985,13 @@
                     <PreSize X="0.2700" Y="0.2700" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_duipai.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Panel_talk" ActionTag="430268357" Tag="104" IconVisible="False" LeftMargin="106.8156" RightMargin="83.1844" TopMargin="0.5477" BottomMargin="189.4523" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Panel_talk" ActionTag="430268357" Tag="104" IconVisible="False" LeftMargin="108.7882" RightMargin="81.2118" TopMargin="98.5078" BottomMargin="91.4922" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="10.0000" Y="10.0000" />
                     <AnchorPoint />
-                    <Position X="106.8156" Y="189.4523" />
+                    <Position X="108.7882" Y="91.4922" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5341" Y="0.9473" />
+                    <PrePosition X="0.5439" Y="0.4575" />
                     <PreSize X="0.0500" Y="0.0500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -1141,13 +1141,13 @@
                     <PreSize X="0.2700" Y="0.2700" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_duipai.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Panel_talk" ActionTag="-525043583" Tag="117" IconVisible="False" LeftMargin="106.8156" RightMargin="83.1844" TopMargin="0.5477" BottomMargin="189.4523" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Panel_talk" ActionTag="-525043583" Tag="117" IconVisible="False" LeftMargin="-51.5350" RightMargin="241.5350" TopMargin="111.0637" BottomMargin="78.9363" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="10.0000" Y="10.0000" />
                     <AnchorPoint />
-                    <Position X="106.8156" Y="189.4523" />
+                    <Position X="-51.5350" Y="78.9363" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5341" Y="0.9473" />
+                    <PrePosition X="-0.2577" Y="0.3947" />
                     <PreSize X="0.0500" Y="0.0500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -1297,13 +1297,13 @@
                     <PreSize X="0.2700" Y="0.2700" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_duipai.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Panel_talk" ActionTag="-68517810" Tag="130" IconVisible="False" LeftMargin="106.8156" RightMargin="83.1844" TopMargin="0.5477" BottomMargin="189.4523" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Panel_talk" ActionTag="-68517810" Tag="130" IconVisible="False" LeftMargin="-61.1566" RightMargin="251.1566" TopMargin="103.0220" BottomMargin="86.9780" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="10.0000" Y="10.0000" />
                     <AnchorPoint />
-                    <Position X="106.8156" Y="189.4523" />
+                    <Position X="-61.1566" Y="86.9780" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5341" Y="0.9473" />
+                    <PrePosition X="-0.3058" Y="0.4349" />
                     <PreSize X="0.0500" Y="0.0500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -1453,13 +1453,13 @@
                     <PreSize X="0.2700" Y="0.2700" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_duipai.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Panel_talk" ActionTag="-774160056" Tag="143" IconVisible="False" LeftMargin="106.8156" RightMargin="83.1844" TopMargin="0.5477" BottomMargin="189.4523" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Panel_talk" ActionTag="-774160056" Tag="143" IconVisible="False" LeftMargin="-10.2243" RightMargin="200.2243" TopMargin="103.3863" BottomMargin="86.6137" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="10.0000" Y="10.0000" />
                     <AnchorPoint />
-                    <Position X="106.8156" Y="189.4523" />
+                    <Position X="-10.2243" Y="86.6137" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5341" Y="0.9473" />
+                    <PrePosition X="-0.0511" Y="0.4331" />
                     <PreSize X="0.0500" Y="0.0500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -1637,7 +1637,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_talk" ActionTag="1803865521" VisibleForFrame="False" Tag="52" IconVisible="False" LeftMargin="-1157.5392" RightMargin="1178.5392" TopMargin="500.8134" BottomMargin="-79.8134" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="49" Scale9Height="57" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_talk" ActionTag="1803865521" Tag="52" IconVisible="False" LeftMargin="-1157.5392" RightMargin="1178.5392" TopMargin="500.8134" BottomMargin="-79.8134" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="49" Scale9Height="57" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="79.0000" Y="79.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-1118.0392" Y="-40.3134" />
@@ -1679,13 +1679,13 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_bottom" ActionTag="466110940" Tag="126" IconVisible="False" RightMargin="1080.0000" TopMargin="370.0000" BottomMargin="150.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="200.0000" Y="200.0000" />
+          <AbstractNodeData Name="Panel_bottom" ActionTag="466110940" Tag="126" IconVisible="False" RightMargin="1279.0000" TopMargin="569.0000" BottomMargin="150.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="1.0000" Y="1.0000" />
             <Children>
               <AbstractNodeData Name="Panel_leftsmall" Visible="False" ActionTag="-984319096" Tag="127" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="200.0000" Y="200.0000" />
+                <Size X="1.0000" Y="1.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_1" ActionTag="1980690051" Tag="128" IconVisible="False" LeftMargin="11.9185" RightMargin="15.0815" TopMargin="256.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_1" ActionTag="1980690051" Tag="128" IconVisible="False" LeftMargin="11.9185" RightMargin="-183.9185" TopMargin="57.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="1170883880" Tag="129" IconVisible="False" LeftMargin="17.2954" RightMargin="18.7046" TopMargin="12.7357" BottomMargin="27.2643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="47" Scale9Height="16" ctype="ImageViewObjectData">
@@ -1703,8 +1703,8 @@
                     <Position X="98.4185" Y="-99.2026" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4921" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="98.4185" Y="-99.2026" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1712,7 +1712,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_2" ActionTag="240961284" Tag="130" IconVisible="False" LeftMargin="183.9726" RightMargin="-156.9726" TopMargin="256.2027" BottomMargin="-142.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_2" ActionTag="240961284" Tag="130" IconVisible="False" LeftMargin="183.9726" RightMargin="-355.9726" TopMargin="57.2027" BottomMargin="-142.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="1583929105" Tag="131" IconVisible="False" LeftMargin="16.7954" RightMargin="18.2046" TopMargin="12.7357" BottomMargin="27.2643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="48" Scale9Height="16" ctype="ImageViewObjectData">
@@ -1730,8 +1730,8 @@
                     <Position X="270.4726" Y="-99.2027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.3524" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="270.4726" Y="-99.2027" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1739,7 +1739,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3" ActionTag="542183903" Tag="132" IconVisible="False" LeftMargin="359.0579" RightMargin="-332.0579" TopMargin="256.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3" ActionTag="542183903" Tag="132" IconVisible="False" LeftMargin="359.0579" RightMargin="-531.0579" TopMargin="57.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1171762735" Tag="133" IconVisible="False" LeftMargin="17.7954" RightMargin="19.2046" TopMargin="12.7357" BottomMargin="27.2643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="46" Scale9Height="16" ctype="ImageViewObjectData">
@@ -1757,8 +1757,8 @@
                     <Position X="445.5579" Y="-99.2026" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="2.2278" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="445.5579" Y="-99.2026" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1779,9 +1779,9 @@
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
               <AbstractNodeData Name="Panel_leftbig" Visible="False" ActionTag="-2026303091" Tag="134" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="200.0000" Y="200.0000" />
+                <Size X="1.0000" Y="1.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_1" ActionTag="-1288765332" Tag="135" IconVisible="False" LeftMargin="11.9185" RightMargin="15.0815" TopMargin="256.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_1" ActionTag="-1288765332" Tag="135" IconVisible="False" LeftMargin="11.9185" RightMargin="-183.9185" TopMargin="57.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1539000962" Tag="136" IconVisible="False" LeftMargin="16.2954" RightMargin="17.7046" TopMargin="12.2357" BottomMargin="26.7643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="49" Scale9Height="17" ctype="ImageViewObjectData">
@@ -1799,8 +1799,8 @@
                     <Position X="98.4185" Y="-99.2026" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4921" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="98.4185" Y="-99.2026" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1808,7 +1808,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_2" ActionTag="1130563816" Tag="137" IconVisible="False" LeftMargin="183.9726" RightMargin="-156.9726" TopMargin="256.2027" BottomMargin="-142.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_2" ActionTag="1130563816" Tag="137" IconVisible="False" LeftMargin="183.9726" RightMargin="-355.9726" TopMargin="57.2027" BottomMargin="-142.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1601308368" Tag="138" IconVisible="False" LeftMargin="15.2954" RightMargin="16.7046" TopMargin="12.2357" BottomMargin="26.7643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="51" Scale9Height="17" ctype="ImageViewObjectData">
@@ -1826,8 +1826,8 @@
                     <Position X="270.4726" Y="-99.2027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.3524" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="270.4726" Y="-99.2027" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1835,7 +1835,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3" ActionTag="-906487262" Tag="139" IconVisible="False" LeftMargin="359.0579" RightMargin="-332.0579" TopMargin="256.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3" ActionTag="-906487262" Tag="139" IconVisible="False" LeftMargin="359.0579" RightMargin="-531.0579" TopMargin="57.2026" BottomMargin="-142.2026" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="143" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="173.0000" Y="86.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1441918809" Tag="140" IconVisible="False" LeftMargin="17.7954" RightMargin="19.2046" TopMargin="12.7357" BottomMargin="27.2643" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="46" Scale9Height="16" ctype="ImageViewObjectData">
@@ -1853,8 +1853,8 @@
                     <Position X="445.5579" Y="-99.2026" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="2.2278" Y="-0.4960" />
-                    <PreSize X="0.8650" Y="0.4300" />
+                    <PrePosition X="445.5579" Y="-99.2026" />
+                    <PreSize X="173.0000" Y="86.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_zi_pressed.png" Plist="" />
@@ -1875,9 +1875,9 @@
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
               <AbstractNodeData Name="Panel_rightmyturn" Visible="False" ActionTag="306320432" Tag="141" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="200.0000" Y="200.0000" />
+                <Size X="1.0000" Y="1.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_1" ActionTag="957514358" Tag="142" IconVisible="False" LeftMargin="528.8774" RightMargin="-576.8774" TopMargin="256.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_1" ActionTag="957514358" Tag="142" IconVisible="False" LeftMargin="528.8774" RightMargin="-775.8774" TopMargin="57.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="96056443" Tag="143" IconVisible="False" LeftMargin="72.7997" RightMargin="84.2003" TopMargin="10.4362" BottomMargin="26.5638" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="1" Scale9Height="20" ctype="ImageViewObjectData">
@@ -1895,8 +1895,8 @@
                     <Position X="652.8774" Y="-99.7027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="3.2644" Y="-0.4985" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="652.8774" Y="-99.7027" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_hong_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_hong_pressed.png" Plist="" />
@@ -1904,7 +1904,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_2" ActionTag="2022471729" Tag="144" IconVisible="False" LeftMargin="774.1403" RightMargin="-822.1403" TopMargin="256.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_2" ActionTag="2022471729" Tag="144" IconVisible="False" LeftMargin="774.1403" RightMargin="-1021.1403" TopMargin="57.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="1585988311" Tag="145" IconVisible="False" LeftMargin="73.2956" RightMargin="84.7044" TopMargin="8.3349" BottomMargin="29.6651" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="1" Scale9Height="19" ctype="ImageViewObjectData">
@@ -1922,8 +1922,8 @@
                     <Position X="898.1403" Y="-99.7027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="4.4907" Y="-0.4985" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="898.1403" Y="-99.7027" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_huang_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_huang_pressed.png" Plist="" />
@@ -1931,7 +1931,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3_gen" ActionTag="-1091360101" Tag="146" IconVisible="False" LeftMargin="1020.9335" RightMargin="-1068.9335" TopMargin="256.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3_gen" ActionTag="-1091360101" Tag="146" IconVisible="False" LeftMargin="1020.9335" RightMargin="-1267.9335" TopMargin="57.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1332798923" Tag="147" IconVisible="False" LeftMargin="61.7954" RightMargin="138.2046" TopMargin="12.7357" BottomMargin="26.2643" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="18" Scale9Height="18" ctype="ImageViewObjectData">
@@ -1960,8 +1960,8 @@
                     <Position X="1144.9335" Y="-99.7027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7247" Y="-0.4985" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1144.9335" Y="-99.7027" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -1969,7 +1969,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3_all" Visible="False" ActionTag="346529599" Tag="149" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="257.5000" BottomMargin="-144.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3_all" Visible="False" ActionTag="346529599" Tag="149" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="58.5000" BottomMargin="-144.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-429620108" Tag="150" IconVisible="False" LeftMargin="75.9000" RightMargin="82.1000" TopMargin="11.4359" BottomMargin="27.5641" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="60" Scale9Height="18" ctype="ImageViewObjectData">
@@ -1987,8 +1987,8 @@
                     <Position X="1145.0000" Y="-101.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5050" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-101.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -1996,7 +1996,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3_rang" Visible="False" ActionTag="-931497362" Tag="151" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="257.5000" BottomMargin="-144.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3_rang" Visible="False" ActionTag="-931497362" Tag="151" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="58.5000" BottomMargin="-144.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="1248597486" Tag="152" IconVisible="False" LeftMargin="75.4000" RightMargin="81.6000" TopMargin="10.9359" BottomMargin="27.0641" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="61" Scale9Height="19" ctype="ImageViewObjectData">
@@ -2014,8 +2014,8 @@
                     <Position X="1145.0000" Y="-101.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5050" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-101.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2036,9 +2036,9 @@
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
               <AbstractNodeData Name="Panel_rightelseturn" Visible="False" ActionTag="729603005" Tag="153" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="200.0000" Y="200.0000" />
+                <Size X="1.0000" Y="1.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_1" ActionTag="96086998" Tag="154" IconVisible="False" LeftMargin="528.8774" RightMargin="-576.8774" TopMargin="256.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_1" ActionTag="96086998" Tag="154" IconVisible="False" LeftMargin="528.8774" RightMargin="-775.8774" TopMargin="57.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="1838405096" Tag="155" IconVisible="False" LeftMargin="91.3014" RightMargin="24.6986" TopMargin="11.6181" BottomMargin="25.3819" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="42" Scale9Height="20" ctype="ImageViewObjectData">
@@ -2076,8 +2076,8 @@
                     <Position X="652.8774" Y="-99.7027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="3.2644" Y="-0.4985" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="652.8774" Y="-99.7027" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2085,7 +2085,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_2" ActionTag="73431125" Tag="156" IconVisible="False" LeftMargin="774.1403" RightMargin="-822.1403" TopMargin="256.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_2" ActionTag="73431125" Tag="156" IconVisible="False" LeftMargin="774.1403" RightMargin="-1021.1403" TopMargin="57.2027" BottomMargin="-143.2027" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1136124510" Tag="157" IconVisible="False" LeftMargin="67.6934" RightMargin="6.3066" TopMargin="11.3011" BottomMargin="25.6989" LeftEage="45" RightEage="45" TopEage="15" BottomEage="15" Scale9OriginX="45" Scale9OriginY="15" Scale9Width="84" Scale9Height="20" ctype="ImageViewObjectData">
@@ -2123,8 +2123,8 @@
                     <Position X="898.1403" Y="-99.7027" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="4.4907" Y="-0.4985" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="898.1403" Y="-99.7027" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2132,7 +2132,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_3" ActionTag="-694907068" Tag="158" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="256.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_3" ActionTag="-694907068" Tag="158" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="57.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-553954015" Tag="159" IconVisible="False" LeftMargin="68.7279" RightMargin="131.2721" TopMargin="12.7357" BottomMargin="26.2643" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="18" Scale9Height="18" ctype="ImageViewObjectData">
@@ -2181,8 +2181,8 @@
                     <Position X="1145.0000" Y="-100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5000" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-100.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2190,7 +2190,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_4" ActionTag="-879516013" Tag="167" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="256.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_4" ActionTag="-879516013" Tag="167" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="57.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1161792344" Tag="168" IconVisible="False" LeftMargin="85.4298" RightMargin="72.5702" TopMargin="11.4358" BottomMargin="27.5642" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="60" Scale9Height="18" ctype="ImageViewObjectData">
@@ -2228,8 +2228,8 @@
                     <Position X="1145.0000" Y="-100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5000" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-100.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2237,7 +2237,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_5" ActionTag="-1412041967" Tag="172" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="256.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_5" ActionTag="-1412041967" Tag="172" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="57.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="200519518" Tag="173" IconVisible="False" LeftMargin="67.5308" RightMargin="10.4692" TopMargin="9.6357" BottomMargin="28.3643" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="140" Scale9Height="19" ctype="ImageViewObjectData">
@@ -2275,8 +2275,8 @@
                     <Position X="1145.0000" Y="-100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5000" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-100.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2297,9 +2297,9 @@
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
               <AbstractNodeData Name="Panel_liangpai" ActionTag="312343180" VisibleForFrame="False" Tag="196" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="200.0000" Y="200.0000" />
+                <Size X="1.0000" Y="1.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_1" ActionTag="853284877" Tag="214" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="256.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_1" ActionTag="853284877" Tag="214" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="57.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1289154591" Tag="215" IconVisible="False" LeftMargin="64.5308" RightMargin="7.4692" TopMargin="12.6357" BottomMargin="31.3643" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="146" Scale9Height="13" ctype="ImageViewObjectData">
@@ -2337,8 +2337,8 @@
                     <Position X="1145.0000" Y="-100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5000" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-100.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2346,7 +2346,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_2" Visible="False" ActionTag="1609012391" Tag="218" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1069.0000" TopMargin="256.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_2" Visible="False" ActionTag="1609012391" Tag="218" IconVisible="False" LeftMargin="1021.0000" RightMargin="-1268.0000" TopMargin="57.5000" BottomMargin="-143.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="218" Scale9Height="65" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="248.0000" Y="87.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_1" ActionTag="-1931198471" Tag="219" IconVisible="False" LeftMargin="80.0857" RightMargin="77.9143" TopMargin="13.9698" BottomMargin="24.0302" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="60" Scale9Height="19" ctype="ImageViewObjectData">
@@ -2364,8 +2364,8 @@
                     <Position X="1145.0000" Y="-100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="5.7250" Y="-0.5000" />
-                    <PreSize X="1.2400" Y="0.4350" />
+                    <PrePosition X="1145.0000" Y="-100.0000" />
+                    <PreSize X="248.0000" Y="87.0000" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/mainui/dz_button_lv_pressed.png" Plist="" />
@@ -2373,14 +2373,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_4" ActionTag="714394682" Tag="222" IconVisible="False" LeftMargin="85.0100" RightMargin="-813.0100" TopMargin="278.8463" BottomMargin="-111.8463" FontSize="32" LabelText="如果知道自己的牌是最大的，那么只要考虑怎么让人跟下去就好了" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="Text_4" ActionTag="714394682" Tag="222" IconVisible="False" LeftMargin="85.0100" RightMargin="-1012.0100" TopMargin="79.8463" BottomMargin="-111.8463" FontSize="32" LabelText="如果知道自己的牌是最大的，那么只要考虑怎么让人跟下去就好了" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="928.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="549.0100" Y="-95.3463" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="2.7450" Y="-0.4767" />
-                    <PreSize X="4.6400" Y="0.1650" />
+                    <PrePosition X="549.0100" Y="-95.3463" />
+                    <PreSize X="928.0000" Y="33.0000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -2402,6 +2402,42 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition Y="0.2083" />
+            <PreSize X="0.0008" Y="0.0014" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Panel_Talk" ActionTag="-826983147" Tag="214" IconVisible="False" LeftMargin="1355.3669" RightMargin="-275.3669" TopMargin="235.0075" BottomMargin="284.9925" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="200.0000" Y="200.0000" />
+            <Children>
+              <AbstractNodeData Name="Image_5" ActionTag="1433311517" Tag="215" IconVisible="False" LeftMargin="-34.7016" RightMargin="-39.2984" TopMargin="78.0436" BottomMargin="-5.0436" LeftEage="90" RightEage="90" TopEage="41" BottomEage="41" Scale9OriginX="90" Scale9OriginY="41" Scale9Width="94" Scale9Height="45" ctype="ImageViewObjectData">
+                <Size X="274.0000" Y="127.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="102.2984" Y="58.4564" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5115" Y="0.2923" />
+                <PreSize X="1.3700" Y="0.6350" />
+                <FileData Type="Normal" Path="game_res/mainui/dz_qpkuang.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_6" ActionTag="1304417253" Tag="216" IconVisible="False" LeftMargin="-25.7120" RightMargin="-24.2880" TopMargin="92.7632" BottomMargin="29.2368" IsCustomSize="True" FontSize="26" LabelText="快点儿啊，我等到花儿都谢了！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="250.0000" Y="78.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="-25.7120" Y="68.2368" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="-0.1286" Y="0.3412" />
+                <PreSize X="1.2500" Y="0.3900" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="1355.3669" Y="284.9925" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="1.0589" Y="0.3958" />
             <PreSize X="0.1563" Y="0.2778" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
