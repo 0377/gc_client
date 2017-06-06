@@ -523,7 +523,7 @@ function LhjGameScene:setBet(multiple)
    
     betNumTxt2:setVisible(false)
     betNumTxt:setVisible(true)
-    local dizhu = self._currentBetMultiple * self.lhjGameManager:getDataManager():getDizhuNum() / CustomHelper.goldToMoneyRate()
+    local dizhu = CustomHelper.moneyShowStyleNone(self._currentBetMultiple * self.lhjGameManager:getDataManager():getDizhuNum()) 
     betNumTxt:setString(tostring(dizhu))
     betNumTxt2:setString(tostring(dizhu))
 

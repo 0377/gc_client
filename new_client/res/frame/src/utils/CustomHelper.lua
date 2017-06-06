@@ -52,6 +52,104 @@ end
 
 
 
+--截取中英混合的UTF8字符串，endIndex可缺省
+function SubStringUTF8(str, startIndex, endIndex)
+    if startIndex < 0 then
+        startIndex = SubStringGetTotalIndex(str) + startIndex + 1;
+    end
+
+    if endIndex ~= nil and endIndex < 0 then
+        endIndex = SubStringGetTotalIndex(str) + endIndex + 1;
+    end
+
+    if endIndex == nil then 
+        return string.sub(str, SubStringGetTrueIndex(str, startIndex));
+    else
+        return string.sub(str, SubStringGetTrueIndex(str, startIndex), SubStringGetTrueIndex(str, endIndex + 1) - 1);
+    end
+end
+
+--获取中英混合UTF8字符串的真实字符数量
+function SubStringGetTotalIndex(str)
+    local curIndex = 0;
+    local i = 1;
+    local lastCount = 1;
+    repeat 
+        lastCount = SubStringGetByteCount(str, i)
+        i = i + lastCount;
+        curIndex = curIndex + 1;
+    until(lastCount == 0);
+    return curIndex - 1;
+end
+
+function SubStringGetTrueIndex(str, index)
+    local curIndex = 0;
+    local i = 1;
+    local lastCount = 1;
+    repeat 
+        lastCount = SubStringGetByteCount(str, i)
+        i = i + lastCount;
+        curIndex = curIndex + 1;
+    until(curIndex >= index);
+    return i - lastCount;
+end
+
+--返回当前字符实际占用的字符数
+function SubStringGetByteCount(str, index)
+    local curByte = string.byte(str, index)
+    local byteCount = 1;
+    if curByte == nil then
+        byteCount = 0
+    elseif curByte > 0 and curByte <= 127 then
+        byteCount = 1
+    elseif curByte>=192 and curByte<=223 then
+        byteCount = 2
+    elseif curByte>=224 and curByte<=239 then
+        byteCount = 3
+    elseif curByte>=240 and curByte<=247 then
+        byteCount = 4
+    end
+    return byteCount;
+end
+
+
+
+
+--文字宽度固定 超出宽度用...代替
+function CustomHelper.transeWordToStaticLen(word,len)
+    if word == nil then
+		return
+	end
+	local wordStr = word:getString()
+	local wordCount = SubStringGetTotalIndex(wordStr)
+	local width = word:getContentSize().width
+	local subWordNum = 0
+	while width > len do
+		subWordNum = subWordNum + 1
+		local str = SubStringUTF8(wordStr,1,wordCount-subWordNum).."..."
+		word:setString(str)
+		width = word:getContentSize().width
+	end
+end
+
+--文字宽度固定 超出宽度 重置fontsize
+function CustomHelper.transeWordToStaticScaleLen(word,len)
+    if word == nil then
+		return
+	end
+	local wordFontSize = word:getFontSize()
+	local width = word:getContentSize().width
+	local subWordNum = 0
+	while width > len do
+		subWordNum = subWordNum + 1
+		
+		word:setFontSize(wordFontSize-subWordNum)
+		width = word:getContentSize().width
+	end
+end
+
+
+
 --转化数值
 function CustomHelper.tonumber(numStr)
     local   num = tonumber(numStr);
@@ -103,8 +201,12 @@ function CustomHelper.addSetterAndGetterMethod(obj,property,default)
     local member = property
     obj[member] = default
     local ucMember = string.ucfirst(member)
-    obj['get' .. ucMember] = function(this) return this[member] end
-    obj['set' .. ucMember] = function(this, value) this[member] = value end
+    if not obj['get' .. ucMember] then
+        obj['get' .. ucMember] = function(this) return this[member] end
+    end
+    if not obj['set' .. ucMember] then
+        obj['set' .. ucMember] = function(this, value) this[member] = value end
+    end
 end
 --打印调用栈
 function CustomHelper.printStack()
@@ -327,7 +429,7 @@ function CustomHelper.getOneHallGameConfigValueWithKey(key)
     return valueStr
 end
 function CustomHelper.goldToMoneyRate()
-    local ratio = 100;
+    local ratio = 1
     local valueStr = CustomHelper.getOneHallGameConfigValueWithKey("gold_to_money_ratio");
     if valueStr then
         --todo
@@ -337,8 +439,26 @@ function CustomHelper.goldToMoneyRate()
 end
 function CustomHelper.moneyShowStyleNone(_money)
     _money = tonumber(_money) or 0
-    return string.format("%.02f", _money / CustomHelper.goldToMoneyRate())
+    return string.format("%d", _money / CustomHelper.goldToMoneyRate())
 end
+
+--- 显示缩写的金币格式
+function CustomHelper.moneyShowStyleAB(_money)
+    _money = tonumber(_money) or 0
+    _money = _money / CustomHelper.goldToMoneyRate()
+
+
+    if _money >= 10000 and _money / 10000 >= 1 and _money % 10000 == 0 then
+        return string.format("%d万", math.floor(_money / 10000))
+    end
+
+    if _money >= 1000 and _money / 1000 >= 1 and _money % 1000 == 0 then
+        return string.format("%d千", math.floor(_money / 1000))
+    end
+
+    return string.format("%d", _money)
+end
+
 function CustomHelper.addWholeScrennAnim(node, callback)
     dump(123123)
     local oldAnPos = node:getAnchorPoint();

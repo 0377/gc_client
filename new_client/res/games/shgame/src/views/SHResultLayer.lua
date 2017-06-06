@@ -136,8 +136,8 @@ function SHResultLayer:setPlayerResult(rootImg,resultData,hasGiveUp)
 	local textMoney = CustomHelper.seekNodeByName(rootImg,"AtlasLabel_moeny")
 	
 	if resultData.win_money then
-
-		local s = string.gsub(tostring(resultData.win_money/100), '%.', '/' )
+		
+		local s = string.gsub(CustomHelper.moneyShowStyleNone(resultData.win_money), '%.', '/' )
 		local s = string.gsub(s, '%-', ':' )
 		--textMoney:setString(s)
 		textMoney:setProperty(s,
@@ -154,7 +154,7 @@ function SHResultLayer:setPlayerResult(rootImg,resultData,hasGiveUp)
 	else
 		textTax:setVisible(true)
 		
-		local s = tostring(math.abs(resultData.taxes)/100)
+		local s = tostring(CustomHelper.moneyShowStyleNone(resultData.taxes))
 		textTax:setString(string.format(SHi18nUtils:getInstance():get('str_gameover','tax'),s))
 	end
 	resultData.handCards = resultData.handCards or {}
@@ -307,6 +307,7 @@ function SHResultLayer:onTouchListener(ref,eventType)
 			self:stopScheduler()
 			sslog(self.logTag,"继续下一局")
 			--HallGameConfig.SecondRoomMinMoneyLimitKey
+			
 			if self:checkTokickOut() then
 				self:showLackMoney()
 			else
@@ -342,13 +343,47 @@ function SHResultLayer:showLackMoney()
 	if SHHelper.isLuaNodeValid(self.proTimer) then
 		self.proTimer:stopAllActions()
 	end
-	CustomHelper.showAlertView(
+	local bankCallbackFunc = function (  )
+		local secondLayer = {}
+		secondLayer.tag = ViewManager.SECOND_LAYER_TAG.BANK             
+		local BankCenterLayer = requireForGameLuaFile("BankCenterLayer")
+		secondLayer.parme = BankCenterLayer.ViewType.WithDraw
+		local data = {}
+		table.insert(data,secondLayer)
+		if self.exitCallBack then
+			self.exitCallBack(data)
+		end
+	end
+
+	local storyCallbackFunc = function (  )
+		local secondLayer = {}
+		secondLayer.tag = ViewManager.SECOND_LAYER_TAG.STORY
+		local data = {}
+		table.insert(data,secondLayer)
+		if self.exitCallBack then
+			self.exitCallBack(data)
+		end
+	end
+	local exitCallBackFunc = function ()
+		if self.exitCallBack then
+			self.exitCallBack()
+		end
+	end
+	local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+	CustomHelper.showLackMoneyAlertView(roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey],
+										SHi18nUtils:getInstance():get('str_gameover','lackgold'),
+										exitCallBackFunc,
+										bankCallbackFunc,
+										storyCallbackFunc,
+										nil)
+	
+--[[	CustomHelper.showAlertView(
 			SHi18nUtils:getInstance():get('str_gameover','lackgold'),
 			false,
 			true,
 			self.exitCallBack,
 			self.exitCallBack
-	)
+	)--]]
 end
 
 return SHResultLayer

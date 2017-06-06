@@ -346,7 +346,7 @@ function VersionManager:startDownloadOneGameResZipPackage(gameID,needUpdateInfoT
 				--重新加载lua文件
 				reloadGameLuaFiles()
 				--发送下载完成通知
-				 event = cc.EventCustom:new(VersionManager.kNotifyName_OneGameDownloadFinished)
+				 local event = cc.EventCustom:new(VersionManager.kNotifyName_OneGameDownloadFinished)
 				 local userInfo = {};
 				 userInfo["group_key"] = groupKey
     			 event.userInfo = userInfo--string.format("%d",count2)

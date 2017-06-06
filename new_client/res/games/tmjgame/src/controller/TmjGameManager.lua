@@ -52,12 +52,14 @@ function TmjGameManager:clearLoadedOneGameFiles()
     loaded["TmjCardTip"] = nil
     loaded["TmjConfig"] = nil
     loaded["TmjHelper"] = nil
+    loaded["TmjFanCalculator"] = nil
     loaded["languageString"] = nil
-	local x =  loaded["Tmji18nUtils"]
     loaded["Tmji18nUtils"] = nil
+    loaded["TmjOperationFactory"] = nil
 	
 	TmjGameManager.instance = nil
 	Tmji18nUtils.instance = nil
+	TmjOperationFactory.instance = nil
 	
 end
 function TmjGameManager:sendEnterRoomAndSitDownMsg()
@@ -155,6 +157,22 @@ end
 --	repeated int32 pb_hua_pai 	= 3; 			// 花牌
 --	repeated int32 pb_desk_pai 	= 4; 			// 桌牌，打出去的牌
 --	optional int32 chair_id		= 5; 			// id
+--	// game end
+--	optional bool is_hu 		= 6;			//是否胡了
+--	optional int32 hu_fan	 	= 7; 			//番数
+--	optional int32 jiabei	 	= 8; 			//加倍次数
+--	optional string describe	= 9;			//牌型描述
+--	optional int32 win_money 	= 10; 			//赢钱
+--	optional int32 taxes 		= 11; 			//税收
+--	optional bool finish_task	= 12; 			//完成任务
+--	//reconnect
+--	optional bool is_ting 		= 13;			//是否听
+	
+--	//
+--	optional string nick 					= 14;
+--	optional int32 icon 					= 15;
+--	optional int32 gold 					= 16;
+--	optional int32 guid		            	= 17; 	// guid
 --};
 
 --message Maajan_Tiles {

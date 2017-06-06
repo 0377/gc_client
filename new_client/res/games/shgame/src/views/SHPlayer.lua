@@ -179,7 +179,8 @@ function SHPlayer:setHeadInfo(headInfo)
 	end	
 	if headInfo.gold then
 		self.gold = headInfo.gold --当前的金币数
-		local goldStr = string.format("%0.2f", headInfo.gold/100)
+		local goldStr = CustomHelper.moneyShowStyleNone(headInfo.gold)
+		--local goldStr = string.format("%0.2f", headInfo.gold/100)
 		goldStr = string.gsub(goldStr, '%-', '' )
 		goldStr = string.gsub(goldStr, '%+', '' )
 		goldText:setString(goldStr)
@@ -189,7 +190,8 @@ function SHPlayer:setHeadInfo(headInfo)
 	end
 	if headInfo.gamebet then
 		self.gamebet = headInfo.gamebet
-		local s = string.gsub(tostring(headInfo.gamebet), '%.', '/' )
+		local betStr = CustomHelper.moneyShowStyleNone(headInfo.gamebet*100)
+		local s = string.gsub(betStr, '%.', '/' )
 		gameBetLabel:setString(s)
 	end
 	
@@ -219,7 +221,8 @@ function SHPlayer:setHeadInfo(headInfo)
 		else
 			if headInfo.roundbet then --0,"game_res/mainView/sh_szt_2.png",13,17,"/"
 				roundLabel:setVisible(true)
-				local s = string.gsub(tostring(headInfo.roundbet), '%.', '/' )
+				local roundbetStr = CustomHelper.moneyShowStyleNone(headInfo.roundbet*100)
+				local s = string.gsub(roundbetStr, '%.', '/' )
 				roundLabel:setProperty(s,roundLabelPath,13,17,"/")
 				local diff = roundLabel:getPositionX() - (roundImg:getPositionX() + roundImg:getContentSize().width/2)
 				local totalWidth = roundImg:getContentSize().width + diff + roundLabel:getContentSize().width

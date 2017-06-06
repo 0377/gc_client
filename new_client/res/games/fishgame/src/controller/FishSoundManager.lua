@@ -150,12 +150,9 @@ function FishSoundManager:playBulletSound()
 
 end
 
-
 function FishSoundManager:playEffect(file)
-
     local soundConfig = SoundConfig[file]
-dump(file)
-dump(soundConfig)
+
     if not soundConfig then return end
 
     self.m_soundCategory[soundConfig.priority] = self.m_soundCategory[soundConfig.priority] or {

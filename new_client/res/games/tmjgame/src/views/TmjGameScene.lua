@@ -101,9 +101,30 @@ function TmjGameScene:onEnter()
     end
 	self:initPlayLayer()
 	self:showWaiting()
-	self:initPlayer({path = "TmjMyPlayer",seatid = 1})
+--[[	self:initPlayer({path = "TmjMyPlayer",seatid = 1})
 	self:initPlayer({path = "TmjOtherPlayer",seatid = 2})
-	self:closeWaiting()
+	self:closeWaiting()--]]
+--[[	local arr = {
+	[1]=1,
+	[2]=1,
+	[3]=1,
+	[4]=0,
+	[5]=1,
+	[6]=1,
+	[7]=1,
+	[8]=1,
+	[9]=0,
+	[10]=0,
+	[11]=1,
+	[12]=0,
+	[13]=0,
+	[14]=0,
+	[15]=0,
+	[16]=0,
+		}
+	local TmjCardTip = import("..cfg.TmjCardTip")
+	ssdump(TmjCardTip.isTingHu(arr,11))--]]
+	
 end
 
 function TmjGameScene:onExit()
@@ -154,7 +175,7 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 	end
 	
 	
-	self.operationComlete = isReconnect
+	--self.operationComlete = isReconnect
 	sslog(self.logTag,self.operationComlete)
 	sslog(self.logTag,isReconnect)
 	--播放完成开始动画之后的动作
@@ -174,12 +195,13 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 			--创建牌
 			if self.seats[charId] then
 				self.seats[charId]:createCards(pdata.handCards,isReconnect,function ()
-					self.operationComlete = true --动作执行完毕
-					self:onMsgSC_Maajan_Discard_Round()--手动调用，该谁出牌了
+					
+					--self:onMsgSC_Maajan_Discard_Round()--手动调用，该谁出牌了
 					local isSetHand = self.seats[charId]:checkToSetLastHandCard()
 					if isSetHand and charId == selfCharId then --这里要检查一下我的牌能不能胡，听
 						self.seats[charId]:showStartHuOperation(nil)
 					end
+					--self.operationComlete = true --动作执行完毕
 					self:loopMsgOperation()--继续查看队列需要操作的消息
 					
 				end)
@@ -207,7 +229,7 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 		if isReconnect then
 			self:checkToSetLastHandCard()
 			self:setReconnGameState()
-			
+			self:loopMsgOperation()--继续查看队列需要操作的消息
 		end
 			
 	end
@@ -257,7 +279,8 @@ function TmjGameScene:setReconnGameState()
 	if gamestate == TmjConfig.GameState.WAIT_CHU_PAI then --等待其他玩家出牌
 		-- chu_pai_player_index 当前该谁出牌
 		self.TmjGameDataManager.showCardChairId = reconnData.chu_pai_player_index
-		self:onMsgSC_Maajan_Discard_Round(leftTime)
+		--self.TmjGameDataManager:on_SC_Maajan_Discard_Round({chair_id = reconnData.chu_pai_player_index,time = leftTime  })
+		--self:onMsgSC_Maajan_Discard_Round(leftTime)
 		if selfCharId==reconnData.chu_pai_player_index then --如果这个时候是等待我出牌，那么判断我能不能有听，胡的操作
 			--playerData.lastInputVal
 			local lastGetCard = nil
@@ -278,14 +301,17 @@ function TmjGameScene:setReconnGameState()
 		self.TmjGameDataManager.showCardChairId = self.TmjGameDataManager:getNotSelfChairId()
 		if selfCharId==reconnData.chu_pai_player_index then --上一个出牌的是我，那么，等待对面操作
 			sslog(self.logTag,"等待对面对我出的牌进行操作")
-			self:onMsgSC_Maajan_Discard_Round(leftTime)
+			--self:onMsgSC_Maajan_Discard_Round(leftTime)
+			--self.TmjGameDataManager:on_SC_Maajan_Discard_Round({chair_id = self.TmjGameDataManager:getNotSelfChairId(),time = leftTime  })
 		else
 			sslog(self.logTag,"我要操作对面的出牌")
 			local TmjMyPlayer = self.seats[selfCharId]
 			if TmjMyPlayer then
+				--self.TmjGameDataManager:on_SC_Maajan_Discard_Round({chair_id = selfCharId,time = leftTime  })
 				TmjMyPlayer:setLeftTime(decisionTime)
 				TmjMyPlayer:getPreToPlay({ val = reconnData.last_chu_pai})
-				self:onMsgSC_Maajan_Discard_Round(leftTime)
+				--self:onMsgSC_Maajan_Discard_Round(leftTime)
+				
 			else
 				sslog(self.logTag,"座位号非法:"..tostring(selfCharId))
 			end
@@ -340,7 +366,8 @@ end
 --加倍消息UI返回
 function TmjGameScene:onMsgSC_Maajan_Act_Double()
 	sslog(self.logTag,"UI加倍消息")
-	local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
+	self:loopMsgOperation()
+--[[	local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
 	local doubleActions = self.TmjGameDataManager.doubleActions --
 	local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
 	for seatId,TmjPlayer in pairs(self.seats) do
@@ -355,7 +382,7 @@ function TmjGameScene:onMsgSC_Maajan_Act_Double()
 			end
 		end
 		--TmjPlayer
-	end
+	end--]]
 end
 --剩余公牌消息UI返回
 function TmjGameScene:onMsgSC_Maajan_Tile_Letf()
@@ -365,7 +392,7 @@ function TmjGameScene:onMsgSC_Maajan_Tile_Letf()
 end
 --该谁出牌消息UI返回
 function TmjGameScene:onMsgSC_Maajan_Discard_Round(leftTime)
-	local showCardId = self.TmjGameDataManager.showCardChairId
+--[[	local showCardId = self.TmjGameDataManager.showCardChairId
 	local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
 	local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
 	--self.seats[showCardId]
@@ -377,7 +404,9 @@ function TmjGameScene:onMsgSC_Maajan_Discard_Round(leftTime)
 		TmjPlayer:setLeftTime(leftTime and leftTime or playCardTime)
 		TmjPlayer:setIsPlayCard(seatId==showCardId)		
 		--TmjPlayer
-	end
+	end--]]
+	sslog(self.logTag,"UI轮到谁出牌消息")
+	self:loopMsgOperation()
 end
 --开局后的补花消息UI返回
 function TmjGameScene:onMsgSC_Maajan_Bu_Hua()
@@ -401,6 +430,20 @@ end
 
 function TmjGameScene:onMsgSC_Maajan_Game_Finish()
 	sslog(self.logTag,"UI胡牌消息")
+	self:loopMsgOperation()
+	
+end
+
+function TmjGameScene:onMsgSC_ReconnectionPlay(msgTab)
+	ssdump(msgTab,"断线重连返回消息")
+	if msgTab.find_table==nil or msgTab.find_table==false then --没找到房间
+		--游戏已经结束 退出到游戏大厅
+       self:showGameOverTips()
+	end
+	
+end
+function TmjGameScene:showResultLayer()
+	self:playerOperationHandler(nil,TmjConfig.cardOperation.Finish)
 	local consultData = self.TmjGameDataManager.consultData
 	local selfCharId = self.TmjGameDataManager.selfChairId
 	local taskInfo = self.TmjGameDataManager.taskData
@@ -417,6 +460,7 @@ function TmjGameScene:onMsgSC_Maajan_Game_Finish()
 	resultData.other.extraCards = CustomHelper.copyTab(otherData.extraCards)
 	resultData.other.handCards = CustomHelper.copyTab(otherData.handCards)
 	resultData.taskInfo = taskInfo
+	
 	--判断赢输或者留局
 	if consultData.winChairId == nil then --留局
 		TmjSettleDrawnLayer:create(resultData,handler(self,self.exitGame),handler(self,self.nextGame)):addTo(self,TmjConfig.LayerOrder.GAME_RESULT_LAYER)
@@ -424,19 +468,12 @@ function TmjGameScene:onMsgSC_Maajan_Game_Finish()
 		TmjSettleWinLoseLayer:create(resultData,handler(self,self.exitGame),handler(self,self.nextGame)):addTo(self,TmjConfig.LayerOrder.GAME_RESULT_LAYER)
 	end
 end
-function TmjGameScene:onMsgSC_ReconnectionPlay(msgTab)
-	ssdump(msgTab,"断线重连返回消息")
-	if msgTab.find_table==nil or msgTab.find_table==false then --没找到房间
-		--游戏已经结束 退出到游戏大厅
-       self:showGameOverTips()
-	end
-	
-end
+
 --玩家操作完成后的回调
 --@param pType 玩家类型
 --@param operationType 操作类型
 function TmjGameScene:playerOperationHandler(pType,operationType)
-	sslog(self.logTag,"玩家类型："..pType.."，操作类型"..operationType)
+	sslog(self.logTag,"玩家类型："..tostring(pType).."，操作类型"..tostring(operationType))
 	self.operationComlete = true --动作执行完成
 	--删除第一个，已经完成了
 	local cardOperations = self.TmjGameDataManager.cardOperations
@@ -444,7 +481,7 @@ function TmjGameScene:playerOperationHandler(pType,operationType)
 	if table.nums(cardOperations) >0 then
 		table.remove(cardOperations,1)
 	end
-	ssdump(cardOperations,"还剩那些操作需要执行",10)
+	--ssdump(cardOperations,"还剩那些操作需要执行",10)
 	self:loopMsgOperation()--继续查看队列需要操作的消息
 end
 --循环执行玩家操作消息
@@ -460,22 +497,27 @@ function TmjGameScene:loopMsgOperation()
 		sslog(self.logTag,"没有需要的操作")
 		return
 	end
+	if not self.seats or not next(self.seats) then
+		sslog(self.logTag,"座位上还没有人哦")
+		return
+	end
 	self.operationComlete = false --正在处理这个消息
 	--这里所有的消息都通过服务器来，包括自己的操作反馈
 	
 	local chairId = cardOperations[1].chairId
-	ssdump(cardOperations[1],"当前操作",10)
-	ssdump(cardOperations,"所有需要的操作",10)
-	sslog(self.logTag,"当前操作的座位号"..chairId)
+--	ssdump(cardOperations[1],"当前操作",10)
+--	ssdump(cardOperations,"所有需要的操作",10)
+--	sslog(self.logTag,"当前操作的座位号"..tostring(chairId))
 	local cType = cardOperations[1].type
 	local card = CustomHelper.copyTab(cardOperations[1].card)
 	
 	local TmjPlayer = self.seats[chairId]
 	if not TmjPlayer then
 		sslog(self.logTag,"什么鬼")
-		
+	else
+		TmjPlayer:doOperation(cType,card)
 	end
-	TmjPlayer:doOperation(cType,card)
+	
 	--如果是吃，胡，碰，杠，那么要删除另外一个人的打出去的牌
 	if cType == TmjConfig.cardOperation.Chi
 	or cType == TmjConfig.cardOperation.Peng
@@ -496,6 +538,28 @@ function TmjGameScene:loopMsgOperation()
 				break
 			end
 		end
+	elseif cType == TmjConfig.cardOperation.RoundCard then
+		local showCardId = self.TmjGameDataManager.showCardChairId
+		local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
+		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
+		--self.seats[showCardId]
+		self.gameLayer:setCenterPanelInfo({ cardSide = (selfCharId==showCardId and 1 or 2) })
+		self.gameLayer:startCountDown(playCardTime)
+		
+		sslog(self.logTag,"轮到谁出牌了"..tostring(showCardId))
+		for seatId,TmjPlayer in pairs(self.seats) do
+			if seatId~=chairId then
+				TmjPlayer:setIsPlayCard(nil)	
+			end
+			--TmjPlayer:setLeftTime(leftTime and leftTime or playCardTime)
+		end
+	elseif cType == TmjConfig.cardOperation.RoundCard then
+		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
+		self.gameLayer:startCountDown(playCardTime)
+	elseif cType == TmjConfig.cardOperation.Finish then
+		--延迟播放
+		performWithDelay(self,handler(self,self.showResultLayer),1.2)
+		
 	end
 	
 	--其他人打牌，我自己要判断下能不能吃，胡，碰，杠
@@ -591,16 +655,21 @@ function TmjGameScene:showGameOverTips()
 	)
 end
 ---退出游戏界面
-function TmjGameScene:exitGame()
+function TmjGameScene:exitGame(openSecondLayer)
 	--退出游戏的时候 清空游戏数据
 	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	TmjGameManager:getInstance():sendStandUpAndExitRoomMsg()
-    SceneController.goHallScene()
+    --SceneController.goHallScene()
     local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
 	if subGameManager then
 		subGameManager:onExit()
 	else
 		sslog(self.logTag,"子游戏管理器已经释放了")
+	end
+	if openSecondLayer == nil then
+		SceneController.goHallScene()
+	else
+		SceneController.goHallScene(openSecondLayer)
 	end
 end
 --下一局

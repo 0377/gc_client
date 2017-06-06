@@ -19,3 +19,13 @@ SpecialFishType = {
     ESFT_SIXI = 4,
     ESFT_MAX = 5,
 }
+
+EffectType =  {
+    ETF_NONE = -1,
+    ETP_ADDMONEY = 0, -- 增加金币
+    ETP_KILL = 1, --杀死其它鱼
+    ETP_ADDBUFFER = 2, --增加BUFFER
+    ETP_PRODUCE = 3, --生成其它鱼
+    ETP_BLACKWATER = 4, --乌贼喷墨汁效果
+    ETP_AWARD = 5, --抽奖
+};

@@ -21,6 +21,7 @@ function TmjOperationChi:initView(operationData)
 	local node = requireForGameLuaFile("TmjChiOperationNodeCCS"):create()
 	self:addChild(node.root)
 	node.root:runAction(node.animation)
+	node.animation:gotoFrameAndPause(0)
 	self:setContentSizeForData(node.root,operationData.orientation or 2,table.nums(operationData.data))
 	node.animation:play(self:getAnimation(operationData.orientation or 2,table.nums(operationData.data)),true)
 	
@@ -56,7 +57,6 @@ end
 --@param len 长度
 function TmjOperationChi:setContentSizeForData(node,orientation,len)
 	local imgTag = CustomHelper.seekNodeByName(node,"Image_tag")
-	
 	local img = nil
 	if orientation==2 then --纵向，只算一个宽度
 		img = CustomHelper.seekNodeByName(node,"Image_1")
@@ -69,6 +69,7 @@ function TmjOperationChi:setContentSizeForData(node,orientation,len)
 									img:getContentSize().height)
 		
 	end
+	
 end
 
 --根据数据的长度和方向决定动画

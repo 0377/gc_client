@@ -11,6 +11,10 @@ local FishSoundManager = requireForGameLuaFile("FishSoundManager")
 
 FishGameManager.MsgName = 
 {
+    SC_NotifyStandUp = 'SC_NotifyStandUp',
+    SC_NotifySitDown = 'SC_NotifySitDown',
+
+
 	CS_TreasureEnd = 'CS_TreasureEnd',
     CS_ChangeCannonSet = 'CS_ChangeCannonSet',
     CS_Netcast = 'CS_Netcast',
@@ -23,6 +27,7 @@ FishGameManager.MsgName =
     SC_FishMul = 'SC_FishMul',
     SC_AddBuffer = 'SC_AddBuffer',
     SC_BulletSet = 'SC_BulletSet',
+    SC_BulletSet_List = 'SC_BulletSet_List',
     SC_SendDes = 'SC_SendDes',
     SC_LockFish = 'SC_LockFish',
     SC_AllowFire = 'SC_AllowFire',
@@ -48,6 +53,10 @@ function FishGameManager:getInstance()
     return FishGameManager.instance
 end
 
+function FishGameManager:destroyInstance()
+    FishGameManager.instance = nil
+end
+
 function FishGameManager:ctor()
     -- body
     self.gameDetailInfoTab = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
@@ -56,7 +65,6 @@ function FishGameManager:ctor()
     --游戏数据管理器
     CustomHelper.addSetterAndGetterMethod(self,"dataManager",FishGameDataManager:create())
     CustomHelper.addSetterAndGetterMethod(self,"soundManager",FishSoundManager:create())
-	CustomHelper.addSetterAndGetterMethod(self,"myChairId",0)
 
     self:registerPBProtocolToHallMsgManager()
 end
@@ -85,105 +93,122 @@ function FishGameManager:registerNotification()
     
 end
 
+function FishGameManager:onExit()
+    self:destroyInstance()
+end
+
 -----------------  大厅消息
 -- 玩家坐下
 function FishGameManager:on_SC_EnterRoomAndSitDown(msgTab)
     --dump(msgTab, "----------------------进入 房间坐下")
-	self:getDataManager():_onMsg_EnterRoomAndSitDownInfo(msgTab)
+	self:getDataManager():on_SC_EnterRoomAndSitDownInfo(msgTab)
 end
 
+
+
+function FishGameManager:on_SC_NotifyStandUp(msgTab)
+dump(msgTab)
+    self:getDataManager():on_SC_NotifyStandUp(msgTab)
+end
+
+function FishGameManager:on_SC_NotifySitDown(msgTab)
+    dump(msgTab)
+    self:getDataManager():on_SC_NotifySitDown(msgTab)
+end
 -----------------  捕鱼消息
 -- 鱼增加值
 function FishGameManager:on_SC_FishMul(msgTab)
-    self:getDataManager():onFishMul(msgTab)
+    self:getDataManager():on_SC_FishMul(msgTab)
 end
 
 -- 添加BUFFER
 function FishGameManager:on_SC_AddBuffer(msgTab)
-    self:getDataManager():onAddBuffer(msgTab)
+    self:getDataManager():on_SC_AddBuffer(msgTab)
 end
 
 -- 返回子弹集信息
 function FishGameManager:on_SC_BulletSet(msgTab)
-    self:getDataManager():onBulletSet(msgTab)
+    self:getDataManager():on_SC_BulletSet(msgTab)
+end
+
+-- 返回子弹集信息
+function FishGameManager:on_SC_BulletSet_List(msgTab)
+    self:getDataManager():on_SC_BulletSet_List(msgTab)
 end
 
 -- 鱼描述信息
 function FishGameManager:on_SC_SendDes(msgTab)
-    self:getDataManager():onSendDes(msgTab)
+    self:getDataManager():on_SC_SendDes(msgTab)
 end
 
 -- 锁定目标鱼
 function FishGameManager:on_SC_LockFish(msgTab)
-    self:getDataManager():onLockFish(msgTab)
+    self:getDataManager():on_SC_LockFish(msgTab)
 end
 
 -- 是否允许开火
 function FishGameManager:on_SC_AllowFire(msgTab)
-    self:getDataManager():onAllowFire(msgTab)
+    self:getDataManager():on_SC_AllowFire(msgTab)
 end
 
 -- 切换场景
 function FishGameManager:on_SC_SwitchScene(msgTab)
-    self:getDataManager():onSwitchScene(msgTab)
+    self:getDataManager():on_SC_SwitchScene(msgTab)
 end
 
 -- 销毁子弹
 function FishGameManager:on_SC_KillBullet(msgTab)
-    self:getDataManager():onKillBullet(msgTab)
+    self:getDataManager():on_SC_KillBullet(msgTab)
 end
 
 -- 销毁鱼
 function FishGameManager:on_SC_KillFish(msgTab)
-    self:getDataManager():onKillFish(msgTab)
+    self:getDataManager():on_SC_KillFish(msgTab)
 end
 
 -- 发出子弹
 function FishGameManager:on_SC_SendBullet(msgTab)
-    self:getDataManager():onSendBullet(msgTab)
+    self:getDataManager():on_SC_SendBullet(msgTab)
 end
 
 -- 改变炮台返回
 function FishGameManager:on_SC_CannonSet(msgTab)
-    self:getDataManager():onCannonSet(msgTab)
+    self:getDataManager():on_SC_CannonSet(msgTab)
 end
 
 -- 修改积分
 function FishGameManager:on_SC_ChangeScore(msgTab)
-    self:getDataManager():onChangeScore(msgTab)
+    self:getDataManager():on_SC_ChangeScore(msgTab)
 end
 
 -- 玩家信息
 function FishGameManager:on_SC_UserInfo(msgTab)
-    self:getDataManager():onUserInfo(msgTab)
+    self:getDataManager():on_SC_UserInfo(msgTab)
 end
 
 -- 增加鱼
 function FishGameManager:on_SC_SendFish(msgTab)
-
-
-
-    self:getDataManager():onSendFish(msgTab)
+    self:getDataManager():on_SC_SendFish(msgTab)
 end
 
 -- 增加鱼列表
 function FishGameManager:on_SC_SendFishList(msgTab)
-    self:getDataManager():onSendFishList(msgTab)
+    self:getDataManager():on_SC_SendFishList(msgTab)
 end
 
 -- 游戏设置
 function FishGameManager:on_SC_GameConfig(msgTab)
-    self:getDataManager():onGameConfig(msgTab)
+    self:getDataManager():on_SC_GameConfig(msgTab)
 end
 
 -- 同步时间
 function FishGameManager:on_SC_TimeSync(msgTab)
-    self:getDataManager():onTimeSync(msgTab)
+    self:getDataManager():on_SC_TimeSync(msgTab)
 end
 
 -- 系统消息
 function FishGameManager:on_SC_SystemMessage(msgTab)
-    self:getDataManager():onSystemMessage(msgTab)
+    self:getDataManager():on_SC_SystemMessage(msgTab)
 end
 
 -------------------------- 发送消息
@@ -219,10 +244,21 @@ function FishGameManager:send_CS_Netcast(data)
 end
 
 --- 锁定鱼
-function FishGameManager:send_CS_LockFish()
+function FishGameManager:send_CS_LockFish(bLock)
     local msgTab = {
         chair_id= self:getDataManager():getMyChairId(),
-        lock = 1,
+        lock = bLock and 1 or 0,
+    }
+    dump(bLock)
+    local msgName = FishGameManager.MsgName.CS_LockFish;
+    GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
+end
+
+--- 锁定鱼
+function FishGameManager:send_CS_LockSepcFish(fishId)
+    local msgTab = {
+        chair_id= self:getDataManager():getMyChairId(),
+        fish_id = fishId,
     }
     local msgName = FishGameManager.MsgName.CS_LockFish;
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
@@ -233,9 +269,12 @@ function FishGameManager:send_CS_Fire(data)
     local msgTab = {
         chair_id= self:getDataManager():getMyChairId(),
         direction = data.direction,
-        fire_time = 1,
+        fire_time = data.fire_time,
         client_id = data.client_id,
+        pos_x = data.pos_x,
+        pos_y = data.pos_y,
     }
+
     local msgName = FishGameManager.MsgName.CS_Fire;
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
 end
@@ -244,8 +283,9 @@ end
 function FishGameManager:send_CS_ChangeCannon(isAdd)
     local msgTab = {
         chair_id= self:getDataManager():getMyChairId(),
-        add = isAdd,
+        add = isAdd and 1 or 0,
     }
+    dump(msgTab)
     local msgName = FishGameManager.MsgName.CS_ChangeCannon;
 	dump(msgTab,"msgTab")
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)

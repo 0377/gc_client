@@ -331,7 +331,7 @@ function HallMsgManager:callbackWhenReceiveOneFullMsg(msgID,dataStr)
     msgTab["msgName"] = msgName;
 	if msgName ~= HallMsgManager.MsgName.SC_HEARTBEAT then
 		--todo
---	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
+	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
 	end
 	--self.needResendMsgMap移除对应数据
 	for needResendMsgName,v in pairs(self.needResendMsgMap) do

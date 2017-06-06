@@ -58,9 +58,10 @@ function BankDepositLayer:ctor()
 end
 function BankDepositLayer:initView()
 	--
-	local addNumArray = {10,100,500,1000}
+	local addNumArray = {10000,100000,500000,1000000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
+		tempAddBtn:setTitleText("+" .. CustomHelper.moneyShowStyleAB(addNumArray[i]  * CustomHelper.goldToMoneyRate()))
 		tempAddBtn.addValue = addNumArray[i]
 		tempAddBtn:addClickEventListener(function()
 			GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
@@ -87,16 +88,12 @@ end
 
 function BankDepositLayer:checkBankGold()
 	-- body
-	local addNumArray = {10,100,500,1000}
+	local valueStr = self.depositNumTF:getText();
+	local money = CustomHelper.tonumber(valueStr);
+
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
-
-		local valueStr = self.depositNumTF:getText();
-		local money = CustomHelper.tonumber(valueStr);
-
-		local t1 = CustomHelper.goldToMoneyRate()
-
-		local m1 = (self.myPlayerInfo:getMoney()/CustomHelper.goldToMoneyRate()-money) - addNumArray[i]
+		local m1 = (self.myPlayerInfo:getMoney()/CustomHelper.goldToMoneyRate()-money) - tempAddBtn.addValue
 		--print("m1:"..m1.."money:"..money.."array:",addNumArray[i].."rate:"..CustomHelper.goldToMoneyRate())
 		if m1 >= 0 then
 			tempAddBtn:setEnabled(true)

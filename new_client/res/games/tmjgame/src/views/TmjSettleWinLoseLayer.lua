@@ -97,9 +97,11 @@ end
 function TmjSettleWinLoseLayer:initPanelInfo(panelNode)
 	local imgResult = CustomHelper.seekNodeByName(panelNode,"Image_result")
 	imgResult:loadTexture(self.resultData.is_hu and "game_res/settle/niyingle.png" or "game_res/settle/nishule.png")
-	CustomHelper.seekNodeByName(panelNode,"Text_result"):setString(tostring(self.resultData.win_money))
+	
+	CustomHelper.seekNodeByName(panelNode,"Text_result"):setString(CustomHelper.moneyShowStyleNone(math.abs(self.resultData.win_money)))
 	if self.resultData.taxes then
-		CustomHelper.seekNodeByName(panelNode,"Text_tax"):setString("-"..tostring(math.abs(self.resultData.taxes)))
+		
+		CustomHelper.seekNodeByName(panelNode,"Text_tax"):setString("-"..CustomHelper.moneyShowStyleNone(math.abs(self.resultData.taxes)))
 	else
 		CustomHelper.seekNodeByName(panelNode,"Text_tax"):setString("0")
 	end
@@ -232,12 +234,29 @@ function TmjSettleWinLoseLayer:initCardInfo(showCard,extraCards,handCards)
 				count = 4
 			end
 			local tempCardArr = {}
-			for i=1,count do
-				local card = TmjCard:create({ val=v.value.val,position=display.center })
+			if count==4 then --杠
+				for i=1,count do
+					local card = TmjCard:create({ val=v.value.val,position=display.center })
+					card:addTo(parentNode,2)
+					table.insert(self.extraCards,card)
+					table.insert(tempCardArr,card)
+				end
+			else -- 碰，吃
+				table.walk(v.value.handCards,function (extraCard,k)
+					local card = TmjCard:create({ val=extraCard.val,position=display.center })
+					card:addTo(parentNode,2)
+					table.insert(self.extraCards,card)
+					table.insert(tempCardArr,card)
+				end)
+				local card = TmjCard:create({ val=v.value.outCard.val,position=display.center })
 				card:addTo(parentNode,2)
 				table.insert(self.extraCards,card)
 				table.insert(tempCardArr,card)
+
 			end
+
+			
+
 			extraWidth = self:setExtraPosition(scale,startPos,tempCardArr)
 			startPos.x = startPos.x + extraWidth.x
 			
@@ -480,13 +499,46 @@ function TmjSettleWinLoseLayer:showLackMoney()
 	if TmjHelper.isLuaNodeValid(self.proTimer) then
 		self.proTimer:stopAllActions()
 	end
-	CustomHelper.showAlertView(
+	local bankCallbackFunc = function (  )
+		local secondLayer = {}
+		secondLayer.tag = ViewManager.SECOND_LAYER_TAG.BANK             
+		local BankCenterLayer = requireForGameLuaFile("BankCenterLayer")
+		secondLayer.parme = BankCenterLayer.ViewType.WithDraw
+		local data = {}
+		table.insert(data,secondLayer)
+		if self.exitCallBack then
+			self.exitCallBack(data)
+		end
+	end
+
+	local storyCallbackFunc = function (  )
+		local secondLayer = {}
+		secondLayer.tag = ViewManager.SECOND_LAYER_TAG.STORY
+		local data = {}
+		table.insert(data,secondLayer)
+		if self.exitCallBack then
+			self.exitCallBack(data)
+		end
+	end
+	local exitCallBackFunc = function ()
+		if self.exitCallBack then
+			self.exitCallBack()
+		end
+	end
+	local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+	CustomHelper.showLackMoneyAlertView(roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey],
+										Tmji18nUtils:getInstance():get('str_mjplay','lackgold'),
+										exitCallBackFunc,
+										bankCallbackFunc,
+										storyCallbackFunc,
+										nil)
+--[[	CustomHelper.showAlertView(
 			Tmji18nUtils:getInstance():get('str_mjplay','lackgold'),
 			false,
 			true,
 			self.exitCallBack,
 			self.exitCallBack
-	)
+	)--]]
 end
 
 return TmjSettleWinLoseLayer

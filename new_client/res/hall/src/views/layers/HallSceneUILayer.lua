@@ -151,6 +151,7 @@ function HallSceneUILayer:showButtomView()
 	local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney());
 	moneyStr = string.gsub(moneyStr, "%.", "/")
 	self.moneyText:setString(moneyStr)
+	self.moneyText:setScale(math.min(1,160 / self.moneyText:getContentSize().width))
 	--银行存款
 	if self.bankMoneyText == nil then
 		--todo
@@ -159,7 +160,7 @@ function HallSceneUILayer:showButtomView()
 	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
 	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
 	self.bankMoneyText:setString(bankMoneyStr)
-	--
+	self.bankMoneyText:setScale(math.min(1,160 / self.bankMoneyText:getContentSize().width))
 end
 function HallSceneUILayer:initBtns()
 	--账号按钮事件
@@ -530,6 +531,8 @@ function HallSceneUILayer:refreshTableView()
 		self.tableView:setPositionX((viewSize.width - x*gameOrderNum )/2)
 		self.tableView:setTouchEnabled(false)
 	else
+		self.tableView:setViewSize(self.maxSizeForTableView)
+		self.tableView:setPositionX(0)
 		self.rightBtn:setVisible(true)
 		self.leftBtn:setVisible(false)
 		self.tableView:setTouchEnabled(true)

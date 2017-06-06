@@ -42,7 +42,7 @@ function SecondaryNormalNode:initViewData(secondRoomInfoTab)
 	--显示底注 和 入场
 	local  minMoneyLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_money_limit"), "ccui.Text");
 	-- 20.34 string 为 20/34	
-	local minMoneyLimitString = CustomHelper.moneyShowStyleNone(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
+	local minMoneyLimitString = CustomHelper.moneyShowStyleAB(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
 	-- minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
 	minMoneyLimitText:setString(minMoneyLimitString.."入局")
 	--底注

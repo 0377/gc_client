@@ -134,6 +134,10 @@ TmjConfig.cardOperation = {
 	Ting = 8, -- 听
 	Hu = 9, -- 胡
 	BuHua = 10, -- 补花
+	
+	RoundCard = 21, -- 轮到谁出牌
+	Double = 22, -- 加倍
+	Finish = 23, -- 结算
 }
 --游戏的状态
 TmjConfig.GameState = {

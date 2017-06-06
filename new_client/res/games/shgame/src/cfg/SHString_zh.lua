@@ -16,7 +16,7 @@ languageString['str_gameing'] =
 languageString['str_gameover'] =
 {
     ['tax'] = '税收-%s',
-    ['lackgold'] = '金币不足，退出房间!!!',
+    ['lackgold'] = '金币不足，是否去充值？',
 }
 languageString['str_chat'] =
 {

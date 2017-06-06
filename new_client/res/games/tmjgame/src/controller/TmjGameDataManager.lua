@@ -27,6 +27,22 @@ end
 --	repeated int32 pb_hua_pai 	= 3; 			// 花牌
 --	repeated int32 pb_desk_pai 	= 4; 			// 桌牌，打出去的牌
 --	optional int32 chair_id		= 5; 			// id
+--	// game end
+--	optional bool is_hu 		= 6;			//是否胡了
+--	optional int32 hu_fan	 	= 7; 			//番数
+--	optional int32 jiabei	 	= 8; 			//加倍次数
+--	optional string describe	= 9;			//牌型描述
+--	optional int32 win_money 	= 10; 			//赢钱
+--	optional int32 taxes 		= 11; 			//税收
+--	optional bool finish_task	= 12; 			//完成任务
+--	//reconnect
+--	optional bool is_ting 		= 13;			//是否听
+	
+--	//
+--	optional string nick 					= 14;
+--	optional int32 icon 					= 15;
+--	optional int32 gold 					= 16;
+--	optional int32 guid		            	= 17; 	// guid
 --};
 
 --message Maajan_Task_Data {
@@ -86,6 +102,11 @@ function TmjGameDataManager:on_SC_Maajan_Desk_Enter(msgTab)
 		
 		playerData.chair_id = playerinfo.chair_id
 		playerData.isTing = playerinfo.is_ting --是否听
+		playerData.nickname = playerinfo.nick --显示的昵称
+		playerData.headId = playerinfo.icon --头像
+		playerData.money = playerinfo.gold --金币
+		playerData.guid = playerinfo.guid --唯一ID
+		
 		if playerData.chair_id == self.selfChairId then
 			playerData.lastInputVal = playerData.handCards[#playerData.handCards].val --最后一个牌是我摸的
 		end
@@ -93,7 +114,7 @@ function TmjGameDataManager:on_SC_Maajan_Desk_Enter(msgTab)
 	end
 	
 	ssdump(msgTab," 玩家进入",10)
-	ssdump(self.playerdatas,"解析后的玩家信息",10)
+	--ssdump(self.playerdatas,"解析后的玩家信息",10)
 	TmjHelper.removeAll(self.discards)
 	TmjHelper.removeAll(self.cardOperations)
 	TmjHelper.removeAll(self.doubleActions)
@@ -125,7 +146,7 @@ function TmjGameDataManager:on_SC_Maajan_Act_Win(msgTab)
 		
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列")
+	--ssdump(self.cardOperations,"玩家操作队列")
 end
 --加倍
 --	optional int32 chair_id		= 1; 			// id
@@ -135,6 +156,13 @@ function TmjGameDataManager:on_SC_Maajan_Act_Double(msgTab)
 	if msgTab.chair_id then
 		self.doubleActions[msgTab.chair_id] = msgTab.jiabei_val or 0 --玩家加倍
 	end
+	local cardOperation = {
+		type = TmjConfig.cardOperation.Double,
+		chairId = msgTab.chair_id,
+		card = { doubleCount = msgTab.jiabei_val or 0 } --加倍信息
+		
+	}
+	table.insert(self.cardOperations,cardOperation)
 	
 end
 --打牌
@@ -150,7 +178,7 @@ function TmjGameDataManager:on_SC_Maajan_Act_Discard(msgTab)
 		card = {val = TmjConfig.convertToLocalCard(msgTab.tile) }
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列",10)
+	--ssdump(self.cardOperations,"玩家操作队列",10)
 	
 end
 -- 碰
@@ -164,7 +192,7 @@ function TmjGameDataManager:on_SC_Maajan_Act_Peng(msgTab)
 		card = {val = TmjConfig.convertToLocalCard(msgTab.tile) }
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列",10)
+	--ssdump(self.cardOperations,"玩家操作队列",10)
 end
 -- 杠
 --	optional int32 chair_id	 	= 1; 			// id
@@ -184,7 +212,7 @@ function TmjGameDataManager:on_SC_Maajan_Act_Gang(msgTab)
 		card =  {val = TmjConfig.convertToLocalCard(msgTab.tile) } --杠的牌
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列")
+	--ssdump(self.cardOperations,"玩家操作队列")
 end
 --吃
 --	optional int32 chair_id	 	= 1; 			// id
@@ -208,7 +236,7 @@ function TmjGameDataManager:on_SC_Maajan_Act_Chi(msgTab)
 		}
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列")
+	--ssdump(self.cardOperations,"玩家操作队列")
 end
 --剩余多少张公牌
 --optional int32 tile_left = 1;	
@@ -223,6 +251,17 @@ end
 function TmjGameDataManager:on_SC_Maajan_Discard_Round(msgTab)
 	ssdump(msgTab," 该谁出牌返回")
 	self.showCardChairId = msgTab.chair_id --当前出牌的玩家ID
+	--RoundCard
+	local cardOperation = {
+		type = TmjConfig.cardOperation.RoundCard,
+		chairId = msgTab.chair_id,
+		card = {
+				chairId = msgTab.chair_id,
+				time = msgTab.time or self.playCardTime,
+		}
+	}
+	table.insert(self.cardOperations,cardOperation)
+	--ssdump(self.cardOperations,"玩家操作队列",10)
 	
 end
 --服务器的游戏状态
@@ -265,7 +304,7 @@ function TmjGameDataManager:on_SC_Maajan_Draw(msgTab)
 		card = cards
 	}
 	table.insert(self.cardOperations,cardOperation)
-	ssdump(self.cardOperations,"玩家操作队列",10)
+	--ssdump(self.cardOperations,"玩家操作队列",10)
 end
 --开始阶段补花
 --repeated Maajan_Tiles pb_bu_hu 	= 1; 		// 补花
@@ -311,7 +350,7 @@ function TmjGameDataManager:on_SC_Maajan_Bu_Hua(msgTab)
 		end
 
 	end
-	
+	ssdump(self.cardOperations,"补花插入后的操作",10)
 end
 --报听返回
 --optional int32 chair_id	 = 1;	
@@ -370,7 +409,12 @@ function TmjGameDataManager:on_SC_Maajan_Game_Finish(msgTab)
 		table.merge(playerData,playerCardData)
 		self.consultData.players[playerinfo.chair_id] = playerData
 	end
-	
+	local cardOperation = {
+		type = TmjConfig.cardOperation.Finish,
+		chairId = chairId,
+		card = cards
+	}
+	table.insert(self.cardOperations,cardOperation)
 	
 end
 --解析玩家牌数据
@@ -384,21 +428,21 @@ function TmjGameDataManager:parsePlayerCard(playerinfo)
 			local extraData = {}
 			if table.nums(cards)==3 then --吃和碰
 				extraData.value = {}
+				local outCard = {val =TmjConfig.convertToLocalCard(cards[1]) }
+				local handCards = {}
 				if cards[1]==cards[2] and cards[2] == cards[3] then --碰
 					
-					extraData.type =  TmjConfig.cardOperation.Peng
+					extraData.type = TmjConfig.cardOperation.Peng
 					--cardInfo
-					extraData.value = {createTag = true, val = TmjConfig.convertToLocalCard(cards[1])  }
+					table.insert(handCards,{val =TmjConfig.convertToLocalCard(cards[1]) })
+					table.insert(handCards,{val =TmjConfig.convertToLocalCard(cards[1]) })
 				else --吃
 					extraData.type = TmjConfig.cardOperation.Chi
-					local outCard = {val =TmjConfig.convertToLocalCard(cards[1]) }
-					local handCards = {}
+
 					table.insert(handCards,{val =TmjConfig.convertToLocalCard(cards[2]) })
 					table.insert(handCards,{val =TmjConfig.convertToLocalCard(cards[3]) })
-					extraData.value = { createTag = true,outCard = outCard,handCards = handCards }
-		
 				end
-
+				extraData.value = { createTag = true,outCard = outCard,handCards = handCards }
 			elseif table.nums(cards)==5 then --杠 
 				extraData.value = {}
 				--取最后一位

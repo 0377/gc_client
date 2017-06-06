@@ -92,9 +92,10 @@ function PasswordModifyLayer:clickPwdModfyBtn()
         --todo
         errorStr = "请输入旧密码"
     end
-    if errorStr == nil and oldPwdStr ~= GameManager:getInstance():getHallManager():getHallDataManager():getSavePlayerPwd() then
-        errorStr = "旧密码不正确"
-    end 
+    -- PS:出现过判断出错的bug，而且这里最好交给服务器验证，故屏蔽
+    -- if errorStr == nil and oldPwdStr ~= GameManager:getInstance():getHallManager():getHallDataManager():getSavePlayerPwd() then
+    --     errorStr = "旧密码不正确"
+    -- end 
 
 
     if errorStr == nil and newPwdStr == "" then

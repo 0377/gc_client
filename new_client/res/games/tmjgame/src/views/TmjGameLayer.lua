@@ -297,9 +297,7 @@ function TmjGameLayer:hideCenterPanel()
 end
 --开始倒计时
 function TmjGameLayer:startCountDown(curTime)
-	if self._scheduler then
-		scheduler:unscheduleScriptEntry(self._scheduler)
-	end
+	self:stopCountDown()
 	self.showTime = curTime
 	if not self.showTime or self.showTime <=0 then
 		return
@@ -307,13 +305,17 @@ function TmjGameLayer:startCountDown(curTime)
 	self._scheduler = scheduler:scheduleScriptFunc(handler(self,self._onInterval), 1, false)
 	self.centerPanel:getChildByName("Text_countdownTime"):setString(tostring(self.showTime).."s")
 end
+function TmjGameLayer:stopCountDown()
+	if self._scheduler then
+		scheduler:unscheduleScriptEntry(self._scheduler)
+		self._scheduler = nil
+	end
+end
+
 function TmjGameLayer:_onInterval(dt)
 	self.showTime = self.showTime - 1
 	if self.showTime<0 then
-		if self._scheduler then
-			scheduler:unscheduleScriptEntry(self._scheduler)
-			self._scheduler = nil
-		end
+		self:stopCountDown()
 	else
 		CustomHelper.seekNodeByName(self.centerPanel,"Text_countdownTime"):setString(tostring(self.showTime).."s")
 	end
@@ -392,5 +394,7 @@ end
 function TmjGameLayer:onEnter()
 	
 end
-
+function TmjGameLayer:onExit()
+	self:stopCountDown()
+end
 return TmjGameLayer

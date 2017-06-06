@@ -120,7 +120,7 @@ function VersionModel:getGameSrcVersion(gameId)
 end
 
 function VersionModel:getVerionStr()
-	return "大厅.v4"
+	return "大厅.v7"
 end
 
 return VersionModel

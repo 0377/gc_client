@@ -23,6 +23,8 @@ TmjPlayer.playerCmd = {
 	[TmjConfig.cardOperation.Ting] = function (self,cardInfo) if self['tingCard'] then self['tingCard'](self,cardInfo) end end, -- 听
 	[TmjConfig.cardOperation.Hu] = function (self,cardInfo) if self['huCard'] then self['huCard'](self,cardInfo) end end, -- 胡
 	[TmjConfig.cardOperation.BuHua] = function (self,cardInfo) if self['buHuaCard'] then self['buHuaCard'](self,cardInfo) end end, -- 补花
+	[TmjConfig.cardOperation.RoundCard] = function (self,cardInfo) if self['setIsPlayCard'] then self['setIsPlayCard'](self,cardInfo) end end, -- 设置轮到谁出牌
+	[TmjConfig.cardOperation.Double] = function (self,cardInfo) if self['doubleCard'] then self['doubleCard'](self,cardInfo) end end, -- 设置轮到谁出牌
 	
 }
 
@@ -39,7 +41,7 @@ function TmjPlayer:ctor(pinfo)
 	self.zhuangCard = nil --庄家牌
 	self.cardsArray = {} --玩家的牌信息根据牌值作为Key进行存储 value为数量
 	self.cardsExtraArray = {} --玩家的明牌信息根据牌值作为Key进行存储 value为数量
-	
+	self.seatid = pinfo.seatid
 	self.cardStartPos = pinfo.startPos or cc.p(0,0) --牌起始位置
 	self.extraCardPos = pinfo.extraPos or cc.p(0,0) -- 其他牌的位置（这个变化会导致cardStartPos变化）
 	self.outCardPos = pinfo.outCardPos or cc.p(0,0) -- 打出牌的位置
@@ -66,13 +68,24 @@ function TmjPlayer:setOperationCallBack(operationFun)
 	self.operationFun = operationFun
 end
 --设置是否轮到我出牌
-function TmjPlayer:setIsPlayCard(isplayCard)
-	sslog(self.logTag,"设置是否轮到我出牌"..tostring(isplayCard))
-	self.isPlayCard = isplayCard
-	
-	if not self.isPlayCard then --不是我出牌，那我的出牌提示tag删除
+--@param cardInfo 
+--@key chairId 座位号
+--@key time 剩余时间
+function TmjPlayer:setIsPlayCard(cardInfo)
+	ssdump(cardInfo,"设置是否轮到我出牌，我的座位号："..tostring(self.seatid))
+	if not cardInfo or cardInfo.chairId~=self.seatid then
 		self:removeCardTagAnim()
+		self.isPlayCard = false
+	else
+		self.isPlayCard = cardInfo.chairId==self.seatid
+		if cardInfo.time then
+			self:setLeftTime(cardInfo.time)
+		end
+		if self.operationFun then
+			self.operationFun(self.pType,TmjConfig.cardOperation.RoundCard)--吃牌结束
+		end
 	end
+
 end
 --删除牌上边的动画
 function TmjPlayer:removeCardTagAnim()
@@ -97,14 +110,13 @@ end
 --@param operation 操作类型 
 function TmjPlayer:checkOperation(cardVal,operation)
 	if TmjCardTip.s_cmds[operation] then
-		ssdump(self.cardsArray,"判断步骤--手里的牌")
-		sslog(self.logTag,"输入的牌值 "..cardVal)
-		sslog(self.logTag,"判断的操作 "..operation)
-		ssdump(self:getExtraPair(),"判断步骤--额外的牌")
+		sslog(self.logTag,"输入的牌值 "..cardVal..",判断的操作 "..operation)		
 		if operation==TmjCardTip.CardOperation.BuGang then
 			--self.extraCards
+			--ssdump(self:getExtraPair(),"判断步骤--额外的牌")
 			return TmjCardTip.s_cmds[operation](self:getExtraPair(),cardVal)
 		else
+			--ssdump(self.cardsArray,"判断步骤--手里的牌")
 			return TmjCardTip.s_cmds[operation](self.cardsArray,cardVal)
 		end
 		
@@ -190,12 +202,14 @@ function TmjPlayer:setHeadInfo(TmjHeadNode,headInfo)
 		end
 	end	
 	if headInfo.gold then
-		textGold:setString(tostring(headInfo.gold))
+		
+		textGold:setString(CustomHelper.moneyShowStyleNone(headInfo.gold))
 	end
 	if headInfo.nickname then
 		textId:setString(tostring(headInfo.nickname))
 	end
 	if headInfo.huaCount then
+		self.huaCount = headInfo.huaCount
 		textHua:setString(tostring(headInfo.huaCount))
 	end
 	if headInfo.doubleCount then
@@ -316,7 +330,6 @@ function TmjPlayer:refreshCard(isAnimation,animCallFun)
 	table.walk(self.handCards,function (card,i)
 		local card = card.node
 		card:setLocalZOrder(i)
-
 		local cardPos = self:getHandCardPosition(i,card:getContentSize())
 		
 		local function cardActionCB1()
@@ -486,6 +499,8 @@ function TmjPlayer:setOutCards(cards)
 		if type(card)=="number" then
 			card = { val = card,position = display.center }
 		end
+		
+		card.state = TmjConfig.CardState.State_Discard
 		local newCard = self:createOneCard(card)
 		table.insert(self.outCards,newCard)
 		--最后一张牌的位置动画
@@ -679,13 +694,13 @@ end
 function TmjPlayer:getOneCard(cardInfo)
 	self.getCard = self:createOneCard(cardInfo)
 	--
-	local tempHandCards ={ {info = self.getCard.info } }
+--[[	local tempHandCards ={ {info = self.getCard.info } }
 	--创建临时表，只有info
 	table.walk(self.handCards,function (card,k)
 		table.insert(tempHandCards,{info = card.info })
-	end)
+	end)--]]
 	
-	self.cardsArray = self:setCardArray(tempHandCards)	
+	self.cardsArray = self:setCardArray(self.handCards)	
 	tempHandCards = nil
 	
 	return self.getCard
@@ -743,7 +758,7 @@ end
 function TmjPlayer:huCard(cardInfo)
 	--todo
 	if self.operationFun then
-		self.operationFun(self.pType,TmjConfig.cardOperation.Gang)--胡牌结束
+		self.operationFun(self.pType,TmjConfig.cardOperation.Hu)--胡牌结束
 	end
 end
 --补花
@@ -755,6 +770,13 @@ function TmjPlayer:buHuaCard(cardInfo)
 	self.cardsArray = self:setCardArray(self.handCards)
 	--自己补花完成，设置那张牌是摸牌
 	self:checkToSetLastHandCard()
+end
+--加倍
+function TmjPlayer:doubleCard(cardInfo)
+	if self.operationFun then
+		self.operationFun(self.pType,TmjConfig.cardOperation.Double)--补花结束
+	end
+	self:setHeadInfo({ doubleCount = cardInfo.doubleCount })
 end
 
 function TmjPlayer:removeAllHandCard()

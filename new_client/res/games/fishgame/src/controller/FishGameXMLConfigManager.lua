@@ -88,6 +88,7 @@ function FishGameXMLConfigManager:loadFishVisual(file)
                     scale = tonumber(vv.Scale),
                     offset = {tonumber(vv.OffestX),tonumber(vv.OffestY)},
                     direction = tonumber(vv.Direction),
+                    hideShadow = (vv.HideShadow == "true"),
                 })
             end
         else
@@ -98,6 +99,7 @@ function FishGameXMLConfigManager:loadFishVisual(file)
                 scale = tonumber(v.Live.Scale),
                 offset = {tonumber(v.Live.OffestX),tonumber(v.Live.OffestY)},
                 direction = tonumber(v.Live.Direction),
+                hideShadow = (v.Live.HideShadow == "true"),
             })
         end
 
@@ -110,6 +112,7 @@ function FishGameXMLConfigManager:loadFishVisual(file)
                     scale = tonumber(vv.Scale),
                     offset = {tonumber(vv.OffestX),tonumber(vv.OffestY)},
                     direction = tonumber(vv.Direction),
+                    hideShadow = (vv.HideShadow == "true"),
                 })
             end
         else
@@ -120,6 +123,8 @@ function FishGameXMLConfigManager:loadFishVisual(file)
                 scale = tonumber(v.Die.Scale),
                 offset = {tonumber(v.Die.OffestX),tonumber(v.Live.OffestY)},
                 direction = tonumber(v.Die.Direction),
+                hideShadow = (v.Die.HideShadow == "true"),
+
             })
         end
 
@@ -212,39 +217,43 @@ function FishGameXMLConfigManager:loadFish(file)
 
 end
 
-function sz_T2S(_t)
-    local szRet = "{"
-    function doT2S(_i, _v)
-        if "number" == type(_i) then
-            szRet = szRet .. "[" .. _i .. "] = "
---            szRet = szRet .. "" .. _i .. " = "
-            if "number" == type(_v) then
-                szRet = szRet .. _v .. ","
-            elseif "string" == type(_v) then
-                szRet = szRet .. '"' .. _v .. '"' .. ","
-            elseif "table" == type(_v) then
-                szRet = szRet .. sz_T2S(_v) .. ","
-            else
-                szRet = szRet .. "nil,"
-            end
-        elseif "string" == type(_i) then
---            szRet = szRet .. '["' .. _i .. '"] = '
-            szRet = szRet .. '' .. _i .. ' = '
-            if "number" == type(_v) then
-                szRet = szRet .. _v .. ","
-            elseif "string" == type(_v) then
-                szRet = szRet .. '"' .. _v .. '"' .. ","
-            elseif "table" == type(_v) then
-                szRet = szRet .. sz_T2S(_v) .. ","
-            else
-                szRet = szRet .. "nil,"
+    function sz_T2S(_t)
+        local szRet = "{"
+        function doT2S(_i, _v)
+            if "number" == type(_i) then
+                szRet = szRet .. "[" .. _i .. "] = "
+    --            szRet = szRet .. "" .. _i .. " = "
+                if "number" == type(_v) then
+                    szRet = szRet .. _v .. ","
+                elseif "string" == type(_v) then
+                    szRet = szRet .. '"' .. _v .. '"' .. ","
+                elseif "table" == type(_v) then
+                    szRet = szRet .. sz_T2S(_v) .. ","
+                elseif "boolean" == type(_v) then
+                    szRet = szRet .. (_v and "true" or "false") .. ","
+                else
+                    szRet = szRet .. "nil,"
+                end
+            elseif "string" == type(_i) then
+    --            szRet = szRet .. '["' .. _i .. '"] = '
+                szRet = szRet .. '' .. _i .. ' = '
+                if "number" == type(_v) then
+                    szRet = szRet .. _v .. ","
+                elseif "string" == type(_v) then
+                    szRet = szRet .. '"' .. _v .. '"' .. ","
+                elseif "table" == type(_v) then
+                    szRet = szRet .. sz_T2S(_v) .. ","
+                elseif "boolean" == type(_v) then
+                    szRet = szRet .. (_v and "true" or "false") .. ","
+                else
+                    szRet = szRet .. "nil,"
+                end
             end
         end
+        table.foreach(_t, doT2S)
+        szRet = szRet .. "}"
+        return szRet
     end
-    table.foreach(_t, doT2S)
-    szRet = szRet .. "}"
-    return szRet
-end
 
 
 
@@ -286,7 +295,6 @@ function FishGameXMLConfigManager:loadTroop(file)
 
     end
 
-
     local pathMap = {}
 
     for k,v in pairs(config) do
@@ -294,27 +302,26 @@ function FishGameXMLConfigManager:loadTroop(file)
 
         local hhh = {}
         repeat
-            local data = config[k]
+            local data = config[next]
 
             local ttt ={
-                type = v.type,
-                count = v.count,
-                delay = v.delay,
-                position = v.position,
+                type = data.type,
+                count = data.count,
+                delay = data.delay,
+                position = data.position,
 
             }
 
             table.insert(hhh,ConvertPathPoint(ttt))
 
-        until next ~= 0
-
+            next = data.next
+        until next == 0
 
         pathMap[k] = createPathData(hhh)
     end
 
 
-
-
+    io.writefile("jaye_test_1.text", sz_T2S(config), "w+")
     io.writefile("jaye_test.text", sz_T2S(pathMap), "w+")
 end
 
@@ -383,6 +390,26 @@ function createPathData(path)
     }
 
     for _,v in ipairs(path) do
+        if v.type == PMT_LINE
+            or v.type == PMT_BEZIER
+            or v.type == PMT_STAY
+        then
+            for _,vv in ipairs(v.position) do
+                vv[1] = math.round(vv[1] * display.width)
+                vv[2] = math.round(vv[2] * display.height)
+            end
+        else
+            for k,vv in ipairs(v.position) do
+                if k == 1 then
+                    vv[1] = math.round(vv[1] * display.width)
+                    vv[2] = math.round(vv[2] * display.height)
+                end
+            end
+        end
+
+    end
+
+    for _,v in ipairs(path) do
         if v.type == NPT_LINE then
             local distance = game.fishgame2d.MathAide:CalcDistance(v.position[1][1],v.position[1][2],v.position[2][1],v.position[2][2])
             distance = math.round(distance)
@@ -405,7 +432,7 @@ function createPathData(path)
 
                 local ele = {
                     type = PMT_STAY,
-                    position = {{v.position[1][1],v.position[1][2]}},
+                    position = {{v.position[2][1],v.position[2][2]},{0,0},{0,0},{0,0}},
                     count = 1,
                     direction = tempDir,
                     duration = v.delay,
@@ -438,7 +465,7 @@ function createPathData(path)
 
                 local ele = {
                     type = PMT_STAY,
-                    position = {{v.position[1][1],v.position[1][2]}},
+                    position = {{v.position[2][1],v.position[2][2]},{0,0},{0,0},{0,0}},
                     count = 1,
                     direction = tempDir,
                     duration = v.delay,
@@ -473,7 +500,7 @@ function createPathData(path)
 
                 local ele = {
                     type = PMT_STAY,
-                    position = {{v.position[1][1],v.position[1][2]}},
+                    position = {{v.position[2][1],v.position[2][2]},{0,0},{0,0},{0,0}},
                     count = 1,
                     direction = tempDir,
                     duration = v.delay,
@@ -555,11 +582,6 @@ function ConvertPathPoint(data,xMirror,yMirror,xyMirror,Not)
                 v.position[v.count - i + 1][2] = t
             end
         end
-    end
-
-    for _,vv in ipairs(v.position) do
-        vv[1] = math.round(vv[1] * display.width)
-        vv[2] = math.round(vv[2] * display.height)
     end
 
     return v

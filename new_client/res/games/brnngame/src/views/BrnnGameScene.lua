@@ -386,7 +386,7 @@ function BrnnGameScene:checkGuanZhan()
 			if myPlayerInfo:getMoney() < self.bet_min_limit_money then
 				--弹出提示
 				CustomHelper.showAlertView(
-			             "由于你携带金币小于"..(self.bet_min_limit_money/100)..",现在你只能处于观战模式,不能下注！",
+			             "由于你携带金币小于"..( CustomHelper.moneyShowStyleNone(self.bet_min_limit_money))..",现在你只能处于观战模式,不能下注！",
 			             false,
 			             true,
 			             nil,
@@ -669,7 +669,10 @@ function BrnnGameScene:initUI()
             MyToastLayer.new(self, "你是庄家不能退出") 
             return
         end
-        if  (chipNum == 0 or self.brnnGameManager:getDataManager():getGameStates() ~= 2) and self.brnnGameManager:getDataManager():isMyBanker() == false then
+        if  (chipNum == 0 or self.brnnGameManager:getDataManager():getGameStates() ~= 2)
+                and self.brnnGameManager:getDataManager():isMyBanker() == false
+                and self._isBet
+        then
             self:exitGame()
         else
             MyToastLayer.new(self, "游戏中不能退出") 
@@ -773,7 +776,7 @@ function BrnnGameScene:initBankerBtnUI()
 
     self.bankerListOn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bankerListOn"), "ccui.ImageView");
     local bankerCionTipsText = tolua.cast(CustomHelper.seekNodeByName(self.bankerListOn, "bankerCionTipsText"), "ccui.Text");
-    bankerCionTipsText:setString("申请上庄需要"..CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getBankerLimit()).."金币")
+    bankerCionTipsText:setString("申请上庄需要"..CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getBankerLimit()).."金币")
     ---申请上庄按钮
     self.bankerOn = tolua.cast(CustomHelper.seekNodeByName(self.bankerListOn, "bankerOn"), "ccui.Button");
 
@@ -1157,7 +1160,7 @@ function BrnnGameScene:updatePlayerIcon(isShow)
         if _userList ~= nil and _userList[i]~= nil then
             local info =  _userList[i]
             
-            coin:setString(CustomHelper.moneyShowStyleNone(info["money"]))
+            coin:setString(CustomHelper.moneyShowStyleAB(info["money"]))
             player:setVisible(true)
             local head_id = info["head_id"] or 1
             headIcon:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(head_id)..".png"))
@@ -1201,7 +1204,7 @@ function BrnnGameScene:updateMyInfo()
     local myInfo = self.brnnGameManager:getDataManager():getMyUserInfo()
     if myInfo ~= nil then
         --local myMoney = string.format("%0.2f", myInfo["money"]/100)
-        self.playerCoin:setString(CustomHelper.moneyShowStyleNone(myInfo["money"]))
+        self.playerCoin:setString(CustomHelper.moneyShowStyleAB(myInfo["money"]))
         self.playerName:setString(myInfo["nickname"])
     end
 end
@@ -1218,7 +1221,7 @@ function BrnnGameScene:initMyInfo()
 
     local myInfo = self.brnnGameManager:getDataManager():getMyUserInfo()
     if myInfo ~= nil then
-        local myMoney = CustomHelper.moneyShowStyleNone(myInfo["money"])
+        local myMoney = CustomHelper.moneyShowStyleAB(myInfo["money"])
         self.playerCoin:setString(myMoney)
         self.playerName:setString(myInfo["nickname"])
     end
@@ -1488,7 +1491,7 @@ end
 function BrnnGameScene:updateMyStakeData()
 
     ---更新自己的钱
-    local myMoney = CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getMyMoney())
+    local myMoney = CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getMyMoney())
     self.playerCoin:setString(myMoney)
 
     ---更新每个区域自己下的注
@@ -1638,7 +1641,9 @@ function BrnnGameScene:setInitChioseAllPoints(nums)
 	
 	for i=1, 5 do
 		if self._coinBtns[i] ~= nil then
-			self._coinBtns[i]:getChildByName("AtlasLabel_num"):setString(nums[i]/100)
+            local label = self._coinBtns[i]:getChildByName("AtlasLabel_num")
+			label:setString(CustomHelper.moneyShowStyleNone(nums[i]))
+            label:setScale(math.min(1,78 / label:getContentSize().width))
 		end
         
         
@@ -1678,7 +1683,8 @@ function BrnnGameScene:showCoin(area, coin,time)
     self._table:addChild(sp1)
 	
 	local t1 = self.csNode:getChildByName("AtlasLabel_1"):clone()
-	t1:setString( coin/100 )
+	t1:setString( CustomHelper.moneyShowStyleNone(coin) )
+    t1:setScale(math.min(30 / t1:getContentSize().width ,1))
 	sp1:addChild(t1)
 	t1:setPosition(cc.p(24,25) )
 
@@ -1703,21 +1709,20 @@ function BrnnGameScene:coinMoveTo(num,coin)
     -- 添加随机的下注，增强下注动画效果 --
     local time = self._chipMoveTime
     if num == 1 or num == 4 then
-        time = time*0.3
+        time = time * 0.3
     end
-	--AtlasLabel_1
-	
-	
-    local sp1=cc.Sprite:create(self:getChipIcon(coin))
-    self._table:addChild(sp1,50)
-    sp1:setPosition(self:getCoinMoveFromPt())      --设置起始位置
+    --AtlasLabel_1
+    local sp1 = cc.Sprite:create(self:getChipIcon(coin))
+    self._table:addChild(sp1)
+    sp1:setPosition(self:getCoinMoveFromPt()) --设置起始位置
 
-	local t1 = self.csNode:getChildByName("AtlasLabel_1"):clone()
-	t1:setString(  coin/100 )
-	sp1:addChild(t1)
-	t1:setPosition(cc.p(24,25) )
-	
-    self:coinPosMove(sp1,num,time)
+    local t1 = self.csNode:getChildByName("AtlasLabel_1"):clone()
+    t1:setString(CustomHelper.moneyShowStyleNone(coin))
+    t1:setScale(math.min(30 / t1:getContentSize().width, 1))
+    sp1:addChild(t1)
+    t1:setPosition(cc.p(24, 25))
+
+    self:coinPosMove(sp1, num, time)
 end
 
 
@@ -2132,7 +2137,7 @@ function BrnnGameScene:gameEnd()
         local gameOverBg = tolua.cast(CustomHelper.seekNodeByName(self.panel_gameOver, "gameoverBg"), "ccui.ImageView")
        
         ---设置钱
-        local myMoney = CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getMyMoney())
+        local myMoney = CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getMyMoney())
         self.playerCoin:setString(myMoney)
 
 

@@ -112,7 +112,7 @@ void MoveByPath::OnUpdate(float fdt){
 	if (m_fDelay > 0){
 		m_fDelay = m_fDelay - fdt;
 		if (m_fDelay >= 0){
-			m_pOwner->setPosition(-500.0f, -500.0f);
+			m_pOwner->setGamePos(-500.0f, -500.0f);
 
 			return;
 		}
@@ -126,7 +126,7 @@ void MoveByPath::OnUpdate(float fdt){
 	}
 	m_Elaspe += fdt * getSpeed();
 	if (m_Elaspe < 0){
-		m_pOwner->setPosition(-500, -500);
+		m_pOwner->setGamePos(-500, -500);
 		return;
 	}
 
@@ -185,7 +185,7 @@ void MoveByPath::OnUpdate(float fdt){
 		x = path.xPos[0];
 		y =  path.yPos[0];
 		dir = path.fDirction;
-		break;
+		break;	
 	default:
 		break;
 	}
@@ -196,9 +196,8 @@ void MoveByPath::OnUpdate(float fdt){
 	// ele.dir = dir;
 	// m_pPathData->pathData[tempElaspe] = ele;
 		
-	m_pOwner->setPosition(x + m_Offest.x, y + m_Offest.y);
-	//m_pOwner->setRotation(dir);
-	m_pOwner->setRotation(CC_RADIANS_TO_DEGREES(-dir));
+	m_pOwner->setGamePos(x + m_Offest.x, y + m_Offest.y);;
+	m_pOwner->setGameDir(-dir);
 }
 
 void MoveByPath::OnDetach(){}
@@ -249,14 +248,14 @@ void MoveByDirection::OnUpdate(float fdt){
 		if (pObj != nullptr && pObj->getState() < EOS_DEAD && pObj->InSideScreen())
 		{
 			if (inited_){
-				if (MathAide::CalcDistance(pObj->getPosition().x, pObj->getPosition().y, m_pOwner->getPosition().x, m_pOwner->getPosition().y) > 10)
+				if (MathAide::CalcDistance(pObj->getGamePos().x, pObj->getGamePos().y, m_pOwner->getGamePos().x, m_pOwner->getGamePos().y) > 10)
 				{
-					SetDirection(MathAide::CalcAngle(pObj->getPosition().x, pObj->getPosition().y, m_pOwner->getPosition().x, m_pOwner->getPosition().y));
+					SetDirection(MathAide::CalcAngle(pObj->getGamePos().x, pObj->getGamePos().y, m_pOwner->getGamePos().x, m_pOwner->getGamePos().y));
 					InitMove();
 				}
 				else
 				{
-					SetPosition(m_pOwner->getPosition().x, m_pOwner->getPosition().y);
+					SetPosition(m_pOwner->getGamePos().x, m_pOwner->getGamePos().y);
 					//SetDirection(m_pOwner->);
 					return;
 				}
@@ -319,7 +318,7 @@ void MoveByDirection::OnUpdate(float fdt){
 	}
 
 
-	m_pOwner->setRotation(CC_RADIANS_TO_DEGREES(m_pOwner->GetType() == EOT_FISH ? angle_ - M_PI_2 : - angle_ + M_PI));
-	m_pOwner->setPosition(m_pPosition.x, m_pPosition.y);
+	m_pOwner->setGameDir(m_pOwner->GetType() == EOT_FISH ? - angle_ + M_PI_2 : - angle_ + M_PI);
+	m_pOwner->setGamePos(m_pPosition.x, m_pPosition.y);
 }
 NS_FISHGAME2D_END

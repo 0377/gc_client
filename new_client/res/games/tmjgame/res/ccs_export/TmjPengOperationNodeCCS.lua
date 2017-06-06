@@ -62,6 +62,7 @@ Image_1:ignoreContentAdaptWithSize(false)
 Image_1:loadTexture("game_res/desk/tongyongkuang.png",0)
 Image_1:setScale9Enabled(true)
 Image_1:setCapInsets({x = 10, y = 10, width = 4, height = 2})
+Image_1:setTouchEnabled(true);
 Image_1:setLayoutComponentEnabled(true)
 Image_1:setName("Image_1")
 Image_1:setTag(113)

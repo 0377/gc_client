@@ -18,10 +18,10 @@ FishGameConfig.RULE_SELECT ={
 
 -- 玩家对应的编号
 FishGameConfig.PLAYER ={
-        LEFTBOTTOM      = 0,
-        RIGHTBOTTOM     = 1,
-        RIGHTTOP        = 2,
-        LEFTTOP         = 3,
+        LEFTBOTTOM      = 1,
+        RIGHTBOTTOM     = 2,
+        RIGHTTOP        = 3,
+        LEFTTOP         = 4,
 }
 
 FishGameConfig.LBPLAYER_OFFSETX   = 190
@@ -68,18 +68,18 @@ FishGameConfig.BTN_IMG ={
 
 -- 捕鱼XML配置文件路径
 FishGameConfig.XML_CONFIG = {
-    BOUNDING_BOX    = "games/fishgame/res/config/BoundingBox.xml",
-    BULLET_SET      = "games/fishgame/res/config/BulletSet.xml",
-    CANNON_SET      = "games/fishgame/res/config/CannonSet.xml",
-    FISH            = "games/fishgame/res/config/Fish.xml",
-    FISH_SOUND      = "games/fishgame/res/config/FishSound.xml",
-    FRAME_DEFINE    = "games/fishgame/res/config/FrameDefine.xml",
-    PATH            = "games/fishgame/res/config/path.xml",
-    SCENE           = "games/fishgame/res/config/Scene.xml",
-    SPECIAL         = "games/fishgame/res/config/Special.xml",
-    SYSTEM          = "games/fishgame/res/config/System.xml",
-    TROOP_SET       = "games/fishgame/res/config/TroopSet.xml",
-    VISUAL          = "games/fishgame/res/config/Visual.xml",
+    BOUNDING_BOX    = "config/BoundingBox.xml",
+    BULLET_SET      = "config/BulletSet.xml",
+    CANNON_SET      = "config/CannonSet.xml",
+    FISH            = "config/Fish.xml",
+    FISH_SOUND      = "config/FishSound.xml",
+    FRAME_DEFINE    = "config/FrameDefine.xml",
+    PATH            = "config/path.xml",
+    SCENE           = "config/Scene.xml",
+    SPECIAL         = "config/Special.xml",
+    SYSTEM          = "config/System.xml",
+    TROOP_SET       = "config/TroopSet.xml",
+    VISUAL          = "config/Visual.xml",
 }
 
 FishGameConfig.PARTICAL_CONFIG = {
@@ -87,6 +87,33 @@ FishGameConfig.PARTICAL_CONFIG = {
     ["bubble"] = { AniImage = "fish_effect_bomb_big_02", AniName = "Animation1" },
     ["switch"] = { AniImage = "fish_effect_bomb_big_03", AniName = "Animation1" },
     ["bomb"] = { AniImage = "fish_effect_bomb_big_04", AniName = "Animation1" },
+}
+
+FishGameConfig.FishVisualZOrder = nil
+
+
+FishGameConfig.FISHNAME_ICON_CONFIG = {
+    [16] = "ui/fishname/ts_cjk_yinsefangtousha.png",  -- 银色方头鲨
+    [17] = "ui/fishname/ts_cjk_jinsefangtousha.png",  -- 金色方头鲨
+    [18] = "ui/fishname/ts_cjk_haitun.png",  -- 海豚
+    [19] = "ui/fishname/ts_cjk_jinsehujing.png",  -- 金色虎鲨
+    [20] = "ui/fishname/ts_cjk_shuangtouqie.png",  -- 双头企鹅
+    [21] = "ui/fishname/ts_cjk_yinlong.png",        -- 银龙
+    [22] = "ui/fishname/ts_cjk_jinlong.png",        -- 金龙
+    [23] = "ui/fishname/ts_cjk_shenhaizhangyu.png", -- 深海章鱼
+    [24] = "ui/fishname/ts_cjk_meirenyu.png",       -- 美人鱼
+    [25] = "ui/fishname/ts_cjk_yunliangchuan.png",       -- 运粮船
+    [29] = "ui/fishname/ts_cjk_likui.png",       -- 李逵
+    [601] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [602] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [603] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [604] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [605] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [606] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [607] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [608] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [609] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
+    [610] = "ui/fishname/ts_cjk_yuwang.png",       -- 鱼王
 }
 
 return FishGameConfig

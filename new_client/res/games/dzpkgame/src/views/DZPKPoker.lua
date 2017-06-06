@@ -42,6 +42,24 @@ function DZPKPoker:getCardPath(issmall)
 
 end
 
+function DZPKPoker:ShowLight()
+	if self.lightSprite == nil then
+		self.lightSprite = cc.Sprite:create(CustomHelper.getFullPath("game_res/secondui/dz_pai_guangxiao.png"))
+		self.lightSprite:setScale(5/3)
+		self:addChild(self.lightSprite,100)
+		local size = self:getContentSize()
+		self.lightSprite:setPosition(cc.p(size.width/2,size.height/2))
+	end
+end
+
+function DZPKPoker:HideLight()
+	if self.lightSprite ~= nil then
+		self.lightSprite:removeFromParent()
+		self.lightSprite = nil
+		
+	end
+end
+
 --得到牌型
 function DZPKPoker:getCard(font, num)
 	if font then

@@ -5,7 +5,7 @@
 --
 
 local FishgameEntry = class("FishgameEntry")
-local FishGameScene = import("FishGameScene")
+local FishGameScene = requireForGameLuaFile("FishGameScene")
 requireForGameLuaFile("CDefine")
 
 import(".controller.FishGameManager")
@@ -18,9 +18,6 @@ function FishgameEntry:ctor()
     --注册管理器
     local fishManager = FishGameManager:getInstance()
     GameManager:getInstance():getHallManager():setSubGameManager(fishManager)
-
-
-    import(".test.TestServer", curModule):create()
 end
 
 --获取进入游戏场景需要预加载的资源数组，每个元素为完整路径
@@ -30,9 +27,7 @@ function FishgameEntry:getNeedPreloadResArray()
 end
 
 function FishgameEntry:getStartScene(infoTab)
-    GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():_onMsg_EnterRoomAndSitDownInfo(infoTab)
-
-
+    GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():on_SC_EnterRoomAndSitDownInfo(infoTab)
 
     -- body
     local sceneLayer = FishGameScene:create()

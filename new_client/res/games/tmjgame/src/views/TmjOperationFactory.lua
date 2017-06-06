@@ -8,7 +8,7 @@
 --	  2.听牌的时候，需要特殊处理，点击听牌的时候不发送命令执行完毕
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
-local TmjOperationFactory = class("TmjOperationFactory")
+TmjOperationFactory = class("TmjOperationFactory")
 local TmjOperationChi = requireForGameLuaFile("TmjOperationChi")
 local TmjOperationGang = requireForGameLuaFile("TmjOperationGang")
 local TmjOperationPeng = requireForGameLuaFile("TmjOperationPeng")
@@ -122,8 +122,9 @@ function TmjOperationFactory:sortOperationPosition()
 	local len = table.nums(self.operationPanel)
 	for i=len,1,-1 do
 		local TmjOperationWidget = self.operationPanel[i]
+		--ssdump(TmjOperationWidget:getContentSize(),TmjOperationWidget.__cname..".lua 尺寸")
 		TmjOperationWidget:setPosition(cc.pSub(curpos,cc.p(TmjOperationWidget:getContentSize().width,0)))
-		ssdump(curpos,TmjOperationWidget.logTag.."设置他的位置")
+		--ssdump(curpos,TmjOperationWidget.logTag.."设置他的位置")
 		curpos.x = curpos.x - TmjOperationWidget:getContentSize().width
 		
 	end
@@ -149,7 +150,12 @@ function TmjOperationFactory:clearOperation()
 		self.tingCancelBtn:removeFromParent()
 	end
 end
+TmjOperationFactory.instance = nil
+function TmjOperationFactory:getInstance()
+	if TmjOperationFactory.instance == nil then
+		TmjOperationFactory.instance = TmjOperationFactory:create()
+	end
+	return TmjOperationFactory.instance
+end
 
-
-cc.exports.TmjOperationFactory = cc.exports.TmjOperationFactory or TmjOperationFactory:create()
 return TmjOperationFactory

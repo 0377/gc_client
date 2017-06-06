@@ -1,5 +1,5 @@
 
-Ø
+ª
 common_msg_banker.proto"k
 BankerTable
 state (Rstate
@@ -7,7 +7,7 @@
 bottom_bet (R	bottomBet
 chair (Rchair"
 MsgID
-IDã§"z
+IDìÀ"z
 BankerPlayerInfo
 guid (Rguid
 chair (Rchair
@@ -36,103 +36,103 @@ cards_type
 flag (Rflag
 tax (Rtax
 victory (Rvictory'
-increment_money (RincrementMoney"X
+increment_money (RincrementMoney"Y
 SC_BankerTableMatching
 chair (Rchair
-chair1 (Rchair1"
-MsgID
-IDêN"ï
+chair1 (Rchair1"
+MsgID
+IDêÀ"ñ
 SC_BankerSendCards'
 pb_table (2.BankerTableRpbTable.
 	pb_player (2.BankerPlayerInfoRpbPlayer
-cards (Rcards"
-MsgID
-IDëN"h
+cards (Rcards"
+MsgID
+IDëÀ"i
 SC_BankerBeginToContend
 	countdown (R	countdown
 
-total_time (R	totalTime"
-MsgID
-IDíN"V
+total_time (R	totalTime"
+MsgID
+IDíÀ"W
 SC_BankerPlayerContend
 chair (Rchair
-ratio (Rratio"
-MsgID
-IDìN"â
+ratio (Rratio"
+MsgID
+IDìÀ"ä
 SC_BankerChoosingBanker
 chairs (Rchairs!
 banker_chair (RbankerChair!
-banker_ratio (RbankerRatio"
-MsgID
-IDîN"j
+banker_ratio (RbankerRatio"
+MsgID
+IDîÀ"k
 SC_BankerPlayerBeginToBet
 	countdown (R	countdown
 
-total_time (R	totalTime"
-MsgID
-IDïN"Y
+total_time (R	totalTime"
+MsgID
+IDïÀ"Z
 SC_BankerPlayerBet
 chair (Rchair
-	bet_money (RbetMoney"
-MsgID
-IDñN"õ
+	bet_money (RbetMoney"
+MsgID
+IDñÀ"ú
 SC_BankerShowOwnCards
 cards (Rcards
 
 cards_type (R	cardsType
 	countdown (R	countdown
 
-total_time (R	totalTime"
-MsgID
-IDóN"Ö
+total_time (R	totalTime"
+MsgID
+IDóÀ"Ü
 SC_BankerShowCards
 chair (Rchair
 cards (Rcards
 
 cards_type (R	cardsType
-flag (Rflag"
-MsgID
-IDòN"Ñ
+flag (Rflag"
+MsgID
+IDòÀ"Ö
 SC_BankerGameEnd5
 	pb_player (2.BankerGameEndPlayerInfoRpbPlayer'
-pb_table (2.BankerTableRpbTable"
-MsgID
-IDôN"S
+pb_table (2.BankerTableRpbTable"
+MsgID
+IDôÀ"T
 SC_BankerForceToLeave
 reason (	Rreason
-num (Rnum"
-MsgID
-IDöN"…
+num (Rnum"
+MsgID
+IDöÀ" 
 SC_BankerReconnectInfo'
 pb_table (2.BankerTableRpbTable7
 	pb_player (2.BankerReconnectPlayerInfoRpbPlayer
 	countdown (R	countdown
 
-total_time (R	totalTime"
-MsgID
-IDõN"Q
+total_time (R	totalTime"
+MsgID
+IDõÀ"Q
 CS_BankerEnter
 chair (Rchair
 chair1 (Rchair1"
 MsgID
-ID°ú"#
+IDëÀ"#
 CS_BankerLeave"
 MsgID
-ID¢ú";
+IDˆÀ";
 CS_BankerContend
 ratio (Rratio"
 MsgID
-ID£ú"D
+ID˜À"D
 CS_BankerPlayerBet
 	bet_money (RbetMoney"
 MsgID
-ID§ú".
+ID¯À".
 CS_BankerPlayerGuessCards"
 MsgID
-ID•ú"&
+ID˘À"&
 CS_BankerNextGame"
 MsgID
-ID¶ú*›
+ID˙À*›
 BANKER_CARD_TYPE
 BANKER_CARD_TYPE_NONEd
 BANKER_CARD_TYPE_ONEe

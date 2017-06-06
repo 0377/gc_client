@@ -109,7 +109,6 @@ function TmjCard:getContentSize()
 	return contentSize
 end
 function TmjCard:setCardPosition(pos,isSet)
-	
 	self.locationPos = pos
 	if isSet and self.locationPos then
 		self:setPosition(self.locationPos)

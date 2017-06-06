@@ -1,5 +1,5 @@
 
-†
+Ö
 common_msg_maajan.proto"&
 CS_Maajan_Act_Win"
 MsgID
@@ -33,7 +33,7 @@
 MsgID
 IDá³"$
 Maajan_Tiles
-tiles (Rtiles"ú
+tiles (Rtiles"Ê
 Maajan_Player_Info-
 pb_ming_pai (2.Maajan_TilesR	pbMingPai
 shou_pai (RshouPai
@@ -49,7 +49,11 @@
 taxes (Rtaxes
 finish_task (R
 finishTask
-is_ting (RisTing"Ž
+is_ting (RisTing
+nick (	Rnick
+icon (Ricon
+gold (Rgold
+guid (Rguid"Ž
 Maajan_Reconnect_Data"
 act_left_time (RactLeftTime/
 chu_pai_player_index (RchuPaiPlayerIndex 

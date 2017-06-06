@@ -303,7 +303,22 @@ function QznnGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
 	
 	local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
 	if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN)then
-		self:exitGame()
+		CustomHelper.showAlertView(
+                "本局已经结束,退回到大厅!!!",
+                false,
+                true,
+                function(tipLayer)
+					
+                    self:exitGame()
+					tipLayer:removeFromParent()
+                end,
+                function(tipLayer)
+                    self:exitGame()
+					tipLayer:removeFromParent()
+                end
+        )
+	
+		
 	else
 		--- 尝试直接发送进入游戏消息
 		local tableinfo = self.qznnGameManager:getDataManager():getRoomInfo()
@@ -1909,6 +1924,7 @@ function QznnGameScene:updateUserInfo(dt )
 			--玩家名字
 			local userNameNode = uNode:getChildByName("Text_name")
 			userNameNode:setString(v.name)
+			CustomHelper.transeWordToStaticLen(userNameNode,110)
 			
 			--玩家钱
 			local userMoneyNode = uNode:getChildByName("Text_money")

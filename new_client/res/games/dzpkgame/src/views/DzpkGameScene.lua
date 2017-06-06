@@ -31,6 +31,20 @@ local cardTypeImagePath = {
 	
 }
 
+local cardTypeWords = {
+	[DzpkGameManager.CardType.CT_HIGH_CARD] = "高牌",
+	[DzpkGameManager.CardType.CT_ONE_PAIR] = "一对",
+	[DzpkGameManager.CardType.CT_TWO_PAIRS] = "两对",
+	[DzpkGameManager.CardType.CT_THREE_OF_A_KIND] = "三条",
+	[DzpkGameManager.CardType.CT_STRAIGHT] = "顺子",
+	[DzpkGameManager.CardType.CT_FLUSH] = "同花",
+	[DzpkGameManager.CardType.CT_FULL_HOUSE] = "葫芦",
+	[DzpkGameManager.CardType.CT_FOUR_OF_KIND] = "四条",
+	[DzpkGameManager.CardType.CT_STRAIT_FLUSH] = "同花顺",
+	[DzpkGameManager.CardType.CT_ROYAL_FLUSH] = "皇家同花顺",
+	
+}
+
 local heguanBottomPos = {x = 640,y = 562}
 local heguanMousePos = {x = 640,y = 664}
 local publicCardPosTop 	  = {[1] = {x = 386,y = 410},[2] = {x = 510,y = 410},[3] = {x = 634,y = 410},[4] = {x = 758,y = 410},[5] = {x = 882,y = 410}}
@@ -153,6 +167,8 @@ function DzpkGameScene:receiveServerResponseSuccessEvent(event)
     elseif msgName == DzpkGameManager.MsgName.SC_TexasSendUserCards then ---
 		--发牌飞行动画 usr
 		MusicAndSoundManager:getInstance():playerSoundWithFile("dzpksound/on_turn.mp3")
+		
+		self:updateLiangPaiNotice()
 		
 		self:sendPlayerDiPai(userInfo["pb_user"])
     elseif msgName == DzpkGameManager.MsgName.SC_TexasUserAction then ---有玩家操作 信息变化
@@ -373,7 +389,7 @@ function DzpkGameScene:ctor()
 	self._scheduler = scheduler:scheduleScriptFunc(function(dt)
             self:update(dt)
             end, 0.02, false);
-	
+	--self:update(0)
 
     GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	
@@ -676,9 +692,14 @@ function DzpkGameScene:initMenu()
 			if tableinfo == nil or users == nil or myinfo == nil then
 				return
 			end
-			if myinfo.action ~= nil and myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING then
+			if myinfo.action ~= nil and (myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING or 
+											myinfo.action == DzpkGameManager.TexasAction.ACT_FOLD) then
 				
 				self:exitGame()
+			elseif tableinfo.state == DzpkGameManager.TexasStatus.STATUS_WAITING or 
+					tableinfo.state == DzpkGameManager.TexasStatus.STATUS_SHOW_DOWN then
+				self:exitGame()	
+					
 			else
 				CustomHelper.showAlertView(
 				   "此时离开本局已经下注的筹码不能收回,确定要离开吗？",
@@ -839,7 +860,7 @@ end
 			local _gameTalk = requireForGameLuaFile("DzpkGameTalk");
 			local function sendmessage(key,str)
 				local a = 0
-				self.dzpkGameManager:sendChatMsg(str)
+				self.dzpkGameManager:sendChatMsg(key.."|"..str)
 			end
 			
 			self.gameTalk = _gameTalk:create(sendmessage)
@@ -1052,6 +1073,30 @@ local operateSound = {
 		  }
 }
 
+
+local talkSound = {
+	[1] = {
+			[1] = "dzpksound/talk/m_1.mp3",
+			[2] = "dzpksound/talk/m_2.mp3",
+			[3] = "dzpksound/talk/m_3.mp3",
+			[4] = "dzpksound/talk/m_4.mp3",
+			[5] = "dzpksound/talk/m_5.mp3",
+			[6] = "dzpksound/talk/m_6.mp3",
+			[7] = "dzpksound/talk/m_7.mp3",
+			[8] = "dzpksound/talk/m_8.mp3"
+		  },
+	[2] = {
+			[1] = "dzpksound/talk/f_1.mp3",
+			[2] = "dzpksound/talk/f_2.mp3",
+			[3] = "dzpksound/talk/f_3.mp3",
+			[4] = "dzpksound/talk/f_4.mp3",
+			[5] = "dzpksound/talk/f_5.mp3",
+			[6] = "dzpksound/talk/f_6.mp3",
+			[7] = "dzpksound/talk/f_7.mp3",
+			[8] = "dzpksound/talk/f_8.mp3"
+		  }
+}
+
 function DzpkGameScene:playerOperateSound(action,chair)
 	
 	local playerinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(chair)
@@ -1192,6 +1237,9 @@ function DzpkGameScene:setPublicCardEndPos()
 
 	--设置位置
 	for k,v in ipairs(self.publicCard) do
+		v:stopAllActions()
+		v:setScale(0.6)
+		v:setOpacity(255)
 		v:setPosition(endpos[k])
 	end
 	
@@ -1531,8 +1579,28 @@ end
 --
 function DzpkGameScene:talk(msgTab)
 	
+	local datas = string.split(msgTab.chat_content or "","|")
+	local words = msgTab.chat_content
+	local key = 1
+	if datas and table.nums(datas) >=2 then
+		words = datas[2]
+		key = tonumber(datas[1])
+	end
+	
+	
 	local user = self.dzpkGameManager:getDataManager():getUserInfoByGuid(msgTab["chat_guid"])
 	if user ~= nil then
+		
+		local isman = PlayerInfo:getIsMaleByHeadIconNum( CustomHelper.tonumber(user.icon))
+		local sex = 1
+		if isman == false then
+			sex = 2
+		end
+		MusicAndSoundManager:getInstance():playerSoundWithFile(talkSound[sex][key])
+		
+		
+		
+		
 		local userNode = self:getUserInfoNodeFromChairid(user.chair)
 		if userNode == nil then
 			return
@@ -1543,7 +1611,7 @@ function DzpkGameScene:talk(msgTab)
 		
 		local pos1 = userNode:getChildByName("Panel_talk"):convertToWorldSpace(cc.p(0,0))
 		talkui:setPosition(pos1)
-		talkui:getChildByName("Text_6"):setString(msgTab.chat_content)
+		talkui:getChildByName("Text_6"):setString(words)
 		
 		talkui:runAction(cc.Sequence:create(
             cc.DelayTime:create(5),
@@ -2363,6 +2431,7 @@ function DzpkGameScene:updateUserInfo(dt )
 			--玩家名字
 			local userNameNode = uNode:getChildByName("Text_name")
 			userNameNode:setString(v.name)
+			CustomHelper.transeWordToStaticLen(userNameNode,110)
 			
 			--玩家钱
 			local userMoneyNode = uNode:getChildByName("Text_money")
@@ -2408,6 +2477,7 @@ function DzpkGameScene:updateUserInfo(dt )
 			--筹码
 			local userChoumaNode = uNode:getChildByName("Panel_chouma")
 			userChoumaNode:getChildByName("Text_3"):setString( CustomHelper.moneyShowStyleNone(v.bet_money) )
+			CustomHelper.transeWordToStaticScaleLen(userChoumaNode:getChildByName("Text_3"),70)
 			if v.bet_money > 0 then
 				userChoumaNode:setVisible(true)
 			else
@@ -2519,6 +2589,23 @@ function DzpkGameScene:doWillOperate()
 	
 end
 
+--更新亮牌提示信息
+function DzpkGameScene:updateLiangPaiNotice()
+	local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+	if tableinfo == nil then
+		return
+	end
+	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
+	if myinfo == nil then
+		return
+	end
+	local userlistCCS = self.csNode:getChildByName("Panel_bottom")
+	local liangpai = userlistCCS:getChildByName("Panel_liangpai")
+	local noticeWord = noticeWords[math.random(1,#noticeWords)]
+	liangpai:getChildByName("Text_4"):setString(noticeWord)
+end
+
+
 
 --更新亮牌信息
 function DzpkGameScene:updateLiangPai()
@@ -2611,9 +2698,10 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	
 	
 	--设置按钮是否可点击
-	
+	local maxbet = self.dzpkGameManager:getDataManager():getUserMaxBet_money()
+	local mybet = self.dzpkGameManager:getDataManager():getMyBet_money()
 	--3X
-	if myinfo.money >= tableinfo.blind_bet*3 then
+	if myinfo.money >= tableinfo.blind_bet*3 and mybet+tableinfo.blind_bet*3 >= maxbet then
 		leftsmall:getChildByName("Button_1"):setEnabled(true)
 	else
 		leftsmall:getChildByName("Button_1"):setEnabled(false)
@@ -2621,7 +2709,7 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	
 	
 	--4X
-	if myinfo.money >= tableinfo.blind_bet*4 then
+	if myinfo.money >= tableinfo.blind_bet*4 and mybet+tableinfo.blind_bet*4 >= maxbet then
 		leftsmall:getChildByName("Button_2"):setEnabled(true)
 	else
 		leftsmall:getChildByName("Button_2"):setEnabled(false)
@@ -2706,7 +2794,7 @@ function DzpkGameScene:updatePlayerBtn(dt )
 		end
 		rightmyturn:getChildByName("Button_3_gen"):getChildByName("Text_2"):setString(  CustomHelper.moneyShowStyleNone(cha))
 		
-		
+		CustomHelper.transeWordToStaticScaleLen(rightmyturn:getChildByName("Button_3_gen"):getChildByName("Text_2"),126)
 		
 	elseif 	myinfo.action == DzpkGameManager.TexasAction.ACT_WAITING 	or
 			myinfo.action == DzpkGameManager.TexasAction.ACT_ALL_IN 	then
@@ -2745,7 +2833,7 @@ function DzpkGameScene:updatePlayerBtn(dt )
 				all:setVisible(false)
 				geng:setVisible(true)
 				geng:getChildByName("Text_4"):setString(  CustomHelper.moneyShowStyleNone(maxBet-myBet))
-				
+				CustomHelper.transeWordToStaticScaleLen(geng:getChildByName("Text_4"),126)
 				if maxBet-myBet ~= self.willOperate[3].num then
 					self:clearWillOperate()
 					self.willOperate[3].num = maxBet-myBet
@@ -2775,6 +2863,74 @@ function DzpkGameScene:updatePlayerBtn(dt )
 	
 end
 
+--获取自己的手牌和公共牌
+function DzpkGameScene:getMyCardsAndPublicCards()
+	local re = {}
+	local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+	if tableinfo == nil then
+		return re
+	end
+	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
+	if myinfo == nil or self.chairCard == nil or self.chairCard[tableinfo.own_chair] == nil then
+		return re
+	end
+	
+	for k,v in ipairs(self.chairCard[tableinfo.own_chair]) do
+		table.insert(re,v)
+	end
+	if self.publicCard ~= nil then
+		for k,v in ipairs(self.publicCard) do
+			table.insert(re,v)
+		end
+	end
+	
+	return re
+	
+end
+
+--预测牌型
+function DzpkGameScene:checkMyCardType(dt)
+	local tableinfo = self.dzpkGameManager:getDataManager():getTableInfo()
+	if tableinfo == nil then
+		return
+	end
+	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
+	if myinfo == nil then
+		return
+	end
+	
+	for k,v in ipairs(self:getMyCardsAndPublicCards()) do
+		v:HideLight()
+	end
+	
+	if myinfo.cards_type == nil or myinfo.cards_type == DzpkGameManager.CardType.CT_HIGH_CARD then
+		local uNode = self:getUserInfoNodeFromChairid(tableinfo.own_chair)
+		if uNode ~= nil then
+			uNode:getChildByName("Text_paixing"):setString("")
+			
+		end
+		return
+	end
+	
+	if myinfo.cards_show ~= nil then
+		for k,v in ipairs(myinfo.cards_show) do
+			for k1,v1 in ipairs(self:getMyCardsAndPublicCards()) do
+				if v == v1._num then
+					v1:ShowLight()
+				end
+			end
+		end
+	end
+	
+	--
+	
+	local uNode = self:getUserInfoNodeFromChairid(tableinfo.own_chair)
+	if uNode ~= nil then
+		uNode:getChildByName("Text_paixing"):setString(cardTypeWords[myinfo.cards_type])
+		
+	end
+end
+
 
 --更新信息
 function DzpkGameScene:update(dt )
@@ -2783,6 +2939,7 @@ function DzpkGameScene:update(dt )
 		self:updateUserInfo(dt)
 		self:updatePlayerBtn(dt)
 		self:updateLiangPai()
+		self:checkMyCardType(dt)
 end
 
 

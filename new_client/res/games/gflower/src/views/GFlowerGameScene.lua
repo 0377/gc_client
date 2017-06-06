@@ -723,7 +723,7 @@ function GFlowerGameScene:On_InitJetton()
         add_btn:addTouchEventListener(handler(self,self._onBtnTouched_bet))
 
         -- 设置筹码显示值
-        add_Label_Jetton:setString(""..(self._logic.MinJetton * GFlowerConfig.ADD_BTN_TIMES[i])/CustomHelper.goldToMoneyRate())
+        add_Label_Jetton:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton * GFlowerConfig.ADD_BTN_TIMES[i]))
     end
 end
 
@@ -1137,9 +1137,9 @@ function GFlowerGameScene:CreateCoin(coinType)
 
     -- 筹码显示文本数值
     local _coinLabel = cc.Label:create()
-    local _coinScore = GFlowerConfig.ADD_BTN_TIMES[coinType] * self._logic.MinJetton/CustomHelper.goldToMoneyRate()
+    local _coinScore = GFlowerConfig.ADD_BTN_TIMES[coinType] * self._logic.MinJetton
 
-    _coinLabel:setString("".._coinScore)
+    _coinLabel:setString(CustomHelper.moneyShowStyleAB(_coinScore))
     _coinLabel:setSystemFontSize(24)
     _coinLabel:setPosition(
         _coinSprite:getContentSize().width / 2,
@@ -1434,13 +1434,13 @@ function GFlowerGameScene:recoverMainTableUI()
 
     -- 设置文本
     -- 单住
-    self.Text_danzhu:setString(CustomHelper.moneyShowStyleNone(self._logic.MinJetton))
+    self.Text_danzhu:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton))
 
     -- 总注
-    self.Text_zongzhu:setString(CustomHelper.moneyShowStyleNone(self._logic.deskAllMoney))
+    self.Text_zongzhu:setString(CustomHelper.moneyShowStyleAB(self._logic.deskAllMoney))
 
     -- 底注文本 --
-    self.Label_Dizhu:setString(CustomHelper.moneyShowStyleNone(self._logic.MinJetton))
+    self.Label_Dizhu:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton))
     --print("---------------------------------onEnter---------------重置文字文本2："..self._logic.MinJetton)
 
     -- 轮数文本 --
@@ -1452,7 +1452,7 @@ function GFlowerGameScene:recoverMainTableUI()
         local downMoney = gfplayer:getDownMoney()
         local client_id = self._logic:getLocalChairId(gfplayer:getChairId())
         if downMoney > 0 then
-            self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleNone(downMoney))
+            self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleAB(downMoney))
         end
         self:UpdatePlayerStatus(client_id)
     end
@@ -1461,10 +1461,10 @@ end
 
 -- 重置文本 和 部分隐藏
 function GFlowerGameScene:resetMainTableUI()
-    self.Text_danzhu:setString(CustomHelper.moneyShowStyleNone(self._logic.MinJetton))
+    self.Text_danzhu:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton))
     self.Text_zongzhu:setString("0")
     -- 底注文本 --
-    self.Label_Dizhu:setString(CustomHelper.moneyShowStyleNone(self._logic.MinJetton))
+    self.Label_Dizhu:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton))
     --print("---------------------------------onEnter---------------重置文字文本1："..self._logic.MinJetton)
     -- 轮数文本 --
     self.Label_Lunshu:setString("0")
@@ -1584,7 +1584,7 @@ function GFlowerGameScene:setDiZhu()
        local client_id = player:getClientChairId()
         -- 下注累积
         if player:getDownMoney() > 0 then
-            self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleNone(player:getDownMoney()))
+            self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleAB(player:getDownMoney()))
         end
     end
 end
@@ -1629,14 +1629,14 @@ end
 function GFlowerGameScene:setPlayerInfo(gfplayer)
     local chair = gfplayer:getClientChairId()
     self.playername[chair]:setString(gfplayer:getNickName())
-    local p_money  = CustomHelper.moneyShowStyleNone(gfplayer:getMoney())
+    local p_money  = CustomHelper.moneyShowStyleAB(gfplayer:getMoney())
     self.playergold[chair]:setString(p_money)
     self.playerhead[chair]:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(gfplayer:getHeadIconNum())..".png"))
     local  downMoney = gfplayer:getDownMoney()
     if downMoney == 0 then 
         self.playerxiazhu[chair]:setString("获取中")
     else
-        self.playerxiazhu[chair]:setString(CustomHelper.moneyShowStyleNone(downMoney))
+        self.playerxiazhu[chair]:setString(CustomHelper.moneyShowStyleAB(downMoney))
     end
     self.gf_player[chair]:setVisible(true)
 end
@@ -2312,13 +2312,13 @@ function GFlowerGameScene:setJieSuanPanelInfo()
                     local win_num = Image_winer:getChildByName("icon")
                     local tax = Image_winer:getChildByName("tax")
                     
-                    win_num:setString(""..(score - playerDownMoney)/ CustomHelper.goldToMoneyRate())
-                    tax:setString(""..self.tax / CustomHelper.goldToMoneyRate())
+                    win_num:setString(CustomHelper.moneyShowStyleAB(score - playerDownMoney))
+                    tax:setString(CustomHelper.moneyShowStyleAB(self.tax))
                 else
                     Image_lost:setVisible(true)
                     Image_winer:setVisible(false)
                     local score_num = Image_lost:getChildByName("icon")
-                    score_num:setString(""..(score - playerDownMoney) / CustomHelper.goldToMoneyRate())
+                    score_num:setString(CustomHelper.moneyShowStyleAB(score - playerDownMoney))
                 end
 
                 -- 按牌编号显示牌
@@ -2357,7 +2357,7 @@ function GFlowerGameScene:setJieSuanPanelInfo()
                 Image_lost:setVisible(true)
                 Image_winer:setVisible(false)
                 local score_num = Image_lost:getChildByName("icon")
-                score_num:setString(""..score / CustomHelper.goldToMoneyRate())
+                score_num:setString(CustomHelper.moneyShowStyleAB(score))
 
                 Image_caozuo:setVisible(true)
                 --默认为弃牌 否则为淘汰
@@ -2631,21 +2631,21 @@ end
 function GFlowerGameScene:On_UpdatePlayerMoney(gfplayer)
     local client_id = gfplayer:getClientChairId()
     -- 金币
-    self.playergold[client_id]:setString(CustomHelper.moneyShowStyleNone(gfplayer:getMoney()))
+    self.playergold[client_id]:setString(CustomHelper.moneyShowStyleAB(gfplayer:getMoney()))
 
     -- 下注累积
     if gfplayer:getDownMoney() > 0 then
-        self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleNone(gfplayer:getDownMoney()))
+        self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleAB(gfplayer:getDownMoney()))
     end
 end
 
 -- 更新桌面总注 单注大小
 function GFlowerGameScene:On_UpdateDeskMoney(follow_num, all_money)
     -- 单注大小
-    self.Text_danzhu:setString(""..follow_num/CustomHelper.goldToMoneyRate())
+    self.Text_danzhu:setString(CustomHelper.moneyShowStyleAB(follow_num))
 
     -- 桌面总注
-    self.Text_zongzhu:setString(""..all_money/CustomHelper.goldToMoneyRate())
+    self.Text_zongzhu:setString(CustomHelper.moneyShowStyleAB(all_money))
 end
 
 function GFlowerGameScene:setLunshuStr(num)
@@ -2665,7 +2665,7 @@ function GFlowerGameScene:setComparePlayerInfo(name_win, money_win, name_lost, m
     name:setString(name_win)
     -- 金钱
     local num = _playerUp:getChildByName("Label_GoldNum")
-    local p_Money = CustomHelper.moneyShowStyleNone(money_win)
+    local p_Money = CustomHelper.moneyShowStyleAB(money_win)
     num:setString(""..p_Money)
     -- 头像
     local headicon = _playerUp:getChildByName("headicon")
@@ -2680,7 +2680,7 @@ function GFlowerGameScene:setComparePlayerInfo(name_win, money_win, name_lost, m
     name_d:setString(name_lost)
     -- 金钱
     local num_d = _playerDown:getChildByName("Label_GoldNum")
-    p_Money = CustomHelper.moneyShowStyleNone(money_lost)
+    p_Money = CustomHelper.moneyShowStyleAB(money_lost)
     num_d:setString(""..p_Money)
     -- 头像
     local headicon_d = _playerDown:getChildByName("headicon")

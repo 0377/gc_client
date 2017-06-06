@@ -66,10 +66,13 @@ function ViewManager.initPublicTopInfoLayer(layer, titleImageName)
     local goldStr = CustomHelper.moneyShowStyleNone(myPlayerInfo:getMoney());
     goldStr = string.gsub(goldStr, "%.", "/")
     goldText:setString(goldStr)
+    goldText:setScale(math.min(1,160 / goldText:getContentSize().width))
     local bankText = tolua.cast(CustomHelper.seekNodeByName(layer, "top_bank_text"), "ccui.TextAtlas");
     local bankStr = CustomHelper.moneyShowStyleNone(myPlayerInfo:getBank());
     bankStr = string.gsub(bankStr, "%.", "/")
     bankText:setString(bankStr)
+    bankText:setScale(math.min(1,160 / bankText:getContentSize().width))
+
     local titleView = tolua.cast(CustomHelper.seekNodeByName(layer, "titile_view"), "ccui.ImageView");
     titleView:ignoreContentAdaptWithSize(true);
     titleView:loadTexture(CustomHelper.getFullPath(titleImageName));

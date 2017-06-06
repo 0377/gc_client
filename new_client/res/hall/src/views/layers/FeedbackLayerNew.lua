@@ -86,7 +86,7 @@ function FeedbackLayerNew:onCreateContent()
     self.textfield = textfield
 
     local bgFileName = "bank_file"
-    self.editboxFeedback = ccui.EditBox:create(textfield:getContentSize(),bgFileName)
+    self.editboxFeedback = ccui.EditBox:create(cc.size(bg_editbox:getContentSize().width - 16, bg_editbox:getContentSize().height), bgFileName)
     self.editboxFeedback:setPosition(textfield:getPosition())
     self.editboxFeedback:setAnchorPoint(textfield:getAnchorPoint())
     self.editboxFeedback:setFontName("Helvetica-Bold")

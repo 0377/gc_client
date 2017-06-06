@@ -379,25 +379,29 @@ end
 --补花 其他玩家补花的时候，数据结构按照
 function TmjOtherPlayer:buHuaCard(cardInfo)
 	--todo
-	sslog(self.logTag,"补花")
+	sslog(self.logTag,"其他玩家补花")
 	--摸到牌的补花动画 如果有
 	local function loopGetCardBuHua(cardInfos,index)
 		if index<= table.nums(cardInfos) then
-			
-			if cardInfos[index].val>=TmjConfig.Card.R_Spring and cardInfos[index].val<= TmjConfig.Card.R_Chry then
+			self.huaCount = self.huaCount or 0
+			self.huaCount = self.huaCount + 1
+			self:setHeadInfo({ huaCount = self.huaCount })
+			sslog(self.logTag,"当前index:"..tostring(index))
+			if cardInfos[index+1].val>=TmjConfig.Card.R_Spring and cardInfos[index+1].val<= TmjConfig.Card.R_Chry then
 				sslog(self.logTag,"播放补花动画")
 			else
 				sslog(self.logTag,"补花时，摸到正常的牌")
 			end
-			index = index + 1
-			loopGetCardBuHua(cardInfos,index)
+			performWithDelay(self,function ()
+				sslog(self.logTag,"补花动画播放完成")
+				index = index + 2
+				loopGetCardBuHua(cardInfos,index)
+			end,1)
+			
 		else
 			--最后一张了，不是花
 			--如果有手牌
 			--不用管了
-			if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
-				sslog(self.logTag,"播放补花动画")
-			end
 			sslog(self.logTag,"补花结束")
 			TmjOtherPlayer.super.buHuaCard(self,cardInfo)
 		end
@@ -407,7 +411,10 @@ function TmjOtherPlayer:buHuaCard(cardInfo)
 	loopGetCardBuHua(cardInfo,1)
 	
 end
-
+function TmjOtherPlayer:checkToSetLastHandCard()
+	sslog(self.logTag,"其他玩家检测最后一张牌为手牌动作")
+	TmjOtherPlayer.super.checkToSetLastHandCard(self)
+end
 --根据传入的牌组合，放到额外牌位置
 function TmjOtherPlayer:setExtraPosition(tempCardArr)
 	--self.extraCardPos

@@ -78,6 +78,7 @@ function FeedbackHelper.queryFeedback(page,callback)
         }, function(xhr,isSuccess)
             if isSuccess then
                 local responseStr = xhr.response;
+                responseStr = string.gsub(responseStr, "\\", "")
                 local data = json.decode(responseStr)
                 -- dump(data, "FeedbackHelper.queryFeedback", nesting)
                 if data and data.status == 1 then

@@ -308,8 +308,8 @@ cur_serial (R	curSerial"
 IDâ"v
 SC_NotifyMoney
 opt_type (RoptType
-money (Rmoney!
-change_money (RchangeMoney"
+money (Rmoney!
+change_money (RchangeMoney"
 MsgID
 IDã"S
 CS_BankTransferByGuid
@@ -616,7 +616,7 @@ is_offline (R	isOffline"
 MsgID
 ID¬V"7
 SC_Gamefinish
-money (Rmoney"
+money (Rmoney"
 MsgID
 ID®V"Í
 SC_PlayerReconnection

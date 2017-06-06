@@ -18,7 +18,7 @@
 				"ios_create_order": "http:\/\/119.23.142.36:8080\/api\/apple\/store",
 				"web_query_order": "http:\/\/119.23.142.36:8080\/api\/pay\/show"
 			},
-			"gold_to_money_ratio": 100,
+			"gold_to_money_ratio": 0.1,
 			"personal_center_btns": [{
 				"account_bind_view_btn": true
 			}, {

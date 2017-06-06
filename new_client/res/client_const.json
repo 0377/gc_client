@@ -9,7 +9,11 @@
         "update_url": "http:\/\/192.168.7.32\/test\/hall.zip"
     },
     "hall_info": {
-        "addr": ["14.29.123.142#7788"],
+        "addr": ["192.168.7.174#7788"],
+        "addr": ["192.168.7.137#7788"],
+        "addr": ["14.29.123.142#7789","14.29.123.142#7788"],
+
+
         "config": {
             "hall_ui_other_btns_config": {
                 "btn_kaifu": true,
@@ -22,7 +26,7 @@
                 "ios_create_order": "http:\/\/119.23.142.36:8080\/api\/apple\/store",
                 "web_query_order": "http:\/\/119.23.142.36:8080\/api\/pay\/show"
             },
-            "gold_to_money_ratio": 100,
+            "gold_to_money_ratio": 0.1,
             "personal_center_btns": [
                 {
                     "account_bind_view_btn": true

@@ -133,14 +133,15 @@ function SHMyPlayer:createRaiseButtons()
 		sslog(self.logTag,"显示的加倍数:"..tostring(showBet)..",最大的加倍额度:"..tostring(maxAdd))
 		if showBet <= maxAdd then -- 未超过最大允许的
 			btn:setVisible(true)
-			local s = string.gsub(tostring(showBet), '%.', '/' )
+			
+			local s = string.gsub(CustomHelper.moneyShowStyleNone(showBet*100), '%.', '/' )
 			label:setString(s)
 		else
 			if i>1 then
 				local preBet = startTimes * self.baseBet*math.pow(2,i-2)
 				if preBet < maxAdd then --上一个加注金额未超过我的金币
 					btn:setVisible(true)
-					local s = string.gsub(tostring(maxAdd), '%.', '/' )
+					local s = string.gsub(CustomHelper.moneyShowStyleNone(maxAdd*100), '%.', '/' )
 					label:setString(s)
 				end
 				
@@ -160,7 +161,8 @@ function SHMyPlayer:raiseButtonListener(ref,eventType)
 		local atlasBet = CustomHelper.seekNodeByName(ref,string.format("AtlasLabel_%d",ref:getTag()))
 		--发送加注消息
 		local target = string.gsub(atlasBet:getString(), '/', '.' )
-		local sendTarget = tonumber(target)*100
+		
+		local sendTarget = tonumber(target)*CustomHelper.goldToMoneyRate()
 		
 		SHGameManager:getInstance():sendRaiseMsg(sendTarget)--发送是以分为单位
 		self:hideOperationNodes()
@@ -305,7 +307,8 @@ function SHMyPlayer:showDealView(cardinfo)
 		if k==SHConfig.CardOperation.Call then
 			local callAtlas = CustomHelper.seekNodeByName(v,"AtlasLabel_call")
 			local callImg = CustomHelper.seekNodeByName(v,"Image_call")
-			local s = string.gsub(tostring(diffBet), '%.', '/' )
+			
+			local s = string.gsub(CustomHelper.moneyShowStyleNone(diffBet*100), '%.', '/' )
 			callAtlas:setString(s)
 			local btnWidth = v:getContentSize().width
 			local textWidth = callAtlas:getContentSize().width + callImg:getContentSize().width

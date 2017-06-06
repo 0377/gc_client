@@ -6,17 +6,17 @@ HallGameConfig.game = {};
 
 
 HallGameConfig.game.ID_DemoGame    = 2   
-HallGameConfig.game.ID_DDZGame     = 5
-HallGameConfig.game.ID_GFLOWER     = 6
-HallGameConfig.game.ID_SHGame     = 7 --梭哈
+HallGameConfig.game.ID_DDZGame     = 5  -- 斗地主
+HallGameConfig.game.ID_GFLOWER     = 6  -- 炸金花
+HallGameConfig.game.ID_SHGame     = 7   --梭哈
 
-HallGameConfig.game.ID_FISHGAME    = 3   --zzl 捕鱼游戏id  与服务器同步
+HallGameConfig.game.ID_FISHGAME    = 3   --zzl 捕鱼游戏id  与服务器同步 李逵
 
-HallGameConfig.game.ID_BRNNGame    = 8
-HallGameConfig.game.ID_TMJGame    = 13 --二人麻将
-HallGameConfig.game.ID_LHJGame     = 12
-HallGameConfig.game.ID_DZPKGame    = 11
-HallGameConfig.game.ID_QZNNGame    = 14
+HallGameConfig.game.ID_BRNNGame    = 8  -- 百人牛牛
+HallGameConfig.game.ID_TMJGame    = 13  -- 二人麻将
+HallGameConfig.game.ID_LHJGame     = 12 -- 老虎机
+HallGameConfig.game.ID_DZPKGame    = 11 -- 德州扑克
+HallGameConfig.game.ID_QZNNGame    = 14 -- 抢庄牛牛
 --- wKind:游戏ID gameName:游戏名称 module:游戏模块  entrance:游戏入口加载文件 dwClientVersion:游戏版本号
 HallGameConfig.gameOrderList = 
 {
@@ -25,7 +25,7 @@ HallGameConfig.gameOrderList =
 	HallGameConfig.game.ID_GFLOWER,
 	HallGameConfig.game.ID_FISHGAME,
 	HallGameConfig.game.ID_BRNNGame,
-	-- HallGameConfig.game.ID_TMJGame,
+	HallGameConfig.game.ID_TMJGame,
 	HallGameConfig.game.ID_LHJGame,
 	HallGameConfig.game.ID_SHGame,
 	HallGameConfig.game.ID_DZPKGame,
@@ -66,7 +66,7 @@ HallGameConfig.game.IconConfig = {
 
     [HallGameConfig.game.ID_BRNNGame] = "hall_res/hall/bb_dating_youxitubiao_3_1.png",
 	
-    [HallGameConfig.game.ID_TMJGame] = "hall_res/hall/bb_dating_youxitubiao_3_1.png",
+    [HallGameConfig.game.ID_TMJGame] = "hall_res/hall/bb_dating_youxitubiao_9_1.png",
 
     [HallGameConfig.game.ID_LHJGame] = "hall_res/hall/bb_dating_youxitubiao_4_2.png",
     [HallGameConfig.game.ID_DZPKGame] = "hall_res/hall/bb_dating_youxitubiao_10_1.png",
@@ -209,16 +209,40 @@ HallGameConfig.allGames = {
 		[HallGameConfig.GamePackageRootPathKey]       = "games/fishgame/",
 		[HallGameConfig.GameEntranceKey]	          = "FishgameEntry",
 		[HallGameConfig.GameIconKey]	 			  =	HallGameConfig.game.IconConfig[HallGameConfig.game.ID_FISHGAME],
-		-- [HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SceondaryZJHNode",
-		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/np_zh_zhajinhua_chart/bb_fc_zjh_biaotizi.png",
+		[HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SceondaryLKPYNode",
+		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/lkpy_chart/bb_fc_lkpy_biaotizi.png",
 		[HallGameConfig.SecondRoomKey]		          = {
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "新手",
+				[HallGameConfig.SecondRoomNameKey]			  = "海沟",
 				[HallGameConfig.SecondRoomIDKey] 			  = 1,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/zjh/zjh_qigaichang.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/lkpy_chart/BB_icon_lkpy_hg.png",
 				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "浅滩",
+				[HallGameConfig.SecondRoomIDKey] 			  = 2,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/lkpy_chart/BB_icon_lkpy_qt.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "深海",
+				[HallGameConfig.SecondRoomIDKey] 			  = 3,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/lkpy_chart/BB_icon_lkpy_sh.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "峡湾",
+				[HallGameConfig.SecondRoomIDKey] 			  = 4,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/lkpy_chart/BB_icon_lkpy_xw.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10
 			},
 		}
 	},
@@ -263,12 +287,36 @@ HallGameConfig.allGames = {
 		-- [HallGameConfig.GameIconAnimKey]			  = HallGameConfig.game.IconAnimConfig[HallGameConfig.game.ID_BRNNGame],
 		-- [HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SceondaryZJHNode",
 		-- [HallGameConfig.GameSecondEffectResKey]	      = "anim/game_select/baobo_zjh_choice_02/baobo_zjh_choice_02.ExportJson",--前面为资源名，后面为动画名
-		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/zjh/zjh_biaotizi.png",
+		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/ermj_chart/bb_fc_ermj_biaotizi.png",
 		[HallGameConfig.SecondRoomKey]		          = {
 			{
-				[HallGameConfig.SecondRoomNameKey]			  = "新手",
+				[HallGameConfig.SecondRoomNameKey]			  = "小雀场",
 				[HallGameConfig.SecondRoomIDKey] 			  = 1,
-				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/np_zh_zhajinhua_chart/BB_icon_zjh_xsc.png",
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/ermj_chart/BB_icon_ermj_xqc.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "成雀场",
+				[HallGameConfig.SecondRoomIDKey] 			  = 2,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/ermj_chart/BB_icon_ermj_cqc.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "老雀场",
+				[HallGameConfig.SecondRoomIDKey] 			  = 3,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/ermj_chart/BB_icon_ermj_lqc.png",
+				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	
+			},
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "雀神场",
+				[HallGameConfig.SecondRoomIDKey] 			  = 4,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/ermj_chart/BB_icon_ermj_qsc.png",
 				--[HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10	

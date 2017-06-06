@@ -84,8 +84,8 @@ public:
 	virtual bool OnUpdate(float fdt,bool shouldUpdate);
 
 	bool InSideScreen(){ 
-		return m_pPosition.x > 10 && m_pPosition.x < 1430 &&
-			m_pPosition.y > 10 && m_pPosition.y < 890;
+		return position.x > 10 && position.x < 1430 &&
+			position.y > 10 && position.y < 890;
 	}
 	void OnMoveEnd();
 		
@@ -103,6 +103,14 @@ public:
 	cocos2d::Vector<MyObject*> ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 
 	void  registerStatusChangedHandler(int);
+
+
+
+	virtual void setGamePos(float x, float y);
+	virtual void setGameDir(float rotation);
+
+	virtual const cocos2d::Vec2& getGamePos() const;
+	virtual float getGameDir() const;
 protected:
 	int m_nType;
 
@@ -123,6 +131,8 @@ protected:
 	int m_nTargetId;
 
 	int m_nTypeId;
+
+	bool m_bMarkEffectDone;
 		
 	std::vector<VisualNode>	m_pVisualNodeList;
 	//
@@ -137,6 +147,11 @@ protected:
 	MoveCompent* m_pMoveCompent;
 
 	int m_handler_statusChanged;
+
+
+
+	float rotation;
+	cocos2d::Vec2 position;
 };
 
 class Fish : public MyObject

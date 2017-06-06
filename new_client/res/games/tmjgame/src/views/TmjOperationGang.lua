@@ -29,6 +29,7 @@ function TmjOperationGang:initView(operationData)
 	self:addChild(node.root)
 	local imgTag = CustomHelper.seekNodeByName(node.root,"Image_tag")
 	CustomHelper.seekNodeByName(node.root,"Image_tag"):addTouchEventListener(handler(self,self.touchListener))
+	CustomHelper.seekNodeByName(node.root,"Image_1"):addTouchEventListener(handler(self,self.touchListener))
 	--Image_1
 	local img = CustomHelper.seekNodeByName(node.root,"Image_1")
 	for i=1,4 do

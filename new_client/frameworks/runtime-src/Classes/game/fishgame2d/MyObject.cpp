@@ -23,6 +23,7 @@ MyObject::MyObject()
 	, m_pManager(nullptr)
 	, m_pMoveCompent(nullptr)
 	, m_nTargetId(0)
+	, m_bMarkEffectDone(false)
 {}
 
 MyObject::~MyObject(){
@@ -149,15 +150,15 @@ void MyObject::setState(int st){
 		return;
 	}
 
+	if (st == EOS_DEAD)
+	{
+		cocos2d::Vector<MyObject*> vector;
+		self:ExecuteEffects(nullptr, vector, false);
+	}
+
 	m_nState = st;
 	m_bDirtyState = true;
-
-
-	if (st == EOS_DESTORED)
-	{
-		int a = 1;
-		int b = 2;
-	}
+	
 #if CC_ENABLE_SCRIPT_BINDING
 	cocos2d::LuaStack *_stack = cocos2d::LuaEngine::getInstance()->getLuaStack();
 	_stack->pushInt(m_nState);
@@ -204,6 +205,9 @@ int MyObject::GetTarget(){
 }
 
 cocos2d::Vector<MyObject*> MyObject::ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating){
+	if (m_bMarkEffectDone) return list;
+	m_bMarkEffectDone = true;
+
 	for (auto v : list){
 		if (v->getId() == getId()){
 			return list;
@@ -230,6 +234,30 @@ void  MyObject::registerStatusChangedHandler(int handler) {
 #endif
 }
 
+void MyObject::setGamePos(float x, float y) {
+	this->position.x = x;
+	this->position.y = y;
+
+	FishObjectManager::GetInstance()->ConvertCoord(&x, &y);
+
+	this->setPosition(x, y);
+}
+
+void MyObject::setGameDir(float rotation) {
+	this->rotation = rotation;
+
+
+	FishObjectManager::GetInstance()->ConvertDirection(&rotation);
+	this->setRotation(CC_RADIANS_TO_DEGREES(rotation));
+}
+
+const cocos2d::Vec2& MyObject::getGamePos() const {
+	return this->position;
+}
+float MyObject::getGameDir() const {
+	return this->rotation;
+}
+
 Fish::Fish() 
 	: MyObject()
 	, m_nRedTime(0)
@@ -247,20 +275,24 @@ Fish::Fish()
 Fish::~Fish(){}
 
 void Fish::setPosition(float x, float y) {
+	this->position.x = x;
+	this->position.y = y;
+
+
 	if (m_debug) m_debug->setPosition(x, y);
 	if (m_content) m_content->setPosition(x, y);
 	if (m_shadow) m_shadow->setPosition(x, y - 35);
-
-	this->position.x = x;
-	this->position.y = y;
 }
 
 void Fish::setRotation(float rotation) {
+	this->rotation = rotation;
+
+	FishObjectManager::GetInstance()->ConvertDirection(&rotation);
+
 	if (m_debug) m_debug->setRotation(rotation);
 	if (m_content) m_content->setRotation(rotation);
 	if (m_shadow) m_shadow->setRotation(rotation);
 
-	this->rotation = rotation;
 }
 
 const cocos2d::Vec2& Fish::getPosition() const {

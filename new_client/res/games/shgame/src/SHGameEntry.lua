@@ -36,7 +36,7 @@ function SHGameEntry:getNeedPreloadResArray()
 end
 
 function SHGameEntry:getVerionStr()
-    return "二人梭哈.v2"
+    return "二人梭哈.v3"
 end
 
 return SHGameEntry

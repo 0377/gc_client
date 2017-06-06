@@ -11,6 +11,7 @@ local TmjMyPlayer = class("TmjMyPlayer",requireForGameLuaFile("TmjPlayer"))
 local TmjConfig = import("..cfg.TmjConfig")
 local TmjHelper = import("..cfg.TmjHelper")
 local TmjCardTip = import("..cfg.TmjCardTip")
+local TmjFanCalculator = import("..cfg.TmjFanCalculator")
 local TmjOperationFactory = requireForGameLuaFile("TmjOperationFactory")
 local TmjTingHuInfo = requireForGameLuaFile("TmjTingHuInfo")
 
@@ -124,9 +125,11 @@ function TmjMyPlayer:onTouchListener(event)
 				self.curChooseIndex = nil
 				self.choosedCardIndex = nil
 			else
+				sslog(self.logTag,"并不该我出牌")
 				self.rechooseCur = true
 			end
 		else
+			sslog(self.logTag,"和之前的选择不一样，放下")
 			self.rechooseCur = false
 			self:putDownCards()
 		end
@@ -142,8 +145,7 @@ end
 function TmjMyPlayer:chooseCard(x,y)
 	local chooseIndex = 0
 	local function isContainsTouch(index,x,y,TmjCard)
-		if TmjCard:isContainsTouch(cc.p(x,y)) then			
-			
+		if TmjCard:isContainsTouch(cc.p(x,y)) then
 			self.choosedCardIndex = index
 			local state = TmjCard:getState()
 			if state~=TmjConfig.CardState.State_Up then
@@ -175,6 +177,10 @@ function TmjMyPlayer:chooseCard(x,y)
 		local TmjCard = self.getCard.node
 		isContainsTouch(-1,x,y,TmjCard) -- -1代表摸到的牌
 	end
+	
+	if chooseIndex==0 then --没触摸到牌
+		self:closeTingHuInfo()
+	end
 	return chooseIndex
 end
 --放下手牌
@@ -191,7 +197,9 @@ function TmjMyPlayer:putDownCards()
 		TmjCard:setTingTag(false)
 	end
 	self.choosedCardIndex = 0
+
 end
+
 --当有完整牌的时候，判断手牌可以操作的
 --@param isOther 是否是其他人打的牌 否则是自己摸的
 --@param inputCard 最后一张牌 可以是其他人打的牌 也可能是自己摸到的牌
@@ -209,7 +217,20 @@ function TmjMyPlayer:checkFullCard(isOther,inputCard)
 	local function checkToInsert(val,operation,tOperation)
 		local result = self:checkOperation(val,operation)
 		if result then
-			table.insert(tOperation,{type = operation,weight = TmjCardTip.operationWeight[operation] or 0,result = result })
+			local hasOperation = false
+			if tOperation then
+				for _,v in pairs(tOperation) do
+					if v.type == operation then
+						hasOperation = true
+						break
+					end
+				end
+			end
+			--防止重复添加
+			if not hasOperation then
+				table.insert(tOperation,{type = operation,weight = TmjCardTip.operationWeight[operation] or 0,result = result })
+			end
+			
 		end
 	end
 	--排序操作集合，用于在UI上显示顺序
@@ -239,7 +260,19 @@ function TmjMyPlayer:checkFullCard(isOther,inputCard)
 		else
 			checkToInsert(inputCard.val,TmjCardTip.CardOperation.AnGang,operations)
 			checkToInsert(inputCard.val,TmjCardTip.CardOperation.BuGang,operations)
-			checkToInsert(inputCard.val,TmjCardTip.CardOperation.Ting,operations)
+			checkToInsert(inputCard.val,TmjCardTip.CardOperation.Hu,operations)
+			--能胡不能听
+			local hasHu = false
+			for _,v in pairs(operations) do
+				if v.type == TmjCardTip.CardOperation.Hu then
+					hasHu = true
+					break
+				end
+			end
+			if not hasHu then --不能胡的时候，检测听
+				checkToInsert(inputCard.val,TmjCardTip.CardOperation.Ting,operations)
+			end
+			
 		end
 	end
 	--里边没有听 并且长度大于1
@@ -347,6 +380,7 @@ end
 --@param isPreCard 是否上一个玩家的出牌提示
 function TmjMyPlayer:showOperationPanel(operations,isPreCard)
 	--先关闭
+	sslog(self.logTag,"先关闭操作界面")
 	self:closeOperationPanel()
 	table.sort(operations,function (t1,t2)
 		return t1.weight <= t2.weight
@@ -354,18 +388,19 @@ function TmjMyPlayer:showOperationPanel(operations,isPreCard)
 
 	
 	ssdump(operations,"我能干什么",5)
-	TmjOperationFactory:setStartPos(cc.p(display.width,250))
-	TmjOperationFactory:setCancelTingFun(handler(self,self.reSetCardGray))
+	TmjOperationFactory:getInstance():setStartPos(cc.p(display.width,250))
+	TmjOperationFactory:getInstance():setCancelTingFun(handler(self,self.reSetCardGray))
 	self.isPreCard = isPreCard
 	self.curOperations = operations
 	
 	table.walk(operations,function (v,k)
-		TmjOperationFactory:createOperationWidget(TmjGameScene,v.type,v.result,handler(self,self.doChooseOperation))
+		TmjOperationFactory:getInstance():createOperationWidget(TmjGameScene,v.type,v.result,handler(self,self.doChooseOperation))
 	end)
 	
 end
 
 function TmjMyPlayer:closeTingHuInfo()
+	sslog(self.logTag,"关闭听胡界面")
 	self.showChooseIndex = nil
 	local TmjGameScene = display.getRunningScene():getChildByName("TmjGameScene")
 	if TmjGameScene:getChildByName("huinfo") then
@@ -376,6 +411,7 @@ end
 --选择听牌的时候，显示胡牌信息
 --@param chooseIndex 选择牌的位置
 function TmjMyPlayer:showTingHuInfo(chooseIndex)
+	sslog(self.logTag,"选择听牌，显示听牌界面")
 	--选择的是手牌
 	if self.showChooseIndex and self.showChooseIndex == chooseIndex then
 		return --不用管了
@@ -394,8 +430,60 @@ function TmjMyPlayer:showTingHuInfo(chooseIndex)
 	end
 	local showResult = {}
 	table.walk(self.tingResult[chooseVal],function (val,k)
+		--val 胡的这张牌
+		local cards = {}
+		cards.ming_pai = {}
+		cards.shou_pai = {}
+		--把手上的牌加上去
+		local hasRemoveOne  = false
+		table.walk(self.handCards,function (cardBundle,kk)
+			if cardBundle and cardBundle.info and cardBundle.info.val then
+				
+				if cardBundle.info.val == chooseVal then
+					if hasRemoveOne then
+						table.insert(cards.shou_pai,cardBundle.info.val)
+					end
+					hasRemoveOne = true
+				else
+					table.insert(cards.shou_pai,cardBundle.info.val)
+				end
+				
+				
+			end
+		end)
+		if self.getCard and self.getCard.info and self.getCard.info.val then
+			cards.shou_pai = cards.shou_pai or {}
+			if self.getCard.info.val==chooseVal then
+					if hasRemoveOne then
+						table.insert(cards.shou_pai,self.getCard.info.val)
+					end
+			else
+				table.insert(cards.shou_pai,self.getCard.info.val)
+			end
+		end
 		
-		table.insert(showResult,{ val= val,count = TmjGameManager:getInstance():getRestCardCount(val),fan = 88 })
+		cards.shou_pai = cards.shou_pai or {}
+		--从手牌中删除掉选择的牌
+		
+		table.insert(cards.shou_pai,val)
+		--明牌
+		table.walk(self.extraCards,function (cardBundle,kk)
+			if cardBundle.arr then
+				
+				local tempVals = {}
+				table.walk(cardBundle.arr,function (cardInfo,kkk)
+					if cardInfo then
+						table.insert(tempVals,cardInfo.info.val)
+					end
+				end)
+				table.insert(cards.ming_pai,tempVals)
+			end
+		end)
+		ssdump(cards,"计算牌型")
+		local fanInfo = TmjFanCalculator.getFan(cards)
+		local showFan = (fanInfo and fanInfo.fan) and fanInfo.fan or 0
+
+		table.insert(showResult,{ val= val,count = TmjGameManager:getInstance():getRestCardCount(val),fan = showFan })
 	end)
 	
 	--self.tingResult
@@ -437,6 +525,14 @@ function TmjMyPlayer:doChooseTing(result)
 			TmjCard:setGray()
 		end
 	end
+	if self.getCard then
+		local TmjCard = self.getCard.node
+		if containsTingCard(result,self.getCard.info.val) then
+			TmjCard:reSetGray()
+		else
+			TmjCard:setGray()
+		end
+	end
 end
 --放弃听牌的重置牌操作
 function TmjMyPlayer:reSetCardGray()
@@ -445,12 +541,23 @@ function TmjMyPlayer:reSetCardGray()
 	if self.handCards then
 		table.walk(self.handCards,function (TmjCard,k)
 			TmjCard = TmjCard.node
-			TmjCard:reSetGray()
+			if TmjCard then
+				TmjCard:reSetGray()
+			end
 		end)
+	end
+	if self.getCard then
+		local TmjCard = self.getCard.node
+		if TmjCard then
+			TmjCard:reSetGray()
+		end
+		
 	end
 end
 
 function TmjMyPlayer:doChooseOperation(operation,index)
+	self:stopPlaySchedule()
+	self:stopDecisionSchedule()
 	if operation==TmjConfig.cardOperation.Hu then
 		if index==1 then --胡
 			--self:doOperation(TmjConfig.cardOperation.Hu)
@@ -463,7 +570,7 @@ function TmjMyPlayer:doChooseOperation(operation,index)
 			else
 				TmjGameManager:getInstance():requestPass()
 			end
-			TmjOperationFactory:clearOperation()
+			TmjOperationFactory:getInstance():clearOperation()
 		end
 	elseif operation == TmjConfig.cardOperation.Chi then
 		--self:doOperation(operation)
@@ -488,7 +595,7 @@ function TmjMyPlayer:doChooseOperation(operation,index)
 			scheduler:unscheduleScriptEntry(self._decisionScheduler)
 			self._decisionScheduler = nil
 		end
-		TmjMyPlayer.super.getPreToPlay(self,nil)
+		--TmjMyPlayer.super.getPreToPlay(self,nil)
 	else --我自己的牌提示，关闭界面
 		--TmjOperationFactory:clearOperation()
 		if self._playScheduler then
@@ -503,7 +610,7 @@ function TmjMyPlayer:closeOperationPanel()
 	sslog(self.logTag,"关闭操作界面")
 	--同时关闭听胡界面
 	self:closeTingHuInfo()
-	TmjOperationFactory:clearOperation()
+	TmjOperationFactory:getInstance():clearOperation()
 	self:reSetCardGray() --重置灰色
 end
 --判断自己是否是听状态，是那就直接出牌
@@ -525,27 +632,33 @@ function TmjMyPlayer:checkTingToPlay(hasOperation)
 	
 end
 --设置是否轮到我出牌
-function TmjMyPlayer:setIsPlayCard(isplayCard)
-	TmjMyPlayer.super.setIsPlayCard(self,isplayCard)
+--@param cardInfo 
+--@key chairId 座位号
+--@key time 剩余时间
+function TmjMyPlayer:setIsPlayCard(cardInfo)
+	TmjMyPlayer.super.setIsPlayCard(self,cardInfo)
+	self:stopPlaySchedule()
+	if self.isPlayCard then --轮到我出牌 倒计时
+		sslog(self.logTag,"出牌倒计时开始")
+		self.curCountTime = self.leftTime
+		self._playScheduler = scheduler:scheduleScriptFunc(handler(self,self._onPlayInterval), 1, false)
+	else --不该我出牌，移除
+		sslog(self.logTag,"并不该我出牌的")
+	end
+
+end
+--停止打牌计时器
+function TmjMyPlayer:stopPlaySchedule()
 	if self._playScheduler then
 		scheduler:unscheduleScriptEntry(self._playScheduler)
-		self._playScheduler = nil
 	end
-	if self.isPlayCard then --轮到我出牌 倒计时
-		self.curCountTime = self.leftTime
-		self._playScheduler = scheduler:scheduleScriptFunc(handler(self,self._onPlayInterval), 1, false)	
-	else --不该我出牌，移除
-
-	end
-
+	self._playScheduler = nil
 end
 
 function TmjMyPlayer:_onPlayInterval(dt)
 	self.curCountTime = self.curCountTime - 1
 	if self.curCountTime<=0 then
-		if self._playScheduler then
-			scheduler:unscheduleScriptEntry(self._playScheduler)
-		end
+		self:stopPlaySchedule()
 		self.curCountTime = self.leftTime
 		local val = nil
 		if self.getCard then
@@ -562,12 +675,18 @@ end
 function TmjMyPlayer:_onDecisionInterval(dt)
 	self.curCountTime = self.curCountTime - 1
 	if self.curCountTime <=0 then
-		if self._decisionScheduler then
-			scheduler:unscheduleScriptEntry(self._decisionScheduler)
-		end
+		self:stopDecisionSchedule()
 		self.curCountTime = self.leftTime
 		TmjGameManager:getInstance():requestPass()
 	end
+end
+
+--停止打牌计时器
+function TmjMyPlayer:stopDecisionSchedule()
+	if self._decisionScheduler then
+		scheduler:unscheduleScriptEntry(self._decisionScheduler)
+	end
+	self._decisionScheduler = nil
 end
 
 --上家出牌后，轮到我操作，是否吃，碰，胡，杠
@@ -577,16 +696,24 @@ function TmjMyPlayer:getPreToPlay(cardInfo)
 	--todo
 	--TmjMyPlayer.super.getPreToPlay(self,cardInfo)
 	ssdump(cardInfo,"上家打的什么牌啊")
+	self.cardsArray = self:setCardArray(self.handCards)
+	
 	local operations = self:checkFullCard(true,cardInfo)
 	ssdump(operations,"上家打的牌可以有那些操作",5)
 	if next(operations) then --其他玩家出牌的时候，如果我没什么操作，就不提示了
+		local hasHu = false
+		table.walk(operations,function (operation,k)
+			if operation.type == TmjCardTip.CardOperation.Hu then
+				hasHu = true
+			end
+		end)
+		if not hasHu then
+			table.insert(operations,{type = TmjCardTip.CardOperation.Hu,weight = TmjCardTip.operationWeight[TmjCardTip.CardOperation.Hu] or 0 })
+		end
 		self:showOperationPanel(operations,true)
 		--上一个打牌我考虑的倒计时
 		--cardInfo.decisionTime
-		
-		if self._decisionScheduler then
-			scheduler:unscheduleScriptEntry(self._decisionScheduler)
-		end
+		self:stopDecisionSchedule()
 		self.curCountTime = self.leftTime
 		print(self.curCountTime)
 		self._decisionScheduler = scheduler:scheduleScriptFunc(handler(self,self._onDecisionInterval), 1, false)
@@ -668,7 +795,7 @@ function TmjMyPlayer:getOneCard(cardInfo)
 	--最后一张牌的回调
 	local function getLastFun(card)
 		--牌摸完了
-		ssdump(self.handCards,"我目前手上的牌",10)
+		--ssdump(self.handCards,"我目前手上的牌",10)
 		if self.operationFun then
 			self.operationFun(self.pType,TmjConfig.cardOperation.GetOne)
 		end
@@ -732,7 +859,7 @@ end
 --@param cardInfo 一个单张牌的数据
 --@param callback
 function TmjMyPlayer:playGetCardAnim(cardInfo,callback)
-	ssdump(self.handCards,"我目前手上的牌",10)
+--	ssdump(self.handCards,"我目前手上的牌",10)
 	ssdump(cardInfo,"播放摸到一张牌的动画")
 	TmjMyPlayer.super.getOneCard(self,cardInfo)
 	--self.getCard
@@ -1081,44 +1208,65 @@ end
 --@param cardInfo 外界的牌
 function TmjMyPlayer:huCard(cardInfo)
 	--todo
+	TmjMyPlayer.super.huCard(self,cardInfo)
 	sslog(self.logTag,"胡")
 	--播放胡的动画
 	TmjConfig.playAmature("ermj_px_eff","ani_04",nil,display.center,false)
 	
 	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
 end
+function TmjMyPlayer:checkToSetLastHandCard()
+	sslog(self.logTag,"我检测最后一张牌为手牌动作")
+	TmjMyPlayer.super.checkToSetLastHandCard(self)
+end
 --补花
 --@param cardInfo 发过来补花的牌的数量 如果补花中的牌也有花
 function TmjMyPlayer:buHuaCard(cardInfo)
 	--todo
-	sslog(self.logTag,"补花")
+	sslog(self.logTag,"我补花")
 	--是否把最后一个牌放在摸牌位置
 	local notShowGet = (not self.isBanker) and (self:getColorCard()~=nil)
-	--先删除手上的花牌
-	local function loopRemoveHandHuaCard(handOverCB)
-		local colorCard = self:getColorCard()
-		if colorCard then
-			--播放补花动画
-			self:removeHandCard(colorCard.info.val)
-			ssdump(colorCard,"删除的花牌",5)
-			colorCard.node:removeFromParent()
-			colorCard = nil
-			loopRemoveHandHuaCard(handOverCB)
-		else
-			--
-			print("手牌补花完成")
-			if handOverCB then
-				handOverCB()
-			end
-		end
-	end
 	--摸到牌的补花动画 如果有
-	
 	local function loopGetCardBuHua(cardInfo,index)
-		
 		if index<=table.nums(cardInfo) then
+			self.huaCount = self.huaCount or 0
+			self.huaCount = self.huaCount + 1
+			self:setHeadInfo({ huaCount = self.huaCount })
+			--删除手上的花牌
+			local tempCard = self:removeHandCard(cardInfo[index].val)
+			if not tempCard then --花牌不在手上，在摸起来的牌上
+				tempCard = self.getCard
+			end
+			--删除手上现有的花牌
+			sslog(self.logTag,"删除手上现有的花牌:"..tostring(cardInfo[index].val))
+			if tempCard and tempCard.node then
+				sslog(self.logTag,"删除了手上的花牌")
+				tempCard.node:removeFromParent()
+				tempCard.node = nil
+				TmjHelper.removeAll(tempCard)
+			end
+			--播放补花动画
+			sslog(self.logTag,"播放补花动画")
+			performWithDelay(self,function ()
+				sslog(self.logTag,"补花动画播放完成")
+				if cardInfo[index + 1] then
+					cardInfo[index + 1].position = self.getCardPos
+					cardInfo[index + 1].state = TmjConfig.CardState.State_Down
+					local tempCard = TmjMyPlayer.super.createOneCard(self,cardInfo[index + 1])
+					
+					table.insert(self.handCards,tempCard)
+					ssdump(tempCard,"补花的手牌")
+					TmjHelper.sortCards(self.handCards)
+					self:showFrontCard()
+					self:refreshCard(false)
+					self:checkToSetLastHandCard()
+				end
+				index = index + 2
+				loopGetCardBuHua(cardInfo,index)
 				
-			if cardInfo[index].val >=TmjConfig.Card.R_Spring then
+			end,1)
+			
+--[[			if cardInfo[index].val >=TmjConfig.Card.R_Spring then
 				--继续播放动画
 				print("这张牌也是花牌",cardInfo[index].val)
 			else
@@ -1139,19 +1287,29 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 				--self:doOperation(TmjConfig.cardOperation.GetOne,cardInfo[index])
 			end
 			index = index + 1
-			loopGetCardBuHua(cardInfo,index)
-		
+			loopGetCardBuHua(cardInfo,index)--]]
+		else
+			sslog(self.logTag,"补花结束")
+			self.cardsArray = self:setCardArray(self.handCards)
+			self:checkToSetLastHandCard()
+			TmjMyPlayer.super.buHuaCard(self,cardInfo)
 		end
 		
 	end
 	
-	loopRemoveHandHuaCard(loopGetCardBuHua(cardInfo,1))
-	
+	--loopRemoveHandHuaCard(loopGetCardBuHua(cardInfo,1))
+	loopGetCardBuHua(cardInfo,1)
 	
 	--将cardInfo中非花的牌加入到手牌中
 	
 end
-
+--加倍
+function TmjMyPlayer:doubleCard(cardInfo)
+	TmjMyPlayer.super.doubleCard(self,cardInfo)
+	self:closeOperationPanel() --加倍后，打牌
+	self:setIsPlayCard({chairId = self.seatid }) --我继续出牌
+	self:checkTingToPlay(false)
+end
 
 --根据牌的顺序ID获取牌的位置
 --@param index 牌的索引值
@@ -1196,7 +1354,7 @@ function TmjMyPlayer:setExtraPosition(tempCardArr)
 	self.cardStartPos = cc.pAdd(self.cardStartPos,moveDiff)
 	--刷新位置
 	self:refreshCard(false)
-	ssdump(self.extraCards,"额外牌信息",5)
+	--ssdump(self.extraCards,"额外牌信息",5)
 end
 
 --播放打牌的动画
@@ -1234,6 +1392,12 @@ function TmjMyPlayer:runGetCardAnim(tGetcard,getCardCB)
 		cc.CallFunc:create(getCardCB)
 	})
 	tGetcard.node:runAction(seqAction)
+end
+function TmjMyPlayer:onExit()
+	self:stopPlaySchedule()
+	self:stopDecisionSchedule()
+	self:closeOperationPanel()
+	TmjMyPlayer.super.onExit(self)
 end
 
 return TmjMyPlayer

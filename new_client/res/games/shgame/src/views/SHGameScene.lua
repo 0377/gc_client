@@ -394,21 +394,29 @@ function SHGameScene:setTableInfo(tinfo)
 		nameText:setString(tostring(tinfo.name))
 	end
 	if tinfo.basebet then
-		baseText:setString(tostring(tinfo.basebet/100))
+		
+		--tostring(tinfo.basebet/100)
+		baseText:setString(CustomHelper.moneyShowStyleNone(tinfo.basebet))
 	end
 	if tinfo.maxbet and tinfo.basebet then
-		limitText:setString(tostring(tinfo.maxbet*tinfo.basebet/100))
+		--tostring(tinfo.maxbet*tinfo.basebet/100)
+		
+		limitText:setString(CustomHelper.moneyShowStyleNone(tinfo.maxbet*tinfo.basebet))
 	end
 	if tinfo.totalbet then
-		local oldTotal = totalText:getString()
-		sslog(self.logTag,"以前的加注额度："..oldTotal)
+		self.oldTotalMoney = self.oldTotalMoney or 0
 		
-		local newTotal = tinfo.totalbet
+		local oldTotal = self.oldTotalMoney
+		sslog(self.logTag,"以前的加注额度："..CustomHelper.moneyShowStyleNone(oldTotal))
+		
+		local newTotal = tinfo.totalbet*100
 		if tinfo.isAdd then
-			newTotal = newTotal +tonumber(oldTotal)
+			newTotal = newTotal + oldTotal
 		end
-		sslog(self.logTag,"现在的加注额度："..tostring(newTotal))
-		totalText:setString(tostring(newTotal))
+		
+		sslog(self.logTag,"现在的加注额度："..CustomHelper.moneyShowStyleNone(newTotal))
+		self.oldTotalMoney = newTotal
+		totalText:setString(CustomHelper.moneyShowStyleNone(newTotal))
 	end
 end
 
@@ -919,20 +927,25 @@ function SHGameScene:showGameOverTips()
 end
 
 ---退出游戏界面
-function SHGameScene:exitGame()
+function SHGameScene:exitGame(openSecondLayer)
 	self:stopDeviceSchedule()
 	--退出游戏发送弃牌操作
 	--退出游戏的时候 清空游戏数据
 	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	SHGameManager:getInstance():sendFallExitMsg()
 	SHGameManager:getInstance():sendStandUpAndExitRoomMsg()
-    SceneController.goHallScene()
+    --SceneController.goHallScene()
 	
     local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
 	if subGameManager then
 		subGameManager:onExit()
 	else
 		sslog(self.logTag,"子游戏管理器已经释放了")
+	end
+	if openSecondLayer == nil then
+		SceneController.goHallScene()
+	else
+		SceneController.goHallScene(openSecondLayer)
 	end
 end
 --下一局

@@ -1,9 +1,9 @@
 local config = {
     cannonPos = {
-        { id = 1, posX = 0.16, posY = 0.1, direction = 3.14, },
-        { id = 2, posX = 0.56, posY = 0.1, direction = 3.14, },
-        { id = 3, posX = 0.56, posY = 0.8, direction = 0, },
-        { id = 4, posX = 0.16, posY = 0.8, direction = 0, },
+        { id = 1, pos = {}, posPer = { 0.33, 0.1 }, direction = 3.14, },
+        { id = 2, pos = {}, posPer = { 0.725, 0.1 }, direction = 3.14, },
+        { id = 3, pos = {}, posPer = { 0.67, 0.9 }, direction = 0, },
+        { id = 4, pos = {}, posPer = { 0.275, 0.9 }, direction = 0, },
     },
     connonSet = {
         {
@@ -177,5 +177,12 @@ local config = {
     },
 }
 
+
+for _,v in ipairs(config.cannonPos) do
+    v.pos = {
+        v.posPer[1] * display.width,
+        v.posPer[2] * display.height,
+    }
+end
 
 return config

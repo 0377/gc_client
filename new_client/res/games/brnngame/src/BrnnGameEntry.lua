@@ -26,7 +26,7 @@ function BrnnGameEntry:getNeedPreloadResArray()
 end
 
 function BrnnGameEntry:getVerionStr()
-	return "百人牛牛.v2"
+	return "百人牛牛.v3"
 end
 
 return BrnnGameEntry;

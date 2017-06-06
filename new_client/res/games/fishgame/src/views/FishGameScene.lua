@@ -1,16 +1,10 @@
---
--- Author: Your Name
--- Date: 2016-12-29 14:41:41
--- 游戏场景
---
-
-local SubGameBaseScene = requireForGameLuaFile("SubGameBaseScene")
-local FishGameScene = class(classname, SubGameBaseScene)
+local FishGameScene = class("FishGameScene", requireForGameLuaFile("SubGameBaseScene"))
 local FishGameFish = requireForGameLuaFile("FishGameFish")
 local FishGameBullet = requireForGameLuaFile("FishGameBullet")
 local Visual = requireForGameLuaFile("Visual")
 local Fishes = requireForGameLuaFile("Fishes")
 local CDefine = requireForGameLuaFile("CDefine")
+local ConnonSet = requireForGameLuaFile("ConnonSet")
 
 local FishGameConfig = requireForGameLuaFile("FishGameConfig")
 local FishGameXMLConfigManager = requireForGameLuaFile("FishGameXMLConfigManager")
@@ -19,8 +13,8 @@ local FishGamePlayerInfo = requireForGameLuaFile("FishGamePlayerInfo")
 local TestFishLayer = requireForGameLuaFile("TestFishLayer")
 local FishGameBubble = requireForGameLuaFile("FishGameBubble")
 local CachedNodeManager = requireForGameLuaFile("CachedNodeManager")
-
-local dispatcher = cc.Director:getInstance():getEventDispatcher()
+local FishGameRuleLayer = requireForGameLuaFile("FishGameRuleLayer")
+local FishGameCannon = requireForGameLuaFile("FishGameCannon")
 
 local ChainConfig = {
     [E_Red] = { image = "fish_42", animation = "move" },
@@ -34,17 +28,10 @@ local LAYER_ZORDER = {
     EFFECT_DOWN = 2,
     FISHES = 3,
     BUBBLE = 4,
-
     EFFECT_UP = 5,
-
-
-
     BACKGROUND_SWITCH = 10,
     BACKGROUND_SWITCH_WATER = 11,
-
-
     BULLET = 15,
-
     TOUCH = 19,
     UI = 20,
     TEST_LAYER = 50,
@@ -54,15 +41,23 @@ local LAYER_ZORDER = {
 function FishGameScene:ctor()
     FishGameScene.super.ctor(self)
     CustomHelper.addSetterAndGetterMethod(self, "fishGameManager", GameManager:getInstance():getHallManager():getSubGameManager())
+    CustomHelper.addSetterAndGetterMethod(self, "dataManager", self:getFishGameManager():getDataManager())
+    CustomHelper.addSetterAndGetterMethod(self, "soundManager", self:getFishGameManager():getSoundManager())
+
+
+    local objMng = game.fishgame2d.FishObjectManager:GetInstance()
+    objMng:SetMirrowShow(self:getDataManager():getMirrorShow())
+    objMng:RegisterBulletHitFishHandler(handler(self, self.on_event_BulletHitFish))
+    objMng:RegisterEffectHandler(handler(self, self.on_event_FishEffect))
+    objMng:Init(1280, 720, "config/")
 
     --TestFishLayer.create():addTo(self, LAYER_ZORDER.TEST_LAYER)
+    self._time = socket.gettime()
+    self:onUpdate(handler(self, self._onInterval))
+    self._scheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(handler(self, self._onInterval_timeSync), 10, false)
 
 
-    self.m_pBubbles = {}
-    self.m_pBubbleLayer = display.newLayer():addTo(self, LAYER_ZORDER.BUBBLE)
-    for i=1,4 do
-        self.m_pBubbles[i] = FishGameBubble:create(i):align(display.LEFT_BOTTOM,0,0):addTo(self.m_pBubbleLayer)
-    end
+    self.m_winningNode = {}
     self.m_pChains = {}
     self.m_pParticals = {}
     -- 鱼摆摆 --
@@ -80,33 +75,11 @@ function FishGameScene:ctor()
     -- 节点缓存管理器 --
     self._cacheMng = CachedNodeManager.new()
 
-    local objMng = game.fishgame2d.FishObjectManager:GetInstance()
-    objMng:RegisterBulletHitFishHandler(handler(self, self.on_event_BulletHitFish))
-    objMng:RegisterEffectHandler(handler(self, self.on_event_FishEffect))
-    objMng:Init(1280, 720, "config/")
-    --    local pathManager = objMng:GetPathManager()
-    --    pathManager:LoadData("config/", function(percent)
-    --        if percent == 1 then
-    --            self:on_msg_SendFish()
-    --        end
-    --    end)
-    -- self.rootPath = DdzGameManager:getInstance():getPackageRootPath();
-    -- elf.csbRootPath = "res/"..self.rootPath.."res/csb/"
-    -- cc.FileUtils:getInstance():addSearchPath(self.csbRootPath, true)
-    -- cc.FileUtils:getInstance():addSearchPath(self.csbRootPath.."game_res", true)
+    self._mainUI = requireForGameLuaFile("FishGameCCS"):create().root:addTo(self, LAYER_ZORDER.UI)
 
-    local CCSLuaNode = requireForGameLuaFile("FishGameCCS")
-    self._mainWnd = CCSLuaNode:create().root;
-    self:addChild(self._mainWnd, LAYER_ZORDER.UI)
-    self._touchLayer = display.newLayer()
-    self:addChild(self._touchLayer, LAYER_ZORDER.TOUCH)
-    self._touchLayer:setZOrder(0)
-    self._touchLayer:registerScriptTouchHandler(handler(self, self.onTouchTTTTT))
-    self._touchLayer:setTouchEnabled(true)
-	
-    self._effectLayer = display.newLayer()
-    self:addChild(self._effectLayer)
-    self._effectLayer:setZOrder(1)
+    local layerTouch = display.newLayer():addTo(self, LAYER_ZORDER.TOUCH)
+    layerTouch:registerScriptTouchHandler(handler(self, self._onTouched_TTTTT))
+    layerTouch:setTouchEnabled(true)
 
     -- 初始化XML配置管理器
     self._xmlConfigManager = FishGameXMLConfigManager:getInstance()
@@ -114,56 +87,44 @@ function FishGameScene:ctor()
     -- 初始化局部变量 --------------
     self._musicOpen = true
     self._soundOpen = true
-    self._targetPos = cc.p(0, 0)
-	self._lastFireTime = 0
-	self._lastTouchTime = 0
+    self._targetPos = cc.p(display.cx, display.cy)
+    self._lastFireTime = 0
+    self._lastTouchTime = 0
+
+    self._longTouch = false
+    self._autoFire = false
+    self._autoFireTime = 0
+    self._lockFish = false
+
+    -- 自己最大子弹数量限制 --
+    self.m_dwLastFireTick = -1
+    self.m_nBulletCount = 0
 
     -- 玩家控件列表 --------------------
     self._playersUI = {}
-    for i = 0, FishGameConfig.PLAYER_COUNT - 1 do
-        self._playersUI[i] = {}
-    end
+    self._playerCannon = {}
+
 
     -- 初始化界面 ------------------
     self:initUI()
 
-    -- 初始化声音
-    self._musicOpen = not GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
-    self._soundOpen = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
-    self:onBtnSound(self._btnSound, ccui.TouchEventType.ended)
-    self:onBtnMusic(self._btnMusic, ccui.TouchEventType.ended)
-
-    -- 设置界面默认值
-    self._ruleWndSelect = FishGameConfig.RULE_SELECT.NORMAL
-    self:dealRuleSelect(self._ruleWndSelect)
-
-    self._menuOpen = false
-    self._pnlMenu:setVisible(self._menuOpen)
-
-    --  添加玩家数据   测试数据！！！！！！！！！！！！！！！！！！！
-    --    local dataMgr = FishGameManager:getInstance():getDataManager()
-    --    dataMgr:addPlayer(0, 3, 9)
-    --    dataMgr:addPlayer(1, 6, 9)
-    --    dataMgr:addPlayer(0, 1, 9)
-    --    dataMgr:addPlayer(0, 5, 8)
-
-    -- 初始化XML配置 ---------------
-    self:intXMLConfig()
-
     -- 初始化玩家 ------------------
     self:initPlayers()
 
-    -- 初始化炮台信息 --------------
-    self:initCannon()
-
     self:initBgSwitchWater()
+    -- 初始化声音状态
+    self:updateMusicAndSoundStatus()
+
+    self:updateSceneBackground(1, true)
 end
 
--- 预加载资源路径
+--- 预加载资源路径
 function FishGameScene.getNeedPreloadResArray()
     -- body
     print("getNeedPreloadResArray.............................")
     local resPaths = {
+        CustomHelper.getFullPath("anim/fish_effect_boss/fish_effect_boss.ExportJson"),
+        CustomHelper.getFullPath("anim/effect_bar_glod/effect_bar_glod.ExportJson"),
         CustomHelper.getFullPath("anim/fish_jinbi_1/fish_jinbi_1.ExportJson"),
         CustomHelper.getFullPath("anim/bubble_full_eff/bubble_full_eff.ExportJson"),
         CustomHelper.getFullPath("anim/effect_bg_water/effect_bg_water.ExportJson"),
@@ -171,17 +132,27 @@ function FishGameScene.getNeedPreloadResArray()
         CustomHelper.getFullPath("anim/effect_fish_bomb/effect_fish_bomb.ExportJson"),
         CustomHelper.getFullPath("anim/bb_likui_pao_bullet/bb_likui_pao_bullet.ExportJson"),
         CustomHelper.getFullPath("anim/effect_weapons_replace/effect_weapons_replace.ExportJson"),
-    }
 
+        CustomHelper.getFullPath("anim/eff_fish_button_right_lock_auto_lk/eff_fish_button_right_lock_auto_lk.ExportJson"),
+    }
+    -- 鱼
+    local indexFish = 1
     local data = {}
     for _, v in pairs(Visual) do
         for __, vv in ipairs(v.die) do
-            data[vv.image] = true
+            if not data[vv.image] then
+                data[vv.image] = indexFish
+                indexFish = indexFish + 1
+            end
         end
         for __, vv in ipairs(v.live) do
-            data[vv.image] = true
+            if not data[vv.image] then
+                data[vv.image] = indexFish
+                indexFish = indexFish + 1
+            end
         end
     end
+    FishGameConfig.FishVisualZOrder = data
     for k, v in pairs(data) do
         table.insert(resPaths, CustomHelper.getFullPath("anim/fishes/" .. k .. ".ExportJson"))
     end
@@ -190,10 +161,22 @@ function FishGameScene.getNeedPreloadResArray()
     for k, v in pairs(ChainConfig) do
         table.insert(resPaths, CustomHelper.getFullPath("anim/fishes/" .. v.image .. ".ExportJson"))
     end
+    -- 子弹和炮
+    local tmpData= {}
+    for _,v in ipairs(ConnonSet.connonSet) do
+        for __,vv in ipairs(v.cannonType) do
+            tmpData[vv.cannon.resName] = true
+            tmpData[vv.bullet.resName] = true
+            tmpData[vv.net.resName] = true
+        end
+    end
+    for k,v in pairs(tmpData) do
+        table.insert(resPaths, CustomHelper.getFullPath("anim/" .. k .. "/" .. k .. ".ExportJson"))
 
+    end
 
+    -- 炸弹粒子
     for k, v in pairs(FishGameConfig.PARTICAL_CONFIG) do
-        dump("anim/" .. v.AniImage .. ".ExportJson")
         table.insert(resPaths, CustomHelper.getFullPath("anim/" .. v.AniImage .. "/" .. v.AniImage .. ".ExportJson"))
     end
 
@@ -201,14 +184,7 @@ function FishGameScene.getNeedPreloadResArray()
 end
 
 function FishGameScene:onEnter()
-    self:switchScene(1, true)
-
-    self._time = socket.gettime()
-    self:onUpdate(handler(self, self._onInterval))
-
-    self._scheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(handler(self, self._onInterval_timeSync), 10, false)
     self:_onInterval_timeSync()
-
     self:getFishGameManager():sendGameReady()
 end
 
@@ -218,7 +194,6 @@ function FishGameScene:onExit()
         self._scheduler = nil
     end
 
-    --self._sound:Clear()  
     local loadAramtureResTab = FishGameScene:getNeedPreloadResArray()
     for i, res in ipairs(loadAramtureResTab) do
         if res ~= "" then
@@ -233,8 +208,6 @@ function FishGameScene:_onInterval(dt)
     local time = socket.gettime()
     local dt = time - self._time
     self._time = time
-
-
 
     game.fishgame2d.FishObjectManager:GetInstance():OnUpdate(dt)
 
@@ -266,11 +239,66 @@ function FishGameScene:_onInterval(dt)
         end
     end
 
+    -- 更新锁定鱼的炮台方向
+    local dataMgr = self:getDataManager()
+    local myChairId = dataMgr:getMyChairId()
+    for i = 1, 4 do
+        if i ~= myChairId then
+            local player = dataMgr:getPlayerByChairId(i)
+            if player then
+                local optIndex = player:getOptIndex()
+                local fishId = player and player:getLockedFishId()
+                if fishId and fishId ~= 0 then
+                    local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(fishId)
+                    if fish then
+                        local angle = self:updateCannonRotationToPosition(optIndex, fish:getPosition())
+                        self._playersUI[optIndex].node_cannon:setRotation(math.deg(-angle + math.pi / 2))
+                    end
+                end
+            end
+        end
+    end
+    -- 自己锁定鱼的状态
+    local player = dataMgr:getMyPlayerInfo()
+    local optIndex = player:getOptIndex()
+    local fishId = player and player:getLockedFishId()
+    self._btnLock.armature:setVisible(fishId and fishId ~= 0)
+
+    --- 处于锁定状态，但没有锁定的鱼，发送锁定新的鱼
+    if not (fishId and fishId ~= 0) then
+        if self._lockFish then
+            if self._lockTime == 0 then
+                self:getFishGameManager():send_CS_LockFish(true)
+            end
+            self._lockTime = self._lockTime + dt
+            if self._lockTime > 3 then
+                self._lockTime = 0
+            end
+        end
+    else
+        if not self._lockFish then
+            self:getFishGameManager():send_CS_LockFish(false)
+        end
+
+        local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(fishId)
+        if fish then
+            self._targetPos.x = fish:getPosition().x
+            self._targetPos.y = fish:getPosition().y
+        end
+    end
+    local angle = self:updateCannonRotationToPosition(optIndex, self._targetPos)
+    self._playersUI[optIndex].node_cannon:setRotation(math.deg(-angle + math.pi / 2))
 
 
-    -- 更新锁定鱼的气泡
-    for i=1,4 do
-        self.m_pBubbles[i]:_onInterval(dt)
+    -- 自动攻击
+    if self._autoFire or self._longTouch then
+        if self._autoFireTime == 0 then
+            self:fireTo(self._targetPos)
+        end
+        self._autoFireTime = self._autoFireTime + dt
+        if self._autoFireTime >= dataMgr:getFireInterval() then
+            self._autoFireTime = 0;
+        end
     end
 end
 
@@ -279,393 +307,97 @@ function FishGameScene:_onInterval_timeSync()
     subGameManager:send_CS_TimeSync()
 end
 
--- 初始化XML配置
-function FishGameScene:intXMLConfig()
-end
-
 -- 初始化界面
 function FishGameScene:initUI()
+    local menu = self._mainUI:getChildByName("panel_menu")
+    local handlerMenu = handler(self, self._onBtnTouched_Menu)
+    local btnList = {
+        "btn_rule",
+        "btn_music",
+        "btn_sound",
+        "btn_quit",
+        "btn_open",
+        "btn_close",
+    }
+    for _, v in ipairs(btnList) do
+        menu:getChildByName(v):addTouchEventListener(handlerMenu)
+    end
 
-    self:initMenuUI()
-
-    self:initRuleWnd()
-end
-
--- 初始化右边菜单栏
-function FishGameScene:initMenuUI()
-
-    self._btnShowMenu = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "btn_show_menu"), "ccui.Button")
-    self._btnShowMenu:addTouchEventListener(handler(self, self.onBtnShowMenu))
-
-    self._layerGame = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "layer_game"), "ccui.Layout"):hide()
-
-    self._pnlMenu = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "panel_menu"), "ccui.Layout")
-
-    self._btnRule = tolua.cast(CustomHelper.seekNodeByName(self._pnlMenu, "btn_rule"), "ccui.Button")
-    self._btnRule:addTouchEventListener(handler(self, self.onBtnRule))
-
-    self._btnMusic = tolua.cast(CustomHelper.seekNodeByName(self._pnlMenu, "btn_music"), "ccui.Button")
-    self._btnMusic:addTouchEventListener(handler(self, self.onBtnMusic))
-
-    self._btnSound = tolua.cast(CustomHelper.seekNodeByName(self._pnlMenu, "btn_sound"), "ccui.Button")
-    self._btnSound:addTouchEventListener(handler(self, self.onBtnSound))
-
-    self._btnQuit = tolua.cast(CustomHelper.seekNodeByName(self._pnlMenu, "btn_quit"), "ccui.Button")
-    self._btnQuit:addTouchEventListener(handler(self, self.onBtnQuit))
-end
-
--- 初始化规则界面
-function FishGameScene:initRuleWnd()
-
-    self._pnlRuleWnd = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "RuleView"), "ccui.Layout")
-    self._pnlRuleWnd:setVisible(false)
-
-    self._btnClose = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_close"), "ccui.Button")
-    self._btnClose:addTouchEventListener(handler(self, self.onBtnRuleClose))
-
-    self._btnNormal = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_normal"), "ccui.Button")
-    self._btnNormal:addTouchEventListener(handler(self, self.onBtnRuleNormal))
-
-    self._btnBigFish = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_big"), "ccui.Button")
-    self._btnBigFish:addTouchEventListener(handler(self, self.onBtnRuleBigFish))
-
-    self._btnSpecial = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_special"), "ccui.Button")
-    self._btnSpecial:addTouchEventListener(handler(self, self.onBtnRuleSpecial))
-
-    self._btnBoss = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_boss"), "ccui.Button")
-    self._btnBoss:addTouchEventListener(handler(self, self.onBtnRuleBoss))
-
-    self._pnlNormal = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_normal"), "ccui.Layout")
-
-    self._pnlBigFish = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_bigfish"), "ccui.Layout")
-
-    self._pnlSpecial = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_special"), "ccui.Layout")
-
-    self._pnlBoss = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_boss"), "ccui.Layout")
+    -- 自动发炮和锁定攻击
+    local handlerAutoLock = handler(self, self._onBtnTouched_AutoAndLock)
+    local btnList = {
+        "btn_auto",
+        "btn_lock",
+    }
+    for _, v in ipairs(btnList) do
+        local btn = self._mainUI:getChildByName(v)
+        btn:setTouchEnabled(true)
+        btn:addTouchEventListener(handlerAutoLock)
+        btn.armature = btn:getChildByName("eff_fish_button_right_lock_auto_lk"):hide()
+        if v == "btn_lock" then
+            self._btnLock = btn
+        end
+    end
 end
 
 -- 初始化玩家
 function FishGameScene:initPlayers()
+    local hanler_opt = handler(self, self._onBtnTouched_OptCannon)
 
-    self:initLTPlayer()
+    --- 锁定气泡
+    local layerBubble = display.newLayer():addTo(self, LAYER_ZORDER.BUBBLE)
 
-    self:initRTPlayer()
-
-    self:initLBPlayer()
-
-    self:initRBPlayer()
-end
-
--- 点击事件
-function FishGameScene:onTouchTTTTT(eventType, x, y)
-	local time = socket.gettime()
-    local dt = time - self._lastFireTime	
-	local dataMgr = FishGameManager:getInstance():getDataManager()
-	local fireInterval = dataMgr:getFireInterval()
-	if dt*1000 >= fireInterval then
-		self._lastFireTime = time
-		self._targetPos = cc.p(x, y)
-		local mychair = dataMgr:getMyChairId()
-		local idx = mychair - 1
-		local opchair = dataMgr:getOperateChair(idx)
-		local angle = self:updateCannonRotationToPosition(mychair, self._targetPos)
-		if opchair == FishGameConfig.PLAYER.LEFTTOP or opchair == FishGameConfig.PLAYER.RIGHTTOP then
-			angle = angle + math.pi/2
-		else
-			angle = math.pi/2 - angle
-		end
-
-		self._playersUI[opchair].pnlCannon:setRotation(math.deg(angle))
-
-		self:fireTo(mychair, angle)
-	end
-
---
---    self:addFishGold( {
---        fishX = x,
---        fishY = y,
---        cannonX = display.cx,
---        cannonY = 0,
---        score = 10,
---        baseScore = 1,
---    })
-
-    --	for k = 1, FishGameConfig.PLAYER_COUNT do
-    --		local idx = k - 1
-    --	    local fireEffect = ccs.Armature:create("effect_bar_glod")
-    --		fireEffect:getAnimation():play("star_yellow_Copy13_Copy15")
-    --
-    --		local v    = self._playersUI[idx].pnlCannon:getWorldPosition()
-    --		local posx = v.x
-    --		local posy = v.y
-    --		local size = self._playersUI[idx].pnlCannon:getSize()
-    --
-    --		if idx == FishGameConfig.PLAYER.LEFTTOP or  idx == FishGameConfig.PLAYER.RIGHTTOP then
-    --			fireEffect:setPosition(cc.p(posx , posy - size.height))
-    --		elseif idx == FishGameConfig.PLAYER.RIGHTBOTTOM or idx == FishGameConfig.PLAYER.LEFTBOTTOM then
-    --			fireEffect:setPosition(cc.p(posx , posy + size.height))
-    --		end
-    --
-    --		self._effectLayer:addChild(fireEffect)
-    --		fireEffect:runAction(transition.sequence({
-    --			cc.DelayTime:create(0.5),
-    --			cc.CallFunc:create(function(sender)
-    --				sender:removeSelf()
-    --			end)
-    --		}))
-    --	end
+    for i = 1, FishGameConfig.PLAYER_COUNT do
+        local conf = ConnonSet.cannonPos[i]
+        local node = CustomHelper.seekNodeByName(self._mainUI, "player_" .. i)
 
 
-    --    if eventType == "began" then
-    --        return true
-    --    elseif eventType == "ended" then
-    --                self:fireTo(math.rad(angle))
-    --
-    --
-    --        --        self:addPartical({
-    --        --            xPos = x,
-    --        --            yPos = y,
-    --        --            name = "salute1",
-    --        --        })
-    --- -        self:addChain({
-    ---- start_x = display.width * 0.25,
-    ---- start_y = display.cy,
-    ---- end_x = display.width * 0.75,
-    ---- end_y = display.cy,
-    ---- type = E_Light
-    ---- })
-    -- end
-end
+        local bg_info = node:getChildByName("bg_info"):hide()
+        local label_money = node:getChildByName("label_money"):hide()
+        local label_name = node:getChildByName("label_name"):hide()
+        local bg_cannon_sc = node:getChildByName("bg_cannon_sc"):hide()
+        local label_score = node:getChildByName("plb_txt_score"):hide()
+        local btn_sub = node:getChildByName("btn_sub"):hide()
+        local btn_add = node:getChildByName("btn_add"):hide()
+        local node_cannon = node:getChildByName("node_cannon"):hide()
+        local node_winning = node:getChildByName("node_winning")
+        local node_lockfish = node:getChildByName("node_lockfish"):hide()
 
--- 旋转炮台角度
-function FishGameScene:updateCannonRotationToPosition(chairID, targetPos)
-    local idx = chairID - 1
-    local v = self._playersUI[idx].pnlCannon:getWorldPosition()
+        btn_sub:addTouchEventListener(hanler_opt)
+        btn_add:addTouchEventListener(hanler_opt)
 
-    --计算两点之间的夹角
-    local dx = targetPos.x - v.x
-    local dy = targetPos.y - v.y;
-    local dis = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)); --斜边长度
+        node:setPositionX(conf.pos[1])
 
-    local cos0 = dx / dis;
-    local rad = math.acos(cos0);
-
-    return rad
-end
-
--- 初始化左上玩家
-function FishGameScene:initLTPlayer()
-    self._playersUI[FishGameConfig.PLAYER.LEFTTOP].txtScore = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plt_txt_score"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTTOP].pnlPlayer = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "player_lefttop"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.LEFTTOP].pnlCannon = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plt_pnl_cannon"), "ccui.Layout")
-end
-
--- 初始化右上玩家
-function FishGameScene:initRTPlayer()
-    self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].txtScore = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prt_txt_score"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].pnlPlayer = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "player_righttop"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].pnlCannon = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prt_pnl_cannon"), "ccui.Layout")
-end
-
--- 初始化左下玩家
-function FishGameScene:initLBPlayer()
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].txtScore = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_txt_score"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].btnSub = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_btn_sub"), "ccui.Button")
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].btnSub:addTouchEventListener(handler(self, self.onBtnChangeCannon))
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].btnAdd = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_btn_add"), "ccui.Button")
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].btnAdd:addTouchEventListener(handler(self, self.onBtnChangeCannon))
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlInfo = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_player_info"), "ccui.Layout")
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].txtName = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_txt_player_name"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlPlayer = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "player_leftbottom"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlCannon = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_pnl_cannon"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlLockFish = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_pnl_lockfishbk"), "ccui.Layout")
-	self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].txtMoney = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "plb_txt_money"), "ccui.TextAtlas")
-end
-
--- 初始化右下玩家
-function FishGameScene:initRBPlayer()
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].txtScore = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_txt_score"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].btnSub = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_btn_sub"), "ccui.Button")
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].btnSub:addTouchEventListener(handler(self, self.onBtnChangeCannon))
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].btnAdd = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_btn_add"), "ccui.Button")
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].btnAdd:addTouchEventListener(handler(self, self.onBtnChangeCannon))
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlInfo = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_player_info"), "ccui.Layout")
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].txtName = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_txt_player_name"), "ccui.Text")
-
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlPlayer = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "player_rightbottom"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlCannon = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_pnl_cannon"), "ccui.Layout")
-    self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlLockFish = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_pnl_lockfishbk"), "ccui.Layout")
-	self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].txtMoney = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "prb_txt_money"), "ccui.TextAtlas")
-end
-
--- 显示菜单按钮点击事件
-function FishGameScene:onBtnShowMenu(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-    elseif eventType == ccui.TouchEventType.ended then
-        self._menuOpen = not self._menuOpen
-        self:dealMenuSwitchAction()
-
-        for k = 1, FishGameConfig.PLAYER_COUNT do
-            self:refreshPlayerInfo(k)
+        if i > 2 then
+            node_cannon:setRotation(180)
         end
 
+        self._playersUI[i] = {
+            bg_info = bg_info,
+            label_money = label_money,
+            label_name = label_name,
+            bg_cannon_sc = bg_cannon_sc,
+            label_score = label_score,
+            btn_sub = btn_sub,
+            btn_add = btn_add,
+            node_cannon = node_cannon,
+            node_winning = node_winning,
+        }
+
+        self._playerCannon[i] = FishGameCannon:create(i, conf):addTo(node_cannon)
+
+        FishGameBubble:create(i, node_lockfish):align(display.LEFT_BOTTOM, 0, 0):addTo(layerBubble)
+    end
+
+    -- 初始化桌面上的信息
+    local players = self:getFishGameManager():getDataManager():getPlayeres()
+    for i = 1, FishGameConfig.PLAYER_COUNT do
+        self:showPlayerInfo(players[i])
     end
 end
 
--- 处理菜单动画
-function FishGameScene:dealMenuSwitchAction()
-    self._pnlMenu:setVisible(self._menuOpen)
-    if self._menuOpen == true then
-        self._btnShowMenu:loadTextureNormal(FishGameConfig.BTN_IMG.MENU_DOWN_N)
-        self._btnShowMenu:loadTexturePressed(FishGameConfig.BTN_IMG.MENU_DOWN_P)
-        self._btnShowMenu:loadTextureDisabled(FishGameConfig.BTN_IMG.MENU_DOWN_P)
-    else
-        self._btnShowMenu:loadTextureNormal(FishGameConfig.BTN_IMG.MENU_UP_N)
-        self._btnShowMenu:loadTexturePressed(FishGameConfig.BTN_IMG.MENU_UP_P)
-        self._btnShowMenu:loadTextureDisabled(FishGameConfig.BTN_IMG.MENU_UP_P)
-    end
-end
-
-function FishGameScene:onBtnRule(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        local ruleWndShow = self._pnlRuleWnd:isVisible()
-        ruleWndShow = not ruleWndShow
-        self._pnlRuleWnd:setVisible(ruleWndShow)
-
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-    end
-end
-
-function FishGameScene:onBtnChangeCannon(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        print("FishGameScene:onBtnChangeCannon!!!!!!!!!!!")
-        local isAdd = 0
-        if sender:getName() == "plb_btn_add" or sender:getName() == "prb_btn_add" then
-            isAdd = 1
-        end
-
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-        FishGameManager:getInstance():send_CS_ChangeCannon(isAdd)
-    end
-end
-
-
-function FishGameScene:onBtnSound(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        self._soundOpen = not self._soundOpen
-        if self._soundOpen == true then
-            self._btnSound:loadTextureNormal(FishGameConfig.BTN_IMG.SOUND_ON_N)
-            self._btnSound:loadTexturePressed(FishGameConfig.BTN_IMG.SOUND_ON_P)
-            self._btnSound:loadTextureDisabled(FishGameConfig.BTN_IMG.SOUND_ON_P)
-
-            GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(true)
-            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-        else
-            self._btnSound:loadTextureNormal(FishGameConfig.BTN_IMG.SOUND_OFF_N)
-            self._btnSound:loadTexturePressed(FishGameConfig.BTN_IMG.SOUND_OFF_P)
-            self._btnSound:loadTextureDisabled(FishGameConfig.BTN_IMG.SOUND_OFF_P)
-
-            GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(false)
-            GameManager:getInstance():getMusicAndSoundManager():stopAllSound();
-        end
-    end
-end
-
-function FishGameScene:onBtnMusic(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        self._musicOpen = not self._musicOpen
-        if self._musicOpen == true then
-            self._btnMusic:loadTextureNormal(FishGameConfig.BTN_IMG.MUSIC_ON_N)
-            self._btnMusic:loadTexturePressed(FishGameConfig.BTN_IMG.MUSIC_ON_P)
-            self._btnMusic:loadTextureDisabled(FishGameConfig.BTN_IMG.MUSIC_ON_P)
-
-            GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(true)
-            self:getFishGameManager():getSoundManager():playBGM(nil, true)
-        else
-            self._btnMusic:loadTextureNormal(FishGameConfig.BTN_IMG.MUSIC_OFF_N)
-            self._btnMusic:loadTexturePressed(FishGameConfig.BTN_IMG.MUSIC_OFF_P)
-            self._btnMusic:loadTextureDisabled(FishGameConfig.BTN_IMG.MUSIC_OFF_P)
-
-            GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(false)
-            GameManager:getInstance():getMusicAndSoundManager():stopMusic()
-        end
-    end
-end
-
-function FishGameScene:initCannonInfo(chair_id)
-    if chair_id < 0 or chair_id >= FishGameConfig.PLAYER_COUNT then return end
-    local idx = chair_id + 1
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local playerInfo = dataMgr:getPlayerInfoById(idx)
-    local cannonSetType = playerInfo:getCannonSet()
-    local cannonType = playerInfo:getCannonType()
-    local cannonSet = self._xmlConfigManager._cannonSetVector[cannonSetType]
-    local cannon = cannonSet.Sets[cannonType]
-
-    -- 清除原炮台
-    self._playersUI[id].pnlCannon:removeAllChildren()
-
-    -- 添加新炮台
-    local rootPath = FishGameManager:getInstance():getPackageRootPath()
-    local armature = ccs.Armature:create(cannon.Cannon.szResourceName)
-    armature:getAnimation():play(cannon.Cannon.Name)
-    self._playersUI[id].pnlCannon:addChild(armature)
-end
-
-function FishGameScene:initCannon()
-    local visibleSize = cc.Director:getInstance():getVisibleSize()
-    for k, v in pairs(self._xmlConfigManager._cannonPosVector) do
-        local id = k
-        local posX = v.x
-        local posY = v.y
-        local direction = v.dir
-
-        if id == FishGameConfig.PLAYER.LEFTBOTTOM then
-            self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlPlayer:setPosition(visibleSize.width * posX, 0)
-            self._playersUI[FishGameConfig.PLAYER.LEFTBOTTOM].pnlCannon:setPosition(FishGameConfig.LBPLAYER_OFFSETX, visibleSize.height * posY)
-
-            --self:initCannonInfo(id)
-        elseif id == FishGameConfig.PLAYER.RIGHTBOTTOM then
-            self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlPlayer:setPosition(visibleSize.width * posX, 0)
-            self._playersUI[FishGameConfig.PLAYER.RIGHTBOTTOM].pnlCannon:setPosition(FishGameConfig.RBPLAYER_OFFSETX, visibleSize.height * posY)
-
-
-            --self:initCannonInfo(id)
-        elseif id == FishGameConfig.PLAYER.RIGHTTOP then
-            self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].pnlPlayer:setPosition(visibleSize.width * posX, visibleSize.height)
-            self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].pnlCannon:setPosition(FishGameConfig.LTPLAYER_OFFSETX, visibleSize.height * (1 - posY))
-            self._playersUI[FishGameConfig.PLAYER.RIGHTTOP].pnlCannon:setRotation(math.deg(math.pi))
-
-
-            --self:initCannonInfo(id)
-        elseif id == FishGameConfig.PLAYER.LEFTTOP then
-            self._playersUI[FishGameConfig.PLAYER.LEFTTOP].pnlPlayer:setPosition(visibleSize.width * posX, visibleSize.height)
-            self._playersUI[FishGameConfig.PLAYER.LEFTTOP].pnlCannon:setPosition(FishGameConfig.RTPLAYER_OFFSETX, visibleSize.height * (1 - posY))
-            self._playersUI[FishGameConfig.PLAYER.LEFTTOP].pnlCannon:setRotation(math.deg(math.pi))
-
-            --self:initCannonInfo(id)
-        end
-    end
-end
-
+--- 初始化切换场景波浪
 function FishGameScene:initBgSwitchWater()
-
     local effSwitchWater = ccs.Armature:create("effect_transition_water")
     effSwitchWater:getAnimation():play("effect_transition_water_animation")
 
@@ -674,127 +406,127 @@ function FishGameScene:initBgSwitchWater()
     self._bgSwitchWater = effSwitchWater
 end
 
+--- 点击事件
+function FishGameScene:_onTouched_TTTTT(eventType, x, y)
+    local time = socket.gettime()
+    local dt = time - self._lastFireTime
+    local dataMgr = FishGameManager:getInstance():getDataManager()
+    local fireInterval = dataMgr:getFireInterval()
 
-function FishGameScene:onBtnSound(sender, eventType)
+
+    local player = self:getFishGameManager():getDataManager():getMyPlayerInfo()
+    local fishId = player and player:getLockedFishId()
+    local lockFish = fishId and fishId ~= 0
+
+    -- 选中锁定鱼的状态下，点击可以切换到锁定指定鱼
+    if self._lockFish then
+        local fishId = game.fishgame2d.FishObjectManager:GetInstance():TestHitFish(x, y)
+        if fishId ~= -1 then
+            self:getFishGameManager():send_CS_LockSepcFish(fishId)
+        end
+    end
+
+    if not lockFish then
+        self._targetPos.x = x
+        self._targetPos.y = y
+    end
+    if eventType == "began" then
+        self._longTouch = true
+        if not self._autoFire then
+            self._autoFireTime = 0.01;
+        end
+
+        self:fireTo(self._targetPos, true)
+        return true
+    elseif eventType == "moved" then
+    elseif eventType == "ended" then
+        self._longTouch = false
+    end
+end
+
+function FishGameScene:_onBtnTouched_Menu(sender, eventType)
     if eventType == ccui.TouchEventType.began then
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
-        self._soundOpen = not self._soundOpen
-        if self._soundOpen == true then
-            self._btnSound:loadTextureNormal(FishGameConfig.BTN_IMG.SOUND_ON_N)
-            self._btnSound:loadTexturePressed(FishGameConfig.BTN_IMG.SOUND_ON_P)
-            self._btnSound:loadTextureDisabled(FishGameConfig.BTN_IMG.SOUND_ON_P)
-        else
-            self._btnSound:loadTextureNormal(FishGameConfig.BTN_IMG.SOUND_OFF_N)
-            self._btnSound:loadTexturePressed(FishGameConfig.BTN_IMG.SOUND_OFF_P)
-            self._btnSound:loadTextureDisabled(FishGameConfig.BTN_IMG.SOUND_OFF_P)
+        local name = sender:getName()
+
+        if name == "btn_close" then
+            sender:getParent().animation:play("open", false)
+        elseif name == "btn_open" then
+            sender:getParent().animation:play("close", false)
+        elseif name == "btn_music" then
+            local musicSwitch = not GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
+            GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(musicSwitch)
+            if musicSwitch == true then
+                self:getFishGameManager():getSoundManager():playBGM(nil, true)
+            else
+                GameManager:getInstance():getMusicAndSoundManager():stopMusic()
+            end
+            self:updateMusicAndSoundStatus()
+        elseif name == "btn_sound" then
+            local isOpenForSound = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
+            GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(isOpenForSound)
+            if isOpenForSound == true then
+                GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+            else
+                GameManager:getInstance():getMusicAndSoundManager():stopAllSound()
+            end
+            self:updateMusicAndSoundStatus()
+        elseif name == "btn_quit" then
+            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+            self:returnToHallScene()
+        elseif name == "btn_rule" then
+            if not tolua.isnull(self._layerRule) then return end
+            self._layerRule = FishGameRuleLayer:create():addTo(self, LAYER_ZORDER.UI)
         end
     end
 end
 
-function FishGameScene:onBtnQuit(sender, eventType)
+function FishGameScene:_onBtnTouched_OptCannon(sender, eventType)
     if eventType == ccui.TouchEventType.began then
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:returnToHallScene()
+        local name = sender:getName()
+        if name == "btn_sub" then
+            self:getFishGameManager():send_CS_ChangeCannon(false)
+        elseif name == "btn_add" then
+            self:getFishGameManager():send_CS_ChangeCannon(true)
+        end
     end
 end
 
-function FishGameScene:onBtnRuleClose(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
 
-        self._pnlRuleWnd:setVisible(false)
+
+function FishGameScene:_onBtnTouched_AutoAndLock(sender, eventType)
+    if eventType == ccui.TouchEventType.began then
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+        sender:setScale(1.1)
+    elseif eventType == ccui.TouchEventType.canceled then
+        sender:setScale(1)
+    elseif eventType == ccui.TouchEventType.ended then
+        sender:setScale(1)
+
+        local name = sender:getName()
+        if name == "btn_auto" then
+            self._autoFire = not self._autoFire
+            if self._autoFire then
+                self._autoFireTime = 0
+            end
+            sender.armature:setVisible(self._autoFire)
+        elseif name == "btn_lock" then
+            self._lockTime = 0
+            self._lockFish = not self._lockFish
+            if not self._lockFish then
+                self:getFishGameManager():send_CS_LockFish(false)
+            end
+        end
     end
 end
 
-function FishGameScene:onBtnRuleNormal(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.NORMAL)
-    end
-end
-
-function FishGameScene:onBtnRuleBigFish(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.BIGFISH)
-    end
-end
-
-function FishGameScene:onBtnRuleSpecial(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.SPECIAL)
-    end
-end
-
-function FishGameScene:onBtnRuleBoss(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.BOSS)
-    end
-end
-
-function FishGameScene:dealRuleSelect(sel)
-    self._ruleWndSelect = sel
-    if sel == FishGameConfig.RULE_SELECT.NORMAL then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(true)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(false)
-
-    elseif sel == FishGameConfig.RULE_SELECT.BIGFISH then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(true)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(false)
-
-    elseif sel == FishGameConfig.RULE_SELECT.SPECIAL then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(true)
-
-    elseif sel == FishGameConfig.RULE_SELECT.BOSS then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(true)
-        self._pnlSpecial:setVisible(false)
-    end
+-- 旋转炮台角度
+function FishGameScene:updateCannonRotationToPosition(chairID, targetPos)
+    local po = self._playerCannon[chairID]:getCannonPosition()
+    return math.atan2(targetPos.y - po[2], targetPos.x - po[1])
 end
 
 --监听相关通知
@@ -831,8 +563,6 @@ function FishGameScene:receiveServerResponseSuccessEvent(event)
     local msgName = msgTab["msgName"];
     if msgName == HallMsgManager.MsgName.SC_StandUpAndExitRoom then
         self:returnToHallScene()
-    elseif msgName == HallMsgManager.MsgName.SC_EnterRoomAndSitDown then
-        self:on_msg_EnterRoomAndSitDown(msgTab)
     elseif msgName == HallMsgManager.MsgName.SC_NotifySitDown then
         self:on_msg_NotifySitDown(msgTab)
     elseif msgName == HallMsgManager.MsgName.SC_NotifyStandUp then
@@ -874,96 +604,75 @@ function FishGameScene:receiveServerResponseSuccessEvent(event)
     FishGameScene.super.receiveServerResponseSuccessEvent(self, event)
 end
 
-function FishGameScene:hidePlayerInfo(chair_id)
-    local idx = chair_id
-    self._playersUI[idx].pnlInfo:setVisible(false)
-    self._playersUI[idx].btnAdd:setVisible(false)
-    self._playersUI[idx].btnSub:setVisible(false)
+---重新连接成功
+function FishGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
+    FishGameScene.super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
+
+    --- 尝试直接发送进入游戏消息
+    local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+    local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
+    local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
+
+    CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
+    GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
 end
 
-function FishGameScene:showPlayerInfo(chair_id)
-    local idx = chair_id
-    self._playersUI[idx].pnlInfo:setVisible(true)
-    self._playersUI[idx].btnAdd:setVisible(true)
-    self._playersUI[idx].btnSub:setVisible(true)
+function FishGameScene:hidePlayerInfo(optIndex)
+
+    local nodePlayer = self._playersUI[optIndex]
+    nodePlayer.bg_info:hide()
+    nodePlayer.label_money:hide()
+    nodePlayer.label_name:hide()
+    nodePlayer.bg_cannon_sc:hide()
+    nodePlayer.label_score:hide()
+    nodePlayer.btn_sub:hide()
+    nodePlayer.btn_add:hide()
+    nodePlayer.node_cannon:hide()
+    nodePlayer.node_winning:hide()
 end
 
-function FishGameScene:showCannonUI(chairid)
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local player = dataMgr:getPlayerByChairId(chairid)
-    local idx = chairid - 1
-	local operateChair = dataMgr:getOperateChair(idx)
-    if player ~= nil then
-        local cannonSetV = player:getCannonSet()
-        local cannonType = player:getCannonType()
-		local cannonMul  = player:getCannonMul()
-        if cannonSetV == nil then cannonSetV = 0 end
-        if cannonType == nil then cannonType = 0 end
-		if cannonMul  == nil then cannonMul  = 0 end
+function FishGameScene:showPlayerInfo(player)
+    if not player then return end
 
-        local cannonSet = self._xmlConfigManager._cannonSetVector[cannonSetV]
-        local cannon = cannonSet.Sets[cannonType]
-	    local bullet = self._xmlConfigManager._bulletVector[cannonMul]
-        self._playersUI[operateChair].pnlCannon:removeAllChildren()
+    local optIndex = player:getOptIndex()
 
-        local rootPath = FishGameManager:getInstance():getPackageRootPath();
-        local armature = ccs.Armature:create(cannon.Cannon.szResourceName)
-        armature:getAnimation():play(cannon.Cannon.Name)
-        self._playersUI[operateChair].pnlCannon:addChild(armature)
+    local nodePlayer = self._playersUI[optIndex]
 
-        local effectWeaponReplace = ccs.Armature:create("effect_weapons_replace")
-        effectWeaponReplace:getAnimation():play("effect_weapons_replace_animation")
-        self._playersUI[operateChair].pnlCannon:addChild(effectWeaponReplace)
-        effectWeaponReplace:runAction(transition.sequence({
-            cc.DelayTime:create(0.5),
-            cc.CallFunc:create(function(sender)
-                sender:removeSelf()
-            end)
-        }))
-		
-		self._playersUI[operateChair].txtScore:setString(""..bullet.nMulriple.."元")
+    nodePlayer.bg_info:show()
+    nodePlayer.label_money:show()
+    nodePlayer.label_name:show()
+    nodePlayer.bg_cannon_sc:show()
+    nodePlayer.label_score:show()
+
+    nodePlayer.node_cannon:show()
+    nodePlayer.node_winning:show()
+
+    if player:isMyself() then
+        nodePlayer.btn_sub:show()
+        nodePlayer.btn_add:show()
+    else
+        nodePlayer.btn_sub:hide()
+        nodePlayer.btn_add:hide()
     end
-end
 
-function FishGameScene:setPlayerScore(chair_id, score)
-    local s = score
-    if s == nil then
-        s = 0
-    end
-    local idx = chair_id
-    self._playersUI[idx].txtScore:setString("" .. s .. "元")
-end
 
-function FishGameScene:showLockFishEffect(chair_id)
-    local fishConfig = Fishes[18]
-    local visualConfig = Visual[fishConfig.visualId]
+    nodePlayer.label_name:setString(player:getNickName())
 
-    for _, v in ipairs(visualConfig.live) do
-        local t_animation = ccs.Armature:create(v.image)
-        t_animation:setScale(v.scale)
-        local size = self._playersUI[0].pnlLockFish:getSize()
-        dump(size, "size")
-        t_animation:getAnimation():play(v.name)
-        t_animation:setPosition(cc.p(size.width * 3 / 4, size.height * 3 / 4))
 
-        self._playersUI[0].pnlLockFish:addChild(t_animation)
-    end
-end
-
-function FishGameScene:removeLockFishEffect(chair_id)
-    self._playersUI[0].pnlLockFish:removeAllChildren()
-end
-
---  进入房间消息
-function FishGameScene:on_msg_EnterRoomAndSitDown(msgTab)
+    player:setTableUI(nodePlayer)
+    player:setCannon(self._playerCannon[optIndex])
+    player:setBubble(self._playerCannon[optIndex])
 end
 
 --  中途有玩家进入消息
 function FishGameScene:on_msg_NotifySitDown(msgTab)
+    local player = self:getDataManager():getPlayerByChairId(msgTab.pb_visual_info.chair_id)
+    self:showPlayerInfo(player)
 end
 
 --  中途退出玩家消息
 function FishGameScene:on_msg_NotifyStandUp(msgTab)
+    self:hidePlayerInfo(self:getDataManager():getOperateChair(msgTab.chair_id))
 end
 
 function FishGameScene:on_msg_FishMul(msgTab)
@@ -973,56 +682,12 @@ function FishGameScene:on_msg_AddBuffer(msgTab)
 end
 
 function FishGameScene:on_msg_GameConfig(msgTab)
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local opchair = dataMgr:getMyChairId() - 1
-    if dataMgr:getMirrorShow() == true then
-        if opchair == FishGameConfig.PLAYER.LEFTTOP then
-            self:showPlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
-            self:hidePlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
-			opchair = FishGameConfig.PLAYER.LEFTBOTTOM
-        else
-            self:showPlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
-            self:hidePlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
-			opchair = FishGameConfig.PLAYER.RIGHTBOTTOM
-        end
-	    
-		local playerInfo  =  dataMgr:getPlayerByChairId(dataMgr:getMyChairId())
-		if playerInfo ~= nil then
-			local name = playerInfo:getNickName()
-			self._playersUI[opchair].txtName:setString(playerInfo:getNickName())
-			local bullet = self._xmlConfigManager._bulletVector[1]
-			self._playersUI[opchair].txtScore:setString(""..bullet.nMulriple.."元")
-		end
-    else
-        if opchair == FishGameConfig.PLAYER.LEFTBOTTOM then
-            self:showPlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
-            self:hidePlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
-        else
-            self:showPlayerInfo(FishGameConfig.PLAYER.RIGHTBOTTOM)
-            self:hidePlayerInfo(FishGameConfig.PLAYER.LEFTBOTTOM)
-        end
-		
-		local playerInfo  =  dataMgr:getPlayerByChairId(dataMgr:getMyChairId())
-		if playerInfo ~= nil then
-			local name = playerInfo:getNickName()
-			self._playersUI[opchair].txtName:setString(playerInfo:getNickName())
-			local bullet = self._xmlConfigManager._bulletVector[1]
-			self._playersUI[opchair].txtScore:setString(""..bullet.nMulriple.."元")
-		end
-    end
-
-    for _, v in ipairs(dataMgr._players) do
-        if v ~= nil then
-            self:showCannonUI(v:getChairId())
-       end
-    end
 end
 
 function FishGameScene:on_msg_BulletSet(msgTab)
 end
 
 function FishGameScene:on_msg_UserInfo(msgTab)
-    self:showCannonUI(msgTab.chair_id)
 end
 
 function FishGameScene:on_msg_ChangeScore(msgTab)
@@ -1030,82 +695,86 @@ function FishGameScene:on_msg_ChangeScore(msgTab)
 end
 
 function FishGameScene:on_msg_SendDes(msgTab)
+    self:showBossAnimation({
+        type = "troop"
+    })
 end
 
 function FishGameScene:on_msg_LockFish(msgTab)
     --    msgTab.chair_id
     --    msgTab.lock_id
-    -- 更新锁定界面
-    local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(msgTab.fish_id)
 end
 
 function FishGameScene:on_msg_AllowFire(msgTab)
 end
 
 function FishGameScene:on_msg_SwitchScene(msgTab)
-    dump(msgTab)
-    self:switchScene(msgTab.nst, msgTab.switching ~= 1)
+    self:updateSceneBackground(msgTab.nst, msgTab.switching ~= 1)
 end
 
 function FishGameScene:on_msg_KillBullet(msgTab)
-    local bullet = game.fishgame2d.FishObjectManager:GetInstance():FindBullet(msgTab.bullet_id)
-    if bullet and bullet:getState() < EOS_DEAD then
-        bullet:setState(EOS_DEAD)
-    end
+--    local bullet = game.fishgame2d.FishObjectManager:GetInstance():FindBullet(msgTab.bullet_id)
+--    if bullet and bullet:getState() < EOS_DEAD then
+--        if bullet:isMine() then
+--            -- 删除子弹 --
+--            self.m_nBulletCount = self.m_nBulletCount - 1
+--        end
+--        bullet:setState(EOS_DEAD)
+--    end
 end
 
 function FishGameScene:on_msg_KillFish(msgTab)
-    --    FindFish
-    --
-    --    message SC_KillFish {
-    --    enum MsgID { ID = 12110; }
-    --    optional int32		chair_id=1;							//椅子ID
-    --    optional int64	score=2;                  //鱼价值
-    --    optional int32		fish_id=3;              //鱼ID
-    --    optional int32			bscoe=4;              //子弹价值
-    --    };
-    dump(msgTab)
+    -- message SC_KillFish {
+    -- enum MsgID { ID = 12110; }
+    -- optional int32		chair_id=1;							//椅子ID
+    -- optional int64	score=2;                  //鱼价值
+    -- optional int32		fish_id=3;              //鱼ID
+    -- optional int32			bscoe=4;              //子弹价值
+    -- };
+    -- 更新玩家分数
+    local dataMgr = self:getDataManager()
+    local player = dataMgr:getPlayerByChairId(msgTab.chair_id)
+    if not player then return end
+    local optIndex = player:getOptIndex()
 
+    player:setScore(player:getScore() + msgTab.score)
+
+    -- 添加鱼
     local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(msgTab.fish_id)
     if not fish then return end
+
     fish:setState(EOS_DEAD)
     local fishConf = Fishes[fish:getTypeId()]
 
-
-
-
-
     local x, y = fish:getPosition().x, fish:getPosition().y
-    local canX, canY = FishGameXMLConfigManager:getInstance():getCannonPosition(msgTab.chair_id)
+    local canPos = player:getCannon():getCannonPosition()
+    local canX, canY = canPos[1], canPos[2]
 
     -- 播放金币动画
-    self:addFishGold( {
+    self:addFishGold({
         fishX = x,
         fishY = y,
         cannonX = canX,
         cannonY = canY,
-        score = msgTab.score ,
+        score = msgTab.score,
         baseScore = msgTab.bscoe,
     })
 
-
     local mul = msgTab.score / msgTab.bscoe
     --- 播放获取金币声音
-    if self:getFishGameManager():getMyChairId() == msgTab.chair_id then
+    if dataMgr:getMyChairId() == msgTab.chair_id then
         local effect = mul < 30 and "Hit0.mp3" or (mul < 80 and "Hit1.mp3" or "Hit2.mp3")
         self:getFishGameManager():getSoundManager():playEffect(effect)
     end
 
-
-
-    -- 鱼死亡时触发屏幕震动
+    --- 鱼死亡时触发屏幕震动
     if fishConf.shakeScreen then
         local time = math.max(0.5, math.min(mul / 60, 1.5))
         local range = math.min(mul / 50, 2)
         self:shakeScreen(time, range, 0)
     end
 
-    -- 播放鱼死亡的粒子动画
+    --- 播放鱼死亡的粒子动画
     if fishConf.particle ~= "0" then
         self:addPartical({
             xPos = fish:getPosition().x,
@@ -1116,7 +785,7 @@ function FishGameScene:on_msg_KillFish(msgTab)
     if mul >= 50 then
         local xPos = fish:getPosition().x
         local yPos = fish:getPosition().y
-        self:addParticel({
+        self:addPartical({
             xPos = xPos,
             yPos = yPos,
             name = "salute1",
@@ -1124,61 +793,56 @@ function FishGameScene:on_msg_KillFish(msgTab)
     end
 
     -- 播放彩金动画
-    if (fishConf.showBingo and mul >= 80) then
-        self:showBingo({
-            chair_id = msgTab.chair_id,
-            score = msgTab.score,
-        })
-    end
+    self:showEffectWinnings({
+        wChairID = msgTab.chair_id,
+        lScore = msgTab.score,
+        BScore = msgTab.bscoe,
+        nVisualID = fishConf.visualId,
+    })
 end
 
 function FishGameScene:on_msg_SendBullet(msgTab)
-
-    --    self:addBullet(msgTab)
-
-    --    dump(self:getFishGameManager():getMyChairId())
-    --    dump(msgTab)
-    if msgTab.chair_id ~= self:getFishGameManager():getDataManager():getMyChairId() then
+    local dataMgr = self:getDataManager()
+    if msgTab.chair_id ~= dataMgr:getMyChairId() then
         self:addBullet(msgTab)
+
+        local player = dataMgr:getPlayerByChairId(msgTab.chair_id)
+        local optIndex = player:getOptIndex()
+        local mychair = player:getChairId()
+        local idx = optIndex
+
+        local angle = msgTab.direction
+
+        if dataMgr:getMirrorShow() then
+            angle = angle + math.pi
+        end
+
+        self._playersUI[idx].node_cannon:setRotation(math.deg(math.pi - angle))
+        self._playerCannon[idx]:_doAction_Fire()
     end
+
+    local dataMgr = self:getDataManager()
+    local player = dataMgr:getPlayerByChairId(msgTab.chair_id)
+    local optIndex = player:getOptIndex()
+
+    player:setScore(msgTab.score)
 end
 
 function FishGameScene:on_msg_CannonSet(msgTab)
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local idx = msgTab.chair_id - 1
-    idx = dataMgr:getOperateChair(idx)
-    local cannonSetV = msgTab.cannon_set
-	local cannonType = msgTab.cannon_type
-	local cannonMul = msgTab.cannon_mul
-		
-    if cannonSetV == nil then cannonSetV = 0 end
-    if cannonMul  == nil then cannonMul = 0 end
-    if cannonType == nil then cannonType = 0 end
+    dump(msgTab)
+    local player = self:getDataManager():getPlayerByChairId(msgTab.chair_id)
+    local optIndex = player:getOptIndex()
 
-    local cannonSet = self._xmlConfigManager._cannonSetVector[cannonSetV]
-    local cannon = cannonSet.Sets[cannonType]
-	local bullet = self._xmlConfigManager._bulletVector[cannonMul]
+    self._playerCannon[optIndex]:updateCannon(msgTab.cannon_set, msgTab.cannon_type, msgTab.cannon_mul)
 
-    local dataMgr = FishGameManager:getInstance():getDataManager()
+    local bulletSet = self:getDataManager()._bulletSet[msgTab.cannon_mul + 1]
+    if not bulletSet then return end
+    self._playersUI[optIndex].label_score:setString(CustomHelper.moneyShowStyleNone(bulletSet.mulriple))
 
-    self._playersUI[idx].pnlCannon:removeAllChildren()
-
-    local rootPath = FishGameManager:getInstance():getPackageRootPath();
-    local armature = ccs.Armature:create(cannon.Cannon.szResourceName)
-    armature:getAnimation():play(cannon.Cannon.Name)
-    self._playersUI[idx].pnlCannon:addChild(armature)
-
-    local effectWeaponReplace = ccs.Armature:create("effect_weapons_replace")
-    effectWeaponReplace:getAnimation():play("effect_weapons_replace_animation")
-    self._playersUI[idx].pnlCannon:addChild(effectWeaponReplace)
-    effectWeaponReplace:runAction(transition.sequence({
-        cc.DelayTime:create(0.5),
-        cc.CallFunc:create(function(sender)
-            sender:removeSelf()
-        end)
-    }))
-	
-	self._playersUI[idx].txtScore:setString(""..bullet.nMulriple.."元")
+    --- 播放切换声音
+    if player:isMyself() then
+        self:getFishGameManager():getSoundManager():playEffect("MakeUP.mp3")
+    end
 end
 
 function FishGameScene:on_msg_SendFish(msgTab)
@@ -1186,7 +850,7 @@ function FishGameScene:on_msg_SendFish(msgTab)
 end
 
 function FishGameScene:on_msg_SendFishList(msgTab)
-    for _, v in ipairs(msgTab.fishes) do
+    for _, v in ipairs(msgTab.pb_fishes) do
         self:addFish(v)
     end
 end
@@ -1199,80 +863,62 @@ function FishGameScene:on_event_BulletHitFish(bullet, fish)
         bullet_id = bullet:getId(),
         fish_id = fish:getId(),
     })
+
+    if bullet:isMine() then
+        -- 删除子弹 --
+        self.m_nBulletCount = self.m_nBulletCount - 1
+    end
 end
 
-function FishGameScene:on_event_FishEffect(self, target, effect)
+function FishGameScene:on_event_FishEffect(pSelf, target, effect)
+    if effect:GetEffectType() == EffectType.ETP_KILL then
+        local param_0 = effect:GetParam(0)
+        local typeLight = E_Red
+        if param_0 == 2 then
+            typeLight = E_Blue
+        elseif param_0 == 3 then
+            typeLight = E_Light
+        end
+
+        typeLight = E_Light
+
+        self:addChain({
+            type = typeLight,
+            start_x = pSelf:getPosition().x,
+            start_y = pSelf:getPosition().y,
+            end_x = target:getPosition().x,
+            end_y = target:getPosition().y,
+        })
+
+        target:setState(EOS_DEAD)
+    end
 end
 
 --- 添加鱼
 function FishGameScene:addFish(fishInfo)
-    --    dump(fishInfo)
-    --    self._id = self._id or 0
-    --    self._id = self._id + 1
-    --    fishInfo = {
-    --        fish_id = self._id,
-    --        type_id = 802,
-    --        path_id = math.random(100),
-    --        create_tick = 0,
-    --        offest_x = 0,
-    --        offest_y = 0,
-    --        dir = 0,
-    --        delay = 0,
-    --        server_tick = GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getServerTime(),
-    --        fish_speed = 500,
-    --        fis_type = 0,
-    --        troop = false,
-    --        refersh_id = 0,
-    --    }
+    local fish = FishGameFish:create(fishInfo):addTo(self.m_pFishLayer)
 
-
-    local fish = FishGameFish:create(fishInfo)
-
-    self.m_pFishLayer:addChild(fish)
+    if fishInfo.type_id == 29 then
+        self:showBossAnimation({
+            type = "boss"
+        })
+    end
 
     game.fishgame2d.FishObjectManager:GetInstance():AddFish(fish)
-
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    local player = dataMgr:getPlayerByChairId(1)
-    player:setLockedFishId(fishInfo.fish_id)
-    --    local fish = FishGameFish:create(fishInfo)
-    --
-    --    self.m_pFishLayer:addChild(fish)
-    --    game.fishgame2d.FishObjectManager:GetInstance():AddFish(fish)
 
     return fish
 end
 
-function FishGameScene:refreshPlayerInfo(chair_id)
-    local dataMgr = FishGameManager:getInstance():getDataManager()
-    if dataMgr ~= nil then
-        local playerInfo = dataMgr:getPlayerByChairId(chair_id)
-        if playerInfo ~= nil then
-            local idx = chair_id - 1
-            dump(idx, "idx")
-            if idx == FishGameConfig.PLAYER.LEFTTOP or
-                idx == FishGameConfig.PLAYER.RIGHTTOP then
-            else
-            end
-        end
-    end
-end
-
 function FishGameScene:addBullet(data)
-    self._bulletId = self._bulletId or 0
-    self._bulletId = self._bulletId + 1
+    local player = self:getDataManager():getPlayerByChairId(data.chair_id)
+    if not player then return end
 
-    local bullet = FishGameBullet:create(data)
-    self.m_pBulletLayer:addChild(bullet)
+    local bullet = FishGameBullet:create(data,player):addTo(self.m_pBulletLayer)
 
+    bullet:SetTarget(player and player:getLockedFishId() or 0)
     game.fishgame2d.FishObjectManager:GetInstance():AddBullet(bullet)
 
-
-    --    local bullet = FishGameBullet:create(data)
-    --    bullet:move(data.x_pos,data.y_pos)
-    --    self.m_pBulletLayer:addChild(bullet)
-    --
-    --    game.fishgame2d.FishObjectManager:GetInstance():AddBullet(bullet)
+    return bullet
 end
 
 function FishGameScene:addEffectDown(effect, key)
@@ -1327,38 +973,88 @@ function FishGameScene:addPartical(_info)
         name = _info.name,
     })
 end
-function FishGameScene:fireTo(chairid, dir)
-    self._bulletId = self._bulletId or 0
-    self._bulletId = self._bulletId + 1
-	local idx = chairid - 1
 
-	local po  = self._playersUI[idx].pnlCannon:getWorldPosition()
-	local x = po.x
-	local y = po.y
-	local dataMgr  = FishGameManager:getInstance():getDataManager()
-    local serverTime = GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getServerTime()
-    local playerInfo = dataMgr:getPlayerByChairId(chairid)
-    local data = {
-        id = self._bulletId, -- 子弹ID
-        chair_id = chairid, -- 椅子ID
+function FishGameScene:fireTo(targetPos, _handle)
+    local dataMgr = self:getDataManager()
+
+    -- 当前不允许发炮
+    if not dataMgr:getAllowFire() then
+        return
+    end
+
+    local player = dataMgr:getMyPlayerInfo()
+    local bulletSet = dataMgr._bulletSet[player:getCannonMul() + 1]
+    local optIndex = player:getOptIndex()
+    local mychair = player:getChairId()
+
+    -- 如果当前的金币不够，不能够发射子弹
+    local error
+    if player:getScore() < bulletSet.mulriple then
+        error = "您的金币不足，请返回大厅进行充值!!!"
+    elseif player:getScore() < dataMgr:getRoomInfo()[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+        error = "您的金币低于本房间最低入场要求，请返回大厅进行充值!!!"
+    end
+    if error then
+        -- FIX 如果当前自己的子弹没有耗完，则不提示金币不足
+        if self.m_nBulletCount > 0 then return end
+        self:showAlertLackMoney(error)
+        return
+    end
+
+    -- 如果当前自己的子弹数量大于最大子弹数量
+    if self.m_nBulletCount >= dataMgr:getMaxBulletCount() then
+        return
+    end
+    self.m_nBulletCount = self.m_nBulletCount + 1
+
+    -- 扣除金币
+    player:setScore(player:getScore() - bulletSet.mulriple)
+
+    -- 计算角度
+    local angle = self:updateCannonRotationToPosition(optIndex, self._targetPos)
+    self._playersUI[optIndex].node_cannon:setRotation(math.deg(-angle + math.pi / 2))
+
+    if self:getDataManager():getMirrorShow() then
+        angle = angle + math.pi
+    end
+
+    --- 播放声音
+    self:getFishGameManager():getSoundManager():playEffect("GunFire0.mp3")
+    self._playerCannon[optIndex]:_doAction_Fire()
+
+
+    -- 创建子弹并添加到场景
+    local po = self._playerCannon[mychair]:getCannonPosition()
+    local x = po[1]
+    local y = po[2]
+    local offset = 100
+    x = x + math.sin(-angle + math.pi / 2) * offset
+    y = y + math.cos(-angle + math.pi / 2) * offset
+
+    local serverTime = dataMgr:getServerTime()
+    local bulletId = dataMgr:getMyBulletId()
+    self:addBullet({
+        id = bulletId, -- 子弹ID
+        chair_id = mychair, -- 椅子ID
         create_tick = serverTime, -- 创建时间
         x_pos = x, -- X坐标
         y_pos = y, -- Y坐标
-        cannon_type = playerInfo:getCannonType(), -- 炮类型
-        multiply = playerInfo:getCannonMul(), -- 子弹类型
+        cannon_type = player:getCannonType(), -- 炮类型
+        multiply = player:getCannonMul(), -- 子弹类型
         score = 0, -- 玩家金钱？
-        direction = dir, -- 方向
-        is_new = 0, -- 是否新子弹
+        direction = angle + math.pi / 2, -- 方向
+        is_new = 1, -- 是否新子弹
         server_tick = serverTime, --系统时间
         is_double = 0, --双倍炮
-    }
+    })
 
-    self:addBullet(data)
-
+    -- 发送子弹消息
     self:getFishGameManager():send_CS_Fire({
-        direction = data.direction,
+        direction = angle + math.pi / 2,
         fire_time = serverTime,
-        client_id = self._bulletId,
+        client_id = bulletId,
+        pos_x = x,
+        pos_y = y,
     })
 end
 
@@ -1366,89 +1062,12 @@ function FishGameScene:jumpToHallScene()
     self:returnToHallScene()
 end
 
-function FishGameScene:returnToHallScene()
+function FishGameScene:returnToHallScene(...)
     GameManager:getInstance():getHallManager():getHallMsgManager():sendStandUpAndExitRoom()
+    self:getFishGameManager():onExit()
 
-    local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager();
-    subGameManager:onExit();
-
-    SceneController.goHallScene()
+    SceneController.goHallScene(...)
     self.isReturnToHallScene = true
-end
-
---- 创建背景
-function FishGameScene:createBackground(id)
-    local image = FishGameConfig.IMAGE_SCENE[id] or FishGameConfig.IMAGE_SCENE[1]
-    local background = display.newSprite(image)
-
-    local effBubble = ccs.Armature:create("bubble_full_eff")
-    effBubble:getAnimation():play("ani_01")
-    effBubble:align(display.CENTER, display.cx, display.cy):addTo(background)
-
-    local effWater = ccs.Armature:create("effect_bg_water")
-    effWater:getAnimation():play("effect_bg_water_animation")
-    effWater:align(display.CENTER, display.cx, display.cy):addTo(background)
-
-    return background
-end
-
---- 切换场景
-function FishGameScene:switchScene(id, bInit)
-    -- 播放切换场景音乐
-    self:getFishGameManager():getSoundManager():playBGM(id, bInit)
-
-    if bInit then
-        if not tolua.isnull(self._background) then
-            self._background:removeSelf()
-        end
-
-        local background = self:createBackground(id)
-        background:align(display.LEFT_BOTTOM, 0, 0):addTo(self, LAYER_ZORDER.BACKGROUND)
-        self._background = background
-    else
-        -- 关闭切换场景时碰撞
-        game.fishgame2d.FishObjectManager:GetInstance():SetSwitchingScene(true)
-
-        local speed = 230
-        local xBG = display.width + 100
-        local xWater = display.width + 400
-        local timeBg = (xBG) / speed
-        local timeWater = (xWater) / speed
-
-        if not tolua.isnull(self._background) then
-            self._background:runAction(transition.sequence({
-                cc.DelayTime:create(timeBg),
-                cc.CallFunc:create(function(sender)
-                    sender:removeSelf()
-                end)
-            }))
-            self._background = nil
-        end
-
-        local background = self:createBackground(id)
-        background:align(display.LEFT_BOTTOM, xBG, 0):addTo(self, LAYER_ZORDER.BACKGROUND_SWITCH)
-        background:runAction(transition.sequence({
-            cc.MoveTo:create(timeBg, cc.p(0, 0)),
-            cc.CallFunc:create(function(sender)
-                sender:setLocalZOrder(LAYER_ZORDER.BACKGROUND)
-
-                -- 打开切换场景后碰撞
-                game.fishgame2d.FishObjectManager:GetInstance():SetSwitchingScene(false)
-                game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes(false)
-            end)
-        }))
-        self._background = background
-
-        self._bgSwitchWater:stopAllActions()
-        self._bgSwitchWater:move(display.width, 0)
-        self._bgSwitchWater:show()
-        self._bgSwitchWater:runAction(transition.sequence({
-            cc.MoveBy:create(timeWater, cc.p(-xWater, 0)),
-            cc.CallFunc:create(function(sender)
-                sender:hide()
-            end)
-        }))
-    end
 end
 
 --- 震动屏幕
@@ -1472,32 +1091,6 @@ function FishGameScene:shakeScreen(time, range, delaytime)
                 scene:setPosition(math.random() * base - base_2, math.random() * base - base_2)
             end
         end),
-        cc.CallFunc:create(function(sender)
-            sender:removeSelf()
-        end)
-    }))
-end
-
-
-function FishGameScene:showFireEffect(chair_id)
-    local idx = chair_id - 1
-    local fireEffect = ccs.Armature:create("effect_bar_glod")
-    fireEffect:getAnimation():play("star_yellow_Copy13_Copy15")
-
-    local v = self._playersUI[idx].pnlCannon:getWorldPosition()
-    local posx = v.x
-    local posy = v.y
-    local size = self._playersUI[idx].pnlCannon:getSize()
-
-    if idx == FishGameConfig.PLAYER.LEFTTOP or idx == FishGameConfig.PLAYER.RIGHTTOP then
-        fireEffect:setPosition(cc.p(posx, posy - size.height))
-    elseif idx == FishGameConfig.PLAYER.RIGHTBOTTOM or idx == FishGameConfig.PLAYER.LEFTBOTTOM then
-        fireEffect:setPosition(cc.p(posx, posy + size.height))
-    end
-
-    self._effectLayer:addChild(fireEffect)
-    fireEffect:runAction(transition.sequence({
-        cc.DelayTime:create(0.5),
         cc.CallFunc:create(function(sender)
             sender:removeSelf()
         end)
@@ -1599,11 +1192,207 @@ function FishGameScene:showChain(_chain)
     end
 end
 
+function FishGameScene:showEffectWinnings(args)
+    args = args or {}
+    local wChairID = args.wChairID or 0
+    local lScore = args.lScore or 0
+    local baseScore = args.BScore or 0
+    local nVisualID = args.nVisualID or 0
+
+    local dataMgr = self:getDataManager()
+    local player = dataMgr:getPlayerByChairId(wChairID)
+    if not player then return end
+
+    local optIndex = player:getOptIndex()
+    local times = lScore / baseScore
+    --- 倍数覆盖
+    local winningNode = self.m_winningNode[optIndex]
+    if not tolua.isnull(winningNode) and winningNode.times and winningNode.times > times then
+        return
+    end
+    if not tolua.isnull(winningNode) then winningNode:removeSelf() end
+
+    local nameAni
+    if times >= 100 then
+        nameAni = "ani_03"
+    elseif times >= 50 then
+        nameAni = "ani_02"
+    elseif times >= 30 then
+        nameAni = "ani_01"
+    end
+    if not nameAni then return end
+
+    --- 播放声音
+    if times >= 100 then
+        self:getFishGameManager():getSoundManager():playEffect("TNNFDCLNV.mp3")
+    else
+        self:getFishGameManager():getSoundManager():playEffect("CJ.mp3")
+    end
+
+    --- 添加节点
+    local node = display.newNode()
+    node:setCascadeOpacityEnabled(true)
+    node:move(self._playersUI[optIndex].node_winning:convertToWorldSpace(cc.p(0,0)))
+    node.times = times
+    self.m_winningNode[optIndex] = node
+
+    local armature = ccs.Armature:create("effect_bar_glod")
+    armature:getAnimation():play(nameAni)
+    if times >= 100 then
+    elseif times >= 50 then
+        armature:setScale(0.85)
+    elseif times >= 30 then
+        armature:setScale(0.7)
+    end
+
+    local iconConfig = FishGameConfig.FISHNAME_ICON_CONFIG[nVisualID or 0]
+    if iconConfig then
+        display.newSprite(iconConfig):addTo(node,1):align(display.CENTER,0,-80)
+    end
+
+    local fileName = player:isMyself() and "ui/number_02.png" or "ui/number_01.png"
+    local text = CustomHelper.moneyShowStyleNone(lScore)
+    text = string.gsub(text, "%.", ";")
+    text = string.format(":%s",text)
+    local labelScore = cc.LabelAtlas:_create("0123456789", fileName, 37, 46, 48)
+    labelScore:setString(text)
+    labelScore:setAnchorPoint(0.5, 0.5)
+
+    node:addChild(armature)
+    node:addChild(labelScore)
+    self:addEffectUp(node, "-2")
+
+    labelScore:runAction(cc.RepeatForever:create(transition.sequence({
+        cc.RotateTo:create(0.3, 30),
+        cc.RotateTo:create(0.6, -30),
+        cc.RotateTo:create(0.3, 0),
+    })))
+    node:runAction(transition.sequence({
+        -- 应雷总口头安排改为5秒
+        -- cc.DelayTime:create(2),
+        cc.DelayTime:create(5),
+        cc.Spawn:create({
+            cc.ScaleTo:create(0.2, 0.3),
+            cc.FadeOut:create(0.2),
+        }),
+        cc.CallFunc:create(function(sender)
+            sender:removeSelf()
+            self.m_winningNode[optIndex] = nil
+        end),
+    }))
+
+    armature = nil
+    labelScore = nil
+    node = nil
+end
+
+function FishGameScene:showBossAnimation(args)
+    args = args or {}
+    local type = args.type or 0
+
+    local config = {
+        ["boss"] = "ani_01",
+        ["troop"] = "ani_02",
+    }
+
+    if not(type and config[type]) then return end
+
+    if not tolua.isnull(self._bossAnimation) then self._bossAnimation:removeSelf() end
+
+    local armature = ccs.Armature:create("fish_effect_boss")
+    armature:getAnimation():play(config[type])
+    armature:align(display.CENTER,display.cx,display.height * 0.618)
+    armature:runAction(transition.sequence({
+        cc.DelayTime:create(10),
+        cc.CallFunc:create(function(sender)
+            sender:removeSelf()
+        end),
+    }))
+
+    self._bossAnimation = armature
+
+    self:addEffectUp(armature, "fish_effect_boss",999)
+end
+
+
+function FishGameScene:ShowEffectJetton(wChairID, lScore, baseScore)
+    if lScore <= 0 then return end
+    local pJetton = self.m_pJetton[wChairID]
+    if not pJetton then return end
+
+    -- 计算显示的筹码数量 --
+    local nCount = 0
+    local Max_Jetton_Count = 60
+    if #pJetton == 0 then
+        nCount = math.min(Max_Jetton_Count, math.max(1, math.floor(lScore / baseScore * 0.5)))
+    else
+        local nMaxLayer = 1
+        local max_score = 0
+        for _, v in ipairs(pJetton) do
+            if (v.m_lScore > max_score) then
+                nMaxLayer = v.m_nCount
+                max_score = v.m_lScore
+            end
+        end
+        nCount = math.min(Max_Jetton_Count, math.max(1, math.floor(lScore * nMaxLayer / max_score)))
+    end
+
+    local panenCannon = FishGame2DLogic.getInstance():GetUILayer():GetChairPanel(wChairID)
+    if not panenCannon then return end
+
+    local reverse = panenCannon.bUp
+    local xOffset
+    if FishGame2DLogic.getInstance():getMyChairId() == wChairID then
+        if panenCannon.id % 2 == (panenCannon.bUp and 1 or 0) then
+            xOffset =  -150
+        else
+            xOffset = 345
+        end
+    else
+        if panenCannon.id % 2 == (panenCannon.bUp and 1 or 0) then
+            xOffset = -280
+        else
+            xOffset = 85
+        end
+    end
+    local x = panenCannon.widgetCannon:getPositionX() + xOffset
+    local y = panenCannon.widgetCannon:getPositionY() + (panenCannon.bUp and -75 or 75)
+    local lastJetton = pJetton[#pJetton]
+
+    local color = Jetton.COLOR.GREEN
+    if lastJetton and lastJetton:GetColor() == Jetton.COLOR.GREEN then
+        color = Jetton.COLOR.RED
+    end
+
+    local jettonCount = self:GetMaxJettonCount()
+    local jetton = Jetton.new({
+        wChairID = wChairID,
+        lScore = lScore,
+        nColor = color,
+        nCount = nCount,
+        bUp = panenCannon.bUp,
+        bReverse = reverse,
+        onRevemoHandler = handler(self, self._onJettonRemoved)
+    })
+    if reverse then
+        jetton:pos(x + math.min(jettonCount, #pJetton) * Jetton.INTERVAL + Jetton.INTERVAL * 0.5, y)
+    else
+        jetton:pos(x - math.min(jettonCount, #pJetton) * Jetton.INTERVAL - Jetton.INTERVAL * 0.5, y)
+    end
+    self:AddEffectUp(jetton, "-1")
+
+    table.insert(pJetton, jetton)
+
+    for i = 1, #pJetton - jettonCount + 1 do
+        pJetton[i]:_doAction_End()
+    end
+end
+
+
 function FishGameScene:showEffectPartical(x, y, name)
     local config = FishGameConfig.PARTICAL_CONFIG[name]
     if not config then return end
-    dump(name)
-    dump(config)
+
     local animaNode = ccs.Armature:create(config.AniImage)
     animaNode:getAnimation():play(config.AniName)
     animaNode:setAnchorPoint(0.5, 0.5)
@@ -1632,11 +1421,12 @@ end
 local intervalX = 20
 local jumpByX = 20
 local jumByHeight = 100
-local opacity = { 0xFF,0xFF * 0.3,0xFF * 0.1 }
+local opacity = { 0xFF, 0xFF * 0.3, 0xFF * 0.1 }
 local shadowCount_1 = #opacity - 1
 local function funcHide(sender)
     sender:setVisible(true)
 end
+
 function FishGameScene:showFishGold(args)
     args = args or {}
     local fishX = args.fishX or 0
@@ -1649,11 +1439,11 @@ function FishGameScene:showFishGold(args)
 
     if score <= 0 then return end
 
-    self._cacheMng:setCacheLimit("fish_jinbi_1",100)
+    self._cacheMng:setCacheLimit("fish_jinbi_1", 100)
     local runningCount = self._cacheMng:getRunningCount("fish_jinbi_1")
     local xxx = (100 - runningCount) / 100
 
-    local shadowCount = math.max(1 + math.ceil(shadowCount_1 * xxx),2)
+    local shadowCount = math.max(1 + math.ceil(shadowCount_1 * xxx), 2)
     --    local start = shadowCount - math.min(math.floor(#opacity * xxx),2)
 
     local coin_count = score / base * 0.5
@@ -1661,7 +1451,7 @@ function FishGameScene:showFishGold(args)
     if (coin_count > 10) then coin_count = 10 end
     coin_count = coin_count * xxx
 
-    if (coin_count < 1 ) then coin_count = 1 end
+    if (coin_count < 1) then coin_count = 1 end
 
     local offsetX = fishX - intervalX * coin_count * 0.5 - 40
     local distance = game.fishgame2d.MathAide:CalcDistance(fishX, fishY, cannonX, cannonY)
@@ -1669,14 +1459,14 @@ function FishGameScene:showFishGold(args)
 
     for i = 1, coin_count do
         local x = offsetX + intervalX * (coin_count - i)
-        for j=1,shadowCount do
+        for j = 1, shadowCount do
             local icon = self._cacheMng:getCachedNode("fish_jinbi_1")
             if not icon then
                 icon = ccs.Armature:create("fish_jinbi_1")
                 icon:getAnimation():play("move")
                 self:addEffectUp(icon, "fish_jinbi_1")
 
-                self._cacheMng:addNode("fish_jinbi_1",icon)
+                self._cacheMng:addNode("fish_jinbi_1", icon)
             end
 
             icon:setPosition(x, fishY)
@@ -1687,7 +1477,7 @@ function FishGameScene:showFishGold(args)
             icon:runAction(transition.sequence({
                 cc.DelayTime:create(0.2 * i + 0.2 / shadowCount * (j - 1)),
                 cc.CallFunc:create(funcHide),
-                cc.JumpBy:create(0.6,cc.p(jumpByX,0),jumByHeight,2),
+                cc.JumpBy:create(0.6, cc.p(jumpByX, 0), jumByHeight, 2),
                 cc.DelayTime:create(0.1),
                 cc.MoveTo:create(distanceTime, cc.p(cannonX, cannonY)),
                 cc.CallFunc:create(function(sender)
@@ -1711,6 +1501,8 @@ function FishGameScene:showFishGoldLabel(args)
     local wChairID = args.wChairID or 0
 
     if score <= 0 then return end
+
+    score = CustomHelper.moneyShowStyleNone(score)
 
     -- 金币数字显示 --
     local labelScore = cc.LabelAtlas:_create("0123456789", "ui/gold_hit_numbers.png", 117, 150, 48)
@@ -1740,6 +1532,149 @@ function FishGameScene:showFishGoldLabel(args)
         end)
     }))
     labelScore = nil
+end
+
+--- 弹出缺钱提示
+function FishGameScene:showAlertLackMoney(content)
+    local TipLayer = requireForGameLuaFile("TipLayer");
+    local tipLayer = TipLayer:create();
+    tipLayer:showLackMoneyAlertView(content, nil, "story", nil, function()
+        self:returnToHallScene({
+            { tag = ViewManager.SECOND_LAYER_TAG.STORY },
+        })
+    end, nil)
+
+    local tipLayerName = CustomHelper.md5String(content)
+    tipLayer:setName(tipLayerName);
+    local parent = cc.Director:getInstance():getRunningScene();
+    if parent:getChildByName(tipLayerName) then
+        --todo
+        return tipLayer;
+    end
+    parent:addChild(tipLayer, 1000);
+end
+
+--- 创建背景
+function FishGameScene:createBackground(id)
+    local image = FishGameConfig.IMAGE_SCENE[id] or FishGameConfig.IMAGE_SCENE[1]
+    local background = display.newSprite(image)
+
+    local effBubble = ccs.Armature:create("bubble_full_eff")
+    effBubble:getAnimation():play("ani_01")
+    effBubble:align(display.CENTER, display.cx, display.cy):addTo(background)
+
+    local effWater = ccs.Armature:create("effect_bg_water")
+    effWater:getAnimation():play("effect_bg_water_animation")
+    effWater:align(display.CENTER, display.cx, display.cy):addTo(background)
+
+    return background
+end
+
+--- 切换场景
+function FishGameScene:updateSceneBackground(id, bInit)
+    -- 播放切换场景音乐
+    local dataMng = self:getDataManager()
+    local gameMng = self:getFishGameManager()
+    gameMng:getSoundManager():playBGM(id, bInit)
+
+    if bInit then
+        if not tolua.isnull(self._background) then
+            self._background:removeSelf()
+        end
+
+        local background = self:createBackground(id)
+        background:align(display.CENTER, display.cx, display.cy):addTo(self, LAYER_ZORDER.BACKGROUND)
+        if dataMng:getMirrorShow() then
+            background:setRotation(180)
+        else
+            background:setRotation(0)
+        end
+
+        self._background = background
+    else
+        -- 关闭切换场景时碰撞
+        game.fishgame2d.FishObjectManager:GetInstance():SetSwitchingScene(true)
+
+        local speed = 230
+        local xBG = display.width + 100
+        local xWater = display.width + 400
+        local timeBg = (xBG) / speed
+        local timeWater = (xWater) / speed
+
+        if not tolua.isnull(self._background) then
+            self._background:runAction(transition.sequence({
+                cc.DelayTime:create(timeBg),
+                cc.CallFunc:create(function(sender)
+                    sender:removeSelf()
+                end)
+            }))
+            self._background = nil
+        end
+
+        local background = self:createBackground(id)
+        background:addTo(self, LAYER_ZORDER.BACKGROUND_SWITCH)
+
+        if dataMng:getMirrorShow() then
+            background:setRotation(180)
+            background:align(display.CENTER, -xBG + display.cx, display.cy)
+        else
+            background:setRotation(0)
+            background:align(display.CENTER, xBG + display.cx, display.cy)
+        end
+        background:runAction(transition.sequence({
+            cc.MoveTo:create(timeBg, cc.p(display.cx, display.cy)),
+            cc.CallFunc:create(function(sender)
+                sender:setLocalZOrder(LAYER_ZORDER.BACKGROUND)
+
+                -- 打开切换场景后碰撞
+                game.fishgame2d.FishObjectManager:GetInstance():SetSwitchingScene(false)
+                game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes(false)
+            end)
+        }))
+        self._background = background
+
+        -- 波纹动画
+        local bgSwitchWater = self._bgSwitchWater
+        bgSwitchWater:stopAllActions()
+        bgSwitchWater:show()
+        if dataMng:getMirrorShow() then
+            bgSwitchWater:setRotation(180)
+            bgSwitchWater:align(display.LEFT_CENTER, 0, display.cy)
+            bgSwitchWater:runAction(transition.sequence({
+                cc.MoveBy:create(timeWater, cc.p(xWater, 0)),
+                cc.CallFunc:create(function(sender)
+                    sender:hide()
+                end)
+            }))
+        else
+            bgSwitchWater:setRotation(0)
+            bgSwitchWater:align(display.LEFT_CENTER, display.width, display.cy)
+            bgSwitchWater:runAction(transition.sequence({
+                cc.MoveBy:create(timeWater, cc.p(-xWater, 0)),
+                cc.CallFunc:create(function(sender)
+                    sender:hide()
+                end)
+            }))
+        end
+    end
+end
+
+--- 更新声音和音乐状态
+function FishGameScene:updateMusicAndSoundStatus()
+    local panel_menu = self._mainUI:getChildByName("panel_menu")
+
+    local nodeMusic = panel_menu:getChildByName("btn_music")
+    local nodeSound = panel_menu:getChildByName("btn_sound")
+
+    local musicSwitch = GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
+    nodeMusic:loadTextureNormal(musicSwitch and FishGameConfig.BTN_IMG.MUSIC_ON_N or FishGameConfig.BTN_IMG.MUSIC_OFF_N)
+    nodeMusic:loadTexturePressed(musicSwitch and FishGameConfig.BTN_IMG.NUSIC_ON_P or FishGameConfig.BTN_IMG.MUSIC_OFF_P)
+    nodeMusic:loadTextureDisabled(musicSwitch and FishGameConfig.BTN_IMG.NUSIC_ON_P or FishGameConfig.BTN_IMG.MUSIC_OFF_P)
+
+    local soundSwitch = GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
+    nodeSound:loadTextureNormal(soundSwitch and FishGameConfig.BTN_IMG.SOUND_ON_N or FishGameConfig.BTN_IMG.SOUND_OFF_N)
+    nodeSound:loadTexturePressed(soundSwitch and FishGameConfig.BTN_IMG.SOUND_ON_P or FishGameConfig.BTN_IMG.SOUND_OFF_P)
+    nodeSound:loadTextureDisabled(soundSwitch and FishGameConfig.BTN_IMG.SOUND_ON_P or FishGameConfig.BTN_IMG.SOUND_OFF_P)
 end
 
 return FishGameScene
