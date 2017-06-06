@@ -487,7 +487,6 @@ function TmjPlayer:addToHandCard(cardInfo)
 	table.insert(self.handCards,beforeIndex,cardInfo)
 	--
 	self.cardsArray = self:setCardArray(self.handCards)
-
 	self:refreshCard()
 	sslog(self.logTag,"插入的位置:"..beforeIndex)
 	
@@ -693,6 +692,7 @@ end
 --@param cardInfo 摸到的牌信息
 function TmjPlayer:getOneCard(cardInfo)
 	self.getCard = self:createOneCard(cardInfo)
+	ssdump(self.getCard,"我摸到的牌是什么",10)
 	--
 --[[	local tempHandCards ={ {info = self.getCard.info } }
 	--创建临时表，只有info

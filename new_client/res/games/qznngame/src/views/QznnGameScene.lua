@@ -2450,6 +2450,7 @@ function QznnGameScene:onExit()
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.dingzhuang_scheduler)
         self.dingzhuang_scheduler = nil
     end
+	QznnGameManager:clearLoadedOneGameFiles()
 end
 
 ----退出房间

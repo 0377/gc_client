@@ -606,11 +606,14 @@ function TmjMyPlayer:doChooseOperation(operation,index)
 end
 
 --关闭操作界面
-function TmjMyPlayer:closeOperationPanel()
+--@param ignoreOperation 是否需要忽略
+function TmjMyPlayer:closeOperationPanel(ignoreOperation)
 	sslog(self.logTag,"关闭操作界面")
 	--同时关闭听胡界面
 	self:closeTingHuInfo()
-	TmjOperationFactory:getInstance():clearOperation()
+	if not ignoreOperation then
+		TmjOperationFactory:getInstance():clearOperation()
+	end
 	self:reSetCardGray() --重置灰色
 end
 --判断自己是否是听状态，是那就直接出牌
@@ -895,7 +898,7 @@ function TmjMyPlayer:playCard(cardIndex)
 	else
 		choosedCard = self.getCard and self.getCard.node or nil
 	end
-	
+	ssdump(self.getCard,"打牌的时候，摸到的牌是",10)
 	if choosedCard then
 		choosedCard:changeState(TmjConfig.CardState.State_Discard)
 		TmjMyPlayer.super.playCard(self,cardIndex)
@@ -1157,12 +1160,26 @@ function TmjMyPlayer:anGangCard(cardInfo)
 			sslog(self.logTag,"没有摸到牌，不能暗杠")
 			return 
 		end
+
 		local outCard = self.getCard --这里的外部的牌就是摸到的
+		local hangGangCount = 3
 		--self.extraCards
 		local tempGangArr = {}
+		if self.getCard.info.val~=cardInfo.val then --摸得牌不是要杠的，那就是手上的四张
+			outCard = nil
+			hangGangCount = 4
+			if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
+				self:addToHandCard(self.getCard)
+				self:refreshCard(false)
+				self.getCard = nil
+			end
+		else
 		--table.insert(self.extraCards,outCard)
-		table.insert(tempGangArr,outCard)
-		for i=1,3 do
+			table.insert(tempGangArr,outCard)
+		end
+
+
+		for i=1,hangGangCount do
 			local removedCard = self:removeHandCard(cardInfo.val)
 			if removedCard then
 				table.insert(tempGangArr,removedCard)
@@ -1370,6 +1387,28 @@ function TmjMyPlayer:runOutCardAnim()
 	local seqAction = transition.sequence({cc.MoveTo:create(len/speed,outPos),cc.CallFunc:create(handler(self,self.freshOutCard))})
 	lastNode:runAction(seqAction)
 end
+function TmjMyPlayer:freshOutCard()
+	--这里要把手上的牌整理一下，这个时候self.getCard 应该是空的，如果有，那么把他放到手牌中去
+	ssdump(self.getCard,"打完牌后摸到的牌的信息应该是空的")
+	ssdump(self.handCards,"手上的牌有哪些",10)
+	if self.getCard then
+		sslog(self.logTag,"纳尼，摸到的牌居然不是空的")
+		--ssdump(self.handCards,"手上的牌有哪些")
+		--把摸到的牌，放到手上去
+		table.insert(self.handCards,self.getCard)
+		ssdump(tempCard,"补花的手牌")
+		TmjHelper.sortCards(self.handCards)
+		self:showFrontCard()
+		self:refreshCard(false)
+		self:checkToSetLastHandCard()
+		self.getCard = nil
+	else
+		self:refreshCard(false)
+	end
+	
+	
+	TmjMyPlayer.super.freshOutCard(self)
+end
 
 --播放摸牌的动画
 --@param tGetcard 摸到牌的数据结构
@@ -1396,7 +1435,7 @@ end
 function TmjMyPlayer:onExit()
 	self:stopPlaySchedule()
 	self:stopDecisionSchedule()
-	self:closeOperationPanel()
+	self:closeOperationPanel(true)
 	TmjMyPlayer.super.onExit(self)
 end
 

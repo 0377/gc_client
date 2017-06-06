@@ -189,6 +189,10 @@ function FishGameScene:onEnter()
 end
 
 function FishGameScene:onExit()
+    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes(true)
+    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllBullets(true)
+    game.fishgame2d.FishObjectManager:GetInstance():Clear()
+    game.fishgame2d.FishObjectManager:DestroyInstance()
     if self._scheduler ~= nil then
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
         self._scheduler = nil
@@ -276,10 +280,6 @@ function FishGameScene:_onInterval(dt)
             end
         end
     else
-        if not self._lockFish then
-            self:getFishGameManager():send_CS_LockFish(false)
-        end
-
         local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(fishId)
         if fish then
             self._targetPos.x = fish:getPosition().x
@@ -495,8 +495,6 @@ function FishGameScene:_onBtnTouched_OptCannon(sender, eventType)
     end
 end
 
-
-
 function FishGameScene:_onBtnTouched_AutoAndLock(sender, eventType)
     if eventType == ccui.TouchEventType.began then
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
@@ -515,6 +513,19 @@ function FishGameScene:_onBtnTouched_AutoAndLock(sender, eventType)
             sender.armature:setVisible(self._autoFire)
         elseif name == "btn_lock" then
             self._lockTime = 0
+
+
+            if self._lockFish then
+                local dataMgr = self:getDataManager()
+                local player = dataMgr:getMyPlayerInfo()
+                local fishId = player:getLockedFishId()
+                if not (fishId and fishId ~= 0) then
+                    self:getFishGameManager():send_CS_LockFish(true)
+                    self._lockTime = 0
+                    return
+                end
+            end
+
             self._lockFish = not self._lockFish
             if not self._lockFish then
                 self:getFishGameManager():send_CS_LockFish(false)
@@ -987,17 +998,21 @@ function FishGameScene:fireTo(targetPos, _handle)
     local optIndex = player:getOptIndex()
     local mychair = player:getChairId()
 
+    -- FIX 如果当前自己的子弹没有耗完，则不提示金币不足
     -- 如果当前的金币不够，不能够发射子弹
-    local error
+    local error,needMoney
     if player:getScore() < bulletSet.mulriple then
         error = "您的金币不足，请返回大厅进行充值!!!"
+        needMoney = bulletSet.mulriple
     elseif player:getScore() < dataMgr:getRoomInfo()[HallGameConfig.SecondRoomMinMoneyLimitKey] then
         error = "您的金币低于本房间最低入场要求，请返回大厅进行充值!!!"
+        needMoney = dataMgr:getRoomInfo()[HallGameConfig.SecondRoomMinMoneyLimitKey]
     end
+
     if error then
         -- FIX 如果当前自己的子弹没有耗完，则不提示金币不足
         if self.m_nBulletCount > 0 then return end
-        self:showAlertLackMoney(error)
+        self:showAlertLackMoney(error,needMoney)
         return
     end
 
@@ -1535,16 +1550,38 @@ function FishGameScene:showFishGoldLabel(args)
 end
 
 --- 弹出缺钱提示
-function FishGameScene:showAlertLackMoney(content)
-    local TipLayer = requireForGameLuaFile("TipLayer");
-    local tipLayer = TipLayer:create();
-    tipLayer:showLackMoneyAlertView(content, nil, "story", nil, function()
+function FishGameScene:showAlertLackMoney(needMoneyTip,compareMoney)
+    local cancalCallbackFunc = function() self:returnToHallScene() end
+    local closeCallbackFunc = function() self:returnToHallScene() end
+    local bankCallbackFunc = function()
+        local BankCenterLayer = requireForGameLuaFile("BankCenterLayer")
+        self:returnToHallScene({
+            { tag = ViewManager.SECOND_LAYER_TAG.BANK, parme = BankCenterLayer.ViewType.WithDraw },
+        })
+    end
+    local storyCallbackFunc = function()
         self:returnToHallScene({
             { tag = ViewManager.SECOND_LAYER_TAG.STORY },
         })
-    end, nil)
+    end
 
-    local tipLayerName = CustomHelper.md5String(content)
+    local dataMgr = self:getDataManager()
+    local player = dataMgr:getMyPlayerInfo()
+    local myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo();
+
+    local money = player:getScore()
+    local bank = myPlayerInfo:getBank()
+    if money >= compareMoney then return false end
+
+    local TipLayer = requireForGameLuaFile("TipLayer");
+    local tipLayer = TipLayer:create();
+    if money + bank >= compareMoney then --银行有钱足够，可以去提款
+        tipLayer:showLackMoneyAlertView(needMoneyTip, "bank", "story", bankCallbackFunc, storyCallbackFunc, closeCallbackFunc)
+    else --银行有钱不过，去充值
+        tipLayer:showLackMoneyAlertView(needMoneyTip, nil, "story", cancalCallbackFunc, storyCallbackFunc, closeCallbackFunc)
+    end
+
+    local tipLayerName = CustomHelper.md5String("TipLayer")
     tipLayer:setName(tipLayerName);
     local parent = cc.Director:getInstance():getRunningScene();
     if parent:getChildByName(tipLayerName) then
@@ -1552,6 +1589,7 @@ function FishGameScene:showAlertLackMoney(content)
         return tipLayer;
     end
     parent:addChild(tipLayer, 1000);
+    return true;
 end
 
 --- 创建背景

@@ -2163,6 +2163,7 @@ function DzpkGameScene:initMyBtn( )
 	self.LiangPai = true --亮牌
 
 	local bottom = self.csNode:getChildByName("Panel_bottom")
+	bottom:setVisible(false)
 	
 	local leftbig = bottom:getChildByName("Panel_leftbig")
 	local leftsmall = bottom:getChildByName("Panel_leftsmall")
@@ -2948,6 +2949,8 @@ function DzpkGameScene:onExit()
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
         self._scheduler = nil
     end
+	
+	DzpkGameManager:clearLoadedOneGameFiles()
 end
 
 ----退出房间

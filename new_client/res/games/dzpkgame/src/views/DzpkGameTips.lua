@@ -4,13 +4,13 @@ DzpkGameTips = class("DzpkGameTips", function()
 end)
 
 
-
+local instanse = nil
 local btns = {
 	[1] = {	btnName = "Button_1",wordName = "Image_info1",clickFun = function()
-				self:setShowIndex(1)
+				instanse:setShowIndex(1)
 			end},
 	[2] = {btnName = "Button_2",wordName = "Image_info2",clickFun = function()
-			self:setShowIndex(2)
+			instanse:setShowIndex(2)
 		end}
 }
 
@@ -20,7 +20,7 @@ function DzpkGameTips:ctor()
     self._uiLayer = cc.CSLoader:createNode(csNodePath)
     self:addChild(self._uiLayer)
 
-
+	instanse = self
     --self._gameBG= tolua.cast(CustomHelper.seekNodeByName(self._uiLayer,"guiZheJieMianImg"), "ccui.ImageView")--- layer:getChildByName("guiZheJieMianImg")
     --self._gameBG:setTouchEnabled(true)
     --local closeBtn = tolua.cast(CustomHelper.seekNodeByName(self._uiLayer, "closeBtn"), "ccui.Button")
@@ -71,9 +71,9 @@ function DzpkGameTips:setShowIndex(index)
 		local btn1 = self._uiLayer:getChildByName("Panel_bg"):getChildByName(v.btnName)
 		if btn1 ~= nil then
 			if k == self.showIndex then
-				btn1:setTouchEnabled(false)
+				btn1:setEnabled(false)
 			else
-				btn1:setTouchEnabled(true)
+				btn1:setEnabled(true)
 			end
 		end
 		

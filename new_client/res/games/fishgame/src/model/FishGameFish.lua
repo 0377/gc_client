@@ -19,8 +19,9 @@ function FishGameFish:ctor(data)
     self:setRefershId(data.refersh_id or 0)
     self:SetFishType(data.fis_type)
 
+    local fishConfig = Fishes[data.type_id]
+    self:SetLockLevel(fishConfig.lockLvl)
 
-    data.path_id = data.path_id or 0
     -- 路径
     local moveCompent
     if data.path_id > 0 then
@@ -65,7 +66,6 @@ function FishGameFish:ctor(data)
 
     self:setMoveCompent(moveCompent)
 
-    local fishConfig = Fishes[data.type_id]
 
     -- TODO 添加默认的BUFF效果
     for _, v in ipairs(fishConfig.buff) do

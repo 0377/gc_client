@@ -19,6 +19,7 @@ FishGameManager.MsgName =
     CS_ChangeCannonSet = 'CS_ChangeCannonSet',
     CS_Netcast = 'CS_Netcast',
     CS_LockFish = 'CS_LockFish',
+    CS_LockSpecFish = 'CS_LockSpecFish',
     CS_Fire = 'CS_Fire',
     CS_ChangeCannon = 'CS_ChangeCannon',
     CS_ChangeScore = 'CS_ChangeScore',
@@ -249,7 +250,6 @@ function FishGameManager:send_CS_LockFish(bLock)
         chair_id= self:getDataManager():getMyChairId(),
         lock = bLock and 1 or 0,
     }
-    dump(bLock)
     local msgName = FishGameManager.MsgName.CS_LockFish;
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
 end
@@ -260,7 +260,7 @@ function FishGameManager:send_CS_LockSepcFish(fishId)
         chair_id= self:getDataManager():getMyChairId(),
         fish_id = fishId,
     }
-    local msgName = FishGameManager.MsgName.CS_LockFish;
+    local msgName = FishGameManager.MsgName.CS_LockSpecFish;
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName,msgTab)
 end
 

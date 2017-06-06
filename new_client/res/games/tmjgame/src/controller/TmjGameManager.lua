@@ -13,6 +13,7 @@ TmjGameManager = class("TmjGameManager",requireForGameLuaFile("SubGameBaseManage
 local TmjGameDataManager = import(".TmjGameDataManager")
 local HallMsgManager = GameManager:getInstance():getHallManager():getHallMsgManager()
 local TmjConfig = import("..cfg.TmjConfig")
+local TmjOperationFactory = requireForGameLuaFile("TmjOperationFactory")
 function TmjGameManager:ctor()
 	TmjGameManager.super.ctor(self)
 	self.logTag = self.__cname..".lua"
@@ -57,9 +58,17 @@ function TmjGameManager:clearLoadedOneGameFiles()
     loaded["Tmji18nUtils"] = nil
     loaded["TmjOperationFactory"] = nil
 	
-	TmjGameManager.instance = nil
-	Tmji18nUtils.instance = nil
-	TmjOperationFactory.instance = nil
+	
+	if TmjGameManager then
+		TmjGameManager.instance = nil
+	end
+	if Tmji18nUtils then
+		Tmji18nUtils.instance = nil
+	end
+	if TmjOperationFactory then
+		TmjOperationFactory.instance = nil
+	end
+	
 	
 end
 function TmjGameManager:sendEnterRoomAndSitDownMsg()

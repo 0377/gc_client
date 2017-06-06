@@ -50,18 +50,21 @@ end
 function LoadingScene:onEnterTransitionFinish()
 	--print("LoadingScene:onEnterTransitionFinish()")
 	CustomHelper.cleanMemeryCache();
-	local seq = cc.Sequence:create(cc.DelayTime:create(0.01),cc.CallFunc:create(function()
-		self:preLoadRes()
-	end));
 	---如果6秒没加载完成 就直接跳过
-	self._scheduler =  CustomHelper.performWithDelayGlobal(function (dt)
-		self:showProgressPercent(100);
-		if self._scheduler~=nil then
-			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)   
-        	self._scheduler = nil
-		end
-	end,6,false)
-	self:runAction(seq)
+--	self._scheduler =  CustomHelper.performWithDelayGlobal(function (dt)
+--		self:showProgressPercent(100);
+--		if self._scheduler~=nil then
+--			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._scheduler)
+--        	self._scheduler = nil
+--		end
+--	end,6,false)
+
+--	local seq = cc.Sequence:create(cc.DelayTime:create(0.01),cc.CallFunc:create(function()
+	--				self:preLoadRes()
+	--	end));
+	--	self:runAction(seq)
+
+	self:preLoadRes()
 end
 function LoadingScene:preLoadRes()
 	local percent = 0;

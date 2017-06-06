@@ -15,6 +15,7 @@ local TmjFanXinInfoLayer = requireForGameLuaFile("TmjFanXinInfoLayer")
 local TmjGameLayer = requireForGameLuaFile("TmjGameLayer")
 local TmjSettleWinLoseLayer = requireForGameLuaFile("TmjSettleWinLoseLayer")
 local TmjSettleDrawnLayer = requireForGameLuaFile("TmjSettleDrawnLayer")
+local TmjOperationFactory = requireForGameLuaFile("TmjOperationFactory")
 --GameManager:getInstance():getHallManager():getSubGameManager()
 function TmjGameScene.getNeedPreloadResArray()
 	local resNeed = {
@@ -169,6 +170,8 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 	self:closeWaiting()
 	--这里应该先删除玩家 
 	self:removeAllPlayer()
+	
+	TmjOperationFactory:getInstance():clearOperation()
 	--初始化任务
 	if TmjHelper.isLuaNodeValid(self.gameLayer) then
 		self.gameLayer:setTaskData(taskData)
