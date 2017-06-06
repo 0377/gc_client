@@ -434,6 +434,8 @@
             <Image Name="bb_xszd_xczs1.png" />
           </Folder>
           <Folder Name="tongyong">
+            <Image Name="an.png" />
+            <Image Name="an1.png" />
             <Image Name="bb_dxgm_hqyzm.png" />
             <Image Name="bb_dxgm_hqyzm1.png" />
             <Image Name="bb_grxx_queren.png" />
@@ -514,6 +516,7 @@
         <Project Name="RechargeFeedbackLayerCCS.csd" Type="Layer" />
         <Project Name="RechargeLayerCCS.csd" Type="Layer" />
         <Project Name="RechargeTypeLayerCCS.csd" Type="Layer" />
+        <Project Name="SceondaryLKPYNode.csd" Type="Layer" />
         <Project Name="SecondaryBRNNNodeCCS.csd" Type="Layer" />
         <Project Name="SecondaryDZPKNodeCCS.csd" Type="Layer" />
         <Project Name="SecondaryNormalNodeCCS.csd" Type="Layer" />

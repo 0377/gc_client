@@ -135,20 +135,20 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Panel_Enter_Room" ActionTag="-892608101" VisibleForFrame="False" Tag="339" IconVisible="False" LeftMargin="260.0000" TopMargin="80.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="Panel_Enter_Room" ActionTag="-892608101" Tag="339" IconVisible="False" LeftMargin="260.0000" TopMargin="80.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1020.0000" Y="640.0000" />
                 <Children>
                   <AbstractNodeData Name="bg_editbox" ActionTag="-335077304" Tag="383" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="326.0000" RightMargin="326.0000" TopMargin="43.5000" BottomMargin="543.5000" LeftEage="121" RightEage="121" TopEage="23" BottomEage="23" Scale9OriginX="121" Scale9OriginY="23" Scale9Width="126" Scale9Height="7" ctype="ImageViewObjectData">
                     <Size X="368.0000" Y="53.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Num_Room" ActionTag="1465624261" Tag="399" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TopMargin="10.5000" BottomMargin="10.5000" IsCustomSize="True" FontSize="32" LabelText="输入2-6位房间号&#xA;" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="368.0000" Y="32.0000" />
+                      <AbstractNodeData Name="Text_Num_Room" ActionTag="1465624261" Tag="399" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="64.0000" RightMargin="64.0000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="32" LabelText="输入2-6位房间号" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="240.0000" Y="33.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="184.0000" Y="26.5000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="0.5000" />
-                        <PreSize X="1.0000" Y="0.6038" />
+                        <PreSize X="0.6522" Y="0.6226" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>

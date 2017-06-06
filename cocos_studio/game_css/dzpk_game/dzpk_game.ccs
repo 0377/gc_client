@@ -109,20 +109,29 @@
             <Image Name="show3.jpg" />
           </Folder>
           <Folder Name="secondui">
+            <Image Name="dz_button_pxjs_normal.png" />
+            <Image Name="dz_button_pxjs_pressed.png" />
             <Image Name="dz_button_qd_normal.png" />
             <Image Name="dz_button_qd_pressed.png" />
             <Image Name="dz_button_qx_normal.png" />
             <Image Name="dz_button_qx_pressed.png" />
+            <Image Name="dz_button_wfjs_normal.png" />
+            <Image Name="dz_button_wfjs_pressed.png" />
+            <Image Name="dz_bz_kuang.png" />
             <Image Name="dz_kjfy_kuang.png" />
             <Image Name="dz_kjfy_kuang_2.png" />
             <Image Name="dz_kjfy_kuang_3.png" />
+            <Image Name="dz_pai_guangxiao.png" />
             <Image Name="dz_paixing.png" />
             <Image Name="dz_tckuang.png" />
+            <Image Name="dz_wfjs.png" />
             <Image Name="dz_X_normal.png" />
             <Image Name="dz_X_pressed.png" />
             <Image Name="show1.jpg" />
             <Image Name="show2.jpg" />
             <Image Name="show3.jpg" />
+            <Image Name="show4.jpg" />
+            <Image Name="show5.jpg" />
           </Folder>
         </Folder>
         <Project Name="dzpk_jiazhu.csd" Type="Layer" />

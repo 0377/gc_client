@@ -42,7 +42,7 @@
                 <PreSize X="0.4474" Y="0.0968" />
                 <FileData Type="Normal" Path="hall_res/bank_new/baobo_popupview_changtiao.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="add_btn_1" ActionTag="132221521" Tag="33" IconVisible="False" LeftMargin="29.5032" RightMargin="771.4968" TopMargin="249.4722" BottomMargin="299.5278" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="add_btn_1" ActionTag="132221521" Tag="33" IconVisible="False" LeftMargin="29.5032" RightMargin="771.4968" TopMargin="249.4722" BottomMargin="299.5278" TouchEnable="True" FontSize="38" ButtonText="+100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="149.0000" Y="71.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="104.0032" Y="335.0278" />
@@ -50,14 +50,14 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1095" Y="0.5404" />
                 <PreSize X="0.1568" Y="0.1145" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_10_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_10_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_10_normal.png" Plist="" />
+                <TextColor A="255" R="255" G="255" B="255" />
+                <DisabledFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/tongyong/an.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="add_btn_2" ActionTag="-1525929629" Tag="34" IconVisible="False" LeftMargin="219.1278" RightMargin="581.8722" TopMargin="247.2168" BottomMargin="301.7832" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="add_btn_2" ActionTag="-1525929629" Tag="34" IconVisible="False" LeftMargin="219.1278" RightMargin="581.8722" TopMargin="247.2168" BottomMargin="301.7832" TouchEnable="True" FontSize="38" ButtonText="+1000" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="149.0000" Y="71.0000" />
                 <AnchorPoint ScaleX="0.5012" ScaleY="0.5270" />
                 <Position X="293.8066" Y="339.2002" />
@@ -65,14 +65,14 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3093" Y="0.5471" />
                 <PreSize X="0.1568" Y="0.1145" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_100_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_100_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_100_normal.png" Plist="" />
+                <TextColor A="255" R="255" G="255" B="255" />
+                <DisabledFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/tongyong/an.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="add_btn_3" ActionTag="-2116513872" Tag="36" IconVisible="False" LeftMargin="407.3213" RightMargin="393.6787" TopMargin="246.8165" BottomMargin="302.1835" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="add_btn_3" ActionTag="-2116513872" Tag="36" IconVisible="False" LeftMargin="407.3213" RightMargin="393.6787" TopMargin="246.8165" BottomMargin="302.1835" TouchEnable="True" FontSize="38" ButtonText="+5000" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="149.0000" Y="71.0000" />
                 <AnchorPoint ScaleX="0.5012" ScaleY="0.5270" />
                 <Position X="482.0001" Y="339.6005" />
@@ -80,14 +80,14 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5074" Y="0.5477" />
                 <PreSize X="0.1568" Y="0.1145" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_500_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_500_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_500_normal.png" Plist="" />
+                <TextColor A="255" R="255" G="255" B="255" />
+                <DisabledFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/tongyong/an.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="add_btn_4" ActionTag="-1294111312" Tag="35" IconVisible="False" LeftMargin="594.3213" RightMargin="206.6787" TopMargin="247.5169" BottomMargin="301.4831" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="add_btn_4" ActionTag="-1294111312" Tag="35" IconVisible="False" LeftMargin="594.3213" RightMargin="206.6787" TopMargin="247.5169" BottomMargin="301.4831" TouchEnable="True" FontSize="38" ButtonText="+10000" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="149.0000" Y="71.0000" />
                 <AnchorPoint ScaleX="0.5012" ScaleY="0.5270" />
                 <Position X="669.0001" Y="338.9001" />
@@ -95,10 +95,10 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7042" Y="0.5466" />
                 <PreSize X="0.1568" Y="0.1145" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_1000_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_1000_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="hall_res/bank_new/BB_yh_button_1000_normal.png" Plist="" />
+                <TextColor A="255" R="255" G="255" B="255" />
+                <DisabledFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <PressedFileData Type="Normal" Path="hall_res/tongyong/an1.png" Plist="" />
+                <NormalFileData Type="Normal" Path="hall_res/tongyong/an.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

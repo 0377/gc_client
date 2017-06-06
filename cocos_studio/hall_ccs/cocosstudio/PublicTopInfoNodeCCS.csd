@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="PublicTopInfoNode" Type="Node" ID="dac4a6cf-bcbc-4347-9d40-facf86467f02" Version="3.10.0.0" />
+  <PropertyGroup Name="PublicTopInfoNodeCCS" Type="Node" ID="dac4a6cf-bcbc-4347-9d40-facf86467f02" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -93,13 +93,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="top_gold_text" ActionTag="1885044120" Tag="353" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="82.9651" RightMargin="30.0349" TopMargin="18.0000" BottomMargin="18.0000" CharWidth="16" CharHeight="24" LabelText="9990922" StartChar="/" ctype="TextAtlasObjectData">
+                  <AbstractNodeData Name="top_gold_text" ActionTag="1885044120" Tag="353" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="104.0000" RightMargin="9.0000" TopMargin="17.9999" BottomMargin="18.0001" CharWidth="16" CharHeight="24" LabelText="9990922" StartChar="/" ctype="TextAtlasObjectData">
                     <Size X="112.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="194.9651" Y="30.0000" />
+                    <Position X="216.0000" Y="30.0001" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8665" Y="0.5000" />
+                    <PrePosition X="0.9600" Y="0.5000" />
                     <PreSize X="0.4978" Y="0.4000" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="hall_res/hall/bb_tubiao_shuzi.png" Plist="" />
                   </AbstractNodeData>
@@ -115,13 +115,13 @@
               <AbstractNodeData Name="bank_bg" ActionTag="1458316778" Tag="351" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="629.8900" RightMargin="425.1100" TopMargin="12.0000" BottomMargin="12.0000" LeftEage="74" RightEage="74" TopEage="19" BottomEage="19" Scale9OriginX="74" Scale9OriginY="19" Scale9Width="77" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="225.0000" Y="60.0000" />
                 <Children>
-                  <AbstractNodeData Name="top_bank_text" ActionTag="-967143811" Tag="354" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="92.9651" RightMargin="20.0349" TopMargin="18.0000" BottomMargin="18.0000" CharWidth="16" CharHeight="24" LabelText="9990922" StartChar="/" ctype="TextAtlasObjectData">
+                  <AbstractNodeData Name="top_bank_text" ActionTag="-967143811" Tag="354" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="104.0000" RightMargin="9.0000" TopMargin="17.9999" BottomMargin="18.0001" CharWidth="16" CharHeight="24" LabelText="9990922" StartChar="/" ctype="TextAtlasObjectData">
                     <Size X="112.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="204.9651" Y="30.0000" />
+                    <Position X="216.0000" Y="30.0001" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.9110" Y="0.5000" />
+                    <PrePosition X="0.9600" Y="0.5000" />
                     <PreSize X="0.4978" Y="0.4000" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="hall_res/hall/bb_tubiao_shuzi.png" Plist="" />
                   </AbstractNodeData>

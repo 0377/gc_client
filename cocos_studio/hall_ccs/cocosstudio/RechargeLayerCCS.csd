@@ -19,7 +19,17 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="PublicTopInfoNodeCCS.csd" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="view_btn_listview" ActionTag="-1972560794" Tag="581" IconVisible="False" LeftMargin="-1.4260" RightMargin="965.4260" TopMargin="95.9107" BottomMargin="34.0893" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ItemMargin="8" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="Image_51" ActionTag="-1431332046" Tag="182" IconVisible="False" RightMargin="1018.0000" TopMargin="89.0000" BottomMargin="-7.0000" LeftEage="86" RightEage="86" TopEage="210" BottomEage="210" Scale9OriginX="86" Scale9OriginY="210" Scale9Width="90" Scale9Height="218" ctype="ImageViewObjectData">
+                <Size X="262.0000" Y="638.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position Y="312.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition Y="0.4333" />
+                <PreSize X="0.2047" Y="0.8861" />
+                <FileData Type="Normal" Path="hall_res/tongyong/bb_ty_zuodi.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="view_btn_listview" ActionTag="-1972560794" Tag="581" IconVisible="False" LeftMargin="-1.4260" RightMargin="965.4260" TopMargin="94.9106" BottomMargin="35.0894" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ItemMargin="8" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="316.0000" Y="590.0000" />
                 <Children>
                   <AbstractNodeData Name="btn_zfb" ActionTag="-2041106311" Tag="337" IconVisible="False" RightMargin="46.0000" BottomMargin="510.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="240" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -99,10 +109,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleY="1.0000" />
-                <Position X="-1.4260" Y="624.0893" />
+                <Position X="-1.4260" Y="625.0894" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="-0.0011" Y="0.8668" />
+                <PrePosition X="-0.0011" Y="0.8682" />
                 <PreSize X="0.2469" Y="0.8194" />
                 <SingleColor A="255" R="150" G="150" B="255" />
                 <FirstColor A="255" R="150" G="150" B="255" />

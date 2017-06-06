@@ -234,14 +234,14 @@
                   <AbstractNodeData Name="bg_editbox" ActionTag="943644624" Tag="24" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="20.0000" RightMargin="283.4309" TopMargin="29.6695" BottomMargin="29.6696" LeftEage="288" RightEage="288" TopEage="23" BottomEage="23" Scale9OriginX="288" Scale9OriginY="23" Scale9Width="263" Scale9Height="17" ctype="ImageViewObjectData">
                     <Size X="839.0000" Y="63.0000" />
                     <Children>
-                      <AbstractNodeData Name="textfield" ActionTag="-751531427" Tag="27" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TopMargin="11.5000" BottomMargin="11.5000" TouchEnable="True" FontSize="36" IsCustomSize="True" LabelText="" PlaceHolderText="在此输入反馈内容，最多50字" MaxLengthEnable="True" MaxLengthText="100" ctype="TextFieldObjectData">
-                        <Size X="839.0000" Y="40.0000" />
+                      <AbstractNodeData Name="textfield" ActionTag="-751531427" Tag="27" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="19.4991" RightMargin="19.5009" TopMargin="11.5000" BottomMargin="11.5000" TouchEnable="True" FontSize="36" IsCustomSize="True" LabelText="" PlaceHolderText="在此输入反馈内容，最多50字" MaxLengthEnable="True" MaxLengthText="100" ctype="TextFieldObjectData">
+                        <Size X="800.0000" Y="40.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="419.5000" Y="31.5000" />
+                        <Position X="419.4991" Y="31.5000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="0.5000" />
-                        <PreSize X="1.0000" Y="0.6349" />
+                        <PreSize X="0.9535" Y="0.6349" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleY="0.5000" />

@@ -16,7 +16,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="game_res/desk/anpeng.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_1" ActionTag="1246879201" Tag="113" IconVisible="False" LeftMargin="60.0000" RightMargin="-250.0000" TopMargin="-50.0000" BottomMargin="-50.0000" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="4" Scale9Height="2" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_1" ActionTag="1246879201" Tag="113" IconVisible="False" LeftMargin="60.0000" RightMargin="-250.0000" TopMargin="-50.0000" BottomMargin="-50.0000" TouchEnable="True" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="4" Scale9Height="2" ctype="ImageViewObjectData">
             <Size X="190.0000" Y="100.0000" />
             <Children>
               <AbstractNodeData Name="FileNode_1" ActionTag="932398880" Tag="114" IconVisible="True" LeftMargin="40.7739" RightMargin="149.2261" TopMargin="53.7314" BottomMargin="46.2686" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="0.5000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">

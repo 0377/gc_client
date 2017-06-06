@@ -9,17 +9,17 @@
           <AbstractNodeData Name="Panel_zfb_wx" ActionTag="397720809" Tag="516" IconVisible="False" LeftMargin="-2.9390" RightMargin="2.9390" TopMargin="-0.0001" BottomMargin="0.0001" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="950.0000" Y="615.0000" />
             <Children>
-              <AbstractNodeData Name="Image_12" ActionTag="-1317909039" Tag="521" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="299.3664" RightMargin="290.6335" TopMargin="65.4064" BottomMargin="501.5936" LeftEage="110" RightEage="110" TopEage="13" BottomEage="13" Scale9OriginX="110" Scale9OriginY="13" Scale9Width="140" Scale9Height="22" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_12" ActionTag="-1317909039" Tag="521" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="299.3700" RightMargin="290.6300" TopMargin="65.4064" BottomMargin="501.5936" LeftEage="110" RightEage="110" TopEage="13" BottomEage="13" Scale9OriginX="110" Scale9OriginY="13" Scale9Width="140" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="360.0000" Y="48.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="479.3664" Y="525.5936" />
+                <Position X="479.3700" Y="525.5936" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5046" Y="0.8546" />
                 <PreSize X="0.3789" Y="0.0780" />
                 <FileData Type="Normal" Path="hall_res/bank_new/baobo_popupview_chongzhiwenzi.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="will_recharge_value_input_bg" ActionTag="339939907" Tag="522" IconVisible="False" LeftMargin="244.4759" RightMargin="280.5242" TopMargin="134.8582" BottomMargin="420.1418" LeftEage="177" RightEage="177" TopEage="21" BottomEage="21" Scale9OriginX="177" Scale9OriginY="21" Scale9Width="71" Scale9Height="18" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="will_recharge_value_input_bg" ActionTag="339939907" Tag="522" IconVisible="False" LeftMargin="244.4759" RightMargin="280.5241" TopMargin="134.8582" BottomMargin="420.1418" LeftEage="177" RightEage="177" TopEage="21" BottomEage="21" Scale9OriginX="177" Scale9OriginY="21" Scale9Width="71" Scale9Height="18" ctype="ImageViewObjectData">
                 <Size X="425.0000" Y="60.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="456.9759" Y="450.1418" />
@@ -29,7 +29,7 @@
                 <PreSize X="0.4474" Y="0.0976" />
                 <FileData Type="Normal" Path="hall_res/bank_new/baobo_popupview_changtiao.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_14" ActionTag="182232542" Tag="524" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="343.0000" RightMargin="343.0000" TopMargin="349.2979" BottomMargin="241.7021" FontSize="24" LabelText="充值比例：1元=1.00金币" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_14" ActionTag="182232542" Tag="524" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="343.0000" RightMargin="343.0000" TopMargin="349.2979" BottomMargin="241.7021" FontSize="24" LabelText="充值比例：1元=1000金币" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="264.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="475.0000" Y="253.7021" />
@@ -51,10 +51,10 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="btn_qrcz" ActionTag="-270419818" Tag="526" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="331.4997" RightMargin="331.5002" TopMargin="454.6976" BottomMargin="60.3024" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="btn_qrcz" ActionTag="-270419818" Tag="526" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="331.5000" RightMargin="331.5000" TopMargin="454.6976" BottomMargin="60.3024" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="257" Scale9Height="78" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="287.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="474.9997" Y="110.3024" />
+                <Position X="475.0000" Y="110.3024" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.1794" />
@@ -84,10 +84,10 @@
               <AbstractNodeData Name="Panel_3" ActionTag="1362736371" Tag="360" IconVisible="False" PositionPercentXEnabled="True" TopMargin="305.0000" BottomMargin="230.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="950.0000" Y="80.0000" />
                 <Children>
-                  <AbstractNodeData Name="Button_Coin_1" ActionTag="30347803" Tag="361" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="39.4997" RightMargin="761.5003" TopMargin="-74.4962" BottomMargin="83.4962" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Coin_1" ActionTag="30347803" Tag="361" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="39.5000" RightMargin="761.5000" TopMargin="-74.5000" BottomMargin="83.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="149.0000" Y="71.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="113.9997" Y="118.9962" />
+                    <Position X="114.0000" Y="119.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1200" Y="1.4875" />
@@ -99,10 +99,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Coin_2" ActionTag="-1790077313" Tag="362" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="219.9989" RightMargin="581.0011" TopMargin="-74.4962" BottomMargin="83.4962" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Coin_2" ActionTag="-1790077313" Tag="362" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="220.0000" RightMargin="581.0000" TopMargin="-74.5000" BottomMargin="83.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="149.0000" Y="71.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="294.4989" Y="118.9962" />
+                    <Position X="294.5000" Y="119.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.3100" Y="1.4875" />
@@ -114,10 +114,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Coin_3" ActionTag="-1888068859" Tag="363" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="400.4980" RightMargin="400.5021" TopMargin="-74.4962" BottomMargin="83.4962" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Coin_3" ActionTag="-1888068859" Tag="363" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="400.5000" RightMargin="400.5000" TopMargin="-74.5000" BottomMargin="83.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="149.0000" Y="71.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="474.9980" Y="118.9962" />
+                    <Position X="475.0000" Y="119.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="1.4875" />
@@ -129,10 +129,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Coin_4" ActionTag="426812773" Tag="364" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="580.9923" RightMargin="220.0077" TopMargin="-74.4962" BottomMargin="83.4962" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Coin_4" ActionTag="426812773" Tag="364" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="581.0000" RightMargin="220.0000" TopMargin="-74.5000" BottomMargin="83.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="149.0000" Y="71.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="655.4923" Y="118.9962" />
+                    <Position X="655.5000" Y="119.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6900" Y="1.4875" />
@@ -144,10 +144,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Coin_5" ActionTag="-2022666809" Tag="365" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="761.4889" RightMargin="39.5111" TopMargin="-74.4962" BottomMargin="83.4962" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Coin_5" ActionTag="-2022666809" Tag="365" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="761.5000" RightMargin="39.5000" TopMargin="-74.5000" BottomMargin="83.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="119" Scale9Height="49" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="149.0000" Y="71.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="835.9889" Y="118.9962" />
+                    <Position X="836.0000" Y="119.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8800" Y="1.4875" />

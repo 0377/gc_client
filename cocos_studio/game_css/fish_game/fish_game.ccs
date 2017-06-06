@@ -4,6 +4,12 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="game_res">
+          <Folder Name="eff_fish_button_right_lock_auto_lk">
+            <ExportJsonFile Name="eff_fish_button_right_lock_auto_lk.ExportJson" />
+          </Folder>
+          <Folder Name="effect_gunsight">
+            <ExportJsonFile Name="effect_gunsight.ExportJson" />
+          </Folder>
           <Image Name="by_button_gz_normal.png" />
           <Image Name="by_button_gz_pressed.png" />
           <Image Name="by_button_shang_normal.png" />
@@ -59,6 +65,8 @@
           <Image Name="Map_likui_003.jpg" />
         </Folder>
         <Project Name="FishGameCCS.csd" Type="Scene" />
+        <Project Name="FishGameMenuNodeCCS.csd" Type="Node" />
+        <Project Name="FishGameRuleCCS.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
