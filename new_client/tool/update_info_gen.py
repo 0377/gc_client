@@ -1,4 +1,4 @@
-#coding:utf-8
+﻿#coding:utf-8
 import hashlib
 import sys
 import os,os.path,shutil
@@ -33,7 +33,12 @@ backstageIdMap = {"frame_res.zip": "1",
                   "shgame_res.zip": "11",
                   "shgame_src.zip": "12",
                   "qznngame_res.zip": "13",
-                  "qznngame_src.zip": "14"}
+                  "qznngame_src.zip": "14",
+		  "fishgame_res.zip": "15",
+                  "fishgame_src.zip": "16",
+		  "tmjgame_res.zip": "17",
+                  "tmjgame_src.zip": "18"}
+
 
 from Helper import Helper
 #删除文件夹
