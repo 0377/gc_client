@@ -33,7 +33,7 @@ function QznnGameEntry:getNeedPreloadResArray()
 end
 
 function QznnGameEntry:getVerionStr()
-    return "抢庄牛牛.v3"
+    return "抢庄牛牛.v6"
 end
 
 return QznnGameEntry;

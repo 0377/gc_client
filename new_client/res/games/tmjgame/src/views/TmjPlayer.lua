@@ -41,6 +41,7 @@ function TmjPlayer:ctor(pinfo)
 	self.zhuangCard = nil --庄家牌
 	self.cardsArray = {} --玩家的牌信息根据牌值作为Key进行存储 value为数量
 	self.cardsExtraArray = {} --玩家的明牌信息根据牌值作为Key进行存储 value为数量
+	self.pinfo = pinfo
 	self.seatid = pinfo.seatid
 	self.cardStartPos = pinfo.startPos or cc.p(0,0) --牌起始位置
 	self.extraCardPos = pinfo.extraPos or cc.p(0,0) -- 其他牌的位置（这个变化会导致cardStartPos变化）
@@ -299,7 +300,7 @@ function TmjPlayer:runDealAction(dealCallback)
 	local index = 0
 	local dealOKFun = function ()
 		index = index +1
-		print(index,table.nums(self.handCards))
+		--print(index,table.nums(self.handCards))
 		if index>=table.nums(self.handCards) then
 			index = 0
 			--都播放完成了
@@ -351,7 +352,6 @@ function TmjPlayer:refreshCard(isAnimation,animCallFun)
 			}))
 			
 		else
-			
 			card:setCardPosition(cardPos,true)
 		end
 		--ssdump(cardPos,"刷新手里牌的位置"..i)
@@ -436,7 +436,7 @@ function TmjPlayer:removeCardAt(index)
 	end
 	local removedCard = self.handCards[index]
 	table.remove(self.handCards,index)
-	self:refreshCard(false)
+	--self:refreshCard(false)
 	return removedCard
 end
 --删除最后一张打出去的牌，别人吃，碰，刚，胡的时候
@@ -515,19 +515,26 @@ end
 function TmjPlayer:playCard(cardIndex)
 	--挨个放到打出去的位置
 	local cardNodeInfo = nil
-	if cardIndex>0 then
+	if cardIndex>0 then --打的牌不是摸到的牌，那么摸牌就该放到手牌中去
 		cardNodeInfo = self:removeCardAt(cardIndex)
 		if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
 			self:addToHandCard(self.getCard)
 		end
-	else
+	else -- 打的牌就是摸的牌
 		cardNodeInfo = self.getCard
 	end
 	
 	--self.cardStartPos
 	table.insert(self.outCards,cardNodeInfo)
+	--重新设置层级
+	local outNum = table.nums(self.outCards)
+	table.walk(self.outCards,function (cardBundle,k)
+		local TmjCard = cardBundle.node
+		TmjCard:setLocalZOrder(outNum - k)
+	end)
+	
 	self:runOutCardAnim()
-	self:refreshCard()
+	--self:refreshCard()
 	--如果摸到的牌不为空，把摸到的牌放到手牌中
 	self.getCard = nil --打完牌后，摸到的牌都清空，已经打出去或者放到集合了
 end
@@ -575,6 +582,7 @@ function TmjPlayer:setExtraBuGangPosition(gangCardArr)
 	local centerCard = gangCardArr[2]
 	local x,y = centerCard.node:getPosition()
 	--位置放到第二张牌的上边
+	gangCardArr[4].node:changeState(TmjConfig.CardState.State_Extra)
 	gangCardArr[4].node:setPosition(cc.p(x,y+30))
 	--重置摸到的牌为空
 	self.getCard = nil
@@ -585,7 +593,7 @@ function TmjPlayer:setLastHandCardToGet()
 		sslog(self.logTag,"手牌异常")
 		return false
 	end
-	if self.getCard then
+	if self.getCard and next(self.getCard) then
 		sslog(self.logTag,"手牌位置有了")
 		return true
 	end
@@ -611,7 +619,8 @@ function TmjPlayer:checkToSetLastHandCard()
 	sslog(self.logTag,"我的牌长度"..tostring(allHandCard))
 	ssdump(self.getCard,"手牌信息")
 	--手里的牌和旁边的牌有13张，那么就根据getCard判断是否需要将最后一张牌设置成为摸到的牌
-	if allHandCard - gangCount >=14 and not self.getCard then --手上有14张，没有摸到的牌
+	if allHandCard - gangCount >=14 and 
+		(not self.getCard or not next(self.getCard)) then --手上有14张，没有摸到的牌
 		return self:setLastHandCardToGet()
 	end
 	return false
@@ -711,6 +720,11 @@ end
 --@key handCards 手上的牌，需要和外边的牌进行吃的
 function TmjPlayer:chiCard(cardInfo)
 	--todo
+	if cardInfo and not cardInfo.createTag then 
+		TmjConfig.playSound(TmjConfig.cardOperation.Chi,self:isMan())
+	end
+	
+	
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.Chi)--吃牌结束
 	end
@@ -719,6 +733,9 @@ end
 --@param cardInfo 外界的牌
 function TmjPlayer:pengCard(cardInfo)
 	--todo
+	if cardInfo and not cardInfo.createTag then 
+		TmjConfig.playSound(TmjConfig.cardOperation.Peng,self:isMan())
+	end
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.Peng)--碰牌结束
 	end
@@ -727,6 +744,9 @@ end
 --@param cardInfo 外界的牌
 function TmjPlayer:gangCard(cardInfo)
 	--todo
+	if cardInfo and not cardInfo.createTag then 
+		TmjConfig.playSound(TmjConfig.cardOperation.Gang,self:isMan())
+	end
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.Gang)--杠牌结束
 	end
@@ -734,6 +754,9 @@ end
 --暗杠
 --@param cardInfo 
 function TmjPlayer:anGangCard(cardInfo)
+	if cardInfo and not cardInfo.createTag then 
+		TmjConfig.playSound(TmjConfig.cardOperation.AnGang,self:isMan())
+	end
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.AnGang)--杠牌结束
 	end
@@ -742,8 +765,11 @@ end
 --@param cardInfo 外界的牌
 function TmjPlayer:buGangCard(cardInfo)
 	--todo
+	if cardInfo and not cardInfo.createTag then 
+		TmjConfig.playSound(TmjConfig.cardOperation.BuGang,self:isMan())
+	end
 	if self.operationFun then
-		self.operationFun(self.pType,TmjConfig.cardOperation.Gang)--杠牌结束
+		self.operationFun(self.pType,TmjConfig.cardOperation.BuGang)--杠牌结束
 	end
 end
 --听 播放听动画
@@ -757,6 +783,7 @@ end
 --@param cardInfo 外界的牌
 function TmjPlayer:huCard(cardInfo)
 	--todo
+	TmjConfig.playSound(TmjConfig.cardOperation.Hu,self:isMan())
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.Hu)--胡牌结束
 	end
@@ -764,6 +791,7 @@ end
 --补花
 function TmjPlayer:buHuaCard(cardInfo)
 	--todo
+	
 	if self.operationFun then
 		self.operationFun(self.pType,TmjConfig.cardOperation.BuHua)--补花结束
 	end
@@ -777,6 +805,13 @@ function TmjPlayer:doubleCard(cardInfo)
 		self.operationFun(self.pType,TmjConfig.cardOperation.Double)--补花结束
 	end
 	self:setHeadInfo({ doubleCount = cardInfo.doubleCount })
+end
+
+--判断是否是男的
+function TmjPlayer:isMan()
+	local icon = self.pinfo and self.pinfo.icon or 1
+
+    return icon > 5
 end
 
 function TmjPlayer:removeAllHandCard()

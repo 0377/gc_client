@@ -89,7 +89,11 @@ function TmjGameDataManager:on_SC_Maajan_Desk_Enter(msgTab)
 	--act_left_time  操作剩余时间
 	--chu_pai_player_index 最后一次出牌用户索引  或者  当前该谁出牌
 	--last_chu_pai 最后一次的出牌
+	if msgTab.pb_rec_data then
+		msgTab.pb_rec_data.act_left_time = msgTab.pb_rec_data.act_left_time or 5
+	end
 	self.reconnData = msgTab.pb_rec_data
+	
 	if self.reconnData and self.reconnData.last_chu_pai then	--转换出牌到本地
 		self.reconnData.last_chu_pai = TmjConfig.convertToLocalCard(self.reconnData.last_chu_pai)
 	end

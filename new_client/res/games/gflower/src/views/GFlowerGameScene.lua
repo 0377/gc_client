@@ -134,13 +134,13 @@ function GFlowerGameScene:On_serverStop()
         end)
 end
 
-
 --重连后游戏结束 就退出房间
 function GFlowerGameScene:exitRoom()
     --GFlowerGameScene.instance = nil
     GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
     self:returnToHallScene()
 end
+
 --请求失败通知，网络连接状态变化
 function GFlowerGameScene:callbackWhenConnectionStatusChange(event)
     GFlowerGameScene.super.callbackWhenConnectionStatusChange(self,event);
@@ -152,7 +152,7 @@ function GFlowerGameScene:ctor()
 
     -- 调用父类
     GFlowerGameScene.super.ctor(self);
-    local CCSLuaNode =  requireForGameLuaFile("GameZJHCCS")
+    local CCSLuaNode =  requireForGameLuaFile("GameZJHMain")
     self.m_widget = CCSLuaNode:create().root;
     self.csNode = self.m_widget
     self:addChild(self.csNode);
@@ -177,6 +177,9 @@ function GFlowerGameScene:ctor()
 
     -- 手牌 --
     self:CardUiInit()
+	
+	-- 私人房间 --
+	self:initPrivateRoomUI()
 
     -- 音效管理 --
     self:SoundInit()
@@ -190,6 +193,9 @@ function GFlowerGameScene:ctor()
 
     -- 是否已经往大厅跳转
     self.isReturnToHallScene = false
+	
+	-- 是否显示私人房间
+	self.isShowPRPro  = false
 
     -- 播放跑马灯
     self:showMarqueeTip()
@@ -271,6 +277,31 @@ function GFlowerGameScene:check_StandUp()
                 end, 1, false);
 end
 
+function GFlowerGameScene:check_ClosePRJieSan()
+	self:removeScheduler()
+    self._ClosePRJieSan = 2
+    self:_onInterval_ClosePRJieSan()
+    self._scheduler = scheduler:scheduleScriptFunc(function(dt)
+                self:_onInterval_ClosePRJieSan()
+                end, 1, false);
+end
+
+function GFlowerGameScene:_onInterval_ClosePRJieSan()
+	    --print("--------------------------------------onEnter"..self._StandUp)
+    if self._ClosePRJieSan <= -1 then
+        if self._scheduler ~= nil then
+            self:removeScheduler()
+        end
+		print("================================= _ClosePRJieSan")
+		self._pnlJiesan:setVisible(false)
+		if self._logic.isInPRReady == true then
+			self._pnlReady:setVisible(true)
+		end
+		self._logic.isInPRJieSan = false
+    end
+    self._ClosePRJieSan = self._ClosePRJieSan - 1
+end
+
 function GFlowerGameScene:onEnter()
     --print("-------------------------------------------------------------------------------------------onEnter")
 
@@ -280,11 +311,11 @@ function GFlowerGameScene:onEnter()
     if gameingInfoTable == nil then
         -- 获取房间内玩家状态 再坐下
         GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
-         --print("玩家正常进入--------------------------")
+         print("玩家正常进入--------------------------")
     else
         GFlowerGameManager:getInstance():sendMsgReconnectionPlay()
         GFlowerGameManager:getInstance():sendMsgZhaJinHuaGetSitDown()
-        --print("玩家重连进入--------------------------")
+        print("玩家重连进入--------------------------")
     end
 
     -- 初始化所有按钮 不可点击 --
@@ -413,6 +444,7 @@ function GFlowerGameScene:InitPlayerUi()
     self.playerCallAction = {}
     self.playerLook = {}
     self.playerLight = {}
+	self.playerPRoomMaster = {}
 
     self.playercardendPos = {}
 
@@ -466,6 +498,9 @@ function GFlowerGameScene:InitPlayerUi()
         self.playerLight[i] = self.gf_player[i]:getChildByName("Image_Light")
         self.playerLight[i]:setVisible(false)
         self.playerLight[i]:setLocalZOrder(5)
+		
+		self.playerPRoomMaster[i] = self.gf_player[i]:getChildByName("Image_fangzhu")
+		self.playerPRoomMaster[i]:setVisible(false)
 
         -- 比牌/取消比牌按钮 --
         --local playercompare1 = self.gf_player[i]:getChildByName("BtnPlayer")
@@ -482,6 +517,502 @@ function GFlowerGameScene:InitPlayerUi()
         self.player5_3Card[i] = {}
     end
 
+end
+
+--  初始化私人房间相关UI
+function GFlowerGameScene:initPrivateRoomUI()
+	local CCSLuaNode =  requireForGameLuaFile("GameZJHPRoom")
+    self._privateRoot = CCSLuaNode:create().root;
+	self:addChild(self._privateRoot);
+	
+	self._uiIsFirstLook  	= false
+	self._uiIsFirstCom   	= false
+	self._uiIsNoMoneyCom	= false
+	self._uiIsMoreRound     = false
+	
+	self._pnlReady  = self._privateRoot:getChildByName("Panel_ready")
+	self._pnlReady:setVisible(false)
+	self._pnlReady:setLocalZOrder(500)
+    local btnReady = self._pnlReady:getChildByName("btn_ready")
+	btnReady:addTouchEventListener(handler(self, self._onBtnTouched_PRReadyReady))
+	local btnclose = self._pnlReady:getChildByName("btn_closed")
+	btnclose:addTouchEventListener(handler(self, self._onBtnTouched_PRReadyClosed))
+	for k = 1, GFlowerConfig.CHAIR_COUNT do
+		local pnlPlayer = self._pnlReady:getChildByName("pnl_player"..k)
+		if pnlPlayer ~= nil then
+			local btne = pnlPlayer:getChildByName("btn_pclosed")
+			btne:setTag(k)
+			btne:setLocalZOrder(30)
+			btne:setTouchEnabled(true)
+			btne:addTouchEventListener(handler(self, self._onBtnTouched_PRReadyKickPlayer))
+		end
+	end
+
+	self._pnlRoomPro = self._privateRoot:getChildByName("Panel_roompro")
+	btnclose = self._pnlRoomPro:getChildByName("btn_closed")
+	btnclose:addTouchEventListener(handler(self, self._onBtnTouched_PRRoomProClosed))
+	local btncf = self._pnlRoomPro:getChildByName("btn_confirm")
+    btncf:addTouchEventListener(handler(self, self._onBtnTouched_RoomProConfirm))
+	for m =1 , 8 do
+		local bk = self._pnlRoomPro:getChildByName("img_bk"..m)
+		local btn  = bk:getChildByName("btn_sselect")
+		btn:addTouchEventListener(handler(self, self._onBtnTouched_RoomProCkick))
+		btn:setTag(m + 1000)
+		btn:setLocalZOrder(80)
+		btn:setTouchEnabled(true)
+		btn:setEnabled(true)
+	end
+	
+	self._pnlRoomPro:setVisible(false)
+	
+	self._pnlRecord = self._privateRoot:getChildByName("Panel_record")
+	self._pnlRecord:setVisible(false)
+	btnclose = self._pnlRecord:getChildByName("btn_closed")
+	btnclose:addTouchEventListener(handler(self, self._onBtnTouched_PRRecordClosed))
+	
+	self._pnlJiesan = self._privateRoot:getChildByName("Panel_jiesan")
+	self._pnlJiesan:setVisible(false)
+	btnclose = self._pnlJiesan:getChildByName("btn_closed")
+	local btnconfirm = self._pnlJiesan:getChildByName("btn_agree")
+	local btncancel  = self._pnlJiesan:getChildByName("btn_refuse")
+	btnclose:addTouchEventListener(handler(self, self._onBtnTouched_PRJiesanClosed))
+	btnconfirm:addTouchEventListener(handler(self, self._onBtnTouched_PRJiesanConfirm))
+	btncancel:addTouchEventListener(handler(self, self._onBtnTouched_PRJiesanCancel))
+	
+	self._pnlTongji = self._privateRoot:getChildByName("Panel_tongji")
+	self._pnlTongji:setVisible(false)
+    btnclose = self._pnlTongji:getChildByName("btn_closed")
+	btnclose:addTouchEventListener(handler(self, self._onBtnTouched_PRTongjiClosed))
+	btnconfirm = self._pnlTongji:getChildByName("btn_confirm")
+	btnconfirm:addTouchEventListener(handler(self, self._onBtnTouched_PRTongjiClosed))
+	
+	local scrollviewCell = self._pnlTongji:getChildByName("scrollv_oneCell"):hide()
+    self.scrollviewCell = scrollviewCell
+
+    self.scrollview = self._pnlTongji:getChildByName("scrollv_record")
+    self.scrollview:addEventListener(handler(self, self._onEvent_scrollview))
+end
+
+-- 清除所有私人房间准备界面信息
+function GFlowerGameScene:clearPRReadyUI()
+	for k = 1, GFlowerConfig.CHAIR_COUNT do
+		local pnlPlayer = self._pnlReady:getChildByName("pnl_player"..k)
+		if pnlPlayer ~= nil then
+			pnlPlayer:setVisible(false)
+		end
+	end
+end
+
+-- 设置私人房间解散界面的标题
+function GFlowerGameScene:setPRJieSanTitle(clientchairid)
+	local player = self._logic:getGFPlayerByClientId(clientchairid)
+	local txtTitle = self._pnlJiesan:getChildByName("txt_titlename")
+	if txtTitle ~= nil and player ~= nil then
+		txtTitle:setString(player:getNickName())
+	end
+end
+
+-- 通过玩家ID清除一个玩家
+function GFlowerGameScene:clearPRReadyUIPlayerByID(clientId)
+	local pnlPlayer = self._pnlReady:getChildByTag(clientId)
+	if pnlPlayer ~= nil then
+		pnlPlayer:setVisible(false)
+	end
+end
+
+-- 有一个玩家点击了准备
+function GFlowerGameScene:onePlayerReady(clientId )
+	local pnlPlayer = self._pnlReady:getChildByTag(clientId)
+	if pnlPlayer ~= nil then
+		local txtState = pnlPlayer:getChildByName("txt_state")
+		txtState:setString("准备")
+		txtState:setVisible(true)
+		local imgState = pnlPlayer:getChildByName("img_statebk")
+		imgState:setVisible(true)
+	end
+end
+
+-- 刷新解散玩家的状态
+function GFlowerGameScene:onePRPlayerStateChange(clientId, state)
+	local pnlPlayer = self._pnlReady:getChildByTag(clientId)
+	if pnlPlayer ~= nil then
+		local txtState   = pnlPlayer:getChildByName("txt_state")
+		local imgStateBk = pnlPlayer:getChildByName("img_statebk")
+		txtState:setVisible(true)
+		imgStateBk:setVisible(true)
+		if state == true then
+			txtState:setString("同意")
+		else
+			txtState:setString("拒绝")
+		end
+	end
+end
+
+function GFlowerGameScene:clearPRJieSanUI()
+	for k = 1, GFlowerConfig.CHAIR_COUNT do
+		local pnlPlayer = self._pnlJiesan:getChildByName("pnl_player"..k)
+		if pnlPlayer ~= nil then
+			pnlPlayer:setVisible(false)
+		end
+	end
+end
+
+function GFlowerGameScene:updatePRJieSuanPlayerState(clientchairid ,stat)
+	local pnlPlayer = self._pnlJiesan:getChildByTag(clientchairid)
+	if pnlPlayer ~= nil then
+		local txtState   = pnlPlayer:getChildByName("txt_state")
+		local imgStateBk = pnlPlayer:getChildByName("img_statebk")
+		txtState:setVisible(true)
+		imgStateBk:setVisible(true)
+		if stat == true then
+			txtState:setTextColor(cc.c3b(30, 255, 0))
+			txtState:setString("同意")
+		else
+			txtState:setTextColor(cc.c3b(255, 0, 0))
+			txtState:setString("拒绝")
+		end
+	end
+end
+
+-- 刷新解散界面的数据
+function GFlowerGameScene:refreshPRJieSanUI()
+	local idx = 1
+	if self._logic.gfPlayers ~= nil and table.nums(self._logic.gfPlayers) > 0 then
+	    for k ,player in pairs(self._logic.gfPlayers) do
+			local clientChair = player:getClientChairId()
+			local serverChair = player:getChairId()
+			local pnlPlayer = self._pnlJiesan:getChildByName("pnl_player"..idx)
+			pnlPlayer:setTag(clientChair)	
+			pnlPlayer:setVisible(true)		
+			local txtName    = pnlPlayer:getChildByName("txt_name")
+			local imgStatebk = pnlPlayer:getChildByName("img_statebk")
+			local txtState   = pnlPlayer:getChildByName("txt_state")
+			local head = pnlPlayer:getChildByName("img_header")
+			txtName:setString(player:getNickName())
+			head:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(player:getHeadIconNum())..".png"))
+			imgStatebk:setVisible(false)
+			txtState:setVisible(false)
+			idx = idx + 1
+		end
+	end
+end
+
+--  刷新准备界面的数据
+function GFlowerGameScene:refreshPRReadyUI()
+	local  idx = 2
+	if self._logic.gfPlayers ~= nil and table.nums(self._logic.gfPlayers) > 0 then
+        for k, player in pairs(self._logic.gfPlayers) do
+			local clientChair = player:getClientChairId()
+			local serverChair = player:getChairId()
+			if serverChair == self._logic.myServerChairId then
+				local pnlPlayer = self._pnlReady:getChildByName("pnl_player1")
+				pnlPlayer:setTag(clientChair)
+				local txtName = pnlPlayer:getChildByName("txt_name")
+				txtName:setString(player:getNickName())
+				local txtState = pnlPlayer:getChildByName("txt_state")
+				txtState:setVisible(false)
+				local imgState = pnlPlayer:getChildByName("img_statebk")
+				imgState:setVisible(false)
+				local head = pnlPlayer:getChildByName("img_header")
+				head:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(player:getHeadIconNum())..".png"))
+				local btnclose = pnlPlayer:getChildByName("btn_pclosed")
+				btnclose:setVisible(false)
+				pnlPlayer:setVisible(true)
+				if player:getGameState() == GFlowerConfig.PLAYER_STATUS.READY then
+					self:onePlayerReady(clientChair)
+				end
+			else
+				local pnlPlayer = self._pnlReady:getChildByName("pnl_player"..idx)
+				pnlPlayer:setTag(clientChair)
+				local txtName = pnlPlayer:getChildByName("txt_name")
+				txtName:setString(player:getNickName())
+				local txtState = pnlPlayer:getChildByName("txt_state")
+				txtState:setVisible(false)
+				local imgState = pnlPlayer:getChildByName("img_statebk")
+				imgState:setVisible(false)
+				local head = pnlPlayer:getChildByName("img_header")
+				head:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(player:getHeadIconNum())..".png"))
+				if self._logic.myServerChairId == GFlowerConfig.PR_MASTER then
+					local btnclose = pnlPlayer:getChildByName("btn_pclosed")
+					btnclose:setVisible(true)
+				else
+					local btnclose = pnlPlayer:getChildByName("btn_pclosed")
+					btnclose:setVisible(false)
+				end
+				pnlPlayer:setVisible(true)
+				
+				if player:getGameState() == GFlowerConfig.PLAYER_STATUS.READY then
+					self:onePlayerReady(clientChair)
+				end
+				
+				idx = idx + 1
+			end
+        end
+    end
+end
+
+function GFlowerGameScene:_onEvent_scrollview()
+end
+
+function GFlowerGameScene:createTongJiCell(name, score)
+	local cell = self.scrollviewCell:clone():show()
+    local txtName = cell:getChildByName("txt_name")
+    local txtScore = cell:getChildByName("txt_score")
+
+    --cell.txt_name = txtName
+    --cell.txt_score = txtScore
+
+    txtName:setString(name)
+    txtScore:setString(score)
+	if score > 0 then
+		txtScore:setTextColor((cc.c3b(30, 255, 0)))
+	else
+		txtScore:setTextColor((cc.c3b(255, 0, 0)))
+	end
+
+    --label_content:setTextAreaSize(cc.size(label_content:getParent():getContentSize().width, 0));
+    --label_content:ignoreContentAdaptWithSize(true) 
+    --label_content:setString(data.content)
+
+    cell:setAnchorPoint(display.LEFT_BOTTOM)
+
+    return cell
+end
+
+function GFlowerGameScene:showPRoomPro()
+	if self._logic.isNeedPRoomPro == true then
+		GFlowerGameManager:getInstance():send_CS_ZhaJinHuaPrivateCFG_Get()
+		self.isShowPRPro = true
+		return
+	end
+	
+	local imglookcfalse = self._pnlRoomPro:getChildByName("img_bk1")
+	local imglookctrue 	= self._pnlRoomPro:getChildByName("img_bk2")
+	local imgccfalse 	= self._pnlRoomPro:getChildByName("img_bk3")
+	local imgcctrue 	= self._pnlRoomPro:getChildByName("img_bk4")
+	local imgnocfalse 	= self._pnlRoomPro:getChildByName("img_bk5")
+	local imgnoctrue 	= self._pnlRoomPro:getChildByName("img_bk6")
+	local imgmrfalse 	= self._pnlRoomPro:getChildByName("img_bk7")
+	local imgmrtrue 	= self._pnlRoomPro:getChildByName("img_bk8")
+	
+	if self._logic.isFirstLookCard == true then
+		local vf = imglookcfalse:getChildByName("img_select")
+		local vt = imglookctrue:getChildByName("img_select")
+		vf:setVisible(false)
+		vt:setVisible(true)
+	else
+		local vf = imglookcfalse:getChildByName("img_select")
+		local vt = imglookctrue:getChildByName("img_select")
+		vf:setVisible(true)
+		vt:setVisible(false)
+	end
+	
+	if self._logic.isFirstCompare == true then
+		local vf = imgccfalse:getChildByName("img_select")
+		local vt = imgcctrue:getChildByName("img_select")
+		vf:setVisible(false)
+		vt:setVisible(true)
+	else
+		local vf = imgccfalse:getChildByName("img_select")
+		local vt = imgcctrue:getChildByName("img_select")
+		vf:setVisible(true)
+		vt:setVisible(false)
+	end
+	
+	if self._logic.isNoMoneyCompare == true then
+		local vf = imgnocfalse:getChildByName("img_select")
+		local vt = imgnoctrue:getChildByName("img_select")
+		vf:setVisible(false)
+		vt:setVisible(true)
+	else
+		local vf = imgnocfalse:getChildByName("img_select")
+		local vt = imgnoctrue:getChildByName("img_select")
+		vf:setVisible(true)
+		vt:setVisible(false)
+	end
+	
+	if self._logic.isMoreRound == true then
+		local vf = imgmrfalse:getChildByName("img_select")
+		local vt = imgmrtrue:getChildByName("img_select")
+		vf:setVisible(false)
+		vt:setVisible(true)
+	else
+		local vf = imgmrfalse:getChildByName("img_select")
+		local vt = imgmrtrue:getChildByName("img_select")
+		vf:setVisible(true)
+		vt:setVisible(false)
+	end
+
+	self._pnlRoomPro:setVisible(true)
+end
+
+function GFlowerGameScene:_onBtnTouched_PRRoomProClosed(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		print("_onBtnTouched_PRRoomProClosed....  ")
+		self._pnlRoomPro:setVisible(false)
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_RoomProCkick(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		local id = sender:getTag() - 1000
+		if self._logic:isPRMaster() == false then 
+			MyToastLayer.new(self, "只有房主才能设定了房间属性")
+			return 
+		end
+		
+		if id == 1 then
+			local pnlfalse  = self._pnlRoomPro:getChildByName("img_bk1")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(true)
+			
+			local pnltrue = self._pnlRoomPro:getChildByName("img_bk2")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(false)
+			self._uiIsFirstLook = false
+		elseif id == 2 then
+			local pnlfalse  = self._pnlRoomPro:getChildByName("img_bk1")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(false)
+			
+			local pnltrue = self._pnlRoomPro:getChildByName("img_bk2")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(true)
+			self._uiIsFirstLook = true
+		elseif id == 3 then
+			local pnlfalse  = self._pnlRoomPro:getChildByName("img_bk3")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(true)
+			
+			local pnltrue = self._pnlRoomPro:getChildByName("img_bk4")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(false)
+			self._uiIsFirstCom = false
+		elseif id == 4 then
+			local pnlfalse  = self._pnlRoomPro:getChildByName("img_bk3")
+			local imgfalse = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(false)
+			
+			local pnltrue = self._pnlRoomPro:getChildByName("img_bk4")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(true)			
+			self._uiIsFirstCom = true
+		elseif id == 5 then
+			local pnlfalse  = self._pnlRoomPro:getChildByName("img_bk5")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(true)
+			
+			local pnltrue = self._pnlRoomPro:getChildByName("img_bk6")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(false)
+			self._uiIsNoMoneyCom = false
+		elseif id == 6 then
+			local pnltrue  = self._pnlRoomPro:getChildByName("img_bk5")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(false)
+			
+			local pnlfalse = self._pnlRoomPro:getChildByName("img_bk6")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(true)
+			self._uiIsNoMoneyCom = true
+		elseif id == 7 then
+			local pnltrue  = self._pnlRoomPro:getChildByName("img_bk7")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(true)
+			
+			local pnlfalse = self._pnlRoomPro:getChildByName("img_bk8")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(false)
+			self._uiIsMoreRound = false
+		elseif id == 8 then
+			local pnltrue  = self._pnlRoomPro:getChildByName("img_bk7")
+			local imgtrue  = pnltrue:getChildByName("img_select")
+			imgtrue:setVisible(false)
+			
+			local pnlfalse = self._pnlRoomPro:getChildByName("img_bk8")
+			local imgfalse  = pnlfalse:getChildByName("img_select")
+			imgfalse:setVisible(true)
+			self._uiIsMoreRound = true
+		end
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_RoomProConfirm(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		if self._logic:isPRMaster() == true then
+			GFlowerGameManager:getInstance():send_CS_ZhaJinHuaPrivateCFG_Set(self._uiIsFirstLook,
+				self._uiIsFirstCom, self._uiIsNoMoneyCom, self._uiIsMoreRound)
+			
+		end
+		
+		self._pnlRoomPro:setVisible(false)
+	end
+end
+
+
+function GFlowerGameScene:_onBtnTouched_PRJiesanConfirm(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		print("_onBtnTouched_PRJiesanConfirm!!!!!!!!!!!!!!!!!!!!!!!!!")
+		GFlowerGameManager:getInstance():send_CS_ZhaJinHuaTabVote(true)
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRJiesanCancel(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		print("_onBtnTouched_PRJiesanCancel!!!!!!!!!!!!!!!!!!!!!!!!!")
+		GFlowerGameManager:getInstance():send_CS_ZhaJinHuaTabVote(false)
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRReadyReady(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady();
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRReadyKickPlayer(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		local clientchairid = sender:getTag()
+		local player = self._logic:getGFPlayerByClientId(clientchairid)
+		GFlowerGameManager:getInstance():send_CS_ZhaJinHuaTabTiren(player:getChairId())
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRReadyClosed(sender, eventType)
+
+end
+
+function GFlowerGameScene:_onBtnTouched_PRTongjiClosed(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		self:jumpToHallScene()
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRRecordClosed(sender, eventType)
+	print("_onBtnTouched_PRRecordClosed")
+end
+
+function GFlowerGameScene:_onBtnTouched_PRJiesanClosed(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+        sender:setScale(GFlowerConfig.BTN_CLICK_SCALE)
+    elseif eventType == ccui.TouchEventType.ended then
+		self._pnlJiesan:setVisible(false)
+	end
+end
+
+function GFlowerGameScene:_onBtnTouched_PRProClick(sender, eventType)
+	if eventType == ccui.TouchEventType.began then
+    elseif eventType == ccui.TouchEventType.ended then
+		self:showPRoomPro()
+	end
 end
 
 -- 操作按钮 --
@@ -614,17 +1145,20 @@ function GFlowerGameScene:InitOtherUi()
     self.rotateLight:setVisible(false)
 
     -- 结算界面 --
-    self.jiesuan = self.m_widget:getChildByName("jiesuan")
+	local CCSLuaNode =  requireForGameLuaFile("GameZJHJSuan")
+    self.jsroot = CCSLuaNode:create().root;
+	self:addChild(self.jsroot);
+    self.jiesuan = self.jsroot:getChildByName("jiesuan")
     self.jiesuan:setVisible(false)
     self.jiesuan:setLocalZOrder(29)
-    self.btn_ready = self.jiesuan:getChildByName("btn_ready")
-    self.readyImage = self.btn_ready:getChildByName("Image_4")
-    self.btn_ready:addTouchEventListener(handler(self,self._onBtnTouched_GameOver))
+    self.jsbtn_ready = self.jiesuan:getChildByName("btn_ready")
+    self.readyImage = self.jsbtn_ready:getChildByName("Image_4")
+    self.jsbtn_ready:addTouchEventListener(handler(self,self._onBtnTouched_GameOver))
 
-    self.btn_autoready = self.jiesuan:getChildByName("btn_autoready")
-    self.autoreadyImage = self.btn_autoready:getChildByName("Image_3")
+    self.jsbtn_autoready = self.jiesuan:getChildByName("btn_autoready")
+    self.autoreadyImage = self.jsbtn_autoready:getChildByName("Image_3")
     self.autoreadyImage:setVisible(false)
-    self.btn_autoready:addTouchEventListener(handler(self,self._onBtnTouched_GameOver))
+    self.jsbtn_autoready:addTouchEventListener(handler(self,self._onBtnTouched_GameOver))
 
     -- 结算界面准备倒计时
     self.ready_time_di = self.jiesuan:getChildByName("Image_jiesuan_di")
@@ -664,6 +1198,7 @@ function GFlowerGameScene:InitOtherUi()
     cardType_Ani:setPosition(100, 120)
     cardType_Ani:setTag(GFlowerConfig.PAIXIN_TAG)
     cardType_Ani:setVisible(false)
+	self.Panel_PaiXin:setVisible(false)
 
     -- 跟到底按钮
     self.Button_FollowDi = self.m_widget:getChildByName("Button__FollowDi")
@@ -687,6 +1222,7 @@ function GFlowerGameScene:InitOtherUi()
     self.Image_VS:setVisible(false)
     self.Panel_OpenCard:setVisible(false)
     self.Panel_OpenCard:setLocalZOrder(32)
+	
 
     -- 全场比牌 动画 --
     if self.Ani_OpenCard == nil then
@@ -699,6 +1235,12 @@ function GFlowerGameScene:InitOtherUi()
     self.Image_begin = self.m_widget:getChildByName("Image_begin")
     self.Image_begin:setVisible(false)
     self.Txt_StartCountDown = self.Image_begin:getChildByName("Text_startTime")
+	
+	-- 私人房间属性 --
+	self.btn_proomPro = self.m_widget:getChildByName("btn_proompro")
+	self.btn_proomPro:addTouchEventListener(handler(self,self._onBtnTouched_PRProClick))
+	self.btn_proomPro:setVisible(false)
+
 end
 
 function GFlowerGameScene:setImageBeginVisible(Visible)
@@ -714,17 +1256,32 @@ end
 
 --初始化筹码 一共5种筹码(起始跟注为默认筹码) 加注筹码编号2 ~ 5
 function GFlowerGameScene:On_InitJetton()
-    for i = 2, GFlowerConfig.COIN_NUM do
+    if self._logic.isPrivateRoom == false then
+		for i = 2, GFlowerConfig.COIN_NUM do
 
-        local add_btn = self.Panel_JettonZone:getChildByName("Button_Jetton_" .. i)
-        local add_Label_Jetton = add_btn:getChildByName("Label_Jetton")
+			local add_btn = self.Panel_JettonZone:getChildByName("Button_Jetton_" .. i)
+			local add_Label_Jetton = add_btn:getChildByName("Label_Jetton")
 
-        add_btn:setTag(i)
-        add_btn:addTouchEventListener(handler(self,self._onBtnTouched_bet))
+			add_btn:setTag(i)
+			add_btn:addTouchEventListener(handler(self,self._onBtnTouched_bet))
 
-        -- 设置筹码显示值
-        add_Label_Jetton:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton * GFlowerConfig.ADD_BTN_TIMES[i]))
-    end
+			-- 设置筹码显示值
+			add_Label_Jetton:setString(CustomHelper.moneyShowStyleAB(self._logic.MinJetton * GFlowerConfig.ADD_BTN_TIMES[i]))
+		end
+	else
+		local cfg = GFlowerConfig.PRIVATE_ROOM[self._logic.selScoreIdx]
+		for i = 2, GFlowerConfig.COIN_NUM do
+
+			local add_btn = self.Panel_JettonZone:getChildByName("Button_Jetton_" .. i)
+			local add_Label_Jetton = add_btn:getChildByName("Label_Jetton")
+
+			add_btn:setTag(i)
+			add_btn:addTouchEventListener(handler(self,self._onBtnTouched_bet))
+
+			-- 设置筹码显示值
+			add_Label_Jetton:setString(CustomHelper.moneyShowStyleAB(cfg.score[i]))
+		end
+	end
 end
 
 ----------------------------------------------------------------------
@@ -774,7 +1331,6 @@ function GFlowerGameScene:dealJieSuanReady()
     -- 如果房间 不处于战斗状态 玩家进入后强制准备
     if self.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
         self:removeAllCoin()
-		print("11111111111111111111111111111111111111111111111111111")
         GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady()
     else
         self:recoverMainTableUI()
@@ -901,7 +1457,6 @@ function GFlowerGameScene:_onBtnTouched_play_btn(sender, eventType)
             else
                 self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 1)
             end
-
             GFlowerGameManager:getInstance():send_CS_ZhaJinHuaAddScore(GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
         end
         --sender:setScale(1)
@@ -1025,21 +1580,47 @@ function GFlowerGameScene:_onBtnTouched_result_close(sender, eventType)
    if eventType == ccui.TouchEventType.ended then
       
         local gfplayer = self._logic:getGfPlayers()[self._logic.myServerChairId]
-        --print("self._logic.s_chair: ",self._logic.s_chair," ,gfplayer: ",gfplayer)
         --dump(gfplayer,"gfplayer")
         local state    = gfplayer:getGameState()
         if sender:getName() == "Button_Exit" then
             -- 如果玩家还没弃牌 先弃牌
-            if state == GFlowerConfig.PLAYER_STATUS.LOOK
-            or state == GFlowerConfig.PLAYER_STATUS.CONTROL then
-                -- false 表示换桌  true表示退出
-                self.huanzhuo_or_exit = false
-                self.changetable_or_exit_tips:setString("现在退出将视为弃牌，已下注的\n筹码将不会退还，是否确认退出？")
-                self.huanzhuotip:setVisible(not self.huanzhuotip:isVisible())
-            else
-                GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
-                --self:returnToHallScene()
-            end
+			if self._logic.isPrivateRoom == true then 
+				if self._logic.isInPRReady == true then
+					self.tipLayer = CustomHelper.showAlertView(
+							"返回大厅会解散房间并退还房费，确认要退出吗？",
+							true,
+							true,
+						function(tipLayer)
+							self.tipLayer:removeSelf()
+						end,
+						function(tipLayer)
+							GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+					end)
+				else
+					self.tipLayer = CustomHelper.showAlertView(
+							"您正处于私人房游戏中，要发起解散投票吗？",
+							true,
+							true,
+						function(tipLayer)
+							self.tipLayer:removeSelf()
+						end,
+						function(tipLayer)
+							GFlowerGameManager:getInstance():send_CS_ZhaJinHuaTabVote(true)
+							self.tipLayer:removeSelf()
+						end)
+				end
+			else
+				if state == GFlowerConfig.PLAYER_STATUS.LOOK
+				or state == GFlowerConfig.PLAYER_STATUS.CONTROL then
+					-- false 表示换桌  true表示退出
+					self.huanzhuo_or_exit = false
+					self.changetable_or_exit_tips:setString("现在退出将视为弃牌，已下注的\n筹码将不会退还，是否确认退出？")
+					self.huanzhuotip:setVisible(not self.huanzhuotip:isVisible())
+				else
+					GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+					--self:returnToHallScene()
+				end
+			end 
         elseif sender:getName() == "Button_Menu" then
             self:MenuControl(not self._menuOpen)
         elseif sender:getName() == "sure" then
@@ -1127,6 +1708,24 @@ end
 function GFlowerGameScene:CloseDojishi(showChair)
     self._daojishius[showChair]:stopAllActions()
     self._daojishius[showChair]:setVisible(false)
+end
+
+-- 暂停倒计时边框动画
+function GFlowerGameScene:pauseAllDojishi()
+	for k = 1, GFlowerConfig.CHAIR_COUNT do
+		local actionMgr  = cc.Director:getInstance():getActionManager()
+		local djs = self._daojishius[k]
+		actionMgr:pauseTarget(djs)
+	end
+end
+
+-- 恢复动画
+function GFlowerGameScene:resumeAllDojishi()
+	for k = 1, GFlowerConfig.CHAIR_COUNT do
+		local actionMgr  = cc.Director:getInstance():getActionManager()
+		local djs = self._daojishius[k]
+		actionMgr:resumeTarget(djs)
+	end
 end
 
 -- 生成筹码 -- 类型 1 - 5  
@@ -1516,8 +2115,8 @@ function GFlowerGameScene:On_Ready(tid)
     if tid == 0 then
         --self.jiesuan:setVisible(false)
         -- 禁用准备按钮
-        self.btn_ready:setTouchEnabled(false)
-        self.btn_ready:setBright(false)
+        --self.btn_ready:setTouchEnabled(false)
+        --self.btn_ready:setBright(false)
 
         -- 玩家界面状态   
         self:UpdatePlayerStatus(1)
@@ -1648,6 +2247,11 @@ function GFlowerGameScene:On_NotifyPlayerEnter(gfplayer)
     -- 玩家界面状态
     local client_id = gfplayer:getClientChairId()
     self:UpdatePlayerStatus(client_id)
+	
+	-- 私人房间刷新界面
+	if self._logic.isPrivateRoom == true then
+		self:refreshPRReadyUI()
+	end
 
     self.gf_player[client_id]:setVisible(true)
 end
@@ -1673,6 +2277,14 @@ function GFlowerGameScene:On_PlayerEnter(gfplayer)
             end
         end
     end
+end
+
+-- 进入房间的时候初始化房主信息
+function GFlowerGameScene:On_initPrivateRoom()
+	self.btn_proomPro:setVisible(true)
+		
+	local masterId = self._logic:getPRMaster()
+	self.playerPRoomMaster[masterId]:setVisible(true)
 end
 
 -- 隐藏所有玩家手牌
@@ -1708,17 +2320,32 @@ function GFlowerGameScene:On_NotifyStandUp(client_chair)
     -- 如果是自己退出
     if client_chair == GFlowerConfig.CHAIR_SELF and self._logic.huanzhuo == false then
         --print("---------------------------进入时被服务器踢出----------------------------------")
-        CustomHelper.showAlertView(
-                    "开局前您没准备，请回到大厅重新进入!!",
-                    false,
-                    true,
-                function(tipLayer)
-                    GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
-                end,
-                function(tipLayer)
-                    GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
-            end)
-            return
+		
+		if self._logic.isPrivateRoom == true then
+			CustomHelper.showAlertView(
+						"您已经被房主踢出房间!!",
+						false,
+						true,
+					function(tipLayer)
+						GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+					end,
+					function(tipLayer)
+						GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+				end)
+				return
+		else
+			CustomHelper.showAlertView(
+						"开局前您没准备，请回到大厅重新进入!!",
+						false,
+						true,
+					function(tipLayer)
+						GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+					end,
+					function(tipLayer)
+						GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+				end)
+				return
+		end
     end
 end
 
@@ -1832,7 +2459,13 @@ function GFlowerGameScene:On_ZhaJinHuaAddScore(add_chair, next_chair)
                 --print("-----------------跟到底 全压")
             else
                 --print("-----------------跟到底 普通跟注")
-                if self._logic.roundNum < 21 then
+				local max_round = GFlowerConfig.MAX_ROUND + 1
+				if self._logic.isPrivateRoom == true then
+					if self._logic.isMoreRound == true then
+						max_round = GFlowerConfig.PR_MAX_ROUND + 1
+					end
+				end
+                if self._logic.roundNum <  max_round then
                     self.genDaoDiDelay = 1
                     self:removeScheduler()
                     self._scheduler = scheduler:scheduleScriptFunc(function(dt)
@@ -2143,17 +2776,15 @@ function GFlowerGameScene:_onInterval()
 				--关闭结算界面
 				self.jiesuan:setVisible(false)
 			else
-				GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+				if self._logic.isPrivateRoom == false then
+					GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
+				else
+					self:dealJieSuanReady()
+					--关闭结算界面
+					self.jiesuan:setVisible(false)
+				end
 			end
 		end
-        --判断是否勾选自动准备
-        -- if self.autoreadyImage:isVisible() then
-        --    self:dealJieSuanReady()
-            --关闭结算界面
-        --    self.jiesuan:setVisible(false)
-        --else
-        --    GFlowerGameManager:getInstance():sendStandUpAndExitRoomMsg()
-        --end
     end
 end
 
@@ -2214,12 +2845,14 @@ end
 -- 清除结算界面信息
 function GFlowerGameScene:clearJieSuanPanelInfo()
    -- 启用准备按钮
-    self.btn_ready:setTouchEnabled(true)
-    self.btn_ready:setBright(true)
+    self.jsbtn_ready:setTouchEnabled(true)
+    self.jsbtn_ready:setBright(true)
     self.readyImage:loadTexture(GFlowerConfig.IMAGE_JIESUAN.READY_ENABLE)
     self.ready_time_di:setVisible(true)
 
-    MyToastLayer.new(self, "倒计时结束前，您还没准备将返回大厅！")
+	if self._logic.isPrivateRoom == false then
+		MyToastLayer.new(self, "倒计时结束前，您还没准备将返回大厅！")
+	end
 
     -- 首先设置 所有位置为空
     for i = 1, GFlowerConfig.CHAIR_COUNT do
@@ -2244,6 +2877,15 @@ function GFlowerGameScene:setJieSuanPanelInfo()
     local Image_self_light = self.jiesuan:getChildByName("Image_self_light")
     Image_Self:setVisible(false)
     Image_self_light:setVisible(false)
+	
+	if self._logic.isPrivateRoom == true then
+		self.jsbtn_autoready:setVisible(false)
+		self.jsbtn_ready:setVisible(false)
+	else
+		self.jsbtn_autoready:setVisible(true)
+		self.jsbtn_ready:setVisible(true)
+	end
+	
     -- 再根据结果设置结算界面信息
     local  index = 1
     dump(self.player_Endlist,"self.player_Endlist")
@@ -2306,7 +2948,7 @@ function GFlowerGameScene:setJieSuanPanelInfo()
             local Image_lost = Panel_Player:getChildByName("Image_126")
             if client_chair_id == self.win_id then
                 -- 是否显示税收设置 self._logic.is_shuishou
-                if self._logic.is_shuishou then
+                if self._logic.is_shuishou and self._logic.isPrivateRoom == false then
                     Image_lost:setVisible(false)
                     Image_winer:setVisible(true)
                     local win_num = Image_winer:getChildByName("icon")
@@ -2525,9 +3167,19 @@ function GFlowerGameScene:UpdateMenuBtn()
         self:BtnControlModel("GIVE_UP", true)
 
         --如果是看牌按钮 必须要过了第一轮才能看牌
-        if self._logic.isSelfLookCard == false and self._logic.roundNum > 1 then
-            self:BtnControlModel("LOOK_CARD", true)
-        end
+		if self._logic.isPrivateRoom == true then
+			if self._logic.isFirstLookCard == false then
+				if self._logic.isSelfLookCard == false and self._logic.roundNum > 1 then
+					self:BtnControlModel("LOOK_CARD", true)
+				end
+			else
+				self:BtnControlModel("LOOK_CARD", true)
+			end
+		else
+			if self._logic.isSelfLookCard == false and self._logic.roundNum > 1 then
+				self:BtnControlModel("LOOK_CARD", true)
+			end
+		end
 
         -- 自己的本地id默认为1，如果是自己
         if self._logic.doing_id == GFlowerConfig.CHAIR_SELF then
@@ -2554,10 +3206,20 @@ function GFlowerGameScene:UpdateMenuBtn()
                     self:BtnControlModel("ADD_SCORE", false)
                 end
 
-                --如果是看牌按钮 必须要过了第一轮才能看牌
-                if self._logic.roundNum >= 2 then
-                    self:BtnControlModel("BI_PAI", true)
-                end
+                --必须要过了第一轮才能比牌
+				if self._logic.isPrivateRoom == true then
+					if self._logic.isFirstCompare == true then
+						self:BtnControlModel("BI_PAI", true)
+					else
+						if self._logic.roundNum >= 2 then
+							self:BtnControlModel("BI_PAI", true)
+						end
+					end
+				else
+					if self._logic.roundNum >= 2 then
+						self:BtnControlModel("BI_PAI", true)
+					end
+				end
 
                 -- 玩家已经看牌 和 没看牌情况
                 if lPlayer:getGameState() == GFlowerConfig.PLAYER_STATUS.LOOK then
@@ -2619,7 +3281,11 @@ function GFlowerGameScene:On_updateLunshuStr(client_id)
     
     if add_round == true then
         self._logic.roundNum = self._logic.roundNum + 1
-        if self._logic.roundNum < 21 then
+		local maxR = GFlowerConfig.MAX_ROUND + 1
+		if self._logic.isPrivateRoom == true then
+			maxR = GFlowerConfig.PR_MAX_ROUND + 1
+		end
+        if self._logic.roundNum < maxR then
             if self.Label_Lunshu then
                 self.Label_Lunshu:setString(""..self._logic.roundNum)
             end
@@ -3122,8 +3788,14 @@ function GFlowerGameScene:OpenCardAni()
 
     local function callfunc1()
         --print("全场比牌，轮数大小为："..self._logic.roundNum)
-        if self._logic.roundNum >= 20 then
-            self.Label_OpenCard:setString("20回合数已满，进入全场比牌")
+		local mxRound = GFlowerConfig.MAX_ROUND 
+		local noticeTxt = "20回合数已满，进入全场比牌"
+		if self._logic.isPrivateRoom == true then
+			mxRound = GFlowerConfig.PR_MAX_ROUND
+			noticeTxt = "100回合数已满，进入全场比牌"
+		end
+        if self._logic.roundNum >= mxRound then
+            self.Label_OpenCard:setString(noticeTxt)
         else
             self.Label_OpenCard:setString("有玩家金币不足，进入全场比牌")
         end
@@ -3228,6 +3900,11 @@ function GFlowerGameScene:registerNotification()
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaReadyTime)
     self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaClientReadyTime)
 	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ChangeTable)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaTabTiren)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaTabVote)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaTabVoteResult)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaPrivateCFG)
+	self:addOneTCPMsgListener(GFlowerGameManager.MsgName.SC_ZhaJinHuaStatistics)
 
     GFlowerGameScene.super.registerNotification(self)
 end
@@ -3273,7 +3950,16 @@ function GFlowerGameScene:receiveServerResponseSuccessEvent(event)
 		self:on_msg_ZhaJinHuaGetSitDown(msgTab)
     elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaClientReadyTime then
         self:on_msg_ZhaJinHuaClientReadyTime(msgTab)
-            ---游戏停服通知
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaTabVote then
+		self:on_msg_ZhaJinHuaTabVote(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaTabTiren then
+        self:on_msg_ZhaJinHuaTabTiRen(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaTabVoteResult then
+		self:on_msg_ZhaJinHuaTabVoteResult(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaPrivateCFG then
+		self:on_msg_ZhaJinHuaPrivateCFG(msgTab)
+	elseif msgName == GFlowerGameManager.MsgName.SC_ZhaJinHuaStatistics then
+		self:on_msg_ZhaJinHuaStatistics(msgTab)
     elseif msgName == HallMsgManager.MsgName.SC_GameMaintain then
         --服务器维护中，如果玩家没有正在游戏中，则直接弹出
         if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
@@ -3282,6 +3968,39 @@ function GFlowerGameScene:receiveServerResponseSuccessEvent(event)
     end
 
     GFlowerGameScene.super.receiveServerResponseSuccessEvent(self, event)
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaStatistics(msgTab)
+	local records = msgTab.pb_info
+	
+	if records ~= nil then
+		
+		local size = self.scrollview:getContentSize()
+		local width = size.width
+		local height = size.height
+		local cellheight = self.scrollviewCell:getContentSize().height
+		
+		for k, record in pairs(records) do
+			local cell = self:createTongJiCell(record.nickname, record.money)
+			self.scrollview:addChild(cell)
+			cell:move(0, height)
+			height = height - cellheight - 10
+		end
+
+	end
+	
+	self._pnlTongji:setVisible(true)
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaPrivateCFG(msgTab)
+	if self._logic.isNeedPRoomPro == true then
+		self._logic.isNeedPRoomPro = false
+		if self.isShowPRPro == true then
+			self:showPRoomPro()
+		end
+	else
+		MyToastLayer.new(self, "房主新设定了房间属性，下局游戏生效。")
+	end
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaReConnect(msgTab)
@@ -3301,13 +4020,19 @@ end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaGetSitDown(msgTab)
 	GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
+	print("on_msg_ZhaJinHuaGetSitDown .....................")
 	self:check_StandUp()
 end
 
 function GFlowerGameScene:on_msg_Ready(msgTab)
+	dump(msgTab,"msgTab")
     local server_chairid = msgTab.ready_chair_id
     local client_chair_id = self._logic:getLocalChairId(server_chairid)
 
+	if self._logic.isPrivateRoom == true then
+		self:onePlayerReady(client_chair_id)
+	end
+	
     if self._logic.myServerChairId == server_chairid then
         self:On_Ready(0)
     else
@@ -3316,7 +4041,7 @@ function GFlowerGameScene:on_msg_Ready(msgTab)
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaAddScore(msgTab)
-
+    dump(msgTab, "msgTab")
     local server_add_score_id   = msgTab.add_score_chair_id
     local server_next_id        = msgTab.cur_chair_id
     local client_add_score_id   = self._logic:getLocalChairId(server_add_score_id)
@@ -3386,22 +4111,26 @@ end
 function GFlowerGameScene:on_msg_ZhaJinHuaStart(msgTab)
     print("GFlowerGameScene:on_msg_ZhaJinHuaStart  ")
     --dump(msgTab,"msgTab")
+	-- 私人房间隐藏准备界面
+    if self._logic.isPrivateRoom == true then
+		self._pnlReady:setVisible(false)
+	else
+		--  清除无效玩家界面信息
+		for idx = 1,  GFlowerConfig.CHAIR_COUNT do
+			if self._logic.validPlayerTag[idx] == 0 then
+				self:On_NotifyStandUp(idx)
+			end
+		end
+	end
+	
     -- 更新总注 单注大小
     self:On_UpdateDeskMoney(self._logic.follow_money, self._logic.deskAllMoney)
-
-    --  清除无效玩家界面信息
-    for idx = 1,  GFlowerConfig.CHAIR_COUNT do
-        if self._logic.validPlayerTag[idx] == 0 then
-            self:On_NotifyStandUp(idx)
-        end
-    end
 
     -- 发牌动画执行完毕后发牌
     self:On_GameStart(self._logic.doing_id)
 end
 
 function GFlowerGameScene:on_msg_NotifyStandUp(msgTab)
-   print("GFlowerGameScene:on_msg_NotifyStandUp  UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
    local gfplayer  =  self._logic:getGFPayerByGuid(msgTab.guid)
    if gfplayer == nil then
    -- 为空说明玩家数据已经被清理， 这里需要将界面的数据清理掉。
@@ -3413,9 +4142,10 @@ function GFlowerGameScene:on_msg_NotifyStandUp(msgTab)
 		if gameSwitchStatus == GameMaintainStatus.On then
            return;
 		end
-        print(" 玩家现有金币： ",gfplayer:getMoney()," 房间限制金币： ",self._logic.MinJettonMoney)
         if gfplayer:getMoney() >= self._logic.MinJettonMoney then
-		    self:jumpToHallScene()
+			if self._logic.isLastGame == false then
+				self:jumpToHallScene()
+			end
         end
        end
    end
@@ -3439,6 +4169,10 @@ function GFlowerGameScene:on_msg_ZhaJinHuaWatch(msgTab)
 
     -- 初始化筹码（在获取底注之后再初始化）
     self:On_InitJetton()
+	
+	if self._logic.isPrivateRoom == true  then
+		self:On_initPrivateRoom()
+	end
 
     for k, player in pairs (self._logic.gfPlayers) do
         if self._logic.myServerChairId == player:getChairId() then
@@ -3448,24 +4182,31 @@ function GFlowerGameScene:on_msg_ZhaJinHuaWatch(msgTab)
         end
     end
 
-        -- 如果房间 不处于战斗状态 玩家进入后强制准备
-    if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
-        -- 清空桌面筹码 其他情况不清除
-        self:removeAllCoin()
-        print("11111111111111111111111111111111111111111111111111111")
-        GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady();
-    else
-        self:recoverMainTableUI()
-        
-        -- 生成桌面所有筹码
-        if self._logic.coinList  ~= nil then
-            self:connectAllDeskCoin(self._logic.coinList)
-        end
-    end
+    -- 如果是私人房间，则进入准备阶段
+	if self._logic.isPrivateRoom == true then
+		self:clearPRReadyUI()
+		self:refreshPRReadyUI()
+		self._pnlReady:setVisible(true)
+	else
+		 -- 如果房间 不处于战斗状态 玩家进入后强制准备
+		if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
+			-- 清空桌面筹码 其他情况不清除
+			self:removeAllCoin()
+			GameManager:getInstance():getHallManager():getHallMsgManager():sendGameReady();
+		else
+			self:recoverMainTableUI()
+			
+			-- 生成桌面所有筹码
+			if self._logic.coinList  ~= nil then
+				self:connectAllDeskCoin(self._logic.coinList)
+			end
+		end
+	end
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaEnd(msgTab)
     -- 界面更新
+	dump(msgTab,"msgTab")
     self:On_ZhaJinHuaEnd()
 end
 
@@ -3480,6 +4221,54 @@ function GFlowerGameScene:on_msg_NotifySitDown(msgTab)
     local gfPlayer = gfplayers[server_chairid]
 
     self:On_NotifyPlayerEnter(gfPlayer)
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaTabVoteResult(msgTab)
+	dump(msgTab,"msgTab")
+	if msgTab.bret == false or msgTab.bret == nil then
+		self:resumeAllDojishi()
+		self:check_ClosePRJieSan()
+	else
+		self._pnlJiesan:setVisible(false)
+		self:resumeAllDojishi()
+		if self._logic.isInPRReady == true then
+			self._pnlReady:setVisible(true)
+		end
+	end
+	
+	self._logic.isInPRJieSan = false
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaTabVote(msgTab)
+	local serverchairid = msgTab.chair_id
+	local clientchairid = self._logic:getLocalChairId(serverchairid)
+	local votePlayer    = self._logic:getGFPlayerByClientId(clientchairid)
+	
+	if msgTab.bret == false or msgTab.bret == nil then
+		MyToastLayer.new(self, string.format(votePlayer:getNickName().."拒绝解散房间"))
+	end
+	
+	if self._logic.isInPRJieSan == false then
+		if self._logic.isInPRReady == true then
+			self._pnlReady:setVisible(false)
+		end
+		self:clearPRJieSanUI()
+		self:refreshPRJieSanUI()
+		self:pauseAllDojishi()
+		self:setPRJieSanTitle(clientchairid)
+		self._pnlJiesan:setVisible(true)
+		self._logic.isInPRJieSan = true
+		self:updatePRJieSuanPlayerState(clientchairid, msgTab.bret)
+	else
+		self:updatePRJieSuanPlayerState(clientchairid, msgTab.bret)
+	end
+end
+
+function GFlowerGameScene:on_msg_ZhaJinHuaTabTiRen(msgTab)
+	local serverchairid  = msgTab.chair_id
+	local clientchairid  = self._logic:getLocalChairId(serverchairid)
+	self:clearPRReadyUI()
+	self:refreshPRReadyUI()
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaLostCards(msgTab)

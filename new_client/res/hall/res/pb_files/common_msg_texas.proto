@@ -1,6 +1,6 @@
 
-â
-common_msg_texas.proto"Ò
+®
+common_msg_texas.proto"ê
 UserInfo
 guid (Rguid
 chair (Rchair
@@ -22,7 +22,9 @@ cards_type (R	cardsType
 biggest_winner (RbiggestWinner
 	win_money (RwinMoney$
 main_pot_money (RmainPotMoney$
-side_pot_money (RsidePotMoney"˝
+side_pot_money (RsidePotMoney
+
+cards_show (R	cardsShow"˝
 
 TexasTable
 state (Rstate

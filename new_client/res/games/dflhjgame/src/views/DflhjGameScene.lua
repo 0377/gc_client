@@ -2,23 +2,10 @@ local SubGameBaseScene = requireForGameLuaFile("SubGameBaseScene")
 local DflhjGameScene = class("DflhjGameScene",SubGameBaseScene);
 local scheduler = cc.Director:getInstance():getScheduler()
 
--- 线 - 坐标
-local _lineConfig = {
-    {2, 2, 2, 2, 2},
-    {3, 3, 3, 3, 3},
-    {1, 1, 1, 1, 1},
-    {3, 2, 1, 2, 3},
-    {1, 2, 3, 2, 1},
-    {3, 3, 2, 3, 3},
-    {1, 1, 2, 1, 1},
-    {2, 1, 1, 1, 2},
-    {2, 3, 3, 3, 2}
-}
-
 local EASE_PAR = 1
-
-local MAX_LINE = 9
-local MAX_BET_MULTIPLE = 10
+local PAGE_HEIGHT = 372
+local ITEM_HEIHT = 124
+local ITEM_POSX = 65
 DflhjGameScene.LOOP_TIME = 0.1
 DflhjGameScene.GAME_STATUS = {
     READAY_STATUS = 1, --准备阶段
@@ -30,36 +17,64 @@ DflhjGameScene.GAME_STATUS = {
     SHOUFEN_ANIM_STATUS = 7,--收分动画阶段
 }
 
-
+-- 福袋，散布奖，金铜钱，银龟和金龟，银凰和金凰，银船和金船，银元宝和金元宝，A，Q，K，J，9，10
 DflhjGameScene.IMG = {}
-DflhjGameScene.IMG[1] = "game_res/wz_pg.png"--9 --斧头=苹果                   20
-DflhjGameScene.IMG[2] = "game_res/wz_lm.png"--8 --银枪=橘子                   30
-DflhjGameScene.IMG[3] = "game_res/wz_xg.png"--7 --大刀=西瓜                   50
-DflhjGameScene.IMG[4] = "game_res/wz_yt.png"--6 --鲁智深=荔枝                 70
-DflhjGameScene.IMG[5] = "game_res/wz_xj.png"--5 --林冲=香蕉                   100
-DflhjGameScene.IMG[6] = "game_res/wz_pt.png"--4 --松江=菠萝                   150
-DflhjGameScene.IMG[7] = "game_res/wz_bar.png"--3 --替天行道=bar    200
-DflhjGameScene.IMG[8] = "game_res/wz_qqq.png"--2 --忠义堂=777      500
+DflhjGameScene.IMG[1] = "game_res/item_shanbudai.png"--
+DflhjGameScene.IMG[2] = "game_res/item_fu.png"--
+DflhjGameScene.IMG[3] = "game_res/item_tongqian.png"--
+DflhjGameScene.IMG[4] = "game_res/item_yingui.png"--
+DflhjGameScene.IMG[5] = "game_res/item_jingui.png"--
+DflhjGameScene.IMG[6] = "game_res/item_yinhuang.png"--
+DflhjGameScene.IMG[7] = "game_res/item_jinhuang.png"--
+DflhjGameScene.IMG[8] = "game_res/item_yinchuan.png"--
+DflhjGameScene.IMG[9] = "game_res/item_jinchuan.png"--
+DflhjGameScene.IMG[10] = "game_res/item_yinyuanbao.png"--
+DflhjGameScene.IMG[11] = "game_res/item_jinyuanbao.png"--
+DflhjGameScene.IMG[12] = "game_res/item_a.png"--
+DflhjGameScene.IMG[13] = "game_res/item_q.png"--
+DflhjGameScene.IMG[14] = "game_res/item_k.png"--
+DflhjGameScene.IMG[15] = "game_res/item_j.png"--
+DflhjGameScene.IMG[16] = "game_res/item_9.png"--
+DflhjGameScene.IMG[17] = "game_res/item_10.png"
 
 DflhjGameScene.IMG_MOHU1 = {}
-DflhjGameScene.IMG_MOHU1[1] = "game_res/wz_pg_hu_1.png"--9 --斧头=苹果                   20
-DflhjGameScene.IMG_MOHU1[2] = "game_res/wz_lm_hu_1.png"--8 --银枪=橘子                   30
-DflhjGameScene.IMG_MOHU1[3] = "game_res/wz_xg_hu_1.png"--7 --大刀=西瓜                   50
-DflhjGameScene.IMG_MOHU1[4] = "game_res/wz_yt_hu_1.png"--6 --鲁智深=荔枝                 70
-DflhjGameScene.IMG_MOHU1[5] = "game_res/wz_xj_hu_1.png"--5 --林冲=香蕉                   100
-DflhjGameScene.IMG_MOHU1[6] = "game_res/wz_pt_hu_1.png"--4 --松江=菠萝                   150
-DflhjGameScene.IMG_MOHU1[7] = "game_res/wz_bar_hu_1.png"--3 --替天行道=bar    200
-DflhjGameScene.IMG_MOHU1[8] = "game_res/wz_qqq_hu_1.png"--2 --忠义堂=777      500
+DflhjGameScene.IMG_MOHU1[1] = "game_res/item_shanbudai.png"--
+DflhjGameScene.IMG_MOHU1[2] = "game_res/item_fu.png"--
+DflhjGameScene.IMG_MOHU1[3] = "game_res/item_tongqian.png"--
+DflhjGameScene.IMG_MOHU1[4] = "game_res/item_yingui.png"--
+DflhjGameScene.IMG_MOHU1[5] = "game_res/item_jingui.png"--
+DflhjGameScene.IMG_MOHU1[6] = "game_res/item_yinhuang.png"--
+DflhjGameScene.IMG_MOHU1[7] = "game_res/item_jinhuang.png"--
+DflhjGameScene.IMG_MOHU1[8] = "game_res/item_yinchuan.png"--
+DflhjGameScene.IMG_MOHU1[9] = "game_res/item_jinchuan.png"--
+DflhjGameScene.IMG_MOHU1[10] = "game_res/item_yinyuanbao.png"--
+DflhjGameScene.IMG_MOHU1[11] = "game_res/item_jinyuanbao.png"--
+DflhjGameScene.IMG_MOHU1[12] = "game_res/item_a.png"--
+DflhjGameScene.IMG_MOHU1[13] = "game_res/item_q.png"--
+DflhjGameScene.IMG_MOHU1[14] = "game_res/item_k.png"--
+DflhjGameScene.IMG_MOHU1[15] = "game_res/item_j.png"--
+DflhjGameScene.IMG_MOHU1[16] = "game_res/item_9.png"--
+DflhjGameScene.IMG_MOHU1[17] = "game_res/item_10.png"
 
 DflhjGameScene.IMG_MOHU2 = {}
-DflhjGameScene.IMG_MOHU2[1] = "game_res/wz_pg_hu_2.png"--9 --斧头=苹果                   20
-DflhjGameScene.IMG_MOHU2[2] = "game_res/wz_lm_hu_2.png"--8 --银枪=橘子                   30
-DflhjGameScene.IMG_MOHU2[3] = "game_res/wz_xg_hu_2.png"--7 --大刀=西瓜                   50
-DflhjGameScene.IMG_MOHU2[4] = "game_res/wz_yt_hu_2.png"--6 --鲁智深=荔枝                 70
-DflhjGameScene.IMG_MOHU2[5] = "game_res/wz_xj_hu_2.png"--5 --林冲=香蕉                   100
-DflhjGameScene.IMG_MOHU2[6] = "game_res/wz_pt_hu_2.png"--4 --松江=菠萝                   150
-DflhjGameScene.IMG_MOHU2[7] = "game_res/wz_bar_hu_2.png"--3 --替天行道=bar    200
-DflhjGameScene.IMG_MOHU2[8] = "game_res/wz_qqq_hu_2.png"--2 --忠义堂=777      500
+DflhjGameScene.IMG_MOHU2[1] = "game_res/item_shanbudai.png"--
+DflhjGameScene.IMG_MOHU2[2] = "game_res/item_fu.png"--
+DflhjGameScene.IMG_MOHU2[3] = "game_res/item_tongqian.png"--
+DflhjGameScene.IMG_MOHU2[4] = "game_res/item_yingui.png"--
+DflhjGameScene.IMG_MOHU2[5] = "game_res/item_jingui.png"--
+DflhjGameScene.IMG_MOHU2[6] = "game_res/item_yinhuang.png"--
+DflhjGameScene.IMG_MOHU2[7] = "game_res/item_jinhuang.png"--
+DflhjGameScene.IMG_MOHU2[8] = "game_res/item_yinchuan.png"--
+DflhjGameScene.IMG_MOHU2[9] = "game_res/item_jinchuan.png"--
+DflhjGameScene.IMG_MOHU2[10] = "game_res/item_yinyuanbao.png"--
+DflhjGameScene.IMG_MOHU2[11] = "game_res/item_jinyuanbao.png"--
+DflhjGameScene.IMG_MOHU2[12] = "game_res/item_a.png"--
+DflhjGameScene.IMG_MOHU2[13] = "game_res/item_q.png"--
+DflhjGameScene.IMG_MOHU2[14] = "game_res/item_k.png"--
+DflhjGameScene.IMG_MOHU2[15] = "game_res/item_j.png"--
+DflhjGameScene.IMG_MOHU2[16] = "game_res/item_9.png"--
+DflhjGameScene.IMG_MOHU2[17] = "game_res/item_10.png"
+
 
 
 DflhjGameScene.SOUND = {
@@ -71,46 +86,33 @@ DflhjGameScene.SOUND = {
     getscore =  "lhjSound/lhj_getscore_sound.mp3",
     stop =  "lhjSound/lhj_getscore_sound.mp3",
     bigwincoin =  "lhjSound/lhj_bigwincoin_sound.mp3",
-
-
 }
 
-local slotma_items = {
-    {id = 1, symbol = "苹果",  winingtype ={{number = 3,times = 2},{number = 4,times = 5},{times = 20}}},
-    {id = 2, symbol = "橙子",  winingtype ={{number = 3,times = 3},{number = 4,times = 10},{times = 40}}},
-    {id = 3, symbol = "西瓜",  winingtype ={{number = 3,times = 5},{number = 4,times = 15},{times = 60}}},
-    {id = 4, symbol = "荔枝",  winingtype ={{number = 3,times = 7},{number = 4,times = 20},{times = 100}}},
-    {id = 5, symbol = "香蕉",  winingtype ={{number = 3,times = 10},{number = 4,times = 30},{times = 160}}},
-    {id = 6, symbol = "菠萝",  winingtype ={{number = 3,times = 15},{number = 4,times = 40},{times = 200}}},
-    {id = 7, symbol = "BAR",   winingtype ={{number = 3,times = 20},{number = 4,times = 80},{times = 400}}},
-    {id = 8, symbol = "777",   winingtype ={{number = 3,times = 50},{number = 4,times = 200},{times = 1000}}},
-}
 
 ----初始化要加载的资源
 function DflhjGameScene.getNeedPreloadResArray()
     -- body
     local  res = {
-        CustomHelper.getFullPath("game_res/wz_pg.png"),
-        CustomHelper.getFullPath("game_res/wz_lm.png"),
-        CustomHelper.getFullPath("game_res/wz_xg.png"),
-        CustomHelper.getFullPath("game_res/wz_yt.png"),
-        CustomHelper.getFullPath("game_res/wz_xj.png"),
-        CustomHelper.getFullPath("game_res/wz_pt.png"),
-        CustomHelper.getFullPath("game_res/wz_bar.png"),
-        CustomHelper.getFullPath("game_res/wz_qqq.png"),
-        CustomHelper.getFullPath("anim/slots_race_pop_middle_gold_01/slots_race_pop_middle_gold_01.ExportJson")
+        -- CustomHelper.getFullPath("game_res/wz_pg.png"),
+        -- CustomHelper.getFullPath("game_res/wz_lm.png"),
+        -- CustomHelper.getFullPath("game_res/wz_xg.png"),
+        -- CustomHelper.getFullPath("game_res/wz_yt.png"),
+        -- CustomHelper.getFullPath("game_res/wz_xj.png"),
+        -- CustomHelper.getFullPath("game_res/wz_pt.png"),
+        -- CustomHelper.getFullPath("game_res/wz_bar.png"),
+        -- CustomHelper.getFullPath("game_res/wz_qqq.png"),
+        -- CustomHelper.getFullPath("anim/slots_race_pop_middle_gold_01/slots_race_pop_middle_gold_01.ExportJson")
     }
     return res
 end
 function DflhjGameScene:ctor()
     self._isAuto = false --是不是自动模式
     self._isBtnListOpen = false --是否展开右上角按钮列表
-    self._currentLine = MAX_LINE --当前线数
     self._currentBetMultiple = 1 --当前底注倍数
     self._isStopLoop = false --是否点击或自动停止滚动
 
     self._tableResult = nil --最后结算数据
-    self.isShowingMarquee  = false
+    self.isShowingMarquee  = false --显示跑马灯
     self._gameStatus = DflhjGameScene.GAME_STATUS.READAY_STATUS
     ---初始化数据对象
     self.DflhjGameManager = DflhjGameManager:getInstance();
@@ -120,7 +122,8 @@ function DflhjGameScene:ctor()
     self._isPlayBigWinAnimTime = false
    
 
-    self.fruitTab = self.fruitTab or {} --游戏中水果节点
+    self.itemsTab = self.itemsTab or {} --游戏中水果节点
+    self.jackpot = self.jackpot or {}
     self.numAndLine = self.numAndLine or {} --连线
     ---初始化UI
     self:initUI();
@@ -131,8 +134,8 @@ function DflhjGameScene:ctor()
     self:showMyInfo()
 
     ---背景音乐
-    MusicAndSoundManager:getInstance():playMusicWithFile(DflhjGameScene.SOUND.bg, true)
-    self:showMarqueeTip();
+    -- MusicAndSoundManager:getInstance():playMusicWithFile(DflhjGameScene.SOUND.bg, true)
+    -- self:showMarqueeTip();
     DflhjGameScene.super.ctor(self);
 end
 function DflhjGameScene:onEnterTransitionFinish()
@@ -145,136 +148,35 @@ function DflhjGameScene:initUI()
     self.csNode = CCSLuaNode:create().root;
     self:addChild(self.csNode);
    
-    self.cumulativeScoreTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "cumulative_score_txt"), "ccui.TextAtlas");
-    self.bankMoneyTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bank_money_txt"), "ccui.TextAtlas");
-    self.moneyTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "money_txt"), "ccui.TextAtlas");
-    self.betTxt = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bet_txt"), "ccui.TextAtlas");
 
-    
-    for i=1,MAX_LINE do
-        --left 亮数字
-        local leftNumLight = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("icon%d_left",i)), "ccui.ImageView");
-         --left 暗数字
-        local leftNumBark = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("icon%d_2_left",i)), "ccui.ImageView");
-          --right 亮数字
-        local rightNumLight = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("icon%d_right",i)), "ccui.ImageView");
-         --right 暗数字
-        local rightNumBark = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("icon%d_2_right",i)),"ccui.ImageView");
-        local line = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("line_%d",i)), "ccui.ImageView");
-        local tab = {
-            leftNumLight        = leftNumLight,
-            leftNumBark         = leftNumBark,
-            rightNumLight       = rightNumLight,
-            rightNumBark        = rightNumBark,
-            line                = line,
-        }
-        table.insert(self.numAndLine ,tab)
+
+    self.labelMoney = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_money"), "ccui.TextAtlas");
+    self.labelBank = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_bank"), "ccui.TextAtlas");
+    self.labelDfjj = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_dfjj"), "ccui.TextAtlas");
+    self.labelDfzj = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_dfzj"), "ccui.TextAtlas");
+    self.labelDcdj = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_dcdj"), "ccui.TextAtlas");
+    self.labelDcxj = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_dcxj"), "ccui.TextAtlas");
+    self.labelYafen = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_yafen"), "ccui.TextAtlas");
+    self.labelWin = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_win"), "ccui.TextAtlas");
+    self.labelJcjh = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_jcjh"), "ccui.TextAtlas");
+    self.labelFd = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "label_fd"), "ccui.TextAtlas");
+    self.btnJian = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_jian"), "ccui.Button");
+    self.btnJia = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_jia"), "ccui.Button");
+    self.btnYaman = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_yaman"), "ccui.Button");
+    self.btnStart = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_start"), "ccui.Button");
+    self.btnAuto = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_auto"), "ccui.Button");
+    self.btnStop = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_stop"), "ccui.Button");
+    self.btnHuifang = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_huifang"), "ccui.Button");
+    self.btnOpen = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_open"), "ccui.Button");
+    for i=1,5 do
+        local btn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("btn_x%d",i)), "ccui.Button");
+        btn:addClickEventListener(function(  )
+            self:onBtnClickJiangChi(i)
+        end) 
+        table.insert(self.jackpot,btn)
     end
 
-    self.btnXs = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_xs"), "ccui.Button"); --线数
-    self.btnMaxLine = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_max_line"), "ccui.Button"); --满线
-    self.btnBet = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_bet"), "ccui.Button"); --底注
-    self.btnMaxBet = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_max_bet"), "ccui.Button"); --满注
-    self.btnStart = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_start"), "ccui.Button"); --开始
-    self.btnCancalAuto = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_cancal_auto"), "ccui.Button"); --取消自动
-    self.btnStop = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_stop"), "ccui.Button"); --停止
-    self.btnShoufen = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_shoufen"), "ccui.Button"); --停止
-
-       
-     self.btnXs:addTouchEventListener(function(sender,eventType)
-        if eventType == ccui.TouchEventType.began then
-           GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-            local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
-            local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
-            --显示下注倍数
-            lineNumTxt2:setVisible(true)
-            lineNumTxt:setVisible(false)
-
-        elseif eventType == ccui.TouchEventType.moved then
-                local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
-                local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
-                lineNumTxt2:setVisible( sender:isHighlighted())
-                lineNumTxt:setVisible(not sender:isHighlighted())
-          
-     
-        elseif eventType == ccui.TouchEventType.ended then
-            if self._gameStatus ~= DflhjGameScene.GAME_STATUS.READAY_STATUS then
-                local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
-                local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
-                --显示下注倍数
-                lineNumTxt2:setVisible(false)
-                lineNumTxt:setVisible(true)
-                return  
-            end
-            self:setLineNum(self._currentLine + 1);
-            
-        elseif eventType == ccui.TouchEventType.canceled then
-            local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
-            local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
-            --显示下注倍数
-            lineNumTxt2:setVisible(false)
-            lineNumTxt:setVisible(true)
-            print("ccui.TouchEventType.canceled")
-        end
-    end); 
-
-
-
-
-    self.btnMaxLine:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        if self._gameStatus ~= DflhjGameScene.GAME_STATUS.READAY_STATUS then return  end
-        self:setLineNum(9);
-    end) 
-
-    self.btnBet:addTouchEventListener(function(sender,eventType)
-        if eventType == ccui.TouchEventType.began then
-            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-            local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
-            local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
-            --显示下注倍数
-            betNumTxt2:setVisible(true)
-            betNumTxt:setVisible(false)
-
-        elseif eventType == ccui.TouchEventType.moved then
-                local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
-                local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
-                betNumTxt2:setVisible( sender:isHighlighted())
-                betNumTxt:setVisible(not sender:isHighlighted())
-          
-     
-        elseif eventType == ccui.TouchEventType.ended then
-            if self._gameStatus ~= DflhjGameScene.GAME_STATUS.READAY_STATUS then 
-                local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
-                local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
-                --显示下注倍数
-                betNumTxt2:setVisible(false)
-                betNumTxt:setVisible(true)
-                return 
-            end
-            self:setBet(self._currentBetMultiple + 1);
-        elseif eventType == ccui.TouchEventType.canceled then
-            local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
-            local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
-            --显示下注倍数
-            betNumTxt2:setVisible(false)
-            betNumTxt:setVisible(true)
-            print("ccui.TouchEventType.canceled")
-        end
-    end); 
-    self.btnShoufen:addClickEventListener(function()
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        if self._gameStatus == DflhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS then return end
-        if self._winLayout:isVisible() and self._isPlayBigWinAnimTime == false then
-            self:showShouFenAnim()
-        end
-    end) 
-
-    self.btnMaxBet:addClickEventListener(function()
-         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        if self._gameStatus ~= DflhjGameScene.GAME_STATUS.READAY_STATUS then return  end
-        self:setBet(10);
-    end)
+    self:onBtnClickJiangChi(1)
 
     local function btnClick(sender,eventType)
         if eventType == ccui.TouchEventType.began then
@@ -302,83 +204,82 @@ function DflhjGameScene:initUI()
     end 
     self.btnStart:addTouchEventListener(btnClick) 
 
-    self.btnCancalAuto:addClickEventListener(function()
+    self.btnAuto:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
         self._isAuto = false
         self:btnVisibleControl()
     end) 
+
     self.btnStop:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
        
        --只在加速或loop时执行逻辑
-        if self._gameStatus == DflhjGameScene.GAME_STATUS.ACCLERA_STATUS or self._gameStatus == DflhjGameScene.GAME_STATUS.LOOP_STATUS then
-             if  self._gameStatus == DflhjGameScene.GAME_STATUS.STOP_STATUS then
-            --已经减速 和中奖项目闪烁时 return
-                return 
-            end
-             CustomHelper.unscheduleGlobal(self._scheduler)
-            self._scheduler = nil
-            self:stopLoop(0.5)
-        end 
+        -- if self._gameStatus == DflhjGameScene.GAME_STATUS.ACCLERA_STATUS or self._gameStatus == DflhjGameScene.GAME_STATUS.LOOP_STATUS then
+        --      if  self._gameStatus == DflhjGameScene.GAME_STATUS.STOP_STATUS then
+        --     --已经减速 和中奖项目闪烁时 return
+        --         return 
+        --     end
+        --      CustomHelper.unscheduleGlobal(self._scheduler)
+        --     self._scheduler = nil
+        --     self:stopLoop(0.5)
+        -- end 
     end)    
-
-    self:setLineNum(self._currentLine)
 
     --初始化游戏界面的水果节点
    for i=1,5 do
-       local list = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("fruits_list_%d",i)), "ccui.Layout")
-       table.insert(self.fruitTab,list)
+       local list = tolua.cast(CustomHelper.seekNodeByName(self.csNode, string.format("list_%d",i)), "ccui.Layout")
+       table.insert(self.itemsTab,list)
    end
-   self:initFruits()
+   self:initItems()
 
    --右上角按钮
-    self.btnsList = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btns_list"), "ccui.Widget");
-    self.btnOpenList = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_open_list"), "ccui.Button");
-    self.btnOpenList:addClickEventListener(function()
+    self.btnList = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_list"), "ccui.Widget");
+   
+    self.btnOpen:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        self.btnOpenList:setTouchEnabled(false)
+        self.btnOpen:setTouchEnabled(false)
         if not self._isBtnListOpen then
             local action = {}
             action[1] = cc.MoveTo:create(DflhjGameScene.LOOP_TIME,cc.p(0,0))
             action[2] = cc.CallFunc:create(function (  )
-                local icon = tolua.cast(CustomHelper.seekNodeByName(self.btnOpenList, "btn_icon"), "ccui.ImageView");
+                local icon = tolua.cast(CustomHelper.seekNodeByName(self.btnOpen, "btn_icon"), "ccui.ImageView");
                 icon:setScaleY(-1)
-                self.btnOpenList:setTouchEnabled(true)
+                self.btnOpen:setTouchEnabled(true)
                 self._isBtnListOpen = true
             end)
-            self.btnsList:runAction(cc.Sequence:create(action))
+            self.btnList:runAction(cc.Sequence:create(action))
 
         else
             local action = {}
             action[1] = cc.MoveTo:create(DflhjGameScene.LOOP_TIME,cc.p(0,488))
             action[2] = cc.CallFunc:create(function (  )
-                local icon = tolua.cast(CustomHelper.seekNodeByName(self.btnOpenList, "btn_icon"), "ccui.ImageView");
+                local icon = tolua.cast(CustomHelper.seekNodeByName(self.btnOpen, "btn_icon"), "ccui.ImageView");
                 icon:setScaleY(1)
                 self._isBtnListOpen = false
-                self.btnOpenList:setTouchEnabled(true)
+                self.btnOpen:setTouchEnabled(true)
             end)
-            self.btnsList:runAction( cc.Sequence:create(action))
+            self.btnList:runAction( cc.Sequence:create(action))
         end
     end)  
 
-    local btn_exit = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_exit"), "ccui.Button");
-    btn_exit:addClickEventListener(function()
+    local btnExit = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_exit"), "ccui.Button");
+    btnExit:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         self:exitGame()
     end)  
-    local btn_sound = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_sound"), "ccui.Button");
+    local btnSound = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_sound"), "ccui.Button");
 
     local function setSoundBtnIcon(  )
         local isOpenForSound =  GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
-        local icon = tolua.cast(CustomHelper.seekNodeByName(btn_sound, "btn_icon"), "ccui.ImageView"); 
+        local icon = tolua.cast(CustomHelper.seekNodeByName(btnSound, "btn_icon"), "ccui.ImageView"); 
         if not isOpenForSound then
-            icon:loadTexture("game_res/wz_sz_sy_2.png")
+            icon:loadTexture("game_res/yinxiao_2.png")
         else
-            icon:loadTexture("game_res/wz_sz_sy.png")
+            icon:loadTexture("game_res/yinxiao.png")
         end
     end
     setSoundBtnIcon()
-    btn_sound:addClickEventListener(function()
+    btnSound:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         local isOpenForSound = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
         GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(isOpenForSound);
@@ -391,150 +292,111 @@ function DflhjGameScene:initUI()
         end
         setSoundBtnIcon()
     end)  
-    local btn_help = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_help"), "ccui.Button");
-    btn_help:addClickEventListener(function()
+    local btnHelp = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_help"), "ccui.Button");
+    btnHelp:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         local tips = requireForGameLuaFile("DflhjGameTips")
         local tipsLayer = tips:create()
         self:addChild(tipsLayer,100)
     end)  
-    local btn_music = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_music"), "ccui.Button");
+    local btnMusic = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_music"), "ccui.Button");
 
     local function setMusicBtnIcon(  )
         local musicSwitch =  GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
-        local icon = tolua.cast(CustomHelper.seekNodeByName(btn_music, "btn_icon"), "ccui.ImageView"); 
+        local icon = tolua.cast(CustomHelper.seekNodeByName(btnMusic, "btn_icon"), "ccui.ImageView"); 
         if musicSwitch then
-            icon:loadTexture("game_res/wz_sz_yy.png")
+            icon:loadTexture("game_res/yinyue.png")
             GameManager:getInstance():getMusicAndSoundManager():playMusicWithFile(HallSoundConfig.BgMusic.Hall)
         else
-            icon:loadTexture("game_res/wz_sz_yy_2.png")
+            icon:loadTexture("game_res/yinyue_2.png")
             GameManager:getInstance():getMusicAndSoundManager():stopMusic()
         end
     end
 
 
-    btn_music:addClickEventListener(function()
+    btnMusic:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
         local musicSwitch = not GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
         GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(musicSwitch)
         setMusicBtnIcon()
     end)  
     setMusicBtnIcon()
-    self._winLayout = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "win_layout"), "ccui.Layout");
-    self._winLayout:setVisible(false)
-    for i,v in ipairs(self.csNode:getChildren()) do
-        print(v:getName())
-    end
-
-
-     local function winLayoutClick(sender,eventType)
-        if eventType == ccui.TouchEventType.began then
+    -- self._winLayout = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "win_layout"), "ccui.Layout");
+    -- self._winLayout:setVisible(false)
+    -- local function winLayoutClick(sender,eventType)
+    --     if eventType == ccui.TouchEventType.began then
            
-        elseif eventType == ccui.TouchEventType.moved then
+    --     elseif eventType == ccui.TouchEventType.moved then
             
-        elseif eventType == ccui.TouchEventType.ended then
-            if self._gameStatus == DflhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS then return end
-            if self._winLayout:isVisible()  and self._isPlayBigWinAnimTime == false then
-                self:showShouFenAnim()
-            end
-        elseif eventType == ccui.TouchEventType.canceled then
-        end
-    end 
+    --     elseif eventType == ccui.TouchEventType.ended then
+    --         if self._gameStatus == DflhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS then return end
+    --         if self._winLayout:isVisible()  and self._isPlayBigWinAnimTime == false then
+    --             self:showShouFenAnim()
+    --         end
+    --     elseif eventType == ccui.TouchEventType.canceled then
+    --     end
+    -- end 
 
-    self._winLayout:addTouchEventListener(winLayoutClick)  
-
-
-    self._startAnim = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "slots_race_pop_middle_gold_01"),"ccs.Armature")
-    self._startAnim:setVisible(false)
-
-    self._btnLagan = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_lagan"), "ccui.Button");
-    self._btnLagan:addClickEventListener(function()
-        self:startNextRound()
-    end)  
-    self._btnLagan:setVisible(true)
-
-    if self.marqueeText == nil then
-        --todo
-        self.marqueeText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "marquee_text"), "ccui.Text");
-    end
-    self.marqueeText:setString("")
-    self.marqueePanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "marquee_layout"), "ccui.Layout");
-    self.marqueePanel:setOpacity(0);
+    -- self._winLayout:addTouchEventListener(winLayoutClick)  
 
 
-    self:setBet(self._currentBetMultiple)
-    self._winBetNode = tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "win_bet_node"), "cc.Node");
-    local winLight = tolua.cast(CustomHelper.seekNodeByName(self._winBetNode, "win_light"), "cc.Sprite");
-    local animation =cc.Animation:create()                                                                           
-    for i=1,2 do  
-        local frameName = string.format("game_res/jiujiu_lhj_caideng_%d.png",i)                                                     
-        local spriteFrame = cc.SpriteFrame:create(frameName,cc.rect(0,0,251,125))         
-        animation:addSpriteFrame(spriteFrame)                                                           
-    end  
-    animation:setDelayPerUnit(0.1)
-    winLight:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+    -- self._startAnim = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "slots_race_pop_middle_gold_01"),"ccs.Armature")
+    -- self._startAnim:setVisible(false)
+
+    -- self._btnLagan = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_lagan"), "ccui.Button");
+    -- self._btnLagan:addClickEventListener(function()
+    --     self:startNextRound()
+    -- end)  
+    -- self._btnLagan:setVisible(true)
+
+    -- if self.marqueeText == nil then
+    --     --todo
+    --     self.marqueeText = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "marquee_text"), "ccui.Text");
+    -- end
+    -- self.marqueeText:setString("")
+    -- self.marqueePanel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "marquee_layout"), "ccui.Layout");
+    -- self.marqueePanel:setOpacity(0);
+
+
+    -- self._winBetNode = tolua.cast(CustomHelper.seekNodeByName(self._winLayout, "win_bet_node"), "cc.Node");
+    -- local winLight = tolua.cast(CustomHelper.seekNodeByName(self._winBetNode, "win_light"), "cc.Sprite");
+    -- local animation =cc.Animation:create()                                                                           
+    -- for i=1,2 do  
+    --     local frameName = string.format("game_res/jiujiu_lhj_caideng_%d.png",i)                                                     
+    --     local spriteFrame = cc.SpriteFrame:create(frameName,cc.rect(0,0,251,125))         
+    --     animation:addSpriteFrame(spriteFrame)                                                           
+    -- end  
+    -- animation:setDelayPerUnit(0.1)
+    -- winLight:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
 
 
 end
 
+--选择奖池数量
+function  DflhjGameScene:onBtnClickJiangChi(index)
+    GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+    for i,btn in ipairs(self.jackpot or {}) do
+        if i == index then
+            btn:setEnabled(false)
+        else
+            btn:setEnabled(true)
+        end
+    end
+end
+
 --初始化进入游戏时界面中显示的水果
-function DflhjGameScene:initFruits(  )
+function DflhjGameScene:initItems(  )
     math.randomseed(os.time())
     self:randomItems(0,0)
 end
 
 function DflhjGameScene:sendMsgStart()
-    local lineTab = {}
-    for i=1,self._currentLine do
-        table.insert(lineTab,i)
-    end
-    self.DflhjGameManager:sendStartGame(self._currentBetMultiple,lineTab)
+    -- local lineTab = {}
+    -- for i=1,self._currentLine do
+    --     table.insert(lineTab,i)
+    -- end
+    -- self.DflhjGameManager:sendStartGame(self._currentBetMultiple,lineTab)
 end
-
-function DflhjGameScene:setLineNum(lineNum)
-
-    self._currentLine = lineNum > MAX_LINE and 1 or lineNum
-
-    for i=1,9 do
-        assert(self.numAndLine[i])
-        self.numAndLine[i].leftNumLight:setVisible(i<=self._currentLine)
-        self.numAndLine[i].rightNumLight:setVisible(i<=self._currentLine)
-        self.numAndLine[i].line:setVisible(i<=self._currentLine)
-        self.numAndLine[i].leftNumBark:setVisible(i>self._currentLine)
-        self.numAndLine[i].rightNumBark:setVisible(i>self._currentLine)
-    end
-    local lineNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt"), "ccui.TextAtlas"); --线数
-    local lineNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnXs, "line_num_txt_2"), "ccui.TextAtlas"); --线数
-    --显示下注倍数
-   
-    lineNumTxt2:setVisible(false)
-    lineNumTxt:setVisible(true)
-    lineNumTxt:setString(tostring(self._currentLine))
-    lineNumTxt2:setString(tostring(self._currentLine))
-    self:showBetNum();
-
-end
-
-function DflhjGameScene:setBet(multiple)
-    self._currentBetMultiple = multiple > MAX_BET_MULTIPLE and 1 or multiple
-    local betNumTxt = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt"), "ccui.TextAtlas"); --线数
-    local betNumTxt2 = tolua.cast(CustomHelper.seekNodeByName(self.btnBet, "bet_num_txt_2"), "ccui.TextAtlas"); --线数
-    --显示下注倍数
-   
-    betNumTxt2:setVisible(false)
-    betNumTxt:setVisible(true)
-    local dizhu = CustomHelper.moneyShowStyleNone(self._currentBetMultiple * self.DflhjGameManager:getDataManager():getDizhuNum()) 
-    betNumTxt:setString(tostring(dizhu))
-    betNumTxt2:setString(tostring(dizhu))
-
-    local scale = 70 / betNumTxt:getContentSize().width 
-    dump(betNumTxt:getContentSize())
-    if scale > 1 then scale = 1 end
-    betNumTxt:setScale(scale)
-    betNumTxt2:setScale(scale)
-    self:showBetNum();
-end
-
 
 ----退出房间
 function DflhjGameScene:exitGame(openSecondLayer)
@@ -605,23 +467,15 @@ function DflhjGameScene:startNextRound( )
         end
 
     end
-    if not verificationGold() then return end
+    -- if not verificationGold() then return end
     self._gameStatus = DflhjGameScene.GAME_STATUS.ACCLERA_STATUS
     self:btnVisibleControl()
 
-    --隐藏line 
-    local function hideLine()
-        for i=1,9 do
-            self.numAndLine[i].line:setVisible(false)
-        end
-    end
-    hideLine()
     self._isStopLoop = false
     self:sendMsgStart()
     self:startLoopAnim()
   
     local start = self.DflhjGameManager:getDataManager():getMoneyInfo().money
-    self.DflhjGameManager:getDataManager():deductedBet(self._currentLine*self._currentBetMultiple *self.DflhjGameManager:getDataManager():getDizhuNum())
     local endNum = self.DflhjGameManager:getDataManager():getMoneyInfo().money
     self:moneyAnimFactory(self.moneyTxt,start ,endNum,6)
 
@@ -649,7 +503,7 @@ function DflhjGameScene:startLoopAnim(  )
             return 
         end
         local action = {}
-        action[1] = cc.MoveBy:create(DflhjGameScene.LOOP_TIME,cc.p(0,-312))
+        action[1] = cc.MoveBy:create(DflhjGameScene.LOOP_TIME,cc.p(0,-PAGE_HEIGHT))
         action[2] = cc.CallFunc:create(function (  )
             if self._isStopLoop  and self.DflhjGameManager:getDataManager():getGameItemResults() then
                 self:stopLoop()
@@ -658,8 +512,8 @@ function DflhjGameScene:startLoopAnim(  )
             if item:getPositionY() < 0 then
                 --当停止滚动时item继续原先的动画 滚动到不可见区域被移除
                
-                item:setPositionY(item:getPositionY() + 624)
-                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,8)])
+                item:setPositionY(item:getPositionY() + PAGE_HEIGHT * 2)
+                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,17)])
                 
             end
             --滚动停止时 完成action后不在继续
@@ -669,8 +523,8 @@ function DflhjGameScene:startLoopAnim(  )
         item:runAction(cc.Sequence:create(action))
     end
   
-    --正常滚屏的速度为v = 312/ LOOP_TIME(0.2)
-    --加速时间t内从0 加速到v 位移d = 312*3  加速度为v0
+    --正常滚屏的速度为v = PAGE_HEIGHT/ LOOP_TIME(0.2)
+    --加速时间t内从0 加速到v 位移d = PAGE_HEIGHT*3  加速度为v0
     -- d = 1/2 *v0 * t*t    v0*t = v 经过计算加速时间1.2s 加速度1300
 
 
@@ -688,7 +542,7 @@ function DflhjGameScene:startLoopAnim(  )
     local dis = getAccelerationMoveDistance(1300,1.2,0.3)
     local function accelerate(item,index ) --加速
         local action = {}
-        action[1] = cc.EaseIn:create(cc.MoveBy:create(1.5,cc.p(0,-312*3)),EASE_PAR + index*2)
+        action[1] = cc.EaseIn:create(cc.MoveBy:create(1.5,cc.p(0,-PAGE_HEIGHT*3)),EASE_PAR + index*2)
         --
         -- action[1] = cc.EaseIn:create(cc.MoveBy:create(1,cc.p(0,-dis[1])),EASE_PAR + index*2)
         -- for i=2,4 do
@@ -697,14 +551,14 @@ function DflhjGameScene:startLoopAnim(  )
              
         action[2] = cc.CallFunc:create(function (  )
             --加速结束的时候 3屏items 去掉最下面的一屏
-            if item:getPositionY() < 0 and item:getPositionY() > -312 then
+            if item:getPositionY() < 0 and item:getPositionY() > -PAGE_HEIGHT then
                 --当停止滚动时item继续原先的动画 滚动到不可见区域被移除
-                item:setPositionY(item:getPositionY() + 624)
-                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,8)])
+                item:setPositionY(item:getPositionY() + PAGE_HEIGHT*2)
+                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,17)])
                 loop(item)
             elseif item:getPositionY() > 0 then
                 loop(item)
-            elseif item:getPositionY() < -312 then
+            elseif item:getPositionY() < -PAGE_HEIGHT then
                 item:removeSelf()
             end
         end)
@@ -714,7 +568,7 @@ function DflhjGameScene:startLoopAnim(  )
     self:randomItems(1,1) 
     self:randomItems(2,1) --在不可见区域加上4页实现加速滚动
     self:randomItems(3,1)
-    for i,widget in ipairs(self.fruitTab) do
+    for i,widget in ipairs(self.itemsTab) do
         local listNode = widget
         for _,item in ipairs(listNode:getChildren()) do
            accelerate(item,i);
@@ -750,28 +604,28 @@ function DflhjGameScene:stopLoop( time)
     if time == nil then time = 1 end
     
     self._tableResult = {}
-    for index,widget in ipairs(self.fruitTab) do
+    for index,widget in ipairs(self.itemsTab) do
         self._tableResult[index] = {}
         local listNode = widget
         --remove 不在正中正在显示的item 
         local highItemY = 0
         for _,item in ipairs(listNode:getChildren()) do
             local posY =  item:getPositionY()
-            if posY < 0 and posY > 312 then
+            if posY < 0 and posY > PAGE_HEIGHT then
                item:removeSelf()
             else
                 highItemY =  posY > highItemY and posY or highItemY
             end
         end
         --在本列最顶端加入5行随机item
-        local posX = 50
-        highItemY = highItemY + 104
+        local posX = ITEM_POSX
+        highItemY = highItemY + ITEM_HEIHT
         local row = 5 
         if time < 1 then row = 2 end
 
 
         for i=1,row do
-            local fruitId = math.random(1,8)
+            local fruitId = math.random(1,17)
             local img = nil
             if i <=3 then
                 img = cc.Sprite:create(DflhjGameScene.IMG_MOHU2[fruitId])
@@ -779,7 +633,7 @@ function DflhjGameScene:stopLoop( time)
                 img = cc.Sprite:create(DflhjGameScene.IMG_MOHU1[fruitId])
             end 
             img:setPosition(cc.p(posX,highItemY))
-            highItemY = highItemY + 104
+            highItemY = highItemY + ITEM_HEIHT
             listNode:add(img)
         end
 
@@ -795,11 +649,11 @@ function DflhjGameScene:stopLoop( time)
             self._tableResult[index][i] = img
         end
 
-        highItemY = highItemY - 104
+        highItemY = highItemY - ITEM_HEIHT
         for _,item in ipairs(listNode:getChildren()) do
             item:stopAllActions()
             local action = {}
-            action[1] = cc.EaseOut:create(cc.MoveBy:create(time,cc.p(0,312-highItemY - 52 )),EASE_PAR *4 - index/2)
+            action[1] = cc.EaseOut:create(cc.MoveBy:create(time,cc.p(0,PAGE_HEIGHT-highItemY - PAGE_HEIGHT / 2 )),EASE_PAR *4 - index/2)
             action[2] = cc.CallFunc:create(function (  )
                 if item:getPositionY() < 0 then
                     item:removeSelf()
@@ -1046,12 +900,13 @@ end
 
 
 function DflhjGameScene:randomItems(page,degree)
-    for i,v in ipairs(self.fruitTab) do
+    for i,v in ipairs(self.itemsTab) do
         local listNode = v
-        local posX = 50
-        local startY = 52 + 312*page
+        local posX = ITEM_POSX
+        local startY = 72 + PAGE_HEIGHT*page
         for i=1,3 do
-            local fruitId = math.random(1,8)
+            local fruitId = math.random(1,17)
+            if fruitId == 2 then fruitId = 1 end
             local img = nil
             if degree and degree == 1 then
                 img =cc.Sprite:create(DflhjGameScene.IMG_MOHU1[fruitId])
@@ -1059,7 +914,7 @@ function DflhjGameScene:randomItems(page,degree)
                 img =cc.Sprite:create(DflhjGameScene.IMG[fruitId])
             end
             img:setPosition(cc.p(posX,startY))
-            startY = startY + 104
+            startY = startY + ITEM_HEIHT
             listNode:add(img)
         end
     end
@@ -1070,17 +925,17 @@ end
 function DflhjGameScene:btnVisibleControl( )
     -- self._btnLagan:setTouchEnabled(self._gameStatus == DflhjGameScene.GAME_STATUS.READAY_STATUS)
     if self._isAuto then
-        self.btnCancalAuto:setVisible(true)
+        self.btnAuto:setVisible(true)
         self.btnStart:setVisible(false)
         self.btnStop:setVisible(false)
-        self.btnShoufen:setVisible(false) 
+        -- self.btnShoufen:setVisible(false) 
         
     else
-        self.btnCancalAuto:setVisible(false)
+        self.btnAuto:setVisible(false)
         self.btnStart:setVisible(self._gameStatus == DflhjGameScene.GAME_STATUS.READAY_STATUS)
         self.btnStop:setVisible(self._gameStatus == DflhjGameScene.GAME_STATUS.FLASH_STATUS or self._gameStatus == DflhjGameScene.GAME_STATUS.ACCLERA_STATUS or self._gameStatus == DflhjGameScene.GAME_STATUS.LOOP_STATUS or self._gameStatus == DflhjGameScene.GAME_STATUS.STOP_STATUS)
-        self.btnShoufen:setVisible(self._gameStatus == DflhjGameScene.GAME_STATUS.SHOW_RESULT or self._gameStatus == DflhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS)  
-        self._btnLagan:setTouchEnabled(self._gameStatus == DflhjGameScene.GAME_STATUS.READAY_STATUS)
+        -- self.btnShoufen:setVisible(self._gameStatus == DflhjGameScene.GAME_STATUS.SHOW_RESULT or self._gameStatus == DflhjGameScene.GAME_STATUS.SHOUFEN_ANIM_STATUS)  
+        -- self._btnLagan:setTouchEnabled(self._gameStatus == DflhjGameScene.GAME_STATUS.READAY_STATUS)
     end
 end
 
@@ -1128,11 +983,6 @@ function DflhjGameScene:moneyAnim()
     self:moneyAnimFactory(self.moneyTxt,startMoney ,endMoney,6)
 end
 
-
-----更新自己的money 动画
-function DflhjGameScene:updateMyInfo()
-    self:showMyInfo()
-end
 
 ----自己的信息
 function DflhjGameScene:showMyInfo()

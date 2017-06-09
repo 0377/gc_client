@@ -36,9 +36,9 @@ function TmjOperationChi:initView(operationData)
 			end)
 			for index2,val in pairs(data) do
 				local fnode = CustomHelper.seekNodeByName(img,string.format("FileNode_%d",index2))
-				local card = TmjCard:create({val = val })
+				local card = TmjCard:create({val = val,scale = fnode:getScale()/0.6 })
 				card:addTo(fnode:getParent())
-				card:setScale(fnode:getScale())
+				--card:setScale(fnode:getScale())
 				card:changeState(TmjConfig.CardState.State_Discard)
 				
 				local cardPos = cc.p(fnode:getPositionX(),fnode:getPositionY())

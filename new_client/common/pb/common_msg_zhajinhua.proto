@@ -169,3 +169,97 @@ message SC_ZhaJinHuaClientReadyTime
 	optional int32 time = 1;                    //剩余准备时间
 }
 
+//设置私房信息
+message CS_ZhaJinHuaPrivateCFG_Set
+{
+	enum MsgID { ID = 16021; }
+	optional int32 first_see = 1 [default = -1];                //第一轮是否可看牌 1 0
+	optional int32 first_compare = 2 [default = -1];            //第一轮是否可比牌  1 0
+	optional int32 no_money_compare = 3 [default = -1];         //金币不足是否可比牌  1 0
+	optional int32 more_round = 4 [default = -1];               //是否比常规下注轮数更多  1 0
+}
+
+message CS_ZhaJinHuaPrivateCFG_Get
+{
+	enum MsgID { ID = 16022; }
+}
+message SC_ZhaJinHuaPrivateCFG
+{
+	enum MsgID { ID = 16023; }
+	optional int32 first_see = 1 [default = -1];                //第一轮是否可看牌 1 0
+	optional int32 first_compare = 2 [default = -1];            //第一轮是否可比牌  1 0
+	optional int32 no_money_compare = 3 [default = -1];         //金币不足是否可比牌  1 0
+	optional int32 more_round = 4 [default = -1];               //是否比常规下注轮数更多  1 0
+}
+
+//游戏历史数据
+message CS_ZhaJinHuaGameData 
+{
+	enum MsgID { ID = 16024; }
+}
+
+message ZhaJinHuaGameInfo {
+	optional int32 status = 1;					 // 状态 -1 观战  0 空闲 6弃牌 7淘汰 9赢家
+	optional int32 header_icon = 2[default = 0]; // 头像
+	repeated int32 cards = 3;					 // 扑克列表
+	optional int32 money = 4;					 // 输赢金额	
+	optional int32 chair_id = 5;		 
+}
+message SC_ZhaJinHuaGameData 
+{
+	enum MsgID { ID = 16025; }
+	repeated ZhaJinHuaGameInfo  pb_info = 1;	
+	optional string  str_time = 2;
+}
+//金花私房桌子设置
+message SC_ZhaJinHuaTabCFG
+{
+	enum MsgID { ID = 16026; }
+	optional int32 score_type = 1;				//筹码类型
+	optional int32 chair_num = 2;				//椅子数
+	optional int32 lost_score = 3;              //最低注
+	optional bool  vote_result = 4;				//true 是 false 否
+}
+//金花T人
+message CS_ZhaJinHuaTabTiren
+{
+	enum MsgID { ID = 16027; }
+	optional int32 chair_id = 1;				
+}
+//广播被T
+message SC_ZhaJinHuaTabTiren
+{
+	enum MsgID { ID = 16028; }
+	optional int32 chair_id = 1;				
+}
+//发起投票
+message CS_ZhaJinHuaTabVote
+{
+	enum MsgID { ID = 16029; }	
+	optional bool bret = 1;						//true 是  false 否	
+}
+//投票信息
+message SC_ZhaJinHuaTabVote
+{
+	enum MsgID { ID = 16030; }
+	optional int32 chair_id = 1;
+	optional bool bret = 2;						//true 是  false 否	
+}
+
+message SC_ZhaJinHuaTabVoteResult
+{
+	enum MsgID { ID = 16031; }
+	optional bool bret = 1;						//true 是  false 否	
+}
+//私房解散统计
+message ZhaJinHuaStatistics {
+	optional int32 chair_id = 1;				 // 状态 -1 观战  0 空闲 6弃牌 7淘汰 9赢家
+	optional string nickname = 2; 				 // 昵称
+	optional int32 money = 3;					 // 输赢金额
+}
+
+message SC_ZhaJinHuaStatistics
+{
+	enum MsgID { ID = 16032; }
+	repeated ZhaJinHuaStatistics  pb_info = 1;	
+}

@@ -646,8 +646,7 @@ function QznnGameScene:initMenu()
 				self:exitGame()
 			else
 				local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
-				if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN or
-										tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_CARD	)then
+				if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN )then
 					self:exitGame()
 				else
 					MyToastLayer.new(self, "请在本局游戏结束时再退出游戏")

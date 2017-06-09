@@ -342,19 +342,21 @@ function FishGameXMLConfigManager:loadPath(file)
             position = {}
         }
 
-        if data.type == NPT_LINE then
-            data.count = 2
-        elseif data.type == NPT_BEZIER then
-            data.count = 3
-        end
-
-
         for __,vv in ipairs(v.Position) do
             local dd = {}
             dd[1] = tonumber(vv.x)
             dd[2] = tonumber(vv.y)
 
+
             table.insert(data.position,dd)
+        end
+
+        if data.type == NPT_LINE then
+            data.count = 2
+        elseif data.type == NPT_BEZIER then
+            if data.position[4][1] == 0 and data.position[4][2] == 0 then
+                data.count = 3
+            end
         end
 
         table.insert(config,data)
@@ -363,23 +365,17 @@ function FishGameXMLConfigManager:loadPath(file)
     local realData = {}
     local id = 0
     for _,v in ipairs(config) do
-        for x=0,1 do
-            for y=0,1 do
-                for xy=0,1 do
-                    for _not=0,1 do
-
-
-
---                        realData[id] = ConvertPathPoint(v,x == 1,y == 1,xy == 1,_not == 1)
-                        realData[id] = createPathData({ConvertPathPoint(v,x == 1,y == 1,xy == 1,_not == 1)})
+        for x = 0, 1 do
+            for y = 0, 1 do
+                for xy = 0, 1 do
+                    for _not = 0, 1 do
+                        realData[id] = createPathData({ ConvertPathPoint(v, x == 0, y == 0, xy == 0, _not == 0) })
                         id = id + 1
                     end
                 end
             end
-
         end
     end
-
 
     io.writefile("jaye_test.text", sz_T2S(realData), "w+")
 end
@@ -395,14 +391,14 @@ function createPathData(path)
             or v.type == PMT_STAY
         then
             for _,vv in ipairs(v.position) do
-                vv[1] = math.round(vv[1] * display.width)
-                vv[2] = math.round(vv[2] * display.height)
+                vv[1] = vv[1] * display.width
+                vv[2] = vv[2] * display.height
             end
         else
             for k,vv in ipairs(v.position) do
                 if k == 1 then
-                    vv[1] = math.round(vv[1] * display.width)
-                    vv[2] = math.round(vv[2] * display.height)
+                    vv[1] = vv[1] * display.width
+                    vv[2] = vv[2] * display.height
                 end
             end
         end
@@ -550,7 +546,7 @@ function ConvertPathPoint(data,xMirror,yMirror,xyMirror,Not)
         end
     end
 
-    if yMirror then
+    if xyMirror then
         if v.type == NPT_CIRCLE then
             local t = v.position[1][1]
             v.position[1][1] = 1.0 - v.position[1][2]
@@ -565,13 +561,13 @@ function ConvertPathPoint(data,xMirror,yMirror,xyMirror,Not)
         end
     end
 
-    if yMirror then
+    if Not then
         if v.type == NPT_CIRCLE then
 
             v.position[3][1] = v.position[3][1] + v.position[3][2]
             v.position[3][2] = -v.position[3][2]
         else
-            for i=1, v.count do
+            for i=1, v.count / 2 do
                 local t = v.position[i][1]
                 v.position[i][1] = v.position[v.count - i + 1][1]
                 v.position[v.count - i + 1][1] = t

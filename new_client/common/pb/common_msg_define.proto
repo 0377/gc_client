@@ -387,8 +387,8 @@ message SC_BankTransfer {
 message SC_NotifyMoney {
 	enum MsgID { ID = 2019; }
 	optional int32 opt_type = 1;					// LOG_MONEY_OPT_TYPE
-	optional int32 money = 2;						// 当前的钱
-	optional int32 change_money = 3;				// 改变的钱
+	optional int64 money = 2;						// 当前的钱
+	optional int64 change_money = 3;				// 改变的钱
 }
 
 // 通过guid转账
@@ -772,7 +772,7 @@ message CS_Exit {
 // 应答当前游戏结束数据
 message SC_Gamefinish {
 	enum MsgID { ID = 11054; }
-	optional int32 money = 1;
+	optional int64 money = 1;
 }
 
 message SC_PlayerReconnection {

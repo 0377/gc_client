@@ -949,6 +949,12 @@ function DzpkGameScene:popJiazhuOperate()
 	--范围
 	local jiazhuMinBet = maxBet-myBet+damang
 	local max = tableinfo.pot
+	--local max = tableinfo.max_bet
+	--[[
+	if max <= jiazhuMinBet then
+		max = jiazhuMinBet
+	end
+	--]]
 	local myinfo = self.dzpkGameManager:getDataManager():getUserInfoByChair(tableinfo.own_chair)
 	if max > myinfo.money then
 		max = myinfo.money
@@ -964,6 +970,7 @@ function DzpkGameScene:popJiazhuOperate()
 	local jiazhuMaxBet = max
 	if jiazhuMaxBet <= jiazhuMinBet then
 		jiazhuMaxBet = jiazhuMinBet
+		--jiazhuMinBet = jiazhuMaxBet
 	end
 	
 	 
@@ -994,6 +1001,7 @@ function DzpkGameScene:popJiazhuOperate()
 	--加注具体数值
 	self.jiazhuNode.addnum = jiazhuMinBet
 	panel:getChildByName("Button_jia"):getChildByName("Text_1"):setString( CustomHelper.moneyShowStyleNone(jiazhuMinBet))
+	CustomHelper.transeWordToStaticScaleLen(panel:getChildByName("Button_jia"):getChildByName("Text_1"),248)
 	panel:getChildByName("Slider_1"):setPercent(0)
 	
 
@@ -1006,7 +1014,7 @@ function DzpkGameScene:popJiazhuOperate()
 				local bet = math.ceil((jiazhuMaxBet-jiazhuMinBet)/100*curPercent+jiazhuMinBet)
 				
 				panel:getChildByName("Button_jia"):getChildByName("Text_1"):setString(CustomHelper.moneyShowStyleNone( bet ))
-				
+				CustomHelper.transeWordToStaticScaleLen(panel:getChildByName("Button_jia"):getChildByName("Text_1"),248)
 				
 				self.jiazhuNode.addnum = bet
 				

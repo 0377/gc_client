@@ -5,6 +5,7 @@ GFlowerConfig.GAME_ID = 1000  -- 游戏ID
 GFlowerConfig.CHAIR_COUNT   = 5     -- 椅子数
 GFlowerConfig.CARD_COUNT    = 3     -- 玩家手牌数
 GFlowerConfig.MAX_ROUND     = 20    -- 最大轮数
+GFlowerConfig.PR_MAX_ROUND  = 100   -- 私人房间最大轮数
 GFlowerConfig.COIN_NUM      = 5     -- 筹码数
 GFlowerConfig.CHAIR_SELF    = 1     -- 自己
 GFlowerConfig.MAX_JETTON    = 300
@@ -30,6 +31,17 @@ GFlowerConfig.ADD_BTN_TIMES_LIST = {
     {1, 2, 5, 8, 10},
 }
 
+-- 私人房间配置
+GFlowerConfig.PRIVATE_ROOM = {
+	{ score = {10, 20, 50, 80, 100}, 			money_limit = 10}, 
+	{ score = {100, 200, 500, 800, 1000}, 		money_limit = 100}, 
+	{ score = {500, 1000, 2500, 4000, 5000}, 	money_limit = 500}, 
+	{ score = {1000, 2000, 5000, 8000, 10000}, 	money_limit = 1000}
+} 
+
+-- 私人房间房主位置号
+GFlowerConfig.PR_MASTER  = 1
+
 GFlowerConfig.ROOM_STATE ={
     FREE        = 1,
     READY       = 2,
@@ -45,6 +57,7 @@ GFlowerConfig.CARD_INIT_SCALE = 0.5
 GFlowerConfig.CARD_STAY_SCALE_OTHER = 0.6
 GFlowerConfig.CARD_STAY_SCALE_ME = 0.8
 GFlowerConfig.CARD_COMPARE_SCALE = 1.0
+
 
 -- 动画标志
 GFlowerConfig.FANPAI_TAG    = 105

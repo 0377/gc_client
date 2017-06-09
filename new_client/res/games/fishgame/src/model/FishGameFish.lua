@@ -11,16 +11,18 @@ local FishGameFish = class("FishGameFish",function()
     return game.fishgame2d.Fish:create()
 end)
 
-function FishGameFish:ctor(data)
-    self:setCascadeColorEnabled(true)
+function FishGameFish:ctor(data,parent)
     self:registerStatusChangedHandler(handler(self,self.onStateUpdated))
     self:setId(data.fish_id)
     self:setTypeId(data.type_id)
     self:setRefershId(data.refersh_id or 0)
-    self:SetFishType(data.fis_type)
+    self:setFishType(data.fis_type)
+
+    self._parent = parent
 
     local fishConfig = Fishes[data.type_id]
-    self:SetLockLevel(fishConfig.lockLvl)
+    self:setLockLevel(fishConfig.lockLvl)
+    self:setVisualId(fishConfig.visualId)
 
     -- 路径
     local moveCompent
@@ -56,20 +58,20 @@ function FishGameFish:ctor(data)
 
     else
         moveCompent = game.fishgame2d.MoveByDirection:create()
-        moveCompent:SetDirection(data.dir);
-        moveCompent:SetPosition(data.offest_x,data.offest_y);
-        moveCompent:SetRebound(data.path_id == -1);
+        moveCompent:setDirection(data.dir);
+        moveCompent:setPosition(data.offest_x,data.offest_y);
+        moveCompent:setRebound(data.path_id == -1);
 
     end
     moveCompent:setSpeed(data.fish_speed)
-    moveCompent:SetDelay(data.delay or 0)
+    moveCompent:setDelay(data.delay or 0)
 
     self:setMoveCompent(moveCompent)
 
 
     -- TODO 添加默认的BUFF效果
     for _, v in ipairs(fishConfig.buff) do
-        self:AddBuff(v.typeId, v.param, v.life)
+        self:addBuff(v.typeId, v.param, v.life)
     end
 
     -- TODO 添加效果
@@ -77,7 +79,7 @@ function FishGameFish:ctor(data)
     for _, v in ipairs(fishConfig.effect) do
         local pef = game.fishgame2d.EffectFactory:CreateEffect(v.typeId)
         if pef then
-            local paramSize = pef:GetParamSize()
+            local paramSize = pef:getParamSize()
             for i = 0, paramSize - 1 do
                 local nValue = 0
                 if i < #v.data then
@@ -85,24 +87,24 @@ function FishGameFish:ctor(data)
                 end
 
                 if (ft == SpecialFishType.ESFT_SANYUAN and i == 1) then
-                    pef:SetParam(i, nValue * 3);
+                    pef:setParam(i, nValue * 3);
                 elseif (ft == SpecialFishType.ESFT_SIXI and i == 1) then
-                    pef:SetParam(i, nValue * 4);
+                    pef:setParam(i, nValue * 4);
                 else
-                    pef:SetParam(i, nValue);
+                    pef:setParam(i, nValue);
                 end
             end
-            self:AddEffect(pef);
+            self:addEffect(pef);
         end
     end
 --    -- 特殊鱼 --
 --    if (ft == SpecialFishType.ESFT_KINGANDQUAN) then
 --        local pef = game.fishgame2d.EffectFactory:CreateEffect(EffectType.ETP_PRODUCE)
 --        if (pef) then
---            pef:SetParam(0, self:getTypeID());
---            pef:SetParam(1, 3);
---            pef:SetParam(2, 30);
---            pef:SetParam(3, 1);
+--            pef:setParam(0, self:getTypeID());
+--            pef:setParam(1, 3);
+--            pef:setParam(2, 30);
+--            pef:setParam(3, 1);
 --            self:AddEffect(pef);
 --        end
 --    end
@@ -113,20 +115,20 @@ function FishGameFish:ctor(data)
 --
 --        local pef = game.fishgame2d.EffectFactory:CreateEffect(EffectType.ETP_KILL)
 --        if pef then
---            pef:SetParam(0, 2)
---            pef:SetParam(1, self:getTypeId());
+--            pef:setParam(0, 2)
+--            pef:setParam(1, self:getTypeId());
 --
 --            local ist = CGameConfig.GetInstance().KingFishMap[self:getTypeId()]
 --            if ist then
---                pef:SetParam(2, ist.nMaxScore)
+--                pef:setParam(2, ist.nMaxScore)
 --            end
 --            self:AddEffect(pef);
 --        end
 --
 --        local pef = game.fishgame2d.EffectFactory:CreateEffect(EffectType.ETP_ADDMONEY)
 --        if pef then
---            pef:SetParam(0, 1);
---            pef:SetParam(1, 10);
+--            pef:setParam(0, 1);
+--            pef:setParam(1, 10);
 --            self:AddEffect(pef)
 --        end
 --    end
@@ -142,27 +144,31 @@ function FishGameFish:ctor(data)
     end
 
     local serverTime = GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getServerTime()
-    self:OnUpdate((serverTime - data.server_tick) / 1000,true)
+    self:onUpdate((serverTime - data.create_tick) / 1000,true)
     self:setState(EOS_LIVE)
 end
 
 function FishGameFish:onHit()
-    self:setColor(cc.c3b(0xFF, 0x11, 0))
-    self:runAction(transition.sequence({
+    local node = self:getVisualContent()
+    if not node then return end
+
+    node:setColor(cc.c3b(0xFF, 0x11, 0))
+    node:runAction(transition.sequence({
         cc.DelayTime:create(0.1),
         cc.CallFunc:create(function(sender)
             sender:setColor(display.COLOR_WHITE)
         end)
     }))
+
 end
 
 function FishGameFish:onStateUpdated(state)
     self:removeAllChildren()
 
     if state == EOS_LIVE then
-        local fishConfig = Fishes[self:getTypeId()]
+        local visualId = self:getVisualId()
 
-        local visualConfig = Visual[fishConfig.visualId]
+        local visualConfig = Visual[visualId]
 
         local nodeContent = display.newNode()
         nodeContent:setCascadeColorEnabled(true)
@@ -190,18 +196,18 @@ function FishGameFish:onStateUpdated(state)
             end
         end
 
-        self:addChild(nodeContent)
-        self:addChild(nodeShadow,-1)
-        nodeContent:move(-500,-500)
-        nodeShadow:move(-500,-500)
-        self:setContentNode(nodeContent,nodeShadow)
+        self._parent:addChild(nodeContent,visualId * 2 + 1)
+        self._parent:addChild(nodeShadow,visualId * 2)
+
+        self:setVisualContent(nodeContent)
+        self:setVisualShadow(nodeShadow)
 
         self.nodeContent = nodeContent
     elseif state == EOS_DEAD then
 
-        local fishConfig = Fishes[self:getTypeId()]
+        local visualId = self:getVisualId()
 
-        local visualConfig = Visual[fishConfig.visualId]
+        local visualConfig = Visual[visualId]
 
         local nodeContent = display.newNode()
         local nodeShadow = display.newNode()
@@ -228,30 +234,30 @@ function FishGameFish:onStateUpdated(state)
                 elseif type == ccs.MovementEventType.complete
                     or type == ccs.MovementEventType.loopComplete
                 then
-                    count = count + 1
-                    if count >= #visualConfig.die then
-                        self:setVisible(false)
-                        self:setState(EOS_DESTORY)
-                    end
+                    sender:setVisible(false)
+
+--                    count = count + 1
+--                    if count >= #visualConfig.die then
+--                    end
                 end
             end)
         end
 
 
-        self:addChild(nodeContent)
-        self:addChild(nodeShadow)
-        nodeContent:move(-500,-500)
-        nodeShadow:move(-500,-500)
-        self:setContentNode(nodeContent,nodeShadow)
+        self._parent:addChild(nodeContent,visualId * 2 + 1)
+        self._parent:addChild(nodeShadow,visualId * 2)
+
+        self:setVisualContent(nodeContent)
+        self:setVisualShadow(nodeShadow)
 
         -- 播放死亡音乐
         FishGameManager:getInstance():getSoundManager():playFishSound(self:getTypeId())
     elseif state == EOS_DESTORED then
-        self:removeSelf()
+
     end
 
     -- 显示测试信息
---     self:showDebugInfo(state)
+    -- self:showDebugInfo(state)
 end
 
 function FishGameFish:showDebugInfo(state)
@@ -269,11 +275,12 @@ function FishGameFish:showDebugInfo(state)
             drawNode:drawDot(cc.p(v.nOffestX, v.nOffestY), v.fRadio, cc.c4f(1, 1, 1, 0.5));
         end
     end
+    local visualId = self:getVisualId()
 
     drawNode:addTo(node)
-    node:addTo(self,-1)
+    self._parent:addChild(node,visualId * 2)
 
-    self:setDebugNode(node)
+    self:setVisualDebug(node)
 end
 
 --function FishGameFish:setState(state)
@@ -282,6 +289,12 @@ end
 --
 --    game.fishgame2d.MyObject.setState(self,state)
 --end
+
+function FishGameFish:addTo(parent)
+    self._parent = parent
+
+    return self
+end
 
 return FishGameFish
 

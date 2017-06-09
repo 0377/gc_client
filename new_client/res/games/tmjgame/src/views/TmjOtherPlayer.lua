@@ -18,9 +18,9 @@ function TmjOtherPlayer:ctor(pInfo)
 	--目前其他玩家只有对家
 	self.pType = TmjConfig.PlayerType.Type_Opposite
 	self.cardStartPos = cc.p(1000,630)
-	self.extraCardPos = cc.p(1000,630)
+	self.extraCardPos = cc.p(1020,630)
 	self.outCardPos = cc.p(1000,500)
-	self.getCardPos = cc.p(200,630) -- 摸到牌的位置 
+	self.getCardPos = cc.p(170,630) -- 摸到牌的位置 
 	self.headPos = cc.p(1150,630)
 	self.outCardMaxLength = 8
 	
@@ -84,6 +84,7 @@ function TmjOtherPlayer:setTingState(isTing)
 	if not self.isTingState and isTing then --之前没听，现在听了，UI变化
 		--显示听
 		sslog(self.logTag,"显示听牌的UI")
+		TmjConfig.playSound(TmjConfig.cardOperation.Ting,self:isMan())
 		if not TmjHelper.isLuaNodeValid(self.tingNode) then
 			self.tingNode = ccui.Button:create("game_res/desk/ting.png","game_res/desk/ting.png")
 			self.tingNode:addTo(self,100)
@@ -99,9 +100,10 @@ function TmjOtherPlayer:setTingState(isTing)
 end
 
 --执行牌操作
---@param cardInfo 牌信息 数组
+--@param cardInfos 牌信息 数组
 --@param oldCardCount 需要删除的牌的张数
-function TmjOtherPlayer:doOperationCard(cardInfos,oldCardCount)
+--@param createTag 恢复对局创建的 是的话，就不删除
+function TmjOtherPlayer:doOperationCard(cardInfos,oldCardCount,createTag)
 	local tempCardArr = {}
 	local val = {}
 	local newCardCount = cardInfos and table.nums(cardInfos) or 0
@@ -114,12 +116,17 @@ function TmjOtherPlayer:doOperationCard(cardInfos,oldCardCount)
 	end
 	
 	TmjHelper.sortCards(tempCardArr)
-	for i=1,oldCardCount do
-		local handCard = self:removeHandCard(TmjConfig.Card.R_0)
-		if handCard and TmjHelper.isLuaNodeValid(handCard.node) then
-			handCard.node:removeFromParent()
+	if createTag then
+		--创建的，就不能删除了
+	else
+		for i=1,oldCardCount do
+			local handCard = self:removeHandCard(TmjConfig.Card.R_0)
+			if handCard and TmjHelper.isLuaNodeValid(handCard.node) then
+				handCard.node:removeFromParent()
+			end
 		end
 	end
+
 	return tempCardArr,val
 end
 
@@ -167,6 +174,7 @@ function TmjOtherPlayer:playCard(cardIndex)
 	sslog(self.logTag,"播放打牌动画")
 	--self.cardStartPos
 	cardIndex.state = TmjConfig.CardState.State_Discard
+	TmjConfig.playSound(TmjConfig.cardOperation.Play,self:isMan(),cardIndex.val)
 	table.insert(self.outCards,self:createOneCard(cardIndex))
 	self:runOutCardAnim()
 	self:refreshCard()
@@ -196,14 +204,22 @@ function TmjOtherPlayer:getOneCard(cardInfo)
 					self.operationFun(self.pType,TmjConfig.cardOperation.GetOne)
 				end
 			else
+				--增加补花数量
+				self.huaCount = self.huaCount or 0
+				self.huaCount = self.huaCount + 1
+				self:setHeadInfo({ huaCount = self.huaCount })
+				TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
+				
 				if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
 					self.getCard.node:removeFromParent()
 					ssdump(cardInfo[index + 1],"花牌数据")
 					sslog(self.logTag,"播放摸到牌的补花动画")
 					
 				end
-				index = index + 1
-				loopPlayGetCard(index)
+				performWithDelay(self,function ()
+					index = index + 2
+					loopPlayGetCard(index)
+				end,0.5)
 			end
 
 		end)
@@ -246,15 +262,24 @@ function TmjOtherPlayer:chiCard(cardInfo)
 	end
 	
 	--self.extraCards
+	if cardInfo.outCard then
+		cardInfo.outCard.scale = 0.8
+	end
+	if cardInfo.handCards then
+		table.walk(cardInfo.handCards,function (card,k)
+			card.scale = 0.8
+		end)
+	end
 	local cardInfos = {}
 	table.insert(cardInfos,cardInfo.outCard)
-	table.merge(cardInfos,cardInfo.handCards)
-	local tempPengArr,val = self:doOperationCard(cardInfos,2)
+	table.insertto(cardInfos,cardInfo.handCards,table.nums(cardInfos)+1)
+	local tempPengArr,val = self:doOperationCard(cardInfos,2,cardInfo.createTag)
 	table.insert(self.extraCards,{arr = tempPengArr,type = TmjConfig.cardOperation.Chi,val = val })
+	TmjHelper.sortCards(tempPengArr)
 	--更新这些牌的位置
 	self:setExtraPosition(tempPengArr)
 	--吃了后把最右边的牌，放到摸牌位置
-	self:setLastHandCardToGet()
+	self:checkToSetLastHandCard()
 	TmjOtherPlayer.super.chiCard(self,cardInfo)
 end
 --碰
@@ -266,20 +291,31 @@ function TmjOtherPlayer:pengCard(cardInfo)
 	if not cardInfo.createTag then --非新建的才播放
 		TmjConfig.playAmature("ermj_px_eff","ani_01",nil,cc.p(display.center.x,self.cardStartPos.y),false)
 	end
-	
+	local tempCardInfo = nil
+	--这种情况是开局解析出来的 恢复对局
+	if cardInfo.handCards and next(cardInfo.handCards) then
+		tempCardInfo = cardInfo.handCards[1]
+		tempCardInfo.createTag = cardInfo.createTag
+	else
+		tempCardInfo = cardInfo
+	end
 	--self.extraCards
 	local cardInfos = {}
-	table.insert(cardInfos,cardInfo)
-	table.insert(cardInfos,cardInfo)
-	table.insert(cardInfos,cardInfo)
-	local tempPengArr,val = self:doOperationCard(cardInfos,2)
+	tempCardInfo.scale = 0.8
+	table.insert(cardInfos,tempCardInfo)
+	table.insert(cardInfos,tempCardInfo)
+	table.insert(cardInfos,tempCardInfo)
+	local tempPengArr,val = self:doOperationCard(cardInfos,2,tempCardInfo.createTag)
 	
 	table.insert(self.extraCards,{arr = tempPengArr,type = TmjConfig.cardOperation.Peng,val = val })
 	--更新这些牌的位置
 	self:setExtraPosition(tempPengArr)
+	local getCardInfo = self.getCard
+	local hands = self.handCards
 	--吃了后把最右边的牌，放到摸牌位置
-	self:setLastHandCardToGet()
-	TmjOtherPlayer.super.pengCard(self,cardInfo)
+	self:checkToSetLastHandCard()
+	
+	TmjOtherPlayer.super.pengCard(self,tempCardInfo)
 end
 --杠
 --@param cardInfo 外界的牌
@@ -293,11 +329,12 @@ function TmjOtherPlayer:gangCard(cardInfo)
 	
 	--self.extraCards
 	local cardInfos = {}
+	cardInfo.scale = 0.8
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
-	local tempPengArr,val = self:doOperationCard(cardInfos,3)
+	local tempPengArr,val = self:doOperationCard(cardInfos,3,cardInfo.createTag)
 	table.insert(self.extraCards,{arr = tempPengArr,type = TmjConfig.cardOperation.Gang,val = val })
 	--更新这些牌的位置
 	self:setExtraPosition(tempPengArr)
@@ -314,11 +351,12 @@ function TmjOtherPlayer:anGangCard(cardInfo)
 	
 	--self.extraCards
 	local cardInfos = {}
+	cardInfo.scale = 0.8
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
 	table.insert(cardInfos,cardInfo)
-	local tempPengArr,val = self:doOperationCard(cardInfos,4,4)
+	local tempPengArr,val = self:doOperationCard(cardInfos,4,cardInfo.createTag)
 	table.insert(self.extraCards,{arr = tempPengArr,type = TmjConfig.cardOperation.AnGang,val = val })
 	--更新这些牌的位置
 	self:setExtraPosition(tempPengArr)
@@ -344,6 +382,7 @@ function TmjOtherPlayer:buGangCard(cardInfo)
 		end
 		return tempBuGangArrData
 	end
+	cardInfo.scale = 0.8
 	local tempBuGangArrData = findBuGangCards(cardInfo)
 	--如果这里没找到，那就是数据异常了
 	if not tempBuGangArrData then
@@ -367,10 +406,12 @@ end
 function TmjOtherPlayer:tingCard(cardInfo)
 	--todo
 	sslog(self.logTag,"听牌")
+	TmjConfig.playSound(TmjConfig.cardOperation.Ting,self:isMan())
 end
 --胡
 --@param cardInfo 外界的牌
 function TmjOtherPlayer:huCard(cardInfo)
+	TmjOtherPlayer.super.huCard(self,cardInfo)
 	--todo
 	sslog(self.logTag,"胡牌")
 	--播放杠的动画
@@ -385,6 +426,7 @@ function TmjOtherPlayer:buHuaCard(cardInfo)
 		if index<= table.nums(cardInfos) then
 			self.huaCount = self.huaCount or 0
 			self.huaCount = self.huaCount + 1
+			TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
 			self:setHeadInfo({ huaCount = self.huaCount })
 			sslog(self.logTag,"当前index:"..tostring(index))
 			if cardInfos[index+1].val>=TmjConfig.Card.R_Spring and cardInfos[index+1].val<= TmjConfig.Card.R_Chry then
@@ -433,7 +475,7 @@ function TmjOtherPlayer:setExtraPosition(tempCardArr)
 	end
 	--更新额外牌的位置起始位置
 	--移动的位置
-	local moveDiff = cc.p(maxWidth +10,0)
+	local moveDiff = cc.p(maxWidth +7,0)
 	self.extraCardPos = cc.pSub(self.extraCardPos,moveDiff)
 	self.cardStartPos = cc.pSub(self.cardStartPos,moveDiff)
 	--刷新位置

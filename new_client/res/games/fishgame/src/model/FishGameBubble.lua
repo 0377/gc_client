@@ -33,7 +33,9 @@ function FishGameBubble:_onInterval(dt)
     end
 
     local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(fishId)
-    if not fish then
+    if not fish
+        or (fish and not fish:InSideScreen())
+    then
         self:hide()
         self:reset()
 

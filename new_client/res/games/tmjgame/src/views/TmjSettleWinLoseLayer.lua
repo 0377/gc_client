@@ -5,6 +5,8 @@
 -- Last: 
 -- Content:  
 --    1.结算界面 包括胜利，失败
+-- Modify:
+--	 2017/6/8 Button_back 根据策划要求，不要关闭按钮
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 local TmjSettleWinLoseLayer = class("TmjSettleWinLoseLayer",requireForGameLuaFile("TmjPopBaseLayer"))
@@ -36,6 +38,8 @@ function TmjSettleWinLoseLayer:onEnter()
 	CustomHelper.seekNodeByName(node.root,"Button_self_card"):addTouchEventListener(handler(self,self.onTouchListener))
 	CustomHelper.seekNodeByName(node.root,"Button_exit"):addTouchEventListener(handler(self,self.onTouchListener))
 	CustomHelper.seekNodeByName(node.root,"Button_next"):addTouchEventListener(handler(self,self.onTouchListener))
+	--应策划要求，关闭按钮不要
+	CustomHelper.seekNodeByName(node.root,"Button_back"):setVisible(false)
 	self.node = node.root
 	self:initSettleTag(CustomHelper.seekNodeByName(node.root,"Image_settleTag"))
 	self:initPanelInfo(CustomHelper.seekNodeByName(node.root,"Panel_info"))
@@ -43,6 +47,13 @@ function TmjSettleWinLoseLayer:onEnter()
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_showcard"),self.resultData.extraCards,self.resultData.handCards)
 	
 	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
+	if self.resultData and self.resultData.is_hu then
+		TmjConfig.playSound(TmjConfig.sType.GAME_WIN)
+	else
+		TmjConfig.playSound(TmjConfig.sType.GAME_LOSE)
+	end
+	
+	
 end
 --初始化结算标签页面
 function TmjSettleWinLoseLayer:initSettleTag(tagNode)
@@ -109,18 +120,26 @@ function TmjSettleWinLoseLayer:initPanelInfo(panelNode)
 	
 	--显示规则 番数x 加倍次数 x 完成任务倍数
 	if self.resultData.hu_fan then
-		local fanDesc = string.format(Tmji18nUtils:getInstance():get('str_mjplay','fan'),self.resultData.hu_fan)
+		--计算原始番数
+		local originFan = self.resultData.hu_fan
+		if self.resultData.jiabei and self.resultData.jiabei > 0 then
+			originFan = originFan / math.pow(2,self.resultData.jiabei)
+		end
+		if self.resultData.finish_task and self.resultData.taskInfo.task_scale and self.resultData.taskInfo.task_scale>0 then
+			originFan = originFan / self.resultData.taskInfo.task_scale
+		end
+		local fanDesc = string.format(Tmji18nUtils:getInstance():get('str_mjplay','fan'),originFan)
 		local hasExtra = false
 		local totalFan = self.resultData.hu_fan
 		if self.resultData.jiabei and self.resultData.jiabei > 0 then
 			fanDesc = fanDesc.."x"..string.format(Tmji18nUtils:getInstance():get('str_mjplay','rate'), math.pow(2,self.resultData.jiabei))
 			hasExtra = true
-			totalFan = totalFan * math.pow(2,self.resultData.jiabei)
+			--totalFan = totalFan * math.pow(2,self.resultData.jiabei)
 		end
 		if self.resultData.finish_task then
 			fanDesc = fanDesc.."x"..string.format(Tmji18nUtils:getInstance():get('str_mjplay','rate'),self.resultData.taskInfo.task_scale)
 			hasExtra = true
-			totalFan = totalFan * self.resultData.taskInfo.task_scale
+			--totalFan = totalFan * self.resultData.taskInfo.task_scale
 		end
 		if hasExtra then
 			fanDesc = fanDesc.."="..string.format(Tmji18nUtils:getInstance():get('str_mjplay','fan'),totalFan)

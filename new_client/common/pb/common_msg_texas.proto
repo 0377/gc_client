@@ -1,12 +1,9 @@
 syntax = "proto2";
-
-// 客户端和服务器通信消息
 // C Client, L LoginServer, D DBServer, S GameServer
 // CS 即C-发送->S
 
-
 //////////////////////////////////////////////////////////////////////////
-/// 德州扑克相关消息
+/// 德州扑克
 //////////////////////////////////////////////////////////////////////////
 
 //扑克信息
@@ -86,12 +83,12 @@ message UserInfo
 	required int64 win_money = 16;	//赢的钱
 	required int32 main_pot_money = 17; //赢取主池的钱
 	repeated int32 side_pot_money = 18;	//赢取第几个边池	[330,0,5560]
+	repeated int32 cards_show = 19;	//展示的最大牌型 [5,5,5] [0]
 }
 
 //牌桌信息数据
 message TexasTable
 {
-	enum MsgID { ID = 21003; }
 	optional int32 state = 1;		//游戏状态	[enum TexasStatus]
 	optional int64 max_bet = 2;		//最大下注金额
 	optional int64 min_bet = 3;		//最小下注金额
@@ -105,21 +102,21 @@ message TexasTable
 
 message SC_TexasTableInfo			//房间汇总信息/等待信息
 {
-	enum MsgID { ID = 10000; }
+	enum MsgID { ID = 25000; }
 	optional TexasTable pb_table = 1;
 	repeated UserInfo pb_user = 2;
 }
 
 message SC_TexasSendUserCards		//玩家发牌-1s间隔
 {
-	enum MsgID { ID = 10002; }
+	enum MsgID { ID = 25002; }
 	repeated UserInfo pb_user = 1;
 	optional TexasTable pb_table = 2;
 }
 
 message SC_TexasSendPublicCards		//公共牌-增量
 {
-	enum MsgID { ID = 10001; }
+	enum MsgID { ID = 25001; }
 	optional TexasTable pb_table = 1;
 	repeated UserInfo pb_user = 2;
 	repeated int32 public_cards = 3;//公共牌
@@ -127,7 +124,7 @@ message SC_TexasSendPublicCards		//公共牌-增量
 
 message SC_TexasUserAction			//玩家动作
 {
-	enum MsgID { ID = 10003; }
+	enum MsgID { ID = 25003; }
 	optional UserInfo pb_action = 1;
 	optional TexasTable pb_table = 2;
 
@@ -138,39 +135,40 @@ message SC_TexasUserAction			//玩家动作
 
 message SC_TexasNewUser		//进入
 {
-	enum MsgID { ID = 10004; }
+	enum MsgID { ID = 25004; }
 	optional UserInfo pb_user = 1;
 }
 	
 message SC_TexasUserLeave		//离开
 {
-	enum MsgID { ID = 10005; }
+	enum MsgID { ID = 25005; }
 	optional UserInfo pb_user = 1;
 }
 
 message SC_TexasForceLeave		//强制离开
 {
-	enum MsgID { ID = 10007; }
+	enum MsgID { ID = 25007; }
 	optional string reason = 1;
+	optional int32 num = 2;
 }
 
 message SC_TexasTableEnd		//结算
 {
-	enum MsgID { ID = 10006; }
+	enum MsgID { ID = 25006; }
 	repeated UserInfo pb_user = 1;
 	optional TexasTable pb_table = 2;
 }
 
 message SC_TexasGiveTips			//打赏
 {
-	enum MsgID { ID = 10008; }
+	enum MsgID { ID = 25008; }
 	required int32 chair = 1;
 	optional int64 money = 2;
 }
 
 message SC_TexasShowCards			//亮牌
 {
-	enum MsgID { ID = 10009; }
+	enum MsgID { ID = 25009; }
 	required int32 chair = 1;		//椅子
 	repeated int32 user_cards = 2;  //底牌
 	optional int32 cards_type = 3;	//牌型[enum TexasCardsType]
@@ -178,7 +176,7 @@ message SC_TexasShowCards			//亮牌
 
 message SC_TexasShowCardsPermission	//允许亮牌
 {
-	enum MsgID { ID = 10010; }
+	enum MsgID { ID = 25010; }
 	required int32 chair = 1;
 }
 
@@ -190,33 +188,33 @@ enum TexasError
 
 message SC_TexasError
 {
-	enum MsgID { ID = 19999; }
+	enum MsgID { ID = 25999; }
 	optional int32 error = 1;		//错误代码	[enum  TexasError]
 }
 
 message CS_TexasUserAction
 {
-	enum MsgID { ID = 20000; }
+	enum MsgID { ID = 25100; }
 	required int32 action = 1;		//本轮正在进行的动作	[enum  TexasAction]
 	required int64 bet_money = 2;	//本轮下注的钱-增量
 }
 
 message CS_TexasEnterTable			//用户进入桌子
 {
-	enum MsgID { ID = 20001; } 
+	enum MsgID { ID = 25101; } 
 }
 
 message CS_TexasLeaveTable			//用户离开桌子
 {
-	enum MsgID { ID = 20002; }
+	enum MsgID { ID = 25102; }
 }
 
 message CS_TexasGiveTips			//打赏请求
 {
-	enum MsgID { ID = 20003; }
+	enum MsgID { ID = 25103; }
 }
 
 message CS_TexasShowCards			//亮牌请求
 {
-	enum MsgID { ID = 20004; }
+	enum MsgID { ID = 25104; }
 }

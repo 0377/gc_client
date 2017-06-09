@@ -1,7 +1,7 @@
 {
     "client_info": {
         "channel": "1",
-        "version": "1.0.0",
+        "version": "1.0.2",
         "is_must_update": "false",
         "server_urls": [
             "http:\/\/14.29.123.144:8080\/api\/index\/index"
@@ -9,9 +9,6 @@
         "update_url": "http:\/\/192.168.7.32\/test\/hall.zip"
     },
     "hall_info": {
-        "addr": ["192.168.7.174#7788"],
-        "addr": ["192.168.7.137#7788"],
-        "addr": ["14.29.123.142#7789","14.29.123.142#7788"],
         "addr": ["192.168.7.164#7788"],
 
 

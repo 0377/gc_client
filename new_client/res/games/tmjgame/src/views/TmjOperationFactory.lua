@@ -75,6 +75,18 @@ function TmjOperationFactory:createOperationWidget(parentNode,operation,operatio
 	end
 	
 end
+--检测时候只有胡，如果是，那么胡和加倍的按钮下移，否则不动
+--@param onlyHu 是否只有胡
+function TmjOperationFactory:checkToSetHuPosition(onlyHu)
+	if self.operationPanel then
+		table.walk(self.operationPanel,function (TmjOperationWidget,k)
+			if TmjOperationWidget:getName()=="TmjOperationHu" and onlyHu then
+				local TmjOperationHu = TmjOperationWidget
+				TmjOperationHu:ingorePassAndSetPosition()
+			end
+		end)
+	end
+end
 --取消听的时候 回调
 function TmjOperationFactory:setCancelTingFun(cancelFun)
 	self.tingCancelFun = cancelFun
@@ -83,7 +95,7 @@ end
 function TmjOperationFactory:showTingCancel(parentNode)
 	local node = requireForGameLuaFile("TmjTingCancelNodeCCS"):create()
 	self.tingCancelBtn = node.root
-	parentNode:addChild(node.root,10)
+	parentNode:addChild(node.root,TmjConfig.LayerOrder.GAME_OPERATION_LAYER)
 	local btnTingCancel = CustomHelper.seekNodeByName(node.root,"Button_ting_cancel")
 	node.root:setPosition(cc.pSub(self.startPosition,cc.p(btnTingCancel:getContentSize().width,0)))
 	CustomHelper.seekNodeByName(node.root,"Button_ting_cancel"):addTouchEventListener(function (ref,eventType)

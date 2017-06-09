@@ -120,7 +120,11 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 				function(tipLayer)
 					tipLayer:removeSelf()
 				end,
-				self.exitFun)
+				function ()
+					if self.exitFun then
+						self.exitFun()
+					end
+				end)
 			else
 				if self.exitFun then
 					self.exitFun()
@@ -141,14 +145,15 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 			GameManager:getInstance():getMusicAndSoundManager():setMusicSwitch(musicSwitch)
 			if musicSwitch == true then
 				--todo
-				GameManager:getInstance():getMusicAndSoundManager():playMusicWithFile(HallSoundConfig.BgMusic.Hall)
+				TmjConfig.playBgMusic()
 			else
 				GameManager:getInstance():getMusicAndSoundManager():stopMusic()
 			end
 			self:showMusicAndSoundInfoView()
 		elseif ref:getName()=="Button_fanxing" then
 			sslog(self.logTag,"打开番型界面")
-			TmjFanXinInfoLayer:create():addTo(self.parent,TmjConfig.LayerOrder.GAME_FAN_LAYER)
+			local TmjGameScene = self.parent
+			TmjFanXinInfoLayer:create():addTo(TmjGameScene,TmjConfig.LayerOrder.GAME_FAN_LAYER)
 			local resultData = {
 				handCards = {
 					{val = 1,position = display.center },
@@ -319,7 +324,10 @@ function TmjGameLayer:_onInterval(dt)
 	else
 		CustomHelper.seekNodeByName(self.centerPanel,"Text_countdownTime"):setString(tostring(self.showTime).."s")
 	end
-	
+	if self.showTime>0 and self.showTime <=5 then
+		sslog(self.logTag,"播放倒计时音效")
+		TmjConfig.playSound(TmjConfig.sType.GAME_LAST_SECOND)
+	end
 	
 end
 --设置中间的信息
@@ -362,7 +370,10 @@ function TmjGameLayer:setCenterPanelInfo(tableInfo)
 		end
 	end
 	if tableInfo.pour then
-		self.centerPanel:getChildByName("AtlasLabel_pour"):setString(string.gsub(tostring(tableInfo.pour),"%.","/"))
+		
+		local pourStr = string.gsub(CustomHelper.moneyShowStyleNone(tableInfo.pour),"%.","/")
+		
+		self.centerPanel:getChildByName("AtlasLabel_pour"):setString(pourStr)
 	end
 	
 	--Image_zhuang_up  Image_zhuang_up_light

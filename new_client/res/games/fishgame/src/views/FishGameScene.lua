@@ -189,8 +189,8 @@ function FishGameScene:onEnter()
 end
 
 function FishGameScene:onExit()
-    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes(true)
-    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllBullets(true)
+    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes()
+    game.fishgame2d.FishObjectManager:GetInstance():RemoveAllBullets()
     game.fishgame2d.FishObjectManager:GetInstance():Clear()
     game.fishgame2d.FishObjectManager:DestroyInstance()
     if self._scheduler ~= nil then
@@ -281,7 +281,7 @@ function FishGameScene:_onInterval(dt)
         end
     else
         local fish = game.fishgame2d.FishObjectManager:GetInstance():FindFish(fishId)
-        if fish then
+        if fish and fish:InSideScreen() then
             self._targetPos.x = fish:getPosition().x
             self._targetPos.y = fish:getPosition().y
         end
@@ -724,14 +724,14 @@ function FishGameScene:on_msg_SwitchScene(msgTab)
 end
 
 function FishGameScene:on_msg_KillBullet(msgTab)
---    local bullet = game.fishgame2d.FishObjectManager:GetInstance():FindBullet(msgTab.bullet_id)
---    if bullet and bullet:getState() < EOS_DEAD then
---        if bullet:isMine() then
---            -- 删除子弹 --
---            self.m_nBulletCount = self.m_nBulletCount - 1
---        end
---        bullet:setState(EOS_DEAD)
---    end
+    local bullet = game.fishgame2d.FishObjectManager:GetInstance():FindBullet(msgTab.bullet_id)
+    if bullet and bullet:getState() < EOS_DEAD then
+        if bullet:isMine() then
+            -- 删除子弹 --
+            self.m_nBulletCount = self.m_nBulletCount - 1
+        end
+        bullet:setState(EOS_DEAD)
+    end
 end
 
 function FishGameScene:on_msg_KillFish(msgTab)
@@ -882,8 +882,8 @@ function FishGameScene:on_event_BulletHitFish(bullet, fish)
 end
 
 function FishGameScene:on_event_FishEffect(pSelf, target, effect)
-    if effect:GetEffectType() == EffectType.ETP_KILL then
-        local param_0 = effect:GetParam(0)
+    if effect:getEffectType() == EffectType.ETP_KILL then
+        local param_0 = effect:getParam(0)
         local typeLight = E_Red
         if param_0 == 2 then
             typeLight = E_Blue
@@ -907,24 +907,22 @@ end
 
 --- 添加鱼
 function FishGameScene:addFish(fishInfo)
-    local fish = FishGameFish:create(fishInfo):addTo(self.m_pFishLayer)
+    local fish = FishGameFish:create(fishInfo,self.m_pFishLayer):addTo(self.m_pFishLayer)
+    game.fishgame2d.FishObjectManager:GetInstance():AddFish(fish)
 
+    --- 李逵出现的时候显示动画
     if fishInfo.type_id == 29 then
         self:showBossAnimation({
             type = "boss"
         })
     end
-
-    game.fishgame2d.FishObjectManager:GetInstance():AddFish(fish)
-
-    return fish
 end
 
 function FishGameScene:addBullet(data)
     local player = self:getDataManager():getPlayerByChairId(data.chair_id)
     if not player then return end
 
-    local bullet = FishGameBullet:create(data,player):addTo(self.m_pBulletLayer)
+    local bullet = FishGameBullet:create(data,player,self.m_pBulletLayer):addTo(self.m_pBulletLayer)
 
     bullet:SetTarget(player and player:getLockedFishId() or 0)
     game.fishgame2d.FishObjectManager:GetInstance():AddBullet(bullet)
@@ -1042,7 +1040,7 @@ function FishGameScene:fireTo(targetPos, _handle)
     local po = self._playerCannon[mychair]:getCannonPosition()
     local x = po[1]
     local y = po[2]
-    local offset = 100
+    local offset = 0
     x = x + math.sin(-angle + math.pi / 2) * offset
     y = y + math.cos(-angle + math.pi / 2) * offset
 
@@ -1666,7 +1664,7 @@ function FishGameScene:updateSceneBackground(id, bInit)
 
                 -- 打开切换场景后碰撞
                 game.fishgame2d.FishObjectManager:GetInstance():SetSwitchingScene(false)
-                game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes(false)
+                game.fishgame2d.FishObjectManager:GetInstance():RemoveAllFishes()
             end)
         }))
         self._background = background

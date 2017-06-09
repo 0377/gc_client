@@ -41,6 +41,20 @@ GFlowerGameManager.MsgName =
     SC_ZhaJinHuaLostCards = 'SC_ZhaJinHuaLostCards', --比牌向输家展示两家牌
     SC_ZhaJinHuaReadyTime = 'SC_ZhaJinHuaReadyTime', --服务器通知客户端准备剩余时间
     SC_ZhaJinHuaClientReadyTime = 'SC_ZhaJinHuaClientReadyTime', --服务器通知客户端准备剩余时间(客户端单独显示处理，服务器无实际逻辑)
+	SC_ZhaJinHuaTabCFG = 'SC_ZhaJinHuaTabCFG',  -- 私人房间额外信息
+	
+	CS_ZhaJinHuaTabTiren = 'CS_ZhaJinHuaTabTiren',  -- 私人房间踢人相关消息
+	SC_ZhaJinHuaTabTiren = 'SC_ZhaJinHuaTabTiren',
+	
+	CS_ZhaJinHuaTabVote = 'CS_ZhaJinHuaTabVote',    -- 私人房间投票解散消息
+	SC_ZhaJinHuaTabVote = 'SC_ZhaJinHuaTabVote',
+	
+	SC_ZhaJinHuaTabVoteResult = "SC_ZhaJinHuaTabVoteResult", --私人房间投票结果
+	
+	CS_ZhaJinHuaPrivateCFG_Set = "CS_ZhaJinHuaPrivateCFG_Set", -- 私人房间属性设置
+	CS_ZhaJinHuaPrivateCFG_Get = "CS_ZhaJinHuaPrivateCFG_Get", -- 私人房间属性获取
+	SC_ZhaJinHuaPrivateCFG     = "SC_ZhaJinHuaPrivateCFG",      -- 私人房间属性返回
+	SC_ZhaJinHuaStatistics     = "SC_ZhaJinHuaStatistics"      -- 私人房间解散统计
 }
 
 GFlowerGameManager.instance = nil;
@@ -147,6 +161,21 @@ function GFlowerGameManager:on_SC_NotifyExitRoom(msgTab)
     --dump(msgTab, "---通知其他人离开房间");
 end
 
+-- 投票返回
+function GFlowerGameManager:on_SC_ZhaJinHuaTabVote(msgTab)
+	self:getDataManager():S2C_ZhaJinHuaTabVote(msgTab)
+end
+
+-- 踢人返回
+function GFlowerGameManager:on_SC_ZhaJinHuaTabTiren(msgTab)
+	self:getDataManager():S2C_ZhaJinHuaTabTiren(msgTab)
+end
+
+-- 炸金花私人房间设置返回
+function GFlowerGameManager:on_SC_ZhaJinHuaPrivateCFG(msgTab)
+	self:getDataManager():S2C_ZhaJinHuaPrivateCFG(msgTab)
+end
+
 --通知同桌坐下
 function GFlowerGameManager:on_SC_NotifySitDown(msgTab)
     --print("-----------------------------------------------通知同桌坐下");
@@ -196,6 +225,7 @@ function GFlowerGameManager:send_CS_ZhaJinHuaAddScore(score)
     local msgTab = {};
     msgTab.score = score
     local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaAddScore
+	dump(msgTab, "msgTab")
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
 end
 
@@ -213,12 +243,63 @@ function GFlowerGameManager:send_CS_ZhaJinHuaLookCard(msgTab)
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
 end
 
+function GFlowerGameManager:send_CS_ZhaJinHuaPrivateCFG_Get()
+	local  msgTab = {};
+    local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaPrivateCFG_Get
+    GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function GFlowerGameManager:send_CS_ZhaJinHuaPrivateCFG_Set(firstlook, firstc, nomoneyc, morer)
+	local msgTab = {};
+    local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaPrivateCFG_Set
+	if firstlook == true then
+		msgTab.first_see = 1
+	else
+		msgTab.first_see = 0
+	end
+	
+	if firstc == true then
+		msgTab.first_compare = 1
+	else
+		msgTab.first_compare = 0
+	end
+	
+	if nomoneyc == true then
+		msgTab.no_money_compare = 1 
+	else
+		msgTab.no_money_compare = 0
+	end
+	
+	if morer == true then
+		msgTab.more_round = 1 
+	else
+		msgTab.more_round = 0
+	end
+
+    GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
 --sx 比牌
 function GFlowerGameManager:send_CS_ZhaJinHuaCompareCard(chair_id)
     local msgTab = {};
     msgTab.compare_chair_id = self:getDataManager():getServerChairId(chair_id)
     local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaCompareCard
     GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+-- 发送踢人消息
+function GFlowerGameManager:send_CS_ZhaJinHuaTabTiren(serverchair_id)
+	local msgTab = {};
+	msgTab.chair_id = serverchair_id
+	local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaTabTiren
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function GFlowerGameManager:send_CS_ZhaJinHuaTabVote(ret)
+	local msgTab = {};
+	msgTab.bret = ret
+	local msgName = GFlowerGameManager.MsgName.CS_ZhaJinHuaTabVote
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
 end
 
 --sx 加注 跟注 返回
@@ -230,6 +311,7 @@ end
 function GFlowerGameManager:on_SC_ZhaJinHuaGiveUp(msgTab)
     self:getDataManager():S2C_ZhaJinHuaGiveUp(msgTab)
 end
+
 
 --sx 看牌返回
 function GFlowerGameManager:on_SC_ZhaJinHuaLookCard(msgTab)
@@ -252,9 +334,21 @@ function GFlowerGameManager:on_SC_ZhaJinHuaLostCards(msgTab)
     self:getDataManager():S2C_ZhaJinHuaLostCards(msgTab)
 end
 
+function GFlowerGameManager:on_SC_ZhaJinHuaTabCFG(msgTab)
+	self:getDataManager():S2C_ZhaJinHuaTabCFG(msgTab)
+end
+
+function GFlowerGameManager:on_SC_ZhaJinHuaTabVoteResult(msgTab)
+end
+
 -- 准备倒计时时间
 function GFlowerGameManager:on_SC_ZhaJinHuaReadyTime(msgTab)
     self:getDataManager():S2C_ZhaJinHuaReadyTime(msgTab)
+end
+
+-- 私人房间解散统计
+function GFlowerGameManager:on_SC_ZhaJinHuaStatistics(msgTab)
+	self:getDataManager():S2C_ZhaJinHuaStatistics(msgTab)
 end
 
 -- 客户端准备倒计时

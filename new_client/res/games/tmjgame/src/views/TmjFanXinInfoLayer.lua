@@ -16,6 +16,7 @@ local scheduler = cc.Director:getInstance():getScheduler()
 
 function TmjFanXinInfoLayer:ctor()
 	TmjFanXinInfoLayer.super.ctor(self)
+	self:setName("fanInfo")
 	self:initView()
 	self:initCheckGroup()
 	local imgBg = CustomHelper.seekNodeByName(self.node,"Image_bg")
@@ -60,13 +61,14 @@ function TmjFanXinInfoLayer:initCheckGroup()
 		
 	end
 	self.groupPercents = {
-		0,19,30,39,47,56,64,66,71,79,85,94,
+		0,19,30,39,47,56,62,66,71,79,85,94,
 	}
 end
 
 -- ccui.CheckBoxEventType     selected = 0,   unselected = 1,
 function TmjFanXinInfoLayer:checkListener(ref,eventType)
 	--checkbox:setEnabled(not ref:getSelected())
+	--sslog(self.logTag,"点击的位置:"..ref:getTag()..",name:"..ref:getName())
 	TmjConfig.playButtonSound()
 	self:setCheckIndex(ref:getTag())
 	-- self.scrollView
@@ -84,10 +86,14 @@ function TmjFanXinInfoLayer:backListener(ref,eventType)
 end
 
 function TmjFanXinInfoLayer:setCheckIndex(index)
+	--sslog(self.logTag,"--------------------------------------------")
 	for i,checkbox in pairs(self.checkGroups) do
+		
+		--sslog(self.logTag,checkbox:getName().."设置为"..tostring(i==index))
 		checkbox:setSelected(i==index)
 		checkbox:setEnabled(i~=index)
 	end
+	--sslog(self.logTag,"--------------------------------------------")
 end
 function TmjFanXinInfoLayer:_interval(dt)
 	local pos = self.scrollView:getInnerContainerPosition()
@@ -114,7 +120,7 @@ function TmjFanXinInfoLayer:onEnter()
 	self:stopScheduler()
 	--self.timeInterval
 	local aniInterval = cc.Director:getInstance():getAnimationInterval()
-	self.timeInterval = scheduler:scheduleScriptFunc(handler(self,self._interval), aniInterval, false)
+	self.timeInterval = scheduler:scheduleScriptFunc(handler(self,self._interval), 2*aniInterval, false)
 	
 end
 

@@ -15,10 +15,10 @@ TmjConfig.LayerOrder = {
 	GAME_OPERATION_LAYER = 3, --玩家选择操作层级
 	GAME_HUTIP_LAYER = 4, --胡牌提示层级
 	GAME_TASK_LAYER = 5, --任务界面
-	GAME_MENU_LAYER = 5, --设置界面
-	GAME_FAN_LAYER = 6, --番型提示界面
-	GAME_RESULT_LAYER = 7, --结算界面
-	TmjGameMatchingLayer = 10,--匹配界面层级
+	GAME_MENU_LAYER = 7, --设置界面
+	GAME_FAN_LAYER = 8, --番型提示界面
+	GAME_RESULT_LAYER = 9, --结算界面
+	TmjGameMatchingLayer = 6,--匹配界面层级
 
 	GAME_EFFECT_LAYER = 10, --特效播放层级
 }
@@ -162,12 +162,12 @@ TmjConfig.Pop_Dir = {
     Left = 2,
     Right = 3,
 }
-
 --桌子类型配置
 TmjConfig.tableType = {
-	[1] = "game_res/desk/laoquechang.png", --小雀场
+	[1] = "game_res/desk/xiaoquechang.png", --小雀场
 	[2] = "game_res/desk/chengquechang.png", --成雀场
-	[3] = "game_res/desk/queshenchang.png", --雀神场
+	[3] = "game_res/desk/laoquechang.png", --老雀场
+	[4] = "game_res/desk/queshenchang.png", --雀神场
 }
 --任务配置
 TmjConfig.taskConfig = {
@@ -261,6 +261,184 @@ TmjConfig.CARD_HU_TYPE_INFO = {
 	QING_LONG			= {name = "QING_LONG",fan = 16,res="game_res/fan/qinglong.png"},			--清龙
 	YI_SE_SAN_BU_GAO	= {name = "YI_SE_SAN_BU_GAO",fan = 16,res="game_res/fan/yisesanbugao.png"},		--一色三步高
 }
+--声音类型
+TmjConfig.sType = {
+	GAME_DRAWN = 100,--流局
+	GAME_WIN = 101,--胜利
+	GAME_LOSE = 102,--失败
+	GAME_CHOOSE_CARD = 103,--选牌
+	GAME_LAST_SECOND = 104,--倒计时
+	GAME_OPENING = 105,--开局
+}
+
+--二人麻将声音配置
+TmjConfig.Sound = {
+
+	--摸牌
+	[TmjConfig.cardOperation.GetOne] = {
+		['m'] = "shsound/sh_ren/m_giveup2.mp3",
+		['f'] = "shsound/sh_ren/f_giveup2.mp3",
+	},
+	--打牌
+	[TmjConfig.cardOperation.Play] = {
+		['m'] = {
+				[TmjConfig.Card.R_1] = "tmjsound/game_boy_wan_1.mp3",
+				[TmjConfig.Card.R_2] = "tmjsound/game_boy_wan_2.mp3",
+				[TmjConfig.Card.R_3] = "tmjsound/game_boy_wan_3.mp3",
+				[TmjConfig.Card.R_4] = "tmjsound/game_boy_wan_4.mp3",
+				[TmjConfig.Card.R_5] = "tmjsound/game_boy_wan_5.mp3",
+				[TmjConfig.Card.R_6] = "tmjsound/game_boy_wan_6.mp3",
+				[TmjConfig.Card.R_7] = "tmjsound/game_boy_wan_7.mp3",
+				[TmjConfig.Card.R_8] = "tmjsound/game_boy_wan_8.mp3",
+				[TmjConfig.Card.R_9] = "tmjsound/game_boy_wan_9.xac.mp3",
+				[TmjConfig.Card.R_E] = "tmjsound/game_boy_feng_1.mp3",
+				[TmjConfig.Card.R_W] = "tmjsound/game_boy_feng_3.xac.mp3",
+				[TmjConfig.Card.R_S] = "tmjsound/game_boy_feng_2.mp3",
+				[TmjConfig.Card.R_N] = "tmjsound/game_boy_feng_4.mp3",
+				[TmjConfig.Card.R_Read] = "tmjsound/game_boy_zhong.mp3",
+				[TmjConfig.Card.R_Green] = {
+						"tmjsound/game_boy_facai.mp3",
+						"tmjsound/game_boy_facai_1.mp3",
+					},
+				[TmjConfig.Card.R_White] = "tmjsound/game_boy_baiban.mp3",
+			},
+		['f'] = {
+				[TmjConfig.Card.R_1] = "tmjsound/game_girl_wan_1.mp3",
+				[TmjConfig.Card.R_2] = "tmjsound/game_girl_wan_2.mp3",
+				[TmjConfig.Card.R_3] = "tmjsound/game_girl_wan_3.mp3",
+				[TmjConfig.Card.R_4] = "tmjsound/game_girl_wan_4.mp3",
+				[TmjConfig.Card.R_5] = "tmjsound/game_girl_wan_5.mp3",
+				[TmjConfig.Card.R_6] = "tmjsound/game_girl_wan_6.mp3",
+				[TmjConfig.Card.R_7] = "tmjsound/game_girl_wan_7.mp3",
+				[TmjConfig.Card.R_8] = "tmjsound/game_girl_wan_8.mp3",
+				[TmjConfig.Card.R_9] = "tmjsound/game_girl_wan_9.mp3",
+				[TmjConfig.Card.R_E] = "tmjsound/game_girl_feng_1.mp3",
+				[TmjConfig.Card.R_W] = "tmjsound/game_girl_feng_3.mp3",
+				[TmjConfig.Card.R_S] = "tmjsound/game_girl_feng_2.mp3",
+				[TmjConfig.Card.R_N] = "tmjsound/game_girl_feng_4.mp3",
+				[TmjConfig.Card.R_Read] = "tmjsound/game_girl_zhong.mp3",
+				[TmjConfig.Card.R_Green] = {
+						"tmjsound/game_girl_facai.mp3",
+						"tmjsound/game_girl_facai_1.mp3",
+					},
+				[TmjConfig.Card.R_White] = "tmjsound/game_girl_baiban.mp3",
+			},
+	},
+	--吃
+	[TmjConfig.cardOperation.Chi] = {
+		['m'] = {
+			"tmjsound/game_boy_op_chi.xac.mp3",
+			"tmjsound/game_boy_op_chi_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_chi.mp3",
+			"tmjsound/game_girl_op_chi_1.mp3",
+		},
+	},
+	--碰
+	[TmjConfig.cardOperation.Peng] = {
+		['m'] = {
+			"tmjsound/game_boy_op_peng.mp3",
+			"tmjsound/game_boy_op_peng_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_peng.mp3",
+			"tmjsound/game_girl_op_peng_1.mp3",
+		},
+	},
+	--杠
+	[TmjConfig.cardOperation.Gang] = {
+		['m'] = {
+			"tmjsound/game_boy_op_gang.mp3",
+			"tmjsound/game_boy_op_gang_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_gang.mp3",
+			"tmjsound/game_girl_op_gang_1.mp3",
+		},
+	},
+	--暗杠
+	[TmjConfig.cardOperation.AnGang] = {
+		['m'] = {
+			"tmjsound/game_boy_op_gang.mp3",
+			"tmjsound/game_boy_op_gang_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_gang.mp3",
+			"tmjsound/game_girl_op_gang_1.mp3",
+		},
+	},
+	--补杠
+	[TmjConfig.cardOperation.BuGang] = {
+		['m'] = {
+			"tmjsound/game_boy_op_gang.mp3",
+			"tmjsound/game_boy_op_gang_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_gang.mp3",
+			"tmjsound/game_girl_op_gang_1.mp3",
+		},
+	},
+	--听
+	[TmjConfig.cardOperation.Ting] = {
+		['m'] = {
+			"tmjsound/game_boy_op_ting.mp3",
+			"tmjsound/game_boy_op_ting_1.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_ting.mp3",
+			"tmjsound/game_girl_op_ting_1.mp3",
+		},
+	},
+	--胡
+	[TmjConfig.cardOperation.Hu] = {
+		['m'] = {
+			"tmjsound/game_boy_op_hu_1.mp3",
+			"tmjsound/game_boy_op_hu.xac.mp3",
+		},
+		['f'] = {
+			"tmjsound/game_girl_op_hu.mp3",
+			"tmjsound/game_girl_op_hu_1.mp3",
+		},
+	},
+	--补花
+	[TmjConfig.cardOperation.BuHua] = {
+		['m'] = "tmjsound/game_boy_buhua.mp3",
+		['f'] = "tmjsound/game_girl_buhua.mp3",
+	},
+	--轮到谁出牌
+	[TmjConfig.cardOperation.RoundCard] = {
+	
+	},
+	--加倍
+	[TmjConfig.cardOperation.Double] = {
+		['m'] = {
+				"tmjsound/game_boy_double_1.mp3",
+				"tmjsound/game_boy_double_2.mp3",
+			},
+		['f'] = {
+				"tmjsound/game_girl_double_1.mp3",
+				"tmjsound/game_girl_double_2.mp3",
+			},
+	},
+	--结算
+
+
+	--流局
+	[TmjConfig.sType.GAME_DRAWN] = "tmjsound/tmj_game_drawn.mp3",
+	--胜利
+	[TmjConfig.sType.GAME_WIN] = "tmjsound/tmj_game_win.mp3",
+	--失败
+	[TmjConfig.sType.GAME_LOSE] = "tmjsound/tmj_game_lose.mp3",
+	--选择牌
+	[TmjConfig.sType.GAME_CHOOSE_CARD] = "tmjsound/tmj_game_choosecard.mp3",
+	--倒计时
+	[TmjConfig.sType.GAME_LAST_SECOND] = "tmjsound/tmj_game_last_secound.mp3",
+	--开局
+	[TmjConfig.sType.GAME_OPENING] = "tmjsound/tmj_game_opening.mp3",
+	
+}
+
 --把服务器的牌值转换成本地的牌值
 --服务器牌值规则
 --一万到九万， 东-南-西-北  -中-发-白-   春-夏-秋-冬-梅-兰-竹-菊--
@@ -300,6 +478,48 @@ end
 --按钮
 function TmjConfig.playButtonSound()
 	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+end
+--播放背景音乐
+function TmjConfig.playBgMusic()
+	sslog("11111","播放背景音乐")
+	local MusicAndSoundManager = GameManager:getInstance():getMusicAndSoundManager()
+	MusicAndSoundManager:playMusicWithFile("tmjsound/tmj_music_bg.mp3")
+end
+--播放游戏音效
+--@param stype 音效类型 TmjConfig.sType 和 TmjConfig.cardOperation
+--@param isMan 是否是男的 
+--@param extraData 其他数据，如果类型是打牌，那么extraData表示打的哪张牌 val 
+function TmjConfig.playSound(stype,isMan,extraData)
+	if not stype or not TmjConfig.Sound[stype] then
+		return
+	end
+	local MusicAndSoundManager = GameManager:getInstance():getMusicAndSoundManager()
+	local soundRes = TmjConfig.Sound[stype]
+	local soundPath = nil
+	if type(soundRes)=="table" then --其他的
+		--先判断男女
+		soundPath = isMan == true and soundRes['m'] or soundRes['f']
+		if stype==TmjConfig.cardOperation.Play and extraData then --打牌的音效，还要包括打的哪张牌
+			soundPath = soundPath[extraData]
+		end
+		--最后得到的音效路径，有两种情况，一种是字符串地址，另一种是table，随机里边的地址即可
+		if type(soundPath)=="table" then
+			local len = table.nums(soundPath)
+			local randIndex = math.random(1,len)
+			soundPath = soundPath[randIndex]
+		else
+			--todo
+			--直接播放
+		end
+		
+	elseif type(soundRes) == "string" then --配置的是字符串地址
+		soundPath = soundRes
+		
+	end
+	if soundPath and cc.FileUtils:getInstance():isFileExist(soundPath) then
+		MusicAndSoundManager:playerSoundWithFile(soundPath)
+	end
+	
 end
 
 return TmjConfig

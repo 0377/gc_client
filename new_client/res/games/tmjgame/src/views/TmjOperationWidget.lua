@@ -16,6 +16,7 @@ function TmjOperationWidget:ctor(operationData,chooseFun)
 	self.chooseFun = chooseFun
 	self.operationData = operationData 
 	self.contentSize = cc.size(0,0)
+	self:setName(self.__cname)
 	self:initView(operationData)
 	
 end

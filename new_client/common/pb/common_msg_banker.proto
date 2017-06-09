@@ -34,7 +34,7 @@ enum Status
 //牌桌信息数据
 message BankerTable
 {
-	enum MsgID { ID = 21003; }
+	enum MsgID { ID = 26003; }
 	optional int32 state = 1;		//游戏状态	[enum BankerStatus]
 	optional int64 bottom_bet = 2;	//底注
 	optional int32 chair = 3;		//自己的座位
@@ -84,7 +84,7 @@ message BankerReconnectPlayerInfo
 //匹配
 message SC_BankerTableMatching		
 {
-	enum MsgID { ID = 10000; }
+	enum MsgID { ID = 26000; }
 	optional int32 chair = 1;
 	optional int32 chair1 = 2;
 }
@@ -92,7 +92,7 @@ message SC_BankerTableMatching
 //发牌
 message SC_BankerSendCards				
 {
-	enum MsgID { ID = 10001; }
+	enum MsgID { ID = 26001; }
 	optional BankerTable pb_table = 1;
 	repeated BankerPlayerInfo pb_player = 2;
 	repeated int32 cards = 3;			//玩家自己的牌	4张; 第5张-1
@@ -101,7 +101,7 @@ message SC_BankerSendCards
 //开始抢庄
 message SC_BankerBeginToContend			
 {
-	enum MsgID { ID = 10002; }
+	enum MsgID { ID = 26002; }
 	required int32 countdown = 1;		//倒计时/s
 	required int32 total_time = 2;		//倒计时总时间
 }
@@ -109,14 +109,14 @@ message SC_BankerBeginToContend
 //其它玩家的抢庄倍数
 message SC_BankerPlayerContend			
 {
-	enum MsgID { ID = 10003; }
+	enum MsgID { ID = 26003; }
 	optional int32 chair = 1;	
 	optional int32 ratio = 2;			//-1, 1-4
 }
 
 //定庄
 message SC_BankerChoosingBanker {		
-	enum MsgID { ID = 10004; }
+	enum MsgID { ID = 26004; }
 	repeated int32 chairs = 1;			//竞争庄家的玩家[1,2,4]
 	optional int32 banker_chair = 2;
 	optional int32 banker_ratio = 3;	//庄家倍率
@@ -125,7 +125,7 @@ message SC_BankerChoosingBanker {
 //闲家开始下注
 message SC_BankerPlayerBeginToBet		
 {
-	enum MsgID { ID = 10005; }
+	enum MsgID { ID = 26005; }
 	required int32 countdown = 1;		//倒计时/s
 	required int32 total_time = 2;		//倒计时总时间
 }
@@ -133,7 +133,7 @@ message SC_BankerPlayerBeginToBet
 //闲家下注
 message SC_BankerPlayerBet				
 {
-	enum MsgID { ID = 10006; }
+	enum MsgID { ID = 26006; }
 	optional int32 chair = 1;	
 	required int64 bet_money = 2;		//下注的钱
 }
@@ -141,7 +141,7 @@ message SC_BankerPlayerBet
 //玩家看到自己的牌
 message SC_BankerShowOwnCards			
 {
-	enum MsgID { ID = 10007; }
+	enum MsgID { ID = 26007; }
 	repeated int32 cards = 1;			//玩家自己的牌	5张;
 	optional int32 cards_type = 2;		//牌型
 	required int32 countdown = 3;		//倒计时/s
@@ -151,7 +151,7 @@ message SC_BankerShowOwnCards
 //展示牌桌各玩家牌	消息个数=玩家人数
 message SC_BankerShowCards				
 {
-	enum MsgID { ID = 10008; }
+	enum MsgID { ID = 26008; }
 	optional int32 chair = 1;			//座位
 	repeated int32 cards = 2;			//所有5张牌，顺序重排
 	optional int32 cards_type = 3;		//牌型					[enum BANKER_CARD_TYPE]
@@ -161,7 +161,7 @@ message SC_BankerShowCards
 //结算
 message SC_BankerGameEnd			
 {
-	enum MsgID { ID = 10009; }
+	enum MsgID { ID = 26009; }
 	repeated BankerGameEndPlayerInfo pb_player = 1;
 	optional BankerTable pb_table = 2;
 }
@@ -169,7 +169,7 @@ message SC_BankerGameEnd
 //强制离开
 message SC_BankerForceToLeave		
 {
-	enum MsgID { ID = 10010; }
+	enum MsgID { ID = 26010; }
 	optional string reason = 1;
 	optional int32 num = 2;
 }
@@ -177,7 +177,7 @@ message SC_BankerForceToLeave
 //断线重入 房间汇总信息/等待信息
 message SC_BankerReconnectInfo			
 {
-	enum MsgID { ID = 10011; }
+	enum MsgID { ID = 26011; }
 	optional BankerTable pb_table = 1;
 	repeated BankerReconnectPlayerInfo pb_player = 2;
 	optional int32 countdown = 3;		//倒计时/s
@@ -188,7 +188,7 @@ message SC_BankerReconnectInfo
 //玩家进入游戏
 message CS_BankerEnter			
 {
-	enum MsgID { ID = 20001; }
+	enum MsgID { ID = 26001; }
 	optional int32 chair = 1;
 	optional int32 chair1 = 2;
 }
@@ -196,33 +196,33 @@ message CS_BankerEnter
 //玩家离开游戏
 message CS_BankerLeave		
 {
-	enum MsgID { ID = 20002; }
+	enum MsgID { ID = 26102; }
 }
 
 //抢庄
 message CS_BankerContend				
 {
-	enum MsgID { ID = 20003; } 
+	enum MsgID { ID = 26103; } 
 	optional int32 ratio = 1;			//-1, 1-4
 }
 
 //闲家下注
 message CS_BankerPlayerBet			
 {
-	enum MsgID { ID = 20004; }
+	enum MsgID { ID = 26104; }
 	required int64 bet_money = 1;	//本轮下注的钱
 }
 
 //猜牌
 message CS_BankerPlayerGuessCards	
 {
-	enum MsgID { ID = 20005; }
+	enum MsgID { ID = 26105; }
 }
 
 //下一局
 message CS_BankerNextGame			
 {
-	enum MsgID { ID = 20006; }
+	enum MsgID { ID = 26106; }
 }
 
 

@@ -37,7 +37,7 @@ return {
     [1001] = { BBList = { [1] = { nOffestX = 0, fRadio = 118.329, nOffestY = 0, }, }, nID = 1001, },
     [1000] = { BBList = { [1] = { nOffestX = -40, fRadio = 60, nOffestY = -40, }, [2] = { nOffestX = 40, fRadio = 60, nOffestY = -40, }, [3] = { nOffestX = -40, fRadio = 60, nOffestY = 40, }, [4] = { nOffestX = 40, fRadio = 60, nOffestY = 40, }, }, nID = 1000, },
     [903] = { BBList = { [1] = { nOffestX = 0, fRadio = 58.3265, nOffestY = 0, }, }, nID = 903, },
-    [600] = { BBList = { [1] = { nOffestX = 0, fRadio = 120, nOffestY = 0, }, }, nID = 600, },
+    [600] = { BBList = { [1] = { nOffestX = 0, fRadio = 60, nOffestY = 0, }, }, nID = 600, },
     [902] = { BBList = { [1] = { nOffestX = -14.4444, fRadio = 38.7397, nOffestY = -2.77778, }, [2] = { nOffestX = 54.4444, fRadio = 34.3802, nOffestY = 5, }, }, nID = 902, },
     [900] = { BBList = { [1] = { nOffestX = 0, fRadio = 60, nOffestY = 45, }, [2] = { nOffestX = -41, fRadio = 60, nOffestY = -45, }, [3] = { nOffestX = 41, fRadio = 60, nOffestY = -45, }, }, nID = 900, },
     [206] = { BBList = { [1] = { nOffestX = 0, fRadio = 110, nOffestY = 0, }, }, nID = 206, },
@@ -49,5 +49,5 @@ return {
     [205] = { BBList = { [1] = { nOffestX = 0, fRadio = 80, nOffestY = 0, }, }, nID = 205, },
     [502] = { BBList = { [1] = { nOffestX = 0, fRadio = 115, nOffestY = 0, }, }, nID = 502, },
     [202] = { BBList = { [1] = { nOffestX = 0, fRadio = 60, nOffestY = 0, }, }, nID = 202, },
-    [700] = { BBList = { [1] = { nOffestX = 0, fRadio = 100, nOffestY = 0, }, }, nID = 700, },
+    [700] = { BBList = { [1] = { nOffestX = 0, fRadio = 30, nOffestY = 0, }, }, nID = 700, },
 }

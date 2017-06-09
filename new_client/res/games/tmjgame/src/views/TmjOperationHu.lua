@@ -19,15 +19,40 @@ function TmjOperationHu:initView(operationData)
 	--TmjPengOperationNodeCCS
 	local node = requireForGameLuaFile("TmjBundleNodeCCS"):create()
 	self:addChild(node.root)
-	CustomHelper.seekNodeByName(node.root,"Button_double"):addTouchEventListener(handler(self,self.touchListener))
-	CustomHelper.seekNodeByName(node.root,"Button_hu"):addTouchEventListener(handler(self,self.touchListener))
-	CustomHelper.seekNodeByName(node.root,"Button_pass"):addTouchEventListener(handler(self,self.touchListener))
-	self.contentSize = CustomHelper.seekNodeByName(node.root,"Button_pass"):getContentSize()
+	local doubleBtn = CustomHelper.seekNodeByName(node.root,"Button_double")
+	local huBtn = CustomHelper.seekNodeByName(node.root,"Button_hu")
+	local passBtn = CustomHelper.seekNodeByName(node.root,"Button_pass")
 	
-	CustomHelper.seekNodeByName(node.root,"Button_hu"):setVisible(operationData)
-	CustomHelper.seekNodeByName(node.root,"Button_double"):setVisible(operationData)
+	doubleBtn:addTouchEventListener(handler(self,self.touchListener))
+	huBtn:addTouchEventListener(handler(self,self.touchListener))
+	passBtn:addTouchEventListener(handler(self,self.touchListener))
+	self.contentSize = passBtn:getContentSize()
+	
+	--passBtn:setVisible(not operationData)
+	huBtn:setVisible(operationData)
+	doubleBtn:setVisible(operationData)
+	
+	--如果是胡，那么过和胡显示的位置往下移动，Y在过的地方
+	if operationData then
+		--huBtn:setPositionY(passBtn:getPositionY())
+		--doubleBtn:setPositionY(passBtn:getPositionY())
+	end
 end
-
+--隐藏过，并且把胡和加倍下移，这种情况只在胡的情况才有
+function TmjOperationHu:ingorePassAndSetPosition()
+	local doubleBtn = CustomHelper.seekNodeByName(self,"Button_double")
+	local huBtn = CustomHelper.seekNodeByName(self,"Button_hu")
+	local passBtn = CustomHelper.seekNodeByName(self,"Button_pass")
+	if passBtn then
+		passBtn:setVisible(false)
+	end
+	if huBtn then
+		huBtn:setPositionY(passBtn:getPositionY())
+	end
+	if doubleBtn then
+		doubleBtn:setPositionY(passBtn:getPositionY())
+	end
+end
 function TmjOperationHu:touchListener(ref,eventType)
 	if eventType==ccui.TouchEventType.began then
 		TmjConfig.playButtonSound()

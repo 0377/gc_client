@@ -52,21 +52,37 @@ function GFlowerGameDataManager:ctor()
     self.huanzhuo           = false
     self.all_Compare        = false         -- 是否是全场比牌
     self.StandUp            = false         -- 进入没准备 被t
+	
+	--  私人房间相关数据
+	self.selScoreIdx        = 0             -- 当前选择的基础分数索引（私人房间）
+	self.isPrivateRoom      = false         -- 私人房间
+	self.isInPRReady        = false         -- 私人房间的准备状态
+	self.isInPRJieSan       = false         -- 私人房间的解散状态
+	self.isNeedPRoomPro     = true          -- 是否需要获取私人房间属性
+	self.isFirstLookCard    = false         -- 第一轮是否看牌
+	self.isFirstCompare     = false         -- 第一轮是否比牌
+	self.isNoMoneyCompare   = false         -- 没钱是否可以比牌
+	self.isMoreRound        = false         -- 轮数是否更多
+	self.isLastGame         = false         -- 是否是最后一局
 end
 
 -- 初始化数据
 function GFlowerGameDataManager:InitData()
+	-- 私人房间
+	if self.isPrivateRoom == true then		
+		self:calPRJetton()
+	else
+		-- 房间参数信息（进场最少需要多少钱、底注等信息）
+		self.roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab();
+		-- 进入需要最小金币数量  和 底注
+		self.MinJettonMoney = self.roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]
+		self.MinJetton = self.roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey]
 
-    -- 房间参数信息（进场最少需要多少钱、底注等信息）
-    self.roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab();
-    -- 进入需要最小金币数量  和 底注
-    self.MinJettonMoney = self.roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]
-    self.MinJetton = self.roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey]
-
-    -- 根据房间编号 初始化筹码比例
-    self.roomNum = self.roomInfo["second_game_type"]
-    GFlowerConfig.ADD_BTN_TIMES = GFlowerConfig.ADD_BTN_TIMES_LIST[self.roomNum]
-
+		-- 根据房间编号 初始化筹码比例
+		self.roomNum = self.roomInfo["second_game_type"]
+		GFlowerConfig.ADD_BTN_TIMES = GFlowerConfig.ADD_BTN_TIMES_LIST[self.roomNum]
+	end
+	
     self.is_newIn = true
     self:resetMainTableData()         -- 下面为本局结束需要清除的数据
 end
@@ -149,6 +165,18 @@ function GFlowerGameDataManager:recalPlayerClientId()
     end
 end
 
+-- 计算私人房间的底注
+function GFlowerGameDataManager:calPRJetton()
+	-- 进入需要最小金币数量  和 底注
+	local seldata = GFlowerConfig.PRIVATE_ROOM[self.selScoreIdx]
+	dump(seldata, "seldata")
+	
+    self.MinJettonMoney = seldata.money_limit
+    self.MinJetton 		= seldata.score[1]
+
+    GFlowerConfig.ADD_BTN_TIMES = GFlowerConfig.ADD_BTN_TIMES_LIST[1]
+end
+
 -- 重连获取房间信息
 function GFlowerGameDataManager:_onMsg_ReConnectInfo( infoTab )
     --dump(infoTab,"infoTab")
@@ -172,6 +200,28 @@ function GFlowerGameDataManager:_onMsg_ReConnectInfo( infoTab )
     end
 end
 
+-- 获取私人房间的房主ID
+function GFlowerGameDataManager:getPRMaster()
+	if self.gfPlayers ~= nil and table.nums(self.gfPlayers) > 0 then
+        for k, v in pairs(self.gfPlayers) do
+			if v:getChairId() == GFlowerConfig.PR_MASTER then
+				return v:getClientChairId()
+            end
+        end
+    end
+	
+	return 0
+end
+
+-- 是否是房主
+function GFlowerGameDataManager:isPRMaster()
+	if self.myServerChairId == GFlowerConfig.PR_MASTER then
+		return  true
+	end
+	
+	return false
+end
+
 -- 自己进入时得到已经存在的玩家的状态
 function GFlowerGameDataManager:S2C_ZhaJinHuaWatch(msgTab)
     -- 获取房间其他玩家状态
@@ -185,6 +235,21 @@ function GFlowerGameDataManager:S2C_ZhaJinHuaWatch(msgTab)
 
     -- 状态消息回来后再刷新界面（准备）
     self:dealZhaJinHuaWatch()
+end
+
+function GFlowerGameDataManager:S2C_ZhaJinHuaTabCFG(msgTab)
+	dump(msgTab)
+	self.isPrivateRoom = true
+	self.isInPRReady   = true
+	self.selScoreIdx   = msgTab.score_type
+end
+
+function GFlowerGameDataManager:S2C_ZhaJinHuaTabVote(msgTab)
+
+end
+
+function GFlowerGameDataManager:setInPRJiesanState(stat )
+	self.isInJieSan = stat
 end
 
 function GFlowerGameDataManager:S2C_ShowTax(msgTab)
@@ -317,7 +382,7 @@ end
 
 function GFlowerGameDataManager:dealZhaJinHuaWatch()
     -- 如果是新进入该桌的玩家
-    --print("GFlowerGameDataManager:dealZhaJinHuaWatch    WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+    print("GFlowerGameDataManager:dealZhaJinHuaWatch    WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
     if self.is_newIn == true then
         
         --清除所有数据
@@ -351,6 +416,10 @@ function GFlowerGameDataManager:getGFPlayerByClientId(clientId)
     end
 
     return nil
+end
+
+function GFlowerGameDataManager:getGFPlayerCount()
+	return table.nums(self.gfPlayers)
 end
 
 function GFlowerGameDataManager:getGFPayerByGuid(guid)
@@ -535,6 +604,7 @@ function GFlowerGameDataManager:setPlayerOrder( begin_chair )
                 --print("1发牌序号：",index,"--------玩家client_id：",client_id," idx: ",idx," begin_chair: ",begin_chair," 底注：",self.MinJetton)
 
                 -- 刷新底注
+				dump(self.MinJetton, "self.MinJetton")
                 self:UpdatePlayerMoney(idx, self.MinJetton)
             end
         end
@@ -554,18 +624,22 @@ function GFlowerGameDataManager:S2C_ZhaJinHuaStart(msgTab)
     local banker_chair_id = msgTab.banker_chair_id
     local begin_chair = self:getLocalChairId(banker_chair_id)
 
-    --  记录本局有效玩家
-    for k , server_id in pairs(msgTab.chair_id) do
-        local client_id = self:getLocalChairId(server_id)
-        self.validPlayerTag[client_id] = 1
-    end
+	if self.isPrivateRoom == false then
+		--  记录本局有效玩家
+		for k , server_id in pairs(msgTab.chair_id) do
+			local client_id = self:getLocalChairId(server_id)
+			self.validPlayerTag[client_id] = 1
+		end
     
-    --  清除无效玩家数据
-    for idx = 1,  GFlowerConfig.CHAIR_COUNT do
-        if self.validPlayerTag[idx] == 0 then
-            self:clearGFPlayerByClientId(idx)
-        end
-    end
+		--  清除无效玩家数据
+		for idx = 1,  GFlowerConfig.CHAIR_COUNT do
+			if self.validPlayerTag[idx] == 0 then
+				self:clearGFPlayerByClientId(idx)
+			end
+		end
+	else
+		self.isInPRReady = false
+	end
 
     -- 记录当前操作玩家
     self.doing_id = begin_chair
@@ -589,17 +663,16 @@ end
 
 -- 计算 当前跟注筹码编号  和 当前跟注金币数
 function GFlowerGameDataManager:setFollowType(score)
+	for type1, num in pairs(GFlowerConfig.ADD_BTN_TIMES) do
 
-    for type1, num in pairs(GFlowerConfig.ADD_BTN_TIMES) do
-
-        if num * self.MinJetton   ==  score then
-            -- 筹码下标
-            self.follow_num = type1
-            -- 剩以底注
-            self.follow_money = GFlowerConfig.ADD_BTN_TIMES[self.follow_num] * self.MinJetton
-            break
-        end
-    end
+		if num * self.MinJetton   ==  score then
+			-- 筹码下标
+			self.follow_num = type1
+			-- 剩以底注
+			self.follow_money = GFlowerConfig.ADD_BTN_TIMES[self.follow_num] * self.MinJetton
+			break
+		end
+	end
 end
 
 function GFlowerGameDataManager:resetValidPlayerTag()
@@ -724,6 +797,36 @@ function GFlowerGameDataManager:S2C_ZhaJinHuaGiveUp( msgTab )
     end
 end
 
+function GFlowerGameDataManager:S2C_ZhaJinHuaPrivateCFG(msgTab)
+	if self.isPrivateRoom == true then
+		if msgTab.first_see == 1 then
+			self.isFirstLookCard = true
+		else
+			self.isFirstLookCard = false
+		end
+		
+		if msgTab.first_compare == 1 then
+			self.isFirstCompare = true
+		else
+			self.isFirstCompare = false
+		end
+		
+		if msgTab.no_money_compare == 1 then
+			self.isNoMoneyCompare = true
+		else
+			self.isNoMoneyCompare = false
+		end
+		
+		if msgTab.more_round == 1 then
+		    self.isMoreRound = true
+		else
+			self.isMoreRound = false
+		end
+		
+	end
+end
+
+
 -- 自己看牌
 function GFlowerGameDataManager:S2C_ZhaJinHuaLookCard( msgTab )
 
@@ -827,6 +930,23 @@ end
 -- 通知客户端倒计时的消息
 function GFlowerGameDataManager:S2C_ZhaJinHuaClientReadyTime(msgTab)
     self.countDown = msgTab.time
+end
+
+-- 私人房间T人消息
+function GFlowerGameDataManager:S2C_ZhaJinHuaTabTiren(msgTab)
+	local serverchairid  = msgTab.chair_id
+	local clientchairid  = self:getLocalChairId(serverchairid)
+	
+	self:clearGFPlayerByClientId(clientchairid)
+end
+
+function GFlowerGameDataManager:S2C_ZhaJinHuaTabVote(msgTab)
+	local clientchairid  = self:getLocalChairId(msgTab.chair_id)
+	
+end
+
+function GFlowerGameDataManager:S2C_ZhaJinHuaStatistics(msgTab)
+	self.isLastGame  = true
 end
 
 -- 游戏结束

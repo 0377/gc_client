@@ -19,7 +19,8 @@ local TmjOperationFactory = requireForGameLuaFile("TmjOperationFactory")
 --GameManager:getInstance():getHallManager():getSubGameManager()
 function TmjGameScene.getNeedPreloadResArray()
 	local resNeed = {
-	"game_res/animation/ermj_px_eff/ermj_px_eff.ExportJson"
+	"game_res/animation/ermj_px_eff/ermj_px_eff.ExportJson",
+	"game_res/settle/ermj_px_eff/fanxingzi.png"
 	}
 	return resNeed
 end
@@ -81,6 +82,10 @@ end
 --显示等待界面
 function TmjGameScene:showWaiting()
 	self:closeWaiting()
+	--关闭番型界面
+	if self:getChildByName("fanInfo") then
+		self:removeChildByName("fanInfo")
+	end
 	local mathcingLayer = TmjGameMatchingLayer:create(handler(self,self.exitGame))
 	mathcingLayer:setName("mathcingLayer")
 	self:addChild(mathcingLayer,TmjConfig.LayerOrder.TmjGameMatchingLayer)
@@ -104,27 +109,51 @@ function TmjGameScene:onEnter()
 	self:showWaiting()
 --[[	self:initPlayer({path = "TmjMyPlayer",seatid = 1})
 	self:initPlayer({path = "TmjOtherPlayer",seatid = 2})
-	self:closeWaiting()--]]
+	self:closeWaiting()
+	local TmjCardTip = import("..cfg.TmjCardTip")
+	local TmjMyPlayer = self.seats[1]
+	if TmjMyPlayer then
+		local operations = {}
+		local chiData = {1,2,3}
+		local pengData = 2
+		table.insert(operations,{
+				type = TmjCardTip.CardOperation.Chi,
+				weight = TmjCardTip.operationWeight[TmjCardTip.CardOperation.Chi] or 0,
+				result = { data = {chiData} } })
+		table.insert(operations,{
+				type = TmjCardTip.CardOperation.Peng,
+				weight = TmjCardTip.operationWeight[TmjCardTip.CardOperation.Peng] or 0,
+				result = pengData })
+		table.insert(operations,{
+				type = TmjCardTip.CardOperation.Hu,
+				weight = TmjCardTip.operationWeight[TmjCardTip.CardOperation.Hu] or 0,
+				result = true })
+		TmjMyPlayer:showOperationPanel(operations,true)
+	end--]]
 --[[	local arr = {
-	[1]=1,
+	[1]=0,
 	[2]=1,
 	[3]=1,
 	[4]=0,
-	[5]=1,
+	[5]=2,
 	[6]=1,
-	[7]=1,
-	[8]=1,
+	[7]=0,
+	[8]=0,
 	[9]=0,
 	[10]=0,
-	[11]=1,
+	[11]=0,
 	[12]=0,
-	[13]=0,
+	[13]=2,
 	[14]=0,
 	[15]=0,
 	[16]=0,
 		}
 	local TmjCardTip = import("..cfg.TmjCardTip")
-	ssdump(TmjCardTip.isTingHu(arr,11))--]]
+	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
+	ssdump(TmjCardTip.isTingHu(arr,1))--]]
+--[[	local cards = {}
+	cards.shou_pai = {1,1,2,2,4,4,6,6,8,13,13,14,14 }
+	ssdump(TmjFanCalculator.is_hu(cards,8))--]]
 	
 end
 
@@ -150,10 +179,7 @@ end
 --开局消息UI处理
 function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 	--开局后 播放音乐
-	local musicSwitch = GameManager:getInstance():getMusicAndSoundManager():getMusicSwitch()
-	if musicSwitch then
-		GameManager:getInstance():getMusicAndSoundManager():playMusicWithFile(HallSoundConfig.BgMusic.Hall)
-	end
+	TmjConfig.playBgMusic()
 	
 	local playerdatas = self.TmjGameDataManager.playerdatas
 	local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
@@ -224,9 +250,15 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 				--用户创建失败
 			end			
 		end
+		local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+		--底注
+		local pour = roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey]
+		--
+		local roomId = roomInfo[HallGameConfig.SecondRoomIDKey]
+		
 		--设置庄家消息
 		--selfCharId zhuangId
-		self.gameLayer:setCenterPanelInfo({ bankerSide = (selfCharId==zhuangId and 1 or 2) })
+		self.gameLayer:setCenterPanelInfo({ bankerSide = (selfCharId==zhuangId and 1 or 2),pour = pour,tableType = roomId })
 		
 		--如果是恢复对局
 		if isReconnect then
@@ -239,6 +271,9 @@ function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
 	
 	--先播放开局动画
 	if not isReconnect then
+		
+		TmjConfig.playSound(TmjConfig.sType.GAME_OPENING)
+		
 		TmjConfig.playAmature("ermj_px_eff","ani_07",nil,display.center,false,createPlayers)
 	else
 		createPlayers() --恢复对局的，直接创建玩家
@@ -446,6 +481,16 @@ function TmjGameScene:onMsgSC_ReconnectionPlay(msgTab)
 	
 end
 function TmjGameScene:showResultLayer()
+	--关闭操作界面
+	TmjOperationFactory:getInstance():clearOperation()
+	--关闭番型界面
+	if self:getChildByName("fanInfo") then
+		self:removeChildByName("fanInfo")
+	end
+	--停止倒计时
+	if TmjHelper.isLuaNodeValid(self.gameLayer) then
+		self.gameLayer:stopCountDown()
+	end
 	self:playerOperationHandler(nil,TmjConfig.cardOperation.Finish)
 	local consultData = self.TmjGameDataManager.consultData
 	local selfCharId = self.TmjGameDataManager.selfChairId
@@ -544,7 +589,12 @@ function TmjGameScene:loopMsgOperation()
 	elseif cType == TmjConfig.cardOperation.RoundCard then
 		local showCardId = self.TmjGameDataManager.showCardChairId
 		local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
+		local reconnData = self.TmjGameDataManager.reconnData
 		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
+		if reconnData and reconnData.act_left_time then
+			playCardTime = reconnData.act_left_time
+			reconnData.act_left_time = nil
+		end
 		--self.seats[showCardId]
 		self.gameLayer:setCenterPanelInfo({ cardSide = (selfCharId==showCardId and 1 or 2) })
 		self.gameLayer:startCountDown(playCardTime)
@@ -660,7 +710,7 @@ end
 ---退出游戏界面
 function TmjGameScene:exitGame(openSecondLayer)
 	--退出游戏的时候 清空游戏数据
-	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
+	--GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	TmjGameManager:getInstance():sendStandUpAndExitRoomMsg()
     --SceneController.goHallScene()
     local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()

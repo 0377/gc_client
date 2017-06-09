@@ -92,6 +92,7 @@ message LandPlayerConclude {
 	repeated int32 cards = 3;						// 扑克列表
 	optional int32 flag = 4;           				// 税收开启
 	optional int32 tax  = 5;						// 税收
+	optional int32 totoalwinlost=6;					//游戏总输赢
 }
 message SC_LandConclude {
 	enum MsgID { ID = 15011; }
@@ -186,3 +187,75 @@ message SC_LandRecoveryPlayerDouble {
 	repeated PlayerDoubleMsg pb_double_state = 1;  // 加倍情况
 	optional int32 double_count_down	= 2; //加倍阶段倒计时
 };
+
+//私人房间玩家请求房间设置
+message CS_GetPrivateConfig {
+	enum MsgID { ID = 15024; Target = 2; }
+};
+
+//私人游戏房间增加自定义设置提示(消息只能是房主发送)
+message CS_SetPrivateConfigChange {
+	enum MsgID { ID = 15025; Target = 2; }
+	optional int32	nallowDouble=1;	// 1/2 不允许/允许加倍
+	optional int32  nlimitbeishu=2; //1/32 没有限制/32倍限制
+	optional int32  nallowYiXiaoBoda=3; //1/2 不允许/允许
+};
+
+//通知游戏房间设置
+message SC_PrivateConfigChange {
+	enum MsgID { ID = 15026; }
+	optional int32	nallowDouble=1;	// 1/2 不允许/允许加倍
+	optional int32  nlimitbeishu=2; //1/32 没有限制/32倍限制
+	optional int32  nallowYiXiaoBoda=3; //1/2 不允许/允许
+	optional int32	ncell=4;		//房间基本信息	
+	optional int32  nlimit=5;
+	optional int32  nhosterguid=6;	//房主
+	optional int32  nstatues=7;		//1/2 没有设置过/有设置
+	optional int32	nreason=8;		//1/2 设置返回/请求返回 消息
+};
+
+//T人
+message CS_TabTiren
+{
+	enum MsgID { ID = 15027; Target = 2; }
+	optional int32 chair_id = 1;				
+}
+
+//发起投票
+message CS_TabVote
+{
+	enum MsgID { ID = 15028; Target = 2; }
+	required bool bret = 1;						//true 是  false 否	
+}
+
+//投票信息
+message SC_TabVoteInfo
+{
+	enum MsgID { ID = 15029; }
+	optional int32 chair_id = 1;
+	required bool bret = 2;						//true 是  false 否	
+	required int32 vote_chairid=3;					//投票发起人
+}
+
+//S->C主动发送总结算消息
+message SC_TotalScoreInfo
+{
+	enum MsgID { ID = 15030; }
+	repeated int32 totoalscore= 1;					//每个座位上的总结算分数
+}
+
+
+//请求投票列表
+message CS_GetTabVoteArray
+{
+	enum MsgID { ID = 15031; Target = 2; }
+}
+
+//请求投票列表
+message SC_TabVoteArray
+{
+	enum MsgID { ID = 15032; Target = 2; }
+	repeated SC_TabVoteInfo	sctableinfo=1;
+ 	optional int32 votechairid=2;
+}
+

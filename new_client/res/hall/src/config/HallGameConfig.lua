@@ -325,8 +325,8 @@ HallGameConfig.allGames = {
 	},
 	[HallGameConfig.game.ID_LHJGame] = {
 		[HallGameConfig.GameNameKey]		          = "老虎机",
-		[HallGameConfig.GamePackageRootPathKey]       = "games/lhjgame/",
-		[HallGameConfig.GameEntranceKey]	          = "LhjGameEntry",
+		[HallGameConfig.GamePackageRootPathKey]       = "games/dflhjgame/",
+		[HallGameConfig.GameEntranceKey]	          = "DflhjGameEntry",
 		[HallGameConfig.GameIconKey]	 			  =	HallGameConfig.game.IconConfig[HallGameConfig.game.ID_LHJGame],
 		[HallGameConfig.GameShadowIconKey]			  = "hall_res/hall/bb_dating_tubiao_daoying_lhj.png",
 		-- [HallGameConfig.GameIconAnimKey]			  = HallGameConfig.game.IconAnimConfig[HallGameConfig.game.ID_GFLOWER],

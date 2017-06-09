@@ -5,6 +5,8 @@
 -- Last: 
 -- Content:  
 --    1.结算界面 包括胜利，失败
+-- Modify:
+--	 2017/6/8 Button_back 根据策划要求，不要关闭按钮
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 local TmjSettleDrawnLayer = class("TmjSettleDrawnLayer",requireForGameLuaFile("TmjPopBaseLayer"))
@@ -34,12 +36,14 @@ function TmjSettleDrawnLayer:onEnter()
 	CustomHelper.seekNodeByName(node.root,"Button_back"):addTouchEventListener(handler(self,self.onTouchListener))
 	CustomHelper.seekNodeByName(node.root,"Button_exit"):addTouchEventListener(handler(self,self.onTouchListener))
 	CustomHelper.seekNodeByName(node.root,"Button_next"):addTouchEventListener(handler(self,self.onTouchListener))
-	
+	--应策划要求，关闭按钮不要
+	CustomHelper.seekNodeByName(node.root,"Button_back"):setVisible(false)
 	self.node = node.root
 	self:initSettleTag(CustomHelper.seekNodeByName(node.root,"Image_settleTag"))
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_other"),self.resultData.other.extraCards,self.resultData.other.handCards)
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_me"),self.resultData.me.extraCards,self.resultData.me.handCards)
 	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
+	TmjConfig.playSound(TmjConfig.sType.GAME_DRAWN)
 end
 --初始化结算标签页面
 function TmjSettleDrawnLayer:initSettleTag(tagNode)

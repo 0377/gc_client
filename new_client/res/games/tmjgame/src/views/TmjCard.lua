@@ -182,30 +182,30 @@ function TmjCard:setTingTag(isShow)
 	self.tingImg:setVisible(isShow)
 end
 function TmjCard:onStateNone(param)
-	self:setScale(0.9)
+	self:setScale(self:getScale()*0.9)
 	self.animation:play("animation0",true)
 end
 
 function TmjCard:onStateDiscard(param)
 	--self:setPosition(display.center)
-	self:setScale(0.6)
+	self:setScale(self:getScale()*0.6)
 	self.animation:play("animation2",true)
 end
 
 function TmjCard:onStateDown(param)
 	self:setPosition(self.locationPos)
-	self:setScale(1)
+	self:setScale(self:getScale()*1)
 	self.animation:play("animation1",true)
 end
 
 function TmjCard:onStateUp(param)
 	self:setPosition(cc.pAdd(self.locationPos,chooseUpDiff))
-	self:setScale(1)
+	self:setScale(self:getScale()*1)
 	self.animation:play("animation1",true)
 end
 --牌状态 吃，碰，刚
 function TmjCard:onStateExtra(param)
-	self:setScale(1)
+	self:setScale(self:getScale()*1)
 	self.animation:play("animation2",true)
 end
 return TmjCard

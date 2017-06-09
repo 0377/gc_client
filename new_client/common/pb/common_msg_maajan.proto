@@ -68,6 +68,12 @@ message Maajan_Player_Info {
 	optional bool finish_task	= 12; 			//完成任务
 	//reconnect
 	optional bool is_ting 		= 13;			//是否听
+	
+	//
+	optional string nick 					= 14;
+	optional int32 icon 					= 15;
+	optional int32 gold 					= 16;
+	optional int32 guid		            	= 17; 	// guid
 };
 message Maajan_Reconnect_Data {
 	optional int32 act_left_time = 1;						// 操作剩余时间
