@@ -163,7 +163,12 @@ __G__TRACKBACK__ = function(msg)
     local msgAll = "LUA ERROR: " .. tostring(msg) .. "\n"
         ..debug.traceback().. "\n"
 
-    print(msg)
+    print(msgAll)
+
+    if device.platform == "ios" or device.platform == "android" then
+        -- report lua exception
+        buglyReportLuaException(tostring(msg), debug.traceback())
+    end
 
     if _logConfigParam.writeLog then
         --写日志

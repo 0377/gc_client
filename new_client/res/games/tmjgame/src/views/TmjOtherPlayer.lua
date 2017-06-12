@@ -210,16 +210,15 @@ function TmjOtherPlayer:getOneCard(cardInfo)
 				self:setHeadInfo({ huaCount = self.huaCount })
 				TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
 				
-				if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
-					self.getCard.node:removeFromParent()
-					ssdump(cardInfo[index + 1],"花牌数据")
-					sslog(self.logTag,"播放摸到牌的补花动画")
-					
-				end
-				performWithDelay(self,function ()
-					index = index + 2
-					loopPlayGetCard(index)
-				end,0.5)
+				TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,self.getCardPos.y),false,function ()
+					if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
+						self.getCard.node:removeFromParent()
+						ssdump(cardInfo[index + 1],"花牌数据")
+						sslog(self.logTag,"播放摸到牌的补花动画")
+						index = index + 2
+						loopPlayGetCard(index)
+					end
+				end)
 			end
 
 		end)
@@ -434,11 +433,12 @@ function TmjOtherPlayer:buHuaCard(cardInfo)
 			else
 				sslog(self.logTag,"补花时，摸到正常的牌")
 			end
-			performWithDelay(self,function ()
+			
+			TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,self.getCardPos.y),false,function ()
 				sslog(self.logTag,"补花动画播放完成")
 				index = index + 2
 				loopGetCardBuHua(cardInfos,index)
-			end,1)
+			end)
 			
 		else
 			--最后一张了，不是花

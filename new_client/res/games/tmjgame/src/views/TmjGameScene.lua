@@ -134,23 +134,24 @@ function TmjGameScene:onEnter()
 	[1]=0,
 	[2]=1,
 	[3]=1,
-	[4]=0,
-	[5]=2,
-	[6]=1,
-	[7]=0,
-	[8]=0,
-	[9]=0,
+	[4]=2,
+	[5]=1,
+	[6]=3,
+	[7]=1,
+	[8]=2,
+	[9]=2,
 	[10]=0,
 	[11]=0,
 	[12]=0,
-	[13]=2,
+	[13]=0,
 	[14]=0,
 	[15]=0,
 	[16]=0,
 		}
 	local TmjCardTip = import("..cfg.TmjCardTip")
 	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
-	ssdump(TmjCardTip.isTingHu(arr,1))--]]
+	ssdump(TmjCardTip.isTingHu(arr,6))
+	ssdump(TmjCardTip.isAnGang(arr,6))--]]
 --[[	local cards = {}
 	cards.shou_pai = {1,1,2,2,4,4,6,6,8,13,13,14,14 }
 	ssdump(TmjFanCalculator.is_hu(cards,8))--]]
@@ -500,6 +501,9 @@ function TmjGameScene:showResultLayer()
 	local otherData = consultData.players[otherCharId]
 	
 	local resultData = CustomHelper.copyTab(selfData)
+	if consultData.winChairId then --不是留局
+		resultData = CustomHelper.copyTab(consultData.players[consultData.winChairId])
+	end
 	--players
 	resultData.me = {}
 	resultData.me.extraCards = CustomHelper.copyTab(selfData.extraCards)

@@ -64,6 +64,8 @@ function GFlowerGameDataManager:ctor()
 	self.isNoMoneyCompare   = false         -- 没钱是否可以比牌
 	self.isMoreRound        = false         -- 轮数是否更多
 	self.isLastGame         = false         -- 是否是最后一局
+	self.isReconnect        = false         -- 是否是重连
+	self.privateRoomNum     = 0             -- 私人房间号
 end
 
 -- 初始化数据
@@ -179,10 +181,12 @@ end
 
 -- 重连获取房间信息
 function GFlowerGameDataManager:_onMsg_ReConnectInfo( infoTab )
-    --dump(infoTab,"infoTab")
+    dump(infoTab,"infoTab")
     -- 首先就初始化自己id
     self.myServerChairId = infoTab.chair_id
-
+	
+	self.isReconnect = true
+	
     local players = infoTab.pb_visual_info
     if players ~= nil then
         for k, player in pairs(players) do
@@ -242,6 +246,7 @@ function GFlowerGameDataManager:S2C_ZhaJinHuaTabCFG(msgTab)
 	self.isPrivateRoom = true
 	self.isInPRReady   = true
 	self.selScoreIdx   = msgTab.score_type
+	self.privateRoomNum = msgTab.private_room_id
 end
 
 function GFlowerGameDataManager:S2C_ZhaJinHuaTabVote(msgTab)
@@ -253,7 +258,7 @@ function GFlowerGameDataManager:setInPRJiesanState(stat )
 end
 
 function GFlowerGameDataManager:S2C_ShowTax(msgTab)
-    dump(msgTab, "税收开关--------------------------------")
+    --dump(msgTab, "税收开关--------------------------------")
     local isshow_shuishou = msgTab.flag
 
     if isshow_shuishou == GFlowerConfig.TAX.OPEN then

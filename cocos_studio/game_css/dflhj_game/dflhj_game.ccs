@@ -1,0 +1,81 @@
+<Solution>
+  <PropertyGroup Name="dflhj_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Image Name="anniudi.png" />
+          <Image Name="anniudi_1.png" />
+          <Image Name="anniudi_2.png" />
+          <Image Name="caidan_1.png" />
+          <Image Name="caidan_2.png" />
+          <Image Name="csfpk_2.png" />
+          <Image Name="dating.png" />
+          <Image Name="fanpai.png" />
+          <Image Name="gb.png" />
+          <Image Name="gb_2.png" />
+          <Image Name="guize.png" />
+          <Image Name="gz.png" />
+          <Image Name="gz_2.png" />
+          <Image Name="huifang.png" />
+          <Image Name="huifang_2.png" />
+          <Image Name="icon_jbp.png" />
+          <Image Name="icon_zz.png" />
+          <Image Name="item_10.png" />
+          <Image Name="item_9.png" />
+          <Image Name="item_a.png" />
+          <Image Name="item_j.png" />
+          <Image Name="item_jinchuan.png" />
+          <Image Name="item_jingui.png" />
+          <Image Name="item_k.png" />
+          <Image Name="item_yinchuan.png" />
+          <Image Name="item_yingui.png" />
+          <Image Name="jbs_1.png" />
+          <Image Name="jbs_2.png" />
+          <Image Name="jbs_3.png" />
+          <Image Name="jia.png" />
+          <Image Name="jia_2.png" />
+          <Image Name="jian.png" />
+          <Image Name="jian_2.png" />
+          <Image Name="jindutiao.png" />
+          <Image Name="kaishi.png" />
+          <Image Name="kaishi_2.png" />
+          <Image Name="ld_2.png" />
+          <Image Name="peilvbiao.png" />
+          <Image Name="shen_1.png" />
+          <Image Name="shen_2.png" />
+          <Image Name="shen_3.png" />
+          <Image Name="shen_4.png" />
+          <Image Name="shuzhi_win.png" />
+          <Image Name="shuzi_cs.png" />
+          <Image Name="shuzi_zj.png" />
+          <Image Name="tuichu.png" />
+          <Image Name="tx.png" />
+          <Image Name="tx_2.png" />
+          <Image Name="x1_1.png" />
+          <Image Name="x1_2.png" />
+          <Image Name="x2_1.png" />
+          <Image Name="x2_2.png" />
+          <Image Name="x3_1.png" />
+          <Image Name="x3_2.png" />
+          <Image Name="x4_1.png" />
+          <Image Name="x4_2.png" />
+          <Image Name="x5_1.png" />
+          <Image Name="x5_2.png" />
+          <Image Name="xiaoguotu1.jpg" />
+          <Image Name="xiaoguotu2.jpg" />
+          <Image Name="yaman.png" />
+          <Image Name="yaman_2.png" />
+          <Image Name="yinxiao.png" />
+          <Image Name="yinxiao_2.png" />
+          <Image Name="yinyue.png" />
+          <Image Name="yinyue_2.png" />
+          <Image Name="zd.png" />
+          <Image Name="zd_2.png" />
+        </Folder>
+        <Project Name="DflhjGameSceneCCS.csd" Type="Layer" />
+        <Project Name="DflhjGameTipsCCS.csd" Type="Layer" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

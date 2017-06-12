@@ -77,7 +77,7 @@ end
 ---重新连接成功
 function GFlowerGameScene:callbackWhenReloginAndGetPlayerInfoFinished()
     GFlowerGameScene:getInstance().super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
-    --print("+++++++++++++程序没关闭的情况重连+++++++++++++重新连接成功")
+    print("+++++++++++++程序没关闭的情况重连+++++++++++++重新连接成功")
     GFlowerGameManager:getInstance():sendMsgReconnectionPlay()
     if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
         CustomHelper.showAlertView(
@@ -152,7 +152,7 @@ function GFlowerGameScene:ctor()
 
     -- 调用父类
     GFlowerGameScene.super.ctor(self);
-    local CCSLuaNode =  requireForGameLuaFile("GameZJHMain")
+    local CCSLuaNode =  requireForGameLuaFile("GameZJHMainCCS")
     self.m_widget = CCSLuaNode:create().root;
     self.csNode = self.m_widget
     self:addChild(self.csNode);
@@ -521,7 +521,7 @@ end
 
 --  初始化私人房间相关UI
 function GFlowerGameScene:initPrivateRoomUI()
-	local CCSLuaNode =  requireForGameLuaFile("GameZJHPRoom")
+	local CCSLuaNode =  requireForGameLuaFile("GameZJHPRoomCCS")
     self._privateRoot = CCSLuaNode:create().root;
 	self:addChild(self._privateRoot);
 	
@@ -1145,7 +1145,7 @@ function GFlowerGameScene:InitOtherUi()
     self.rotateLight:setVisible(false)
 
     -- 结算界面 --
-	local CCSLuaNode =  requireForGameLuaFile("GameZJHJSuan")
+	local CCSLuaNode =  requireForGameLuaFile("GameZJHJSuanCCS")
     self.jsroot = CCSLuaNode:create().root;
 	self:addChild(self.jsroot);
     self.jiesuan = self.jsroot:getChildByName("jiesuan")
@@ -1164,6 +1164,7 @@ function GFlowerGameScene:InitOtherUi()
     self.ready_time_di = self.jiesuan:getChildByName("Image_jiesuan_di")
     --self.ready_time_di:setPosition(640 + 130, 147)
     self.ready_time = self.ready_time_di:getChildByName("Label_CountDown")
+	self.ready_time:setScale(0.8)
 
     -- 倒计时转圈动画
     if self.jiesuan_djs_ani == nil then
@@ -1240,7 +1241,12 @@ function GFlowerGameScene:InitOtherUi()
 	self.btn_proomPro = self.m_widget:getChildByName("btn_proompro")
 	self.btn_proomPro:addTouchEventListener(handler(self,self._onBtnTouched_PRProClick))
 	self.btn_proomPro:setVisible(false)
-
+	
+	-- 私人房间房间号 --
+	self.txtPRoomTxt = self.m_widget:getChildByName("txt_proomtext")
+	self.txtPRoomNum = self.m_widget:getChildByName("txt_proomnum")
+	self.txtPRoomNum:setVisible(false)
+	self.txtPRoomTxt:setVisible(false)
 end
 
 function GFlowerGameScene:setImageBeginVisible(Visible)
@@ -1299,8 +1305,8 @@ function GFlowerGameScene:_onBtnTouched_GameOver(sender, eventType)
 			--todo
 				return
 			end
-            self.btn_ready:setTouchEnabled(false)
-            self.btn_ready:setBright(false)
+            self.jsbtn_ready:setTouchEnabled(false)
+            self.jsbtn_ready:setBright(false)
             self.readyImage:loadTexture(GFlowerConfig.IMAGE_JIESUAN.READY_DISABLE)
 
             self:dealJieSuanReady()
@@ -2285,6 +2291,12 @@ function GFlowerGameScene:On_initPrivateRoom()
 		
 	local masterId = self._logic:getPRMaster()
 	self.playerPRoomMaster[masterId]:setVisible(true)
+	
+	if self._logic:isPRMaster() == true then
+		self.txtPRoomNum:setString(string.format(self._logic.privateRoomNum))
+		self.txtPRoomNum:setVisible(true)
+		self.txtPRoomTxt:setVisible(true)
+	end
 end
 
 -- 隐藏所有玩家手牌
@@ -2402,6 +2414,24 @@ function GFlowerGameScene:On_ZhaJinHuaGiveUp(giveup_chair, next_chair)
     self:UsingDaojishi(self._logic.doing_id, GFlowerConfig.COUNT_DOWN_TIME)
     self:MoveLight(self._logic.doing_id)
     --end
+	
+	--  如果选择了跟到底
+	if self._logic.gendaodi == true and self._logic.doing_id  == GFlowerConfig.CHAIR_SELF then
+		--print("-----------------跟到底 普通跟注")
+		local max_round = GFlowerConfig.MAX_ROUND + 1
+		if self._logic.isPrivateRoom == true then
+			if self._logic.isMoreRound == true then
+				max_round = GFlowerConfig.PR_MAX_ROUND + 1
+			end
+		end
+		if self._logic.roundNum <  max_round then
+			self.genDaoDiDelay = 1
+			self:removeScheduler()
+			self._scheduler = scheduler:scheduleScriptFunc(function(dt)
+						self:_onGenDaodiCountDown()
+						end, 1, false)
+		end
+	end
 
     -- 刷新下排按钮
     self:UpdateMenuBtn()
@@ -2760,6 +2790,7 @@ end
 function GFlowerGameScene:_onInterval()
 
     self.Txt_StartCountDown:setString(self.ready_timeNum.."S")
+	
     self.ready_time:setString(self.ready_timeNum.."S")
     self.ready_timeNum = self.ready_timeNum - 1
     
@@ -4025,7 +4056,6 @@ function GFlowerGameScene:on_msg_ZhaJinHuaGetSitDown(msgTab)
 end
 
 function GFlowerGameScene:on_msg_Ready(msgTab)
-	dump(msgTab,"msgTab")
     local server_chairid = msgTab.ready_chair_id
     local client_chair_id = self._logic:getLocalChairId(server_chairid)
 
@@ -4041,7 +4071,6 @@ function GFlowerGameScene:on_msg_Ready(msgTab)
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaAddScore(msgTab)
-    dump(msgTab, "msgTab")
     local server_add_score_id   = msgTab.add_score_chair_id
     local server_next_id        = msgTab.cur_chair_id
     local client_add_score_id   = self._logic:getLocalChairId(server_add_score_id)
@@ -4184,9 +4213,14 @@ function GFlowerGameScene:on_msg_ZhaJinHuaWatch(msgTab)
 
     -- 如果是私人房间，则进入准备阶段
 	if self._logic.isPrivateRoom == true then
-		self:clearPRReadyUI()
-		self:refreshPRReadyUI()
-		self._pnlReady:setVisible(true)
+		if self._logic.isReconnect == true then
+			self._pnlReady:setVisible(false)
+			self._logic.isInPRReady = false
+		else
+			self:clearPRReadyUI()
+			self:refreshPRReadyUI()
+			self._pnlReady:setVisible(true)
+		end
 	else
 		 -- 如果房间 不处于战斗状态 玩家进入后强制准备
 		if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
@@ -4211,7 +4245,9 @@ function GFlowerGameScene:on_msg_ZhaJinHuaEnd(msgTab)
 end
 
 function GFlowerGameScene:on_msg_EnterRoomAndSitDown(msgTab)
-    print("GFlowerGameScene:on_msg_EnterRoomAndSitDown  ")
+	dump(msgTab, "GFlowerGameScene ++++++++++++++++ msgTab")
+    if self._logic.isPrivateRoom == true and self._logic:isPRMaster() == true then
+	end
 end
 
 function GFlowerGameScene:on_msg_NotifySitDown(msgTab)
@@ -4267,8 +4303,13 @@ end
 function GFlowerGameScene:on_msg_ZhaJinHuaTabTiRen(msgTab)
 	local serverchairid  = msgTab.chair_id
 	local clientchairid  = self._logic:getLocalChairId(serverchairid)
-	self:clearPRReadyUI()
-	self:refreshPRReadyUI()
+	
+	if serverchairid == self._logic.myServerChairId then
+		self:returnToHallScene()
+	else
+		self:clearPRReadyUI()
+		self:refreshPRReadyUI()
+	end
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaLostCards(msgTab)

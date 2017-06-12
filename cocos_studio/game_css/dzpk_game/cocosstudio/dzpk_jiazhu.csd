@@ -155,14 +155,14 @@
                     <PreSize X="0.1895" Y="0.5632" />
                     <FileData Type="Normal" Path="game_res/mainui/dz_jia.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_1" ActionTag="828327751" Tag="181" IconVisible="False" LeftMargin="102.5769" RightMargin="91.4231" TopMargin="20.0285" BottomMargin="30.9715" FontSize="36" LabelText="500" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="54.0000" Y="36.0000" />
+                  <AbstractNodeData Name="Text_1" ActionTag="828327751" Tag="181" IconVisible="False" LeftMargin="94.5767" RightMargin="9.4233" TopMargin="20.0285" BottomMargin="30.9715" FontSize="36" LabelText="50000000" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="144.0000" Y="36.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="102.5769" Y="48.9715" />
+                    <Position X="94.5767" Y="48.9715" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4136" Y="0.5629" />
-                    <PreSize X="0.2177" Y="0.4138" />
+                    <PrePosition X="0.3814" Y="0.5629" />
+                    <PreSize X="0.5806" Y="0.4138" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="255" G="255" B="255" />
                   </AbstractNodeData>

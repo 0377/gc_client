@@ -5,6 +5,7 @@
       <RootFolder Name=".">
         <Folder Name="game_res">
           <Image Name="baobo_an.png" />
+          <Image Name="baobo_an_qr.png" />
           <Image Name="baobo_art_quxiao.png" />
           <Image Name="baobo_huichouma.png" />
           <Image Name="baobo_zdks_icon.png" />
@@ -17,6 +18,7 @@
           <Image Name="baobo_zjh_anniu_q40.png" />
           <Image Name="baobo_zjh_art_bp.png" />
           <Image Name="baobo_zjh_art_gdd.png" />
+          <Image Name="baobo_zjh_art_gdd_2.png" />
           <Image Name="baobo_zjh_art_gz.png" />
           <Image Name="baobo_zjh_art_jiazhu.png" />
           <Image Name="baobo_zjh_art_jz.png" />
@@ -42,6 +44,7 @@
           <Image Name="baobo_zjh_dengdai_3.png" />
           <Image Name="baobo_zjh_di_2.png" />
           <Image Name="baobo_zjh_gbc.png" />
+          <Image Name="baobo_zjh_guang.png" />
           <Image Name="baobo_zjh_icon_bx.png" />
           <Image Name="baobo_zjh_icon_gou.png" />
           <Image Name="baobo_zjh_icon_gz.png" />
@@ -66,15 +69,47 @@
           <Image Name="baobo_zjh_zhuntaik.png" />
           <Image Name="baobo_zjh_zhuomian.png" />
           <Image Name="baobo_zjh_zijiguang.png" />
+          <Image Name="bk_bar.png" />
+          <Image Name="bt.png" />
+          <Image Name="btzjh.png" />
+          <Image Name="di.png" />
+          <Image Name="dik.png" />
+          <Image Name="dt.png" />
+          <Image Name="fangjian_shuxing.png" />
+          <Image Name="fjsx.png" />
+          <Image Name="fjsx1.png" />
+          <Image Name="fz.png" />
+          <Image Name="jujue.png" />
+          <Image Name="jujue1.png" />
           <Image Name="laba.png" />
+          <Image Name="min_d.png" />
+          <Image Name="nc.png" />
           <Image Name="poker_back.png" />
           <Image Name="s1.png" />
+          <Image Name="select_f.png" />
+          <Image Name="shuyin_tongji.png" />
+          <Image Name="sy.png" />
+          <Image Name="tongyi.png" />
+          <Image Name="tongyi1.png" />
+          <Image Name="txd.png" />
+          <Image Name="txd1.png" />
+          <Image Name="y.png" />
+          <Image Name="yd.png" />
+          <Image Name="yj.png" />
+          <Image Name="yjtx.png" />
+          <Image Name="yuobianpaidi.png" />
+          <Image Name="yuobianpaidi1.png" />
+          <Image Name="zb.png" />
+          <Image Name="zb1.png" />
+          <Image Name="zjh_cmk_bg.png" />
           <Image Name="zjh_gendaodi_bg.png" />
           <Image Name="zjh_guize_bg.png" />
           <Image Name="zjh_icon_vs.png" />
           <Image Name="zjh_icon_vs_bg.png" />
           <Image Name="zjh_jieshao_paixing.png" />
           <Image Name="zjh_jiesuan_timedi.png" />
+          <Image Name="zjh_liaotian_bg2.png" />
+          <Image Name="zjh_srfj.png" />
           <Image Name="zjh_tanchuang_bg.png" />
           <Image Name="zjh_text_gz.png" />
           <Image Name="zjh_tongji_bg.png" />
@@ -87,7 +122,9 @@
           <Image Name="zjh_wanjiachouma_bg.png" />
           <Image Name="zjh_xiazhuchouma_bg.png" />
         </Folder>
-        <Project Name="GameZJHCCS.csd" Type="Scene" />
+        <Project Name="GameZJHJSuanCCS.csd" Type="Scene" />
+        <Project Name="GameZJHMainCCS.csd" Type="Scene" />
+        <Project Name="GameZJHPRoomCCS.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

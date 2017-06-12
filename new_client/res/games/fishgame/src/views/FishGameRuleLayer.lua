@@ -2,41 +2,52 @@ local FishGameRuleLayer = class("FishGameRuleLayer", function()
     return display.newLayer()
 end)
 
-function FishGameRuleLayer:ctor()
-    self:setTouchEnabled(true)
-    CustomHelper.addWholeScrennAnim(self)
+local Config_btns = {
+    "rule_btn_normal",
+    "rule_btn_big",
+    "rule_btn_boss",
+    "rule_btn_special",
+}
 
+function FishGameRuleLayer:ctor()
+    self:setContentSize(display.width, display.height)
+    self:setTouchEnabled(true)
+    self:setSwallowsTouches(true)
+    self:registerScriptTouchHandler(handler(self, self._onTouched_TTTTT))
+    CustomHelper.addWholeScrennAnim(self)
 
     self._mainWnd = requireForGameLuaFile("FishGameRuleCCS"):create().root:addTo(self)
 
-
     self._pnlRuleWnd = tolua.cast(CustomHelper.seekNodeByName(self._mainWnd, "RuleView"), "ccui.Layout")
 
+    local pageview = CustomHelper.seekNodeByName(self._pnlRuleWnd, "PageView_1")
+    pageview:addEventListener(handler(self, self.onPageviewEvent))
+    self._pageview = pageview
 
-    self._btnClose = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_close"), "ccui.Button")
-    self._btnClose:addTouchEventListener(handler(self, self.onBtnRuleClose))
+    local btn_close = CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_close")
+    btn_close:addTouchEventListener(handler(self, self.onBtnRuleClose))
 
-    self._btnNormal = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_normal"), "ccui.Button")
-    self._btnNormal:addTouchEventListener(handler(self, self.onBtnRuleNormal))
+    for k, v in ipairs(Config_btns) do
+        local btn = CustomHelper.seekNodeByName(self._pnlRuleWnd, v)
+        btn:addTouchEventListener(function(sender, eventType)
+            if eventType == ccui.TouchEventType.began then
+            elseif eventType == ccui.TouchEventType.ended then
+                GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+                self._pageview:scrollToPage(k - 1)
+                self:updateSelectedTab(k)
+            end
+        end)
+    end
 
-    self._btnBigFish = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_big"), "ccui.Button")
-    self._btnBigFish:addTouchEventListener(handler(self, self.onBtnRuleBigFish))
+    self:updateSelectedTab(1)
+end
 
-    self._btnSpecial = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_special"), "ccui.Button")
-    self._btnSpecial:addTouchEventListener(handler(self, self.onBtnRuleSpecial))
-
-    self._btnBoss = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "rule_btn_boss"), "ccui.Button")
-    self._btnBoss:addTouchEventListener(handler(self, self.onBtnRuleBoss))
-
-    self._pnlNormal = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_normal"), "ccui.Layout")
-
-    self._pnlBigFish = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_bigfish"), "ccui.Layout")
-
-    self._pnlSpecial = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_special"), "ccui.Layout")
-
-    self._pnlBoss = tolua.cast(CustomHelper.seekNodeByName(self._pnlRuleWnd, "panel_boss"), "ccui.Layout")
-
-    self:dealRuleSelect(FishGameConfig.RULE_SELECT.NORMAL)
+function FishGameRuleLayer:_onTouched_TTTTT(eventType, x, y)
+    if eventType == "began" then
+        return true
+    elseif eventType == "ended" then
+        self:removeSelf()
+    end
 end
 
 function FishGameRuleLayer:onBtnRuleClose(sender, eventType)
@@ -48,92 +59,20 @@ function FishGameRuleLayer:onBtnRuleClose(sender, eventType)
     end
 end
 
-function FishGameRuleLayer:onBtnRuleNormal(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
+function FishGameRuleLayer:onPageviewEvent(sender, ...)
+    local index = sender:getCurrentPageIndex() + 1
 
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.NORMAL)
-    end
+    self:updateSelectedTab(index > #Config_btns and #Config_btns or index)
 end
 
-function FishGameRuleLayer:onBtnRuleBigFish(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.BIGFISH)
-    end
-end
-
-function FishGameRuleLayer:onBtnRuleSpecial(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.SPECIAL)
-    end
-end
-
-function FishGameRuleLayer:onBtnRuleBoss(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-    elseif eventType == ccui.TouchEventType.ended then
-        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
-
-        self:dealRuleSelect(FishGameConfig.RULE_SELECT.BOSS)
-    end
-end
-
-
-function FishGameRuleLayer:dealRuleSelect(sel)
-    self._ruleWndSelect = sel
-    if sel == FishGameConfig.RULE_SELECT.NORMAL then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(true)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(false)
-
-    elseif sel == FishGameConfig.RULE_SELECT.BIGFISH then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(true)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(false)
-
-    elseif sel == FishGameConfig.RULE_SELECT.SPECIAL then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(false)
-        self._pnlSpecial:setVisible(true)
-
-    elseif sel == FishGameConfig.RULE_SELECT.BOSS then
-
-        self._btnNormal:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBigFish:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-        self._btnBoss:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_N)
-        self._btnSpecial:loadTextureNormal(FishGameConfig.BTN_IMG.RULE_P)
-
-        self._pnlNormal:setVisible(false)
-        self._pnlBigFish:setVisible(false)
-        self._pnlBoss:setVisible(true)
-        self._pnlSpecial:setVisible(false)
+function FishGameRuleLayer:updateSelectedTab(index)
+    for k, v in ipairs(Config_btns) do
+        local btn = CustomHelper.seekNodeByName(self._pnlRuleWnd, v)
+        if k == index then
+            btn:setEnabled(false)
+        else
+            btn:setEnabled(true)
+        end
     end
 end
 

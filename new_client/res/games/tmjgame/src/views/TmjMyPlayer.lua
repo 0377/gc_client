@@ -38,6 +38,7 @@ function TmjMyPlayer:ctor(pInfo)
 	self.showChooseIndex = nil --显示听牌提示的索引值
 	
 	
+	self.playCardIndex = nil --出牌的位置
 end
 
 function TmjMyPlayer:onEnter()
@@ -120,6 +121,7 @@ function TmjMyPlayer:onTouchListener(event)
 					if self.isChooseTingCard then --如果是要听 那么打牌的时候要发送听的请求
 						TmjGameManager:getInstance():requestTing()
 					end
+					self.playCardIndex = self.curChooseIndex
 					TmjGameManager:getInstance():requestPlayCard(localVal)
 					
 				else
@@ -273,10 +275,13 @@ function TmjMyPlayer:checkFullCard(isOther,inputCard)
 	local operations = {}
 	if self.isTingState then --如果处于听状态，只能判断胡，杠，补杠，暗杠
 		if isOther then
-			checkToInsert(inputCard.val,TmjCardTip.CardOperation.Gang,operations)
+			--checkToInsert(inputCard.val,TmjCardTip.CardOperation.Gang,operations)--听牌的状态，其他人出的牌只能判断胡
+			--如果这个杠，不影响叫
+			self:checkTingGangEnable(inputCard.val,TmjCardTip.CardOperation.Gang,operations)
 		else
-			checkToInsert(inputCard.val,TmjCardTip.CardOperation.AnGang,operations)
-			checkToInsert(inputCard.val,TmjCardTip.CardOperation.BuGang,operations)
+			--checkToInsert(inputCard.val,TmjCardTip.CardOperation.AnGang,operations)
+			self:checkTingGangEnable(inputCard.val,TmjCardTip.CardOperation.AnGang,operations)
+			checkToInsert(inputCard.val,TmjCardTip.CardOperation.BuGang,operations) --自己在听牌的时候，只能补杠和胡牌
 			--checkToInsert(inputCard.val,TmjCardTip.CardOperation.Ting,operations)
 		end
 		
@@ -353,6 +358,61 @@ function TmjMyPlayer:checkFullCard(isOther,inputCard)
 	end)
 	return operations
 end
+--检测听状态下是否能杠，不影响叫改变
+--@param val 牌值
+--@param operation 操作类型
+--@param tOperation 操作集合
+function TmjMyPlayer:checkTingGangEnable(val,operation,tOperation)
+	if not self.isTingState then
+		return
+	end
+	if operation~=TmjCardTip.CardOperation.AnGang and operation~=TmjCardTip.CardOperation.Gang then
+		return
+	end
+	--判断操作，如果满足，放入到操作集合中
+		--@param val 牌值
+		--@param operation 操作类型
+		--@param tOperation 操作集合
+	local function checkToInsert(val,operation,tOperation)
+		local result = self:checkOperation(val,operation)
+		if result then
+			local hasOperation = false
+			if tOperation then
+				for _,v in pairs(tOperation) do
+					if v.type == operation then
+						hasOperation = true
+						break
+					end
+				end
+			end
+			--防止重复添加
+			if not hasOperation then
+				table.insert(tOperation,{type = operation,weight = TmjCardTip.operationWeight[operation] or 0,result = result })
+			end
+			return true
+		end
+		return false
+	end
+	local canHuCard = false --是否有
+	local tempCardsArr = CustomHelper.copyTab(self.cardsArray)
+	if self:checkOperation(val,operation) then
+		tempCardsArr[val] = 0 --杠之后，判断是否有叫，也就是，摸一张就能胡的，穷举法 15张牌(除了杠的这张)
+		for i=TmjConfig.Card.R_1,TmjConfig.Card.R_White do
+			if i~=val and TmjCardTip.s_cmds[TmjCardTip.CardOperation.Hu](tempCardsArr,i) then
+				--能胡
+				if checkToInsert(val,operation,tOperation) then
+					canHuCard = true
+				end
+				
+			end
+		end
+		if not canHuCard then --不能胡 发送过
+			TmjGameManager:getInstance():requestPass()
+		end
+	end
+	
+
+end
 
 --设置头像信息
 --@headInfo 头像信息
@@ -368,6 +428,10 @@ end
 function TmjMyPlayer:createCards(cards,isInstance,dealCallbackFun)
 	TmjMyPlayer.super.createCards(self,cards,isInstance,dealCallbackFun)
 	self:showFrontCard()
+	if isInstance and self.isTingState then
+		--听牌后，所有手里的牌，变灰色
+		self:setCardGray()
+	end
 end
 
 --设置听状态
@@ -375,6 +439,8 @@ function TmjMyPlayer:setTingState(isTing)
 	if not self.isTingState and isTing then --之前没听，现在听了，UI变化
 		self:putDownCards()
 		self:reSetCardGray()
+		--听牌后，所有手里的牌，变灰色
+		self:setCardGray()
 		--显示听
 		TmjConfig.playSound(TmjConfig.cardOperation.Ting,self:isMan())
 		if not TmjHelper.isLuaNodeValid(self.tingNode) then
@@ -687,6 +753,26 @@ function TmjMyPlayer:reSetCardGray()
 	end
 end
 
+function TmjMyPlayer:setCardGray()
+	if self.handCards then
+		table.walk(self.handCards,function (TmjCard,k)
+			TmjCard = TmjCard.node
+			if TmjCard then
+				TmjCard:setGray()
+			end
+		end)
+	end
+	if not self.isTingState then
+		if self.getCard then
+			local TmjCard = self.getCard.node
+			if TmjCard then
+				TmjCard:reSetGray()
+			end
+			
+		end
+	end
+
+end
 function TmjMyPlayer:doChooseOperation(operation,index)
 	self:stopPlaySchedule()
 	self:stopDecisionSchedule()
@@ -746,7 +832,9 @@ function TmjMyPlayer:closeOperationPanel(ignoreOperation)
 		self:closeTingHuInfo()
 		TmjOperationFactory:getInstance():clearOperation()
 	end
-	self:reSetCardGray() --重置灰色
+	if not self.isTingState then
+		self:reSetCardGray() --重置灰色
+	end
 end
 --判断自己是否是听状态，是那就直接出牌
 --@param 还剩余的操作时间
@@ -1011,17 +1099,17 @@ function TmjMyPlayer:getOneCard(cardInfo)
 				self.huaCount = self.huaCount + 1
 				self:setHeadInfo({ huaCount = self.huaCount })
 				TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
-				if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
-					self.getCard.node:removeFromParent()
-					ssdump(cardInfo[index + 1],"花牌数据")
-					sslog(self.logTag,"播放摸到牌的补花动画")
-					
-				end
 				
-				performWithDelay(self,function ()
+				TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,self.getCardPos.y),false,function ()
+					if self.getCard and TmjHelper.isLuaNodeValid(self.getCard.node) then
+						self.getCard.node:removeFromParent()
+						ssdump(cardInfo[index + 1],"花牌数据")
+						sslog(self.logTag,"播放摸到牌的补花动画")
+						
+					end
 					index = index + 2
 					loopPlayGetCard(index)
-				end,0.5)
+				end)
 				
 			end
 
@@ -1055,17 +1143,34 @@ function TmjMyPlayer:playCard(cardIndex)
 	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
 	sslog(self.logTag,"服务器通知我打一张牌")
 	if type(cardIndex)=="table" then
-		for i,TmjCard in pairs(self.handCards) do
-			local info = TmjCard.info
-			if info.val == cardIndex.val then
-				cardIndex = i
-				break
+		if self.playCardIndex then
+			cardIndex = self.playCardIndex
+			self.playCardIndex = nil
+		else
+			if self.getCard and self.getCard.info and self.getCard.info.val ==cardIndex.val then
+				cardIndex = -1
+			else
+				local tempCardIndex = nil
+				for i,TmjCard in pairs(self.handCards) do
+					local info = TmjCard.info
+					if info.val == cardIndex.val then
+						tempCardIndex = i
+						--cardIndex = i
+						--break
+					end
+				end
+				if tempCardIndex then
+					cardIndex = tempCardIndex
+				end
+			end
+
+			--手牌中没有
+			if type(cardIndex)=="table" then
+				cardIndex = -1
 			end
 		end
-		--手牌中没有
-		if type(cardIndex)=="table" then
-			cardIndex = -1
-		end
+		
+
 	end
 	
 	sslog(self.logTag,"把牌打出去 "..cardIndex)
@@ -1093,7 +1198,9 @@ function TmjMyPlayer:playCard(cardIndex)
 	else
 		sslog(self.logTag,"哪有这张牌啊，打了一张没有的牌"..cardIndex)
 	end
-	
+	if self.isTingState then
+		self:setCardGray() --听牌状态，把手牌设置成灰色
+	end
 end
 
 --吃
@@ -1262,6 +1369,7 @@ function TmjMyPlayer:gangCard(cardInfo)
 			removedCard = self:removeHandCard(cardInfo.val)
 		end
 		if removedCard then
+			removedCard.node:reSetGray()
 			table.insert(tempGangArr,removedCard)
 		else
 			sslog(self.logTag,"杠的时候出问题了，没这牌："..v)
@@ -1419,6 +1527,7 @@ function TmjMyPlayer:anGangCard(cardInfo)
 		for i=1,hangGangCount do
 			local removedCard = self:removeHandCard(cardInfo.val)
 			if removedCard then
+				removedCard.node:reSetGray()
 				table.insert(tempGangArr,removedCard)
 			else
 				sslog(self.logTag,"暗杠的时候出问题了，没这牌："..v)
@@ -1472,7 +1581,7 @@ function TmjMyPlayer:huCard(cardInfo)
 end
 function TmjMyPlayer:checkToSetLastHandCard()
 	sslog(self.logTag,"我检测最后一张牌为手牌动作")
-	TmjMyPlayer.super.checkToSetLastHandCard(self)
+	return TmjMyPlayer.super.checkToSetLastHandCard(self)
 end
 --补花
 --@param cardInfo 发过来补花的牌的数量 如果补花中的牌也有花
@@ -1492,10 +1601,12 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 			if not tempCard then --花牌不在手上，在摸起来的牌上
 				tempCard = self.getCard
 			end
+			local buhuaY = display.cy
 			--删除手上现有的花牌
 			sslog(self.logTag,"删除手上现有的花牌:"..tostring(cardInfo[index].val))
 			if tempCard and tempCard.node then
 				sslog(self.logTag,"删除了手上的花牌")
+				buhuaY = tempCard.node:getPositionY()
 				tempCard.node:removeFromParent()
 				tempCard.node = nil
 				TmjHelper.removeAll(tempCard)
@@ -1503,7 +1614,8 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 			--播放补花动画
 			sslog(self.logTag,"播放补花动画")
 			TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
-			performWithDelay(self,function ()
+			
+			TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,buhuaY),false,function ()
 				sslog(self.logTag,"补花动画播放完成")
 				if cardInfo[index + 1] then
 					cardInfo[index + 1].position = self.getCardPos
@@ -1520,7 +1632,7 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 				index = index + 2
 				loopGetCardBuHua(cardInfo,index)
 				
-			end,1)
+			end)
 			
 --[[			if cardInfo[index].val >=TmjConfig.Card.R_Spring then
 				--继续播放动画
@@ -1619,6 +1731,7 @@ end
 function TmjMyPlayer:runOutCardAnim()
 	--最后一张牌的位置动画
 	local lastNode = self.outCards[#self.outCards].node
+	lastNode:reSetGray()
 	lastNode:changeState(TmjConfig.CardState.State_Discard)
 	local outPos = self:getOutPosition(#self.outCards,lastNode:getContentSize())
 	lastNode:stopAllActions()

@@ -180,15 +180,17 @@ end
 
 --这是暗杠 即手中本来就存在3张一样的，再摸到一张
 function TmjCardTip.isAnGang(array , value)
-	if((array[value]) == 4) then
+	if((array[value]) == 3) then
 		return value;
+	else
+		return false
 	end
-
+--[[
 	for i = 1 , 16 do
-		if((array[i]) == 4) then
+		if((array[i]) == 3) then
 			return i;
 		end
-	end
+	end--]]
 	return false;
 end
 

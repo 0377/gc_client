@@ -262,14 +262,14 @@ function HallSceneUILayer:initBtns()
     --绑定有奖
     self.bindRewardTipBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_kaifu"), "ccui.Button");
 
-    amartureKaiFuNode = self.bindRewardTipBtn:getChildByName("eff_99yl_ui_loading")
+    local amartureKaiFuNode = self.bindRewardTipBtn:getChildByName("eff_99yl_ui_loading")
     -- amartureNode:init("d_gamehall_anieffects")
     amartureKaiFuNode:getAnimation():play("ani_02")
 	
     self.bindRewardTipBtn:addClickEventListener(function()
     	GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     	ViewManager.alertAccountBindTipLayer()
-    end)
+	end)
     --绑定了话，就不用显示了
 	if self.myPlayerInfo:getIsGuest() == false then
     	--todo

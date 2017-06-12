@@ -175,12 +175,28 @@ end
 function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 	-- self.resultData.describe
 	local descs = string.split(self.resultData.describe,",")
+	--里边的花牌要累加起来
+	local huaCount = 0
+	local newDescs = {}
+	local huaStartIndex = nil
+	table.walk(descs,function (huTye,i)
+		if TmjConfig.CARD_HU_TYPE_INFO.HUA_PAI.name==huTye then
+			if not huaStartIndex then
+				huaStartIndex = i
+				table.insert(newDescs,huTye)
+			end
+			huaCount = huaCount + 1
+		else
+			table.insert(newDescs,huTye)
+		end
+	end)
+	
 	self.scrollView = scrollView
 	local xindex = 0
 	local yindex = 0
 	local posIndex = { {10,195},{370,560} }
 	local ydiff = 60
-	local height = ydiff*math.ceil(table.nums(descs)/2) + 20
+	local height = ydiff*math.ceil(table.nums(newDescs)/2) + 20
 	local viewSize = scrollView:getContentSize()
 	scrollView:setInnerContainerSize(cc.size(viewSize.width,height))
 	scrollView:setScrollBarEnabled(false)
@@ -195,7 +211,8 @@ function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 		local sliderBgSize = sliderBar:getParent():getContentSize()
 		self.barPosYLimit = {sliderSize.height/2,sliderBgSize.height - sliderSize.height/2 }
 	end
-	for _,v in pairs(descs) do
+
+	for _,v in pairs(newDescs) do
 		local huInfo = TmjConfig.CARD_HU_TYPE_INFO[v]
 		if huInfo then
 			if not huInfo.fan or huInfo.fan<=0 then
@@ -216,8 +233,11 @@ function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 				imgFanInfo:addTo(scrollView)
 				local y = height - ydiff*(yindex) 
 				imgFanInfo:setPosition(cc.p(posIndex[xindex][1],y))
-				
-				local imgFan = ccui.ImageView:create(string.format("game_res/fan/%dfan.png",huInfo.fan),0)
+				local showFanCount = huInfo.fan
+				if v == TmjConfig.CARD_HU_TYPE_INFO.HUA_PAI.name and huaCount>0 then
+					showFanCount = huaCount
+				end
+				local imgFan = ccui.ImageView:create(string.format("game_res/fan/%dfan.png",showFanCount),0)
 				imgFan:setAnchorPoint(cc.p(0,1.0))
 				imgFan:addTo(scrollView)
 				imgFan:setPosition(cc.p(posIndex[xindex][2],y))
