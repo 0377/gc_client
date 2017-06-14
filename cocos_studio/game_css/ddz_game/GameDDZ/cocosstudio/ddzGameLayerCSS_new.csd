@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="ddzGameLayerCSS_0" Type="Layer" ID="6d37b44c-222e-4adb-a8da-1295f094b560" Version="3.10.0.0" />
+  <PropertyGroup Name="ddzGameLayerCSS_new" Type="Layer" ID="6d37b44c-222e-4adb-a8da-1295f094b560" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />

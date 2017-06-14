@@ -60,11 +60,44 @@
           <Image Name="d.png" />
           <Image Name="ddz_dizhu_2.png" />
           <Image Name="ddz_duihuakuang.png" />
+          <Image Name="ddz_fangjianshuxinganniu.png" />
+          <Image Name="ddz_fangjianshuxinganniu_1.png" />
+          <Image Name="ddz_fangjianshuxingzi.png" />
+          <Image Name="ddz_fangjianshuxingzi_1.png" />
           <Image Name="ddz_jiabei.png" />
+          <Image Name="ddz_jujue.png" />
+          <Image Name="ddz_jujue1.png" />
+          <Image Name="ddz_jujue2.png" />
+          <Image Name="ddz_nicheng.png" />
+          <Image Name="ddz_queren.png" />
+          <Image Name="ddz_queren_1.png" />
+          <Image Name="ddz_quxiao.png" />
+          <Image Name="ddz_quxiao_1.png" />
+          <Image Name="ddz_quxiaozhunbei_dianji.png" />
+          <Image Name="ddz_quxiaozhunbei_dianji1.png" />
+          <Image Name="ddz_shezhi_kuang.png" />
+          <Image Name="ddz_shezhifangjianshux_1.png" />
+          <Image Name="ddz_shezhifangjianshux_2.png" />
+          <Image Name="ddz_shuying.png" />
+          <Image Name="ddz_shuyingtongji.png" />
+          <Image Name="ddz_sifangshezhi.png" />
+          <Image Name="ddz_sifangshuying.png" />
+          <Image Name="ddz_tankuang_1.png" />
+          <Image Name="ddz_tongyi.png" />
+          <Image Name="ddz_tongyi0.png" />
+          <Image Name="ddz_tongyi1.png" />
+          <Image Name="ddz_touxiangguanbi.png" />
+          <Image Name="ddz_touxiangkuang.png" />
+          <Image Name="ddz_transparent.png" />
           <Image Name="ddz_tuoguan_quxiaotuoguan.png" />
           <Image Name="ddz_tuoguan_tuoguanzhong.png" />
           <Image Name="ddz_tuoguan_zhezao.png" />
           <Image Name="ddz_yizhunbei.png" />
+          <Image Name="ddz_zhunbei_dianji.png" />
+          <Image Name="ddz_zhunbei_dianji_1.png" />
+          <Image Name="ddz_zhunbei_fangzhu.png" />
+          <Image Name="ddz_zhunbeik.png" />
+          <Image Name="ddz_zhunbeizi.png" />
           <Image Name="di.png" />
           <Image Name="dian_dian.png" />
           <Image Name="dianchi.png" />
@@ -105,6 +138,11 @@
         <Project Name="ddzGameTimeOutWaitCCS.csd" Type="Layer" />
         <Project Name="ddzGameUIControlLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameUIUpLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameReadyLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameExitLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameDismissLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGamePropertyLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameStatisticsLayerCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

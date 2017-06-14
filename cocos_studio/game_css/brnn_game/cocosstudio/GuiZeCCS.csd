@@ -1,12 +1,12 @@
 <GameFile>
-  <PropertyGroup Name="GuiZe" Type="Layer" ID="3e02395a-8962-4e8b-a6f3-aac97686b6e0" Version="3.10.0.0" />
+  <PropertyGroup Name="GuiZeCCS" Type="Layer" ID="3e02395a-8962-4e8b-a6f3-aac97686b6e0" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="Panel_59" Tag="289" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="2053324313" Tag="127" IconVisible="False" LeftMargin="0.9285" RightMargin="-0.9285" TopMargin="2.2288" BottomMargin="-2.2288" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_1" ActionTag="2053324313" Tag="127" IconVisible="False" LeftMargin="0.9285" RightMargin="-0.9285" TopMargin="2.2288" BottomMargin="-2.2288" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
               <AbstractNodeData Name="guiZheJieMianImg" ActionTag="1007017552" Tag="290" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="158.0000" RightMargin="158.0000" TopMargin="6.0000" BottomMargin="6.0000" LeftEage="344" RightEage="344" TopEage="158" BottomEage="158" Scale9OriginX="344" Scale9OriginY="158" Scale9Width="276" Scale9Height="392" ctype="ImageViewObjectData">

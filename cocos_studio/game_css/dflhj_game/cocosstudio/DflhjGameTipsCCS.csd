@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="37" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="base_layout" ActionTag="-1799012670" Tag="40" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="328" RightEage="328" TopEage="208" BottomEage="208" Scale9OriginX="328" Scale9OriginY="208" Scale9Width="338" Scale9Height="216" ctype="PanelObjectData">
+          <AbstractNodeData Name="base_layout" ActionTag="-1799012670" Tag="40" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TouchEnable="True" ClipAble="True" BackColorAlpha="95" ComboBoxIndex="1" ColorAngle="90.0000" LeftEage="328" RightEage="328" TopEage="208" BottomEage="208" Scale9OriginX="328" Scale9OriginY="208" Scale9Width="338" Scale9Height="216" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
               <AbstractNodeData Name="ListView_2" ActionTag="887900263" Tag="41" IconVisible="False" LeftMargin="150.8837" RightMargin="165.1163" TopMargin="121.2212" BottomMargin="50.7788" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" HorizontalType="Align_HorizontalCenter" ctype="ListViewObjectData">
@@ -57,7 +57,7 @@
             <PrePosition />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="game_res/peilvbiao.png" Plist="" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="0" G="0" B="0" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />

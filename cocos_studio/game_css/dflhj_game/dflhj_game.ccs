@@ -4,6 +4,24 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="game_res">
+          <Folder Name="anim_res">
+            <Folder Name="dfdc_win_eff">
+              <ExportJsonFile Name="dfdc_win_eff.ExportJson" />
+            </Folder>
+            <Folder Name="hap_mammon_1">
+              <ExportJsonFile Name="hap_mammon_1.ExportJson" />
+            </Folder>
+            <Folder Name="zj_jinbiyu">
+              <ExportJsonFile Name="zj_jinbiyu.ExportJson" />
+            </Folder>
+          </Folder>
+          <Folder Name="win_layout">
+            <Image Name="an_d-win.png" />
+            <Image Name="an_d-win2.png" />
+            <Image Name="an_win.png" />
+            <Image Name="an_win2.png" />
+            <Image Name="shuzhi_win.png" />
+          </Folder>
           <Image Name="anniudi.png" />
           <Image Name="anniudi_1.png" />
           <Image Name="anniudi_2.png" />
@@ -75,6 +93,7 @@
         </Folder>
         <Project Name="DflhjGameSceneCCS.csd" Type="Layer" />
         <Project Name="DflhjGameTipsCCS.csd" Type="Layer" />
+        <Project Name="DflhjWinLayerCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

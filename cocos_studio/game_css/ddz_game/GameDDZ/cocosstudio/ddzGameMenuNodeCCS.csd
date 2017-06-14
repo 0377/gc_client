@@ -72,10 +72,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="btn_info" ActionTag="-822083726" VisibleForFrame="False" Tag="393" IconVisible="False" LeftMargin="-9.3179" RightMargin="1.3179" TopMargin="302.3841" BottomMargin="-24.3841" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="58" Scale9Height="69" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="btn_info" ActionTag="-822083726" VisibleForFrame="False" Tag="393" IconVisible="False" LeftMargin="-9.3200" RightMargin="1.3200" TopMargin="302.3841" BottomMargin="-24.3841" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="58" Scale9Height="69" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="88.0000" Y="91.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="34.6821" Y="21.1159" />
+                    <Position X="34.6800" Y="21.1159" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4335" Y="0.0572" />
@@ -84,6 +84,21 @@
                     <DisabledFileData Type="Normal" Path="game_res/btn_menu_info.png" Plist="" />
                     <PressedFileData Type="Normal" Path="game_res/btn_menu_info.png" Plist="" />
                     <NormalFileData Type="Normal" Path="game_res/btn_menu_info.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="btn_property" ActionTag="1482705661" VisibleForFrame="False" Tag="263" IconVisible="False" LeftMargin="-9.3200" RightMargin="1.3200" TopMargin="401.4258" BottomMargin="-123.4258" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="58" Scale9Height="69" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="88.0000" Y="91.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="34.6800" Y="-77.9258" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4335" Y="-0.2112" />
+                    <PreSize X="1.1000" Y="0.2466" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="game_res/ddz_fangjianshuxinganniu_1.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="game_res/ddz_fangjianshuxinganniu_1.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="game_res/ddz_fangjianshuxinganniu.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

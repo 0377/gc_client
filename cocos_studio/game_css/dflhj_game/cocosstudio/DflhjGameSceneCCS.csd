@@ -32,55 +32,118 @@
                     <PreSize X="0.0984" Y="0.0843" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/shuzi_zj.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="label_dfjj" ActionTag="921364259" Tag="111" IconVisible="False" LeftMargin="222.0543" RightMargin="924.9457" TopMargin="116.6580" BottomMargin="65.9420" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="." ctype="TextAtlasObjectData">
-                    <Size X="133.0000" Y="19.0000" />
+                  <AbstractNodeData Name="label_dfjj" ActionTag="921364259" Tag="111" IconVisible="False" LeftMargin="222.0543" RightMargin="886.9457" TopMargin="116.6580" BottomMargin="65.9420" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="0" ctype="TextAtlasObjectData">
+                    <Size X="171.0000" Y="19.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="222.0543" Y="75.4420" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1735" Y="0.3742" />
-                    <PreSize X="0.1039" Y="0.0942" />
+                    <PreSize X="0.1336" Y="0.0942" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/shuzi_cs.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="label_dfzj" ActionTag="1738372072" Tag="112" IconVisible="False" LeftMargin="222.0543" RightMargin="924.9457" TopMargin="160.5753" BottomMargin="22.0247" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="." ctype="TextAtlasObjectData">
-                    <Size X="133.0000" Y="19.0000" />
+                  <AbstractNodeData Name="label_dfzj" ActionTag="1738372072" Tag="112" IconVisible="False" LeftMargin="222.0543" RightMargin="886.9457" TopMargin="160.5753" BottomMargin="22.0247" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="0" ctype="TextAtlasObjectData">
+                    <Size X="171.0000" Y="19.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="222.0543" Y="31.5247" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1735" Y="0.1564" />
-                    <PreSize X="0.1039" Y="0.0942" />
+                    <PreSize X="0.1336" Y="0.0942" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/shuzi_cs.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="label_dcdj" ActionTag="112905472" Tag="113" IconVisible="False" LeftMargin="911.0377" RightMargin="235.9623" TopMargin="116.6580" BottomMargin="65.9420" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="." ctype="TextAtlasObjectData">
-                    <Size X="133.0000" Y="19.0000" />
+                  <AbstractNodeData Name="label_dcdj" ActionTag="112905472" Tag="113" IconVisible="False" LeftMargin="873.0377" RightMargin="235.9623" TopMargin="116.6580" BottomMargin="65.9420" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="0" ctype="TextAtlasObjectData">
+                    <Size X="171.0000" Y="19.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="1044.0377" Y="75.4420" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8157" Y="0.3742" />
-                    <PreSize X="0.1039" Y="0.0942" />
+                    <PreSize X="0.1336" Y="0.0942" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/shuzi_cs.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="label_dcxj" ActionTag="-1391867438" Tag="114" IconVisible="False" LeftMargin="912.3323" RightMargin="234.6677" TopMargin="160.5753" BottomMargin="22.0247" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="." ctype="TextAtlasObjectData">
-                    <Size X="133.0000" Y="19.0000" />
+                  <AbstractNodeData Name="label_dcxj" ActionTag="-1391867438" Tag="114" IconVisible="False" LeftMargin="874.3323" RightMargin="234.6677" TopMargin="160.5753" BottomMargin="22.0247" CharWidth="19" CharHeight="19" LabelText="123456789" StartChar="0" ctype="TextAtlasObjectData">
+                    <Size X="171.0000" Y="19.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="1045.3323" Y="31.5247" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8167" Y="0.1564" />
-                    <PreSize X="0.1039" Y="0.0942" />
+                    <PreSize X="0.1336" Y="0.0942" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/shuzi_cs.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_2" ActionTag="553888018" Tag="91" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="546.5000" RightMargin="546.5000" TopMargin="65.7417" BottomMargin="18.8583" LeftEage="61" RightEage="61" TopEage="38" BottomEage="38" Scale9OriginX="61" Scale9OriginY="38" Scale9Width="65" Scale9Height="41" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_2" ActionTag="553888018" Tag="91" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="548.0360" RightMargin="544.9640" TopMargin="62.8401" BottomMargin="21.7599" LeftEage="61" RightEage="61" TopEage="38" BottomEage="38" Scale9OriginX="61" Scale9OriginY="38" Scale9Width="65" Scale9Height="41" ctype="ImageViewObjectData">
                     <Size X="187.0000" Y="117.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="640.0000" Y="77.3583" />
+                    <Position X="641.5360" Y="80.2599" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="0.3837" />
+                    <PrePosition X="0.5012" Y="0.3981" />
                     <PreSize X="0.1461" Y="0.5804" />
                     <FileData Type="Normal" Path="game_res/icon_jbp.png" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="ArmatureNode_1" ActionTag="-227326388" Tag="50" IconVisible="True" LeftMargin="532.4454" RightMargin="747.5546" TopMargin="90.5378" BottomMargin="111.0622" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_04" ctype="ArmatureNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="532.4454" Y="111.0622" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4160" Y="0.5509" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="game_res/anim_res/hap_mammon_1/hap_mammon_1.ExportJson" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="ArmatureNode_2" ActionTag="-331069343" Tag="51" IconVisible="True" LeftMargin="768.7707" RightMargin="511.2293" TopMargin="90.5378" BottomMargin="111.0622" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_03" ctype="ArmatureNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="768.7707" Y="111.0622" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.6006" Y="0.5509" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="game_res/anim_res/hap_mammon_1/hap_mammon_1.ExportJson" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="ArmatureNode_3" ActionTag="-1297687701" Tag="52" IconVisible="True" LeftMargin="512.5276" RightMargin="767.4724" TopMargin="148.9873" BottomMargin="52.6127" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_02" ctype="ArmatureNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="512.5276" Y="52.6127" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4004" Y="0.2610" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="game_res/anim_res/hap_mammon_1/hap_mammon_1.ExportJson" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="ArmatureNode_4" ActionTag="803215748" Tag="53" IconVisible="True" LeftMargin="775.7136" RightMargin="504.2864" TopMargin="149.9873" BottomMargin="51.6127" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_01" ctype="ArmatureNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="775.7136" Y="51.6127" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.6060" Y="0.2560" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="game_res/anim_res/hap_mammon_1/hap_mammon_1.ExportJson" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="ArmatureNode_5" ActionTag="1558023682" Tag="54" IconVisible="True" LeftMargin="639.1824" RightMargin="640.8176" TopMargin="120.8172" BottomMargin="80.7828" IsLoop="True" IsAutoPlay="True" CurrentAnimationName="ani_08" ctype="ArmatureNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="639.1824" Y="80.7828" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4994" Y="0.4007" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="game_res/anim_res/hap_mammon_1/hap_mammon_1.ExportJson" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Panel_1" ActionTag="1173136823" Tag="56" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" LeftMargin="1.4508" RightMargin="-1.4508" TopMargin="501.9761" BottomMargin="-501.9761" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="1280.0000" Y="201.6000" />
+                    <AnchorPoint />
+                    <Position X="1.4508" Y="-501.9761" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0011" Y="-2.4900" />
+                    <PreSize X="1.0000" Y="1.0000" />
+                    <SingleColor A="255" R="150" G="200" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
@@ -447,10 +510,10 @@
               <AbstractNodeData Name="game_layout" ActionTag="1686244899" Tag="84" IconVisible="False" LeftMargin="293.0630" RightMargin="306.9370" TopMargin="236.1242" BottomMargin="83.8758" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="680.0000" Y="400.0000" />
                 <Children>
-                  <AbstractNodeData Name="list_1" ActionTag="-1986673828" Tag="85" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="4.9999" RightMargin="545.0001" TopMargin="10.5000" BottomMargin="9.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="list_1" ActionTag="-1986673828" Tag="85" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="4.9999" RightMargin="545.0001" TopMargin="10.4800" BottomMargin="9.5200" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="130.0000" Y="380.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="4.9999" Y="199.5000" />
+                    <Position X="4.9999" Y="199.5200" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0074" Y="0.4988" />
@@ -460,10 +523,10 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="list_2" ActionTag="1333109488" Tag="86" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="142.1382" RightMargin="407.8618" TopMargin="10.5000" BottomMargin="9.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="list_2" ActionTag="1333109488" Tag="86" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="142.1382" RightMargin="407.8618" TopMargin="10.4800" BottomMargin="9.5200" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="130.0000" Y="380.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="142.1382" Y="199.5000" />
+                    <Position X="142.1382" Y="199.5200" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.2090" Y="0.4988" />
@@ -473,23 +536,23 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="list_3" ActionTag="-1789991118" Tag="87" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="279.2764" RightMargin="270.7236" TopMargin="10.5000" BottomMargin="9.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="list_3" ActionTag="-1789991118" Tag="87" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="280.7272" RightMargin="269.2728" TopMargin="13.4000" BottomMargin="6.6000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="130.0000" Y="380.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="279.2764" Y="199.5000" />
+                    <Position X="280.7272" Y="196.6000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4107" Y="0.4988" />
+                    <PrePosition X="0.4128" Y="0.4915" />
                     <PreSize X="0.1912" Y="0.9500" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="list_4" ActionTag="290608590" Tag="88" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="414.4146" RightMargin="135.5854" TopMargin="10.5000" BottomMargin="9.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="list_4" ActionTag="290608590" Tag="88" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="414.4146" RightMargin="135.5854" TopMargin="10.4800" BottomMargin="9.5200" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="130.0000" Y="380.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="414.4146" Y="199.5000" />
+                    <Position X="414.4146" Y="199.5200" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6094" Y="0.4988" />
@@ -499,10 +562,10 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="list_5" ActionTag="-938682347" Tag="89" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="549.5527" RightMargin="0.4473" TopMargin="10.5000" BottomMargin="9.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="list_5" ActionTag="-938682347" Tag="89" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="549.5527" RightMargin="0.4473" TopMargin="10.4800" BottomMargin="9.5200" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="130.0000" Y="380.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="549.5527" Y="199.5000" />
+                    <Position X="549.5527" Y="199.5200" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8082" Y="0.4988" />

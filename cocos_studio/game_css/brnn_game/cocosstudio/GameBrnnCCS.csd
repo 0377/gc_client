@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="GameBrnn" Type="Layer" ID="8a34a97f-e28a-4ced-94cf-0114df198b4f" Version="3.10.0.0" />
+  <PropertyGroup Name="GameBrnnCCS" Type="Layer" ID="8a34a97f-e28a-4ced-94cf-0114df198b4f" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -1289,7 +1289,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Panel_guanzhan" ActionTag="413490137" VisibleForFrame="False" Tag="187" IconVisible="False" RightMargin="1080.0000" TopMargin="-83.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="Panel_guanzhan" ActionTag="413490137" Tag="187" IconVisible="False" RightMargin="1080.0000" TopMargin="-83.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="200.0000" Y="200.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_guanzhan" ActionTag="-1056232805" Tag="186" IconVisible="False" LeftMargin="119.7020" RightMargin="-5.7020" TopMargin="148.8646" BottomMargin="10.1354" LeftEage="28" RightEage="28" TopEage="13" BottomEage="13" Scale9OriginX="28" Scale9OriginY="13" Scale9Width="30" Scale9Height="15" ctype="ImageViewObjectData">

@@ -1276,7 +1276,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_JettonZone" Visible="False" ActionTag="488441251" Tag="168" IconVisible="False" LeftMargin="274.0000" RightMargin="274.0000" TopMargin="636.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="241" RightEage="241" TopEage="27" BottomEage="27" Scale9OriginX="241" Scale9OriginY="27" Scale9Width="246" Scale9Height="41" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_JettonZone" ActionTag="488441251" Tag="168" IconVisible="False" LeftMargin="238.0000" RightMargin="310.0000" TopMargin="628.0000" BottomMargin="8.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="241" RightEage="241" TopEage="27" BottomEage="27" Scale9OriginX="241" Scale9OriginY="27" Scale9Width="246" Scale9Height="41" ctype="PanelObjectData">
             <Size X="732.0000" Y="84.0000" />
             <Children>
               <AbstractNodeData Name="Button_Jetton_2" ActionTag="-2024648998" Tag="169" IconVisible="False" LeftMargin="60.0000" RightMargin="548.0000" TopMargin="-70.1113" BottomMargin="24.1113" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="110" Scale9Height="117" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -1293,13 +1293,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_look" ActionTag="-1773331882" Tag="171" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="133.0000" BottomMargin="-27.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_look" ActionTag="-1773331882" Tag="171" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="132.0000" BottomMargin="-26.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
                     <Size X="92.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="62.0000" Y="-15.0000" />
+                    <Position X="62.0000" Y="-14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="-0.1154" />
+                    <PrePosition X="0.5000" Y="-0.1077" />
                     <PreSize X="0.7419" Y="0.1846" />
                     <FileData Type="Normal" Path="game_res/baobo_zjh_art_kpx2.png" Plist="" />
                   </AbstractNodeData>
@@ -1331,13 +1331,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_look" ActionTag="-960770435" Tag="174" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="133.0000" BottomMargin="-27.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_look" ActionTag="-960770435" Tag="174" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="132.0000" BottomMargin="-26.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
                     <Size X="92.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="62.0000" Y="-15.0000" />
+                    <Position X="62.0000" Y="-14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="-0.1154" />
+                    <PrePosition X="0.5000" Y="-0.1077" />
                     <PreSize X="0.7419" Y="0.1846" />
                     <FileData Type="Normal" Path="game_res/baobo_zjh_art_kpx2.png" Plist="" />
                   </AbstractNodeData>
@@ -1369,13 +1369,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_look" ActionTag="-1717706657" Tag="177" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="133.0000" BottomMargin="-27.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_look" ActionTag="-1717706657" Tag="177" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="132.0000" BottomMargin="-26.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
                     <Size X="92.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="62.0000" Y="-15.0000" />
+                    <Position X="62.0000" Y="-14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="-0.1154" />
+                    <PrePosition X="0.5000" Y="-0.1077" />
                     <PreSize X="0.7419" Y="0.1846" />
                     <FileData Type="Normal" Path="game_res/baobo_zjh_art_kpx2.png" Plist="" />
                   </AbstractNodeData>
@@ -1407,13 +1407,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_look" ActionTag="-812019478" Tag="180" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="133.0000" BottomMargin="-27.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_look" ActionTag="-812019478" Tag="180" IconVisible="False" LeftMargin="16.0000" RightMargin="16.0000" TopMargin="132.0000" BottomMargin="-26.0000" LeftEage="30" RightEage="30" TopEage="7" BottomEage="7" Scale9OriginX="30" Scale9OriginY="7" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
                     <Size X="92.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="62.0000" Y="-15.0000" />
+                    <Position X="62.0000" Y="-14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="-0.1154" />
+                    <PrePosition X="0.5000" Y="-0.1077" />
                     <PreSize X="0.7419" Y="0.1846" />
                     <FileData Type="Normal" Path="game_res/baobo_zjh_art_kpx2.png" Plist="" />
                   </AbstractNodeData>
@@ -1460,10 +1460,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="274.0000" />
+            <Position X="238.0000" Y="8.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2141" />
+            <PrePosition X="0.1859" Y="0.0111" />
             <PreSize X="0.5719" Y="0.1167" />
             <FileData Type="Normal" Path="game_res/baobo_zjh_choumadi.png" Plist="" />
             <SingleColor A="255" R="150" G="200" B="255" />
