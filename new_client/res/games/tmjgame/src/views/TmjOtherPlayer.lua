@@ -4,7 +4,8 @@
 -- Date:    2017.4.11
 -- Last: 
 -- Content:  
---    
+-- Modify:
+-- 			2017/6/13 修改开局补花，多个补花至当成一个特效播放   
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 local TmjOtherPlayer = class("TmjOtherPlayer",requireForGameLuaFile("TmjPlayer"))
@@ -421,7 +422,7 @@ function TmjOtherPlayer:buHuaCard(cardInfo)
 	--todo
 	sslog(self.logTag,"其他玩家补花")
 	--摸到牌的补花动画 如果有
-	local function loopGetCardBuHua(cardInfos,index)
+--[[	local function loopGetCardBuHua(cardInfos,index)
 		if index<= table.nums(cardInfos) then
 			self.huaCount = self.huaCount or 0
 			self.huaCount = self.huaCount + 1
@@ -450,8 +451,25 @@ function TmjOtherPlayer:buHuaCard(cardInfo)
 		
 	end
 	
-	loopGetCardBuHua(cardInfo,1)
+	loopGetCardBuHua(cardInfo,1)--]]
 	
+	local cardCount = table.nums(cardInfo)
+	local inputCards = {} --保存摸到的正常的牌
+	local buhuaCount = 0 -- 补花的数量
+	local outHuaCards = {} --需要删除的花牌的
+	table.insert(outHuaCards,cardInfo[1]) --第一个肯定是打出去的花
+	table.walk(cardInfo,function (c,k)
+		if k%2==0 then --偶数个表示摸进来的牌，摸几张就是多少个花
+			buhuaCount = buhuaCount + 1
+		end
+	end)
+	self.huaCount = self.huaCount or 0
+	self.huaCount = self.huaCount + buhuaCount
+	self:setHeadInfo({ huaCount = self.huaCount })
+	TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,self.getCardPos.y),false,function ()
+		sslog(self.logTag,"补花结束")
+		TmjOtherPlayer.super.buHuaCard(self,cardInfo)
+	end)
 end
 function TmjOtherPlayer:checkToSetLastHandCard()
 	sslog(self.logTag,"其他玩家检测最后一张牌为手牌动作")

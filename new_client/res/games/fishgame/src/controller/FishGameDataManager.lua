@@ -28,6 +28,7 @@ function FishGameDataManager:ctor()
 
     CustomHelper.addSetterAndGetterMethod(self, "fireInterval", 1000)
     CustomHelper.addSetterAndGetterMethod(self, "maxBulletCount", 20)
+    CustomHelper.addSetterAndGetterMethod(self, "bulletCount", 0)
     CustomHelper.addSetterAndGetterMethod(self, "maxCannon", 100)
     CustomHelper.addSetterAndGetterMethod(self, "gameConfig", nil)
 

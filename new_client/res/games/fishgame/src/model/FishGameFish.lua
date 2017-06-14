@@ -251,7 +251,7 @@ function FishGameFish:onStateUpdated(state)
         self:setVisualShadow(nodeShadow)
 
         -- 播放死亡音乐
-        FishGameManager:getInstance():getSoundManager():playFishSound(self:getTypeId())
+        GameManager:getInstance():getHallManager():getSubGameManager():getSoundManager():playFishSound(self:getTypeId())
     elseif state == EOS_DESTORED then
 
     end

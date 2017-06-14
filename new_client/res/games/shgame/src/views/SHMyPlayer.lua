@@ -100,9 +100,9 @@ function SHMyPlayer:createRaiseButtons()
 	local x,y = raiseBtn:getPosition()
 	local size = raiseBtn:getContentSize()
 	self.raiseButtons:move(x,y+size.height/2 + 10)
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
+	local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
 	local maxAdd = self.baseBet*self.betLimit
-	local roundBet = SHGameDataManager.roundBet /100
+	local roundBet = SHGameDataBaseManager.roundBet /100
 	sslog(self.logTag,"maxAdd:"..tostring(maxAdd).."self.gold:"..tostring(self.gold))
 	if self.gold then
 		maxAdd = self.gold/100 < maxAdd and self.gold/100 or maxAdd
@@ -290,8 +290,8 @@ function SHMyPlayer:showDealView(cardinfo)
 	local operationTypes = cardinfo.types
 	self.operationTypes = operationTypes
 	local max_add = cardinfo.max_add
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	local roundbet = SHGameDataManager.roundBet and SHGameDataManager.roundBet/100 or 0 --这一轮的最大下注额度
+	local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
+	local roundbet = SHGameDataBaseManager.roundBet and SHGameDataBaseManager.roundBet/100 or 0 --这一轮的最大下注额度
 	local diffBet = roundbet - self.roundBet
 	
 	sslog(self.logTag,"跟注多少"..tostring(diffBet))

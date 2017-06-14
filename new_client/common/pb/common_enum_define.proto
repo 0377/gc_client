@@ -182,6 +182,7 @@ enum LOG_MONEY_OPT_TYPE {
 	LOG_MONEY_OPT_TYPE_CASH_MONEY_FALSE = 20;			    // 用户提现回退
 	LOG_MONEY_OPT_TYPE_CREATE_PRIVATE_ROOM = 21;			// 开私有房间费
 	LOG_MONEY_OPT_TYPE_BANKER_OX = 22;			   			// 抢庄牛牛
+	LOG_MONEY_OPT_TYPE_FORTUNE_SLOTS = 23;			   		// 多福老虎机
 }
 
 // 游戏准备模式

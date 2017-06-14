@@ -299,10 +299,11 @@ function QznnGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     print("重新连接成功")
     QznnGameScene.super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
 	
-	
+	 local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
 	
 	local tableinfo = self.qznnGameManager:getDataManager():getTableInfo()
-	if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN)then
+	--if tableinfo ~= nil and (tableinfo.state == QznnGameManager.TexasStatus.STATUS_SHOW_DOWN)then
+	if gameingInfoTable == nil then
 		CustomHelper.showAlertView(
                 "本局已经结束,退回到大厅!!!",
                 false,

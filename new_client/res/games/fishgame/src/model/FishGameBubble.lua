@@ -6,12 +6,12 @@ local FishGameBubble = class("FishGameBubble", function()
     return display.newNode()
 end)
 
-function FishGameBubble:ctor(index, nodeLockFish)
+function FishGameBubble:ctor(index, nodeLockFish,dataMgr)
     self:onUpdate(handler(self, self._onInterval))
 
     self._index = index
     self._nodeLockFish = nodeLockFish
-    self._dataMng = FishGameManager:getInstance():getDataManager()
+    self._dataMng = dataMgr
     local pos = ConnonSet.cannonPos[index].pos
 
     self._main = nil

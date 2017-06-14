@@ -4,7 +4,8 @@
 -- Date:    2017.4.11
 -- Last: 
 -- Content:  
---    
+-- Modify:
+-- 			2017/6/13 修改开局补花，多个补花至当成一个特效播放
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 local TmjMyPlayer = class("TmjMyPlayer",requireForGameLuaFile("TmjPlayer"))
@@ -677,7 +678,7 @@ function TmjMyPlayer:showTingHuInfo(chooseIndex)
 				table.insert(cards.ming_pai,tempVals)
 			end
 		end)
-		ssdump(cards,"计算牌型")
+		--ssdump(cards,"计算牌型")
 		local fanInfo = TmjFanCalculator.getFan(cards)
 		local showFan = (fanInfo and fanInfo.fan) and fanInfo.fan or 0
 
@@ -985,7 +986,11 @@ function TmjMyPlayer:showStartHuOperation(lastCardVal)
 	else
 		--从摸的牌中处理
 		if self.getCard then
-			self.cardsArray[self.getCard.info.val] = self.cardsArray[self.getCard.info.val] - 1
+			local temp = self.cardsArray[self.getCard.info.val]
+			if temp and temp>0 then
+				self.cardsArray[self.getCard.info.val] = temp - 1
+			end
+			
 			inputVal = self.getCard.info.val
 		else
 			local lastCard = self.handCards[table.nums(self.handCards)]
@@ -1588,7 +1593,7 @@ end
 function TmjMyPlayer:buHuaCard(cardInfo)
 	--todo
 	sslog(self.logTag,"我补花")
-	--是否把最后一个牌放在摸牌位置
+--[[	--是否把最后一个牌放在摸牌位置
 	local notShowGet = (not self.isBanker) and (self:getColorCard()~=nil)
 	--摸到牌的补花动画 如果有
 	local function loopGetCardBuHua(cardInfo,index)
@@ -1634,28 +1639,6 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 				
 			end)
 			
---[[			if cardInfo[index].val >=TmjConfig.Card.R_Spring then
-				--继续播放动画
-				print("这张牌也是花牌",cardInfo[index].val)
-			else
-				--调用父类的得到一张牌的，然后加到手牌中去
-				if not notShowGet and index==table.nums(cardInfo) then
-					self:doOperation(TmjConfig.cardOperation.GetOne,cardInfo[index])
-				else
-					TmjMyPlayer.super.getOneCard(self,cardInfo[index])
-					
-					table.insert(self.handCards,self.getCard)
-					TmjHelper.sortCards(self.handCards)
-					self:showFrontCard()
-					self:refreshCard(false)
-				end
-				if index==table.nums(cardInfo) then
-					TmjMyPlayer.super.buHuaCard(self,cardInfo)
-				end
-				--self:doOperation(TmjConfig.cardOperation.GetOne,cardInfo[index])
-			end
-			index = index + 1
-			loopGetCardBuHua(cardInfo,index)--]]
 		else
 			sslog(self.logTag,"补花结束")
 			self.cardsArray = self:setCardArray(self.handCards)
@@ -1663,12 +1646,79 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 			TmjMyPlayer.super.buHuaCard(self,cardInfo)
 		end
 		
-	end
+	end--]]
 	
 	--loopRemoveHandHuaCard(loopGetCardBuHua(cardInfo,1))
-	loopGetCardBuHua(cardInfo,1)
+	--loopGetCardBuHua(cardInfo,1)
 	
 	--将cardInfo中非花的牌加入到手牌中
+	sslog(self.logTag,"播放补花动画")
+	TmjConfig.playSound(TmjConfig.cardOperation.BuHua,self:isMan())
+	
+	local cardCount = table.nums(cardInfo)
+	local inputCards = {} --保存摸到的正常的牌
+	local buhuaCount = 0 -- 补花的数量
+	local outHuaCards = {} --需要删除的花牌的
+	table.insert(outHuaCards,cardInfo[1]) --第一个肯定是打出去的花
+	table.walk(cardInfo,function (c,k)
+		if k%2==0 then --偶数个表示摸进来的牌，摸几张就是多少个花
+			buhuaCount = buhuaCount + 1
+		end
+		
+		if c.val>TmjConfig.Card.R_0 and c.val < TmjConfig.Card.R_Spring then --这个牌，是摸到的正常的牌
+			table.insert(inputCards,c)
+			--保证不是最后一个正常的牌
+			if k < cardCount and k +1 <= cardCount then
+				table.insert(outHuaCards,cardInfo[k+1])
+			end
+			
+		end
+	end)
+	self.huaCount = self.huaCount or 0
+	self.huaCount = self.huaCount + buhuaCount
+	self:setHeadInfo({ huaCount = self.huaCount })
+	
+	local buhuaY = display.cy
+	--删除所有的花
+	table.walk(outHuaCards,function (c,k)
+		--删除手上的花牌
+		local tempCard = self:removeHandCard(c.val)
+		if not tempCard then --花牌不在手上，在摸起来的牌上
+			tempCard = self.getCard
+		end
+		--删除手上现有的花牌
+		sslog(self.logTag,"删除手上现有的花牌:"..tostring(c.val))
+		if tempCard and tempCard.node then
+			sslog(self.logTag,"删除了手上的花牌")
+			buhuaY = tempCard.node:getPositionY()
+			tempCard.node:removeFromParent()
+			tempCard.node = nil
+			TmjHelper.removeAll(tempCard)
+		end
+	end)
+	TmjConfig.playAmature("ermj_px_eff","ani_12",nil,cc.p(display.cx,buhuaY),false,function ()
+		--插入新加入的正常牌
+		table.walk(inputCards,function (c,k)
+			c.position = display.center
+			c.state = TmjConfig.CardState.State_Down
+			local tempCard = TmjMyPlayer.super.createOneCard(self,c)
+			
+			table.insert(self.handCards,tempCard)
+			ssdump(tempCard,"补花的手牌")
+			TmjHelper.sortCards(self.handCards)
+			self:showFrontCard()
+			self:refreshCard(false)
+			self:checkToSetLastHandCard()
+		end)
+		self:checkToSetLastHandCard()
+		sslog(self.logTag,"补花结束")
+		self.cardsArray = self:setCardArray(self.handCards)
+		TmjMyPlayer.super.buHuaCard(self,cardInfo)
+		self:showStartHuOperation(nil)
+	end)
+	
+
+	
 	
 end
 --加倍

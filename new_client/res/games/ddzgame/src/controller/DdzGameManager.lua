@@ -38,6 +38,16 @@ DdzGameManager.MsgName =
 	SC_LandCallDouble = "SC_LandCallDouble",--加倍返回
 	SC_LandCallDoubleFinish = "SC_LandCallDoubleFinish", --加倍后出牌玩家
  	SC_ShowTax = "SC_ShowTax",---显示税收
+ 	CS_GetPrivateConfig = "CS_GetPrivateConfig",  -- 请求私人房间配置
+ 	CS_SetPrivateConfigChange = "CS_SetPrivateConfigChange", -- 请求修改私人房间配置
+ 	SC_PrivateConfigChange = "SC_PrivateConfigChange", -- 通知私人房间配置改变
+ 	CS_TabTiren = "CS_TabTiren",  -- 私人房间请求踢人
+ 	CS_TabVote = "CS_TabVote",  -- 私人房间请求投票
+ 	SC_TabVoteInfo = "SC_TabVoteInfo",  -- 私人房间通知投票
+ 	SC_TotalScoreInfo = "SC_TotalScoreInfo",  -- 私人房间结算信息
+ 	CS_GetTabVoteArray = "CS_GetTabVoteArray",  -- 私人房间获取投票信息
+ 	SC_TabVoteArray = "SC_TabVoteArray",
+ 	SC_TickNotify = "SC_TickNotify",
 }
 
 function DdzGameManager:clearLoadedOneGameFiles()
@@ -52,6 +62,10 @@ function DdzGameManager:clearLoadedOneGameFiles()
     loaded["DdzSound"] = nil;
     loaded["DdzGameEntry"] = nil;
     loaded["DdzPlayerInfo"] = nil;
+    loaded["DdzDismissView"] = nil
+    loaded["DdzPropertyView"] = nil
+    loaded["DdzReadyView"] = nil
+    loaded["DdzStatisticsView"] = nil
     DdzGameManager.instance = nil;
 end
 
@@ -394,4 +408,46 @@ end
 function DdzGameManager:on_SC_LandCallDoubleFinish(msgTab)
 	self:getDataManager():_onMsgLandCallDoubleFinish(msgTab)
 end
+
+function DdzGameManager:sendGetPrivateConfig()
+	print("[DdzGameManager] sendGetPrivateConfig")
+	local msgTab = {}
+	local msgName = DdzGameManager.MsgName.CS_GetPrivateConfig
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function DdzGameManager:on_SC_PrivateConfigChange(msgTab)
+	print("[DdzGameManager] on_SC_PrivateConfigChange")
+	dump(msgTab)
+	GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setPrivateOwnerInfo(msgTab)
+end
+
+function DdzGameManager:sendSetPrivateConfig(msgTab)
+	print("[DdzGameManager] sendSetPrivateConfig")
+	dump(msgTab)
+	local msgName = DdzGameManager.MsgName.CS_SetPrivateConfigChange
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function DdzGameManager:sendKickPlayer(chairId)
+	local msgTab = {}
+	msgTab["chair_id"] = chairId
+	local msgName = DdzGameManager.MsgName.CS_TabTiren
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function DdzGameManager:sendVote(status)
+	local msgTab = {}
+	msgTab["bret"] = status
+	local msgName = DdzGameManager.MsgName.CS_TabVote
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
+function DdzGameManager:sendGetTabVoteArray()
+	print("[DdzGameManager] sendGetTabVoteArray")
+	local msgTab = {}
+	local msgName = DdzGameManager.MsgName.CS_GetTabVoteArray
+	GameManager:getInstance():getHallManager():getHallMsgManager():sendMsg(msgName, msgTab)
+end
+
 return DdzGameManager

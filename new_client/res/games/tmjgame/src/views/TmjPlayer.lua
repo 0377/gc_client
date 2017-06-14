@@ -115,10 +115,10 @@ function TmjPlayer:checkOperation(cardVal,operation)
 		if operation==TmjCardTip.CardOperation.BuGang then
 			--self.extraCards
 			--ssdump(self:getExtraPair(),"判断步骤--额外的牌")
-			return TmjCardTip.s_cmds[operation](self:getExtraPair(),cardVal)
+			return TmjCardTip.s_cmds[operation](CustomHelper.copyTab(self:getExtraPair()),cardVal)
 		else
 			--ssdump(self.cardsArray,"判断步骤--手里的牌")
-			return TmjCardTip.s_cmds[operation](self.cardsArray,cardVal)
+			return TmjCardTip.s_cmds[operation](CustomHelper.copyTab(self.cardsArray),cardVal)
 		end
 		
 	else

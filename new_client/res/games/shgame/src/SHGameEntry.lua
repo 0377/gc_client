@@ -8,9 +8,12 @@
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 local SHGameEntry = class("SHGameEntry")
-local SHGameScene = import(".views.SHGameScene")
+local SHGameSceneFactory = requireForGameLuaFile("SHGameSceneFactory")
+local SHGameBaseScene = requireForGameLuaFile("SHGameBaseScene")
+local SHConfig = import(".cfg.SHConfig")
 import(".controller.SHGameManager")
 import(".cfg.SHi18nUtils")
+local SHGameSceneClass = nil
 function SHGameEntry:ctor()
 	-- body
 	MusicAndSoundManager:getInstance()
@@ -22,9 +25,11 @@ function SHGameEntry:getStartScene(infoTab)
 	--ddzGameManager:
 	ssdump(infoTab,"----infoTab",3)
 	local subGameManager = GameManager:getInstance():getHallManager():getSubGameManager()
-	
+	subGameManager:initDataManager(SHConfig.roomType.NORMAL)
 	subGameManager:getDataManager():OnMsg_EnterRoomAndSitDownInfo(infoTab)
-	local sceneLayer = SHGameScene:create()
+	
+	local sceneLayer = SHGameSceneFactory.createScene(SHConfig.roomType.NORMAL)
+	
 	local scene = cc.Scene:create()
 	scene:addChild(sceneLayer)
 	subGameManager:getDataManager():setGameScene(sceneLayer)
@@ -32,7 +37,7 @@ function SHGameEntry:getStartScene(infoTab)
 end
 function SHGameEntry:getNeedPreloadResArray()
 	-- body
-	return SHGameScene.getNeedPreloadResArray()
+	return SHGameBaseScene.getNeedPreloadResArray()
 end
 
 function SHGameEntry:getVerionStr()

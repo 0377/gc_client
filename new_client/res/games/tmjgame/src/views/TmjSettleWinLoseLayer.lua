@@ -43,7 +43,9 @@ function TmjSettleWinLoseLayer:onEnter()
 	self.node = node.root
 	self:initSettleTag(CustomHelper.seekNodeByName(node.root,"Image_settleTag"))
 	self:initPanelInfo(CustomHelper.seekNodeByName(node.root,"Panel_info"))
-	self:initHuDesc(CustomHelper.seekNodeByName(node.root,"ScrollView_desc"),CustomHelper.seekNodeByName(node.root,"Image_bar"))
+	self.scrollView = CustomHelper.seekNodeByName(node.root,"ScrollView_desc")
+	self.imgBar = CustomHelper.seekNodeByName(node.root,"Image_bar")
+	self:initHuDesc(self.scrollView,self.imgBar)
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_showcard"),self.resultData.extraCards,self.resultData.handCards)
 	
 	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
@@ -53,7 +55,36 @@ function TmjSettleWinLoseLayer:onEnter()
 		TmjConfig.playSound(TmjConfig.sType.GAME_LOSE)
 	end
 	
-	
+
+	self:startTimeScheduler()
+end
+function TmjSettleWinLoseLayer:startTimeScheduler()
+	self:stopTimeScheduler()
+	--self.timeInterval
+	if self.hasSliderBar then --有滑块的时候才显示
+		local aniInterval = cc.Director:getInstance():getAnimationInterval()
+		self.timeInterval = scheduler:scheduleScriptFunc(handler(self,self._timeInterval), aniInterval, false)
+	end
+
+end
+function TmjSettleWinLoseLayer:stopTimeScheduler()
+	if self.timeInterval then
+        scheduler:unscheduleScriptEntry(self.timeInterval)
+        self.timeInterval = nil
+    end
+end
+function TmjSettleWinLoseLayer:_timeInterval(dt)
+	local pos = self.scrollView:getInnerContainerPosition()
+	local innerSize = self.scrollView:getInnerContainerSize()
+	local contentSize = self.scrollView:getContentSize()
+	--
+	if pos.y>=0 then
+		pos.y = 0
+		contentSize.height = 0
+	end
+	local percent = 100*(innerSize.height + pos.y - contentSize.height) / innerSize.height
+
+	self.imgBar:setPositionY(self:getSliderPostionYByPercent(percent))
 end
 --初始化结算标签页面
 function TmjSettleWinLoseLayer:initSettleTag(tagNode)
@@ -398,7 +429,7 @@ function TmjSettleWinLoseLayer:barListener(ref,eventType)
 		local percent = self:convertScrollPercent(pos.y)
 		self.scrollView:jumpToPercentVertical(percent)
 		
-		
+		self:stopTimeScheduler()
 	elseif eventType == ccui.TouchEventType.moved then	
 		local pos = self:convertSliderPosition(ref,ref:getTouchMovePosition())
 		ref:setPositionY(pos.y)
@@ -406,9 +437,10 @@ function TmjSettleWinLoseLayer:barListener(ref,eventType)
 		self.scrollView:jumpToPercentVertical(percent)
 		
 	elseif eventType == ccui.TouchEventType.ended then
-		
+		self:startTimeScheduler()
 	elseif eventType == ccui.TouchEventType.canceled then
 		--
+		self:startTimeScheduler()
 	end
 end
 --通过位置 转换scrollview的显示百分比
@@ -425,6 +457,11 @@ function TmjSettleWinLoseLayer:convertSliderPosition(ref,pos)
 		newpos.y = self.barPosYLimit[2]
 	end
 	return newpos	
+end
+function TmjSettleWinLoseLayer:getSliderPostionYByPercent(percent)
+	local percent = math.min(percent,100)
+	local percent = math.max(percent,0)
+	return (self.barPosYLimit[2] - self.barPosYLimit[1])*(1 - percent/100) + self.barPosYLimit[1]
 end
 function TmjSettleWinLoseLayer:_onInterval(dt)
 	self.countTime = self.countTime - 1
@@ -448,7 +485,7 @@ function TmjSettleWinLoseLayer:onExit()
 	self.nexCallBack = nil
 	self.resultData = nil
 	self:stopScheduler()
-
+	self:stopTimeScheduler()
 end
 function TmjSettleWinLoseLayer:onTouchListener(ref,eventType)
 	if eventType == ccui.TouchEventType.began then

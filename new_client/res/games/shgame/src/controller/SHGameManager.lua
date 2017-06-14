@@ -10,7 +10,6 @@
 -- Copyright (c) Shusi Entertainment All right reserved.
 --------------------------------------------------------------------------
 SHGameManager = class("SHGameManager",requireForGameLuaFile("SubGameBaseManager"))
-local SHGameDataManager = import(".SHGameDataManager")
 local HallMsgManager = GameManager:getInstance():getHallManager():getHallMsgManager()
 local SHConfig = import("..cfg.SHConfig")
 function SHGameManager:ctor()
@@ -18,9 +17,22 @@ function SHGameManager:ctor()
 	self.logTag = self.__cname..".lua"
 	--游戏详情
 	self.gameDetailInfoTab = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
-	CustomHelper.addSetterAndGetterMethod(self,"dataManager",SHGameDataManager:create())--游戏数据管理器
+	
 	--注册pb文件
 	self:registerPBProtocolToHallMsgManager()
+end
+--初始化数据管理器
+function SHGameManager:initDataManager(mType)
+	local SHGameDataBaseManager = nil
+	if mType == SHConfig.roomType.NORMAL then
+		SHGameDataBaseManager = requireForGameLuaFile("SHGameDataNormalManager")
+	elseif mType == SHConfig.roomType.PRIVATE then
+		SHGameDataBaseManager = requireForGameLuaFile("SHGameDataPrivateManager")
+	end
+	if SHGameDataBaseManager then
+		CustomHelper.addSetterAndGetterMethod(self,"dataManager",SHGameDataBaseManager:create())--游戏数据管理器
+	end
+	
 end
 
 function SHGameManager:registerPBProtocolToHallMsgManager()
@@ -132,13 +144,13 @@ end
 --	//reconnect
 --};
 function SHGameManager:on_SC_ShowHand_Desk_Enter(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHand_Desk_Enter(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHand_Desk_Enter(msgTab)
 end
 --服务器的游戏状态
 --message SC_ShowHand_Desk_State{
@@ -146,13 +158,13 @@ end
 --	optional int32 state = 1;				
 --}
 function SHGameManager:on_SC_ShowHand_Desk_State(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHand_Desk_State(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHand_Desk_State(msgTab)
 end
 --结算
 --message SC_ShowHand_Game_Finish {
@@ -161,13 +173,13 @@ end
 --}
 
 function SHGameManager:on_SC_ShowHand_Game_Finish(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHand_Game_Finish(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHand_Game_Finish(msgTab)
 end
 --翻牌  下一回合
 --message SC_ShowHand_Next_Round {
@@ -175,13 +187,13 @@ end
 --	repeated ShowHand_Player_Info pb_players 	= 1; 		// 玩家
 --}
 function SHGameManager:on_SC_ShowHand_Next_Round(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHand_Next_Round(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHand_Next_Round(msgTab)
 end
 --加注=倍数*底注，allin = -1，跟注 = 0
 --message SC_ShowHandAddScore {
@@ -190,13 +202,13 @@ end
 --  optional int32 chair_id	    = 2; 	// id
 --}
 function SHGameManager:on_SC_ShowHandAddScore(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHandAddScore(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHandAddScore(msgTab)
 end
 --弃牌
 --message SC_ShowHandGiveUp {
@@ -204,13 +216,13 @@ end
 --    optional int32 chair_id	    = 1; 	// id
 --}
 function SHGameManager:on_SC_ShowHandGiveUp(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHandGiveUp(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHandGiveUp(msgTab)
 end
 --让牌
 --message SC_ShowHandPass {
@@ -218,13 +230,13 @@ end
 --  optional int32 chair_id	    = 1; 	// id
 --}
 function SHGameManager:on_SC_ShowHandPass(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHandPass(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHandPass(msgTab)
 end
 
 --更新发言者
@@ -240,26 +252,26 @@ end
 --	//16 --弃牌
 --}
 function SHGameManager:on_SC_ShowHand_NextTurn(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ShowHand_NextTurn(msgTab)
+	SHGameDataBaseManager:on_SC_ShowHand_NextTurn(msgTab)
 end
 --玩家聊天返回
 --	optional string chat_content = 1;				// 聊天内容
 --	optional int32 chat_guid = 2;					// 说话人
 --	optional string chat_name = 3; 					// 说话人名字
 function SHGameManager:on_SC_ChatTable(msgTab)
-	local SHGameDataManager = self:getDataManager()
-	if not SHGameDataManager then
+	local SHGameDataBaseManager = self:getDataManager()
+	if not SHGameDataBaseManager then
 		sslog(self.logTag,"二人梭哈数据管理器已经销毁")
 		ssdump(msgTab,"收到的消息内容")
 		return
 	end
-	SHGameDataManager:on_SC_ChatTable(msgTab)
+	SHGameDataBaseManager:on_SC_ChatTable(msgTab)
 end
 
 function SHGameManager:clearLoadedOneGameFiles()
@@ -267,8 +279,12 @@ function SHGameManager:clearLoadedOneGameFiles()
 	local loaded = package.loaded
     --重新加载frame内文件
     loaded["SHGameManager"] = nil
-    loaded["SHGameDataManager"] = nil
-    loaded["SHGameScene"] = nil
+    loaded["SHGameDataBaseManager"] = nil
+    loaded["SHGameDataNormalManager"] = nil
+    loaded["SHGameDataPrivateManager"] = nil
+    loaded["SHGameBaseScene"] = nil
+    loaded["SHGameNormalScene"] = nil
+    loaded["SHGamePrivateScene"] = nil
     loaded["SHCardTip"] = nil
     loaded["SHConfig"] = nil
     loaded["SHHelper"] = nil

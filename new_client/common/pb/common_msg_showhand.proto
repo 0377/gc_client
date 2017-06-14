@@ -22,6 +22,11 @@ message CS_ShowHandPass {
 message CS_ShowHandGiveUpEixt {
 	enum MsgID { ID = 17003; }
 }
+//退出 de 投票 
+message CS_ShowHandMyVoteResult {
+	enum MsgID { ID = 17004; }
+	optional bool agreen = 1;  //是否同意
+}
 
 
 message ShowHand_Player_Info {
@@ -42,6 +47,7 @@ message ShowHand_Player_Info {
 };
 message ShowHand_Reconnect_Data {
 	optional int32 act_left_time = 1;						// 操作剩余时间
+	optional int32 vote_chair_id = 2;						//发起投票的用户chair——id
 }
 
 message SC_ShowHand_Desk_Enter {
@@ -103,6 +109,17 @@ message SC_ShowHand_NextTurn {
 	//4 --跟注
 	//8 --让牌
 	//16 --弃牌
+}
+//发起 投票 
+message SC_ShowHandStartVote {
+	enum MsgID { ID = 17004; }
+	optional int32 chair_id	    = 1; 	// 玩家
+}
+//投票 结果
+message SC_ShowHandPlayerVoteRes {
+	enum MsgID { ID = 17004; }
+	optional int32 chair_id	    = 1; 	// 玩家
+	optional bool agreen = 2;  //是否同意
 }
 
   							

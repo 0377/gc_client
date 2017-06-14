@@ -263,14 +263,37 @@ function DzpkGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     -- body
     print("重新连接成功")
     DzpkGameScene.super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
-   
-    --- 尝试直接发送进入游戏消息
-    local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
-    local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
-    local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
+	
+	local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
+	if gameingInfoTable == nil then
+		CustomHelper.showAlertView(
+                "本局已经结束,退回到大厅!!!",
+                false,
+                true,
+                function(tipLayer)
+					
+                    self:exitGame()
+					tipLayer:removeFromParent()
+                end,
+                function(tipLayer)
+                    self:exitGame()
+					tipLayer:removeFromParent()
+                end
+        )
+	
+		
+	else
+		--- 尝试直接发送进入游戏消息
+		local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
+		local gameTypeID = roomInfo[HallGameConfig.GameIDKey]
+		local roomID = roomInfo[HallGameConfig.SecondRoomIDKey]
 
-    CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
-    GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
+		CustomHelper.addIndicationTip(HallUtils:getDescriptionWithKey("entering_gamescene_tip"));
+		GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
+		
+	end
+   
+    
 end
 
 --请求失败通知，网络连接状态变化
@@ -2958,7 +2981,7 @@ function DzpkGameScene:onExit()
         self._scheduler = nil
     end
 	
-	DzpkGameManager:clearLoadedOneGameFiles()
+	--DzpkGameManager:clearLoadedOneGameFiles()
 end
 
 ----退出房间

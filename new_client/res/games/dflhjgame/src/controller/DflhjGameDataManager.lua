@@ -20,7 +20,6 @@ function DflhjGameDataManager:ctor()
 	self._gameItemResults = nil --本局游戏结果
 	self._winMoney = 0; --本局赢取的金钱
 	self._winLines = nil; --本局中奖线
-	self._cellTimes = 1;--当前底注倍数
 	self._enterRoomAndSitDownInfo = nil;---进入游戏保存游戏信息
 	self._systemTax = 0 --系统台费
 	self._winBets = 0; --本局的中奖总倍数
@@ -36,6 +35,9 @@ function DflhjGameDataManager:ctor()
     -- 进入需要最小金币数量  和 底注
     self.MinJettonMoney =self.roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey]
     self.MinJetton = self.roomInfo[HallGameConfig.SecondRoomMinJettonLimitKey]
+    self._currentBet =  self.MinJetton --当前押注 默认最小底注
+    self._fudai = 0 --开出的福袋
+    self._progressive = 0 --奖池
 end
 
 
@@ -69,6 +71,13 @@ function DflhjGameDataManager:OnMsg_Slotma_Start( msgData)
 	end
 end
 
+
+
+--返回奖池
+function DflhjGameDataManager:getProgressive( )
+	return self._progressive
+end
+
 --本轮结算
 function DflhjGameDataManager:settlement( )
 	self.moneyInfo.money = self.moneyInfo.money  + self._winMoney  - self._systemTax
@@ -88,14 +97,30 @@ function DflhjGameDataManager:getAccumulative(  )
 	return self._accumulative
 end
 
+--福袋
+function DflhjGameDataManager:getFudai(  )
+	return self._fudai
+end
+
 function DflhjGameDataManager:getSystemTax(  )
 	return self._systemTax
 end
 
---获取当前底注倍数
-function DflhjGameDataManager:getCellTimes(  )
-	return self._cellTimes;
+--获取当前押注金额
+function DflhjGameDataManager:getCurrentBet(  )
+	return self._currentBet;
 end
+
+function DflhjGameDataManager:updateCurrentBet(bet)
+	self._currentBet = self._currentBet + bet;
+	if self._currentBet < self.MinJetton then 
+		self._currentBet = self.MinJetton
+	end
+	if self._currentBet > self.moneyInfo.money then
+		self._currentBet = self.moneyInfo.money
+	end
+end
+
 
 --获取赢取的金钱
 function DflhjGameDataManager:getWinMoney(  )

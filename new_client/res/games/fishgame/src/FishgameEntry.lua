@@ -8,7 +8,7 @@ local FishgameEntry = class("FishgameEntry")
 local FishGameScene = requireForGameLuaFile("FishGameScene")
 requireForGameLuaFile("CDefine")
 
-import(".controller.FishGameManager")
+requireForGameLuaFile("FishGameManager")
 local TestFishLayer  = requireForGameLuaFile("TestFishLayer")
 
 local curModule = ...
@@ -16,7 +16,7 @@ local curModule = ...
 --在切换场景之前会调用，用于游戏初始化
 function FishgameEntry:ctor()
     --注册管理器
-    local fishManager = FishGameManager:getInstance()
+    local fishManager = FishGameManager:create()
     GameManager:getInstance():getHallManager():setSubGameManager(fishManager)
 end
 

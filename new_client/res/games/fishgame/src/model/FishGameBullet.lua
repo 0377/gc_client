@@ -11,7 +11,7 @@ function FishGameBullet:ctor(data,player,parent)
 
 
     local dataMng = GameManager:getInstance():getHallManager():getSubGameManager():getDataManager()
-
+    self._dataMng = dataMng
     local conf = dataMng:getBulletConfig(data.multiply)
 
     self:setId(data.id)
@@ -73,7 +73,9 @@ function FishGameBullet:onStateUpdated(state)
 
         self:setVisualContent(t_animation)
     elseif state == EOS_DESTORED then
---        self:removeSelf()
+        if self._isMine then
+            self._dataMng:setBulletCount(math.max(0,self._dataMng:getBulletCount() - 1))
+        end
     end
 end
 

@@ -1,4 +1,4 @@
-DflhjGameTips = class("DflhjGameTips", function()
+local DflhjGameTips = class("DflhjGameTips", function()
     return display.newLayer()
 end)
 

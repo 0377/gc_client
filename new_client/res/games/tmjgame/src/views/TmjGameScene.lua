@@ -131,15 +131,15 @@ function TmjGameScene:onEnter()
 		TmjMyPlayer:showOperationPanel(operations,true)
 	end--]]
 --[[	local arr = {
-	[1]=0,
+	[1]=1,
 	[2]=1,
-	[3]=1,
-	[4]=2,
-	[5]=1,
-	[6]=3,
+	[3]=2,
+	[4]=1,
+	[5]=2,
+	[6]=1,
 	[7]=1,
-	[8]=2,
-	[9]=2,
+	[8]=1,
+	[9]=3,
 	[10]=0,
 	[11]=0,
 	[12]=0,
@@ -150,8 +150,10 @@ function TmjGameScene:onEnter()
 		}
 	local TmjCardTip = import("..cfg.TmjCardTip")
 	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
-	ssdump(TmjCardTip.isTingHu(arr,6))
-	ssdump(TmjCardTip.isAnGang(arr,6))--]]
+	ssdump(TmjCardTip.isHu(arr,7))
+	ssdump(TmjCardTip.isTingHu(arr,10))
+	ssdump(TmjCardTip.isAnGang(arr,10))--]]
+	
 --[[	local cards = {}
 	cards.shou_pai = {1,1,2,2,4,4,6,6,8,13,13,14,14 }
 	ssdump(TmjFanCalculator.is_hu(cards,8))--]]
@@ -584,17 +586,25 @@ function TmjGameScene:loopMsgOperation()
 			end
 		end
 	elseif cType == TmjConfig.cardOperation.Play then --如果是打牌消息 要删除另外一个人的游标动画
+		local showCardId = nil
 		for cid,player in pairs(self.seats) do
 			if cid ~=chairId then
+				showCardId = cid
 				player:removeCardTagAnim()
 				break
 			end
 		end
+		--这里要立马刷新另外一个人操作的倒计时
+		local desesionTime = self.TmjGameDataManager.preDesionTime --等待操作时间
+		self.gameLayer:setCenterPanelInfo({ cardSide = (selfCharId==showCardId and 1 or 2) })
+		self.gameLayer:startCountDown(desesionTime)
+		
 	elseif cType == TmjConfig.cardOperation.RoundCard then
 		local showCardId = self.TmjGameDataManager.showCardChairId
 		local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号
 		local reconnData = self.TmjGameDataManager.reconnData
 		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
+		
 		if reconnData and reconnData.act_left_time then
 			playCardTime = reconnData.act_left_time
 			reconnData.act_left_time = nil
@@ -610,9 +620,9 @@ function TmjGameScene:loopMsgOperation()
 			end
 			--TmjPlayer:setLeftTime(leftTime and leftTime or playCardTime)
 		end
-	elseif cType == TmjConfig.cardOperation.RoundCard then
-		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
-		self.gameLayer:startCountDown(playCardTime)
+--	elseif cType == TmjConfig.cardOperation.RoundCard then
+--		local playCardTime = self.TmjGameDataManager.playCardTime --打牌时间
+--		self.gameLayer:startCountDown(playCardTime)
 	elseif cType == TmjConfig.cardOperation.Finish then
 		--延迟播放
 		performWithDelay(self,handler(self,self.showResultLayer),1.2)

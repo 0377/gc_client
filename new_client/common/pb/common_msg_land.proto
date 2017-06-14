@@ -259,3 +259,9 @@ message SC_TabVoteArray
  	optional int32 votechairid=2;
 }
 
+//通知哪个座位玩家被提出房间
+message SC_TickNotify
+{
+	enum MsgID { ID = 15033; Target = 2; }
+ 	optional int32 tickchairid=1;
+}

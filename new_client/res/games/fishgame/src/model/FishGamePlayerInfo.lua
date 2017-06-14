@@ -16,7 +16,7 @@ function FishGamePlayerInfo:ctor()
     CustomHelper.addSetterAndGetterMethod(self, "cannonMul", 0)
     CustomHelper.addSetterAndGetterMethod(self, "score", 0)
 
-    CustomHelper.addSetterAndGetterMethod(self, "tableUI", 0)
+    CustomHelper.addSetterAndGetterMethod(self, "tableUI", nil)
     CustomHelper.addSetterAndGetterMethod(self, "cannon", 0)
     CustomHelper.addSetterAndGetterMethod(self, "bubble", 0)
 end
@@ -40,10 +40,14 @@ end
 function FishGamePlayerInfo:setScore(score)
     self.score = score
 
-    local labelMoney = self.tableUI.label_money
-    labelMoney:setString(CustomHelper.moneyShowStyleNone(score))
+    if not self.tableUI then return end
 
-    labelMoney:setScale(math.min(1,160 / labelMoney:getContentSize().width))
+    local labelMoney = self.tableUI.label_money
+
+    if tolua.isnull(labelMoney) then return end
+
+    labelMoney:setString(CustomHelper.moneyShowStyleNone(score))
+    labelMoney:setScale(math.min(1, 160 / labelMoney:getContentSize().width))
 end
 
 return FishGamePlayerInfo

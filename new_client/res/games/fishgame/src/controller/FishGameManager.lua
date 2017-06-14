@@ -46,18 +46,6 @@ FishGameManager.MsgName =
     SC_SystemMessage = 'SC_SystemMessage',
 }
 
-FishGameManager.instance = nil
-function FishGameManager:getInstance()
-    if FishGameManager.instance == nil then
-        FishGameManager.instance = FishGameManager:create()
-    end
-    return FishGameManager.instance
-end
-
-function FishGameManager:destroyInstance()
-    FishGameManager.instance = nil
-end
-
 function FishGameManager:ctor()
     -- body
     self.gameDetailInfoTab = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab()
@@ -95,7 +83,6 @@ function FishGameManager:registerNotification()
 end
 
 function FishGameManager:onExit()
-    self:destroyInstance()
 end
 
 -----------------  大厅消息

@@ -219,6 +219,7 @@ message SC_ZhaJinHuaTabCFG
 	optional int32 chair_num = 2;				//椅子数
 	optional int32 lost_score = 3;              //最低注
 	optional bool  vote_result = 4;				//true 是 false 否
+	optional int32 private_room_id = 5;			// 私人房间号
 }
 //金花T人
 message CS_ZhaJinHuaTabTiren

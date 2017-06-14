@@ -384,15 +384,23 @@ function BrnnGameScene:checkGuanZhan()
 			--self.playerName:setString(myInfo["nickname"])
 			print("--------------moeny:"..myPlayerInfo:getMoney())
 			if myPlayerInfo:getMoney() < self.bet_min_limit_money then
-				--弹出提示
-				CustomHelper.showAlertView(
-			             "由于你携带金币小于"..( CustomHelper.moneyShowStyleNone(self.bet_min_limit_money))..",现在你只能处于观战模式,不能下注！",
-			             false,
-			             true,
-			             nil,
-						 nil)
-				
-				--
+                local bankCallbackFunc = function (  )
+                    local BankCenterLayer = requireForGameLuaFile("BankCenterLayer")
+                    self:exitGame({
+                        { tag = ViewManager.SECOND_LAYER_TAG.BANK, parme = BankCenterLayer.ViewType.WithDraw },
+                    })
+                end
+                local storyCallbackFunc = function (  )
+                    self:exitGame({
+                        { tag = ViewManager.SECOND_LAYER_TAG.STORY },
+                    })
+                end
+                local closeCallbackFunc = function(sender) sender:removeSelf() end
+
+                CustomHelper.showLackMoneyAlertView(self.bet_min_limit_money,
+                    "由于你携带金币小于"..( CustomHelper.moneyShowStyleNone(self.bet_min_limit_money))..",现在你只能处于观战模式,不能下注！",
+                    nil,bankCallbackFunc,storyCallbackFunc,closeCallbackFunc)
+
 				self.isGuanzhan = true
 				self.guanzhanStartTime = socket.gettime()
 				--
@@ -687,7 +695,7 @@ function BrnnGameScene:initUI()
 end
 
 ---退出游戏界面
-function BrnnGameScene:jumpToHallScene()
+function BrnnGameScene:jumpToHallScene(...)
     ---释放资源
     local needLoadResArray = BrnnGameScene.getNeedPreloadResArray();
     for i,v in ipairs(needLoadResArray) do
@@ -711,18 +719,18 @@ function BrnnGameScene:jumpToHallScene()
 	end
     
 
-    SceneController.goHallScene();
+    SceneController.goHallScene(...);
 end
 
 ----退出房间
-function BrnnGameScene:exitGame()
+function BrnnGameScene:exitGame(...)
     self.brnnGameManager:sendOxLeaveGame()
 
     self.brnnGameManager:sendStandUpAndExitRoomMsg()
 
     GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
 
-    self:jumpToHallScene();
+    self:jumpToHallScene(...);
 end
 
  ----庄家信息
@@ -1388,52 +1396,51 @@ function BrnnGameScene:updateChipBtnTouch()
     -- body
     local chipNum = 0
     local stakeData = self.brnnGameManager:getDataManager():getAreaMeCoins()
-    for k,v in pairs(stakeData) do
+    for k, v in pairs(stakeData) do
         chipNum = chipNum + v
     end
 
     local isCan = false
 
-    for i=1,5 do
-
-        ---自己是庄家
+    for i = 1, 5 do
+        --- 自己是庄家
         if self.brnnGameManager:getDataManager():isMyBanker() == true or self.isGuanzhan == true then
-             self._coinBtns[i]:setEnabled(false)
-             self.xuTouBtn:setEnabled(false)
+            self._coinBtns[i]:setEnabled(false)
+            self.xuTouBtn:setEnabled(false)
         else
             self._coinBtns[i]:setEnabled(true)
-			local t = 0
-			if self.willCoin ~= nil then
-				t = self.willCoin
-			end
-			--[[
-			local b = self.brnnGameManager:getDataManager():getMyMoney()+chipNum > (self._initChioseAllPoints[i]+(chipNum+t))*self.brnnGameManager.gameDetailInfoTab["beishu"]
-			if b == true then
-				self._coinBtns[i]:setEnabled(false)
-			else
-				isCan = true
-			end
-			--]]
-			
-
-            local x = self.brnnGameManager:getDataManager():getMyMoney()-t - ((chipNum+t)*(self.brnnGameManager.gameDetailInfoTab["beishu"]-1))
-            -- print("-----t:",t)
-            -- print("-----x:",x)
-            -- print("-----s:",x/self.brnnGameManager.gameDetailInfoTab["beishu"])
-            if x/self.brnnGameManager.gameDetailInfoTab["beishu"] < self._initChioseAllPoints[i]  then
-                self._coinBtns[i]:setEnabled(false)
-			else
-				isCan = true
+            local t = 0
+            if self.willCoin ~= nil then
+                t = self.willCoin
             end
-			
+            --[[
+            local b = self.brnnGameManager:getDataManager():getMyMoney()+chipNum > (self._initChioseAllPoints[i]+(chipNum+t))*self.brnnGameManager.gameDetailInfoTab["beishu"]
+            if b == true then
+                self._coinBtns[i]:setEnabled(false)
+            else
+                isCan = true
+            end
+            --]]
+
+            local x = self.brnnGameManager:getDataManager():getMyMoney()
+                    - t - ((chipNum + t) * (self.brnnGameManager.gameDetailInfoTab["beishu"]))
+
+            print("-----t111:", self._initChioseAllPoints[i])
+            print("-----t:", t)
+            print("-----x:", x)
+            print("-----s:", x / self.brnnGameManager.gameDetailInfoTab["beishu"])
+
+            if x / self.brnnGameManager.gameDetailInfoTab["beishu"] < self._initChioseAllPoints[i] then
+                self._coinBtns[i]:setEnabled(false)
+            else
+                isCan = true
+            end
         end
     end
-	
-	if isCan == false then
-		self.xuTouBtn:setEnabled(false);
-	end
-	
-	
+
+    if isCan == false then
+        self.xuTouBtn:setEnabled(false);
+    end
 end
 
 

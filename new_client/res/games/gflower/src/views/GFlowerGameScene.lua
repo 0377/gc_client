@@ -368,13 +368,13 @@ end
 function GFlowerGameScene:InitMenuUI()
     --菜单收缩栏
     local Image_Menu = self.m_widget:getChildByName("Image_Menu")
-    Image_Menu:setLocalZOrder(30)
+    Image_Menu:setLocalZOrder(300)
     self.Button_Menu = self.m_widget:getChildByName("Image_Menu"):getChildByName("Button_Menu")
     --self.Button_Menu:setLocalZOrder(30)
 
     local Panel_Menu = self.m_widget:getChildByName("Panel_Menu")
     self.MoveMenu = self.m_widget:getChildByName("Panel_Menu"):getChildByName("MoveMenu")
-    Panel_Menu:setLocalZOrder(30)
+    Panel_Menu:setLocalZOrder(300)
 
     -- 初始化菜单为缩进去 --
     self._menuOpen = true
@@ -411,7 +411,7 @@ function GFlowerGameScene:InitMenuUI()
     sure:addTouchEventListener(handler(self, self._onBtnTouched_result_close))
     cancel:addTouchEventListener(handler(self, self._onBtnTouched_result_close))
     self.huanzhuotip:setVisible(false)
-    self.huanzhuotip:setLocalZOrder(40)
+    self.huanzhuotip:setLocalZOrder(400)
     -- 提示框文本
     self.changetable_or_exit_tips = self.huanzhuotip:getChildByName("Image_174"):getChildByName("Text_1")
 
@@ -420,13 +420,13 @@ function GFlowerGameScene:InitMenuUI()
     self.Panel_guize:setVisible(false)
     local close_btn_guize = self.Panel_guize:getChildByName("close_btn")
     close_btn_guize:addTouchEventListener(handler(self, self._onBtnTouched_tips_Visible))
-    self.Panel_guize:setLocalZOrder(40)
+    self.Panel_guize:setLocalZOrder(400)
 
     --牌型
     self.Panel_px = self.m_widget:getChildByName("Panel_px")
     self.Panel_px:setVisible(false)
     self.Panel_px:addTouchEventListener(handler(self, self._onBtnTouched_tips_Visible))
-    self.Panel_px:setLocalZOrder(40)
+    self.Panel_px:setLocalZOrder(400)
 end
 
 -- 玩家信息初始化 --
@@ -455,7 +455,7 @@ function GFlowerGameScene:InitPlayerUi()
         
         self.gf_player[i] = self.m_widget:getChildByName("Image_player_"..i)
         self.gf_player[i]:setVisible(false)
-        self.gf_player[i]:setLocalZOrder(20)
+        self.gf_player[i]:setLocalZOrder(0)
 
         -- 重连或者换桌 时不再创建
         if self._daojishius[i] == nil then
@@ -479,6 +479,7 @@ function GFlowerGameScene:InitPlayerUi()
         self.playergold[i] = self.gf_player[i]:getChildByName("Label_GoldNum")
         self.playerxiazhu[i] = self.gf_player[i]:getChildByName("Label_XiaZhuNum")
         self.playerxiazhu[i]:setString("获取中")
+		self.playerxiazhu[i]:setLocalZOrder(1)
 
         self.playerready[i] = self.gf_player[i]:getChildByName("Image_Ready")
         self.playerready[i]:setVisible(false)
@@ -516,7 +517,12 @@ function GFlowerGameScene:InitPlayerUi()
         --5个玩家的手牌容器(每个玩家三张牌) i表示第几个玩家
         self.player5_3Card[i] = {}
     end
-
+	
+	    -- 金币父节点 -- 
+    self.coinParent = cc.Sprite:create()
+	local  bk = self.m_widget:getChildByName("Panel_back")
+    bk:addChild(self.coinParent)
+	--self.coinParent:setLocalZOrder(0)
 end
 
 --  初始化私人房间相关UI
@@ -1083,11 +1089,6 @@ end
 
 -- 其他界面 --
 function GFlowerGameScene:InitOtherUi()
-
-    -- 金币父节点 -- 
-    self.coinParent = cc.Sprite:create()
-    self.m_widget:addChild(self.coinParent)
-
     --所有筹码容器
     self._coinSprite = {}
     -- 比牌按钮
@@ -1140,17 +1141,25 @@ function GFlowerGameScene:InitOtherUi()
     self.Label_Lunshu = self.m_widget:getChildByName("Label_Lunshu")
     self.Label_Lunshu:setString("0")
 
+	-- 金币父节点 -- 
+    self.coinParent = cc.Sprite:create()
+	local  bk = self.m_widget:getChildByName("Panel_back")
+    bk:addChild(self.coinParent)
+	self.coinParent:setLocalZOrder(5)
+	
     -- 当前玩家的灯光效果 --
     self.rotateLight = self.m_widget:getChildByName("icon_light")
+	self.m_widget:removeChildByName("icon_light")
     self.rotateLight:setVisible(false)
+	bk:addChild(self.rotateLight)
+	self.rotateLight:setLocalZOrder(3)
 
     -- 结算界面 --
 	local CCSLuaNode =  requireForGameLuaFile("GameZJHJSuanCCS")
     self.jsroot = CCSLuaNode:create().root;
-	self:addChild(self.jsroot);
+	self.m_widget:addChild(self.jsroot)
     self.jiesuan = self.jsroot:getChildByName("jiesuan")
     self.jiesuan:setVisible(false)
-    self.jiesuan:setLocalZOrder(29)
     self.jsbtn_ready = self.jiesuan:getChildByName("btn_ready")
     self.readyImage = self.jsbtn_ready:getChildByName("Image_4")
     self.jsbtn_ready:addTouchEventListener(handler(self,self._onBtnTouched_GameOver))
@@ -1320,6 +1329,7 @@ function GFlowerGameScene:_onBtnTouched_GameOver(sender, eventType)
 
             --关闭结算界面
             self.jiesuan:setVisible(false)
+			
         elseif sender:getName() == "btn_autoready" then
             self.autoreadyImage:setVisible(not self.autoreadyImage:isVisible())
         end
@@ -1375,13 +1385,19 @@ function GFlowerGameScene:_onBtnTouched_FollowDi(sender, eventType)
                     self.Button_Follow:setEnabled(false)
                     self.Image_Follow:loadTexture(GFlowerConfig.IMAGE_CONTROL_BTN["FOLLOW"][2])
                     local player = self._logic:getGFPlayerByClientId(GFlowerConfig.CHAIR_SELF)
-                    if  player:getGameState() == GFlowerConfig.PLAYER_STATUS.LOOK then
-                        self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 2)
-                    else
-                        self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 1)
-                    end
+					local money = player:getMoney()
+					
+					if money - self._logic.follow_money <= GFlowerConfig.ADD_BTN_TIMES[5] * self._logic.MinJetton * 2 then
+						MyToastLayer.new(self, "剩余金币已经不足以继续跟注")
+					else
+						if  player:getGameState() == GFlowerConfig.PLAYER_STATUS.LOOK then
+							self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 2)
+						else
+							self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 1)
+						end
 
-                    GFlowerGameManager:getInstance():send_CS_ZhaJinHuaAddScore(GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
+						GFlowerGameManager:getInstance():send_CS_ZhaJinHuaAddScore(GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
+					end
                 end
             end
 
@@ -1430,7 +1446,16 @@ function GFlowerGameScene:_onBtnTouched_play_btn(sender, eventType)
             -- 全压1 直接发 1
             self.Button_All:setEnabled(false)
             self.Image_All:loadTexture(GFlowerConfig.IMAGE_CONTROL_BTN["ALL_IN"][2])
-            self._logic:AllCoinList(self._logic.MinJettonMoney*GFlowerConfig.MAX_JETTON)
+			local player    = self._logic:getGFPlayerByClientId(GFlowerConfig.CHAIR_SELF)
+			local myMoney 	= player:getMoney()
+			local maxMoney 	= self._logic.MinJetton*GFlowerConfig.MAX_JETTON
+			print("MyMoney: ",myMoney," MaxMoney: ",maxMoney)
+			if maxMoney > myMoney then
+				 self._logic:AllCoinList(myMoney)
+			else
+				 self._logic:AllCoinList(maxMoney)
+			end
+
             self:AllInScore(GFlowerConfig.CHAIR_SELF)
             GFlowerGameManager:getInstance():send_CS_ZhaJinHuaShowHandScore(1)
         elseif sender:getName() == "Button_Compare" then
@@ -1920,17 +1945,6 @@ function GFlowerGameScene:gfFapaiAnimiCallBack()
 
     -- 刷新下排按钮
     self:UpdateMenuBtn()
-
-    -- 如果选择了跟到底 且 当前轮到自己操作
-    if self._logic.gendaodi == true and self._logic.doing_id  == GFlowerConfig.CHAIR_SELF then
-        local player = self._logic:getGFPlayerByClientId(GFlowerConfig.CHAIR_SELF)
-        if player:getGameState() == GFlowerConfig.PLAYER_STATUS.LOOK then
-            self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 2)
-        else
-            self:CoinFlyAction(GFlowerConfig.CHAIR_SELF, self._logic.follow_num, 1)
-        end
-        GFlowerGameManager:getInstance():send_CS_ZhaJinHuaAddScore(GFlowerConfig.ADD_BTN_TIMES[self._logic.follow_num] * self._logic.MinJetton)
-    end
 end
 
 -- 灯光转动 动画
@@ -1985,6 +1999,7 @@ end
 function GFlowerGameScene:UpdatePlayerStatus(chair_id)
     -- 观战
     local gfplayer = self._logic:getGFPlayerByClientId(chair_id)
+	if gfPlayer == nil then return end
     local state    = gfplayer:getGameState() 
     if state == GFlowerConfig.PLAYER_STATUS.STAND then
         print("ChairID: "..chair_id.." 观战。。。。。。。。。。。。。。。")
@@ -2119,11 +2134,6 @@ end
 -- 玩家准备
 function GFlowerGameScene:On_Ready(tid)
     if tid == 0 then
-        --self.jiesuan:setVisible(false)
-        -- 禁用准备按钮
-        --self.btn_ready:setTouchEnabled(false)
-        --self.btn_ready:setBright(false)
-
         -- 玩家界面状态   
         self:UpdatePlayerStatus(1)
 
@@ -2186,11 +2196,8 @@ end
 -- 设置所有在场玩家底注
 function GFlowerGameScene:setDiZhu()
     for idx, player in pairs(self._logic.gfPlayers) do
-       local client_id = player:getClientChairId()
-        -- 下注累积
-        if player:getDownMoney() > 0 then
-            self.playerxiazhu[client_id]:setString(CustomHelper.moneyShowStyleAB(player:getDownMoney()))
-        end
+
+		self:On_UpdatePlayerMoney(player)
     end
 end
 
@@ -2439,6 +2446,7 @@ end
 
 -- 全下筹码飞入
 function GFlowerGameScene:AllInScore(add_chair)
+	dump(self._logic.AllInList,"self._logic.AllInList")
     for k, index in pairs(self._logic.AllInList) do
         self:CoinFlyAction(add_chair, index, 1)
     end
@@ -2456,7 +2464,7 @@ function GFlowerGameScene:On_ZhaJinHuaAddScore(add_chair, next_chair)
         else
             self:PlayerCall(add_chair, "FOLLOW")
         end
-    end
+    end 
 
     -- 如果是全下 计算飞出筹码 如果是自己在点击的时候飞筹码，其他玩家在收到消息的时候播放动画
     if add_chair ~= GFlowerConfig.CHAIR_SELF  then
@@ -3079,14 +3087,6 @@ end
 
 -- 更新结算界面
 function GFlowerGameScene:showJieSuanPanel()
-    -- 启动结算界面不准备倒计时 
-    --[[if self._logic.huanzhuo == false then
-        self._logic.huanzhuo = true
-    else
-        self.jiesuan:setVisible(false)
-        return
-    end ]]--
-
     -- 倒计时转圈动画
     self:Using_jiesuan_Daojishi(self.countDown)
 
@@ -3221,7 +3221,6 @@ function GFlowerGameScene:UpdateMenuBtn()
             -- 否则正常处理按钮
             else
                 -- 场上剩下只两个玩家 且 回合超过1 才能全下
-                print("UpdateMenuBtn.  GetPlayingNum: ",self._logic:getPlayingNum()," RoundNum: ", self._logic.roundNum)
                 if self._logic:getPlayingNum() == 2 and self._logic.roundNum > 1 then
                     local playerSelf = self._logic:getGfPlayers()[self._logic.myServerChairId]
                     if playerSelf:getMoney() > GFlowerConfig.ADD_BTN_TIMES[5] * self._logic.MinJetton then

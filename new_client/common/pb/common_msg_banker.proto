@@ -57,7 +57,7 @@ message BankerGameEndPlayerInfo
 	optional int64 money = 2;		//钱
 	optional int64 tax = 3;		//税收		输玩家：-1
 	optional int32 victory = 4;	//输赢状态	1-赢； 2-输
-	optional int64 increment_money = 5;	//赢/输的钱
+	required int64 increment_money = 5;	//赢/输的钱
 }
 
 //重连玩家数据结构
@@ -78,7 +78,7 @@ message BankerReconnectPlayerInfo
 
 	optional int64 tax = 12;		//税收		输玩家：-1
 	optional int32 victory = 13;	//输赢状态	1-赢； 2-输
-	optional int64 increment_money = 14;	//赢/输的钱
+	required int64 increment_money = 14;	//赢/输的钱
 }
 
 //匹配

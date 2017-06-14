@@ -98,7 +98,6 @@ function FishGameScene:ctor()
 
     -- 自己最大子弹数量限制 --
     self.m_dwLastFireTick = -1
-    self.m_nBulletCount = 0
 
     -- 玩家控件列表 --------------------
     self._playersUI = {}
@@ -266,7 +265,7 @@ function FishGameScene:_onInterval(dt)
     local player = dataMgr:getMyPlayerInfo()
     local optIndex = player:getOptIndex()
     local fishId = player and player:getLockedFishId()
-    self._btnLock.armature:setVisible(fishId and fishId ~= 0)
+    self._btn_lock.armature:setVisible(fishId and fishId ~= 0)
 
     --- 处于锁定状态，但没有锁定的鱼，发送锁定新的鱼
     if not (fishId and fishId ~= 0) then
@@ -334,9 +333,8 @@ function FishGameScene:initUI()
         btn:setTouchEnabled(true)
         btn:addTouchEventListener(handlerAutoLock)
         btn.armature = btn:getChildByName("eff_fish_button_right_lock_auto_lk"):hide()
-        if v == "btn_lock" then
-            self._btnLock = btn
-        end
+
+        self["_" .. v] = btn
     end
 end
 
@@ -386,11 +384,11 @@ function FishGameScene:initPlayers()
 
         self._playerCannon[i] = FishGameCannon:create(i, conf):addTo(node_cannon)
 
-        FishGameBubble:create(i, node_lockfish):align(display.LEFT_BOTTOM, 0, 0):addTo(layerBubble)
+        FishGameBubble:create(i, node_lockfish,self:getDataManager()):align(display.LEFT_BOTTOM, 0, 0):addTo(layerBubble)
     end
 
     -- 初始化桌面上的信息
-    local players = self:getFishGameManager():getDataManager():getPlayeres()
+    local players = self:getDataManager():getPlayeres()
     for i = 1, FishGameConfig.PLAYER_COUNT do
         self:showPlayerInfo(players[i])
     end
@@ -410,11 +408,11 @@ end
 function FishGameScene:_onTouched_TTTTT(eventType, x, y)
     local time = socket.gettime()
     local dt = time - self._lastFireTime
-    local dataMgr = FishGameManager:getInstance():getDataManager()
+    local dataMgr = self:getDataManager()
     local fireInterval = dataMgr:getFireInterval()
 
 
-    local player = self:getFishGameManager():getDataManager():getMyPlayerInfo()
+    local player = dataMgr:getMyPlayerInfo()
     local fishId = player and player:getLockedFishId()
     local lockFish = fishId and fishId ~= 0
 
@@ -628,6 +626,18 @@ function FishGameScene:callbackWhenReloginAndGetPlayerInfoFinished(event)
     GameManager:getInstance():getHallManager():getHallMsgManager():sendEnterOneGameMsg(gameTypeID,roomID);
 end
 
+--请求失败通知，网络连接状态变化
+function FishGameScene:callbackWhenConnectionStatusChange(event)
+    FishGameScene.super.callbackWhenConnectionStatusChange(self,event);
+    print("网络断开连接")
+
+    self._autoFire = false
+    if self._autoFire then
+        self._autoFireTime = 0
+    end
+    self._btn_auto.armature:setVisible(self._autoFire)
+end
+
 function FishGameScene:hidePlayerInfo(optIndex)
 
     local nodePlayer = self._playersUI[optIndex]
@@ -726,10 +736,6 @@ end
 function FishGameScene:on_msg_KillBullet(msgTab)
     local bullet = game.fishgame2d.FishObjectManager:GetInstance():FindBullet(msgTab.bullet_id)
     if bullet and bullet:getState() < EOS_DEAD then
-        if bullet:isMine() then
-            -- 删除子弹 --
-            self.m_nBulletCount = self.m_nBulletCount - 1
-        end
         bullet:setState(EOS_DEAD)
     end
 end
@@ -874,11 +880,6 @@ function FishGameScene:on_event_BulletHitFish(bullet, fish)
         bullet_id = bullet:getId(),
         fish_id = fish:getId(),
     })
-
-    if bullet:isMine() then
-        -- 删除子弹 --
-        self.m_nBulletCount = self.m_nBulletCount - 1
-    end
 end
 
 function FishGameScene:on_event_FishEffect(pSelf, target, effect)
@@ -1007,18 +1008,19 @@ function FishGameScene:fireTo(targetPos, _handle)
         needMoney = dataMgr:getRoomInfo()[HallGameConfig.SecondRoomMinMoneyLimitKey]
     end
 
+    local bulletCount = dataMgr:getBulletCount()
     if error then
         -- FIX 如果当前自己的子弹没有耗完，则不提示金币不足
-        if self.m_nBulletCount > 0 then return end
+        if bulletCount > 0 then return end
         self:showAlertLackMoney(error,needMoney)
         return
     end
 
     -- 如果当前自己的子弹数量大于最大子弹数量
-    if self.m_nBulletCount >= dataMgr:getMaxBulletCount() then
+    if bulletCount >= dataMgr:getMaxBulletCount() then
         return
     end
-    self.m_nBulletCount = self.m_nBulletCount + 1
+    dataMgr:setBulletCount(bulletCount + 1)
 
     -- 扣除金币
     player:setScore(player:getScore() - bulletSet.mulriple)

@@ -54,7 +54,7 @@ message CS_Fire
 	enum MsgID { ID = 12004; Target = 2; }
 	required int32		chair_id=1;			//椅子ID
 	required float		direction=2;		//方向
-	required int32		fire_time=3;		//开火时间
+	required int64		fire_time=3;		//开火时间
 	required int32		client_id=4;		//子弹ID？
 	required float		pos_x = 5;
 	required float 		pos_y = 6;

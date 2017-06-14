@@ -84,7 +84,10 @@ SHConfig.CardState = {
 	State_Hand = "StateHand", --底牌 暗灰色状态
 }
 
-
+SHConfig.roomType = {
+	NORMAL = 0,--普通房
+	PRIVATE = 1,--私人房
+}
 
 --玩家类型
 SHConfig.PlayerType = {

@@ -37,46 +37,6 @@ DflhjGameScene.IMG[15] = "game_res/item_j.png"--
 DflhjGameScene.IMG[16] = "game_res/item_9.png"--
 DflhjGameScene.IMG[17] = "game_res/item_10.png"
 
-DflhjGameScene.IMG_MOHU1 = {}
-DflhjGameScene.IMG_MOHU1[1] = "game_res/item_shanbudai.png"--
-DflhjGameScene.IMG_MOHU1[2] = "game_res/item_fu.png"--
-DflhjGameScene.IMG_MOHU1[3] = "game_res/item_tongqian.png"--
-DflhjGameScene.IMG_MOHU1[4] = "game_res/item_yingui.png"--
-DflhjGameScene.IMG_MOHU1[5] = "game_res/item_jingui.png"--
-DflhjGameScene.IMG_MOHU1[6] = "game_res/item_yinhuang.png"--
-DflhjGameScene.IMG_MOHU1[7] = "game_res/item_jinhuang.png"--
-DflhjGameScene.IMG_MOHU1[8] = "game_res/item_yinchuan.png"--
-DflhjGameScene.IMG_MOHU1[9] = "game_res/item_jinchuan.png"--
-DflhjGameScene.IMG_MOHU1[10] = "game_res/item_yinyuanbao.png"--
-DflhjGameScene.IMG_MOHU1[11] = "game_res/item_jinyuanbao.png"--
-DflhjGameScene.IMG_MOHU1[12] = "game_res/item_a.png"--
-DflhjGameScene.IMG_MOHU1[13] = "game_res/item_q.png"--
-DflhjGameScene.IMG_MOHU1[14] = "game_res/item_k.png"--
-DflhjGameScene.IMG_MOHU1[15] = "game_res/item_j.png"--
-DflhjGameScene.IMG_MOHU1[16] = "game_res/item_9.png"--
-DflhjGameScene.IMG_MOHU1[17] = "game_res/item_10.png"
-
-DflhjGameScene.IMG_MOHU2 = {}
-DflhjGameScene.IMG_MOHU2[1] = "game_res/item_shanbudai.png"--
-DflhjGameScene.IMG_MOHU2[2] = "game_res/item_fu.png"--
-DflhjGameScene.IMG_MOHU2[3] = "game_res/item_tongqian.png"--
-DflhjGameScene.IMG_MOHU2[4] = "game_res/item_yingui.png"--
-DflhjGameScene.IMG_MOHU2[5] = "game_res/item_jingui.png"--
-DflhjGameScene.IMG_MOHU2[6] = "game_res/item_yinhuang.png"--
-DflhjGameScene.IMG_MOHU2[7] = "game_res/item_jinhuang.png"--
-DflhjGameScene.IMG_MOHU2[8] = "game_res/item_yinchuan.png"--
-DflhjGameScene.IMG_MOHU2[9] = "game_res/item_jinchuan.png"--
-DflhjGameScene.IMG_MOHU2[10] = "game_res/item_yinyuanbao.png"--
-DflhjGameScene.IMG_MOHU2[11] = "game_res/item_jinyuanbao.png"--
-DflhjGameScene.IMG_MOHU2[12] = "game_res/item_a.png"--
-DflhjGameScene.IMG_MOHU2[13] = "game_res/item_q.png"--
-DflhjGameScene.IMG_MOHU2[14] = "game_res/item_k.png"--
-DflhjGameScene.IMG_MOHU2[15] = "game_res/item_j.png"--
-DflhjGameScene.IMG_MOHU2[16] = "game_res/item_9.png"--
-DflhjGameScene.IMG_MOHU2[17] = "game_res/item_10.png"
-
-
-
 DflhjGameScene.SOUND = {
     bg = "lhjSound/lhj_bg_music.mp3",
     line = "lhjSound/sound-tiger-line-button.mp3", --选线/按钮
@@ -93,15 +53,26 @@ DflhjGameScene.SOUND = {
 function DflhjGameScene.getNeedPreloadResArray()
     -- body
     local  res = {
-        -- CustomHelper.getFullPath("game_res/wz_pg.png"),
-        -- CustomHelper.getFullPath("game_res/wz_lm.png"),
-        -- CustomHelper.getFullPath("game_res/wz_xg.png"),
-        -- CustomHelper.getFullPath("game_res/wz_yt.png"),
-        -- CustomHelper.getFullPath("game_res/wz_xj.png"),
-        -- CustomHelper.getFullPath("game_res/wz_pt.png"),
-        -- CustomHelper.getFullPath("game_res/wz_bar.png"),
-        -- CustomHelper.getFullPath("game_res/wz_qqq.png"),
-        -- CustomHelper.getFullPath("anim/slots_race_pop_middle_gold_01/slots_race_pop_middle_gold_01.ExportJson")
+        CustomHelper.getFullPath("game_res/item_shanbudai.png"),
+        CustomHelper.getFullPath("game_res/item_fu.png"),
+        CustomHelper.getFullPath("game_res/item_tongqian.png"),
+        CustomHelper.getFullPath("game_res/item_yingui.png"),
+        CustomHelper.getFullPath("game_res/item_jingui.png"),
+        CustomHelper.getFullPath("game_res/item_yinhuang.png"),
+        CustomHelper.getFullPath("game_res/item_jinhuang.png"),
+        CustomHelper.getFullPath("game_res/item_yinchuan.png"),
+        CustomHelper.getFullPath("game_res/item_jinchuan.png"),
+        CustomHelper.getFullPath("game_res/item_yinyuanbao.png"),
+        CustomHelper.getFullPath("game_res/item_jinyuanbao.png"),
+        CustomHelper.getFullPath("game_res/item_a.png"),
+        CustomHelper.getFullPath("game_res/item_q.png"),
+        CustomHelper.getFullPath("game_res/item_k.png"),
+        CustomHelper.getFullPath("game_res/item_j.png"),
+        CustomHelper.getFullPath("game_res/item_9.png"),
+        CustomHelper.getFullPath("game_res/item_10.png"),
+        CustomHelper.getFullPath("anim_res/dfdc_win_eff/dfdc_win_eff.ExportJson"),
+        CustomHelper.getFullPath("anim_res/hap_manmmon_1/hap_manmmon_1.ExportJson"),
+        CustomHelper.getFullPath("anim_res/zj_jinbiyu/zj_jinbiyu.ExportJson"),
     }
     return res
 end
@@ -204,6 +175,35 @@ function DflhjGameScene:initUI()
     end 
     self.btnStart:addTouchEventListener(btnClick) 
 
+
+    local function btnYafenClick(sender,eventType)
+        if eventType == ccui.TouchEventType.began then
+            GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+
+            local action = {}
+            action[1] = cc.DelayTime:create(0.1)
+            action[2] = cc.CallFunc:create(function (  ) 
+                    self.DflhjGameManager:getDataManager():updateCurrentBet(sender == self.btnJia and 1 or -1)
+                    self.labelYafen:setString( self.DflhjGameManager:getDataManager():getCurrentBet())
+                end)
+            sender:runAction(cc.RepeatForever:create(cc.Sequence:create(action)))
+
+           
+        elseif eventType == ccui.TouchEventType.moved then
+            
+        elseif eventType == ccui.TouchEventType.ended then
+            sender:stopAllActions()
+        elseif eventType == ccui.TouchEventType.canceled then
+            sender:stopAllActions()
+        end
+    end 
+
+
+
+
+    self.btnJian:addTouchEventListener(btnYafenClick)
+    self.btnJia:addTouchEventListener(btnYafenClick)
+
     self.btnAuto:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch);
         self._isAuto = false
@@ -283,9 +283,7 @@ function DflhjGameScene:initUI()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         local isOpenForSound = not GameManager:getInstance():getMusicAndSoundManager():getSoundSwitch()
         GameManager:getInstance():getMusicAndSoundManager():setSoundSwitch(isOpenForSound);
-        
         if isOpenForSound == true then
-            --todo
             GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
         else
             GameManager:getInstance():getMusicAndSoundManager():stopAllSound();
@@ -295,9 +293,13 @@ function DflhjGameScene:initUI()
     local btnHelp = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_help"), "ccui.Button");
     btnHelp:addClickEventListener(function()
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
-        local tips = requireForGameLuaFile("DflhjGameTips")
-        local tipsLayer = tips:create()
-        self:addChild(tipsLayer,100)
+        -- local tips = requireForGameLuaFile("DflhjGameTips")
+        -- local tipsLayer = tips:create()
+        -- self:addChild(tipsLayer,100)
+
+        local dflhjWinLayer = requireForGameLuaFile("DflhjWinLayer")
+        local layer = dflhjWinLayer:create(15636)
+        self:addChild(layer,100)
     end)  
     local btnMusic = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "btn_music"), "ccui.Button");
 
@@ -368,8 +370,40 @@ function DflhjGameScene:initUI()
     -- end  
     -- animation:setDelayPerUnit(0.1)
     -- winLight:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+    self:initViewLabel()
+end
 
 
+function DflhjGameScene:initViewLabel (  )
+    local basenum = self.DflhjGameManager:getDataManager():getDizhuNum() * 1000
+    local jj = basenum + math.random(0,1000)
+    local zj = basenum + math.random(0,1000)
+    local dj = basenum + math.random(0,1000)
+    local xj = basenum + math.random(0,1000) 
+    self.labelDfjj:setString(jj)
+    self.labelDfzj:setString(zj)
+    self.labelDcdj:setString(dj)
+    self.labelDcxj:setString(xj)
+    local action = {}
+    action[1] = cc.DelayTime:create(0.3)
+    action[2] = cc.CallFunc:create(function (  ) 
+            jj = jj + math.random(0,40)
+            zj = zj + math.random(0,40)
+            dj = dj + math.random(0,40)
+            xj = xj + math.random(0,40)
+            self.labelDfjj:setString(jj)
+            self.labelDfzj:setString(zj)
+            self.labelDcdj:setString(dj)
+            self.labelDcxj:setString(xj)
+        end)
+    self:runAction(cc.RepeatForever:create(cc.Sequence:create(action)))
+
+    --奖池激活
+    self.labelJcjh:setString( self.DflhjGameManager:getDataManager():getProgressive())
+    self.labelFd:setString( self.DflhjGameManager:getDataManager():getFudai())
+
+    self.labelYafen:setString( self.DflhjGameManager:getDataManager():getCurrentBet())
+    self.labelWin:setString( self.DflhjGameManager:getDataManager():getAccumulative())
 end
 
 --选择奖池数量
@@ -384,7 +418,7 @@ function  DflhjGameScene:onBtnClickJiangChi(index)
     end
 end
 
---初始化进入游戏时界面中显示的水果
+--初始化进入游戏时界面中显示
 function DflhjGameScene:initItems(  )
     math.randomseed(os.time())
     self:randomItems(0,0)
@@ -513,7 +547,7 @@ function DflhjGameScene:startLoopAnim(  )
                 --当停止滚动时item继续原先的动画 滚动到不可见区域被移除
                
                 item:setPositionY(item:getPositionY() + PAGE_HEIGHT * 2)
-                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,17)])
+                item:setTexture(DflhjGameScene.IMG[math.random(1,17)])
                 
             end
             --滚动停止时 完成action后不在继续
@@ -554,7 +588,7 @@ function DflhjGameScene:startLoopAnim(  )
             if item:getPositionY() < 0 and item:getPositionY() > -PAGE_HEIGHT then
                 --当停止滚动时item继续原先的动画 滚动到不可见区域被移除
                 item:setPositionY(item:getPositionY() + PAGE_HEIGHT*2)
-                item:setTexture(DflhjGameScene.IMG_MOHU2[math.random(1,17)])
+                item:setTexture(DflhjGameScene.IMG[math.random(1,17)])
                 loop(item)
             elseif item:getPositionY() > 0 then
                 loop(item)
@@ -628,9 +662,9 @@ function DflhjGameScene:stopLoop( time)
             local fruitId = math.random(1,17)
             local img = nil
             if i <=3 then
-                img = cc.Sprite:create(DflhjGameScene.IMG_MOHU2[fruitId])
+                img = cc.Sprite:create(DflhjGameScene.IMG[fruitId])
             else
-                img = cc.Sprite:create(DflhjGameScene.IMG_MOHU1[fruitId])
+                img = cc.Sprite:create(DflhjGameScene.IMG[fruitId])
             end 
             img:setPosition(cc.p(posX,highItemY))
             highItemY = highItemY + ITEM_HEIHT
@@ -909,7 +943,7 @@ function DflhjGameScene:randomItems(page,degree)
             if fruitId == 2 then fruitId = 1 end
             local img = nil
             if degree and degree == 1 then
-                img =cc.Sprite:create(DflhjGameScene.IMG_MOHU1[fruitId])
+                img =cc.Sprite:create(DflhjGameScene.IMG[fruitId])
             else
                 img =cc.Sprite:create(DflhjGameScene.IMG[fruitId])
             end
@@ -977,7 +1011,6 @@ function DflhjGameScene:moneyAnim()
     local endAccumulative = self.DflhjGameManager:getDataManager():getAccumulative()
 
     -- 0.8s 完成动画 变化8次
-  
     self:moneyAnimFactory(self.cumulativeScoreTxt,startAccumulative ,endAccumulative,8)
  
     self:moneyAnimFactory(self.moneyTxt,startMoney ,endMoney,6)
@@ -987,12 +1020,12 @@ end
 ----自己的信息
 function DflhjGameScene:showMyInfo()
    
-    self.cumulativeScoreTxt:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getAccumulative())) --累计积分
-    self:stringTxtAdaptation( self.cumulativeScoreTxt,8 )
-    self.bankMoneyTxt:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getMoneyInfo().bank))
-    self:stringTxtAdaptation( self.bankMoneyTxt,6 )
-    self.moneyTxt:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getMoneyInfo().money))
-    self:stringTxtAdaptation( self.moneyTxt,6 )
+    -- self.cumulativeScoreTxt:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getAccumulative())) --累计积分
+    -- self:stringTxtAdaptation( self.cumulativeScoreTxt,8 )
+    self.labelMoney:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getMoneyInfo().bank))
+    self:stringTxtAdaptation( self.labelMoney,6 )
+    self.labelBank:setString(CustomHelper.moneyShowStyleNone(self.DflhjGameManager:getDataManager():getMoneyInfo().money))
+    self:stringTxtAdaptation( self.labelBank,6 )
 end
 
 --界面中显示数字的宽度适配

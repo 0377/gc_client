@@ -132,7 +132,8 @@ function PrivateRoomView:_initData()
     self._data.roomNumDefault = ""
     self._data.roomNum = ""
     self._data.index = 1
-    self._data.operateType = PrivateRoomModel.OperateType.NONE
+    -- self._data.operateType = PrivateRoomModel.OperateType.NONE
+    self._data.operateType = PrivateRoomModel.OperateType.ENTER_PRIVATE_ROOM
     self._data.initedEnterRoom = false
     self._data.initedCreateRoom = false
     self._data.selectedInfoType = InfoType.NONE

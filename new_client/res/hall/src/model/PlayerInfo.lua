@@ -115,6 +115,15 @@ function PlayerInfo:getSquareHeadIconPath()
 	return CustomHelper.getFullPath("hall_res/head_icon/"..(self.headIconNum)..".png");
 	-- return CustomHelper.getFullPath("hall_res/account/bb_grxx_txk_1.png");
 end
+
+function PlayerInfo:getSquareHeadIconPathByIconNum(iconNum)
+	-- TODO
+	if iconNum <= 0 or iconNum > 10 then
+		iconNum = 1
+	end
+	return CustomHelper.getFullPath("hall_res/head_icon/"..iconNum..".png")
+end
+
 --得到是否绑定了支付宝
 function PlayerInfo:getIsBindAlipay()
 	if self.alipayAccount == nil then

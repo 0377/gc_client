@@ -78,6 +78,11 @@ function DdzGameDataManager:initData()
 
     self._landRecoveryPlayerCallScoreMsg = nil;
     -- body
+
+    self._privateIsPrivateRoom = false
+    self._privateRoomId = 0
+    self._privateOwnerInfo = {}
+    self._privateOriginator = 0
 end
 
 function DdzGameDataManager:ctor()
@@ -102,6 +107,13 @@ function DdzGameDataManager:_onMsg_EnterRoomAndSitDownInfo(infoTab)
 
     self:_onMsg_SetMySitDownInfo(infoTab)
 
+    if self._enterRoomAndSitDownInfo["private_room_id"] then
+        self._privateRoomId = self._enterRoomAndSitDownInfo["private_room_id"]
+    end
+
+    if self._enterRoomAndSitDownInfo["private_room"] then
+        self._privateIsPrivateRoom = self._enterRoomAndSitDownInfo["private_room"]
+    end
 end
 
 ----
@@ -203,10 +215,24 @@ function DdzGameDataManager:_onMsg_SetMySitDownInfo(msgTab)
     self._myChairId = msgTab.chair_id
 
     ----其他人的消息
+    dump(msgTab)
     if msgTab["pb_visual_info"] ~= nil then
         for i,v in ipairs(msgTab["pb_visual_info"]) do
-            self:savePlayerSitDownInfo(v,3)
+            -- self:savePlayerSitDownInfo(v,3)
+            if msgTab["private_room"] then
+                self:savePlayerSitDownInfo(v,2)
+            else
+                self:savePlayerSitDownInfo(v,3)
+            end
         end
+    end
+
+    if msgTab["private_room_id"] then
+        self._privateRoomId = msgTab["private_room_id"]
+    end
+
+    if msgTab["private_room"] then
+        self._privateIsPrivateRoom = msgTab["private_room"]
     end
 end
 
@@ -243,6 +269,7 @@ function DdzGameDataManager:_onMsg_SetPlayerReadyState(msgTab)
     if msgTab.is_ready then
         if self._chairs[msgTab.ready_chair_id]~=nil then
             self._chairs[msgTab.ready_chair_id]:setGameState(3)
+            self._chairs[msgTab.ready_chair_id]["playerInfoTab"]["is_ready"] = true
         end
     end
 end
@@ -907,4 +934,49 @@ function DdzGameDataManager:getMyGameSeverStop()
         myGameStop = true;
     end
     return myGameStop
+end
+
+function DdzGameDataManager:getPrivateRoomId()
+    return self._privateRoomId
+end
+
+function DdzGameDataManager:getIsPrivateRoom()
+    -- return self._enterRoomAndSitDownInfo["second_game_type"] == 99
+    return self._privateIsPrivateRoom
+end
+
+function DdzGameDataManager:getChairs()
+    return self._chairs
+end
+
+function DdzGameDataManager:removeChair(charid)
+    self._chairs[charid] = nil
+end
+
+function DdzGameDataManager:setVoteInfo(msgTab)
+    if self._chairs[msgTab["chair_id"]] then
+        self._chairs[msgTab["chair_id"]]["vote"] = msgTab["bret"]
+    end
+end
+
+function DdzGameDataManager:cleanVoteInfo()
+    for k, v in pairs(self._chairs) do
+        self._chairs[k]["vote"] = nil
+    end 
+end
+
+function DdzGameDataManager:setPrivateOwnerInfo(msgTab)
+    self._privateOwnerInfo = msgTab
+end
+
+function DdzGameDataManager:getIsPrivateOwner(uid)
+    return self._privateOwnerInfo["nhosterguid"] == uid
+end
+
+function DdzGameDataManager:setVoteOriginator(charid)
+    self._privateOriginator = charid
+end
+
+function DdzGameDataManager:getVoteOriginator()
+    return self._privateOriginator
 end

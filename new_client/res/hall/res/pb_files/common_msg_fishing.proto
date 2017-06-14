@@ -39,7 +39,7 @@ CS_Netcast
 CS_Fire
 chair_id (RchairId
 	direction (R	direction
-	fire_time (RfireTime
+	fire_time (RfireTime
 	client_id (RclientId
 pos_x (RposX
 pos_y (RposY"

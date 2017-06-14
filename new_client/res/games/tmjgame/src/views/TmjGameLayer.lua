@@ -220,7 +220,7 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 				hu_fan = 10,
 				win_money = 20,
 				jiabei = 2,
-				describe = "TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE,TIAN_HU,QING_YI_SE,HUA_PAI,HUA_PAI,HUA_PAI,HUA_PAI,HAI_DI_LAO_YUE",
+				describe = "TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE,TIAN_HU,QING_YI_SE,HUA_PAI,HUA_PAI,HUA_PAI,HAI_DI_LAO_YUE",
 				taxes = 10,
 				finish_task = true,
 				taskInfo = {
@@ -230,7 +230,7 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 				}
 			}
 	
-		--	TmjSettleWinLoseLayer:create(resultData,exitFun,nextFun):addTo(self.parent,TmjConfig.LayerOrder.GAME_FAN_LAYER)
+			--TmjSettleWinLoseLayer:create(resultData,exitFun,nextFun):addTo(self.parent,TmjConfig.LayerOrder.GAME_FAN_LAYER)
 			--local TmjGameScene = self.parent
 			--TmjSettleDrawnLayer:create(resultData,handler(TmjGameScene,TmjGameScene.exitGame),handler(TmjGameScene,TmjGameScene.nextGame)):addTo(self.parent,TmjConfig.LayerOrder.GAME_FAN_LAYER)
 		end

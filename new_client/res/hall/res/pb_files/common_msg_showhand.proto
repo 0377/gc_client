@@ -1,5 +1,5 @@
 
-ª
+¼
 common_msg_showhand.proto"@
 CS_ShowHandAddScore
 target (Rtarget"
@@ -13,7 +13,11 @@
 IDê„"*
 CS_ShowHandGiveUpEixt"
 MsgID
-IDë„"À
+IDë„"D
+CS_ShowHandMyVoteResult
+agreen (Ragreen"
+MsgID
+IDì„"À
 ShowHand_Player_Info
 tiles (Rtiles
 chair_id (RchairId
@@ -28,9 +32,10 @@
  (RwinMoney
 taxes (Rtaxes
 
-is_give_up (RisGiveUp"=
+is_give_up (RisGiveUp"a
 ShowHand_Reconnect_Data"
-act_left_time (RactLeftTime"ð
+act_left_time (RactLeftTime"
+vote_chair_id (RvoteChairId"ð
 SC_ShowHand_Desk_Enter4
 
 pb_players (2.ShowHand_Player_InfoR	pbPlayers
@@ -77,4 +82,13 @@ pb_players (2.ShowHand_Player_InfoR	pbPlayers"
 type (Rtype
 max_add (RmaxAdd"
 MsgID
-IDÓ…
+IDÓ…"D
+SC_ShowHandStartVote
+chair_id (RchairId"
+MsgID
+IDì„"`
+SC_ShowHandPlayerVoteRes
+chair_id (RchairId
+agreen (Ragreen"
+MsgID
+IDì„

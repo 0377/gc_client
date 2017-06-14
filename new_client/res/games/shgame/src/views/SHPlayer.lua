@@ -358,8 +358,8 @@ function SHPlayer:getOneCard(cardInfo)
 	self:closeLastRoundShow()
 	self:setHeadInfo({gamebet = self.gamebet})
 	if cardInfo and not cardInfo.createTag then
-		local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-		SHGameDataManager.roundBet = 0 
+		local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
+		SHGameDataBaseManager.roundBet = 0 
 		self:setRoundBet(0) --发牌后，重置当前这轮的下注额度
 		SHConfig.playSound(SHConfig.SoundType.DealCard)
 		
@@ -502,8 +502,8 @@ function SHPlayer:callCard(cardInfo)
 	--todo
 
 	--这里去最大的
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	local roundBet = SHGameDataManager.roundBet /100
+	local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
+	local roundBet = SHGameDataBaseManager.roundBet /100
 	local diff = roundBet
 	if self.roundBet then
 		diff = diff - self.roundBet
@@ -529,8 +529,8 @@ function SHPlayer:raiseCard(cardInfo)
 	if self.roundBet then
 		diff = diff - self.roundBet
 	end
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	SHGameDataManager.roundBet = cardInfo --这一轮的最大下注额度
+	local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
+	SHGameDataBaseManager.roundBet = cardInfo --这一轮的最大下注额度
 	
 	self:setRoundBet(cardInfo/100)
 	--
@@ -553,10 +553,10 @@ function SHPlayer:showHandCard(cardInfo)
 	sslog(self.logTag,"玩家梭哈")
 
 	
-	local SHGameDataManager = SHGameManager:getInstance():getDataManager()
-	local maxAdd = SHGameDataManager.maxAdd
-	SHGameDataManager.roundBet = maxAdd --这一轮的最大下注额度
-	sslog(self.logTag,"玩家梭哈SHGameDataManager.roundBet "..tostring(SHGameDataManager.roundBet))
+	local SHGameDataBaseManager = SHGameManager:getInstance():getDataManager()
+	local maxAdd = SHGameDataBaseManager.maxAdd
+	SHGameDataBaseManager.roundBet = maxAdd --这一轮的最大下注额度
+	sslog(self.logTag,"玩家梭哈SHGameDataBaseManager.roundBet "..tostring(SHGameDataBaseManager.roundBet))
 	local diff = maxAdd /100
 	if self.roundBet then
 		diff = diff - self.roundBet

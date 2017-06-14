@@ -1,5 +1,5 @@
 
-Ïm
+ùn
 common_msg_define.protocommon_player_define.proto"&
 C_RequestPublicKey"
 MsgID
@@ -564,7 +564,7 @@ is_offline (R	isOffline"
 IDŽV"*
 CS_EnterRoomAndSitDown"
 MsgID
-ID–V"Í
+ID–V"õ
 SC_EnterRoomAndSitDown
 room_id (RroomId
 table_id (RtableId
@@ -578,7 +578,8 @@ is_offline (R	isOffline"
 private_room
  (RprivateRoom#
 balance_money (RbalanceMoney5
-private_room_score_type (RprivateRoomScoreType"
+private_room_score_type (RprivateRoomScoreType&
+private_room_id (RprivateRoomId"
 MsgID
 ID—V")
 CS_StandUpAndExitRoom"
@@ -618,7 +619,7 @@ is_offline (R	isOffline"
 SC_Gamefinish
 money (Rmoney"
 MsgID
-ID®V"Í
+ID®V"Ï
 SC_PlayerReconnection
 room_id (RroomId
 table_id (RtableId
@@ -628,7 +629,11 @@ is_offline (R	isOffline"
 game_id (RgameId&
 first_game_type (RfirstGameType(
 second_game_type (RsecondGameType
-ip_area	 (	RipArea"
+ip_area	 (	RipArea!
+private_room
+ (RprivateRoom5
+private_room_score_type (RprivateRoomScoreType&
+private_room_id (RprivateRoomId"
 MsgID
 ID¯V"Æ
 SC_ChangeTable

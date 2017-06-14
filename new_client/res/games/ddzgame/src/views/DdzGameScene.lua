@@ -8,6 +8,9 @@ local MY_CARD_INTERVAL = 50
 local MY_CARD_SCALE = 0.8
 local OTHER_CARD_SCALE = 0.6
 
+local ZORDER_PRIVATE_ROOM = 10
+local ZORDER_MENU = 11
+
 ----初始化要加载的资源
 function DdzGameScene.getNeedPreloadResArray()
     -- body
@@ -59,6 +62,11 @@ function DdzGameScene:registerNotification()
     self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_LandRecoveryPlayerDouble) ---断线重连 加倍情况
     self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_ChangeTable) ---切换桌子
     self:addOneTCPMsgListener(HallMsgManager.MsgName.SC_StandUpAndExitRoom)---退出房间
+    self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_PrivateConfigChange)  ---私人房间设置
+    self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_TabVoteInfo)  ---私人房间投票
+    self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_TotalScoreInfo)  -- 私人房间结算
+    self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_TabVoteArray)  -- 私人房间投票信息
+    self:addOneTCPMsgListener(DdzGameManager.MsgName.SC_TickNotify)  -- 私人房间通知踢人
 
     self:addOneTCPMsgListener(DdzGameManager.MsgName.CS_LandOutCard,{DdzGameManager.MsgName.SC_LandOutCard})
     DdzGameScene.super.registerNotification(self);
@@ -68,10 +76,17 @@ end
 function DdzGameScene:receiveServerResponseSuccessEvent(event)
     local userInfo = event.userInfo;
     local msgName = userInfo["msgName"];
+    print("[DdzGameScene] msgName:%s", msgName)
 
     ---收到准备消息
     if msgName == HallMsgManager.MsgName.SC_Ready then
         self:showPlayerSitDownInfo()
+
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if self._ddzReadyView then
+                self._ddzReadyView:showListView()
+            end
+        end
 
     ----切换桌子
     elseif MsgName == DdzGameManager.MsgName.SC_ChangeTable then
@@ -87,6 +102,12 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
     ---通知同桌坐下 ---刷新界面
     elseif msgName == DdzGameManager.MsgName.SC_NotifySitDown then
         self:showPlayerSitDownInfo()
+
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if self._ddzReadyView then
+                self._ddzReadyView:showListView()
+            end
+        end
 
     ---同桌站起
     elseif msgName == DdzGameManager.MsgName.SC_NotifyStandUp then
@@ -104,6 +125,17 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
                 self:jumpToHallScene()
             else
                 self:OnPlayerExit(self._logic:ConvertChairIdToIndex(info.chair_id))
+
+                if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+                    GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():removeChair(info.chair_id)
+                end
+            end
+        end
+
+        -- 私人房间处理
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if self._ddzReadyView then
+                self._ddzReadyView:showListView()
             end
         end
 
@@ -375,6 +407,69 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
         if self._logic:IsGamePlaying() == false and self._gameStatus == nil then
             self:isContinueGameConditions()
         end
+    elseif msgName == DdzGameManager.MsgName.SC_PrivateConfigChange then
+        print("[DdzGameScene] SC_PrivateConfigChange")
+        dump(userInfo)
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if userInfo["nreason"] == 1 then
+                MyToastLayer.new(self, "房主新设定了房间属性，下局游戏生效。")
+            else
+                if self._ddzPropertyView then
+                    self._ddzPropertyView:showListView(userInfo)
+                else
+                    if self:_isPrivateShowingReady() then
+                        self:_showReadyView()
+                    end
+                end
+
+                self:_showPrivateRoomId()
+            end
+        end
+    elseif msgName == DdzGameManager.MsgName.SC_TabVoteInfo then
+        print("[DdzGameScene] SC_TabVoteInfo")
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if (userInfo["bret"]) then
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteInfo(userInfo)
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(userInfo["vote_chairid"])
+                if self._ddzDismissView then
+                    self._ddzDismissView:showListView()
+                else
+                    self:_showDismissView()
+                end
+            else
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():cleanVoteInfo()
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(0)
+                if self._ddzDismissView then
+                    self._ddzDismissView:removeSelf()
+                    self._ddzDismissView = nil
+                end
+
+                local chairId = userInfo["chair_id"]
+                MyToastLayer.new(self, string.format("%s拒绝解散房间", (GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getChairs()[chairId]):getNickName()))
+            end
+        end
+    elseif msgName == DdzGameManager.MsgName.SC_TabVoteArray then
+        print("[DdzGameScene] SC_TabVoteArray")
+        dump(userInfo)
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if userInfo["votechairid"] then
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(userInfo["votechairid"])
+            else
+                GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(0)
+            end
+        end
+    elseif msgName == DdzGameManager.MsgName.SC_TotalScoreInfo then
+        print("[DdzGameScene] SC_TotalScoreInfo")
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            self:_showStatisticsView(userInfo)
+        end
+    elseif msgName == DdzGameManager.MsgName.SC_TickNotify then
+        print("[DdzGameScene] SC_TickNotify")
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            if userInfo["tickchairid"] and (userInfo["tickchairid"] == DdzGameManager:getInstance():getDataManager():getMyChairID()) then
+                self:jumpToHallScene()
+            end
+        end
     end
 
     DdzGameScene.super.receiveServerResponseSuccessEvent(self,event)
@@ -534,8 +629,10 @@ function DdzGameScene:onEnter()
     if gameingInfoTable == nil then
         ---显示已经坐下的玩家
         DdzGameManager:getInstance():showPlayerSitDownInfo()
-        ---发送准备
-        DdzGameManager:getInstance():sendGameReady()
+        ---发送准备（非私人房间）
+        if not GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+            DdzGameManager:getInstance():sendGameReady()
+        end
     else
         DdzGameManager:getInstance():sendMsgReconnectionPlay()
     end
@@ -639,7 +736,7 @@ function DdzGameScene:initMenu()
     local CCSLuaNode =  requireForGameLuaFile("ddzGameMenuNodeCCS")
     local menuNode = CCSLuaNode:create().root;
 
-    self:addChild(menuNode)
+    self:addChild(menuNode, ZORDER_MENU)
     menuNode:setPosition(cc.p(display.width,display.height))
     local menu = menuNode:getChildByName("menu")
     local btn_menu = menu:getChildByName("btn_menu")
@@ -649,6 +746,7 @@ function DdzGameScene:initMenu()
     local btn_music = bg_menu:getChildByName("btn_yingyue")
     local btn_sound = bg_menu:getChildByName("btn_sound")
     local btn_info = bg_menu:getChildByName("btn_info")
+    local btn_property = bg_menu:getChildByName("btn_property")
 
     local bExpand = false
     --- @tip 菜单按钮/弹出
@@ -676,6 +774,10 @@ function DdzGameScene:initMenu()
                      btn_info:setVisible(true)
                  end)))
 
+                 btn_property:runAction(cc.Sequence:create(cc.DelayTime:create(0.1),cc.CallFunc:create(function ( ... )
+                     btn_property:setVisible(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom())
+                 end)))
+
                 --btn_sound:runAction(cc.Sequence:create(cc.DelayTime:create(0.3),moveTo_4))
 
                 --bg_menu:runAction(cc.ScaleTo:create(0.2,1,0))
@@ -701,6 +803,10 @@ function DdzGameScene:initMenu()
                      btn_info:setVisible(false)
                  end)))
 
+                 btn_property:runAction(cc.Sequence:create(cc.DelayTime:create(0.1),cc.CallFunc:create(function ( ... )
+                     btn_property:setVisible(false)
+                 end)))
+
                 btn_menu:setScaleY(1)
             end
         end
@@ -710,7 +816,8 @@ function DdzGameScene:initMenu()
     btn_quit:addTouchEventListener(handler(self, self._onBtnTouched_menu_quit))
     btn_sound:addTouchEventListener(handler(self, self._onBtnTouched_menu_sound))
     btn_info:addTouchEventListener(handler(self, self._onBtnTouched_menu_info))
-    
+    btn_property:addTouchEventListener(handler(self, self._onBtnTouched_menu_property))
+
     self.btn_music = btn_music
     self.btn_sound = btn_sound
    
@@ -836,6 +943,67 @@ function DdzGameScene:initUI()
         self._icon_status[i] = ui:getChildByName("icon_status_" .. i)
         self._icon_status[i]:setVisible(false)
     end
+
+    -- -- TODO
+    print("[DdzGameScene] DdzReadyView")
+    dump(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom())
+
+    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        DdzGameManager:getInstance():sendGetPrivateConfig()
+
+        DdzGameManager:getInstance():sendGetTabVoteArray()
+    end
+end
+
+function DdzGameScene:_showPrivateRoomId()
+    -- 展示房间号
+    if self._privateRoomIdLable == nil then
+        self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateOwner(self.myPlayerInfo:getGuid()) then
+            self._privateRoomIdLable = cc.Label:create()
+            self._privateRoomIdLable:setSystemFontSize(24)
+            self._privateRoomIdLable:setTextColor(cc.c3b(249, 239, 140))
+            -- self._privateRoomIdLable:setString(string.format("房间号：%d", GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getPrivateRoomId()))
+            self._privateRoomIdLable:align(display.LEFT_CENTER, 100, cc.Director:getInstance():getWinSize().height - 26)
+            self:addChild(self._privateRoomIdLable, ZORDER_MENU)
+        end
+    end
+end
+
+function DdzGameScene:_showReadyView()
+    local DdzReadyView = requireForGameLuaFile("DdzReadyView")
+    local layer = DdzReadyView:create()
+    self:addChild(layer, ZORDER_PRIVATE_ROOM)
+    self._ddzReadyView = layer
+end
+
+function DdzGameScene:_hideReadyView()
+    if self._ddzReadyView then
+        self._ddzReadyView:removeSelf()
+        self._ddzReadyView = nil
+    end
+end
+
+function DdzGameScene:_showPropertyView(data)
+    local DdzPropertyView = requireForGameLuaFile("DdzPropertyView")
+    local layer = DdzPropertyView:create(function ()
+        self._ddzPropertyView = nil
+    end)
+    self:addChild(layer, ZORDER_PRIVATE_ROOM)
+    self._ddzPropertyView = layer
+end
+
+function DdzGameScene:_showDismissView()
+    local DdzDismissView = requireForGameLuaFile("DdzDismissView")
+    local layer = DdzDismissView:create()
+    self:addChild(layer, ZORDER_PRIVATE_ROOM)
+    self._ddzDismissView = layer
+end
+
+function DdzGameScene:_showStatisticsView(data)
+    local DdzStatisticsView = requireForGameLuaFile("DdzStatisticsView")
+    local layer = DdzStatisticsView:create(self, data)
+    self:addChild(layer, ZORDER_PRIVATE_ROOM)
 end
 
 ---初始化控制按钮
@@ -1088,6 +1256,9 @@ function DdzGameScene:initResult()
 
     ---换桌
     local btn_change_table = tolua.cast(CustomHelper.seekNodeByName(bg_result, "btn_change_table"), "ccui.Button");
+    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        btn_change_table:setVisible(false)
+    end
     btn_change_table:addClickEventListener(function ()
 
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
@@ -1101,6 +1272,9 @@ function DdzGameScene:initResult()
     end)
 
     ---准备
+    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        btn_ready:setPositionX(435)
+    end
     btn_ready:addClickEventListener(function ()
 
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
@@ -1343,6 +1517,40 @@ function DdzGameScene:_onBtnTouched_menu_quit(sender, eventType)
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
 
+        if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+
+            if self:_isPrivateShowingReady() then
+                self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
+                if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateOwner(self.myPlayerInfo:getGuid()) then
+                    CustomHelper.showAlertView(
+                        "“返回大厅”会解散房间并退返房费，确认要退出吗？",
+                        true,
+                        true,
+                    function(tipLayer)
+                        tipLayer:removeSelf()
+                    end,
+                    function(tipLayer)
+                        CustomHelper.addIndicationTip("正在退出房间,请稍后!!!",cc.Director:getInstance():getRunningScene(),0);
+                        DdzGameManager:getInstance():sendStandUpAndExitRoomMsg();
+                    end)
+                    return
+                end
+            else
+                CustomHelper.showAlertView(
+                    "您正处于私人房游戏中，要发起解散房间投票吗？",
+                    true,
+                    true,
+                function(tipLayer)
+                    tipLayer:removeSelf()
+                end,
+                function(tipLayer)
+                    self:_showDismissView()
+                    tipLayer:removeSelf()
+                end)
+                return
+            end
+        end
+
         if self._gameStatus == "stoped_result" and self._isTrusteeship == true then
             
             self:jumpToHallScene()
@@ -1393,6 +1601,14 @@ function DdzGameScene:_onBtnTouched_menu_info(sender, eventType)
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
         self:ShowHelp(true)
+    end
+end
+
+function DdzGameScene:_onBtnTouched_menu_property(sender, eventType)
+    if eventType == ccui.TouchEventType.began then
+        GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
+    elseif eventType == ccui.TouchEventType.ended then
+        self:_showPropertyView()
     end
 end
 
@@ -2123,6 +2339,7 @@ function DdzGameScene:OnGameStart(msg)
     self._gameStatus = "started"
     -- 关闭结果界面 --
     self:HideResult()
+    self:_hideReadyView()
 
     self:SetShowInfoVisable(false);
 
@@ -3070,17 +3287,22 @@ function DdzGameScene:ShowResult(msg, handler)
             sender:setString(countDown .. "S")
             countDown = countDown - 1
             if countDown < 0 then
-                if self:isContinueGameConditions() == true then
-                    --是托管都T掉
-                    if self._isTrusteeship == true then
+                -- 私人房默认准备
+                if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+                    self:_resultAutoReady()
+                else
+                    if self:isContinueGameConditions() == true then
+                        --是托管都T掉
+                        if self._isTrusteeship == true then
 
-                        DdzGameManager:getInstance():sendStandUpAndExitRoomMsg();
-                    else
-                        ---自动准备
-                        -- DdzGameManager:getInstance():sendGameReady()
-                        -- self:HideResult()
-                        -- self:SetShowInfoVisable(true)
-                        DdzGameManager:getInstance():sendStandUpAndExitRoomMsg();
+                            DdzGameManager:getInstance():sendStandUpAndExitRoomMsg();
+                        else
+                            ---自动准备
+                            -- DdzGameManager:getInstance():sendGameReady()
+                            -- self:HideResult()
+                            -- self:SetShowInfoVisable(true)
+                            DdzGameManager:getInstance():sendStandUpAndExitRoomMsg();
+                        end
                     end
                 end
             end
@@ -3090,6 +3312,15 @@ function DdzGameScene:ShowResult(msg, handler)
 
     -- 更新界面 --
     self:UpdateResult(msg)
+end
+
+function DdzGameScene:_resultAutoReady()
+    if self:isContinueGameConditions() == true then
+        self._gameStatus = nil
+        DdzGameManager:getInstance():sendGameReady()
+        self:HideResult() 
+        self:SetShowInfoVisable(true)
+    end
 end
 
 function DdzGameScene:ShowHelp(bShow)
@@ -3291,26 +3522,40 @@ end
 
 ----是否可以继续游戏判断条件
 function DdzGameScene:isContinueGameConditions()
+    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        return true
+    end
+
     if DdzGameScene.super.isContinueGameConditions(self) == false then
         self:alertAlertViewWhenServerMaintain();
         return false
     end
     local roomInfo = GameManager:getInstance():getHallManager():getHallDataManager():getCurSelectedGameDetailInfoTab();
-    if GameManager:getInstance():getHallManager():getPlayerInfo():getMoney() < roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
-        CustomHelper.showAlertView(
-            "金币不足，退出房间!!!",
-            false,
-            true,
-            function(tipLayer)
-                self:jumpToHallScene()
-            end,
-            function(tipLayer)
-                self:jumpToHallScene();
-            end)
-        return false
+    if roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+        if GameManager:getInstance():getHallManager():getPlayerInfo():getMoney() < roomInfo[HallGameConfig.SecondRoomMinMoneyLimitKey] then
+            CustomHelper.showAlertView(
+                "金币不足，退出房间!!!",
+                false,
+                true,
+                function(tipLayer)
+                    self:jumpToHallScene()
+                end,
+                function(tipLayer)
+                    self:jumpToHallScene();
+                end)
+            return false
+        end
     end
     --DdzGameManager:getInstance():sendMsgChangeTable()
     return true
+end
+
+function DdzGameScene:_isPrivateShowingReady()
+    if self._gameStatus == nil or self._gameStatus == "stoped_result" or self._gameStatus == "stoped"  then
+        return true
+    else
+        return false
+    end
 end
 
 return DdzGameScene;

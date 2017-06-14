@@ -1,7 +1,7 @@
 {
     "client_info": {
         "channel": "1",
-        "version": "1.0.2",
+        "version": "1.0.3",
         "is_must_update": "false",
         "server_urls": [
             "http:\/\/14.29.123.144:8080\/api\/index\/index"
@@ -10,7 +10,6 @@
     },
     "hall_info": {
         "addr": ["14.29.123.142#7788"],
-        "addr": ["192.168.7.164#7788"],
 
 
         "config": {

@@ -698,24 +698,26 @@ end
 function GFlowerGameDataManager:AllCoinList(score)
     self.AllInNum = 1
     self.AllInList = {}
+	local minJetton = self.MinJetton/CustomHelper.goldToMoneyRate()
 
     local allnum = (score / CustomHelper.goldToMoneyRate() )
+	dump(minJetton,"minJetton")
     while( allnum > 0 ) do
-        if allnum >= self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[5] then
+        if allnum >= minJetton * GFlowerConfig.ADD_BTN_TIMES[5] then
             self.AllInList[self.AllInNum] = 5
-            allnum = allnum - self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[5]
+            allnum = allnum - minJetton * GFlowerConfig.ADD_BTN_TIMES[5]
         elseif allnum >= self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[4] then
             self.AllInList[self.AllInNum] = 4
-            allnum = allnum - self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[4]
-        elseif allnum >= self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[3] then
+            allnum = allnum - minJetton * GFlowerConfig.ADD_BTN_TIMES[4]
+        elseif allnum >= minJetton * GFlowerConfig.ADD_BTN_TIMES[3] then
             self.AllInList[self.AllInNum] = 3
-            allnum = allnum - self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[3]
-        elseif allnum >= self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[2] then
+            allnum = allnum - minJetton * GFlowerConfig.ADD_BTN_TIMES[3]
+        elseif allnum >= minJetton * GFlowerConfig.ADD_BTN_TIMES[2] then
             self.AllInList[self.AllInNum] = 2
-            allnum = allnum - self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[2]
-        elseif allnum >= self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[1] then
+            allnum = allnum - minJetton * GFlowerConfig.ADD_BTN_TIMES[2]
+        elseif allnum >= minJetton * GFlowerConfig.ADD_BTN_TIMES[1] then
             self.AllInList[self.AllInNum] = 1
-            allnum = allnum - self.MinJetton * GFlowerConfig.ADD_BTN_TIMES[1]
+            allnum = allnum - minJetton * GFlowerConfig.ADD_BTN_TIMES[1]
         else
             self.AllInList[self.AllInNum] = 1
             break
@@ -1026,7 +1028,7 @@ function GFlowerGameDataManager:getCompareNum()
         if state == GFlowerConfig.PLAYER_STATUS.CONTROL
         or state == GFlowerConfig.PLAYER_STATUS.LOOK then
             if client_id ~= GFlowerConfig.CHAIR_SELF then
-                --print("剩下自己和另一个玩家时，另一个玩家的id："..client_id)
+                print("剩下自己和另一个玩家时，另一个玩家的id："..client_id)
                 return client_id
             end
         end

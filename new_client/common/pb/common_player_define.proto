@@ -39,6 +39,7 @@ message PlayerVisualInfo {
 	optional int64 money = 6[default = 0]; 			// 有多少钱
 	optional int32 header_icon = 7[default = -1]; 	// 头像	
 	optional string ip_area = 8;					// 客户端ip地区
+	optional bool is_ready = 9;						// false 取消 true 准备
 }
 
 // 物品基本信息

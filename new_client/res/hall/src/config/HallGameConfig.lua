@@ -17,6 +17,7 @@ HallGameConfig.game.ID_TMJGame    = 13  -- 二人麻将
 HallGameConfig.game.ID_LHJGame     = 12 -- 老虎机
 HallGameConfig.game.ID_DZPKGame    = 11 -- 德州扑克
 HallGameConfig.game.ID_QZNNGame    = 14 -- 抢庄牛牛
+HallGameConfig.game.ID_DFLHJGame    = 15 -- 多福老虎机
 --- wKind:游戏ID gameName:游戏名称 module:游戏模块  entrance:游戏入口加载文件 dwClientVersion:游戏版本号
 HallGameConfig.gameOrderList = 
 {
@@ -27,6 +28,7 @@ HallGameConfig.gameOrderList =
 	HallGameConfig.game.ID_BRNNGame,
 	HallGameConfig.game.ID_TMJGame,
 	HallGameConfig.game.ID_LHJGame,
+	HallGameConfig.game.ID_DFLHJGame,
 	HallGameConfig.game.ID_SHGame,
 	HallGameConfig.game.ID_DZPKGame,
 	HallGameConfig.game.ID_QZNNGame,
@@ -69,6 +71,7 @@ HallGameConfig.game.IconConfig = {
     [HallGameConfig.game.ID_TMJGame] = "hall_res/hall/bb_dating_youxitubiao_9_1.png",
 
     [HallGameConfig.game.ID_LHJGame] = "hall_res/hall/bb_dating_youxitubiao_4_2.png",
+     [HallGameConfig.game.ID_DFLHJGame] = "hall_res/hall/bb_dating_youxitubiao_4_2.png",
     [HallGameConfig.game.ID_DZPKGame] = "hall_res/hall/bb_dating_youxitubiao_10_1.png",
 
     [HallGameConfig.game.ID_SHGame] = "hall_res/hall/bb_dating_youxitubiao_5_2.png",
@@ -365,6 +368,28 @@ HallGameConfig.allGames = {
 				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_04",
 				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 2000,
 				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	500
+			},
+		}
+	},
+
+	[HallGameConfig.game.ID_DFLHJGame] = {
+		[HallGameConfig.GameNameKey]		          = "多福老虎机",
+		[HallGameConfig.GamePackageRootPathKey]       = "games/dflhjgame/",
+		[HallGameConfig.GameEntranceKey]	          = "DflhjGameEntry",
+		[HallGameConfig.GameIconKey]	 			  =	HallGameConfig.game.IconConfig[HallGameConfig.game.ID_DFLHJGame],
+		[HallGameConfig.GameShadowIconKey]			  = "hall_res/hall/bb_dating_tubiao_daoying_lhj.png",
+		-- [HallGameConfig.GameIconAnimKey]			  = HallGameConfig.game.IconAnimConfig[HallGameConfig.game.ID_GFLOWER],
+		-- [HallGameConfig.SecondRoomNodeClassNameKey]   = "secondary_game_node.SceondaryLHJNode",
+		-- [HallGameConfig.GameSecondEffectResKey]	      = "anim/game_select/baobo_zjh_choice_02/baobo_zjh_choice_02.ExportJson",--前面为资源名，后面为动画名
+		[HallGameConfig.GameSecondTitleResKey]	      =	"hall_res/game_select/slotmachine_chart/bb_fc_lhj_biaotizi.png",
+		[HallGameConfig.SecondRoomKey]		          = {
+			{
+				[HallGameConfig.SecondRoomNameKey]			  = "练习",
+				[HallGameConfig.SecondRoomIDKey] 			  = 1,
+				[HallGameConfig.SecondRoomIconKey]			  = "hall_res/game_select/slotmachine_chart/BB_icon_lhj_xsc.png",
+				-- [HallGameConfig.SecondRoomIconEffectKey]	  = "baobo_zjh_choice_02#ani_01",
+				-- [HallGameConfig.SecondRoomMinMoneyLimitKey]	  = 200,
+				-- [HallGameConfig.SecondRoomMinJettonLimitKey]  =	10
 			},
 		}
 	},
