@@ -49,17 +49,17 @@ protected:
 public:
 	virtual ~Effect();
 
-	int GetEffectType(){ return m_nType; }
-	void SetEffectType(int etp){ m_nType = etp; }
+	int getEffectType(){ return m_nType; }
+	void setEffectType(int etp){ m_nType = etp; }
 
-	int GetParam(int pos);
-	void SetParam(int pos, int p);
+	int getParam(int pos);
+	void setParam(int pos, int p);
 
-	void ClearParam();
+	void clearParam();
 
-	int GetParamSize(){ return m_nParam.size(); }
+	int getParamSize(){ return m_nParam.size(); }
 
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating) = 0;
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating) = 0;
 
 protected:
 	int			m_nType;
@@ -72,7 +72,7 @@ protected:
 class EffectAddMoney : public Effect {
 public:
 	EffectAddMoney();
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 	long lSco;
 };
 
@@ -84,7 +84,7 @@ public:
 class EffectKill : public Effect {
 public:
 	EffectKill();
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 };
 
 //增加ＢＵＦＦ
@@ -96,7 +96,7 @@ public:
 class EffectAddBuffer : public Effect {
 public:
 	EffectAddBuffer();
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 };
 
 //生成鱼
@@ -107,14 +107,14 @@ public:
 class EffectProduce : public Effect {
 public:
 	EffectProduce();
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 };
 
 //乌贼墨汁效果
 class EffectBlackWater : public Effect {
 public:
 	EffectBlackWater();
-	virtual	long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual	long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 };
 
 //抽奖效果展示
@@ -126,7 +126,7 @@ public:
 class EffectAward : public Effect {
 public:
 	EffectAward();
-	virtual long Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	virtual long execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 };
 NS_FISHGAME2D_END
 

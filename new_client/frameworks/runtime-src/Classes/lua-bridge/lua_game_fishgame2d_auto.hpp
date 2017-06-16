@@ -169,4 +169,14 @@ int register_all_game_fishgame2d(lua_State* tolua_S);
 
 
 
+
+
+
+
+
+
+
+
+
+
 #endif // __game_fishgame2d_h__

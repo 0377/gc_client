@@ -56,13 +56,14 @@ public:
 	void Clear();
 	bool AddBullet(Bullet* pBullet);
 	Bullet* FindBullet(unsigned long  id);
-	bool RemoveAllBullets(bool);
 	bool AddFish(Fish* pFish);
 	Fish* FindFish(unsigned long);
 
 	cocos2d::Vector<Fish* > GetAllFishes();
 
-	bool RemoveAllFishes(bool);
+	bool RemoveAllBullets();
+	bool RemoveAllFishes();
+
 	bool OnUpdate(float dt);
 
 	void RegisterBulletHitFishHandler(int);

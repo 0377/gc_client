@@ -6,7 +6,7 @@
 
 --------------------------------
 -- 
--- @function [parent=#EffectBlackWater] Execute 
+-- @function [parent=#EffectBlackWater] execute 
 -- @param self
 -- @param #game.fishgame2d.MyObject pSelf
 -- @param #game.fishgame2d.MyObject pTarget

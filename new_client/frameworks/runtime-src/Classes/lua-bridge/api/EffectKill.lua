@@ -6,7 +6,7 @@
 
 --------------------------------
 -- 
--- @function [parent=#EffectKill] Execute 
+-- @function [parent=#EffectKill] execute 
 -- @param self
 -- @param #game.fishgame2d.MyObject pSelf
 -- @param #game.fishgame2d.MyObject pTarget

@@ -9,7 +9,7 @@
 NS_FISHGAME2D_BEGIN
 
 MyObject::MyObject() 
-	: cocos2d::Node()
+	: cocos2d::Ref()
 	, m_nType(EOT_NONE)
 	, m_nId(0)
 	, m_fDirection(0.0f)
@@ -24,11 +24,13 @@ MyObject::MyObject()
 	, m_pMoveCompent(nullptr)
 	, m_nTargetId(0)
 	, m_bMarkEffectDone(false)
+
+	, m_pContent(nullptr)
+	, m_pShadow(nullptr)
+	, m_pDebug(nullptr)
 {}
 
 MyObject::~MyObject(){
-	
-
 	if (m_pMoveCompent != nullptr){
 		if (m_pMoveCompent->getReferenceCount() > 1) {
 			int a = m_pMoveCompent->getReferenceCount();
@@ -46,48 +48,43 @@ MyObject::~MyObject(){
 		v->release();
 	}
 	m_pBuffList.clear();
-		
-	for (auto& v : m_pVisualNodeList){
-		if (v.target) v.target->removeFromParentAndCleanup(true);
-		if (v.targetShadow) v.targetShadow->removeFromParentAndCleanup(true);
-		v.target = nullptr;
-		v.targetShadow = nullptr;
-	}
-	m_pVisualNodeList.clear();
 }
 
-void MyObject::Clear(bool bForce, bool noCleanNode){
-	if (bForce){
-		for (auto& v : m_pVisualNodeList){
-			if (v.target) v.target->removeFromParentAndCleanup(true);
-			if (v.targetShadow) v.targetShadow->removeFromParentAndCleanup(true);
-			v.target = nullptr;
-			v.targetShadow = nullptr;
-		}
-		m_pVisualNodeList.clear();
-	}
-	else{
-		for (auto& v : m_pVisualNodeList){
-			if (v.target) v.target->runAction(cocos2d::Sequence::createWithTwoActions(
-				cocos2d::DelayTime::create(m_nType == EOT_FISH ? 3 : 1), cocos2d::CallFuncN::create([](cocos2d::Node* sender){
-				sender->removeFromParentAndCleanup(true);
-			})));
-			if (v.targetShadow) v.targetShadow->runAction(cocos2d::Sequence::createWithTwoActions(
-				cocos2d::DelayTime::create(m_nType == EOT_FISH ? 3 : 1), cocos2d::CallFuncN::create([](cocos2d::Node* sender){
-				sender->removeFromParentAndCleanup(true);
-			})));
+void MyObject::Clear(bool bForce){
+	if (bForce) {
+		if (m_pContent) m_pContent->removeFromParentAndCleanup(true);
+		if (m_pShadow) m_pShadow->removeFromParentAndCleanup(true);
+		if (m_pDebug) m_pDebug->removeFromParentAndCleanup(true);
 
-			v.target = nullptr;
-			v.targetShadow = nullptr;
-		}
-		m_pVisualNodeList.clear();
+		m_pContent = nullptr;
+		m_pShadow = nullptr;
+		m_pDebug = nullptr;
 	}
+	else {
+		if (m_pContent) m_pContent->runAction(cocos2d::Sequence::createWithTwoActions(
+			cocos2d::DelayTime::create(m_nType == EOT_FISH ? 3 : 1), cocos2d::CallFuncN::create([](cocos2d::Node* sender) {
+			sender->removeFromParentAndCleanup(true);
+		})));
+		if (m_pShadow) m_pShadow->runAction(cocos2d::Sequence::createWithTwoActions(
+			cocos2d::DelayTime::create(m_nType == EOT_FISH ? 3 : 1), cocos2d::CallFuncN::create([](cocos2d::Node* sender) {
+			sender->removeFromParentAndCleanup(true);
+		})));
+		if (m_pDebug)m_pDebug->runAction(cocos2d::Sequence::createWithTwoActions(
+			cocos2d::DelayTime::create(m_nType == EOT_FISH ? 3 : 1), cocos2d::CallFuncN::create([](cocos2d::Node* sender) {
+			sender->removeFromParentAndCleanup(true);
+		})));
+
+		m_pContent = nullptr;
+		m_pShadow = nullptr;
+		m_pDebug = nullptr;
+	}
+
 	OnClear(bForce);
 }
 
 void MyObject::OnClear(bool){ }
 
-bool MyObject::OnUpdate(float dt, bool shouldUpdate){
+bool MyObject::onUpdate(float dt, bool shouldUpdate){
 	bool ret = shouldUpdate;
 
 	if (m_pMoveCompent != nullptr){
@@ -108,22 +105,21 @@ bool MyObject::OnUpdate(float dt, bool shouldUpdate){
 
 	// 更新状态和显示;
 	if (shouldUpdate
-		&& m_pManager != nullptr
 		&& m_bInScreen 
-		&& m_bDirtyState 
-		&& FishObjectManager::GetInstance()->IsGameLoaded()){
+		&& m_bDirtyState ){
 		m_bDirtyState = false;
 
-		for (auto& v : m_pVisualNodeList){
-			if (v.target) v.target->removeFromParentAndCleanup(true);
-			if (v.targetShadow) v.targetShadow->removeFromParentAndCleanup(true);
-			v.target = nullptr;
-			v.targetShadow = nullptr;
-		}
-		m_pVisualNodeList.clear();
+
+		this->removeAllChildren();
+#if CC_ENABLE_SCRIPT_BINDING
+		cocos2d::LuaStack *_stack = cocos2d::LuaEngine::getInstance()->getLuaStack();
+		_stack->pushInt(m_nState);
+
+		int ret = _stack->executeFunctionByHandler(m_handler_statusChanged, 1);
+		_stack->clean();
+#endif	
 
 
-			
 		m_bDirtyPos = true;
 		m_bDirtyDir = true;
 		m_bDirtyInScreen = true;
@@ -137,7 +133,7 @@ bool MyObject::OnUpdate(float dt, bool shouldUpdate){
 }
 
 void MyObject::OnMoveEnd(){
-	setState(EOS_DESTORY);
+	setState(EOS_DESTORED);
 }
 
 void MyObject::setState(int st){
@@ -153,23 +149,24 @@ void MyObject::setState(int st){
 	if (st == EOS_DEAD)
 	{
 		cocos2d::Vector<MyObject*> vector;
-		self:ExecuteEffects(nullptr, vector, false);
+		self:executeEffects(nullptr, vector, false);
 	}
 
 	m_nState = st;
 	m_bDirtyState = true;
-	
+
+	if (st == EOS_DESTORED) {
 #if CC_ENABLE_SCRIPT_BINDING
-	cocos2d::LuaStack *_stack = cocos2d::LuaEngine::getInstance()->getLuaStack();
-	_stack->pushInt(m_nState);
+		cocos2d::LuaStack *_stack = cocos2d::LuaEngine::getInstance()->getLuaStack();
+		_stack->pushInt(m_nState);
 
-	int ret = _stack->executeFunctionByHandler(m_handler_statusChanged, 1);
-	_stack->clean();
-#endif
-
+		int ret = _stack->executeFunctionByHandler(m_handler_statusChanged, 1);
+		_stack->clean();
+#endif	
+	}
 }
 
-void MyObject::AddBuff(int buffType, float buffParam, float buffTime){
+void MyObject::addBuff(int buffType, float buffParam, float buffTime){
 	auto* pBuff = Buff::create(buffType, buffParam, buffTime);
 	if (pBuff != nullptr)
 	{
@@ -178,7 +175,7 @@ void MyObject::AddBuff(int buffType, float buffParam, float buffTime){
 	}
 }
 
-void MyObject::AddEffect(Effect* effect){
+void MyObject::addEffect(Effect* effect){
 	if (effect != nullptr){
 		effect->retain();
 		m_pEffectList.push_back(effect);
@@ -194,7 +191,7 @@ void MyObject::setMoveCompent(MoveCompent* p){
 
     m_pMoveCompent = p;
 	m_pMoveCompent->retain();
-	m_pMoveCompent->SetOwner(this);
+	m_pMoveCompent->setOwner(this);
 	m_pMoveCompent->OnAttach();
 }
 
@@ -204,7 +201,7 @@ int MyObject::GetTarget(){
 	return m_nTargetId;
 }
 
-cocos2d::Vector<MyObject*> MyObject::ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating){
+cocos2d::Vector<MyObject*> MyObject::executeEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating){
 	if (m_bMarkEffectDone) return list;
 	m_bMarkEffectDone = true;
 
@@ -218,10 +215,10 @@ cocos2d::Vector<MyObject*> MyObject::ExecuteEffects(MyObject* pTarget, cocos2d::
 		list.pushBack(this);
 
 		for (auto v : m_pEffectList){
-			if (v->GetEffectType() == ETP_KILL){
+			if (v->getEffectType() == ETP_KILL){
 				int a = 1;
 			}
-			v->Execute(this, pTarget, list, bPretreating);
+			v->execute(this, pTarget, list, bPretreating);
 		}
 	}
 
@@ -258,58 +255,93 @@ float MyObject::getGameDir() const {
 	return this->rotation;
 }
 
+void MyObject::setPosition(float x, float y) { 
+	if (m_pPosition.x == x && m_pPosition.y == y) {
+		return;
+	}
+
+	// 检测是否在屏幕内;
+	if (x < -100 || y < -100 || x > 1540 || y > 1000) {
+		if (m_bInScreen) {
+			OnMoveEnd();
+		}
+		m_bInScreen = false;
+	}
+	else {
+		m_bInScreen = true;
+	}
+
+	m_pPosition.x = x; m_pPosition.y = y;
+
+	if (m_pDebug) m_pDebug->setPosition(x, y);
+	if (m_pContent) m_pContent->setPosition(x, y);
+	if (m_pShadow) m_pShadow->setPosition(x, y - 35);
+}
+
+cocos2d::Vec2 MyObject::getPosition() { return m_pPosition; }
+
+void MyObject::setRotation(float f) { 
+	m_fDirection = f; 
+
+	FishObjectManager::GetInstance()->ConvertDirection(&f);
+
+	if (m_pDebug) m_pDebug->setRotation(f);
+	if (m_pContent) m_pContent->setRotation(f);
+	if (m_pShadow) m_pShadow->setRotation(f);
+}
+
+float MyObject::getRotation() { return m_fDirection; }
+
+void MyObject::removeAllChildren() {
+	if (m_pContent != nullptr) m_pContent->removeFromParent();
+	if (m_pShadow != nullptr) m_pShadow->removeFromParent();
+	if (m_pDebug != nullptr) m_pDebug->removeFromParent();
+
+	m_pContent = nullptr;
+	m_pShadow = nullptr;
+	m_pDebug = nullptr;
+}
+
+void  MyObject::setVisualContent(cocos2d::Node* node) {
+	if (m_pContent != nullptr) m_pContent->removeFromParent();
+	m_pContent = node;
+
+	if (m_pContent) {
+		m_pContent->setPosition(m_pPosition);
+		m_pContent->setRotation(m_fDirection);
+	}
+}
+
+void  MyObject::setVisualShadow(cocos2d::Node* node) {
+	if (m_pShadow != nullptr) m_pShadow->removeFromParent();
+	m_pShadow = node;
+
+	if (m_pShadow) {
+		m_pShadow->setPosition(m_pPosition.x, m_pPosition.y - 35);
+		m_pShadow->setRotation(m_fDirection);
+	}	
+}
+
+void  MyObject::setVisualDebug(cocos2d::Node* node) {
+	if (m_pDebug != nullptr) m_pDebug->removeFromParent();
+	m_pDebug = node;
+
+	if (m_pDebug) {
+		m_pDebug->setPosition(m_pPosition);
+		m_pDebug->setRotation(m_fDirection);
+	}
+}
+
 Fish::Fish() 
 	: MyObject()
 	, m_nRedTime(0)
 	, m_fMaxRadio(0.0f)
 	, m_nGoldMul(0)
-	, m_content(nullptr)
-	, m_shadow(nullptr)
-	, m_debug(nullptr)
-	, rotation(0)
-	, position(0,0)
 {
 	m_nType = EOT_FISH;
 }
 
 Fish::~Fish(){}
-
-void Fish::setPosition(float x, float y) {
-	this->position.x = x;
-	this->position.y = y;
-
-
-	if (m_debug) m_debug->setPosition(x, y);
-	if (m_content) m_content->setPosition(x, y);
-	if (m_shadow) m_shadow->setPosition(x, y - 35);
-}
-
-void Fish::setRotation(float rotation) {
-	this->rotation = rotation;
-
-	FishObjectManager::GetInstance()->ConvertDirection(&rotation);
-
-	if (m_debug) m_debug->setRotation(rotation);
-	if (m_content) m_content->setRotation(rotation);
-	if (m_shadow) m_shadow->setRotation(rotation);
-
-}
-
-const cocos2d::Vec2& Fish::getPosition() const {
-	return this->position;
-}
-
-float Fish::getRotation() const {
-	return rotation;
-}
-
-void Fish::setContentNode(cocos2d::Node* content, cocos2d::Node* shadow) {
-	m_content = content;
-	m_shadow = shadow;
-}
-void Fish::setDebugNode(cocos2d::Node* debugNode) {
-	m_debug = debugNode;
-}
 
 void Fish::addBoundingBox(float radio, float x, float y) {
 	boundingBox.push_back(BoundingBox(radio,x,y));
@@ -318,46 +350,15 @@ void Fish::addBoundingBox(float radio, float x, float y) {
 	m_fMaxRadio = fmax(m_fMaxRadio, fabs(y) + radio);
 }
 
-void Fish::SetBoundingBox(int id){
-	m_nBoundingBoxId = id;
-
-	auto boxId = GetBoundingBox();
-	auto* pathData = FishObjectManager::GetInstance()->GetPathManager()->GetBoundingBoxData(boxId);
-	if (pathData != nullptr){
-		for (auto v : pathData->value){
-			m_fMaxRadio = fmax(m_fMaxRadio, fabs(v.offsetX) + v.rad);
-			m_fMaxRadio = fmax(m_fMaxRadio, fabs(v.offsetY) + v.rad);
-		}
-	}
-}
-
-int Fish::GetBoundingBox(){
-	return m_nBoundingBoxId;
+void Fish::setState(int st) {
+	MyObject::setState(st);
 }
 
 bool Fish::OnUpdate(float fdt, bool shouldUpdate){
-	// 更新被攻击效果;
-	if (m_nRedTime > 0){
-		m_nRedTime--;
-		if (m_nRedTime == 0){
-			for (auto& v : m_pVisualNodeList){
-				if (v.target) v.target->setColor(cocos2d::Color3B(0xFF, 0xFF, 0xFF));
-			}
-		}
-	}
-			
 	if (!shouldUpdate && m_nState == EOS_DEAD){
-		setState(EOS_DESTORY);
+		setState(EOS_DESTORED);
 	}
-	return MyObject::OnUpdate(fdt, shouldUpdate);
-}
-
-void Fish::OnHit(){
-	for (auto& v : m_pVisualNodeList){
-		if (v.target) v.target->setColor(cocos2d::Color3B(0xFF, 0x11, 0));
-	}
-			
-	m_nRedTime = 5;
+	return MyObject::onUpdate(fdt, shouldUpdate);
 }
 
 Bullet::Bullet() 
@@ -370,21 +371,21 @@ Bullet::Bullet()
 	
 Bullet::~Bullet(){}
 
-void Bullet::SetCannonSetType(int n){
+void Bullet::setCannonSetType(int n){
 	m_nCannonSetType = n;
 }
 
-int	Bullet::GetCannonSetType(){ return m_nCannonSetType; }
+int	Bullet::getCannonSetType(){ return m_nCannonSetType; }
 
-void Bullet::SetCannonType(int n){
+void Bullet::setCannonType(int n){
 	m_nCannonType = n;
 }
 
-int	Bullet::GetCannonType(){ return m_nCannonType; }
+int	Bullet::getCannonType(){ return m_nCannonType; }
 
-void Bullet::SetCatchRadio(int n){ m_nCatchRadio = n; }
+void Bullet::setCatchRadio(int n){ m_nCatchRadio = n; }
 
-int	Bullet::GetCatchRadio(){ return m_nCatchRadio; }
+int	Bullet::getCatchRadio(){ return m_nCatchRadio; }
 
 void Bullet::setState(int st){
 	MyObject::setState(st);
@@ -403,8 +404,8 @@ bool Bullet::OnUpdate(float fdt, bool shouldUpdate){
 		}
 	}
 	if (!shouldUpdate && m_nState == EOS_DEAD){
-		setState(EOS_DESTORY);
+		setState(EOS_DESTORED);
 	}
-	return MyObject::OnUpdate(fdt, shouldUpdate);
+	return MyObject::onUpdate(fdt, shouldUpdate);
 }
 NS_FISHGAME2D_END

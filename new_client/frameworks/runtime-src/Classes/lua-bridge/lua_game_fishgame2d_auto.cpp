@@ -480,21 +480,18 @@ int lua_game_fishgame2d_FishObjectManager_RemoveAllBullets(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0) 
     {
-        bool arg0;
-
-        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "game.fishgame2d.FishObjectManager:RemoveAllBullets");
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_FishObjectManager_RemoveAllBullets'", nullptr);
             return 0;
         }
-        bool ret = cobj->RemoveAllBullets(arg0);
+        bool ret = cobj->RemoveAllBullets();
         tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.FishObjectManager:RemoveAllBullets",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.FishObjectManager:RemoveAllBullets",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
@@ -674,21 +671,18 @@ int lua_game_fishgame2d_FishObjectManager_RemoveAllFishes(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0) 
     {
-        bool arg0;
-
-        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "game.fishgame2d.FishObjectManager:RemoveAllFishes");
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_FishObjectManager_RemoveAllFishes'", nullptr);
             return 0;
         }
-        bool ret = cobj->RemoveAllFishes(arg0);
+        bool ret = cobj->RemoveAllFishes();
         tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.FishObjectManager:RemoveAllFishes",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.FishObjectManager:RemoveAllFishes",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
@@ -1722,7 +1716,7 @@ int lua_register_game_fishgame2d_PathManager(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_MyObject_setMoveCompent(lua_State* tolua_S)
+int lua_game_fishgame2d_MyObject_getVisualShadow(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MyObject* cobj = nullptr;
@@ -1742,32 +1736,29 @@ int lua_game_fishgame2d_MyObject_setMoveCompent(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setMoveCompent'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getVisualShadow'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0) 
     {
-        game::fishgame2d::MoveCompent* arg0;
-
-        ok &= luaval_to_object<game::fishgame2d::MoveCompent>(tolua_S, 2, "game.fishgame2d.MoveCompent",&arg0, "game.fishgame2d.MyObject:setMoveCompent");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setMoveCompent'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getVisualShadow'", nullptr);
             return 0;
         }
-        cobj->setMoveCompent(arg0);
-        lua_settop(tolua_S, 1);
+        cocos2d::Node* ret = cobj->getVisualShadow();
+        object_to_luaval<cocos2d::Node>(tolua_S, "cc.Node",(cocos2d::Node*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setMoveCompent",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getVisualShadow",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setMoveCompent'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getVisualShadow'.",&tolua_err);
 #endif
 
     return 0;
@@ -1815,6 +1806,206 @@ int lua_game_fishgame2d_MyObject_getId(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getId'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_addEffect(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_addEffect'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        game::fishgame2d::Effect* arg0;
+
+        ok &= luaval_to_object<game::fishgame2d::Effect>(tolua_S, 2, "game.fishgame2d.Effect",&arg0, "game.fishgame2d.MyObject:addEffect");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_addEffect'", nullptr);
+            return 0;
+        }
+        cobj->addEffect(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:addEffect",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_addEffect'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_removeAllChildren(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_removeAllChildren'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_removeAllChildren'", nullptr);
+            return 0;
+        }
+        cobj->removeAllChildren();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:removeAllChildren",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_removeAllChildren'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setGamePos(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setGamePos'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        double arg0;
+        double arg1;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:setGamePos");
+
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:setGamePos");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setGamePos'", nullptr);
+            return 0;
+        }
+        cobj->setGamePos(arg0, arg1);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setGamePos",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setGamePos'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setVisualContent(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setVisualContent'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Node* arg0;
+
+        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&arg0, "game.fishgame2d.MyObject:setVisualContent");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setVisualContent'", nullptr);
+            return 0;
+        }
+        cobj->setVisualContent(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setVisualContent",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setVisualContent'.",&tolua_err);
 #endif
 
     return 0;
@@ -1912,6 +2103,56 @@ int lua_game_fishgame2d_MyObject_OnMoveEnd(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_OnMoveEnd'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setVisualShadow(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setVisualShadow'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Node* arg0;
+
+        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&arg0, "game.fishgame2d.MyObject:setVisualShadow");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setVisualShadow'", nullptr);
+            return 0;
+        }
+        cobj->setVisualShadow(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setVisualShadow",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setVisualShadow'.",&tolua_err);
 #endif
 
     return 0;
@@ -2016,6 +2257,106 @@ int lua_game_fishgame2d_MyObject_setState(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MyObject_setVisualDebug(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setVisualDebug'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Node* arg0;
+
+        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&arg0, "game.fishgame2d.MyObject:setVisualDebug");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setVisualDebug'", nullptr);
+            return 0;
+        }
+        cobj->setVisualDebug(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setVisualDebug",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setVisualDebug'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setGameDir(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setGameDir'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:setGameDir");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setGameDir'", nullptr);
+            return 0;
+        }
+        cobj->setGameDir(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setGameDir",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setGameDir'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MyObject_getTypeId(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2063,7 +2404,7 @@ int lua_game_fishgame2d_MyObject_getTypeId(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MyObject_AddEffect(lua_State* tolua_S)
+int lua_game_fishgame2d_MyObject_setMoveCompent(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MyObject* cobj = nullptr;
@@ -2083,7 +2424,7 @@ int lua_game_fishgame2d_MyObject_AddEffect(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_AddEffect'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setMoveCompent'", nullptr);
         return 0;
     }
 #endif
@@ -2091,24 +2432,24 @@ int lua_game_fishgame2d_MyObject_AddEffect(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-        game::fishgame2d::Effect* arg0;
+        game::fishgame2d::MoveCompent* arg0;
 
-        ok &= luaval_to_object<game::fishgame2d::Effect>(tolua_S, 2, "game.fishgame2d.Effect",&arg0, "game.fishgame2d.MyObject:AddEffect");
+        ok &= luaval_to_object<game::fishgame2d::MoveCompent>(tolua_S, 2, "game.fishgame2d.MoveCompent",&arg0, "game.fishgame2d.MyObject:setMoveCompent");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_AddEffect'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setMoveCompent'", nullptr);
             return 0;
         }
-        cobj->AddEffect(arg0);
+        cobj->setMoveCompent(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:AddEffect",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setMoveCompent",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_AddEffect'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setMoveCompent'.",&tolua_err);
 #endif
 
     return 0;
@@ -2160,6 +2501,53 @@ int lua_game_fishgame2d_MyObject_GetTarget(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MyObject_getGamePos(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getGamePos'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getGamePos'", nullptr);
+            return 0;
+        }
+        const cocos2d::Vec2& ret = cobj->getGamePos();
+        vec2_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getGamePos",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getGamePos'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MyObject_getMoveCompent(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2203,6 +2591,56 @@ int lua_game_fishgame2d_MyObject_getMoveCompent(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getMoveCompent'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setRotation(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setRotation'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:setRotation");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setRotation'", nullptr);
+            return 0;
+        }
+        cobj->setRotation(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setRotation",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setRotation'.",&tolua_err);
 #endif
 
     return 0;
@@ -2254,6 +2692,109 @@ int lua_game_fishgame2d_MyObject_getManager(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MyObject_getObjectType(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getObjectType'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getObjectType'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getObjectType();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getObjectType",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getObjectType'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_addBuff(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_addBuff'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 3) 
+    {
+        int arg0;
+        double arg1;
+        double arg2;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.MyObject:addBuff");
+
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:addBuff");
+
+        ok &= luaval_to_number(tolua_S, 4,&arg2, "game.fishgame2d.MyObject:addBuff");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_addBuff'", nullptr);
+            return 0;
+        }
+        cobj->addBuff(arg0, arg1, arg2);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:addBuff",argc, 3);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_addBuff'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MyObject_getState(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2301,6 +2842,62 @@ int lua_game_fishgame2d_MyObject_getState(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MyObject_executeEffects(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_executeEffects'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 3) 
+    {
+        game::fishgame2d::MyObject* arg0;
+        cocos2d::Vector<game::fishgame2d::MyObject *> arg1;
+        bool arg2;
+
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.MyObject:executeEffects");
+
+        ok &= luaval_to_ccvector(tolua_S, 3, &arg1, "game.fishgame2d.MyObject:executeEffects");
+
+        ok &= luaval_to_boolean(tolua_S, 4,&arg2, "game.fishgame2d.MyObject:executeEffects");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_executeEffects'", nullptr);
+            return 0;
+        }
+        cocos2d::Vector<game::fishgame2d::MyObject *> ret = cobj->executeEffects(arg0, arg1, arg2);
+        ccvector_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:executeEffects",argc, 3);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_executeEffects'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MyObject_Clear(lua_State* tolua_S)
 {
     int argc = 0;
@@ -2341,23 +2938,6 @@ int lua_game_fishgame2d_MyObject_Clear(lua_State* tolua_S)
         lua_settop(tolua_S, 1);
         return 1;
     }
-    if (argc == 2) 
-    {
-        bool arg0;
-        bool arg1;
-
-        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:Clear");
-
-        ok &= luaval_to_boolean(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:Clear");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_Clear'", nullptr);
-            return 0;
-        }
-        cobj->Clear(arg0, arg1);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:Clear",argc, 1);
     return 0;
 
@@ -2368,7 +2948,7 @@ int lua_game_fishgame2d_MyObject_Clear(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MyObject_AddBuff(lua_State* tolua_S)
+int lua_game_fishgame2d_MyObject_onUpdate(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MyObject* cobj = nullptr;
@@ -2388,38 +2968,182 @@ int lua_game_fishgame2d_MyObject_AddBuff(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_AddBuff'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_onUpdate'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 3) 
+    if (argc == 2) 
     {
-        int arg0;
-        double arg1;
-        double arg2;
+        double arg0;
+        bool arg1;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.MyObject:AddBuff");
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:onUpdate");
 
-        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:AddBuff");
-
-        ok &= luaval_to_number(tolua_S, 4,&arg2, "game.fishgame2d.MyObject:AddBuff");
+        ok &= luaval_to_boolean(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:onUpdate");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_AddBuff'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_onUpdate'", nullptr);
             return 0;
         }
-        cobj->AddBuff(arg0, arg1, arg2);
-        lua_settop(tolua_S, 1);
+        bool ret = cobj->onUpdate(arg0, arg1);
+        tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:AddBuff",argc, 3);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:onUpdate",argc, 2);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_AddBuff'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_onUpdate'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_getGameDir(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getGameDir'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getGameDir'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getGameDir();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getGameDir",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getGameDir'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_setPosition(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_setPosition'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        double arg0;
+        double arg1;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:setPosition");
+
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:setPosition");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_setPosition'", nullptr);
+            return 0;
+        }
+        cobj->setPosition(arg0, arg1);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:setPosition",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_setPosition'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_getPosition(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getPosition'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getPosition'", nullptr);
+            return 0;
+        }
+        cocos2d::Vec2 ret = cobj->getPosition();
+        vec2_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getPosition",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getPosition'.",&tolua_err);
 #endif
 
     return 0;
@@ -2474,7 +3198,7 @@ int lua_game_fishgame2d_MyObject_registerStatusChangedHandler(lua_State* tolua_S
 
     return 0;
 }
-int lua_game_fishgame2d_MyObject_ExecuteEffects(lua_State* tolua_S)
+int lua_game_fishgame2d_MyObject_getVisualDebug(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MyObject* cobj = nullptr;
@@ -2494,38 +3218,76 @@ int lua_game_fishgame2d_MyObject_ExecuteEffects(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_ExecuteEffects'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getVisualDebug'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 3) 
+    if (argc == 0) 
     {
-        game::fishgame2d::MyObject* arg0;
-        cocos2d::Vector<game::fishgame2d::MyObject *> arg1;
-        bool arg2;
-
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.MyObject:ExecuteEffects");
-
-        ok &= luaval_to_ccvector(tolua_S, 3, &arg1, "game.fishgame2d.MyObject:ExecuteEffects");
-
-        ok &= luaval_to_boolean(tolua_S, 4,&arg2, "game.fishgame2d.MyObject:ExecuteEffects");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_ExecuteEffects'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getVisualDebug'", nullptr);
             return 0;
         }
-        cocos2d::Vector<game::fishgame2d::MyObject *> ret = cobj->ExecuteEffects(arg0, arg1, arg2);
-        ccvector_to_luaval(tolua_S, ret);
+        cocos2d::Node* ret = cobj->getVisualDebug();
+        object_to_luaval<cocos2d::Node>(tolua_S, "cc.Node",(cocos2d::Node*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:ExecuteEffects",argc, 3);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getVisualDebug",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_ExecuteEffects'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getVisualDebug'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MyObject_getRotation(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MyObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getRotation'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getRotation'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getRotation();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getRotation",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getRotation'.",&tolua_err);
 #endif
 
     return 0;
@@ -2580,7 +3342,7 @@ int lua_game_fishgame2d_MyObject_SetTarget(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MyObject_GetType(lua_State* tolua_S)
+int lua_game_fishgame2d_MyObject_getVisualContent(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MyObject* cobj = nullptr;
@@ -2600,7 +3362,7 @@ int lua_game_fishgame2d_MyObject_GetType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_GetType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_getVisualContent'", nullptr);
         return 0;
     }
 #endif
@@ -2610,72 +3372,19 @@ int lua_game_fishgame2d_MyObject_GetType(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_GetType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_getVisualContent'", nullptr);
             return 0;
         }
-        int ret = cobj->GetType();
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        cocos2d::Node* ret = cobj->getVisualContent();
+        object_to_luaval<cocos2d::Node>(tolua_S, "cc.Node",(cocos2d::Node*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:GetType",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:getVisualContent",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_GetType'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_MyObject_OnUpdate(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MyObject* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MyObject",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MyObject*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MyObject_OnUpdate'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        double arg0;
-        bool arg1;
-
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MyObject:OnUpdate");
-
-        ok &= luaval_to_boolean(tolua_S, 3,&arg1, "game.fishgame2d.MyObject:OnUpdate");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MyObject_OnUpdate'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->OnUpdate(arg0, arg1);
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MyObject:OnUpdate",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_OnUpdate'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MyObject_getVisualContent'.",&tolua_err);
 #endif
 
     return 0;
@@ -2836,28 +3545,43 @@ static int lua_game_fishgame2d_MyObject_finalize(lua_State* tolua_S)
 int lua_register_game_fishgame2d_MyObject(lua_State* tolua_S)
 {
     tolua_usertype(tolua_S,"game.fishgame2d.MyObject");
-    tolua_cclass(tolua_S,"MyObject","game.fishgame2d.MyObject","cc.Node",nullptr);
+    tolua_cclass(tolua_S,"MyObject","game.fishgame2d.MyObject","cc.Ref",nullptr);
 
     tolua_beginmodule(tolua_S,"MyObject");
-        tolua_function(tolua_S,"setMoveCompent",lua_game_fishgame2d_MyObject_setMoveCompent);
+        tolua_function(tolua_S,"getVisualShadow",lua_game_fishgame2d_MyObject_getVisualShadow);
         tolua_function(tolua_S,"getId",lua_game_fishgame2d_MyObject_getId);
+        tolua_function(tolua_S,"addEffect",lua_game_fishgame2d_MyObject_addEffect);
+        tolua_function(tolua_S,"removeAllChildren",lua_game_fishgame2d_MyObject_removeAllChildren);
+        tolua_function(tolua_S,"setGamePos",lua_game_fishgame2d_MyObject_setGamePos);
+        tolua_function(tolua_S,"setVisualContent",lua_game_fishgame2d_MyObject_setVisualContent);
         tolua_function(tolua_S,"setTypeId",lua_game_fishgame2d_MyObject_setTypeId);
         tolua_function(tolua_S,"OnMoveEnd",lua_game_fishgame2d_MyObject_OnMoveEnd);
+        tolua_function(tolua_S,"setVisualShadow",lua_game_fishgame2d_MyObject_setVisualShadow);
         tolua_function(tolua_S,"OnClear",lua_game_fishgame2d_MyObject_OnClear);
         tolua_function(tolua_S,"setState",lua_game_fishgame2d_MyObject_setState);
+        tolua_function(tolua_S,"setVisualDebug",lua_game_fishgame2d_MyObject_setVisualDebug);
+        tolua_function(tolua_S,"setGameDir",lua_game_fishgame2d_MyObject_setGameDir);
         tolua_function(tolua_S,"getTypeId",lua_game_fishgame2d_MyObject_getTypeId);
-        tolua_function(tolua_S,"AddEffect",lua_game_fishgame2d_MyObject_AddEffect);
+        tolua_function(tolua_S,"setMoveCompent",lua_game_fishgame2d_MyObject_setMoveCompent);
         tolua_function(tolua_S,"GetTarget",lua_game_fishgame2d_MyObject_GetTarget);
+        tolua_function(tolua_S,"getGamePos",lua_game_fishgame2d_MyObject_getGamePos);
         tolua_function(tolua_S,"getMoveCompent",lua_game_fishgame2d_MyObject_getMoveCompent);
+        tolua_function(tolua_S,"setRotation",lua_game_fishgame2d_MyObject_setRotation);
         tolua_function(tolua_S,"getManager",lua_game_fishgame2d_MyObject_getManager);
+        tolua_function(tolua_S,"getObjectType",lua_game_fishgame2d_MyObject_getObjectType);
+        tolua_function(tolua_S,"addBuff",lua_game_fishgame2d_MyObject_addBuff);
         tolua_function(tolua_S,"getState",lua_game_fishgame2d_MyObject_getState);
+        tolua_function(tolua_S,"executeEffects",lua_game_fishgame2d_MyObject_executeEffects);
         tolua_function(tolua_S,"Clear",lua_game_fishgame2d_MyObject_Clear);
-        tolua_function(tolua_S,"AddBuff",lua_game_fishgame2d_MyObject_AddBuff);
+        tolua_function(tolua_S,"onUpdate",lua_game_fishgame2d_MyObject_onUpdate);
+        tolua_function(tolua_S,"getGameDir",lua_game_fishgame2d_MyObject_getGameDir);
+        tolua_function(tolua_S,"setPosition",lua_game_fishgame2d_MyObject_setPosition);
+        tolua_function(tolua_S,"getPosition",lua_game_fishgame2d_MyObject_getPosition);
         tolua_function(tolua_S,"registerStatusChangedHandler",lua_game_fishgame2d_MyObject_registerStatusChangedHandler);
-        tolua_function(tolua_S,"ExecuteEffects",lua_game_fishgame2d_MyObject_ExecuteEffects);
+        tolua_function(tolua_S,"getVisualDebug",lua_game_fishgame2d_MyObject_getVisualDebug);
+        tolua_function(tolua_S,"getRotation",lua_game_fishgame2d_MyObject_getRotation);
         tolua_function(tolua_S,"SetTarget",lua_game_fishgame2d_MyObject_SetTarget);
-        tolua_function(tolua_S,"GetType",lua_game_fishgame2d_MyObject_GetType);
-        tolua_function(tolua_S,"OnUpdate",lua_game_fishgame2d_MyObject_OnUpdate);
+        tolua_function(tolua_S,"getVisualContent",lua_game_fishgame2d_MyObject_getVisualContent);
         tolua_function(tolua_S,"setId",lua_game_fishgame2d_MyObject_setId);
         tolua_function(tolua_S,"InSideScreen",lua_game_fishgame2d_MyObject_InSideScreen);
         tolua_function(tolua_S,"setManager",lua_game_fishgame2d_MyObject_setManager);
@@ -2868,7 +3592,7 @@ int lua_register_game_fishgame2d_MyObject(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_Fish_GetFishType(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_getFishType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -2888,7 +3612,7 @@ int lua_game_fishgame2d_Fish_GetFishType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_GetFishType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getFishType'", nullptr);
         return 0;
     }
 #endif
@@ -2898,24 +3622,24 @@ int lua_game_fishgame2d_Fish_GetFishType(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_GetFishType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getFishType'", nullptr);
             return 0;
         }
-        int ret = cobj->GetFishType();
+        int ret = cobj->getFishType();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:GetFishType",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getFishType",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_GetFishType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getFishType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_setContentNode(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_getVisualId(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -2935,160 +3659,7 @@ int lua_game_fishgame2d_Fish_setContentNode(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setContentNode'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        cocos2d::Node* arg0;
-        cocos2d::Node* arg1;
-
-        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&arg0, "game.fishgame2d.Fish:setContentNode");
-
-        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 3, "cc.Node",&arg1, "game.fishgame2d.Fish:setContentNode");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setContentNode'", nullptr);
-            return 0;
-        }
-        cobj->setContentNode(arg0, arg1);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setContentNode",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setContentNode'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_SetFishType(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_SetFishType'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        int arg0;
-
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:SetFishType");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_SetFishType'", nullptr);
-            return 0;
-        }
-        cobj->SetFishType(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:SetFishType",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_SetFishType'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_SetLockLevel(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_SetLockLevel'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        int arg0;
-
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:SetLockLevel");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_SetLockLevel'", nullptr);
-            return 0;
-        }
-        cobj->SetLockLevel(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:SetLockLevel",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_SetLockLevel'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_GetMaxRadio(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_GetMaxRadio'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getVisualId'", nullptr);
         return 0;
     }
 #endif
@@ -3098,24 +3669,24 @@ int lua_game_fishgame2d_Fish_GetMaxRadio(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_GetMaxRadio'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getVisualId'", nullptr);
             return 0;
         }
-        int ret = cobj->GetMaxRadio();
+        int ret = cobj->getVisualId();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:GetMaxRadio",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getVisualId",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_GetMaxRadio'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getVisualId'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_setDebugNode(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_setFishType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -3135,7 +3706,7 @@ int lua_game_fishgame2d_Fish_setDebugNode(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setDebugNode'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setFishType'", nullptr);
         return 0;
     }
 #endif
@@ -3143,24 +3714,121 @@ int lua_game_fishgame2d_Fish_setDebugNode(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-        cocos2d::Node* arg0;
+        int arg0;
 
-        ok &= luaval_to_object<cocos2d::Node>(tolua_S, 2, "cc.Node",&arg0, "game.fishgame2d.Fish:setDebugNode");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:setFishType");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setDebugNode'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setFishType'", nullptr);
             return 0;
         }
-        cobj->setDebugNode(arg0);
+        cobj->setFishType(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setDebugNode",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setFishType",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setDebugNode'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setFishType'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_Fish_setLockLevel(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::Fish* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setLockLevel'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:setLockLevel");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setLockLevel'", nullptr);
+            return 0;
+        }
+        cobj->setLockLevel(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setLockLevel",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setLockLevel'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_Fish_getMaxRadio(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::Fish* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getMaxRadio'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getMaxRadio'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getMaxRadio();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getMaxRadio",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getMaxRadio'.",&tolua_err);
 #endif
 
     return 0;
@@ -3212,7 +3880,7 @@ int lua_game_fishgame2d_Fish_getLockLevel(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_GetGoldMul(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_getGoldMul(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -3232,7 +3900,7 @@ int lua_game_fishgame2d_Fish_GetGoldMul(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_GetGoldMul'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getGoldMul'", nullptr);
         return 0;
     }
 #endif
@@ -3242,72 +3910,19 @@ int lua_game_fishgame2d_Fish_GetGoldMul(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_GetGoldMul'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getGoldMul'", nullptr);
             return 0;
         }
-        int ret = cobj->GetGoldMul();
+        int ret = cobj->getGoldMul();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:GetGoldMul",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getGoldMul",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_GetGoldMul'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_setPosition(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setPosition'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        double arg0;
-        double arg1;
-
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.Fish:setPosition");
-
-        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.Fish:setPosition");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setPosition'", nullptr);
-            return 0;
-        }
-        cobj->setPosition(arg0, arg1);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setPosition",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setPosition'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getGoldMul'.",&tolua_err);
 #endif
 
     return 0;
@@ -3361,6 +3976,56 @@ int lua_game_fishgame2d_Fish_OnUpdate(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_OnUpdate'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_Fish_setVisualId(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::Fish* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setVisualId'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:setVisualId");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setVisualId'", nullptr);
+            return 0;
+        }
+        cobj->setVisualId(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setVisualId",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setVisualId'.",&tolua_err);
 #endif
 
     return 0;
@@ -3462,53 +4127,6 @@ int lua_game_fishgame2d_Fish_setRefershId(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_getRotation(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getRotation'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getRotation'", nullptr);
-            return 0;
-        }
-        double ret = cobj->getRotation();
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getRotation",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getRotation'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_game_fishgame2d_Fish_addBoundingBox(lua_State* tolua_S)
 {
     int argc = 0;
@@ -3565,7 +4183,7 @@ int lua_game_fishgame2d_Fish_addBoundingBox(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_setRotation(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_setGoldMul(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -3585,104 +4203,7 @@ int lua_game_fishgame2d_Fish_setRotation(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setRotation'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        double arg0;
-
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.Fish:setRotation");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setRotation'", nullptr);
-            return 0;
-        }
-        cobj->setRotation(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setRotation",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setRotation'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_GetBoundingBox(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_GetBoundingBox'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_GetBoundingBox'", nullptr);
-            return 0;
-        }
-        int ret = cobj->GetBoundingBox();
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:GetBoundingBox",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_GetBoundingBox'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_SetGoldMul(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_SetGoldMul'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setGoldMul'", nullptr);
         return 0;
     }
 #endif
@@ -3692,27 +4213,27 @@ int lua_game_fishgame2d_Fish_SetGoldMul(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:SetGoldMul");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:setGoldMul");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_SetGoldMul'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setGoldMul'", nullptr);
             return 0;
         }
-        cobj->SetGoldMul(arg0);
+        cobj->setGoldMul(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:SetGoldMul",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setGoldMul",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_SetGoldMul'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setGoldMul'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Fish_OnHit(lua_State* tolua_S)
+int lua_game_fishgame2d_Fish_setState(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Fish* cobj = nullptr;
@@ -3732,54 +4253,7 @@ int lua_game_fishgame2d_Fish_OnHit(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_OnHit'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_OnHit'", nullptr);
-            return 0;
-        }
-        cobj->OnHit();
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:OnHit",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_OnHit'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_SetBoundingBox(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_SetBoundingBox'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_setState'", nullptr);
         return 0;
     }
 #endif
@@ -3789,69 +4263,22 @@ int lua_game_fishgame2d_Fish_SetBoundingBox(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:SetBoundingBox");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Fish:setState");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_SetBoundingBox'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_setState'", nullptr);
             return 0;
         }
-        cobj->SetBoundingBox(arg0);
+        cobj->setState(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:SetBoundingBox",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:setState",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_SetBoundingBox'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_Fish_getPosition(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::Fish* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Fish",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::Fish*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Fish_getPosition'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Fish_getPosition'", nullptr);
-            return 0;
-        }
-        const cocos2d::Vec2& ret = cobj->getPosition();
-        vec2_to_luaval(tolua_S, ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Fish:getPosition",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_getPosition'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Fish_setState'.",&tolua_err);
 #endif
 
     return 0;
@@ -3902,26 +4329,20 @@ int lua_register_game_fishgame2d_Fish(lua_State* tolua_S)
     tolua_cclass(tolua_S,"Fish","game.fishgame2d.Fish","game.fishgame2d.MyObject",nullptr);
 
     tolua_beginmodule(tolua_S,"Fish");
-        tolua_function(tolua_S,"GetFishType",lua_game_fishgame2d_Fish_GetFishType);
-        tolua_function(tolua_S,"setContentNode",lua_game_fishgame2d_Fish_setContentNode);
-        tolua_function(tolua_S,"SetFishType",lua_game_fishgame2d_Fish_SetFishType);
-        tolua_function(tolua_S,"SetLockLevel",lua_game_fishgame2d_Fish_SetLockLevel);
-        tolua_function(tolua_S,"GetMaxRadio",lua_game_fishgame2d_Fish_GetMaxRadio);
-        tolua_function(tolua_S,"setDebugNode",lua_game_fishgame2d_Fish_setDebugNode);
+        tolua_function(tolua_S,"getFishType",lua_game_fishgame2d_Fish_getFishType);
+        tolua_function(tolua_S,"getVisualId",lua_game_fishgame2d_Fish_getVisualId);
+        tolua_function(tolua_S,"setFishType",lua_game_fishgame2d_Fish_setFishType);
+        tolua_function(tolua_S,"setLockLevel",lua_game_fishgame2d_Fish_setLockLevel);
+        tolua_function(tolua_S,"getMaxRadio",lua_game_fishgame2d_Fish_getMaxRadio);
         tolua_function(tolua_S,"getLockLevel",lua_game_fishgame2d_Fish_getLockLevel);
-        tolua_function(tolua_S,"GetGoldMul",lua_game_fishgame2d_Fish_GetGoldMul);
-        tolua_function(tolua_S,"setPosition",lua_game_fishgame2d_Fish_setPosition);
+        tolua_function(tolua_S,"getGoldMul",lua_game_fishgame2d_Fish_getGoldMul);
         tolua_function(tolua_S,"OnUpdate",lua_game_fishgame2d_Fish_OnUpdate);
+        tolua_function(tolua_S,"setVisualId",lua_game_fishgame2d_Fish_setVisualId);
         tolua_function(tolua_S,"getRefershId",lua_game_fishgame2d_Fish_getRefershId);
         tolua_function(tolua_S,"setRefershId",lua_game_fishgame2d_Fish_setRefershId);
-        tolua_function(tolua_S,"getRotation",lua_game_fishgame2d_Fish_getRotation);
         tolua_function(tolua_S,"addBoundingBox",lua_game_fishgame2d_Fish_addBoundingBox);
-        tolua_function(tolua_S,"setRotation",lua_game_fishgame2d_Fish_setRotation);
-        tolua_function(tolua_S,"GetBoundingBox",lua_game_fishgame2d_Fish_GetBoundingBox);
-        tolua_function(tolua_S,"SetGoldMul",lua_game_fishgame2d_Fish_SetGoldMul);
-        tolua_function(tolua_S,"OnHit",lua_game_fishgame2d_Fish_OnHit);
-        tolua_function(tolua_S,"SetBoundingBox",lua_game_fishgame2d_Fish_SetBoundingBox);
-        tolua_function(tolua_S,"getPosition",lua_game_fishgame2d_Fish_getPosition);
+        tolua_function(tolua_S,"setGoldMul",lua_game_fishgame2d_Fish_setGoldMul);
+        tolua_function(tolua_S,"setState",lua_game_fishgame2d_Fish_setState);
         tolua_function(tolua_S,"create", lua_game_fishgame2d_Fish_create);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::Fish).name();
@@ -3930,7 +4351,7 @@ int lua_register_game_fishgame2d_Fish(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_Bullet_SetCatchRadio(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_setCatchRadio(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -3950,7 +4371,7 @@ int lua_game_fishgame2d_Bullet_SetCatchRadio(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_SetCatchRadio'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_setCatchRadio'", nullptr);
         return 0;
     }
 #endif
@@ -3960,27 +4381,27 @@ int lua_game_fishgame2d_Bullet_SetCatchRadio(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:SetCatchRadio");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:setCatchRadio");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_SetCatchRadio'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_setCatchRadio'", nullptr);
             return 0;
         }
-        cobj->SetCatchRadio(arg0);
+        cobj->setCatchRadio(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:SetCatchRadio",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:setCatchRadio",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_SetCatchRadio'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_setCatchRadio'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Bullet_GetCannonSetType(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_getCannonSetType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -4000,7 +4421,7 @@ int lua_game_fishgame2d_Bullet_GetCannonSetType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_GetCannonSetType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_getCannonSetType'", nullptr);
         return 0;
     }
 #endif
@@ -4010,24 +4431,24 @@ int lua_game_fishgame2d_Bullet_GetCannonSetType(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_GetCannonSetType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_getCannonSetType'", nullptr);
             return 0;
         }
-        int ret = cobj->GetCannonSetType();
+        int ret = cobj->getCannonSetType();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:GetCannonSetType",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:getCannonSetType",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_GetCannonSetType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_getCannonSetType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Bullet_GetCatchRadio(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_getCatchRadio(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -4047,7 +4468,7 @@ int lua_game_fishgame2d_Bullet_GetCatchRadio(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_GetCatchRadio'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_getCatchRadio'", nullptr);
         return 0;
     }
 #endif
@@ -4057,19 +4478,19 @@ int lua_game_fishgame2d_Bullet_GetCatchRadio(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_GetCatchRadio'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_getCatchRadio'", nullptr);
             return 0;
         }
-        int ret = cobj->GetCatchRadio();
+        int ret = cobj->getCatchRadio();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:GetCatchRadio",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:getCatchRadio",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_GetCatchRadio'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_getCatchRadio'.",&tolua_err);
 #endif
 
     return 0;
@@ -4127,7 +4548,7 @@ int lua_game_fishgame2d_Bullet_OnUpdate(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_Bullet_SetCannonSetType(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_setCannonSetType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -4147,7 +4568,7 @@ int lua_game_fishgame2d_Bullet_SetCannonSetType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_SetCannonSetType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_setCannonSetType'", nullptr);
         return 0;
     }
 #endif
@@ -4157,27 +4578,27 @@ int lua_game_fishgame2d_Bullet_SetCannonSetType(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:SetCannonSetType");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:setCannonSetType");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_SetCannonSetType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_setCannonSetType'", nullptr);
             return 0;
         }
-        cobj->SetCannonSetType(arg0);
+        cobj->setCannonSetType(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:SetCannonSetType",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:setCannonSetType",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_SetCannonSetType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_setCannonSetType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Bullet_GetCannonType(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_getCannonType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -4197,7 +4618,7 @@ int lua_game_fishgame2d_Bullet_GetCannonType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_GetCannonType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_getCannonType'", nullptr);
         return 0;
     }
 #endif
@@ -4207,24 +4628,24 @@ int lua_game_fishgame2d_Bullet_GetCannonType(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_GetCannonType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_getCannonType'", nullptr);
             return 0;
         }
-        int ret = cobj->GetCannonType();
+        int ret = cobj->getCannonType();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:GetCannonType",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:getCannonType",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_GetCannonType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_getCannonType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Bullet_SetCannonType(lua_State* tolua_S)
+int lua_game_fishgame2d_Bullet_setCannonType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Bullet* cobj = nullptr;
@@ -4244,7 +4665,7 @@ int lua_game_fishgame2d_Bullet_SetCannonType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_SetCannonType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Bullet_setCannonType'", nullptr);
         return 0;
     }
 #endif
@@ -4254,22 +4675,22 @@ int lua_game_fishgame2d_Bullet_SetCannonType(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:SetCannonType");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Bullet:setCannonType");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_SetCannonType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Bullet_setCannonType'", nullptr);
             return 0;
         }
-        cobj->SetCannonType(arg0);
+        cobj->setCannonType(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:SetCannonType",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Bullet:setCannonType",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_SetCannonType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Bullet_setCannonType'.",&tolua_err);
 #endif
 
     return 0;
@@ -4370,13 +4791,13 @@ int lua_register_game_fishgame2d_Bullet(lua_State* tolua_S)
     tolua_cclass(tolua_S,"Bullet","game.fishgame2d.Bullet","game.fishgame2d.MyObject",nullptr);
 
     tolua_beginmodule(tolua_S,"Bullet");
-        tolua_function(tolua_S,"SetCatchRadio",lua_game_fishgame2d_Bullet_SetCatchRadio);
-        tolua_function(tolua_S,"GetCannonSetType",lua_game_fishgame2d_Bullet_GetCannonSetType);
-        tolua_function(tolua_S,"GetCatchRadio",lua_game_fishgame2d_Bullet_GetCatchRadio);
+        tolua_function(tolua_S,"setCatchRadio",lua_game_fishgame2d_Bullet_setCatchRadio);
+        tolua_function(tolua_S,"getCannonSetType",lua_game_fishgame2d_Bullet_getCannonSetType);
+        tolua_function(tolua_S,"getCatchRadio",lua_game_fishgame2d_Bullet_getCatchRadio);
         tolua_function(tolua_S,"OnUpdate",lua_game_fishgame2d_Bullet_OnUpdate);
-        tolua_function(tolua_S,"SetCannonSetType",lua_game_fishgame2d_Bullet_SetCannonSetType);
-        tolua_function(tolua_S,"GetCannonType",lua_game_fishgame2d_Bullet_GetCannonType);
-        tolua_function(tolua_S,"SetCannonType",lua_game_fishgame2d_Bullet_SetCannonType);
+        tolua_function(tolua_S,"setCannonSetType",lua_game_fishgame2d_Bullet_setCannonSetType);
+        tolua_function(tolua_S,"getCannonType",lua_game_fishgame2d_Bullet_getCannonType);
+        tolua_function(tolua_S,"setCannonType",lua_game_fishgame2d_Bullet_setCannonType);
         tolua_function(tolua_S,"setState",lua_game_fishgame2d_Bullet_setState);
         tolua_function(tolua_S,"create", lua_game_fishgame2d_Bullet_create);
     tolua_endmodule(tolua_S);
@@ -4386,53 +4807,6 @@ int lua_register_game_fishgame2d_Bullet(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_MoveCompent_GetDelay(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_GetDelay'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_GetDelay'", nullptr);
-            return 0;
-        }
-        double ret = cobj->GetDelay();
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:GetDelay",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_GetDelay'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_game_fishgame2d_MoveCompent_bTroop(lua_State* tolua_S)
 {
     int argc = 0;
@@ -4541,103 +4915,6 @@ int lua_game_fishgame2d_MoveCompent_setPause(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MoveCompent_GetOwner(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_GetOwner'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_GetOwner'", nullptr);
-            return 0;
-        }
-        game::fishgame2d::MyObject* ret = cobj->GetOwner();
-        object_to_luaval<game::fishgame2d::MyObject>(tolua_S, "game.fishgame2d.MyObject",(game::fishgame2d::MyObject*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:GetOwner",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_GetOwner'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_MoveCompent_SetOwner(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_SetOwner'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        game::fishgame2d::MyObject* arg0;
-
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.MoveCompent:SetOwner");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_SetOwner'", nullptr);
-            return 0;
-        }
-        cobj->SetOwner(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:SetOwner",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_SetOwner'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_game_fishgame2d_MoveCompent_HasBeginMove(lua_State* tolua_S)
 {
     int argc = 0;
@@ -4728,6 +5005,56 @@ int lua_game_fishgame2d_MoveCompent_getPathID(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_getPathID'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MoveCompent_setDelay(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setDelay'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setDelay");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setDelay'", nullptr);
+            return 0;
+        }
+        cobj->setDelay(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setDelay",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setDelay'.",&tolua_err);
 #endif
 
     return 0;
@@ -4829,6 +5156,56 @@ int lua_game_fishgame2d_MoveCompent_IsEndPath(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MoveCompent_setRebound(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setRebound'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        bool arg0;
+
+        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setRebound");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setRebound'", nullptr);
+            return 0;
+        }
+        cobj->setRebound(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setRebound",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setRebound'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MoveCompent_Rebound(lua_State* tolua_S)
 {
     int argc = 0;
@@ -4872,56 +5249,6 @@ int lua_game_fishgame2d_MoveCompent_Rebound(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_Rebound'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_MoveCompent_SetDirection(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_SetDirection'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        double arg0;
-
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:SetDirection");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_SetDirection'", nullptr);
-            return 0;
-        }
-        cobj->SetDirection(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:SetDirection",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_SetDirection'.",&tolua_err);
 #endif
 
     return 0;
@@ -4973,7 +5300,7 @@ int lua_game_fishgame2d_MoveCompent_OnDetach(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MoveCompent_SetDelay(lua_State* tolua_S)
+int lua_game_fishgame2d_MoveCompent_InitMove(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MoveCompent* cobj = nullptr;
@@ -4993,7 +5320,54 @@ int lua_game_fishgame2d_MoveCompent_SetDelay(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_SetDelay'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_InitMove'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_InitMove'", nullptr);
+            return 0;
+        }
+        cobj->InitMove();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:InitMove",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_InitMove'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MoveCompent_setSpeed(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setSpeed'", nullptr);
         return 0;
     }
 #endif
@@ -5003,72 +5377,22 @@ int lua_game_fishgame2d_MoveCompent_SetDelay(lua_State* tolua_S)
     {
         double arg0;
 
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:SetDelay");
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setSpeed");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_SetDelay'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setSpeed'", nullptr);
             return 0;
         }
-        cobj->SetDelay(arg0);
+        cobj->setSpeed(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:SetDelay",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setSpeed",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_SetDelay'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_game_fishgame2d_MoveCompent_SetRebound(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_SetRebound'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        bool arg0;
-
-        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:SetRebound");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_SetRebound'", nullptr);
-            return 0;
-        }
-        cobj->SetRebound(arg0);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:SetRebound",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_SetRebound'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setSpeed'.",&tolua_err);
 #endif
 
     return 0;
@@ -5123,6 +5447,59 @@ int lua_game_fishgame2d_MoveCompent_setOffest(lua_State* tolua_S)
 
     return 0;
 }
+int lua_game_fishgame2d_MoveCompent_setPosition(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setPosition'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        double arg0;
+        double arg1;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setPosition");
+
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MoveCompent:setPosition");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setPosition'", nullptr);
+            return 0;
+        }
+        cobj->setPosition(arg0, arg1);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setPosition",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setPosition'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_game_fishgame2d_MoveCompent_getOffest(lua_State* tolua_S)
 {
     int argc = 0;
@@ -5166,6 +5543,53 @@ int lua_game_fishgame2d_MoveCompent_getOffest(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_getOffest'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MoveCompent_getDelay(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_getDelay'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_getDelay'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getDelay();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:getDelay",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_getDelay'.",&tolua_err);
 #endif
 
     return 0;
@@ -5217,7 +5641,7 @@ int lua_game_fishgame2d_MoveCompent_getSpeed(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MoveCompent_InitMove(lua_State* tolua_S)
+int lua_game_fishgame2d_MoveCompent_setDirection(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MoveCompent* cobj = nullptr;
@@ -5237,29 +5661,32 @@ int lua_game_fishgame2d_MoveCompent_InitMove(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_InitMove'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setDirection'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 1) 
     {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setDirection");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_InitMove'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setDirection'", nullptr);
             return 0;
         }
-        cobj->InitMove();
+        cobj->setDirection(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:InitMove",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setDirection",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_InitMove'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setDirection'.",&tolua_err);
 #endif
 
     return 0;
@@ -5311,7 +5738,7 @@ int lua_game_fishgame2d_MoveCompent_OnAttach(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MoveCompent_setSpeed(lua_State* tolua_S)
+int lua_game_fishgame2d_MoveCompent_getOwner(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::MoveCompent* cobj = nullptr;
@@ -5331,7 +5758,54 @@ int lua_game_fishgame2d_MoveCompent_setSpeed(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setSpeed'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_getOwner'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_getOwner'", nullptr);
+            return 0;
+        }
+        game::fishgame2d::MyObject* ret = cobj->getOwner();
+        object_to_luaval<game::fishgame2d::MyObject>(tolua_S, "game.fishgame2d.MyObject",(game::fishgame2d::MyObject*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:getOwner",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_getOwner'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_MoveCompent_setOwner(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::MoveCompent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_setOwner'", nullptr);
         return 0;
     }
 #endif
@@ -5339,24 +5813,24 @@ int lua_game_fishgame2d_MoveCompent_setSpeed(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-        double arg0;
+        game::fishgame2d::MyObject* arg0;
 
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:setSpeed");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.MoveCompent:setOwner");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setSpeed'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_setOwner'", nullptr);
             return 0;
         }
-        cobj->setSpeed(arg0);
+        cobj->setOwner(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setSpeed",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:setOwner",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setSpeed'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_setOwner'.",&tolua_err);
 #endif
 
     return 0;
@@ -5525,59 +5999,6 @@ int lua_game_fishgame2d_MoveCompent_SetEndPath(lua_State* tolua_S)
 
     return 0;
 }
-int lua_game_fishgame2d_MoveCompent_SetPosition(lua_State* tolua_S)
-{
-    int argc = 0;
-    game::fishgame2d::MoveCompent* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.MoveCompent",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (game::fishgame2d::MoveCompent*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_MoveCompent_SetPosition'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 2) 
-    {
-        double arg0;
-        double arg1;
-
-        ok &= luaval_to_number(tolua_S, 2,&arg0, "game.fishgame2d.MoveCompent:SetPosition");
-
-        ok &= luaval_to_number(tolua_S, 3,&arg1, "game.fishgame2d.MoveCompent:SetPosition");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_MoveCompent_SetPosition'", nullptr);
-            return 0;
-        }
-        cobj->SetPosition(arg0, arg1);
-        lua_settop(tolua_S, 1);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.MoveCompent:SetPosition",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_MoveCompent_SetPosition'.",&tolua_err);
-#endif
-
-    return 0;
-}
 static int lua_game_fishgame2d_MoveCompent_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (MoveCompent)");
@@ -5590,30 +6011,30 @@ int lua_register_game_fishgame2d_MoveCompent(lua_State* tolua_S)
     tolua_cclass(tolua_S,"MoveCompent","game.fishgame2d.MoveCompent","cc.Ref",nullptr);
 
     tolua_beginmodule(tolua_S,"MoveCompent");
-        tolua_function(tolua_S,"GetDelay",lua_game_fishgame2d_MoveCompent_GetDelay);
         tolua_function(tolua_S,"bTroop",lua_game_fishgame2d_MoveCompent_bTroop);
         tolua_function(tolua_S,"setPause",lua_game_fishgame2d_MoveCompent_setPause);
-        tolua_function(tolua_S,"GetOwner",lua_game_fishgame2d_MoveCompent_GetOwner);
-        tolua_function(tolua_S,"SetOwner",lua_game_fishgame2d_MoveCompent_SetOwner);
         tolua_function(tolua_S,"HasBeginMove",lua_game_fishgame2d_MoveCompent_HasBeginMove);
         tolua_function(tolua_S,"getPathID",lua_game_fishgame2d_MoveCompent_getPathID);
+        tolua_function(tolua_S,"setDelay",lua_game_fishgame2d_MoveCompent_setDelay);
         tolua_function(tolua_S,"OnUpdate",lua_game_fishgame2d_MoveCompent_OnUpdate);
         tolua_function(tolua_S,"IsEndPath",lua_game_fishgame2d_MoveCompent_IsEndPath);
+        tolua_function(tolua_S,"setRebound",lua_game_fishgame2d_MoveCompent_setRebound);
         tolua_function(tolua_S,"Rebound",lua_game_fishgame2d_MoveCompent_Rebound);
-        tolua_function(tolua_S,"SetDirection",lua_game_fishgame2d_MoveCompent_SetDirection);
         tolua_function(tolua_S,"OnDetach",lua_game_fishgame2d_MoveCompent_OnDetach);
-        tolua_function(tolua_S,"SetDelay",lua_game_fishgame2d_MoveCompent_SetDelay);
-        tolua_function(tolua_S,"SetRebound",lua_game_fishgame2d_MoveCompent_SetRebound);
-        tolua_function(tolua_S,"setOffest",lua_game_fishgame2d_MoveCompent_setOffest);
-        tolua_function(tolua_S,"getOffest",lua_game_fishgame2d_MoveCompent_getOffest);
-        tolua_function(tolua_S,"getSpeed",lua_game_fishgame2d_MoveCompent_getSpeed);
         tolua_function(tolua_S,"InitMove",lua_game_fishgame2d_MoveCompent_InitMove);
-        tolua_function(tolua_S,"OnAttach",lua_game_fishgame2d_MoveCompent_OnAttach);
         tolua_function(tolua_S,"setSpeed",lua_game_fishgame2d_MoveCompent_setSpeed);
+        tolua_function(tolua_S,"setOffest",lua_game_fishgame2d_MoveCompent_setOffest);
+        tolua_function(tolua_S,"setPosition",lua_game_fishgame2d_MoveCompent_setPosition);
+        tolua_function(tolua_S,"getOffest",lua_game_fishgame2d_MoveCompent_getOffest);
+        tolua_function(tolua_S,"getDelay",lua_game_fishgame2d_MoveCompent_getDelay);
+        tolua_function(tolua_S,"getSpeed",lua_game_fishgame2d_MoveCompent_getSpeed);
+        tolua_function(tolua_S,"setDirection",lua_game_fishgame2d_MoveCompent_setDirection);
+        tolua_function(tolua_S,"OnAttach",lua_game_fishgame2d_MoveCompent_OnAttach);
+        tolua_function(tolua_S,"getOwner",lua_game_fishgame2d_MoveCompent_getOwner);
+        tolua_function(tolua_S,"setOwner",lua_game_fishgame2d_MoveCompent_setOwner);
         tolua_function(tolua_S,"isPaused",lua_game_fishgame2d_MoveCompent_isPaused);
         tolua_function(tolua_S,"setPathID",lua_game_fishgame2d_MoveCompent_setPathID);
         tolua_function(tolua_S,"SetEndPath",lua_game_fishgame2d_MoveCompent_SetEndPath);
-        tolua_function(tolua_S,"SetPosition",lua_game_fishgame2d_MoveCompent_SetPosition);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::MoveCompent).name();
     g_luaType[typeName] = "game.fishgame2d.MoveCompent";
@@ -6220,7 +6641,7 @@ int lua_register_game_fishgame2d_EffectFactory(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_Effect_GetEffectType(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_getEffectType(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6240,7 +6661,7 @@ int lua_game_fishgame2d_Effect_GetEffectType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_GetEffectType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_getEffectType'", nullptr);
         return 0;
     }
 #endif
@@ -6250,24 +6671,24 @@ int lua_game_fishgame2d_Effect_GetEffectType(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_GetEffectType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_getEffectType'", nullptr);
             return 0;
         }
-        int ret = cobj->GetEffectType();
+        int ret = cobj->getEffectType();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:GetEffectType",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:getEffectType",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_GetEffectType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_getEffectType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Effect_SetParam(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_setParam(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6287,7 +6708,7 @@ int lua_game_fishgame2d_Effect_SetParam(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_SetParam'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_setParam'", nullptr);
         return 0;
     }
 #endif
@@ -6298,29 +6719,29 @@ int lua_game_fishgame2d_Effect_SetParam(lua_State* tolua_S)
         int arg0;
         int arg1;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:SetParam");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:setParam");
 
-        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "game.fishgame2d.Effect:SetParam");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "game.fishgame2d.Effect:setParam");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_SetParam'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_setParam'", nullptr);
             return 0;
         }
-        cobj->SetParam(arg0, arg1);
+        cobj->setParam(arg0, arg1);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:SetParam",argc, 2);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:setParam",argc, 2);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_SetParam'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_setParam'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Effect_SetEffectType(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6340,7 +6761,66 @@ int lua_game_fishgame2d_Effect_SetEffectType(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_SetEffectType'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_execute'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 4) 
+    {
+        game::fishgame2d::MyObject* arg0;
+        game::fishgame2d::MyObject* arg1;
+        cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
+        bool arg3;
+
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.Effect:execute");
+
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.Effect:execute");
+
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.Effect:execute");
+
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.Effect:execute");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_execute'", nullptr);
+            return 0;
+        }
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:execute",argc, 4);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_execute'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_game_fishgame2d_Effect_setEffectType(lua_State* tolua_S)
+{
+    int argc = 0;
+    game::fishgame2d::Effect* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"game.fishgame2d.Effect",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (game::fishgame2d::Effect*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_setEffectType'", nullptr);
         return 0;
     }
 #endif
@@ -6350,27 +6830,27 @@ int lua_game_fishgame2d_Effect_SetEffectType(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:SetEffectType");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:setEffectType");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_SetEffectType'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_setEffectType'", nullptr);
             return 0;
         }
-        cobj->SetEffectType(arg0);
+        cobj->setEffectType(arg0);
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:SetEffectType",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:setEffectType",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_SetEffectType'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_setEffectType'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Effect_GetParamSize(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_getParamSize(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6390,7 +6870,7 @@ int lua_game_fishgame2d_Effect_GetParamSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_GetParamSize'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_getParamSize'", nullptr);
         return 0;
     }
 #endif
@@ -6400,24 +6880,24 @@ int lua_game_fishgame2d_Effect_GetParamSize(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_GetParamSize'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_getParamSize'", nullptr);
             return 0;
         }
-        int ret = cobj->GetParamSize();
+        int ret = cobj->getParamSize();
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:GetParamSize",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:getParamSize",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_GetParamSize'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_getParamSize'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Effect_ClearParam(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_clearParam(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6437,7 +6917,7 @@ int lua_game_fishgame2d_Effect_ClearParam(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_ClearParam'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_clearParam'", nullptr);
         return 0;
     }
 #endif
@@ -6447,24 +6927,24 @@ int lua_game_fishgame2d_Effect_ClearParam(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_ClearParam'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_clearParam'", nullptr);
             return 0;
         }
-        cobj->ClearParam();
+        cobj->clearParam();
         lua_settop(tolua_S, 1);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:ClearParam",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:clearParam",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_ClearParam'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_clearParam'.",&tolua_err);
 #endif
 
     return 0;
 }
-int lua_game_fishgame2d_Effect_GetParam(lua_State* tolua_S)
+int lua_game_fishgame2d_Effect_getParam(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::Effect* cobj = nullptr;
@@ -6484,7 +6964,7 @@ int lua_game_fishgame2d_Effect_GetParam(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_GetParam'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_Effect_getParam'", nullptr);
         return 0;
     }
 #endif
@@ -6494,22 +6974,22 @@ int lua_game_fishgame2d_Effect_GetParam(lua_State* tolua_S)
     {
         int arg0;
 
-        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:GetParam");
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "game.fishgame2d.Effect:getParam");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_GetParam'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_Effect_getParam'", nullptr);
             return 0;
         }
-        int ret = cobj->GetParam(arg0);
+        int ret = cobj->getParam(arg0);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:GetParam",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.Effect:getParam",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_GetParam'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_Effect_getParam'.",&tolua_err);
 #endif
 
     return 0;
@@ -6526,12 +7006,13 @@ int lua_register_game_fishgame2d_Effect(lua_State* tolua_S)
     tolua_cclass(tolua_S,"Effect","game.fishgame2d.Effect","cc.Ref",nullptr);
 
     tolua_beginmodule(tolua_S,"Effect");
-        tolua_function(tolua_S,"GetEffectType",lua_game_fishgame2d_Effect_GetEffectType);
-        tolua_function(tolua_S,"SetParam",lua_game_fishgame2d_Effect_SetParam);
-        tolua_function(tolua_S,"SetEffectType",lua_game_fishgame2d_Effect_SetEffectType);
-        tolua_function(tolua_S,"GetParamSize",lua_game_fishgame2d_Effect_GetParamSize);
-        tolua_function(tolua_S,"ClearParam",lua_game_fishgame2d_Effect_ClearParam);
-        tolua_function(tolua_S,"GetParam",lua_game_fishgame2d_Effect_GetParam);
+        tolua_function(tolua_S,"getEffectType",lua_game_fishgame2d_Effect_getEffectType);
+        tolua_function(tolua_S,"setParam",lua_game_fishgame2d_Effect_setParam);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_Effect_execute);
+        tolua_function(tolua_S,"setEffectType",lua_game_fishgame2d_Effect_setEffectType);
+        tolua_function(tolua_S,"getParamSize",lua_game_fishgame2d_Effect_getParamSize);
+        tolua_function(tolua_S,"clearParam",lua_game_fishgame2d_Effect_clearParam);
+        tolua_function(tolua_S,"getParam",lua_game_fishgame2d_Effect_getParam);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::Effect).name();
     g_luaType[typeName] = "game.fishgame2d.Effect";
@@ -6539,7 +7020,7 @@ int lua_register_game_fishgame2d_Effect(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectAddMoney_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectAddMoney_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectAddMoney* cobj = nullptr;
@@ -6559,7 +7040,7 @@ int lua_game_fishgame2d_EffectAddMoney_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAddMoney_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAddMoney_execute'", nullptr);
         return 0;
     }
 #endif
@@ -6572,28 +7053,28 @@ int lua_game_fishgame2d_EffectAddMoney_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAddMoney:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAddMoney:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAddMoney:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAddMoney:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAddMoney:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAddMoney:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAddMoney:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAddMoney:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAddMoney_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAddMoney_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAddMoney:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAddMoney:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAddMoney_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAddMoney_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -6648,7 +7129,7 @@ int lua_register_game_fishgame2d_EffectAddMoney(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectAddMoney");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectAddMoney_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectAddMoney_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectAddMoney_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectAddMoney).name();
     g_luaType[typeName] = "game.fishgame2d.EffectAddMoney";
@@ -6656,7 +7137,7 @@ int lua_register_game_fishgame2d_EffectAddMoney(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectKill_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectKill_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectKill* cobj = nullptr;
@@ -6676,7 +7157,7 @@ int lua_game_fishgame2d_EffectKill_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectKill_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectKill_execute'", nullptr);
         return 0;
     }
 #endif
@@ -6689,28 +7170,28 @@ int lua_game_fishgame2d_EffectKill_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectKill:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectKill:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectKill:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectKill:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectKill:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectKill:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectKill:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectKill:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectKill_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectKill_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectKill:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectKill:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectKill_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectKill_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -6765,7 +7246,7 @@ int lua_register_game_fishgame2d_EffectKill(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectKill");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectKill_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectKill_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectKill_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectKill).name();
     g_luaType[typeName] = "game.fishgame2d.EffectKill";
@@ -6773,7 +7254,7 @@ int lua_register_game_fishgame2d_EffectKill(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectAddBuffer_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectAddBuffer_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectAddBuffer* cobj = nullptr;
@@ -6793,7 +7274,7 @@ int lua_game_fishgame2d_EffectAddBuffer_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAddBuffer_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAddBuffer_execute'", nullptr);
         return 0;
     }
 #endif
@@ -6806,28 +7287,28 @@ int lua_game_fishgame2d_EffectAddBuffer_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAddBuffer:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAddBuffer:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAddBuffer:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAddBuffer:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAddBuffer:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAddBuffer:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAddBuffer:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAddBuffer:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAddBuffer_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAddBuffer_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAddBuffer:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAddBuffer:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAddBuffer_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAddBuffer_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -6882,7 +7363,7 @@ int lua_register_game_fishgame2d_EffectAddBuffer(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectAddBuffer");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectAddBuffer_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectAddBuffer_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectAddBuffer_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectAddBuffer).name();
     g_luaType[typeName] = "game.fishgame2d.EffectAddBuffer";
@@ -6890,7 +7371,7 @@ int lua_register_game_fishgame2d_EffectAddBuffer(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectProduce_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectProduce_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectProduce* cobj = nullptr;
@@ -6910,7 +7391,7 @@ int lua_game_fishgame2d_EffectProduce_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectProduce_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectProduce_execute'", nullptr);
         return 0;
     }
 #endif
@@ -6923,28 +7404,28 @@ int lua_game_fishgame2d_EffectProduce_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectProduce:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectProduce:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectProduce:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectProduce:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectProduce:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectProduce:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectProduce:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectProduce:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectProduce_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectProduce_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectProduce:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectProduce:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectProduce_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectProduce_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -6999,7 +7480,7 @@ int lua_register_game_fishgame2d_EffectProduce(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectProduce");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectProduce_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectProduce_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectProduce_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectProduce).name();
     g_luaType[typeName] = "game.fishgame2d.EffectProduce";
@@ -7007,7 +7488,7 @@ int lua_register_game_fishgame2d_EffectProduce(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectBlackWater_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectBlackWater_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectBlackWater* cobj = nullptr;
@@ -7027,7 +7508,7 @@ int lua_game_fishgame2d_EffectBlackWater_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectBlackWater_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectBlackWater_execute'", nullptr);
         return 0;
     }
 #endif
@@ -7040,28 +7521,28 @@ int lua_game_fishgame2d_EffectBlackWater_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectBlackWater:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectBlackWater:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectBlackWater:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectBlackWater:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectBlackWater:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectBlackWater:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectBlackWater:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectBlackWater:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectBlackWater_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectBlackWater_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectBlackWater:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectBlackWater:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectBlackWater_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectBlackWater_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -7116,7 +7597,7 @@ int lua_register_game_fishgame2d_EffectBlackWater(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectBlackWater");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectBlackWater_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectBlackWater_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectBlackWater_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectBlackWater).name();
     g_luaType[typeName] = "game.fishgame2d.EffectBlackWater";
@@ -7124,7 +7605,7 @@ int lua_register_game_fishgame2d_EffectBlackWater(lua_State* tolua_S)
     return 1;
 }
 
-int lua_game_fishgame2d_EffectAward_Execute(lua_State* tolua_S)
+int lua_game_fishgame2d_EffectAward_execute(lua_State* tolua_S)
 {
     int argc = 0;
     game::fishgame2d::EffectAward* cobj = nullptr;
@@ -7144,7 +7625,7 @@ int lua_game_fishgame2d_EffectAward_Execute(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAward_Execute'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_game_fishgame2d_EffectAward_execute'", nullptr);
         return 0;
     }
 #endif
@@ -7157,28 +7638,28 @@ int lua_game_fishgame2d_EffectAward_Execute(lua_State* tolua_S)
         cocos2d::Vector<game::fishgame2d::MyObject *> arg2;
         bool arg3;
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAward:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 2, "game.fishgame2d.MyObject",&arg0, "game.fishgame2d.EffectAward:execute");
 
-        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAward:Execute");
+        ok &= luaval_to_object<game::fishgame2d::MyObject>(tolua_S, 3, "game.fishgame2d.MyObject",&arg1, "game.fishgame2d.EffectAward:execute");
 
-        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAward:Execute");
+        ok &= luaval_to_ccvector(tolua_S, 4, &arg2, "game.fishgame2d.EffectAward:execute");
 
-        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAward:Execute");
+        ok &= luaval_to_boolean(tolua_S, 5,&arg3, "game.fishgame2d.EffectAward:execute");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAward_Execute'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_game_fishgame2d_EffectAward_execute'", nullptr);
             return 0;
         }
-        long ret = cobj->Execute(arg0, arg1, arg2, arg3);
+        long ret = cobj->execute(arg0, arg1, arg2, arg3);
         tolua_pushnumber(tolua_S,(lua_Number)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAward:Execute",argc, 4);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "game.fishgame2d.EffectAward:execute",argc, 4);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAward_Execute'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_game_fishgame2d_EffectAward_execute'.",&tolua_err);
 #endif
 
     return 0;
@@ -7233,7 +7714,7 @@ int lua_register_game_fishgame2d_EffectAward(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"EffectAward");
         tolua_function(tolua_S,"new",lua_game_fishgame2d_EffectAward_constructor);
-        tolua_function(tolua_S,"Execute",lua_game_fishgame2d_EffectAward_Execute);
+        tolua_function(tolua_S,"execute",lua_game_fishgame2d_EffectAward_execute);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(game::fishgame2d::EffectAward).name();
     g_luaType[typeName] = "game.fishgame2d.EffectAward";
@@ -7253,11 +7734,11 @@ TOLUA_API int register_all_game_fishgame2d(lua_State* tolua_S)
     tolua_module(tolua_S,"fishgame2d",0);
     tolua_beginmodule(tolua_S,"fishgame2d");
 
+	lua_register_game_fishgame2d_MoveCompent(tolua_S);
+	lua_register_game_fishgame2d_MoveByDirection(tolua_S);
 	lua_register_game_fishgame2d_FishObjectManager(tolua_S);
 	lua_register_game_fishgame2d_MyObject(tolua_S);
 	lua_register_game_fishgame2d_Bullet(tolua_S);
-	lua_register_game_fishgame2d_MoveCompent(tolua_S);
-	lua_register_game_fishgame2d_MoveByDirection(tolua_S);
 	lua_register_game_fishgame2d_Effect(tolua_S);
 	lua_register_game_fishgame2d_EffectProduce(tolua_S);
 	lua_register_game_fishgame2d_Fish(tolua_S);

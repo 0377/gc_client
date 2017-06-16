@@ -6,20 +6,20 @@
 
 --------------------------------
 -- 
--- @function [parent=#Bullet] SetCatchRadio 
+-- @function [parent=#Bullet] setCatchRadio 
 -- @param self
 -- @param #int n
 -- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] GetCannonSetType 
+-- @function [parent=#Bullet] getCannonSetType 
 -- @param self
 -- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] GetCatchRadio 
+-- @function [parent=#Bullet] getCatchRadio 
 -- @param self
 -- @return int#int ret (return value: int)
         
@@ -33,20 +33,20 @@
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] SetCannonSetType 
+-- @function [parent=#Bullet] setCannonSetType 
 -- @param self
 -- @param #int 
 -- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] GetCannonType 
+-- @function [parent=#Bullet] getCannonType 
 -- @param self
 -- @return int#int ret (return value: int)
         
 --------------------------------
 -- 
--- @function [parent=#Bullet] SetCannonType 
+-- @function [parent=#Bullet] setCannonType 
 -- @param self
 -- @param #int 
 -- @return Bullet#Bullet self (return value: game.fishgame2d.Bullet)

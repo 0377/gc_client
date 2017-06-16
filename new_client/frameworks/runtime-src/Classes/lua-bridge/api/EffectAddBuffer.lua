@@ -6,7 +6,7 @@
 
 --------------------------------
 -- 
--- @function [parent=#EffectAddBuffer] Execute 
+-- @function [parent=#EffectAddBuffer] execute 
 -- @param self
 -- @param #game.fishgame2d.MyObject pSelf
 -- @param #game.fishgame2d.MyObject pTarget

@@ -6,7 +6,7 @@
 
 --------------------------------
 -- 
--- @function [parent=#EffectProduce] Execute 
+-- @function [parent=#EffectProduce] execute 
 -- @param self
 -- @param #game.fishgame2d.MyObject pSelf
 -- @param #game.fishgame2d.MyObject pTarget

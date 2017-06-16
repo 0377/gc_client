@@ -250,12 +250,12 @@ void MoveByDirection::OnUpdate(float fdt){
 			if (inited_){
 				if (MathAide::CalcDistance(pObj->getGamePos().x, pObj->getGamePos().y, m_pOwner->getGamePos().x, m_pOwner->getGamePos().y) > 10)
 				{
-					SetDirection(MathAide::CalcAngle(pObj->getGamePos().x, pObj->getGamePos().y, m_pOwner->getGamePos().x, m_pOwner->getGamePos().y));
+					setDirection(MathAide::CalcAngle(pObj->getGamePos().x, pObj->getGamePos().y, m_pOwner->getGamePos().x, m_pOwner->getGamePos().y));
 					InitMove();
 				}
 				else
 				{
-					SetPosition(m_pOwner->getGamePos().x, m_pOwner->getGamePos().y);
+					setPosition(m_pOwner->getGamePos().x, m_pOwner->getGamePos().y);
 					//SetDirection(m_pOwner->);
 					return;
 				}
@@ -318,7 +318,7 @@ void MoveByDirection::OnUpdate(float fdt){
 	}
 
 
-	m_pOwner->setGameDir(m_pOwner->GetType() == EOT_FISH ? - angle_ + M_PI_2 : - angle_ + M_PI);
+	m_pOwner->setGameDir(m_pOwner->getObjectType() == EOT_FISH ? - angle_ + M_PI_2 : - angle_ + M_PI);
 	m_pOwner->setGamePos(m_pPosition.x, m_pPosition.y);
 }
 NS_FISHGAME2D_END

@@ -29,7 +29,6 @@ enum ObjState
 	EOS_LIVE,
 	EOS_HIT,
 	EOS_DEAD,
-	EOS_DESTORY,
 	EOS_DESTORED,
 };
 
@@ -55,7 +54,7 @@ class Effect;
 class MyObjectVisualNode;
 struct VisualNode;
 
-class MyObject : public cocos2d::Node
+class MyObject : public cocos2d::Ref
 {
 protected:
 	MyObject();
@@ -63,7 +62,7 @@ public:
 	virtual ~MyObject();
 
 public:
-	int GetType(){ return m_nType; }
+	int getObjectType(){ return m_nType; }
 
 	unsigned long getId()const{ return m_nId; };
 	void setId(unsigned long newId){ m_nId = newId; };
@@ -78,10 +77,10 @@ public:
 	void setManager(FishObjectManager* manager){ m_pManager = manager; }
 	FishObjectManager* getManager(){ return m_pManager; }
 
-	virtual void Clear(bool, bool noCleanNode = false);
+	virtual void Clear(bool);
 	virtual void OnClear(bool);
 
-	virtual bool OnUpdate(float fdt,bool shouldUpdate);
+	virtual bool onUpdate(float fdt,bool shouldUpdate);
 
 	bool InSideScreen(){ 
 		return position.x > 10 && position.x < 1430 &&
@@ -95,12 +94,12 @@ public:
 
 	MoveCompent* getMoveCompent(){ return m_pMoveCompent; }
 	void	setMoveCompent(MoveCompent*);
-	void	AddBuff(int buffType, float buffParam, float buffTime);
+	void	addBuff(int buffType, float buffParam, float buffTime);
 	std::vector<Buff*>&	GetBuffs(){ return m_pBuffList; }
 
-	void	AddEffect(Effect*);
+	void	addEffect(Effect*);
 
-	cocos2d::Vector<MyObject*> ExecuteEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
+	cocos2d::Vector<MyObject*> executeEffects(MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating);
 
 	void  registerStatusChangedHandler(int);
 
@@ -111,12 +110,18 @@ public:
 
 	virtual const cocos2d::Vec2& getGamePos() const;
 	virtual float getGameDir() const;
+
+
+	virtual void setPosition(float x, float y);
+	virtual cocos2d::Vec2 getPosition();
+	
+	virtual void setRotation(float f);
+	virtual float getRotation();
 protected:
 	int m_nType;
-
 	unsigned long m_nId;
 
-	cocos2d::Point m_pPosition;
+	cocos2d::Vec2 m_pPosition;
 	float m_fDirection;
 	bool m_bInScreen;
 
@@ -133,10 +138,6 @@ protected:
 	int m_nTypeId;
 
 	bool m_bMarkEffectDone;
-		
-	std::vector<VisualNode>	m_pVisualNodeList;
-	//
-	//Buff*					m_pBuffList[8];
 
 	std::vector<Buff*>		m_pBuffList;
 	std::vector<Effect*>		m_pEffectList;
@@ -152,6 +153,20 @@ protected:
 
 	float rotation;
 	cocos2d::Vec2 position;
+public:
+	virtual void removeAllChildren();
+
+	virtual void  setVisualContent(cocos2d::Node*);
+	virtual void  setVisualShadow(cocos2d::Node*);
+	virtual void  setVisualDebug(cocos2d::Node*);
+
+	virtual cocos2d::Node* getVisualContent() { return m_pContent; }
+	virtual cocos2d::Node* getVisualShadow() { return m_pShadow; }
+	virtual cocos2d::Node* getVisualDebug() { return m_pDebug; }
+protected:
+	cocos2d::Node* m_pContent;
+	cocos2d::Node* m_pShadow;
+	cocos2d::Node* m_pDebug;
 };
 
 class Fish : public MyObject
@@ -175,47 +190,32 @@ public:
 		return ret;
 	}
 
-	void SetBoundingBox(int);
-	int GetBoundingBox();
+	int getMaxRadio(){ return m_fMaxRadio; }
 
-	int GetMaxRadio(){ return m_fMaxRadio; }
-
-	int GetFishType(){ return m_FishType; }
-	void SetFishType(int i){ m_FishType = i; }
+	int getFishType(){ return m_FishType; }
+	void setFishType(int i){ m_FishType = i; }
 
 	int getRefershId(){ return m_nRefershID; }
 	void setRefershId(int i){ m_nRefershID = i;  }
 
-	void SetGoldMul(int n){ m_nGoldMul = n; }
+	void setGoldMul(int n){ m_nGoldMul = n; }
 
-	int GetGoldMul(){ return m_nGoldMul; }
+	int getGoldMul(){ return m_nGoldMul; }
 
-	void SetLockLevel(int n){ m_nLockLevel = n; }
+	void setLockLevel(int n){ m_nLockLevel = n; }
 	int getLockLevel(){ return m_nLockLevel; }
 
-	virtual void setPosition(float x, float y);
-	virtual void setRotation(float rotation);
+	void setVisualId(int n) { m_nVisualId = n; }
+	int getVisualId() { return m_nVisualId; }
 
-	virtual const cocos2d::Vec2& getPosition() const;
-	virtual float getRotation() const;
-
+	virtual void	setState(int);
 	virtual bool OnUpdate(float fdt, bool shouldUpdate);
-	virtual void OnHit();
-
-	void setContentNode(cocos2d::Node*, cocos2d::Node*);
-	void setDebugNode(cocos2d::Node*);
 
 	void addBoundingBox(float radio,float x,float y);
 
 	std::list<BoundingBox>& getBoundingBox() { return boundingBox; }
 private:
-	cocos2d::Node* m_content;
-	cocos2d::Node* m_shadow;
-	cocos2d::Node* m_debug;
 	std::list<BoundingBox> boundingBox;
-
-	int m_nVisualId;
-	int m_nBoundingBoxId;
 
 	int m_nRedTime;
 
@@ -228,9 +228,7 @@ private:
 	int m_nGoldMul;
 	int m_nLockLevel;
 
-	float rotation;
-	cocos2d::Vec2 position;
-
+	int m_nVisualId;
 };
 class Bullet : public MyObject
 {
@@ -252,12 +250,12 @@ public:
 		return ret;
 	}
 		 
-	void	SetCannonSetType(int);
-	int		GetCannonSetType();
-	void	SetCannonType(int);
-	int		GetCannonType();
-	void	SetCatchRadio(int n);
-	int		GetCatchRadio();
+	void	setCannonSetType(int);
+	int		getCannonSetType();
+	void	setCannonType(int);
+	int		getCannonType();
+	void	setCatchRadio(int n);
+	int		getCatchRadio();
 
 	virtual void	setState(int);
 	virtual bool	OnUpdate(float fdt, bool shouldUpdate);

@@ -6,7 +6,7 @@
 
 --------------------------------
 -- 
--- @function [parent=#EffectAddMoney] Execute 
+-- @function [parent=#EffectAddMoney] execute 
 -- @param self
 -- @param #game.fishgame2d.MyObject pSelf
 -- @param #game.fishgame2d.MyObject pTarget

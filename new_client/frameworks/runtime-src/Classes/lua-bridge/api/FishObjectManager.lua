@@ -71,7 +71,6 @@
 -- 
 -- @function [parent=#FishObjectManager] RemoveAllBullets 
 -- @param self
--- @param #bool 
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
@@ -97,7 +96,6 @@
 -- 
 -- @function [parent=#FishObjectManager] RemoveAllFishes 
 -- @param self
--- @param #bool 
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------

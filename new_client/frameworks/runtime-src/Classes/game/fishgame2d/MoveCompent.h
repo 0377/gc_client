@@ -46,22 +46,22 @@ public:
 	void setOffest(cocos2d::Point& pt){ m_Offest = pt; }
 
 
-	void SetDelay(float f){ m_fDelay = f; }
-	float GetDelay(){ return m_fDelay; }
+	void setDelay(float f){ m_fDelay = f; }
+	float getDelay(){ return m_fDelay; }
 
 	bool HasBeginMove(){ return m_bBeginMove; }
 
 	bool Rebound(){ return m_bRebound; }
-	void SetRebound(bool b){ m_bRebound = b; }
+	void setRebound(bool b){ m_bRebound = b; }
 
-	void SetPosition(float x, float y){ m_pPosition.x = x; m_pPosition.y = y; }
-	void SetDirection(float dir){ m_fDirection = dir; }
+	void setPosition(float x, float y){ m_pPosition.x = x; m_pPosition.y = y; }
+	void setDirection(float dir){ m_fDirection = dir; }
 
 	virtual void OnDetach();
 
 
-	void SetOwner(MyObject* owner){ m_pOwner = owner; }
-	MyObject* GetOwner(){
+	void setOwner(MyObject* owner){ m_pOwner = owner; }
+	MyObject* getOwner(){
 		return m_pOwner;
 	}
 

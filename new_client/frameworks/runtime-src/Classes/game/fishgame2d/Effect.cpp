@@ -32,7 +32,7 @@ Effect* EffectFactory::CreateEffect(int type){
 		break;
 	}
 	if (pEffect){
-		pEffect->SetEffectType(type);
+		pEffect->setEffectType(type);
 		pEffect->autorelease();
 	}
 	else{
@@ -47,13 +47,13 @@ Effect::Effect()
 	, m_nType(ETF_NONE)
 { 
 	m_nParam.resize(2);
-	ClearParam();
+	clearParam();
 }
 
 Effect::~Effect(){ }
 
 
-void Effect::ClearParam()
+void Effect::clearParam()
 {
 	for (int i = 0; i < m_nParam.size(); ++i)
 	{
@@ -61,14 +61,14 @@ void Effect::ClearParam()
 	}
 }
 
-int Effect::GetParam(int pos)
+int Effect::getParam(int pos)
 {
 	if (pos >= m_nParam.size()) return 0;
 
 	return m_nParam[pos];
 }
 
-void Effect::SetParam(int pos, int p)
+void Effect::setParam(int pos, int p)
 {
 	if (pos > m_nParam.size()) return;
 
@@ -79,10 +79,10 @@ EffectAddMoney::EffectAddMoney()
 	: Effect()
 {
 	m_nParam.resize(3);
-	ClearParam();
+	clearParam();
 	lSco = 0;
 }
-long EffectAddMoney::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectAddMoney::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL) return 0;
 
@@ -136,10 +136,10 @@ EffectKill::EffectKill()
 	:Effect()
 {
 	m_nParam.resize(3);
-	ClearParam();
+	clearParam();
 }
 
-long EffectKill::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectKill::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL) return 0;
 
@@ -156,31 +156,31 @@ long EffectKill::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyO
 			MoveCompent* pMove = pObj->getMoveCompent();
 			if (pObj->getId() != pSelf->getId() && pMove)
 			{
-				if (GetParam(0) == 0 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为０时表示杀死全部的鱼
+				if (getParam(0) == 0 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为０时表示杀死全部的鱼
 				{
 					FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
 
-					pObj->ExecuteEffects(pTarget, list, bPretreating);
+					pObj->executeEffects(pTarget, list, bPretreating);
 				}
-				else if (GetParam(0) == 1 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为１时表示杀死指定范围内的鱼，参数２表示半径
+				else if (getParam(0) == 1 && pObj->InSideScreen() && pMove->HasBeginMove())//参数１为１时表示杀死指定范围内的鱼，参数２表示半径
 				{
-					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= GetParam(1)){
+					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= getParam(1)){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
-						pObj->ExecuteEffects(pTarget, list, bPretreating);
+						pObj->executeEffects(pTarget, list, bPretreating);
 					}
 				}
-				else if (GetParam(0) == 2 && pObj->InSideScreen() && pObj->getMoveCompent()->HasBeginMove())//参数１为２时表示杀死指定类型的鱼，参数２表示指定类型
+				else if (getParam(0) == 2 && pObj->InSideScreen() && pObj->getMoveCompent()->HasBeginMove())//参数１为２时表示杀死指定类型的鱼，参数２表示指定类型
 				{
-					if (pObj->getTypeId() == GetParam(1) && ((Fish*)pObj)->GetFishType() == ESFT_NORMAL){
+					if (pObj->getTypeId() == getParam(1) && ((Fish*)pObj)->getFishType() == ESFT_NORMAL){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
-						pObj->ExecuteEffects(pTarget, list, bPretreating);
+						pObj->executeEffects(pTarget, list, bPretreating);
 					}
 				}
-				else if (GetParam(0) == 3)//参数１为３时表示杀死同一批次刷出来的鱼。
+				else if (getParam(0) == 3)//参数１为３时表示杀死同一批次刷出来的鱼。
 				{
 					if (((Fish*)pObj)->getRefershId() == ((Fish*)pSelf)->getRefershId()){
 						FishObjectManager::GetInstance()->OnActionEffect(pSelf, pObj, this);
-						pObj->ExecuteEffects(pTarget, list, bPretreating);
+						pObj->executeEffects(pTarget, list, bPretreating);
 					}
 				}
 			}
@@ -198,10 +198,10 @@ EffectAddBuffer::EffectAddBuffer()
 	:Effect()
 {
 	m_nParam.resize(5);
-	ClearParam();
+	clearParam();
 }
 
-long EffectAddBuffer::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectAddBuffer::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL || bPretreating) return 0;
 
@@ -217,19 +217,19 @@ long EffectAddBuffer::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vecto
 
 			if (pObj != pSelf && pObj->getId() != pSelf->getId() /* && pObj->InSideScreen()*/)
 			{
-				if (GetParam(0) == 0)//参数１为０时表示全部的鱼
+				if (getParam(0) == 0)//参数１为０时表示全部的鱼
 				{
-					pObj->AddBuff(GetParam(2), GetParam(3), GetParam(4));
+					pObj->addBuff(getParam(2), getParam(3), getParam(4));
 				}
-				else if (GetParam(0) == 1)//参数１为１时表示指定范围内的鱼，参数２表示半径
+				else if (getParam(0) == 1)//参数１为１时表示指定范围内的鱼，参数２表示半径
 				{
-					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= GetParam(1))
-						pObj->AddBuff(GetParam(2), GetParam(3), GetParam(4));
+					if (MathAide::CalcDistance(pSelf->getPosition().x, pSelf->getPosition().y, pObj->getPosition().x, pObj->getPosition().y) <= getParam(1))
+						pObj->addBuff(getParam(2), getParam(3), getParam(4));
 				}
-				else if (GetParam(0) == 2)//参数１为２时表示指定类型的鱼，参数２表示指定类型
+				else if (getParam(0) == 2)//参数１为２时表示指定类型的鱼，参数２表示指定类型
 				{
-					if (pObj->getTypeId() == GetParam(1))
-						pObj->AddBuff(GetParam(2), GetParam(3), GetParam(4));
+					if (pObj->getTypeId() == getParam(1))
+						pObj->addBuff(getParam(2), getParam(3), getParam(4));
 				}
 			}
 
@@ -244,10 +244,10 @@ EffectProduce::EffectProduce()
 	:Effect()
 {
 	m_nParam.resize(4);
-	ClearParam();
+	clearParam();
 }
 
-long EffectProduce::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectProduce::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL || bPretreating) return 0;
 
@@ -272,7 +272,7 @@ EffectBlackWater::EffectBlackWater()
 	m_nParam.clear();
 }
 
-long EffectBlackWater::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectBlackWater::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL || bPretreating) return 0;
 
@@ -285,10 +285,10 @@ EffectAward::EffectAward()
 	: Effect()
 {
 	m_nParam.resize(4);
-	ClearParam();
+	clearParam();
 }
 
-long EffectAward::Execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
+long EffectAward::execute(MyObject* pSelf, MyObject* pTarget, cocos2d::Vector<MyObject*>& list, bool bPretreating)
 {
 	if (pSelf == NULL) return 0;
 
