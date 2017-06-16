@@ -162,6 +162,12 @@ TmjConfig.Pop_Dir = {
     Left = 2,
     Right = 3,
 }
+--游戏控制器中的状态
+TmjConfig.GameCtrState = {
+	Matching = 1,--匹配中
+	Gaming = 2,--游戏中
+	Ended = 3,--游戏结束
+}
 --桌子类型配置
 TmjConfig.tableType = {
 	[1] = "game_res/desk/xiaoquechang.png", --小雀场

@@ -112,7 +112,7 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 	elseif eventType==ccui.TouchEventType.ended then
 		if ref:getName()=="Button_back" then
 			local TmjGameDataManager = TmjGameManager:getInstance():getDataManager()
-			if not TmjGameDataManager.isGameOver then --在游戏中才弹出提示
+			if TmjGameDataManager:getGameState()==TmjConfig.GameCtrState.Gaming then --在游戏中才弹出提示
 				CustomHelper.showAlertView(
 					Tmji18nUtils:getInstance():get('str_mjplay','exitAlert'),
 					true,

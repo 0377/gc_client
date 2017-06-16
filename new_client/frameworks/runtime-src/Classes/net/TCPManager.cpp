@@ -135,8 +135,8 @@ void TCPManager::dealWithReceiveHandler(struct mg_connection *nc, int ev, void *
 		}
 		case MG_EV_TIMER://超时
 		{
-			//CCLOG("connection timeout");
-			//doCloseMgConnection(nc);
+			CCLOG("connection timeout");
+			nc->flags |= MG_F_CLOSE_IMMEDIATELY;
 			break; 
 		}
 		default:

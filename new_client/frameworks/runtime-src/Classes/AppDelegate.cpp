@@ -74,7 +74,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
-	//ÉèÖÃclient ³¬Ê±Ê±¼ä
+	//ï¿½ï¿½ï¿½ï¿½client ï¿½ï¿½Ê±Ê±ï¿½ï¿½
 	cocos2d::network:: HttpClient::getInstance()->setTimeoutForConnect(10);
 	cocos2d::network::HttpClient::getInstance()->setTimeoutForRead(10);
 
@@ -87,12 +87,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_packages();
 
     #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        CrashReport::initCrashReport("59ef295b0f", true);
+        CrashReport::initCrashReport("59ef295b0f", false);
         BuglyLuaAgent::registerLuaExceptionHandler(engine);
     #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        CrashReport::initCrashReport("c672f46926", true);
+        CrashReport::initCrashReport("c672f46926", false);
         BuglyLuaAgent::registerLuaExceptionHandler(engine);
     #endif
+
 
     LuaStack* stack = engine->getLuaStack();
     std::string keyStr = "2dxLuasdfsdf123123";

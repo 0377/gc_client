@@ -299,7 +299,35 @@ function TmjCardTip.qiduiTing(array)
 	end
 	return result
 end
-
+function TmjCardTip.newTing(array)
+	local result = {};
+	local cache = {};
+	for i,v in pairs(array) do
+		cache[i] = v;
+	end
+	for i,v in pairs(cache) do
+		if v>0 then
+			cache[i] = v - 1 --这张牌，少一张，然后判定能摸一张牌胡不
+			for ii=1,16 do
+				if ii~=i then
+					local temp = cloneTable(cache)
+					if TmjCardTip.isHu(temp,ii) then
+						sslog("TmjCardTip.lua","打出牌:"..tostring(i)..",可以胡牌"..tostring(ii))
+						ssdump(temp,"判断的胡牌手牌")
+						table.insert(result,i)
+						break
+					end
+					temp = nil
+				end
+			end
+			cache[i] = v --还原
+		end
+		
+	end
+	
+	
+	return result
+end
 --[[
 判断手牌是否可以报听，如果可以，返回可以打出去的牌的集合和胡牌集合，否则返回nil
 ]]
@@ -309,7 +337,7 @@ function TmjCardTip.isTingHu(array,value)
 	array[value] = array[value] + 1
 	--听的组合
 	local qiduiResult = TmjCardTip.qiduiTing(array)
-	local tingResult = TmjCardTip.isTing(array)
+	local tingResult = TmjCardTip.newTing(array)
 	if (not tingResult or not next(tingResult)) and (not qiduiResult or not next(qiduiResult)) then
 		return nil --当前牌不能听
 	end
@@ -317,6 +345,7 @@ function TmjCardTip.isTingHu(array,value)
 	tingResult = tingResult or {}
 	table.insertto(tingResult,qiduiResult,table.nums(tingResult)+1)
 	local huResult = {}
+	local tingValid = false
 	for _,v in pairs(tingResult) do
 		local tempArr = cloneTable(array)
 		if tempArr[v]~=nil then
@@ -325,12 +354,13 @@ function TmjCardTip.isTingHu(array,value)
 				if TmjCardTip.isHu(tempArr,i) then
 					huResult[v] = huResult[v] or {}
 					table.insert(huResult[v],i)
+					tingValid = true
 				end
 			end
-			
 		end
 	end
-	return huResult
+	
+	return tingValid and huResult or nil
 end
 
 

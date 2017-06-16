@@ -148,7 +148,7 @@ cannonType
 	direction	 (R	direction
 is_new
  (RisNew
-server_tick (R
+server_tick (R
 serverTick
 	is_double (RisDouble"
 MsgID
@@ -194,7 +194,7 @@ createTick
 offest_y (RoffestY
 dir (Rdir
 delay (Rdelay
-server_tick	 (R
+server_tick	 (R
 serverTick
 
 fish_speed

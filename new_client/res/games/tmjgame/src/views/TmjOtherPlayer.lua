@@ -196,7 +196,12 @@ function TmjOtherPlayer:getOneCard(cardInfo)
 	--循环播放摸到牌的动画
 	local function loopPlayGetCard(index)
 		local card = cardInfo[index]
-		
+		if not card then --牌没了
+			if self.operationFun then
+				self.operationFun(self.pType,TmjConfig.cardOperation.GetOne)
+			end
+			return
+		end
 		card.scale = 0.8
 		self:playGetCardAnim(card,function ()
 			--摸到的牌是花，播放补花动画

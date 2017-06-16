@@ -299,6 +299,7 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
     elseif msgName == DdzGameManager.MsgName.SC_PlayerReconnection then
         self:showPlayerSitDownInfo()
 
+        self._hasInitedPrivateRoom = false
         self:_initPrivateRoom()
         --todo
     ----断线重连
@@ -457,6 +458,24 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
                 GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(userInfo["votechairid"])
             else
                 GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteOriginator(0)
+            end
+        end
+
+        local needShowDismissView = false
+        if userInfo["pb_sctableinfo"] then
+            for k, v in pairs(userInfo["pb_sctableinfo"]) do
+                if v["bret"] then
+                    needShowDismissView = true
+                    GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setVoteInfo(v)
+                end
+            end
+        end
+
+        if needShowDismissView then
+            if self._ddzDismissView then
+                self._ddzDismissView:showListView()
+            else
+                self:_showDismissView()
             end
         end
     elseif msgName == DdzGameManager.MsgName.SC_TotalScoreInfo then
@@ -3051,6 +3070,12 @@ end
 
 ---退出游戏界面
 function DdzGameScene:jumpToHallScene()
+    -- 私人房间处理
+    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        ---设置断线重连数据为
+        GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
+    end
+    
     DdzGameManager:getInstance():clearLoadedOneGameFiles()
     DdzGameScene.instance = nil
     SceneController.goHallScene();
@@ -3568,6 +3593,7 @@ function DdzGameScene:_isPrivateShowingReady()
     print("[DdzGameScene] _isPrivateShowingReady")
 
     local tmpData = clone(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getChairs())
+    dump(tmpData)
     local playerReadyNum = 0
     for k, v in pairs(tmpData) do
         if v["playerInfoTab"]["is_ready"] ~= nil and v["playerInfoTab"]["is_ready"] == true then
@@ -3575,7 +3601,7 @@ function DdzGameScene:_isPrivateShowingReady()
         end
     end
 
-    -- print("[DdzGameScene] _isPrivateShowingReady playerReadyNum:%d", playerReadyNum)
+    print("[DdzGameScene] _isPrivateShowingReady playerReadyNum:%d", playerReadyNum)
 
     if playerReadyNum == 3 then
         return false

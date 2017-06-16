@@ -235,8 +235,8 @@ function HallMsgManager:sendMsg(msgName,msgTab,isNeedLogin,isAutoResend)
 		isNeedLogin = true;
 	end
 	local msgInfo = self.needTimeoutMsgMap[msgName];
-	dump(msgInfo, "msgInfo", nesting)
-	dump(self:checkIsNeedReConnectionToServer())
+	--dump(msgInfo, "msgInfo", nesting)
+	--dump(self:checkIsNeedReConnectionToServer())
 	--检测是否将msg放入到needResendMsgMap中
 	if self:checkIsNeedReConnectionToServer() == true or msgInfo then 
 		--todo
@@ -407,11 +407,11 @@ function HallMsgManager:checkIsHasTimeoutMsg()
          "timeout_interval" = 1489819427
     }
 	]]
-print("-----<>>>",os.time())
+	--print("-----<>>>",os.time())
 	for k,v in pairs(self.sendingMsgMap) do
 		--
 		local osTime = os.time();
-	print("=======>>>",osTime, v.timeout_interval)
+		--print("=======>>>",osTime, v.timeout_interval)
 		local timeoutInterval = v.timeout_interval
 		if timeoutInterval < osTime then -- 超时
 			--todo

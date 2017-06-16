@@ -152,6 +152,11 @@ function TmjGameManager:checkToRequestTrustee()
 	end
 	
 end
+function TmjGameManager:sendGameReady()
+	TmjGameManager.super.sendGameReady(self)
+	local TmjGameDataManager = self:getDataManager()
+	TmjGameDataManager:changeGameState(TmjConfig.GameCtrState.Matching)
+end
 
 
 --玩家进入

@@ -1128,6 +1128,10 @@ function TmjMyPlayer:getOneCard(cardInfo)
 	local function loopPlayGetCard(index)
 		local card = cardInfo[index]
 		ssdump(card,"要播放摸牌的数据")
+		if not card then --牌没了
+			getLastFun(nil)
+			return
+		end
 		if not card.position then
 			card.position = display.center
 			sslog(self.logTag,"设置要摸牌的位置")

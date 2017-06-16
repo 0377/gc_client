@@ -130,16 +130,16 @@ function TmjGameScene:onEnter()
 				result = true })
 		TmjMyPlayer:showOperationPanel(operations,true)
 	end--]]
---[[	local arr = {
-	[1]=0,
-	[2]=1,
+	local arr = {
+	[1]=2,
+	[2]=2,
 	[3]=1,
-	[4]=0,
-	[5]=2,
+	[4]=1,
+	[5]=1,
 	[6]=1,
-	[7]=0,
-	[8]=0,
-	[9]=2,
+	[7]=1,
+	[8]=1,
+	[9]=3,
 	[10]=0,
 	[11]=0,
 	[12]=0,
@@ -150,8 +150,8 @@ function TmjGameScene:onEnter()
 		}
 	local TmjCardTip = import("..cfg.TmjCardTip")
 	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
-	ssdump(TmjCardTip.isHu(CustomHelper.copyTab(arr),3))
-	ssdump(TmjCardTip.isTingHu(CustomHelper.copyTab(arr),1))--]]
+	--ssdump(TmjCardTip.isHu(CustomHelper.copyTab(arr),1))
+	ssdump(TmjCardTip.isTingHu(CustomHelper.copyTab(arr),10))
 	
 	
 	
@@ -698,12 +698,19 @@ function TmjGameScene:callbackWhenReloginAndGetPlayerInfoFinished()
     print("重新连接成功")
 	TmjHelper.removeAll(self.TmjGameDataManager.cardOperations)
 	self.TmjGameDataManager.cardOperations = {}
-	
+	local TmjGameDataManager = TmjGameManager:getInstance():getDataManager()
     local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
-    if gameingInfoTable == nil or self.TmjGameDataManager.isGameOver == true then
-		self:showGameOverTips()
-	else
+    if gameingInfoTable == nil then
+		if TmjGameDataManager:getGameState()==TmjConfig.GameCtrState.Ended then
+			sslog(self.logTag,"游戏已经结束")
+			self:showGameOverTips()
+		elseif TmjGameDataManager:getGameState()==TmjConfig.GameCtrState.Matching then
+			sslog(self.logTag,"继续匹配")
+			TmjGameManager:getInstance():sendGameReady()
+		end
 		
+	else
+		sslog(self.logTag,"断线恢复")
 		self:removeAllPlayer()
 		self.isTrustee = false --是否托管状态
 		self.operationComlete = true --动作执行完成

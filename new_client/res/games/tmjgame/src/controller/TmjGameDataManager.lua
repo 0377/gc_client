@@ -14,7 +14,9 @@ local TmjHelper = import("..cfg.TmjHelper")
 local TmjCardTip = import("..cfg.TmjCardTip")
 function TmjGameDataManager:ctor()
 	self.logTag = self.__cname..".lua"
-	self.isGameOver = true 
+	self.isGameOver = true
+	
+	self.gameCtrState = TmjConfig.GameCtrState.Matching --一进来默认是在匹配中
 end
 function TmjGameDataManager:setGameScene(TmjGameScene)
 	self.TmjGameScene = TmjGameScene
@@ -66,6 +68,7 @@ function TmjGameDataManager:on_SC_Maajan_Desk_Enter(msgTab)
 		
 	end
 	self:setGameRoomInfo()
+	self:changeGameState(TmjConfig.GameCtrState.Gaming)
 	self.isGameOver = false 
 	--self.seatsInfos = msgTab
 	--庄家ID
@@ -400,6 +403,7 @@ function TmjGameDataManager:on_SC_Maajan_Game_Finish(msgTab)
 	GameManager:getInstance():getHallManager():getPlayerInfo():setGamingInfoTab(nil)
 	TmjHelper.removeAll(self.consultData)
 	self.isGameOver = true --结束了
+	self:changeGameState(TmjConfig.GameCtrState.Ended)
 	self.consultData = {}
 	self.consultData.players = {}
 	self.consultData.winChairId = nil --谁赢了 如果是nil 那么就是流局
@@ -506,6 +510,19 @@ function TmjGameDataManager:OnMsg_EnterRoomAndSitDownInfo(msgTab)
 	self._enterRoomAndSitDownInfo = msgTab
 	ssdump(self._enterRoomAndSitDownInfo,"进入游戏位置信息")
 	--self:setGameRoomInfo()
+end
+--切换游戏状态
+--@param gState 新状态 [Matching,Gaming,Ended]
+function TmjGameDataManager:changeGameState(gState)
+	if self.gameCtrState == gState then
+		return
+	end
+	self.gameCtrState = gState
+	sslog(self.logTag,"游戏状态切换:"..tostring(gState))
+end
+--获取游戏状态
+function TmjGameDataManager:getGameState()
+	return self.gameCtrState
 end
 ----
 function TmjGameDataManager:setGameRoomInfo()
