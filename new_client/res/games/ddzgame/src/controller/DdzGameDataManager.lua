@@ -234,6 +234,10 @@ function DdzGameDataManager:_onMsg_SetMySitDownInfo(msgTab)
     if msgTab["private_room"] then
         self._privateIsPrivateRoom = msgTab["private_room"]
     end
+
+    if msgTab["is_ready"] then
+        self._chairs[msgTab.chair_id]["playerInfoTab"]["is_ready"] = msgTab["is_ready"]
+    end
 end
 
 

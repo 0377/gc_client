@@ -131,15 +131,15 @@ function TmjGameScene:onEnter()
 		TmjMyPlayer:showOperationPanel(operations,true)
 	end--]]
 --[[	local arr = {
-	[1]=1,
+	[1]=0,
 	[2]=1,
-	[3]=2,
-	[4]=1,
+	[3]=1,
+	[4]=0,
 	[5]=2,
 	[6]=1,
-	[7]=1,
-	[8]=1,
-	[9]=3,
+	[7]=0,
+	[8]=0,
+	[9]=2,
 	[10]=0,
 	[11]=0,
 	[12]=0,
@@ -150,9 +150,10 @@ function TmjGameScene:onEnter()
 		}
 	local TmjCardTip = import("..cfg.TmjCardTip")
 	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
-	ssdump(TmjCardTip.isHu(arr,7))
-	ssdump(TmjCardTip.isTingHu(arr,10))
-	ssdump(TmjCardTip.isAnGang(arr,10))--]]
+	ssdump(TmjCardTip.isHu(CustomHelper.copyTab(arr),3))
+	ssdump(TmjCardTip.isTingHu(CustomHelper.copyTab(arr),1))--]]
+	
+	
 	
 --[[	local cards = {}
 	cards.shou_pai = {1,1,2,2,4,4,6,6,8,13,13,14,14 }
@@ -510,11 +511,15 @@ function TmjGameScene:showResultLayer()
 	resultData.me = {}
 	resultData.me.extraCards = CustomHelper.copyTab(selfData.extraCards)
 	resultData.me.handCards = CustomHelper.copyTab(selfData.handCards)
+	resultData.me.chair_id = selfCharId
 	resultData.other = {}
 	resultData.other.extraCards = CustomHelper.copyTab(otherData.extraCards)
 	resultData.other.handCards = CustomHelper.copyTab(otherData.handCards)
+	resultData.other.chair_id = otherCharId
 	resultData.taskInfo = taskInfo
-	
+	resultData.winChairId = consultData.winChairId
+	--我自己的
+	resultData.win_money = selfData.win_money
 	--判断赢输或者留局
 	if consultData.winChairId == nil then --留局
 		TmjSettleDrawnLayer:create(resultData,handler(self,self.exitGame),handler(self,self.nextGame)):addTo(self,TmjConfig.LayerOrder.GAME_RESULT_LAYER)

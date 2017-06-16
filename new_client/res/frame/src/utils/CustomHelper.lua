@@ -442,18 +442,56 @@ function CustomHelper.moneyShowStyleNone(_money)
     return string.format("%d", _money / CustomHelper.goldToMoneyRate())
 end
 
+function CustomHelper.moneyShowStyleABNone(_money)
+    _money = tonumber(_money) or 0
+    _money = _money / CustomHelper.goldToMoneyRate()
+
+
+    local configAB = {
+        {100000000,"亿"},
+        {10000,"万"},
+    }
+    for _,v in ipairs(configAB) do
+        if _money >= v[1] then
+            return string.format(_money % v[1] == 0 and "%d%s" or "%.02f%s", math.floor(_money / v[1]),v[2])
+        end
+    end
+
+    return string.format("%d", _money)
+end
+
 --- 显示缩写的金币格式
 function CustomHelper.moneyShowStyleAB(_money)
     _money = tonumber(_money) or 0
     _money = _money / CustomHelper.goldToMoneyRate()
 
 
-    if _money >= 10000 and _money / 10000 >= 1 and _money % 10000 == 0 then
-        return string.format("%d万", math.floor(_money / 10000))
+    local configAB = {
+        {100000000,"亿"},
+        {10000,"万"},
+    }
+    for _,v in ipairs(configAB) do
+        if _money >= v[1] then
+            return string.format("%.02f%s", math.floor(_money / v[1]),v[2])
+        end
     end
 
-    if _money >= 1000 and _money / 1000 >= 1 and _money % 1000 == 0 then
-        return string.format("%d千", math.floor(_money / 1000))
+    return string.format("%d", _money)
+end
+
+--- 显示缩写的金币格式
+function CustomHelper.moneyShowStyleABX(_money)
+    _money = tonumber(_money) or 0
+    _money = _money / CustomHelper.goldToMoneyRate()
+
+
+    local configAB = {
+        {100000000,"亿"},
+    }
+    for _,v in ipairs(configAB) do
+        if _money >= v[1] then
+            return string.format("%.02f%s", math.floor(_money / v[1]),v[2])
+        end
     end
 
     return string.format("%d", _money)

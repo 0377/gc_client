@@ -40,7 +40,7 @@ Node:setName("Node")
 --Create Image_2
 local Image_2 = ccui.ImageView:create()
 Image_2:ignoreContentAdaptWithSize(false)
-Image_2:loadTexture("hall_res/tongyong/bb_ty_di.jpg",0)
+Image_2:loadTexture("hall_res/hall/bb_dating_beijing.jpg",0)
 Image_2:setLayoutComponentEnabled(true)
 Image_2:setName("Image_2")
 Image_2:setTag(561)

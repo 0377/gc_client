@@ -266,7 +266,8 @@ function PrivateRoomView:_enterRoomHandle()
         -- MyToastLayer.new(self, "输入2-6位房间号")
         MyToastLayer.new(self, "请输入正确的房间号")
     else
-        self:_requestEnterRoom()
+        -- self:_requestEnterRoom()
+        self:_checkGameStatus()
     end
 end
 
@@ -368,11 +369,21 @@ function PrivateRoomView:_checkGameStatus()
     local needUpdateInfoTab = GameManager:getInstance():getVersionManager():getNeedUpdateInfoTabForOneGame(gameType)
     if needUpdateInfoTab == nil or table.nums(needUpdateInfoTab) == 0 then
         print("[PrivateRoomView] 不需要更新")
-        self:_enterCreateRoom()
+        -- self:_enterCreateRoom()
+        if self._data.operateType == PrivateRoomModel.OperateType.ENTER_PRIVATE_ROOM then
+            self:_requestEnterRoom()
+        elseif self._data.operateType == PrivateRoomModel.OperateType.CREATE_PRIVATE_ROOM then
+            self:_enterCreateRoom()
+        end
     else
         print("[PrivateRoomView] 需要更新")
         local layer = PrivateRoomUpdate:create(function ()
-            self:_enterCreateRoom()
+            -- self:_enterCreateRoom()
+            if self._data.operateType == PrivateRoomModel.OperateType.ENTER_PRIVATE_ROOM then
+                self:_requestEnterRoom()
+            elseif self._data.operateType == PrivateRoomModel.OperateType.CREATE_PRIVATE_ROOM then
+                self:_enterCreateRoom()
+            end
         end)
         cc.Director:getInstance():getRunningScene():addChild(layer)
     end

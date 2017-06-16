@@ -235,7 +235,8 @@ function HallMsgManager:sendMsg(msgName,msgTab,isNeedLogin,isAutoResend)
 		isNeedLogin = true;
 	end
 	local msgInfo = self.needTimeoutMsgMap[msgName];
-	--dump(msgInfo, "msgInfo", nesting)
+	dump(msgInfo, "msgInfo", nesting)
+	dump(self:checkIsNeedReConnectionToServer())
 	--检测是否将msg放入到needResendMsgMap中
 	if self:checkIsNeedReConnectionToServer() == true or msgInfo then 
 		--todo
@@ -284,7 +285,7 @@ function HallMsgManager:sendMsg(msgName,msgTab,isNeedLogin,isAutoResend)
 		--todo
 --		print("msgName:",msgName)
 		--CustomHelper.printStack();
-		dump(msgTab, "msgTab", nesting)
+--		dump(msgTab, "msgTab", nesting)
 	end
 	--检测是否需要处理超时
 	--[[
@@ -331,7 +332,7 @@ function HallMsgManager:callbackWhenReceiveOneFullMsg(msgID,dataStr)
     msgTab["msgName"] = msgName;
 	if msgName ~= HallMsgManager.MsgName.SC_HEARTBEAT then
 		--todo
-	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
+--	    dump(msgTab, "callbackWhenReceiveOneFullMsg tab:", 100)
 	end
 	--self.needResendMsgMap移除对应数据
 	for needResendMsgName,v in pairs(self.needResendMsgMap) do
@@ -406,9 +407,11 @@ function HallMsgManager:checkIsHasTimeoutMsg()
          "timeout_interval" = 1489819427
     }
 	]]
+print("-----<>>>",os.time())
 	for k,v in pairs(self.sendingMsgMap) do
 		--
 		local osTime = os.time();
+	print("=======>>>",osTime, v.timeout_interval)
 		local timeoutInterval = v.timeout_interval
 		if timeoutInterval < osTime then -- 超时
 			--todo
@@ -428,6 +431,8 @@ function HallMsgManager:callbackWhenReceiveTCPConnectionStatusModiy(status)
 		self.hallDataManager:setPublicKey(nil);
 		CustomHelper.unscheduleGlobal(self.heartBeatScheduleID);
 		dump(self.needResendMsgMap, "self.needResendMsgMap", 100)
+
+
 		-- --发出网络连接失败通知
 		-- if self.needResendMsgMap and #self.needResendMsgMap > 0 then
 		-- 	--todo

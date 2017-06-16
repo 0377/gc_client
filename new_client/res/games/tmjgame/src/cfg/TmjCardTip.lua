@@ -117,6 +117,18 @@ local function Ting(array)
 
 	return 0;
 end;
+--是否是七对胡牌
+local function qiduiHu(array)
+	local hasHu = true
+	for i,v in pairs(array) do
+		if v%2~=0 then
+			hasHu = false
+			break			
+		end
+	end
+	hasHu = hasHu and lastCount(array) == 14
+	return hasHu and 1 or 0
+end
 
 function TmjCardTip.isHu(array,value)
 	local cache = {}
@@ -132,7 +144,10 @@ function TmjCardTip.isHu(array,value)
 	end
 	--if(value) then cache[value] = cache[value] + 1 end
 	jiang = 0
-	local huTag = Hu(cache)
+	local huTag = qiduiHu(cache)
+	if huTag~=1 then
+		huTag = Hu(cache)
+	end
 	return huTag == 1
 end
 
@@ -262,20 +277,45 @@ function TmjCardTip.isTing(array)
 	if(result and #result == 0) then return nil;end;
 	return result;
 end
+--七对听
+function TmjCardTip.qiduiTing(array)
+	local result = {};
+	local cache = {};
+	for i,v in pairs(array) do
+		cache[i] = v;
+	end
+	for i,v in pairs(cache) do
+		if v>=2 then
+			cache[i] = v%2
+		end
+	end
+	--最后还剩下两张，而且两张不一样
+	if lastCount(cache) == 2 then
+		for i,v in pairs(cache) do
+			if v==1 then --就剩下这一张牌
+				result[#result+1] = i
+			end
+		end
+	end
+	return result
+end
+
 --[[
 判断手牌是否可以报听，如果可以，返回可以打出去的牌的集合和胡牌集合，否则返回nil
 ]]
 function TmjCardTip.isTingHu(array,value)
 	--把value放到array中去
-	print(value)
 	array[value] = array[value] or 0
 	array[value] = array[value] + 1
 	--听的组合
+	local qiduiResult = TmjCardTip.qiduiTing(array)
 	local tingResult = TmjCardTip.isTing(array)
-	if not tingResult or not next(tingResult) then
+	if (not tingResult or not next(tingResult)) and (not qiduiResult or not next(qiduiResult)) then
 		return nil --当前牌不能听
 	end
 	--能听牌了
+	tingResult = tingResult or {}
+	table.insertto(tingResult,qiduiResult,table.nums(tingResult)+1)
 	local huResult = {}
 	for _,v in pairs(tingResult) do
 		local tempArr = cloneTable(array)

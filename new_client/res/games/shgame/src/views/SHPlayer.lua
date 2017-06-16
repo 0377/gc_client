@@ -179,7 +179,7 @@ function SHPlayer:setHeadInfo(headInfo)
 	end	
 	if headInfo.gold then
 		self.gold = headInfo.gold --当前的金币数
-		local goldStr = CustomHelper.moneyShowStyleNone(headInfo.gold)
+		local goldStr = CustomHelper.moneyShowStyleAB(headInfo.gold)
 		--local goldStr = string.format("%0.2f", headInfo.gold/100)
 		goldStr = string.gsub(goldStr, '%-', '' )
 		goldStr = string.gsub(goldStr, '%+', '' )

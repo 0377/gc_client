@@ -139,7 +139,7 @@ function HallGameNode:showInfoWithOneGameItemNode(infoTab)
 		if groupKey == self.downloaderGroupKey then
 			--todo
 			local errorStr = userInfo["errorStr"];
-			local errorStr = "下载异常,是否重试"
+			local errorStr = "下载异常,是否重试"..errorStr
 			CustomHelper.showAlertView(
 				errorStr,
 				true,

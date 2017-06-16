@@ -49,7 +49,8 @@ function TmjSettleWinLoseLayer:onEnter()
 	self:initCardInfo(CustomHelper.seekNodeByName(node.root,"FileNode_showcard"),self.resultData.extraCards,self.resultData.handCards)
 	
 	self:popIn(CustomHelper.seekNodeByName(self.node,"Image_bg"),TmjConfig.Pop_Dir.Up)
-	if self.resultData and self.resultData.is_hu then
+	local isWin = self.resultData.winChairId == self.resultData.me.chair_id 
+	if self.resultData and isWin then
 		TmjConfig.playSound(TmjConfig.sType.GAME_WIN)
 	else
 		TmjConfig.playSound(TmjConfig.sType.GAME_LOSE)
@@ -94,9 +95,9 @@ function TmjSettleWinLoseLayer:initSettleTag(tagNode)
 	local tag = CustomHelper.seekNodeByName(tagNode,"Image_tag")
 	
 	local tagAmature = CustomHelper.seekNodeByName(tag,"tag_Amature")
-	
-	tag:loadTexture(self.resultData.is_hu and "game_res/settle/shengli.png" or "game_res/settle/shibai.png")
-	if not self.resultData.is_hu then
+	local isWin = self.resultData.winChairId == self.resultData.me.chair_id 
+	tag:loadTexture(isWin and "game_res/settle/shengli.png" or "game_res/settle/shibai.png")
+	if not isWin then
 		--tagAmature:setVisible(false)
 		tag:removeAllChildren()
 	end
@@ -137,8 +138,9 @@ function TmjSettleWinLoseLayer:initSettleTag(tagNode)
 end
 --初始化信息界面
 function TmjSettleWinLoseLayer:initPanelInfo(panelNode)
+	local isWin = self.resultData.winChairId == self.resultData.me.chair_id 
 	local imgResult = CustomHelper.seekNodeByName(panelNode,"Image_result")
-	imgResult:loadTexture(self.resultData.is_hu and "game_res/settle/niyingle.png" or "game_res/settle/nishule.png")
+	imgResult:loadTexture(isWin and "game_res/settle/niyingle.png" or "game_res/settle/nishule.png")
 	
 	CustomHelper.seekNodeByName(panelNode,"Text_result"):setString(CustomHelper.moneyShowStyleNone(math.abs(self.resultData.win_money)))
 	if self.resultData.taxes then
@@ -217,7 +219,7 @@ function TmjSettleWinLoseLayer:initHuDesc(scrollView,sliderBar)
 				table.insert(newDescs,huTye)
 			end
 			huaCount = huaCount + 1
-		else
+		elseif huTye and string.len(huTye)>0 then
 			table.insert(newDescs,huTye)
 		end
 	end)
@@ -501,7 +503,9 @@ function TmjSettleWinLoseLayer:onTouchListener(ref,eventType)
 			self:initCardInfo(CustomHelper.seekNodeByName(self.node,"FileNode_showcard"),self.resultData.other.extraCards,self.resultData.other.handCards)
 			local bar = CustomHelper.seekNodeByName(self.node,"Image_slider")
 			local scrollview = CustomHelper.seekNodeByName(self.node,"ScrollView_desc")
-			if self.resultData.is_hu then --是我赢了
+			
+			
+			if self.resultData.winChairId == self.resultData.me.chair_id then --是我赢了
 				scrollview:setVisible(false)
 				if self.hasSliderBar then
 					bar:setVisible(false)
@@ -517,7 +521,7 @@ function TmjSettleWinLoseLayer:onTouchListener(ref,eventType)
 			self:initCardInfo(CustomHelper.seekNodeByName(self.node,"FileNode_showcard"),self.resultData.me.extraCards,self.resultData.me.handCards)
 			local bar = CustomHelper.seekNodeByName(self.node,"Image_slider")
 			local scrollview = CustomHelper.seekNodeByName(self.node,"ScrollView_desc")
-			if not self.resultData.is_hu then --是对面赢了
+			if self.resultData.winChairId ~= self.resultData.me.chair_id then --是对面赢了
 				scrollview:setVisible(false)
 				if self.hasSliderBar then
 					bar:setVisible(false)

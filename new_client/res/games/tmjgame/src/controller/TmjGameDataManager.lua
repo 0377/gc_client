@@ -247,7 +247,7 @@ end
 function TmjGameDataManager:on_SC_Maajan_Tile_Letf(msgTab)
 	ssdump(msgTab," 玩家剩余公牌数量返回")
 	--tile_left
-	self.cardLeftCount = tonumber(msgTab.tile_left) --剩余牌的数量
+	self.cardLeftCount = tonumber(msgTab.tile_left or 0) --剩余牌的数量
 	
 end
 --该谁出牌

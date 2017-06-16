@@ -36,7 +36,7 @@ function TmjGameEntry:getNeedPreloadResArray()
 end
 
 function TmjGameEntry:getVerionStr()
-    return "二人麻将.v5"
+    return "二人麻将.v6"
 end
 
 return TmjGameEntry

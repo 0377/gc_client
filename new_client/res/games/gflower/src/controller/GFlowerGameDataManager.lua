@@ -135,7 +135,6 @@ function GFlowerGameDataManager:_onMsg_EnterRoomAndSitDownInfo( infoTab )
     self.gfPlayers[gfPlayer:getChairId()] = gfPlayer
 
     print("GFlowerGameDataManager:_onMsg_EnterRoomAndSitDownInfo.1  新增玩家: ",gfPlayer:getChairId()," GUID: ",gfPlayer:getGuid(),"ClientID: ",client_id)
-    dump(infoTab.pb_visual_info,"infoTab.pb_visual_info")
     -- 已经在房间内的玩家
     local players = infoTab.pb_visual_info
     if players ~= nil then

@@ -2467,8 +2467,8 @@ function DzpkGameScene:updateUserInfo(dt )
 			
 			--玩家钱
 			local userMoneyNode = uNode:getChildByName("Text_money")
-			userMoneyNode:setString( CustomHelper.moneyShowStyleNone(v.money))
-			
+			userMoneyNode:setString( CustomHelper.moneyShowStyleAB(v.money))
+			userMoneyNode:setScale(math.min(1,110 / userMoneyNode:getContentSize().width))
 			--玩家头像
 			local userIconNode = uNode:getChildByName("headicon")
 			userIconNode:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(v.icon)..".png"))

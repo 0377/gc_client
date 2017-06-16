@@ -1,6 +1,6 @@
 
 -- 0 - disable debug info, 1 - less debug info, 2 - verbose debug info
-DEBUG = 2
+DEBUG = 0
 
 -- use framework, will disable all deprecated API, false - use legacy API
 CC_USE_FRAMEWORK = true
@@ -26,10 +26,10 @@ CC_DESIGN_RESOLUTION = {
 }
 -- 脚本Log处理配置
 _logConfigParam = {
-    writeLog = true,             --写log文件 DEBUG >= 2 时会有显示
+    writeLog = false,             --写log文件 DEBUG >= 2 时会有显示
     dialogLog = true,             --客户端提示出错信息 DEBUG >= 1 时会有显示
-    OpenSSdump = true,            --ssdump DEBUG >= 2 时会有显示
+    OpenSSdump = false,            --ssdump DEBUG >= 2 时会有显示
     logfileName = 'ssgame.log',   --文件在可写目录
-    logfileSize = 1024 * 20,      --log文件最大限制大小 单位K
+    logfileSize = 1024 * 30,      --log文件最大限制大小 单位K
     -----------------------------------------------------------------------
 }

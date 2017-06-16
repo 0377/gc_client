@@ -151,7 +151,7 @@ function HallSceneUILayer:showButtomView()
 	local moneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getMoney());
 	moneyStr = string.gsub(moneyStr, "%.", "/")
 	self.moneyText:setString(moneyStr)
-	self.moneyText:setScale(math.min(1,160 / self.moneyText:getContentSize().width))
+	self.moneyText:setScale(math.min(1,150 / self.moneyText:getContentSize().width))
 	--银行存款
 	if self.bankMoneyText == nil then
 		--todo
@@ -160,7 +160,7 @@ function HallSceneUILayer:showButtomView()
 	local bankMoneyStr = CustomHelper.moneyShowStyleNone(self.myPlayerInfo:getBank());
 	bankMoneyStr = string.gsub(bankMoneyStr, "%.", "/")
 	self.bankMoneyText:setString(bankMoneyStr)
-	self.bankMoneyText:setScale(math.min(1,160 / self.bankMoneyText:getContentSize().width))
+	self.bankMoneyText:setScale(math.min(1,150 / self.bankMoneyText:getContentSize().width))
 end
 function HallSceneUILayer:initBtns()
 	--账号按钮事件
@@ -781,7 +781,9 @@ function HallSceneUILayer:registerNotification()
     end);
    	local noticeShowBtns = cc.EventListenerCustom:create(HallMsgManager.kNotifyName_RefreshConstConifg,function(event)
    		print("0----------------0")
-   		self:showBtnsIsVisibleByConfig()
+		self:refreshTableView();
+
+		self:showBtnsIsVisibleByConfig()
    	end)
     self.eventDispatcher:addEventListenerWithSceneGraphPriority(marqueeShowListener,self);
     self.eventDispatcher:addEventListenerWithSceneGraphPriority(noticeShowListener,self);

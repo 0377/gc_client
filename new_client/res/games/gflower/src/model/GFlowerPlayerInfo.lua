@@ -35,7 +35,6 @@ end
 function GFlowerPlayerInfo:updatePlayerPropertyWithInfoTab(infoTab)
 	GFlowerPlayerInfo.super.updatePlayerPropertyWithInfoTab(self,infoTab)
 	self:setOnePropertyWithKey(infoTab,"chair_id","chairId");
-    self:setOnePropertyWithKey(infoTab,"serverChairId", "clientChairId")
     local name = sx_SubStringUTF8(self.ip_position, 12)
     self.nickName = name
 end

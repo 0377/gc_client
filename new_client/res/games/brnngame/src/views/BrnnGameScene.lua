@@ -752,7 +752,8 @@ function BrnnGameScene:initBankerInfo(isGameEndUpdata)
     name:setString(bankerInfo["nickname"] )
 
     local moeny = tolua.cast(CustomHelper.seekNodeByName(shangdi, "moeny"), "ccui.Text")
-    moeny:setString(CustomHelper.moneyShowStyleNone(bankerInfo["money"]))
+    moeny:setString(CustomHelper.moneyShowStyleABX(bankerInfo["money"]))
+    moeny:setScale(math.min(1,150 / moeny:getContentSize().width))
 
     local score = tolua.cast(CustomHelper.seekNodeByName(shangdi, "score"), "ccui.Text")
     local scoreNum = bankerInfo["banker_score"] or 0
@@ -785,6 +786,7 @@ function BrnnGameScene:initBankerBtnUI()
     self.bankerListOn = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bankerListOn"), "ccui.ImageView");
     local bankerCionTipsText = tolua.cast(CustomHelper.seekNodeByName(self.bankerListOn, "bankerCionTipsText"), "ccui.Text");
     bankerCionTipsText:setString("申请上庄需要"..CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getBankerLimit()).."金币")
+    bankerCionTipsText:setScale(math.min(1,190 / bankerCionTipsText:getContentSize().width))
     ---申请上庄按钮
     self.bankerOn = tolua.cast(CustomHelper.seekNodeByName(self.bankerListOn, "bankerOn"), "ccui.Button");
 
@@ -831,8 +833,9 @@ function BrnnGameScene:initBankerBtnUI()
     ---取消上庄
     self.bankerListCancel = tolua.cast(CustomHelper.seekNodeByName(self.csNode, "bankerListCancel"), "ccui.ImageView");
     local bankerCionTipsText1 = tolua.cast(CustomHelper.seekNodeByName(self.bankerListCancel, "bankerCionTipsText"), "ccui.Text");
-    bankerCionTipsText1:setString("申请上庄需要"..CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getBankerLimit()).."金币")
-    
+    bankerCionTipsText1:setString("申请上庄需要"..CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getBankerLimit()).."金币")
+    bankerCionTipsText1:setScale(math.min(1,190 / bankerCionTipsText1:getContentSize().width))
+
     self.bankerCancel = tolua.cast(CustomHelper.seekNodeByName(self.bankerListCancel, "bankerCancel"), "ccui.Button");
     self.bankerCancel:addClickEventListener(function ()
         
@@ -985,7 +988,9 @@ function BrnnGameScene:setBankerList(tablePlayer)
         name:setString(v["nickname"])
 
         local moeny = tolua.cast(CustomHelper.seekNodeByName(node, "money"), "ccui.Text");
-        moeny:setString(CustomHelper.moneyShowStyleNone(v["money"]))
+        moeny:setString(CustomHelper.moneyShowStyleAB(v["money"]))
+        moeny:setScale(math.min(1,80 / moeny:getContentSize().width))
+
         bankerListView:pushBackCustomItem(node)
     end
 end
@@ -1168,7 +1173,9 @@ function BrnnGameScene:updatePlayerIcon(isShow)
         if _userList ~= nil and _userList[i]~= nil then
             local info =  _userList[i]
             
-            coin:setString(CustomHelper.moneyShowStyleAB(info["money"]))
+            coin:setString(CustomHelper.moneyShowStyleABX(info["money"]))
+            coin:setScale(math.min(1,80 / coin:getContentSize().width))
+
             player:setVisible(true)
             local head_id = info["head_id"] or 1
             headIcon:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(head_id)..".png"))
@@ -1212,7 +1219,9 @@ function BrnnGameScene:updateMyInfo()
     local myInfo = self.brnnGameManager:getDataManager():getMyUserInfo()
     if myInfo ~= nil then
         --local myMoney = string.format("%0.2f", myInfo["money"]/100)
-        self.playerCoin:setString(CustomHelper.moneyShowStyleAB(myInfo["money"]))
+        self.playerCoin:setString(CustomHelper.moneyShowStyleNone(myInfo["money"]))
+        self.playerCoin:setScale(math.min(1,165 /  self.playerCoin:getContentSize().width))
+
         self.playerName:setString(myInfo["nickname"])
     end
 end
@@ -1229,8 +1238,9 @@ function BrnnGameScene:initMyInfo()
 
     local myInfo = self.brnnGameManager:getDataManager():getMyUserInfo()
     if myInfo ~= nil then
-        local myMoney = CustomHelper.moneyShowStyleAB(myInfo["money"])
+        local myMoney = CustomHelper.moneyShowStyleNone(myInfo["money"])
         self.playerCoin:setString(myMoney)
+        self.playerCoin:setScale(math.min(1,165 /  self.playerCoin:getContentSize().width))
         self.playerName:setString(myInfo["nickname"])
     end
     headIcon:loadTexture(GameManager:getInstance():getHallManager():getPlayerInfo():getSquareHeadIconPath())
@@ -1498,8 +1508,9 @@ end
 function BrnnGameScene:updateMyStakeData()
 
     ---更新自己的钱
-    local myMoney = CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getMyMoney())
+    local myMoney = CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getMyMoney())
     self.playerCoin:setString(myMoney)
+    self.playerCoin:setScale(math.min(1,165 /  self.playerCoin:getContentSize().width))
 
     ---更新每个区域自己下的注
     if self.brnnGameManager:getDataManager():getMyMoenyBet() == true then
@@ -1606,6 +1617,9 @@ function BrnnGameScene:initMaxBetScore()
     if self._isSystemBanker == true then
         left_money_betValueText:setString("--")
     end
+
+    max_bet_scoreValueText:setScale(math.min(1,130 / max_bet_scoreValueText:getContentSize().width))
+    left_money_betValueText:setScale(math.min(1,130 / left_money_betValueText:getContentSize().width))
 end
 
 
@@ -2144,8 +2158,9 @@ function BrnnGameScene:gameEnd()
         local gameOverBg = tolua.cast(CustomHelper.seekNodeByName(self.panel_gameOver, "gameoverBg"), "ccui.ImageView")
        
         ---设置钱
-        local myMoney = CustomHelper.moneyShowStyleAB(self.brnnGameManager:getDataManager():getMyMoney())
+        local myMoney = CustomHelper.moneyShowStyleNone(self.brnnGameManager:getDataManager():getMyMoney())
         self.playerCoin:setString(myMoney)
+        self.playerCoin:setScale(math.min(1,165 /  self.playerCoin:getContentSize().width))
 
 
         local gameEndInfo = self.brnnGameManager:getDataManager():getGameEndData()

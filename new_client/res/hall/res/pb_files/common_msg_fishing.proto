@@ -39,7 +39,7 @@ CS_Netcast
 CS_Fire
 chair_id (RchairId
 	direction (R	direction
-	fire_time (RfireTime
+	fire_time (RfireTime
 	client_id (RclientId
 pos_x (RposX
 pos_y (RposY"
@@ -64,7 +64,7 @@ CS_Netcast
 Target"g
 CS_TimeSync
 chair_id (RchairId
-client_tick (R
+client_tick (R
 clientTick"
 MsgID
 IDç]
@@ -137,7 +137,7 @@ allow_fire (R	allowFire"
 SC_SendBullet
 id (Rid
 chair_id (RchairId
-create_tick (R
+create_tick (R
 createTick
 x_pos (RxPos
 y_pos (RyPos
@@ -188,7 +188,7 @@ cannon_mul (R	cannonMul
 fish_id (RfishId
 type_id (RtypeId
 path_id (RpathId
-create_tick (R
+create_tick (R
 createTick
 offest_x (RoffestX
 offest_y (RoffestY
@@ -226,9 +226,9 @@ max_cannon
 IDÕ^"|
 SC_TimeSync
 chair_id (RchairId
-server_tick (R
+server_tick (R
 serverTick
-client_tick (R
+client_tick (R
 clientTick"
 MsgID
 IDÖ^"V

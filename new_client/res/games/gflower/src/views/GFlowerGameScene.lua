@@ -77,7 +77,7 @@ end
 ---重新连接成功
 function GFlowerGameScene:callbackWhenReloginAndGetPlayerInfoFinished()
     GFlowerGameScene:getInstance().super.callbackWhenReloginAndGetPlayerInfoFinished(self,event);
-    print("+++++++++++++程序没关闭的情况重连+++++++++++++重新连接成功")
+    --print("+++++++++++++程序没关闭的情况重连+++++++++++++重新连接成功")
     GFlowerGameManager:getInstance():sendMsgReconnectionPlay()
     if self._logic.room_state ~= GFlowerConfig.ROOM_STATE.PLAY then
         CustomHelper.showAlertView(
@@ -1999,7 +1999,7 @@ end
 function GFlowerGameScene:UpdatePlayerStatus(chair_id)
     -- 观战
     local gfplayer = self._logic:getGFPlayerByClientId(chair_id)
-	if gfPlayer == nil then return end
+	if gfplayer == nil then return end
     local state    = gfplayer:getGameState() 
     if state == GFlowerConfig.PLAYER_STATUS.STAND then
         print("ChairID: "..chair_id.." 观战。。。。。。。。。。。。。。。")
@@ -2243,6 +2243,8 @@ function GFlowerGameScene:setPlayerInfo(gfplayer)
     self.playername[chair]:setString(gfplayer:getNickName())
     local p_money  = CustomHelper.moneyShowStyleAB(gfplayer:getMoney())
     self.playergold[chair]:setString(p_money)
+    self.playergold[chair]:setScale(math.min(1,100 / self.playergold[chair]:getContentSize().width))
+
     self.playerhead[chair]:loadTexture(CustomHelper.getFullPath("hall_res/head_icon/"..(gfplayer:getHeadIconNum())..".png"))
     local  downMoney = gfplayer:getDownMoney()
     if downMoney == 0 then 
@@ -3328,6 +3330,7 @@ function GFlowerGameScene:On_UpdatePlayerMoney(gfplayer)
     local client_id = gfplayer:getClientChairId()
     -- 金币
     self.playergold[client_id]:setString(CustomHelper.moneyShowStyleAB(gfplayer:getMoney()))
+    self.playergold[client_id]:setScale(math.min(1,100 / self.playergold[client_id]:getContentSize().width))
 
     -- 下注累积
     if gfplayer:getDownMoney() > 0 then
@@ -3363,6 +3366,8 @@ function GFlowerGameScene:setComparePlayerInfo(name_win, money_win, name_lost, m
     local num = _playerUp:getChildByName("Label_GoldNum")
     local p_Money = CustomHelper.moneyShowStyleAB(money_win)
     num:setString(""..p_Money)
+    num:setScale(math.min(1,100 / num:getContentSize().width))
+
     -- 头像
     local headicon = _playerUp:getChildByName("headicon")
     local tPlayer = self._logic:getGFPlayerByClientId(icon_win)
@@ -3378,6 +3383,8 @@ function GFlowerGameScene:setComparePlayerInfo(name_win, money_win, name_lost, m
     local num_d = _playerDown:getChildByName("Label_GoldNum")
     p_Money = CustomHelper.moneyShowStyleAB(money_lost)
     num_d:setString(""..p_Money)
+    num_d:setScale(math.min(1,100 / num_d:getContentSize().width))
+
     -- 头像
     local headicon_d = _playerDown:getChildByName("headicon")
     local bPlayer = self._logic:getGFPlayerByClientId(icon_lost)

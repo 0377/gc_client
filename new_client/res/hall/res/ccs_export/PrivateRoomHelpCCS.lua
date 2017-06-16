@@ -126,7 +126,7 @@ Text_1:setString([[开设房间
 开设房间的人按照房间人数上限缴纳开房费用，并成为房主。私人房间不扣税。
 
 加入房间
-任何人加入私间不用缴纳任何费用，但银行至少保留6金。
+任何人加入私间不用缴纳任何费用，但银行至少保留6000金。
 
 房间规则
 1、刚加入私房需要玩家手动准备，参与者都准备以后才会开始游戏。
@@ -176,7 +176,7 @@ layout:setPercentWidth(0.0579)
 layout:setPercentHeight(0.1018)
 layout:setSize({width = 67.0000, height = 68.0000})
 layout:setLeftMargin(1031.7060)
-layout:setRightMargin(58.2939)
+layout:setRightMargin(58.2940)
 layout:setTopMargin(40.1505)
 layout:setBottomMargin(559.8495)
 alert_panel:addChild(Button_Close)

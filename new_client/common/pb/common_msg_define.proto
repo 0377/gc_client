@@ -787,9 +787,10 @@ message SC_PlayerReconnection {
 	optional int32 first_game_type = 7;				// 一级菜单
 	optional int32 second_game_type = 8;			// 二级菜单
 	optional string ip_area = 9;					// 客户端ip地区
-	optional bool private_room = 10;				// true 私人房间
-	optional int32 private_room_score_type = 11;	// 选的底注
-	optional int32 private_room_id = 12;			// 私人房间号
+	optional bool is_ready = 10;					// false 取消 true 准备
+	optional bool private_room = 11;				// true 私人房间
+	optional int32 private_room_score_type = 12;	// 选的底注
+	optional int32 private_room_id = 13;			// 私人房间号
 }
 
 message SC_ChangeTable {

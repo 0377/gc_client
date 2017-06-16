@@ -299,6 +299,7 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
     elseif msgName == DdzGameManager.MsgName.SC_PlayerReconnection then
         self:showPlayerSitDownInfo()
 
+        self:_initPrivateRoom()
         --todo
     ----断线重连
     elseif msgName == DdzGameManager.MsgName.SC_LandRecoveryPlayerCard then
@@ -662,6 +663,8 @@ function DdzGameScene:onEnter()
     self:OnUpdateMusicSwitch(musicOn)
 
     self:OnUpdateSoundSwitch(soundOpen)
+
+
 end
 
 function DdzGameScene:onExit()
@@ -944,11 +947,21 @@ function DdzGameScene:initUI()
         self._icon_status[i]:setVisible(false)
     end
 
-    -- -- TODO
-    print("[DdzGameScene] DdzReadyView")
-    dump(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom())
+    self:_initPrivateRoom()
+end
+
+function DdzGameScene:_initPrivateRoom()
+    if self._hasInitedPrivateRoom ~= nil and self._hasInitedPrivateRoom == true then
+        return 
+    end
+
+    -- print("[DdzGameScene] DdzReadyView 2")
+    -- dump(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom())
 
     if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
+        -- 放到这里是因为on_SC_PlayerReconnection导致
+        self._hasInitedPrivateRoom = true
+
         DdzGameManager:getInstance():sendGetPrivateConfig()
 
         DdzGameManager:getInstance():sendGetTabVoteArray()
@@ -963,7 +976,7 @@ function DdzGameScene:_showPrivateRoomId()
             self._privateRoomIdLable = cc.Label:create()
             self._privateRoomIdLable:setSystemFontSize(24)
             self._privateRoomIdLable:setTextColor(cc.c3b(249, 239, 140))
-            -- self._privateRoomIdLable:setString(string.format("房间号：%d", GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getPrivateRoomId()))
+            self._privateRoomIdLable:setString(string.format("房间号：%d", GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getPrivateRoomId()))
             self._privateRoomIdLable:align(display.LEFT_CENTER, 100, cc.Director:getInstance():getWinSize().height - 26)
             self:addChild(self._privateRoomIdLable, ZORDER_MENU)
         end
@@ -2276,9 +2289,10 @@ function DdzGameScene:OnPlayerUpdate(index, player)
     end
     panelPlayer.label_name:setString(player:getIpArea())
     --panelPlayer.label_name:setString(player.nickName)
-    panelPlayer.label_gold:setString(CustomHelper.moneyShowStyleNone(player.money))
+    panelPlayer.label_gold:setString(CustomHelper.moneyShowStyleAB(player.money))
     panelPlayer.label_name:setScale(math.min(1, 170 / panelPlayer.label_name:getContentSize().width))
-    panelPlayer.label_gold:setScale(math.min(1, 120 / panelPlayer.label_gold:getContentSize().width))
+
+    panelPlayer.label_gold:setScale(math.min(1, (index ~= 1 and 120 or 150 )/ panelPlayer.label_gold:getContentSize().width))
 
     ---不是自己就隐藏起来
     if index ~= 1 then
@@ -3551,10 +3565,22 @@ function DdzGameScene:isContinueGameConditions()
 end
 
 function DdzGameScene:_isPrivateShowingReady()
-    if self._gameStatus == nil or self._gameStatus == "stoped_result" or self._gameStatus == "stoped"  then
-        return true
-    else
+    print("[DdzGameScene] _isPrivateShowingReady")
+
+    local tmpData = clone(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getChairs())
+    local playerReadyNum = 0
+    for k, v in pairs(tmpData) do
+        if v["playerInfoTab"]["is_ready"] ~= nil and v["playerInfoTab"]["is_ready"] == true then
+            playerReadyNum = playerReadyNum + 1
+        end
+    end
+
+    -- print("[DdzGameScene] _isPrivateShowingReady playerReadyNum:%d", playerReadyNum)
+
+    if playerReadyNum == 3 then
         return false
+    else
+        return true
     end
 end
 

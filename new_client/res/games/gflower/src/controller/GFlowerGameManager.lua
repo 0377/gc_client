@@ -107,13 +107,19 @@ end
 
 -- 获取重连信息返回 
 function GFlowerGameManager:on_SC_ZhaJinHuaGetSitDown(msgTab)
-    dump(msgTab, "----------------------获取重连信息返回")
+    --dump(msgTab, "on_SC_ZhaJinHuaGetSitDown-------获取重连信息返回")
     self:getDataManager():_onMsg_ReConnectInfo(msgTab)
 end
 
 -- 玩家坐下
 function GFlowerGameManager:on_SC_EnterRoomAndSitDown(msgTab)
-    dump(msgTab, "----------------------进入 房间坐下")
+    --dump(msgTab, "----------------------进入 房间坐下")
+end
+
+-- 获取重连信息返回 
+function GFlowerGameManager:on_SC_ZhaJinHuaReConnect(msgTab)
+	--dump(msgTab, "on_SC_ZhaJinHuaReConnect-----获取重连信息返回")
+    self:getDataManager():_onMsg_ReConnectInfo(msgTab)
 end
 
 -- 请求玩家状态等信息

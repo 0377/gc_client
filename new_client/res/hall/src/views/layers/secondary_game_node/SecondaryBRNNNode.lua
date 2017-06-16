@@ -37,7 +37,7 @@ function SecondaryBRNNNode:initViewData(secondRoomInfoTab)
 	local  minMoneyLimitText = tolua.cast(CustomHelper.seekNodeByName(self.itemNode, "min_money_limit"), "ccui.Text");
 	-- 20.34 string 为 20/34	
 	
-	local minJettonLimitString = CustomHelper.moneyShowStyleNone(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
+	local minJettonLimitString = CustomHelper.moneyShowStyleAB(self.secondRoomInfoTab[HallGameConfig.SecondRoomMinMoneyLimitKey])
 	--minJettonLimitString = string.gsub(minJettonLimitString, "%.", "/")
 	-- minMoneyLimitString = string.gsub(minMoneyLimitString, "%.", "/")
 	minMoneyLimitText:setString("入局:"..minJettonLimitString)

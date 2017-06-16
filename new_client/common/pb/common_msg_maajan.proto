@@ -72,7 +72,7 @@ message Maajan_Player_Info {
 	//
 	optional string nick 					= 14;
 	optional int32 icon 					= 15;
-	optional int32 gold 					= 16;
+	optional int64 gold 					= 16;
 	optional int32 guid		            	= 17; 	// guid
 };
 message Maajan_Reconnect_Data {

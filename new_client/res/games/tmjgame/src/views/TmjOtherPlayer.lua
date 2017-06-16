@@ -523,6 +523,12 @@ function TmjOtherPlayer:getHandCardPosition(index,cardSize)
 end
 --播放打牌的动画
 function TmjOtherPlayer:runOutCardAnim()
+	--重新设置层级
+	local outNum = table.nums(self.outCards)
+	table.walk(self.outCards,function (cardBundle,k)
+		local TmjCard = cardBundle.node
+		TmjCard:setLocalZOrder(k)
+	end)
 	--最后一张牌的位置动画
 	local lastNode = self.outCards[#self.outCards].node
 	

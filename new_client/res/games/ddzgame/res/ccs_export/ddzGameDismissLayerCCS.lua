@@ -214,7 +214,7 @@ layout:setPercentHeight(0.4632)
 layout:setSize({width = 540.0000, height = 170.0000})
 layout:setLeftMargin(56.4769)
 layout:setRightMargin(51.5231)
-layout:setTopMargin(90.7741)
+layout:setTopMargin(90.7740)
 layout:setBottomMargin(106.2260)
 bg:addChild(ListView_Dismiss)
 

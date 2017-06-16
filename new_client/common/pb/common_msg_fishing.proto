@@ -54,7 +54,7 @@ message CS_Fire
 	enum MsgID { ID = 12004; Target = 2; }
 	required int32		chair_id=1;			//椅子ID
 	required float		direction=2;		//方向
-	required int64		fire_time=3;		//开火时间
+	required uint32		fire_time=3;		//开火时间
 	required int32		client_id=4;		//子弹ID？
 	required float		pos_x = 5;
 	required float 		pos_y = 6;
@@ -79,7 +79,7 @@ message CS_TimeSync
 {
 	enum MsgID { ID = 12007; Target = 2; }
 	required int32	chair_id=1;								//椅子ID
-	required int32	client_tick=2;            //玩家时间
+	required uint32	client_tick=2;            //玩家时间
 };
 
 
@@ -157,7 +157,7 @@ message SC_SendBullet {
 	enum MsgID { ID = 12111; }
 	required int32		id=1;										//子弹ID
 	required int32		chair_id=2;             //椅子ID
-	required int32		create_tick=3;          //创建时间
+	required uint32		create_tick=3;          //创建时间
 	required float		x_pos=4;                //X坐标
 	required float		y_pos=5;                //Y坐标
 	required int32		cannon_type=6;          //炮类型
@@ -204,7 +204,7 @@ message SC_SendFish
 	required int32	fish_id=1;					//鱼ID
 	required int32	type_id=2;          //类型？
 	required int32	path_id=3;          //路径ID
-	required int32	create_tick=4;      //创建时间
+	required uint32	create_tick=4;      //创建时间
 	required float	offest_x=5;         //X坐标
 	required float	offest_y=6;         //Y坐标
 	required float	dir=7;              //方向
@@ -241,8 +241,8 @@ message SC_TimeSync
 {
 	enum MsgID { ID = 12118; }
 	required int32	chair_id=1;									//玩家椅子
-	required int32	server_tick=2;              //服务器时间
-	required int32	client_tick=3;              //玩家时间
+	required uint32	server_tick=2;              //服务器时间
+	required uint32	client_tick=3;              //玩家时间
 };
 
 //类型掩码

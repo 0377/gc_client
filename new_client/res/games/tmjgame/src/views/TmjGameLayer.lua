@@ -220,7 +220,7 @@ function TmjGameLayer:onBtnListener(ref,eventType)
 				hu_fan = 10,
 				win_money = 20,
 				jiabei = 2,
-				describe = "TIAN_HU,QING_YI_SE,HAI_DI_LAO_YUE,TIAN_HU,QING_YI_SE,HUA_PAI,HUA_PAI,HUA_PAI,HAI_DI_LAO_YUE",
+				describe = "JIAN_KE,PENG_PENG_HU,HUA_PAI,HUA_PAI,BAO_TING,HU_JUE_ZHANG,ZI_MO,",
 				taxes = 10,
 				finish_task = true,
 				taskInfo = {

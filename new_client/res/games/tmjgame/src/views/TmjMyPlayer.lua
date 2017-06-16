@@ -565,7 +565,7 @@ end
 function TmjMyPlayer:showOperationPanel(operations,isPreCard)
 	--先关闭
 	sslog(self.logTag,"先关闭操作界面")
-	self:closeOperationPanel()
+	self:closeOperationPanel(false)
 	table.sort(operations,function (t1,t2)
 		return t1.weight <= t2.weight
 	end)
@@ -785,7 +785,7 @@ function TmjMyPlayer:doChooseOperation(operation,index)
 			TmjGameManager:getInstance():requestDouble()
 		elseif index == 3 then --过
 			if self.isPlayCard then
-				self:closeOperationPanel() --自己出牌的时候，直接关闭
+				self:closeOperationPanel(false) --自己出牌的时候，直接关闭
 			else
 				TmjGameManager:getInstance():requestPass()
 			end
@@ -1011,12 +1011,49 @@ function TmjMyPlayer:showStartHuOperation(lastCardVal)
 	return hasOperation
 end
 --检测补杠，这是之前有三张牌，但是碰的，手上还剩一张牌，下一轮的时候可以杠
+-- Modify 2017/6/15 补杠的时候如果是听状态，那么不能影响叫
 --@hands 手上的牌
 function TmjMyPlayer:checkBuGangOperation(hands)
+	--是否能插入，在听的情况下
+	--@param cardsArray 手牌的数据组
+	--@param getCardVal 摸到的牌
+	--@param buGangVal 需要补杠的牌
+	--@param tingState 是否在听状态
+	local function canInert(cardsArray,getCardVal,buGangVal,tingState)
+		local canInsert = false
+		if not tingState then
+			return true
+		end
+		
+		local tempCardsArr = CustomHelper.copyTab(cardsArray)
+		if tempCardsArr[buGangVal] and tempCardsArr[buGangVal]>0 then
+			tempCardsArr[buGangVal] = tempCardsArr[buGangVal] - 1
+		end
+		if not tempCardsArr[getCardVal] then
+			tempCardsArr[getCardVal] = 0
+		end
+		tempCardsArr[getCardVal] = tempCardsArr[getCardVal] + 1
+		--杠之后，判断是否有叫，也就是，摸一张就能胡的，穷举法 15张牌(除了补杠的这张)
+		
+		for i=TmjConfig.Card.R_1,TmjConfig.Card.R_White do
+			if i~=buGangVal and TmjCardTip.s_cmds[TmjCardTip.CardOperation.Hu](tempCardsArr,i) then
+				--能胡
+				canInsert = true
+				break
+			end
+		end
+		return canInsert
+		
+	end
+	
 	local bugangOperation = {}
-	self:checkFullCard()
+	local getCardVal = nil
+	if self.getCard and self.getCard.info and self.getCard.info.val then
+		getCardVal = self.getCard.info.val
+	end
+	
 	local operation = TmjCardTip.CardOperation.BuGang
-	table.walk(self.handCards,function (card,i)
+	table.walk(hands,function (card,i)
 		if card and card.info and card.info.val then
 			local result = self:checkOperation(card.info.val,operation)
 			if result then
@@ -1030,7 +1067,8 @@ function TmjMyPlayer:checkBuGangOperation(hands)
 					end
 				end
 				--防止重复添加
-				if not hasOperation then
+				
+				if not hasOperation and canInert(self.cardsArray,getCardVal,card.info.val,self.isTingState) then
 					table.insert(bugangOperation,{type = operation,weight = TmjCardTip.operationWeight[operation] or 0,result = result })
 				end
 				
@@ -1145,7 +1183,7 @@ end
 --把牌打出去
 --@param cardIndex 牌的位置或者牌信息
 function TmjMyPlayer:playCard(cardIndex)
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	sslog(self.logTag,"服务器通知我打一张牌")
 	if type(cardIndex)=="table" then
 		if self.playCardIndex then
@@ -1221,7 +1259,7 @@ function TmjMyPlayer:chiCard(cardInfo)
 		TmjConfig.playAmature("ermj_px_eff","ani_03",nil,display.center,false)
 	end
 	
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	local outCard = self:createOneCard(cardInfo.outCard)
 	
 	local tempChiArr = {}
@@ -1280,7 +1318,7 @@ end
 --@key createTag 是否创建新的牌 这个标识只在恢复对局的时候，新的牌不从手上移除
 function TmjMyPlayer:pengCard(cardInfo)
 	--todo
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	sslog(self.logTag,"碰")
 	--播放碰的动画
 	if not cardInfo.createTag then --非新建的才播放
@@ -1360,7 +1398,7 @@ function TmjMyPlayer:gangCard(cardInfo)
 		TmjConfig.playAmature("ermj_px_eff","ani_02",nil,display.center,false)
 	end
 	
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	local outCard = self:createOneCard(cardInfo)
 	--self.extraCards
 	local tempGangArr = {}
@@ -1402,7 +1440,7 @@ function TmjMyPlayer:buGangCard(cardInfo)
 		TmjConfig.playAmature("ermj_px_eff","ani_02",nil,display.center,false)
 	end
 	
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	if cardInfo.createTag==true then --如果是恢复对局的牌
 		
 		local tempGangArr = {}
@@ -1480,7 +1518,7 @@ function TmjMyPlayer:anGangCard(cardInfo)
 		TmjConfig.playAmature("ermj_px_eff","ani_02",nil,display.center,false)
 	end
 	
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 	if cardInfo.createTag==true then --如果是恢复对局的牌
 		
 		local tempGangArr = {}
@@ -1582,7 +1620,7 @@ function TmjMyPlayer:huCard(cardInfo)
 	--播放胡的动画
 	TmjConfig.playAmature("ermj_px_eff","ani_04",nil,display.center,false)
 	
-	self:closeOperationPanel()--服务器已经告诉我打牌了，关闭操作对话框
+	self:closeOperationPanel(false)--服务器已经告诉我打牌了，关闭操作对话框
 end
 function TmjMyPlayer:checkToSetLastHandCard()
 	sslog(self.logTag,"我检测最后一张牌为手牌动作")
@@ -1726,7 +1764,7 @@ function TmjMyPlayer:doubleCard(cardInfo)
 	--加倍只有我自己有
 	TmjConfig.playSound(TmjConfig.cardOperation.Double,self:isMan())
 	TmjMyPlayer.super.doubleCard(self,cardInfo)
-	self:closeOperationPanel() --加倍后，打牌
+	self:closeOperationPanel(false) --加倍后，打牌
 	self:setIsPlayCard({chairId = self.seatid }) --我继续出牌
 	self:checkTingToPlay(false)
 end
@@ -1779,6 +1817,12 @@ end
 
 --播放打牌的动画
 function TmjMyPlayer:runOutCardAnim()
+	--重新设置层级
+	local outNum = table.nums(self.outCards)
+	table.walk(self.outCards,function (cardBundle,k)
+		local TmjCard = cardBundle.node
+		TmjCard:setLocalZOrder(k)
+	end)
 	--最后一张牌的位置动画
 	local lastNode = self.outCards[#self.outCards].node
 	lastNode:reSetGray()
@@ -1794,13 +1838,14 @@ function TmjMyPlayer:runOutCardAnim()
 	local speed = 3000
 	local seqAction = transition.sequence({ 
 						cc.MoveTo:create(0.15,cc.p(display.center.x,curPos.y+150)),
-						cc.DelayTime:create(0.05),
-						cc.CallFunc:create(function ()
-							self:refreshCard()
-						end),
+
 						cc.DelayTime:create(0.2),
 						cc.CallFunc:create(function ()
 							lastNode:changeState(TmjConfig.CardState.State_Discard)
+						end),
+						cc.DelayTime:create(0.15),
+						cc.CallFunc:create(function ()
+							self:refreshCard()
 						end),
 						cc.MoveTo:create(len/speed,outPos),
 						cc.CallFunc:create(handler(self,self.freshOutCard))

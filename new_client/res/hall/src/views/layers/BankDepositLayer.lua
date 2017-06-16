@@ -61,7 +61,7 @@ function BankDepositLayer:initView()
 	local addNumArray = {10000,100000,500000,1000000}
 	for i=1,4 do
 		local tempAddBtn = tolua.cast(CustomHelper.seekNodeByName(self.csNode,string.format("add_btn_%d",i)), "ccui.Button")
-		tempAddBtn:setTitleText("+" .. CustomHelper.moneyShowStyleAB(addNumArray[i]  * CustomHelper.goldToMoneyRate()))
+		tempAddBtn:setTitleText("+" .. CustomHelper.moneyShowStyleABNone(addNumArray[i]  * CustomHelper.goldToMoneyRate()))
 		tempAddBtn.addValue = addNumArray[i]
 		tempAddBtn:addClickEventListener(function()
 			GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)

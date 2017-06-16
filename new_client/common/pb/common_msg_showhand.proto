@@ -36,7 +36,7 @@ message ShowHand_Player_Info {
     optional int32 cur_round_add            = 4;    // 当前轮下注
 	optional string nick 					= 5;
 	optional int32 icon 					= 6;
-	optional int32 gold 					= 7;
+	optional int64 gold 					= 7;
 	optional int32 guid		            	= 8; 	// guid
 	// game end
 	optional bool is_win 		= 9;			//是否赢了

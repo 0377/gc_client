@@ -5,14 +5,14 @@ local PrivateRoomModel = requireForGameLuaFile("PrivateRoomModel")
 
 local PrivateRoomPrompt = class("PrivateRoomPrompt", CustomBaseView)
 
-local langStr1 = "<font size='27' face='' color='#ffffff'>您携带的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>金才能进入房间。</font>"
-local langStr2 = "<font size='27' face='' color='#ffffff'>您想要从银行取出%s金到携带金币中并进入房间吗？</font>"
-local langStr3 = "<font size='27' face='' color='#ffffff'>您银行的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>金才能进入房间。</font>"
-local langStr4 = "<font size='27' face='' color='#ffffff'>您想要将携带金币%s金存入到银行中并进入房间吗？</font>"
-local langStr5 = "<font size='27' face='' color='#ffffff'>您携带的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>金才能创建房间。</font>"
-local langStr6 = "<font size='27' face='' color='#ffffff'>您想要从银行取出%s金到携带金币中并创建房间吗？</font>"
-local langStr7 = "<font size='27' face='' color='#ffffff'>您银行的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>金才能创建房间。</font>"
-local langStr8 = "<font size='27' face='' color='#ffffff'>您想要将携带金币%s金存入到银行中并创建房间吗？</font>"
+local langStr1 = "<font size='27' face='' color='#ffffff'>您携带的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>才能进入，</font>"
+local langStr2 = "<font size='27' face='' color='#ffffff'>确认从银行取出%s金并进入房间吗？</font>"
+local langStr3 = "<font size='27' face='' color='#ffffff'>您银行金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>才能进入，</font>"
+local langStr4 = "<font size='27' face='' color='#ffffff'>确定将%s金币存入银行并进入房间吗？</font>"
+local langStr5 = "<font size='27' face='' color='#ffffff'>您携带的金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>才能进入，</font>"
+local langStr6 = "<font size='27' face='' color='#ffffff'>确认从银行取出%s金并进入房间吗？</font>"
+local langStr7 = "<font size='27' face='' color='#ffffff'>您银行金币还差</font><font size='40' face='' color='#ff0000'>%s</font><font size='27' face='' color='#ffffff'>才能进入，</font>"
+local langStr8 = "<font size='27' face='' color='#ffffff'>确定将%s金币存入银行并进入房间吗？</font>"
 
 function PrivateRoomPrompt:ctor(result, money)
     PrivateRoomPrompt.super.ctor(self)

@@ -203,8 +203,8 @@ function TmjPlayer:setHeadInfo(TmjHeadNode,headInfo)
 		end
 	end	
 	if headInfo.gold then
-		
-		textGold:setString(CustomHelper.moneyShowStyleNone(headInfo.gold))
+		textGold:setString(CustomHelper.moneyShowStyleAB(headInfo.gold))
+		textGold:setScale(math.min(1,78 / textGold:getContentSize().width))
 	end
 	if headInfo.nickname then
 		textId:setString(tostring(headInfo.nickname))
@@ -487,7 +487,7 @@ function TmjPlayer:addToHandCard(cardInfo)
 	table.insert(self.handCards,beforeIndex,cardInfo)
 	--
 	self.cardsArray = self:setCardArray(self.handCards)
-	self:refreshCard()
+	--self:refreshCard()
 	sslog(self.logTag,"插入的位置:"..beforeIndex)
 	
 end
