@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="hall_res/tongyong/bb_ty_di.jpg" Plist="" />
+            <FileData Type="Normal" Path="hall_res/hall/bb_dating_beijing.jpg" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="Panel_1" ActionTag="-632816005" Tag="284" IconVisible="False" RightMargin="-1280.0000" BottomMargin="-84.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="422" RightEage="422" TopEage="27" BottomEage="27" Scale9OriginX="-422" Scale9OriginY="-27" Scale9Width="844" Scale9Height="54" ctype="PanelObjectData">
             <Size X="1280.0000" Y="84.0000" />

@@ -68,7 +68,7 @@
                   <AbstractNodeData Name="ListView_Item" ActionTag="497639494" Tag="189" IconVisible="False" LeftMargin="38.3691" RightMargin="44.6309" TopMargin="111.9523" BottomMargin="425.0477" LeftEage="1" RightEage="1" TopEage="1" BottomEage="1" Scale9OriginX="1" Scale9OriginY="1" Scale9Width="2" Scale9Height="2" ctype="ImageViewObjectData">
                     <Size X="900.0000" Y="61.0000" />
                     <Children>
-                      <AbstractNodeData Name="Image_Item_1" ActionTag="-1895180043" Tag="190" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="14.0000" RightMargin="464.0000" LeftEage="23" RightEage="23" TopEage="22" BottomEage="22" Scale9OriginX="23" Scale9OriginY="22" Scale9Width="376" Scale9Height="17" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Image_Item_1" ActionTag="-1895180043" VisibleForFrame="False" Tag="190" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="14.0000" RightMargin="464.0000" LeftEage="23" RightEage="23" TopEage="22" BottomEage="22" Scale9OriginX="23" Scale9OriginY="22" Scale9Width="376" Scale9Height="17" ctype="ImageViewObjectData">
                         <Size X="422.0000" Y="61.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Item_Desc" ActionTag="-871518624" Tag="191" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="84.4000" RightMargin="127.6000" TopMargin="15.5000" BottomMargin="15.5000" FontSize="30" LabelText="第一轮不可看牌" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -105,7 +105,7 @@
                         <PreSize X="0.4689" Y="1.0000" />
                         <FileData Type="Normal" Path="game_res/ddz_shezhi_kuang.png" Plist="" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Image_Item_2" ActionTag="752259431" Tag="239" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="464.0000" RightMargin="14.0000" LeftEage="23" RightEage="23" TopEage="22" BottomEage="22" Scale9OriginX="23" Scale9OriginY="22" Scale9Width="376" Scale9Height="17" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Image_Item_2" ActionTag="752259431" VisibleForFrame="False" Tag="239" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="464.0000" RightMargin="14.0000" LeftEage="23" RightEage="23" TopEage="22" BottomEage="22" Scale9OriginX="23" Scale9OriginY="22" Scale9Width="376" Scale9Height="17" ctype="ImageViewObjectData">
                         <Size X="422.0000" Y="61.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Item_Desc" ActionTag="-495688826" Tag="240" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="84.4000" RightMargin="127.6000" TopMargin="15.5000" BottomMargin="15.5000" FontSize="30" LabelText="第一轮不可看牌" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

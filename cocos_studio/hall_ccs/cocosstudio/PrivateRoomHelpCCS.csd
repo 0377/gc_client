@@ -22,7 +22,7 @@
                     <PreSize X="0.1443" Y="0.0659" />
                     <FileData Type="Normal" Path="hall_res/hall/bb_srfj_kfgz_bt.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_1" ActionTag="1715308758" Tag="722" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="106.0000" RightMargin="106.0000" TopMargin="138.0000" BottomMargin="150.0000" IsCustomSize="True" FontSize="27" LabelText="开设房间&#xA;开设房间的人按照房间人数上限缴纳开房费用，并成为房主。私人房间不扣税。&#xA;&#xA;加入房间&#xA;任何人加入私间不用缴纳任何费用，但银行至少保留6金。&#xA;&#xA;房间规则&#xA;1、刚加入私房需要玩家手动准备，参与者都准备以后才会开始游戏。&#xA;2、房主可以在准备阶段踢人，但游戏开始后就不能踢人了。&#xA;3、当有参与者想离开游戏时，只能发起房间解散投票。&#xA;4、当参与者金币不足导致游戏人数不足时，私房会自动解散。&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="Text_1" ActionTag="1715308758" Tag="722" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="106.0000" RightMargin="106.0000" TopMargin="138.0000" BottomMargin="150.0000" IsCustomSize="True" FontSize="27" LabelText="开设房间&#xA;开设房间的人按照房间人数上限缴纳开房费用，并成为房主。私人房间不扣税。&#xA;&#xA;加入房间&#xA;任何人加入私间不用缴纳任何费用，但银行至少保留6000金。&#xA;&#xA;房间规则&#xA;1、刚加入私房需要玩家手动准备，参与者都准备以后才会开始游戏。&#xA;2、房主可以在准备阶段踢人，但游戏开始后就不能踢人了。&#xA;3、当有参与者想离开游戏时，只能发起房间解散投票。&#xA;4、当参与者金币不足导致游戏人数不足时，私房会自动解散。&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="945.0000" Y="380.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="578.5000" Y="340.0000" />

@@ -130,19 +130,19 @@
         </Folder>
         <Project Name="ddzGameCardTipCCS.csd" Type="Node" />
         <Project Name="ddzGameDeviceInfoCCS.csd" Type="Node" />
+        <Project Name="ddzGameDismissLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameExitLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameInfoLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameLayerCSS_new.csd" Type="Layer" />
         <Project Name="ddzGameMenuNodeCCS.csd" Type="Node" />
+        <Project Name="ddzGamePropertyLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameReadyLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameResultLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameShadowLayerCCS.csd" Type="Layer" />
+        <Project Name="ddzGameStatisticsLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameTimeOutWaitCCS.csd" Type="Layer" />
         <Project Name="ddzGameUIControlLayerCCS.csd" Type="Layer" />
         <Project Name="ddzGameUIUpLayerCCS.csd" Type="Layer" />
-        <Project Name="ddzGameReadyLayerCCS.csd" Type="Layer" />
-        <Project Name="ddzGameExitLayerCCS.csd" Type="Layer" />
-        <Project Name="ddzGameDismissLayerCCS.csd" Type="Layer" />
-        <Project Name="ddzGamePropertyLayerCCS.csd" Type="Layer" />
-        <Project Name="ddzGameStatisticsLayerCCS.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

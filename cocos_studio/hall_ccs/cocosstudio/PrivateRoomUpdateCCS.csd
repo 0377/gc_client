@@ -22,14 +22,14 @@
                     <PreSize X="0.9627" Y="0.9408" />
                     <FileData Type="Normal" Path="hall_res/tongyong/bb_ty_tc1.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_1" ActionTag="-1765547103" Tag="546" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="265.4880" RightMargin="265.4880" TopMargin="42.8000" BottomMargin="415.2000" IsCustomSize="True" FontSize="32" LabelText="游戏需要更新&#xA;" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="300.0000" Y="32.0000" />
+                  <AbstractNodeData Name="Text_1" ActionTag="-1765547103" Tag="546" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="319.4880" RightMargin="319.4880" TopMargin="42.3000" BottomMargin="414.7000" FontSize="32" LabelText="游戏需要更新" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="192.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="415.4880" Y="431.2000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.8800" />
-                    <PreSize X="0.3610" Y="0.0653" />
+                    <PreSize X="0.2311" Y="0.0673" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

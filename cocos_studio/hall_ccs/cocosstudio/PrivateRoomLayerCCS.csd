@@ -141,14 +141,14 @@
                   <AbstractNodeData Name="bg_editbox" ActionTag="-335077304" Tag="383" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="326.0000" RightMargin="326.0000" TopMargin="43.5000" BottomMargin="543.5000" LeftEage="121" RightEage="121" TopEage="23" BottomEage="23" Scale9OriginX="121" Scale9OriginY="23" Scale9Width="126" Scale9Height="7" ctype="ImageViewObjectData">
                     <Size X="368.0000" Y="53.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Num_Room" ActionTag="1465624261" Tag="399" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="64.0000" RightMargin="64.0000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="32" LabelText="输入2-6位房间号" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="240.0000" Y="33.0000" />
+                      <AbstractNodeData Name="Text_Num_Room" ActionTag="1465624261" Tag="399" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="104.0000" RightMargin="104.0000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="32" LabelText="输入房间号" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="160.0000" Y="33.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="184.0000" Y="26.5000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="0.5000" />
-                        <PreSize X="0.6522" Y="0.6226" />
+                        <PreSize X="0.4348" Y="0.6226" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
