@@ -1,0 +1,99 @@
+﻿syntax = "proto2";
+
+// 客户端和服务器通信消息
+// C Client, L LoginServer, D DBServer, S GameServer
+// CS 即C-发送->S
+
+
+//////////////////////////////////////////////////////////////////////////
+/// 老虎机相关消息
+//////////////////////////////////////////////////////////////////////////
+
+//进入游戏或重连，获取房间信息
+message CS_SlotsInfo {
+	enum MsgID { ID = 27100;}
+}
+
+//开始转动老虎机
+message CS_SlotsStart {
+	enum MsgID { ID = 27101;}
+	optional int32 bet_money = 1;            //底注的分数
+	optional int32 times = 2;				//选择押注线倍数 x1-x5
+}
+
+//玩家离开游戏
+message CS_SlotsLeaveGame{
+	enum MsgID {ID = 27102;}
+}
+
+//玩家变更押注倍数
+message CS_SlotsChangeTimes{
+	enum MsgID {ID = 27103;}
+	optional int32 times = 1;
+}
+
+//进入抽福神游戏
+message CS_SlotsFortuneGame {
+	enum MsgID { ID = 27104; }
+}
+
+//抽福神游戏,抽中的财神
+message CS_SlotsFortuneGameEnd {
+	enum MsgID { ID = 27105; }
+	optional int64 godID = 1;					//抽中三个的财神ID：1-4
+}
+
+// message AwardInfo {
+// 	repeated LineInfo pb_award = 1;			//中奖对应位置
+// 	repeated LineInfo pb_fortune = 2;		//所中福字位置
+// }
+
+message LineInfo {
+	repeated int32 items = 1;				//三个横线所对应物品
+}
+
+
+message SC_SlotsInfo {
+	enum MsgID { ID = 27000;}
+	optional int32 total_fortune = 1;		//进入附加小游戏,福字需要累积数量
+}
+
+//老虎机结算
+message SC_SlotsStart {
+	enum MsgID { ID = 27001; }
+	repeated LineInfo pb_line = 1;				//当前抽中物品	3*5
+	repeated LineInfo pb_award = 2;				//中奖信息		3*5 [1,0]数组
+	required int32 fortune_num = 3;				//福字累积个数
+	optional int64 money = 4;					//玩家所赢金额
+	optional int32 tax = 5;					    //玩家收税金额
+	optional int32 win_times = 6;				//抽中奖的倍数
+}
+
+//玩家变更押注倍数
+message SC_SlotsChangeTimes{
+	enum MsgID {ID = 27002;}
+	required int32 fortune_num = 1;				//福字累积个数
+}
+
+//进入抽福神游戏
+message SC_SlotsFortuneGame {
+	enum MsgID { ID = 27003; }
+	repeated LineInfo pb_fortune = 1;			//中奖信息	
+}
+
+//抽福神游戏结算
+message SC_SlotsFortuneGameEnd {
+	enum MsgID { ID = 27004; }
+	optional int64 money = 1;					//玩家所赢金额
+	optional int32 tax = 2;					    //玩家收税金额
+	required int32 fortune_num = 3;				//福字累积个数
+}
+
+
+
+
+// error返回类型
+enum Slots_TYPE {
+	SlOTS_TYPE_SUCESS				= 0;								//成功
+	SlOTS_TYPE_NOMONEY  			= 1;								//金钱不足
+}
