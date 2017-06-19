@@ -412,6 +412,10 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
     elseif msgName == DdzGameManager.MsgName.SC_PrivateConfigChange then
         print("[DdzGameScene] SC_PrivateConfigChange")
         dump(userInfo)
+        if userInfo["private_room_has_start"] then
+            GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setIsPrivateReadying(userInfo["private_room_has_start"])
+        end
+
         if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
             if userInfo["nreason"] == 1 then
                 MyToastLayer.new(self, "房主新设定了房间属性，下局游戏生效。")
@@ -419,7 +423,7 @@ function DdzGameScene:receiveServerResponseSuccessEvent(event)
                 if self._ddzPropertyView then
                     self._ddzPropertyView:showListView(userInfo)
                 else
-                    if self:_isPrivateShowingReady() then
+                    if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateReadying() then
                         self:_showReadyView()
                     end
                 end
@@ -1010,6 +1014,8 @@ function DdzGameScene:_showReadyView()
 end
 
 function DdzGameScene:_hideReadyView()
+    GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():setIsPrivateReadying(1)
+
     if self._ddzReadyView then
         self._ddzReadyView:removeSelf()
         self._ddzReadyView = nil
@@ -1549,9 +1555,11 @@ function DdzGameScene:_onBtnTouched_menu_quit(sender, eventType)
         GameManager:getInstance():getMusicAndSoundManager():playerSoundWithFile(HallSoundConfig.Sounds.HallTouch)
     elseif eventType == ccui.TouchEventType.ended then
 
+        print("[DdzGameScene] _onBtnTouched_menu_quit")
+        dump(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom())
         if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateRoom() then
 
-            if self:_isPrivateShowingReady() then
+            if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateReadying() then
                 self.myPlayerInfo = GameManager:getInstance():getHallManager():getPlayerInfo()
                 if GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getIsPrivateOwner(self.myPlayerInfo:getGuid()) then
                     CustomHelper.showAlertView(
@@ -3589,25 +3597,25 @@ function DdzGameScene:isContinueGameConditions()
     return true
 end
 
-function DdzGameScene:_isPrivateShowingReady()
-    print("[DdzGameScene] _isPrivateShowingReady")
+-- function DdzGameScene:_isPrivateShowingReady()
+--     print("[DdzGameScene] _isPrivateShowingReady")
 
-    local tmpData = clone(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getChairs())
-    dump(tmpData)
-    local playerReadyNum = 0
-    for k, v in pairs(tmpData) do
-        if v["playerInfoTab"]["is_ready"] ~= nil and v["playerInfoTab"]["is_ready"] == true then
-            playerReadyNum = playerReadyNum + 1
-        end
-    end
+--     local tmpData = clone(GameManager:getInstance():getHallManager():getSubGameManager():getDataManager():getChairs())
+--     dump(tmpData)
+--     local playerReadyNum = 0
+--     for k, v in pairs(tmpData) do
+--         if v["playerInfoTab"]["is_ready"] ~= nil and v["playerInfoTab"]["is_ready"] == true then
+--             playerReadyNum = playerReadyNum + 1
+--         end
+--     end
 
-    print("[DdzGameScene] _isPrivateShowingReady playerReadyNum:%d", playerReadyNum)
+--     print("[DdzGameScene] _isPrivateShowingReady playerReadyNum:%d", playerReadyNum)
 
-    if playerReadyNum == 3 then
-        return false
-    else
-        return true
-    end
-end
+--     if playerReadyNum == 3 then
+--         return false
+--     else
+--         return true
+--     end
+-- end
 
 return DdzGameScene;

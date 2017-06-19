@@ -1564,7 +1564,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_guize" CanEdit="False" Visible="False" ActionTag="-1678282342" Tag="137" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_guize" ActionTag="-1678282342" Tag="137" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
               <AbstractNodeData Name="Image_95" ActionTag="-679458700" Tag="138" IconVisible="False" LeftMargin="170.0000" RightMargin="170.0000" TopMargin="50.0000" BottomMargin="50.0000" LeftEage="310" RightEage="310" TopEage="204" BottomEage="204" Scale9OriginX="310" Scale9OriginY="204" Scale9Width="320" Scale9Height="212" ctype="ImageViewObjectData">
@@ -1573,14 +1573,14 @@
                   <AbstractNodeData Name="content" ActionTag="1916284212" Tag="140" IconVisible="False" LeftMargin="37.0000" RightMargin="41.0000" TopMargin="98.0000" BottomMargin="42.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                     <Size X="862.0000" Y="480.0000" />
                     <Children>
-                      <AbstractNodeData Name="Image_183" ActionTag="461822958" Tag="141" IconVisible="False" TopMargin="20.0000" BottomMargin="18.0000" LeftEage="284" RightEage="284" TopEage="163" BottomEage="163" Scale9OriginX="284" Scale9OriginY="163" Scale9Width="393" Scale9Height="48" ctype="ImageViewObjectData">
-                        <Size X="862.0000" Y="496.0000" />
+                      <AbstractNodeData Name="Image_183" ActionTag="461822958" Tag="141" IconVisible="False" LeftMargin="5.0000" RightMargin="57.0000" BottomMargin="54.0000" LeftEage="284" RightEage="284" TopEage="163" BottomEage="163" Scale9OriginX="284" Scale9OriginY="163" Scale9Width="393" Scale9Height="48" ctype="ImageViewObjectData">
+                        <Size X="800.0000" Y="480.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="431.0000" Y="266.0000" />
+                        <Position X="405.0000" Y="294.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="0.4981" />
-                        <PreSize X="1.0000" Y="0.9288" />
+                        <PrePosition X="0.4698" Y="0.5506" />
+                        <PreSize X="0.9281" Y="0.8989" />
                         <FileData Type="Normal" Path="game_res/zjh_text_gz.png" Plist="" />
                       </AbstractNodeData>
                     </Children>

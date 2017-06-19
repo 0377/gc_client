@@ -174,25 +174,21 @@ layout:setBottomMargin(3.4181)
 player_1:addChild(bg_info)
 
 --Create label_money
-local label_money = ccui.TextAtlas:create([[12345678]],
-													"game_res/by_szt.png",
-													23,
-													28,
-													".")
+local label_money = ccui.TextBMFont:create()
+label_money:setFntFile("game_res/likui_shuzi.fnt")
+label_money:setString([[1.00万亿]])
 label_money:setLayoutComponentEnabled(true)
 label_money:setName("label_money")
-label_money:setTag(592)
+label_money:setTag(99)
 label_money:setCascadeColorEnabled(true)
 label_money:setCascadeOpacityEnabled(true)
-label_money:setPosition(-236.7800, 28.0000)
-label_money:setScaleX(0.9000)
-label_money:setScaleY(0.9000)
+label_money:setPosition(-236.7800, 24.0000)
 layout = ccui.LayoutComponent:bindLayoutComponent(label_money)
-layout:setSize({width = 184.0000, height = 28.0000})
-layout:setLeftMargin(-328.7800)
-layout:setRightMargin(144.7800)
-layout:setTopMargin(-42.0000)
-layout:setBottomMargin(14.0000)
+layout:setSize({width = 126.0000, height = 37.0000})
+layout:setLeftMargin(-299.7800)
+layout:setRightMargin(173.7800)
+layout:setTopMargin(-42.5000)
+layout:setBottomMargin(5.5000)
 player_1:addChild(label_money)
 
 --Create label_name
@@ -410,25 +406,21 @@ layout:setBottomMargin(3.4200)
 player_2:addChild(bg_info)
 
 --Create label_money
-local label_money = ccui.TextAtlas:create([[452]],
-													"game_res/by_szt.png",
-													23,
-													28,
-													".")
+local label_money = ccui.TextBMFont:create()
+label_money:setFntFile("game_res/likui_shuzi.fnt")
+label_money:setString([[1.00万亿]])
 label_money:setLayoutComponentEnabled(true)
 label_money:setName("label_money")
-label_money:setTag(156)
+label_money:setTag(98)
 label_money:setCascadeColorEnabled(true)
 label_money:setCascadeOpacityEnabled(true)
-label_money:setPosition(236.7800, 28.0000)
-label_money:setScaleX(0.9000)
-label_money:setScaleY(0.9000)
+label_money:setPosition(236.7800, 24.0000)
 layout = ccui.LayoutComponent:bindLayoutComponent(label_money)
-layout:setSize({width = 69.0000, height = 28.0000})
-layout:setLeftMargin(202.2800)
-layout:setRightMargin(-271.2800)
-layout:setTopMargin(-42.0000)
-layout:setBottomMargin(14.0000)
+layout:setSize({width = 126.0000, height = 37.0000})
+layout:setLeftMargin(173.7800)
+layout:setRightMargin(-299.7800)
+layout:setTopMargin(-42.5000)
+layout:setBottomMargin(5.5000)
 player_2:addChild(label_money)
 
 --Create label_name
@@ -647,25 +639,21 @@ layout:setBottomMargin(-82.4198)
 player_3:addChild(bg_info)
 
 --Create label_money
-local label_money = ccui.TextAtlas:create([[452]],
-													"game_res/by_szt.png",
-													23,
-													28,
-													".")
+local label_money = ccui.TextBMFont:create()
+label_money:setFntFile("game_res/likui_shuzi.fnt")
+label_money:setString([[1.00万亿]])
 label_money:setLayoutComponentEnabled(true)
 label_money:setName("label_money")
-label_money:setTag(166)
+label_money:setTag(97)
 label_money:setCascadeColorEnabled(true)
 label_money:setCascadeOpacityEnabled(true)
-label_money:setPosition(236.7800, -28.0000)
-label_money:setScaleX(0.9000)
-label_money:setScaleY(0.9000)
+label_money:setPosition(236.7800, -32.0000)
 layout = ccui.LayoutComponent:bindLayoutComponent(label_money)
-layout:setSize({width = 69.0000, height = 28.0000})
-layout:setLeftMargin(202.2800)
-layout:setRightMargin(-271.2800)
-layout:setTopMargin(14.0000)
-layout:setBottomMargin(-42.0000)
+layout:setSize({width = 126.0000, height = 37.0000})
+layout:setLeftMargin(173.7800)
+layout:setRightMargin(-299.7800)
+layout:setTopMargin(13.5000)
+layout:setBottomMargin(-50.5000)
 player_3:addChild(label_money)
 
 --Create label_name
@@ -887,25 +875,21 @@ layout:setBottomMargin(-82.4198)
 player_4:addChild(bg_info)
 
 --Create label_money
-local label_money = ccui.TextAtlas:create([[452]],
-													"game_res/by_szt.png",
-													23,
-													28,
-													".")
+local label_money = ccui.TextBMFont:create()
+label_money:setFntFile("game_res/likui_shuzi.fnt")
+label_money:setString([[1.00万亿]])
 label_money:setLayoutComponentEnabled(true)
 label_money:setName("label_money")
-label_money:setTag(186)
+label_money:setTag(96)
 label_money:setCascadeColorEnabled(true)
 label_money:setCascadeOpacityEnabled(true)
-label_money:setPosition(-236.7800, -28.0000)
-label_money:setScaleX(0.9000)
-label_money:setScaleY(0.9000)
+label_money:setPosition(-236.7794, -32.0000)
 layout = ccui.LayoutComponent:bindLayoutComponent(label_money)
-layout:setSize({width = 69.0000, height = 28.0000})
-layout:setLeftMargin(-271.2800)
-layout:setRightMargin(202.2800)
-layout:setTopMargin(14.0000)
-layout:setBottomMargin(-42.0000)
+layout:setSize({width = 126.0000, height = 37.0000})
+layout:setLeftMargin(-299.7794)
+layout:setRightMargin(173.7794)
+layout:setTopMargin(13.5000)
+layout:setBottomMargin(-50.5000)
 player_4:addChild(label_money)
 
 --Create label_name

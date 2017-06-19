@@ -38,7 +38,7 @@ function FishgameEntry:getStartScene(infoTab)
 end
 
 function FishgameEntry:getVerionStr()
-    return "李逵劈鱼.v7"
+    return "李逵劈鱼.v9"
 end
 
 return FishgameEntry

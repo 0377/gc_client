@@ -1710,10 +1710,11 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 		if c.val>TmjConfig.Card.R_0 and c.val < TmjConfig.Card.R_Spring then --这个牌，是摸到的正常的牌
 			table.insert(inputCards,c)
 			--保证不是最后一个正常的牌
-			if k < cardCount and k +1 <= cardCount then
+--[[			if k < cardCount and k +1 <= cardCount then
 				table.insert(outHuaCards,cardInfo[k+1])
-			end
-			
+			end--]]
+		elseif c.val >= TmjConfig.Card.R_Spring then
+			table.insert(outHuaCards,c)
 		end
 	end)
 	self.huaCount = self.huaCount or 0
@@ -1726,7 +1727,9 @@ function TmjMyPlayer:buHuaCard(cardInfo)
 		--删除手上的花牌
 		local tempCard = self:removeHandCard(c.val)
 		if not tempCard then --花牌不在手上，在摸起来的牌上
-			tempCard = self.getCard
+			if self.getCard and self.getCard.info and self.getCard.info.val ==c.val then
+				tempCard = self.getCard
+			end
 		end
 		--删除手上现有的花牌
 		sslog(self.logTag,"删除手上现有的花牌:"..tostring(c.val))

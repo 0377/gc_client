@@ -73,15 +73,15 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="game_res/by_pw_sy.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="label_money" ActionTag="-971442377" Tag="592" IconVisible="False" LeftMargin="-328.7800" RightMargin="144.7800" TopMargin="-42.0000" BottomMargin="14.0000" CharWidth="23" CharHeight="28" LabelText="12345678" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="184.0000" Y="28.0000" />
+              <AbstractNodeData Name="label_money" ActionTag="-1713926220" Tag="99" IconVisible="False" LeftMargin="-299.7800" RightMargin="173.7800" TopMargin="-42.5000" BottomMargin="5.5000" LabelText="1.00万亿" ctype="TextBMFontObjectData">
+                <Size X="126.0000" Y="37.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="-236.7800" Y="28.0000" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Position X="-236.7800" Y="24.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/by_szt.png" Plist="" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/likui_shuzi.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="label_name" ActionTag="-328348084" Tag="558" IconVisible="False" LeftMargin="-288.4003" RightMargin="167.4003" TopMargin="-79.0000" BottomMargin="57.0000" FontSize="22" LabelText="游客测试221" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="121.0000" Y="22.0000" />
@@ -215,15 +215,15 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="game_res/by_pw_sy.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="label_money" ActionTag="-358359602" Tag="156" IconVisible="False" LeftMargin="202.2800" RightMargin="-271.2800" TopMargin="-42.0000" BottomMargin="14.0000" CharWidth="23" CharHeight="28" LabelText="452" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="69.0000" Y="28.0000" />
+              <AbstractNodeData Name="label_money" ActionTag="1108290362" Tag="98" IconVisible="False" LeftMargin="173.7800" RightMargin="-299.7800" TopMargin="-42.5000" BottomMargin="5.5000" LabelText="1.00万亿" ctype="TextBMFontObjectData">
+                <Size X="126.0000" Y="37.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="236.7800" Y="28.0000" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Position X="236.7800" Y="24.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/by_szt.png" Plist="" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/likui_shuzi.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="label_name" ActionTag="-330983270" Tag="157" IconVisible="False" LeftMargin="166.5001" RightMargin="-287.5001" TopMargin="-79.0000" BottomMargin="57.0000" FontSize="22" LabelText="游客测试221" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="121.0000" Y="22.0000" />
@@ -357,15 +357,15 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="game_res/by_pw_sy.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="label_money" ActionTag="986504732" Tag="166" IconVisible="False" LeftMargin="202.2800" RightMargin="-271.2800" TopMargin="14.0000" BottomMargin="-42.0000" CharWidth="23" CharHeight="28" LabelText="452" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="69.0000" Y="28.0000" />
+              <AbstractNodeData Name="label_money" ActionTag="-1970892609" Tag="97" IconVisible="False" LeftMargin="173.7800" RightMargin="-299.7800" TopMargin="13.5000" BottomMargin="-50.5000" LabelText="1.00万亿" ctype="TextBMFontObjectData">
+                <Size X="126.0000" Y="37.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="236.7800" Y="-28.0000" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Position X="236.7800" Y="-32.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/by_szt.png" Plist="" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/likui_shuzi.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="label_name" ActionTag="-1478199025" Tag="167" IconVisible="False" LeftMargin="166.5002" RightMargin="-287.5002" TopMargin="56.9998" BottomMargin="-78.9998" FontSize="22" LabelText="游客测试221" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="121.0000" Y="22.0000" />
@@ -499,15 +499,15 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="game_res/by_pw_sy.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="label_money" ActionTag="1715376673" Tag="186" IconVisible="False" LeftMargin="-271.2800" RightMargin="202.2800" TopMargin="14.0000" BottomMargin="-42.0000" CharWidth="23" CharHeight="28" LabelText="452" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="69.0000" Y="28.0000" />
+              <AbstractNodeData Name="label_money" ActionTag="-2003038081" Tag="96" IconVisible="False" LeftMargin="-299.7794" RightMargin="173.7794" TopMargin="13.5000" BottomMargin="-50.5000" LabelText="1.00万亿" ctype="TextBMFontObjectData">
+                <Size X="126.0000" Y="37.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="-236.7800" Y="-28.0000" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Position X="-236.7794" Y="-32.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/by_szt.png" Plist="" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/likui_shuzi.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="label_name" ActionTag="1711027825" Tag="187" IconVisible="False" LeftMargin="-287.5001" RightMargin="166.5001" TopMargin="56.9998" BottomMargin="-78.9998" FontSize="22" LabelText="游客测试221" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="121.0000" Y="22.0000" />

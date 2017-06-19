@@ -27,7 +27,7 @@ function gflowerEntry:getNeedPreloadResArray()
 end
 
 function gflowerEntry:getVerionStr()
-    return "炸金花.v4"
+    return "炸金花.v6"
 end
 
 return gflowerEntry

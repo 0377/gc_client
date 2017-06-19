@@ -33,7 +33,7 @@ function DzpkGameEntry:getNeedPreloadResArray()
 end
 
 function DzpkGameEntry:getVerionStr()
-	return "德州扑克.v7"
+	return "德州扑克.v9"
 end
 
 return DzpkGameEntry;

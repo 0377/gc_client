@@ -15,6 +15,7 @@
           <Image Name="jiujiu_lhj_caideng_1.png" />
           <Image Name="jiujiu_lhj_caideng_2.png" />
           <Image Name="jiujiu_lhj_win.png" />
+          <Fnt Name="lhj_shuzi.fnt" />
           <Image Name="wz_bar.png" />
           <Image Name="wz_bj.png" />
           <Image Name="wz_bt_gb.png" />

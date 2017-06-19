@@ -1,5 +1,5 @@
 
-”o
+Éo
 common_msg_define.protocommon_player_define.proto"&
 C_RequestPublicKey"
 MsgID
@@ -619,7 +619,7 @@ is_offline (R	isOffline"
 SC_Gamefinish
 money (Rmoney"
 MsgID
-ID®V"ê
+ID®V"Ÿ
 SC_PlayerReconnection
 room_id (RroomId
 table_id (RtableId
@@ -634,7 +634,8 @@ is_offline (R	isOffline"
  (RisReady!
 private_room (RprivateRoom5
 private_room_score_type (RprivateRoomScoreType&
-private_room_id (RprivateRoomId"
+private_room_id (RprivateRoomId3
+private_room_has_start (RprivateRoomHasStart"
 MsgID
 ID¯V"Æ
 SC_ChangeTable

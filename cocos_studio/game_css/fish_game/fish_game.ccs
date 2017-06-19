@@ -52,6 +52,7 @@
           <Image Name="by_pw_sy.png" />
           <Image Name="by_szt.png" />
           <Image Name="by_yuan.png" />
+          <Fnt Name="likui_shuzi.fnt" />
           <Image Name="Map_0.jpg" />
           <Image Name="Map_1.jpg" />
           <Image Name="Map_2.jpg" />

@@ -1,0 +1,169 @@
+<Solution>
+  <PropertyGroup Name="qznn_game" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="game_res">
+          <Folder Name="anim">
+            <Folder Name="eff_qznn_px">
+              <ExportJsonFile Name="eff_qznn_px.ExportJson" />
+            </Folder>
+          </Folder>
+          <Folder Name="fnt">
+            <Fnt Name="tt.fnt" />
+          </Folder>
+          <Folder Name="secondjiemian">
+            <Image Name="qznn_button_fhdt.png" />
+            <Image Name="qznn_button_fhdt_pressed.png" />
+            <Image Name="qznn_button_xyj.png" />
+            <Image Name="qznn_button_xyj_pressed.png" />
+            <Image Name="qznn_bz_kuang.png" />
+            <Image Name="qznn_bz_wz.png" />
+            <Image Name="qznn_icon_jn.png" />
+            <Image Name="qznn_icon_mn.png" />
+            <Image Name="qznn_icon_n1.png" />
+            <Image Name="qznn_icon_n2.png" />
+            <Image Name="qznn_icon_n3.png" />
+            <Image Name="qznn_icon_n4.png" />
+            <Image Name="qznn_icon_n5.png" />
+            <Image Name="qznn_icon_n6.png" />
+            <Image Name="qznn_icon_n7.png" />
+            <Image Name="qznn_icon_n8.png" />
+            <Image Name="qznn_icon_n9.png" />
+            <Image Name="qznn_icon_nn.png" />
+            <Image Name="qznn_icon_wxn.png" />
+            <Image Name="qznn_icon_yn.png" />
+            <Image Name="qznn_icon_zdn.png" />
+            <Image Name="qznn_icon_zhuang_2.png" />
+            <Image Name="qznn_js_kuang.png" />
+            <Image Name="qznn_js_kuang_2.png" />
+            <Image Name="qznn_js_kuang_ziji.png" />
+            <Image Name="qznn_js_kw.png" />
+            <Image Name="qznn_js_szt_1.png" />
+            <Image Name="qznn_js_szt_2.png" />
+            <Image Name="qznn_js_X.png" />
+            <Image Name="qznn_js_X_2.png" />
+            <Image Name="qznn_txkuang_2.png" />
+            <Image Name="show1.jpg" />
+            <Image Name="show2.jpg" />
+          </Folder>
+          <Folder Name="zhujiemian">
+            <Image Name="head.png" />
+            <Image Name="poker_0_0.png" />
+            <Image Name="qznn_anniu_szt.png" />
+            <Image Name="qznn_bj.jpg" />
+            <Image Name="qznn_button_1x.png" />
+            <Image Name="qznn_button_1x_pressed.png" />
+            <Image Name="qznn_button_2x.png" />
+            <Image Name="qznn_button_2x_pressed.png" />
+            <Image Name="qznn_button_3x.png" />
+            <Image Name="qznn_button_3x_pressed.png" />
+            <Image Name="qznn_button_4x.png" />
+            <Image Name="qznn_button_4x_pressed.png" />
+            <Image Name="qznn_button_bq.png" />
+            <Image Name="qznn_button_bq_pressed.png" />
+            <Image Name="qznn_button_bz.png" />
+            <Image Name="qznn_button_bz_pressed.png" />
+            <Image Name="qznn_button_cd1.png" />
+            <Image Name="qznn_button_cd1_pressed.png" />
+            <Image Name="qznn_button_cd2.png" />
+            <Image Name="qznn_button_cd2_pressed.png" />
+            <Image Name="qznn_button_jn.png" />
+            <Image Name="qznn_button_jn_pressed.png" />
+            <Image Name="qznn_button_liaotian.png" />
+            <Image Name="qznn_button_liaotian_pressed.png" />
+            <Image Name="qznn_button_meiniu.png" />
+            <Image Name="qznn_button_meiniu_pressed.png" />
+            <Image Name="qznn_button_nn.png" />
+            <Image Name="qznn_button_nn_pressed.png" />
+            <Image Name="qznn_button_qxpp.png" />
+            <Image Name="qznn_button_qxpp_pressed.png" />
+            <Image Name="qznn_button_tc.png" />
+            <Image Name="qznn_button_tc_pressed.png" />
+            <Image Name="qznn_button_tishi.png" />
+            <Image Name="qznn_button_tishi_pressed.png" />
+            <Image Name="qznn_button_wxn.png" />
+            <Image Name="qznn_button_wxn_pressed.png" />
+            <Image Name="qznn_button_yazhu.png" />
+            <Image Name="qznn_button_yazhu_pressed.png" />
+            <Image Name="qznn_button_yn.png" />
+            <Image Name="qznn_button_yn_pressed.png" />
+            <Image Name="qznn_button_youniu.png" />
+            <Image Name="qznn_button_youniu_pressed.png" />
+            <Image Name="qznn_button_yxg.png" />
+            <Image Name="qznn_button_yxg_pressed.png" />
+            <Image Name="qznn_button_yxk.png" />
+            <Image Name="qznn_button_yxk_pressed.png" />
+            <Image Name="qznn_button_yyg.png" />
+            <Image Name="qznn_button_yyg_pressed.png" />
+            <Image Name="qznn_button_yyk.png" />
+            <Image Name="qznn_button_yyk_pressed.png" />
+            <Image Name="qznn_button_zdn.png" />
+            <Image Name="qznn_button_zdn_pressed.png" />
+            <Image Name="qznn_cmkuang.png" />
+            <Image Name="qznn_ddxjxz.png" />
+            <Image Name="qznn_df_di.png" />
+            <Image Name="qznn_dizhu_kuang.png" />
+            <Image Name="qznn_dl_1.png" />
+            <Image Name="qznn_dl_bz.png" />
+            <Image Name="qznn_dl_sd.png" />
+            <Image Name="qznn_dl_zc.png" />
+            <Image Name="qznn_icon_bq.png" />
+            <Image Name="qznn_icon_jn.png" />
+            <Image Name="qznn_icon_mn.png" />
+            <Image Name="qznn_icon_n1.png" />
+            <Image Name="qznn_icon_n2.png" />
+            <Image Name="qznn_icon_n3.png" />
+            <Image Name="qznn_icon_n4.png" />
+            <Image Name="qznn_icon_n5.png" />
+            <Image Name="qznn_icon_n6.png" />
+            <Image Name="qznn_icon_n7.png" />
+            <Image Name="qznn_icon_n8.png" />
+            <Image Name="qznn_icon_n9.png" />
+            <Image Name="qznn_icon_nn.png" />
+            <Image Name="qznn_icon_q1.png" />
+            <Image Name="qznn_icon_q2.png" />
+            <Image Name="qznn_icon_q3.png" />
+            <Image Name="qznn_icon_q4.png" />
+            <Image Name="qznn_icon_wxn.png" />
+            <Image Name="qznn_icon_yn.png" />
+            <Image Name="qznn_icon_zdn.png" />
+            <Image Name="qznn_icon_zhuang_1.png" />
+            <Image Name="qznn_icon_zhuang_2.png" />
+            <Image Name="qznn_jiantou_1.png" />
+            <Image Name="qznn_jiantou_2.png" />
+            <Image Name="qznn_js_szt_1.png" />
+            <Image Name="qznn_js_szt_2.png" />
+            <Image Name="qznn_kuang_2.png" />
+            <Image Name="qznn_ppz.png" />
+            <Image Name="qznn_szt_1.png" />
+            <Image Name="qznn_szt_add.png" />
+            <Image Name="qznn_szt_decrease.png" />
+            <Image Name="qznn_txkuang.png" />
+            <Image Name="qznn_txkuang_2.png" />
+            <Image Name="qznn_txkuang_fg.png" />
+            <Image Name="qznn_wifi_1.png" />
+            <Image Name="qznn_wifi_2.png" />
+            <Image Name="qznn_wifi_3.png" />
+            <Image Name="qznn_wifi_4.png" />
+            <Image Name="sh_djs_1.png" />
+            <Image Name="sh_djs_1_szt.png" />
+            <Image Name="sh_djs_2.png" />
+            <Image Name="sh_djs_3.png" />
+            <Image Name="sh_lbt.png" />
+            <Image Name="show1.jpg" />
+            <Image Name="show2.jpg" />
+            <Image Name="show3.jpg" />
+            <Image Name="show4.jpg" />
+            <Image Name="show5.jpg" />
+          </Folder>
+        </Folder>
+        <Project Name="gameover.csd" Type="Layer" />
+        <Project Name="help.csd" Type="Layer" />
+        <Project Name="marqueeTip.csd" Type="Layer" />
+        <Project Name="phoneInfo.csd" Type="Layer" />
+        <Project Name="jdnnGameLayerCCS.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

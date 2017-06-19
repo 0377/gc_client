@@ -96,6 +96,8 @@ function TmjGameScene:closeWaiting()
 end
 
 function TmjGameScene:onEnter()
+	--开局后 播放音乐
+	TmjConfig.playBgMusic()
 	sslog(self.logTag,"二人麻将onEnter")
     local gameingInfoTable = GameManager:getInstance():getHallManager():getPlayerInfo():getGamingInfoTab()
     if gameingInfoTable == nil then
@@ -130,20 +132,20 @@ function TmjGameScene:onEnter()
 				result = true })
 		TmjMyPlayer:showOperationPanel(operations,true)
 	end--]]
-	local arr = {
-	[1]=2,
-	[2]=2,
-	[3]=1,
-	[4]=1,
-	[5]=1,
-	[6]=1,
-	[7]=1,
-	[8]=1,
-	[9]=3,
+--[[	local arr = {
+	[1]=1,
+	[2]=0,
+	[3]=2,
+	[4]=0,
+	[5]=2,
+	[6]=0,
+	[7]=2,
+	[8]=0,
+	[9]=2,
 	[10]=0,
-	[11]=0,
+	[11]=2,
 	[12]=0,
-	[13]=0,
+	[13]=2,
 	[14]=0,
 	[15]=0,
 	[16]=0,
@@ -151,7 +153,7 @@ function TmjGameScene:onEnter()
 	local TmjCardTip = import("..cfg.TmjCardTip")
 	local TmjFanCalculator = import("..cfg.TmjFanCalculator")
 	--ssdump(TmjCardTip.isHu(CustomHelper.copyTab(arr),1))
-	ssdump(TmjCardTip.isTingHu(CustomHelper.copyTab(arr),10))
+	ssdump(TmjCardTip.isTingHu(CustomHelper.copyTab(arr),10))--]]
 	
 	
 	
@@ -182,8 +184,7 @@ end
 
 --开局消息UI处理
 function TmjGameScene:onMsgSC_Maajan_Desk_Enter()
-	--开局后 播放音乐
-	TmjConfig.playBgMusic()
+
 	
 	local playerdatas = self.TmjGameDataManager.playerdatas
 	local selfCharId = self.TmjGameDataManager.selfChairId --我自己的座位号

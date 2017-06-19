@@ -26,7 +26,7 @@ function LhjGameEntry:getNeedPreloadResArray()
 end
 
 function LhjGameEntry:getVerionStr()
-    return "老虎机.v3"
+    return "老虎机.v5"
 end
 
 return LhjGameEntry;

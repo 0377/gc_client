@@ -99,45 +99,45 @@
           <AbstractNodeData Name="game_base_layput" ActionTag="-426385090" Tag="2" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TopMargin="1.0000" BottomMargin="-1.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="422" RightEage="422" TopEage="237" BottomEage="237" Scale9OriginX="422" Scale9OriginY="237" Scale9Width="436" Scale9Height="246" ctype="PanelObjectData">
             <Size X="1280.0000" Y="720.0000" />
             <Children>
-              <AbstractNodeData Name="cumulative_score_txt" ActionTag="663305044" Tag="24" IconVisible="False" LeftMargin="866.7747" RightMargin="221.2253" TopMargin="59.2852" BottomMargin="627.7148" CharWidth="24" CharHeight="33" LabelText="12345678" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="192.0000" Y="33.0000" />
+              <AbstractNodeData Name="cumulative_score_txt" ActionTag="265446383" Tag="106" IconVisible="False" LeftMargin="866.7700" RightMargin="313.2300" TopMargin="60.2900" BottomMargin="622.7100" LabelText="1.00万" ctype="TextBMFontObjectData">
+                <Size X="100.0000" Y="37.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="866.7747" Y="644.2148" />
+                <Position X="866.7700" Y="641.2100" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6772" Y="0.8947" />
-                <PreSize X="0.1500" Y="0.0458" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/wz_shuzi.png" Plist="" />
+                <PrePosition X="0.6772" Y="0.8906" />
+                <PreSize X="0.0781" Y="0.0514" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/lhj_shuzi.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="bank_money_txt" ActionTag="1857551407" Tag="25" IconVisible="False" LeftMargin="259.8295" RightMargin="876.1705" TopMargin="524.8800" BottomMargin="162.1200" CharWidth="24" CharHeight="33" LabelText="123456" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="144.0000" Y="33.0000" />
+              <AbstractNodeData Name="bank_money_txt" ActionTag="-1872577076" Tag="102" IconVisible="False" LeftMargin="259.8300" RightMargin="920.1700" TopMargin="525.5000" BottomMargin="157.5000" LabelText="1.00万" ctype="TextBMFontObjectData">
+                <Size X="100.0000" Y="37.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="259.8295" Y="178.6200" />
+                <Position X="259.8300" Y="176.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2030" Y="0.2481" />
-                <PreSize X="0.1125" Y="0.0458" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/wz_shuzi.png" Plist="" />
+                <PrePosition X="0.2030" Y="0.2444" />
+                <PreSize X="0.0781" Y="0.0514" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/lhj_shuzi.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="money_txt" ActionTag="-236069451" Tag="26" IconVisible="False" LeftMargin="563.9243" RightMargin="572.0757" TopMargin="524.8781" BottomMargin="162.1219" CharWidth="24" CharHeight="33" LabelText="123456" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="144.0000" Y="33.0000" />
+              <AbstractNodeData Name="money_txt" ActionTag="-841210141" Tag="104" IconVisible="False" LeftMargin="562.2270" RightMargin="617.7730" TopMargin="525.5000" BottomMargin="157.5000" LabelText="1.00亿" ctype="TextBMFontObjectData">
+                <Size X="100.0000" Y="37.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="563.9243" Y="178.6219" />
+                <Position X="562.2270" Y="176.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4406" Y="0.2481" />
-                <PreSize X="0.1125" Y="0.0458" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/wz_shuzi.png" Plist="" />
+                <PrePosition X="0.4392" Y="0.2444" />
+                <PreSize X="0.0781" Y="0.0514" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/lhj_shuzi.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="bet_txt" ActionTag="2100085805" Tag="27" IconVisible="False" LeftMargin="875.9465" RightMargin="260.0535" TopMargin="524.8780" BottomMargin="162.1220" CharWidth="24" CharHeight="33" LabelText="123456" StartChar="." ctype="TextAtlasObjectData">
-                <Size X="144.0000" Y="33.0000" />
+              <AbstractNodeData Name="bet_txt" ActionTag="-1037834403" Tag="105" IconVisible="False" LeftMargin="875.9500" RightMargin="304.0500" TopMargin="524.5000" BottomMargin="158.5000" LabelText="1.00万" ctype="TextBMFontObjectData">
+                <Size X="100.0000" Y="37.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="875.9465" Y="178.6220" />
+                <Position X="875.9500" Y="177.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6843" Y="0.2481" />
-                <PreSize X="0.1125" Y="0.0458" />
-                <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/wz_shuzi.png" Plist="" />
+                <PrePosition X="0.6843" Y="0.2458" />
+                <PreSize X="0.0781" Y="0.0514" />
+                <LabelBMFontFile_CNB Type="Normal" Path="game_res/lhj_shuzi.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="icon_layout" CanEdit="False" ActionTag="1716369540" Tag="76" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1280.0000" Y="720.0000" />
@@ -1042,10 +1042,10 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="win_layout" ActionTag="-1524232419" Tag="84" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" LeftMargin="-2.0000" RightMargin="2.0000" TopMargin="-1.0000" BottomMargin="156.3760" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="win_layout" CanEdit="False" ActionTag="-1524232419" Tag="84" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" LeftMargin="-2.0000" RightMargin="2.0000" TopMargin="-1.0000" BottomMargin="156.3760" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="564.6240" />
             <Children>
-              <AbstractNodeData Name="anim_win" ActionTag="943865672" Tag="186" IconVisible="True" LeftMargin="624.2000" RightMargin="655.8000" TopMargin="329.7040" BottomMargin="234.9200" IsLoop="False" IsAutoPlay="True" CurrentAnimationName="large_01_1" ctype="ArmatureNodeObjectData">
+              <AbstractNodeData Name="anim_win" ActionTag="943865672" Tag="186" IconVisible="True" LeftMargin="624.2000" RightMargin="655.8000" TopMargin="329.7040" BottomMargin="234.9200" IsLoop="False" IsAutoPlay="True" CurrentAnimationName="large_01" ctype="ArmatureNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="624.2000" Y="234.9200" />
@@ -1088,15 +1088,15 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game_res/jiujiu_lhj_bei.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="win_bet_txt" ActionTag="184089283" Tag="103" IconVisible="False" LeftMargin="-43.7068" RightMargin="-28.2932" TopMargin="24.7980" BottomMargin="-57.7980" CharWidth="24" CharHeight="33" LabelText="300" StartChar="." ctype="TextAtlasObjectData">
-                    <Size X="72.0000" Y="33.0000" />
+                  <AbstractNodeData Name="win_bet_txt" ActionTag="-1386571268" Tag="107" IconVisible="False" LeftMargin="-57.7100" RightMargin="-42.2900" TopMargin="25.5000" BottomMargin="-62.5000" LabelText="1.00万" ctype="TextBMFontObjectData">
+                    <Size X="100.0000" Y="37.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-7.7068" Y="-41.2980" />
+                    <Position X="-7.7100" Y="-44.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <LabelAtlasFileImage_CNB Type="Normal" Path="game_res/wz_shuzi.png" Plist="" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="game_res/lhj_shuzi.fnt" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="win_light" ActionTag="-870463695" Tag="102" IconVisible="False" LeftMargin="-129.5000" RightMargin="-121.5000" TopMargin="-30.5000" BottomMargin="-94.5000" ctype="SpriteObjectData">
                     <Size X="251.0000" Y="125.0000" />
@@ -1106,7 +1106,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="game_res/jiujiu_lhj_caideng_2.png" Plist="" />
+                    <FileData Type="Normal" Path="game_res/jiujiu_lhj_caideng_1.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>

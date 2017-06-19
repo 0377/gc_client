@@ -199,6 +199,10 @@ function GFlowerGameScene:ctor()
 
     -- 播放跑马灯
     self:showMarqueeTip()
+	
+	-- 临时弃牌玩家列表
+	self.tmpGiveUpPlayerCountDown = 0
+	self.tmpGiveUpPlayer          = 0
 end
 
 -- 音效 --
@@ -624,6 +628,11 @@ function GFlowerGameScene:clearPRReadyUIPlayerByID(clientId)
 	if pnlPlayer ~= nil then
 		pnlPlayer:setVisible(false)
 	end
+end
+
+function GFlowerGameScene:clearTmpGiveUpPlayer()
+	self.tmpGiveUpPlayerCount = 0
+	self.tmpGiveUpPlayer      = 0 
 end
 
 -- 有一个玩家点击了准备
@@ -2860,6 +2869,18 @@ function GFlowerGameScene:_onGenDaodiCountDown()
     end
 end
 
+function GFlowerGameScene:_onTmpGiveUpPlayerInterval()
+	self.tmpGiveUpPlayerCountDown = self.tmpGiveUpPlayerCountDown - 1
+    if self.tmpGiveUpPlayerCountDown <= 0 then
+		self:On_NotifyStandUp(self.tmpGiveUpPlayer)
+		self.tmpGiveUpPlayer = 0
+		
+		if self._scheduler ~= nil then
+			self:removeScheduler()
+		end
+    end
+end
+
 -- 清除主界面信息
 function GFlowerGameScene:clearMainTableUI()
     self:isVisibleCompareBtn(false)
@@ -4057,7 +4078,6 @@ end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaGetSitDown(msgTab)
 	GFlowerGameManager:getInstance():send_CS_ZhaJinHuaGetPlayerStatus()
-	print("on_msg_ZhaJinHuaGetSitDown .....................")
 	self:check_StandUp()
 end
 
@@ -4093,12 +4113,14 @@ function GFlowerGameScene:on_msg_ZhaJinHuaAddScore(msgTab)
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaGiveUp(msgTab)
-
+    dump(msgTab,"msgTab")
     local server_giveup_id  = msgTab.giveup_chair_id
     local server_next_id    = msgTab.cur_chair_id
     local client_giveup_id  = self._logic:getLocalChairId(server_giveup_id)
     local client_next_id    = self._logic:getLocalChairId(server_next_id)
     
+	self.tmpGiveUpPlayer    = client_giveup_id
+	
     self:On_updateLunshuStr(client_giveup_id)
 
     self:On_ZhaJinHuaGiveUp(client_giveup_id, client_next_id)
@@ -4144,7 +4166,6 @@ function GFlowerGameScene:on_msg_ZhaJinHuaCompareCard(msgTab)
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaStart(msgTab)
-    print("GFlowerGameScene:on_msg_ZhaJinHuaStart  ")
     --dump(msgTab,"msgTab")
 	-- 私人房间隐藏准备界面
     if self._logic.isPrivateRoom == true then
@@ -4166,24 +4187,33 @@ function GFlowerGameScene:on_msg_ZhaJinHuaStart(msgTab)
 end
 
 function GFlowerGameScene:on_msg_NotifyStandUp(msgTab)
-   local gfplayer  =  self._logic:getGFPayerByGuid(msgTab.guid)
-   if gfplayer == nil then
-   -- 为空说明玩家数据已经被清理， 这里需要将界面的数据清理掉。
-       local client_chair = self._logic:getLocalChairId(msgTab.chair_id)
-       self:On_NotifyStandUp(client_chair)
-   else
-       if msgTab.chair_id == self._logic.myServerChairId then
-		local gameSwitchStatus = GameManager:getInstance():getHallManager():getSubGameManager():getGameSwitchStatus()
-		if gameSwitchStatus == GameMaintainStatus.On then
-           return;
+    dump(msgTab,"msgTab")
+    local gfplayer  =  self._logic:getGFPayerByGuid(msgTab.guid)
+        if gfplayer == nil then
+        -- 为空说明玩家数据已经被清理， 这里需要将界面的数据清理掉。
+        local client_chair = self._logic:getLocalChairId(msgTab.chair_id)
+		if client_chair == self.tmpGiveUpPlayer then
+			self.tmpGiveUpPlayerCountDown = 2
+			self:removeScheduler()
+			self._scheduler = scheduler:scheduleScriptFunc(function(dt)
+						self:_onTmpGiveUpPlayerInterval()
+						end, 1, false)
+		else
+			self:On_NotifyStandUp(client_chair)
 		end
-        if gfplayer:getMoney() >= self._logic.MinJettonMoney then
-			if self._logic.isLastGame == false then
-				self:jumpToHallScene()
+    else
+		if msgTab.chair_id == self._logic.myServerChairId then
+			local gameSwitchStatus = GameManager:getInstance():getHallManager():getSubGameManager():getGameSwitchStatus()
+			if gameSwitchStatus == GameMaintainStatus.On then
+			   return;
 			end
-        end
-       end
-   end
+			if gfplayer:getMoney() >= self._logic.MinJettonMoney then
+				if self._logic.isLastGame == false then
+					self:jumpToHallScene()
+				end
+			end
+		end
+    end
 end
 
 function GFlowerGameScene:on_msg_ZhaJinHuaLookCard(msgTab)

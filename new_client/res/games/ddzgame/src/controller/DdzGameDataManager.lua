@@ -83,6 +83,8 @@ function DdzGameDataManager:initData()
     self._privateRoomId = 0
     self._privateOwnerInfo = {}
     self._privateOriginator = 0
+    -- 服务器定：1，玩牌中；2：准备
+    self._privateIsReadying = 2
 end
 
 function DdzGameDataManager:ctor()
@@ -237,6 +239,10 @@ function DdzGameDataManager:_onMsg_SetMySitDownInfo(msgTab)
 
     if msgTab["is_ready"] then
         self._chairs[msgTab.chair_id]["playerInfoTab"]["is_ready"] = msgTab["is_ready"]
+    end
+
+    if msgTab["private_room_has_start"] then
+        self._privateIsReadying = msgTab["private_room_has_start"]
     end
 end
 
@@ -983,4 +989,12 @@ end
 
 function DdzGameDataManager:getVoteOriginator()
     return self._privateOriginator
+end
+
+function DdzGameDataManager:getIsPrivateReadying()
+    return self._privateIsReadying == 2
+end
+
+function DdzGameDataManager:setIsPrivateReadying(status)
+    self._privateIsReadying = status
 end

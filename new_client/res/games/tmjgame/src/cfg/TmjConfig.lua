@@ -217,16 +217,16 @@ TmjConfig.CARD_HU_TYPE_INFO = {
 	HU_JUE_ZHANG			= {name = "HU_JUE_ZHANG",fan = 4,res="game_res/fan/hujuezhang.png"},			--胡绝张
 	JIAN_KE					= {name = "JIAN_KE",fan = 2,res="game_res/fan/jianke.png"},				--箭刻
 	MEN_QING				= {name = "MEN_QING",fan = 2,res="game_res/fan/menqianqing.png"},				--门前清
-	ZI_AN_GANG				= {name = "ZI_AN_GANG",fan = 2,res="game_res/fan/dihu.png"},			--自暗杠
+	ZI_AN_GANG				= {name = "ZI_AN_GANG",fan = 2,res="game_res/fan/angang.png"},			--自暗杠
 	DUAN_YAO				= {name = "DUAN_YAO",fan = 2,res="game_res/fan/duanyao.png"},				--断幺
 	SI_GUI_YI				= {name = "SI_GUI_YI",fan = 2,res="game_res/fan/siguiyi.png"},				--四归一
 	PING_HU					= {name = "PING_HU",fan = 2,res="game_res/fan/pinghu.png"},				--平胡
-	SHUANG_AN_KE			= {name = "SHUANG_AN_KE",fan = 2,res="game_res/fan/dihu.png"},			--双暗刻
-	SAN_AN_KE				= {name = "SAN_AN_KE",fan = 16,res="game_res/fan/dihu.png"},			--三暗刻
+	SHUANG_AN_KE			= {name = "SHUANG_AN_KE",fan = 2,res="game_res/fan/shuanganke.png"},			--双暗刻
+	SAN_AN_KE				= {name = "SAN_AN_KE",fan = 16,res="game_res/fan/sananke.png"},			--三暗刻
 	SI_AN_KE				= {name = "SI_AN_KE",fan = 64,res="game_res/fan/sianke.png"},				--四暗刻
 	BAO_TING				= {name = "BAO_TING",fan = 2,res="game_res/fan/baoting.png"},				--报听
 	MEN_FENG_KE				= {name = "MEN_FENG_KE",fan = 2,res="game_res/fan/menfengke.png"},			--门风刻
-	QUAN_FENG_KE			= {name = "QUAN_FENG_KE",fan = 2,res="game_res/fan/dihu.png"},			--圈风刻
+	QUAN_FENG_KE			= {name = "QUAN_FENG_KE",fan = 2,res="game_res/fan/quanfengke.png"},			--圈风刻
 	ZI_MO					= {name = "ZI_MO",fan = 1,res="game_res/fan/zimo.png"},					--自摸
 	DAN_DIAO_JIANG			= {name = "DAN_DIAO_JIANG",fan = 1,res="game_res/fan/dandiaojiang.png"},		--单钓将
 	YI_BAN_GAO	 			= {name = "YI_BAN_GAO",fan = 1,res="game_res/fan/yibangao.png"},			--一般高
@@ -246,7 +246,7 @@ TmjConfig.CARD_HU_TYPE_INFO = {
 	LIAN_QI_DUI 		= {name = "LIAN_QI_DUI",fan = 88,res="game_res/fan/lianqidui.png"},			--连七对
 	SAN_YUAN_QI_DUI		= {name = "SAN_YUAN_QI_DUI",fan = 48,res="game_res/fan/sanyuanqiduizi.png"},		--三元七对子
 	SI_XI_QI_DUI		= {name = "SI_XI_QI_DUI",fan = 48,res="game_res/fan/sixiqiduizi.png"},			--四喜七对子
-	NORMAL_QI_DUI 		= {name = "NORMAL_QI_DUI",fan = 24,res="game_res/fan/dihu.png"},		--普通七对
+	NORMAL_QI_DUI 		= {name = "NORMAL_QI_DUI",fan = 24,res="game_res/fan/qidui.png"},		--普通七对
 ---------------------
 	DA_YU_WU 			= {name = "DA_YU_WU",fan = 88,res="game_res/fan/dayuwu.png"},				--大于五
 	XIAO_YU_WU 			= {name = "XIAO_YU_WU",fan = 88,res="game_res/fan/xiaoyuwu.png"},			--小于五
@@ -255,7 +255,7 @@ TmjConfig.CARD_HU_TYPE_INFO = {
 	DA_SAN_YUAN			= {name = "DA_SAN_YUAN",fan = 88,res="game_res/fan/dasanyuan.png"},			--大三元
 	XIAO_SAN_YUAN		= {name = "XIAO_SAN_YUAN",fan = 64,res="game_res/fan/xiaosanyuan.png"},		--小三元
 	JIU_LIAN_BAO_DENG	= {name = "JIU_LIAN_BAO_DENG",fan = 88,res="game_res/fan/jiulianbaodeng.png"},	--九莲宝灯
-	LUO_HAN_18			= {name = "LUO_HAN_18",fan = 88,res="game_res/fan/dihu.png"},			--18罗汉
+	LUO_HAN_18			= {name = "LUO_HAN_18",fan = 88,res="game_res/fan/shibaluohan.png"},			--18罗汉
 	SHUANG_LONG_HUI		= {name = "SHUANG_LONG_HUI",fan = 64,res="game_res/fan/yiseshuanglonghui.png"},		--一色双龙会
 	YI_SE_SI_TONG_SHUN	= {name = "YI_SE_SI_TONG_SHUN",fan = 48,res="game_res/fan/yisesitongshun.png"},	--一色四同顺
 	YI_SE_SI_JIE_GAO	= {name = "YI_SE_SI_JIE_GAO",fan = 48,res="game_res/fan/yisesijiegao.png"},		--一色四节高
@@ -263,7 +263,7 @@ TmjConfig.CARD_HU_TYPE_INFO = {
 	HUN_YAO_JIU			= {name = "HUN_YAO_JIU",fan = 32,res="game_res/fan/hunyaojiu.png"},			--混幺九
 	YI_SE_SAN_JIE_GAO	= {name = "YI_SE_SAN_JIE_GAO",fan = 24,res="game_res/fan/yisesanjiegao.png"},	--一色三节高
 	YI_SE_SAN_TONG_SHUN	= {name = "YI_SE_SAN_TONG_SHUN",fan = 24,res="game_res/fan/yisesantongshun.png"},	--一色三同顺
-	SI_ZI_KE			= {name = "SI_ZI_KE",fan = 24,res="game_res/fan/dihu.png"},				--四字刻
+	SI_ZI_KE			= {name = "SI_ZI_KE",fan = 24,res="game_res/fan/sizike.png"},				--四字刻
 	QING_LONG			= {name = "QING_LONG",fan = 16,res="game_res/fan/qinglong.png"},			--清龙
 	YI_SE_SAN_BU_GAO	= {name = "YI_SE_SAN_BU_GAO",fan = 16,res="game_res/fan/yisesanbugao.png"},		--一色三步高
 }

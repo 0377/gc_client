@@ -198,7 +198,16 @@ function TmjCardTip.isAnGang(array , value)
 	if((array[value]) == 3) then
 		return value;
 	else
-		return false
+		--在判断手里其他牌有没有四个的
+		local handGang = false
+		for i,v in pairs(array) do
+			if v==4 then
+				handGang = i
+				break
+			end
+		end
+		
+		return handGang
 	end
 --[[
 	for i = 1 , 16 do
@@ -206,7 +215,7 @@ function TmjCardTip.isAnGang(array , value)
 			return i;
 		end
 	end--]]
-	return false;
+	
 end
 
 --[[
@@ -280,20 +289,22 @@ end
 --七对听
 function TmjCardTip.qiduiTing(array)
 	local result = {};
-	local cache = {};
-	for i,v in pairs(array) do
-		cache[i] = v;
-	end
-	for i,v in pairs(cache) do
-		if v>=2 then
-			cache[i] = v%2
+	if lastCount(array)==14 then --手上必须是14张牌哦
+		local cache = {};
+		for i,v in pairs(array) do
+			cache[i] = v;
 		end
-	end
-	--最后还剩下两张，而且两张不一样
-	if lastCount(cache) == 2 then
 		for i,v in pairs(cache) do
-			if v==1 then --就剩下这一张牌
-				result[#result+1] = i
+			if v>=2 then
+				cache[i] = v%2
+			end
+		end
+		--最后还剩下两张，而且两张不一样
+		if lastCount(cache) == 2 then
+			for i,v in pairs(cache) do
+				if v==1 then --就剩下这一张牌
+					result[#result+1] = i
+				end
 			end
 		end
 	end
@@ -343,7 +354,23 @@ function TmjCardTip.isTingHu(array,value)
 	end
 	--能听牌了
 	tingResult = tingResult or {}
-	table.insertto(tingResult,qiduiResult,table.nums(tingResult)+1)
+	local function hasSameResult(ts,t)
+		local same = false
+		for _,v in pairs(ts) do
+			if v==t then
+				same = true
+				break
+			end
+		end
+		return same
+	end
+	--去重添加
+	for _,v in pairs(qiduiResult) do
+		if not hasSameResult(tingResult,v) then
+			table.insert(tingResult,v)
+		end
+	end
+	--table.insertto(tingResult,qiduiResult,table.nums(tingResult)+1)
 	local huResult = {}
 	local tingValid = false
 	for _,v in pairs(tingResult) do

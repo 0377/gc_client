@@ -1097,7 +1097,7 @@ function LhjGameScene:moneyAnimFactory(node,start ,endNum,charWidth)
             else
                 if start > endNum then start = endNum end
             end
-            node:setString(CustomHelper.moneyShowStyleNone(start)) 
+            node:setString(CustomHelper.moneyShowStyleABX(start))
             self:stringTxtAdaptation(node,charWidth or 6 )
         end)
         index = index + 1
@@ -1106,7 +1106,7 @@ function LhjGameScene:moneyAnimFactory(node,start ,endNum,charWidth)
     end
     action[index] = cc.CallFunc:create(function ()
             if start > endNum then start = endNum end
-            node:setString(CustomHelper.moneyShowStyleNone(endNum)) 
+            node:setString(CustomHelper.moneyShowStyleABX(endNum))
         end)
     node:runAction(cc.Sequence:create(action))
 end
@@ -1136,12 +1136,11 @@ end
 
 ----自己的信息
 function LhjGameScene:showMyInfo()
-   
-    self.cumulativeScoreTxt:setString(CustomHelper.moneyShowStyleNone(self.lhjGameManager:getDataManager():getAccumulative())) --累计积分
+    self.cumulativeScoreTxt:setString(CustomHelper.moneyShowStyleABX(self.lhjGameManager:getDataManager():getAccumulative())) --累计积分
     self:stringTxtAdaptation( self.cumulativeScoreTxt,8 )
-    self.bankMoneyTxt:setString(CustomHelper.moneyShowStyleNone(self.lhjGameManager:getDataManager():getMoneyInfo().bank))
+    self.bankMoneyTxt:setString(CustomHelper.moneyShowStyleABX(self.lhjGameManager:getDataManager():getMoneyInfo().bank))
     self:stringTxtAdaptation( self.bankMoneyTxt,6 )
-    self.moneyTxt:setString(CustomHelper.moneyShowStyleNone(self.lhjGameManager:getDataManager():getMoneyInfo().money))
+    self.moneyTxt:setString(CustomHelper.moneyShowStyleABX(self.lhjGameManager:getDataManager():getMoneyInfo().money))
     self:stringTxtAdaptation( self.moneyTxt,6 )
 end
 

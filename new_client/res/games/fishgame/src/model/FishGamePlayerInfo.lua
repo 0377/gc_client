@@ -46,7 +46,7 @@ function FishGamePlayerInfo:setScore(score)
 
     if tolua.isnull(labelMoney) then return end
 
-    labelMoney:setString(CustomHelper.moneyShowStyleNone(score))
+    labelMoney:setString(CustomHelper.moneyShowStyleABX(score))
     labelMoney:setScale(math.min(1, 160 / labelMoney:getContentSize().width))
 end
 
